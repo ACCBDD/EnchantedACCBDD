@@ -1,9 +1,10 @@
-// 1.19.2	2024-03-27T19:01:41.4841352	Tags for minecraft:item
+// 1.19.2	2024-03-29T23:10:22.3572427	Tags for minecraft:item
 3417ee3ef05e30f24367eb8cbc928a2225ed4b7e data/enchanted/tags/items/chalices.json
 844b6ebc39e105bb6db321be907ec43b2115b1e2 data/enchanted/tags/items/chalks.json
 847203a50ec44d614777e94b9ece91cefd7d94fa data/enchanted/tags/items/leaves.json
 84980a2aaeb2cfd9ec5ba7157d843a877013c53c data/enchanted/tags/items/logs.json
 e47cedad84283e8d4746c2aeff8d12fe2618a430 data/enchanted/tags/items/planks.json
+80113e16be07af958a40508fa4f07e59255c8ee5 data/enchanted/tags/items/raw_foods.json
 3bd801c9b78565d3ac5135054487bd37e13085b9 data/enchanted/tags/items/saplings.json
 7e3768100cc5ced9173c6f166e9f4fd2b701fe38 data/enchanted/tags/items/slabs.json
 7e3768100cc5ced9173c6f166e9f4fd2b701fe38 data/enchanted/tags/items/stairs.json

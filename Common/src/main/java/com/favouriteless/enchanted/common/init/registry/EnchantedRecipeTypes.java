@@ -11,8 +11,8 @@ import java.util.function.Supplier;
 
 public class EnchantedRecipeTypes {
 
-    public static Supplier<RecipeType<WitchOvenRecipe>> WITCH_OVEN = registerType("witch_oven");
-    public static Supplier<WitchOvenRecipe.Serializer> WITCH_OVEN_SERIALIZER = EnchantedRecipeTypes.registerSerializer("witch_oven", WitchOvenRecipe.Serializer::new);
+    public static Supplier<RecipeType<ByproductRecipe>> BYPRODUCT = registerType("byproduct");
+    public static Supplier<ByproductRecipe.Serializer> BYPRODUCT_SERIALIZER = EnchantedRecipeTypes.registerSerializer("byproduct", ByproductRecipe.Serializer::new);
 
     public static Supplier<RecipeType<DistilleryRecipe>> DISTILLERY = registerType("distillery");
     public static Supplier<DistilleryRecipe.Serializer> DISTILLERY_SERIALIZER = EnchantedRecipeTypes.registerSerializer("distillery", DistilleryRecipe.Serializer::new);

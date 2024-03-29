@@ -8,7 +8,7 @@ import com.favouriteless.enchanted.common.init.registry.EnchantedBlockEntityType
 import com.favouriteless.enchanted.common.init.registry.EnchantedBlocks;
 import com.favouriteless.enchanted.common.init.registry.EnchantedRecipeTypes;
 import com.favouriteless.enchanted.common.menus.WitchOvenMenu;
-import com.favouriteless.enchanted.common.recipes.WitchOvenRecipe;
+import com.favouriteless.enchanted.common.recipes.ByproductRecipe;
 import com.favouriteless.enchanted.platform.Services;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -46,7 +46,7 @@ public class WitchOvenBlockEntity extends ContainerBlockEntityBase implements Me
     private static final int[] BOTTOM_SLOTS = new int[] { 3, 2, 4 };
 
     private final RecipeManager.CachedCheck<Container, SmeltingRecipe> smeltCheck;
-    private final RecipeManager.CachedCheck<Container, WitchOvenRecipe> ovenCheck;
+    private final RecipeManager.CachedCheck<Container, ByproductRecipe> ovenCheck;
 
     private int burnProgress = 0;
     private int burnDuration = 0;
@@ -88,7 +88,7 @@ public class WitchOvenBlockEntity extends ContainerBlockEntityBase implements Me
     public WitchOvenBlockEntity(BlockPos pos, BlockState state) {
         super(EnchantedBlockEntityTypes.WITCH_OVEN.get(), pos, state, NonNullList.withSize(5, ItemStack.EMPTY));
         this.smeltCheck = RecipeManager.createCheck(RecipeType.SMELTING);
-        this.ovenCheck = RecipeManager.createCheck(EnchantedRecipeTypes.WITCH_OVEN.get());
+        this.ovenCheck = RecipeManager.createCheck(EnchantedRecipeTypes.BYPRODUCT.get());
     }
 
     public static <T extends BlockEntity> void serverTick(Level level, BlockPos blockPos, BlockState blockState, T t) {
@@ -205,7 +205,7 @@ public class WitchOvenBlockEntity extends ContainerBlockEntityBase implements Me
      * Attempt to create a byproduct from the item currently in the input slot, assuming enough jars are present.
      * @param recipe The {@link Recipe} to create a result from.
      */
-    private void tryCreateByproduct(@Nullable WitchOvenRecipe recipe) {
+    private void tryCreateByproduct(@Nullable ByproductRecipe recipe) {
         if(recipe != null && !getInput().isEmpty()) {
             ItemStack result = recipe.assemble(this);
             if(!result.isEmpty()) {

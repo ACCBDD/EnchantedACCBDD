@@ -1,0 +1,9 @@
+{
+  "type": "enchanted:byproduct",
+  "ingredient": {
+    "tag": "enchanted:raw_foods"
+  },
+  "result": {
+    "item": "enchanted:foul_fume"
+  }
+}

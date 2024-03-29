@@ -1,4 +1,4 @@
-// 1.19.2	2024-03-27T19:01:41.4851353	Recipes
+// 1.19.2	2024-03-29T23:10:22.3637541	Recipes
 61668d74ff2deddcf396832e9b023bbe540f2338 data/enchanted/advancements/recipes/enchanted.main/alder_planks.json
 f582cc8ea99d71aebb585767bbf429745dcb7381 data/enchanted/advancements/recipes/enchanted.main/alder_slab.json
 523eba1250633a09a227190d0164796f0d3a9bd3 data/enchanted/advancements/recipes/enchanted.main/alder_stairs.json
@@ -45,6 +45,15 @@ a01d22b93bd2f779aa83dfbd76f11c99e005799a data/enchanted/recipes/alder_slab.json
 43acea29eb3bae2645ab723db1ec0abbf63afa90 data/enchanted/recipes/attuned_stone.json
 c6d7a9f33caba93102f58e6aaab6e4d2561a7585 data/enchanted/recipes/bone_needle.json
 6a434d170deca9532175bbf70edf1fbfba78789a data/enchanted/recipes/broom.json
+52414c282940693f3b5aa3a6c5a6c0c03651d1e9 data/enchanted/recipes/byproduct/breath_of_the_goddess_birch_sapling.json
+e4b160fe2be203abf152cab0e7de330bff9a5ef0 data/enchanted/recipes/byproduct/exhale_of_the_horned_one_oak_sapling.json
+c0cde745595addfb49fbd9465b50fa20d64d27e0 data/enchanted/recipes/byproduct/foul_fume_jungle_sapling.json
+ac0164df47379a0adecce65390f225e35f2526fb data/enchanted/recipes/byproduct/foul_fume_logs_that_burn.json
+62bdaaaed6639b83623835e3ab550b0ee5577cef data/enchanted/recipes/byproduct/foul_fume_raw_foods.json
+d6a0f883f4f2ac6c27cf2668d39f0dd18730842e data/enchanted/recipes/byproduct/hint_of_rebirth_spruce_sapling.json
+07a6d141698b16f36cea3eb84ba79ee22a87a00e data/enchanted/recipes/byproduct/odour_of_purity_hawthorn_sapling.json
+b86f37af9d55d8ae59805270e9017fc7bccef81f data/enchanted/recipes/byproduct/reek_of_misfortune_alder_sapling.json
+24a5e6752138e5889e777236323f4f4e4c4e20de data/enchanted/recipes/byproduct/whiff_of_magic_rowan_sapling.json
 af8dbaa5fd1aaa89e8b6ecc99a0d63df971513a2 data/enchanted/recipes/candelabra.json
 8133a054404dff481e893740ab0e9c84d6b23c00 data/enchanted/recipes/chalice.json
 409841900adf1d5c14099cedbafa9b465e4062b9 data/enchanted/recipes/chalk_white.json

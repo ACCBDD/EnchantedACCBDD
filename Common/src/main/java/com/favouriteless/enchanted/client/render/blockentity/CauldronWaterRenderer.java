@@ -7,6 +7,7 @@ import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Matrix4f;
 import com.mojang.math.Vector3f;
 import com.mojang.math.Vector4f;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -32,7 +33,7 @@ public class CauldronWaterRenderer<T extends CauldronBlockEntity<?>> implements 
         BlockState state = blockEntity.getLevel().getBlockState(blockEntity.getBlockPos());
         if(state.getBlock() instanceof CauldronBlockBase) {
             long ticks = blockEntity.getLevel().getGameTime(); // This frame count should be common across all TEs
-
+            
             int waterAmount = blockEntity.getWater();
             if(waterAmount > 0) {
 

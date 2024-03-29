@@ -1,5 +1,5 @@
 {
-  "processor": "com.favouriteless.enchanted.api.patchouli.processors.SpinningWheelRecipeProcessor",
+  "processor": "com.favouriteless.enchanted.patchouli.processors.SpinningWheelRecipeProcessor",
   "components": [
     {
       "type": "patchouli:header",

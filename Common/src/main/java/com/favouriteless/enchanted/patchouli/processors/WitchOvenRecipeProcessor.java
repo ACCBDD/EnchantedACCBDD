@@ -1,7 +1,7 @@
 package com.favouriteless.enchanted.patchouli.processors;
 
 import com.favouriteless.enchanted.common.init.registry.EnchantedItems;
-import com.favouriteless.enchanted.common.recipes.WitchOvenRecipe;
+import com.favouriteless.enchanted.common.recipes.ByproductRecipe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -12,7 +12,7 @@ import vazkii.patchouli.api.IVariableProvider;
 
 public class WitchOvenRecipeProcessor implements IComponentProcessor {
 
-	private WitchOvenRecipe byproductRecipe;
+	private ByproductRecipe byproductRecipe;
 	private ItemStack itemIn;
 	private ItemStack resultItem;
 
@@ -21,7 +21,7 @@ public class WitchOvenRecipeProcessor implements IComponentProcessor {
 		String recipeId = variables.get("recipe").asString();
 
 		RecipeManager recipeManager = Minecraft.getInstance().level.getRecipeManager();
-		byproductRecipe = (WitchOvenRecipe)recipeManager.byKey(new ResourceLocation(recipeId)).orElseThrow(IllegalArgumentException::new);
+		byproductRecipe = (ByproductRecipe)recipeManager.byKey(new ResourceLocation(recipeId)).orElseThrow(IllegalArgumentException::new);
 		itemIn = variables.get("itemIn").as(ItemStack.class);
 		resultItem = variables.get("resultItem").as(ItemStack.class);
 	}

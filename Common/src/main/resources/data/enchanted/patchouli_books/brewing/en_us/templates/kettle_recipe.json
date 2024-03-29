@@ -1,5 +1,5 @@
 {
-  "processor": "com.favouriteless.enchanted.api.patchouli.processors.KettleRecipeProcessor",
+  "processor": "com.favouriteless.enchanted.patchouli.processors.KettleRecipeProcessor",
   "recipe": "#recipe",
   "components": [
     {
@@ -16,7 +16,7 @@
     },
     {
       "type": "patchouli:custom",
-      "class": "com.favouriteless.enchanted.api.patchouli.components.ItemListComponent",
+      "class": "com.favouriteless.enchanted.patchouli.components.ItemListComponent",
       "x": 58,
       "y": 46,
       "itemList": "#itemList",
