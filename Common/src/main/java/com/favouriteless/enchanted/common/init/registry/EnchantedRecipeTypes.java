@@ -23,8 +23,8 @@ public class EnchantedRecipeTypes {
     public static Supplier<RecipeType<KettleRecipe>> KETTLE = registerType("kettle");
     public static Supplier<KettleRecipe.Serializer> KETTLE_SERIALIZER = EnchantedRecipeTypes.registerSerializer("kettle", KettleRecipe.Serializer::new);
 
-    public static Supplier<RecipeType<SpinningWheelRecipe>> SPINNING_WHEEL = registerType("spinning_wheel");
-    public static Supplier<SpinningWheelRecipe.Serializer> SPINNING_WHEEL_SERIALIZER = EnchantedRecipeTypes.registerSerializer("spinning_wheel", SpinningWheelRecipe.Serializer::new);
+    public static Supplier<RecipeType<SpinningRecipe>> SPINNING = registerType("wheel");
+    public static Supplier<SpinningRecipe.Serializer> SPINNING_SERIALIZER = EnchantedRecipeTypes.registerSerializer("wheel", SpinningRecipe.Serializer::new);
 
 
     

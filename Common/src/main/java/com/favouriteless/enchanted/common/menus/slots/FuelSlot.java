@@ -1,6 +1,6 @@
 package com.favouriteless.enchanted.common.menus.slots;
 
-import com.favouriteless.enchanted.common.util.ItemStackHelper;
+import com.favouriteless.enchanted.util.ItemStackHelper;
 import net.minecraft.world.Container;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;

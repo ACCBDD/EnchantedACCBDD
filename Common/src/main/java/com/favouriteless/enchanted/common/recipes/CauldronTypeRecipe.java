@@ -17,14 +17,10 @@ public abstract class CauldronTypeRecipe implements Recipe<Container> {
     private final ItemStack itemOut;
     private final int power;
 
-    private final int cookingRed;
-    private final int cookingGreen;
-    private final int cookingBlue;
-    private final int finalRed;
-    private final int finalGreen;
-    private final int finalBlue;
+    private int[] cookColor;
+    private int[] finalColor;
 
-    public CauldronTypeRecipe(RecipeType<?> type, ResourceLocation id, NonNullList<ItemStack> itemsIn, ItemStack itemOut, int power, int[] cookingColour, int[] finalColour) {
+    public CauldronTypeRecipe(RecipeType<?> type, ResourceLocation id, NonNullList<ItemStack> itemsIn, ItemStack itemOut, int power, int[] cookColor, int[] finalColor) {
         this.type = type;
         this.id = id;
 
@@ -32,12 +28,8 @@ public abstract class CauldronTypeRecipe implements Recipe<Container> {
         this.itemOut = itemOut;
         this.power = power;
 
-        this.cookingRed = cookingColour[0];
-        this.cookingGreen = cookingColour[1];
-        this.cookingBlue = cookingColour[2];
-        this.finalRed = finalColour[0];
-        this.finalGreen = finalColour[1];
-        this.finalBlue = finalColour[2];
+        this.cookColor = cookColor;
+        this.finalColor = finalColor;
     }
 
     /**
@@ -67,7 +59,7 @@ public abstract class CauldronTypeRecipe implements Recipe<Container> {
      * @param world
      * @return isMatch
      */
-    public boolean fullMatch(Container inventory, Level world) {
+    public boolean fullMatch(Container inventory) {
         if(inventory.getContainerSize() != itemsIn.size()) // Same number of items
             return false;
 
@@ -89,42 +81,42 @@ public abstract class CauldronTypeRecipe implements Recipe<Container> {
         return power;
     }
 
-    public int getCookingRed() {
-        return cookingRed;
+    public int getCookRed() {
+        return cookColor[0];
     }
 
-    public int getCookingGreen() {
-        return cookingGreen;
+    public int getCookGreen() {
+        return cookColor[1];
     }
 
-    public int getCookingBlue() {
-        return cookingBlue;
+    public int getCookBlue() {
+        return cookColor[2];
     }
 
     public int getFinalRed() {
-        return finalRed;
+        return finalColor[0];
     }
 
     public int getFinalGreen() {
-        return finalGreen;
+        return finalColor[1];
     }
 
     public int getFinalBlue() {
-        return finalBlue;
+        return finalColor[2];
     }
 
     @Override
     public ItemStack getResultItem() {
-        return itemOut;
+        return itemOut.copy();
     }
 
     @Override
     public ItemStack assemble(Container inv) {
-        return null;
+        return itemOut.copy();
     }
 
     @Override
-    public boolean canCraftInDimensions(int pWidth, int pHeight) {
+    public boolean canCraftInDimensions(int wdth, int height) {
         return false;
     }
 

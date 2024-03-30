@@ -21,7 +21,10 @@ build
 runServer
 runClient
 buildOutput
+runData
 
 # other
 eclipse
 run
+
+

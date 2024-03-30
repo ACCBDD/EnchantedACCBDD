@@ -3,6 +3,7 @@ package com.favouriteless.enchanted.datagen.providers;
 import com.favouriteless.enchanted.common.init.EnchantedTags;
 import com.favouriteless.enchanted.common.init.registry.EnchantedItems;
 import com.favouriteless.enchanted.datagen.builders.recipe.ByproductRecipeBuilder;
+import com.favouriteless.enchanted.datagen.builders.recipe.SpinningRecipeBuilder;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
@@ -11,7 +12,10 @@ import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.crafting.StrictNBTIngredient;
@@ -31,6 +35,7 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
 		buildShapelessRecipes(consumer);
 		buildSmeltingRecipes(consumer);
 		buildByproductRecipes(consumer);
+		buildSpinningRecipes(consumer);
 	}
 
 	protected void buildShapedRecipes(Consumer<FinishedRecipe> consumer) {
@@ -230,20 +235,59 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
 		byproduct(consumer, EnchantedItems.WHIFF_OF_MAGIC.get(), EnchantedItems.ROWAN_SAPLING.get());
 	}
 
-	protected static void byproduct(Consumer<FinishedRecipe> recipeConsumer, ItemLike result, ItemLike... items) {
-		ByproductRecipeBuilder.create(result, items).save(recipeConsumer);
+	protected void buildSpinningRecipes(Consumer<FinishedRecipe> consumer) {
+		// Basic poppets
+		spinning(consumer, EnchantedItems.POPPET_INFUSED.get(),
+				EnchantedItems.POPPET.get(), EnchantedItems.ATTUNED_STONE.get(), Items.ENDER_PEARL);
+		spinning(consumer, EnchantedItems.POPPET_STURDY.get(),
+				EnchantedItems.POPPET.get(), EnchantedItems.HINT_OF_REBIRTH.get(), Items.SHIELD);
+		// Effect poppets
+		spinningSet(consumer, EnchantedItems.ARMOUR_POPPET.get(), EnchantedItems.ARMOUR_POPPET_INFUSED.get(), EnchantedItems.ARMOUR_POPPET_STURDY.get(),
+				EnchantedItems.HINT_OF_REBIRTH.get(), Items.DIAMOND_BOOTS);
+		spinningSet(consumer, EnchantedItems.EARTH_POPPET.get(), EnchantedItems.EARTH_POPPET_INFUSED.get(), EnchantedItems.EARTH_POPPET_STURDY.get(),
+				EnchantedItems.MANDRAKE_ROOT.get().getDefaultInstance(), PotionUtils.setPotion(Items.POTION.getDefaultInstance(), Potions.LONG_SLOW_FALLING));
+		spinningSet(consumer, EnchantedItems.FIRE_POPPET.get(), EnchantedItems.FIRE_POPPET_INFUSED.get(), EnchantedItems.FIRE_POPPET_STURDY.get(),
+				EnchantedItems.EMBER_MOSS.get().getDefaultInstance(), PotionUtils.setPotion(Items.POTION.getDefaultInstance(), Potions.LONG_FIRE_RESISTANCE));
+		spinningSet(consumer, EnchantedItems.HUNGER_POPPET.get(), EnchantedItems.HUNGER_POPPET_INFUSED.get(), EnchantedItems.HUNGER_POPPET_STURDY.get(),
+				EnchantedItems.ROWAN_BERRIES.get(), Items.ROTTEN_FLESH);
+		spinningSet(consumer, EnchantedItems.TOOL_POPPET.get(), EnchantedItems.TOOL_POPPET_INFUSED.get(), EnchantedItems.TOOL_POPPET_STURDY.get(),
+				EnchantedItems.HINT_OF_REBIRTH.get(), Items.DIAMOND_SWORD);
+		spinningSet(consumer, EnchantedItems.VOID_POPPET.get(), EnchantedItems.VOID_POPPET_INFUSED.get(), EnchantedItems.VOID_POPPET_STURDY.get(),
+				EnchantedItems.CHALK_PURPLE.get(), EnchantedItems.ENDER_DEW.get());
+		spinningSet(consumer, EnchantedItems.WATER_POPPET.get(), EnchantedItems.WATER_POPPET_INFUSED.get(), EnchantedItems.WATER_POPPET_STURDY.get(),
+				EnchantedItems.ARTICHOKE.get().getDefaultInstance(), PotionUtils.setPotion(Items.POTION.getDefaultInstance(), Potions.LONG_WATER_BREATHING));
 	}
 
-	protected static void byproduct(Consumer<FinishedRecipe> recipeConsumer, ItemLike result, TagKey<Item> tag) {
-		ByproductRecipeBuilder.create(result, tag).save(recipeConsumer);
+	protected static void spinning(Consumer<FinishedRecipe> consumer, ItemLike result, ItemLike first, Item second, Item third) {
+		SpinningRecipeBuilder.create(result, 500, first, second, third).save(consumer);
 	}
 
-	protected static void planksFromLog(Consumer<FinishedRecipe> recipeConsumer, ItemLike planks, ItemLike logs) {
-		ShapelessRecipeBuilder.shapeless(planks, 4).requires(logs).group("planks").unlockedBy("has_log", has(logs)).save(recipeConsumer);
+	protected static void spinningSet(Consumer<FinishedRecipe> consumer, ItemLike normal, ItemLike infused, ItemLike sturdy, Item second, Item third) {
+		SpinningRecipeBuilder.create(normal, 500, EnchantedItems.POPPET.get(), second, third).save(consumer);
+		SpinningRecipeBuilder.create(infused, 1000, EnchantedItems.POPPET_INFUSED.get(), second, third).save(consumer);
+		SpinningRecipeBuilder.create(sturdy, 1000, EnchantedItems.POPPET_STURDY.get(), second, third).save(consumer);
 	}
 
-	protected static void stairs(Consumer<FinishedRecipe> recipeConsumer, ItemLike stairs, ItemLike material) {
-		stairBuilder(stairs, Ingredient.of(material)).unlockedBy(getHasName(material), has(material)).save(recipeConsumer);
+	protected static void spinningSet(Consumer<FinishedRecipe> consumer, ItemLike normal, ItemLike infused, ItemLike sturdy, ItemStack second, ItemStack third) {
+		SpinningRecipeBuilder.create(normal, 500, EnchantedItems.POPPET.get().getDefaultInstance(), second, third).save(consumer);
+		SpinningRecipeBuilder.create(infused, 1000, EnchantedItems.POPPET_INFUSED.get().getDefaultInstance(), second, third).save(consumer);
+		SpinningRecipeBuilder.create(sturdy, 1000, EnchantedItems.POPPET_STURDY.get().getDefaultInstance(), second, third).save(consumer);
+	}
+
+	protected static void byproduct(Consumer<FinishedRecipe> consumer, ItemLike result, ItemLike... items) {
+		ByproductRecipeBuilder.create(result, items).save(consumer);
+	}
+
+	protected static void byproduct(Consumer<FinishedRecipe> consumer, ItemLike result, TagKey<Item> tag) {
+		ByproductRecipeBuilder.create(result, tag).save(consumer);
+	}
+
+	protected static void planksFromLog(Consumer<FinishedRecipe> consumer, ItemLike planks, ItemLike logs) {
+		ShapelessRecipeBuilder.shapeless(planks, 4).requires(logs).group("planks").unlockedBy("has_log", has(logs)).save(consumer);
+	}
+
+	protected static void stairs(Consumer<FinishedRecipe> consumer, ItemLike stairs, ItemLike material) {
+		stairBuilder(stairs, Ingredient.of(material)).unlockedBy(getHasName(material), has(material)).save(consumer);
 	}
 
 }

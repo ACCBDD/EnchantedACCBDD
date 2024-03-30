@@ -11,7 +11,7 @@ import com.favouriteless.enchanted.common.altar.SimplePowerPosHolder;
 import com.favouriteless.enchanted.common.blocks.cauldrons.CauldronBlockBase;
 import com.favouriteless.enchanted.common.init.registry.EnchantedParticleTypes;
 import com.favouriteless.enchanted.common.recipes.CauldronTypeRecipe;
-import com.favouriteless.enchanted.common.util.PlayerInventoryHelper;
+import com.favouriteless.enchanted.util.PlayerInventoryHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.Registry;
@@ -94,7 +94,7 @@ public abstract class CauldronBlockEntity<T extends CauldronTypeRecipe> extends 
 							be.warmingUp++;
 							if(be.warmingUp == WARMING_MAX)
 								shouldUpdate = true;
-						} else if(be.potentialRecipes.size() == 1 && be.potentialRecipes.get(0).fullMatch(be, level)) { // Has final recipe
+						} else if(be.potentialRecipes.size() == 1 && be.potentialRecipes.get(0).fullMatch(be)) { // Has final recipe
 							if(be.cookProgress < be.cookDuration) {
 								be.cookProgress++;
 								be.recalculateTargetColour();
@@ -318,9 +318,9 @@ public abstract class CauldronBlockEntity<T extends CauldronTypeRecipe> extends 
 			targetBlue = 47;
 		}
 		else if(!potentialRecipes.isEmpty() && cookProgress > 0) {
-			targetRed = potentialRecipes.get(0).getCookingRed();
-			targetGreen = potentialRecipes.get(0).getCookingGreen();
-			targetBlue = potentialRecipes.get(0).getCookingBlue();
+			targetRed = potentialRecipes.get(0).getCookRed();
+			targetGreen = potentialRecipes.get(0).getCookGreen();
+			targetBlue = potentialRecipes.get(0).getCookBlue();
 		}
 		else {
 			targetRed = Enchanted.RANDOM.nextInt(80);

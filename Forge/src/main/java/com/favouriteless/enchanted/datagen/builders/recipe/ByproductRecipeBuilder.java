@@ -1,6 +1,7 @@
 package com.favouriteless.enchanted.datagen.builders.recipe;
 
 import com.favouriteless.enchanted.common.init.registry.EnchantedRecipeTypes;
+import com.favouriteless.enchanted.util.ItemStackHelper;
 import com.google.gson.JsonObject;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
@@ -57,7 +58,7 @@ public class ByproductRecipeBuilder extends EnchantedRecipeBuilder {
         return new ByproductRecipeBuilder(result, tag);
     }
 
-    public ByproductRecipeBuilder setCount(int count) {
+    public ByproductRecipeBuilder count(int count) {
         if(count < 1)
             throw new IllegalStateException("Count of byproduct recipe cannot be less than 1.");
         this.count = count;
@@ -99,14 +100,7 @@ public class ByproductRecipeBuilder extends EnchantedRecipeBuilder {
         @Override
         public void serializeRecipeData(JsonObject json) {
             json.add("ingredient", ingredient.toJson());
-
-            JsonObject obj = new JsonObject();
-            obj.addProperty("item", ForgeRegistries.ITEMS.getKey(result).toString());
-            if (this.count > 1) {
-                obj.addProperty("count", this.count);
-            }
-
-            json.add("result", obj);
+            json.add("result", ItemStackHelper.asJson(result, count, null));
         }
 
         @NotNull

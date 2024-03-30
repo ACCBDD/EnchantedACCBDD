@@ -4,7 +4,7 @@ import com.favouriteless.enchanted.common.blocks.entity.PoppetShelfBlockEntity;
 import com.favouriteless.enchanted.common.init.registry.EnchantedBlocks;
 import com.favouriteless.enchanted.common.init.registry.EnchantedMenuTypes;
 import com.favouriteless.enchanted.common.items.poppets.AbstractPoppetItem;
-import com.favouriteless.enchanted.common.util.MenuUtils;
+import com.favouriteless.enchanted.util.MenuUtils;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;

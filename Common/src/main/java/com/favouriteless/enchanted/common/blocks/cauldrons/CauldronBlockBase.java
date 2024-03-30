@@ -1,7 +1,7 @@
 package com.favouriteless.enchanted.common.blocks.cauldrons;
 
 import com.favouriteless.enchanted.common.blocks.entity.CauldronBlockEntity;
-import com.favouriteless.enchanted.common.util.PlayerInventoryHelper;
+import com.favouriteless.enchanted.util.PlayerInventoryHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;

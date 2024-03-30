@@ -191,7 +191,7 @@ public class WitchOvenBlockEntity extends ContainerBlockEntityBase implements Me
                 if(output.isEmpty())
                     return true; // Check the output is valid to place the result into.
                 else {
-                    if(!output.sameItem(result))
+                    if(!ItemStack.isSameItemSameTags(output, result))
                         return false;
                     else
                         return output.getCount() + result.getCount() <= output.getMaxStackSize();
@@ -215,7 +215,7 @@ public class WitchOvenBlockEntity extends ContainerBlockEntityBase implements Me
                     ItemStack output = getJarOutput();
                     if(output.isEmpty())
                         inventory.set(4, result);
-                    else if(output.sameItem(result) && output.getCount() + result.getCount() <= output.getMaxStackSize())
+                    else if(ItemStack.isSameItemSameTags(output, result) && output.getCount() + result.getCount() <= output.getMaxStackSize())
                         output.grow(result.getCount());
 
                     jars.shrink(result.getCount());

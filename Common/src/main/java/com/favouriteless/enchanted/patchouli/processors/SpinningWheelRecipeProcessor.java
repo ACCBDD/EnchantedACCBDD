@@ -1,6 +1,6 @@
 package com.favouriteless.enchanted.patchouli.processors;
 
-import com.favouriteless.enchanted.common.recipes.SpinningWheelRecipe;
+import com.favouriteless.enchanted.common.recipes.SpinningRecipe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
@@ -13,7 +13,7 @@ import vazkii.patchouli.api.IVariableProvider;
 
 public class SpinningWheelRecipeProcessor implements IComponentProcessor {
 
-	private SpinningWheelRecipe recipe;
+	private SpinningRecipe recipe;
 
 	@Override
 	public void setup(IVariableProvider variables) {
@@ -21,9 +21,9 @@ public class SpinningWheelRecipeProcessor implements IComponentProcessor {
 
 		RecipeManager recipeManager = Minecraft.getInstance().level.getRecipeManager();
 		Recipe<?> recipeIn = recipeManager.byKey(new ResourceLocation(recipeId)).orElseThrow(IllegalArgumentException::new);
-		if(!(recipeIn instanceof SpinningWheelRecipe))
+		if(!(recipeIn instanceof SpinningRecipe))
 			throw new IllegalStateException();
-		recipe = (SpinningWheelRecipe)recipeIn;
+		recipe = (SpinningRecipe)recipeIn;
 	}
 
 	@Override

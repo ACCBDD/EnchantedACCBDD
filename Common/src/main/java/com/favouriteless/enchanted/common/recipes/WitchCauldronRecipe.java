@@ -1,8 +1,8 @@
 package com.favouriteless.enchanted.common.recipes;
 
 import com.favouriteless.enchanted.common.init.registry.EnchantedRecipeTypes;
-import com.favouriteless.enchanted.common.util.CraftingHelper;
-import com.favouriteless.enchanted.common.util.JSONHelper;
+import com.favouriteless.enchanted.util.ItemStackHelper;
+import com.favouriteless.enchanted.util.JsonHelper;
 import com.google.gson.JsonObject;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.FriendlyByteBuf;
@@ -31,11 +31,11 @@ public class WitchCauldronRecipe extends CauldronTypeRecipe {
         @Override
         public WitchCauldronRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
 
-            NonNullList<ItemStack> itemsIn = JSONHelper.readItemStackList(GsonHelper.getAsJsonArray(json, "ingredients"));
-            ItemStack itemOut = CraftingHelper.getItemStack(GsonHelper.getAsJsonObject(json, "result"), true);
+            NonNullList<ItemStack> itemsIn = JsonHelper.readItemStackList(GsonHelper.getAsJsonArray(json, "ingredients"), true);
+            ItemStack itemOut = ItemStackHelper.fromJson(GsonHelper.getAsJsonObject(json, "result"), true);
             int power = GsonHelper.getAsInt(json, "power");
-            int[] cookingColour = JSONHelper.deserializeColour(GsonHelper.getAsJsonObject(json, "cookingColour"));
-            int[] finalColour = JSONHelper.deserializeColour(GsonHelper.getAsJsonObject(json, "finalColour"));
+            int[] cookingColour = JsonHelper.readRGB(GsonHelper.getAsJsonObject(json, "cookingColour"));
+            int[] finalColour = JsonHelper.readRGB(GsonHelper.getAsJsonObject(json, "finalColour"));
 
             return new WitchCauldronRecipe(recipeId, itemsIn, itemOut, power, cookingColour, finalColour);
         }
@@ -66,9 +66,9 @@ public class WitchCauldronRecipe extends CauldronTypeRecipe {
             }
             buffer.writeItem(recipe.getResultItem());
             buffer.writeInt(recipe.getPower());
-            buffer.writeShort(recipe.getCookingRed());
-            buffer.writeShort(recipe.getCookingGreen());
-            buffer.writeShort(recipe.getCookingBlue());
+            buffer.writeShort(recipe.getCookRed());
+            buffer.writeShort(recipe.getCookGreen());
+            buffer.writeShort(recipe.getCookBlue());
             buffer.writeShort(recipe.getFinalRed());
             buffer.writeShort(recipe.getFinalGreen());
             buffer.writeShort(recipe.getFinalBlue());

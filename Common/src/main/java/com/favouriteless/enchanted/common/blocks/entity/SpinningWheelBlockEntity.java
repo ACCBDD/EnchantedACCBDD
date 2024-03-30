@@ -7,7 +7,7 @@ import com.favouriteless.enchanted.common.altar.SimplePowerPosHolder;
 import com.favouriteless.enchanted.common.init.registry.EnchantedBlockEntityTypes;
 import com.favouriteless.enchanted.common.init.registry.EnchantedRecipeTypes;
 import com.favouriteless.enchanted.common.menus.SpinningWheelMenu;
-import com.favouriteless.enchanted.common.recipes.SpinningWheelRecipe;
+import com.favouriteless.enchanted.common.recipes.SpinningRecipe;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
@@ -35,7 +35,7 @@ public class SpinningWheelBlockEntity extends ContainerBlockEntityBase implement
 	private static final int[] INPUT_SLOTS = new int[] { 0, 1, 2 };
 	private static final int[] BOTTOM_SLOTS = new int[] { 3 };
 
-	private final RecipeManager.CachedCheck<Container, SpinningWheelRecipe> recipeCheck;
+	private final RecipeManager.CachedCheck<Container, SpinningRecipe> recipeCheck;
 	private final SimplePowerPosHolder posHolder;
 	private boolean isSpinning = false;
 
@@ -57,14 +57,14 @@ public class SpinningWheelBlockEntity extends ContainerBlockEntityBase implement
 	public SpinningWheelBlockEntity(BlockPos pos, BlockState state) {
 		super(EnchantedBlockEntityTypes.SPINNING_WHEEL.get(), pos, state, NonNullList.withSize(4, ItemStack.EMPTY));
 		this.posHolder = new SimplePowerPosHolder(pos);
-		this.recipeCheck = RecipeManager.createCheck(EnchantedRecipeTypes.SPINNING_WHEEL.get());
+		this.recipeCheck = RecipeManager.createCheck(EnchantedRecipeTypes.SPINNING.get());
 	}
 
 	public static <T extends BlockEntity> void tick(Level level, BlockPos blockPos, BlockState blockState, T t) {
 		if(t instanceof SpinningWheelBlockEntity be) {
 			if(!level.isClientSide) {
 				IPowerProvider powerProvider = PowerHelper.tryGetPowerProvider(level, be.posHolder);
-				SpinningWheelRecipe recipe = be.recipeCheck.getRecipeFor(be, level).orElse(null);
+				SpinningRecipe recipe = be.recipeCheck.getRecipeFor(be, level).orElse(null);
 				boolean wasSpinning = be.spinProgress > 0;
 
 				if(be.canSpin(recipe) && (recipe.getPower() == 0 || powerProvider != null)) {
@@ -92,9 +92,9 @@ public class SpinningWheelBlockEntity extends ContainerBlockEntityBase implement
 
 	/**
 	 * Attempt to spin the items in this {@link SpinningWheelBlockEntity}'s input slots.
-	 * @param recipe The {@link SpinningWheelRecipe} to use.
+	 * @param recipe The {@link SpinningRecipe} to use.
 	 */
-	protected void spin(SpinningWheelRecipe recipe) {
+	protected void spin(SpinningRecipe recipe) {
 		for(ItemStack recipeStack : recipe.getItemsIn()) {
 			for(int i = 0; i < 3; i++) {
 				ItemStack input = inventory.get(i);
@@ -118,7 +118,7 @@ public class SpinningWheelBlockEntity extends ContainerBlockEntityBase implement
 	 * @param recipe The recipe to check for.
 	 * @return True if space is found, otherwise false.
 	 */
-	protected boolean canSpin(SpinningWheelRecipe recipe) {
+	protected boolean canSpin(SpinningRecipe recipe) {
 		if(recipe != null) {
 			ItemStack output = inventory.get(3);
 			if(output.isEmpty())

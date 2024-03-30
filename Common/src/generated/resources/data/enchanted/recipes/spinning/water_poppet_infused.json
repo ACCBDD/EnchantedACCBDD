@@ -1,0 +1,19 @@
+{
+  "type": "enchanted:wheel",
+  "ingredients": [
+    {
+      "item": "enchanted:poppet_infused"
+    },
+    {
+      "item": "enchanted:artichoke"
+    },
+    {
+      "item": "minecraft:potion",
+      "nbt": "{Potion:\"minecraft:long_water_breathing\"}"
+    }
+  ],
+  "power": 1000,
+  "result": {
+    "item": "enchanted:water_poppet_infused"
+  }
+}
