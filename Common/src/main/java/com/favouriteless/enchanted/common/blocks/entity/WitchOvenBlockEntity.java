@@ -9,7 +9,7 @@ import com.favouriteless.enchanted.common.init.registry.EnchantedBlocks;
 import com.favouriteless.enchanted.common.init.registry.EnchantedRecipeTypes;
 import com.favouriteless.enchanted.common.menus.WitchOvenMenu;
 import com.favouriteless.enchanted.common.recipes.ByproductRecipe;
-import com.favouriteless.enchanted.platform.Services;
+import com.favouriteless.enchanted.platform.CommonServices;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
@@ -108,16 +108,16 @@ public class WitchOvenBlockEntity extends ContainerBlockEntityBase implements Me
                 Recipe<?> recipe = hasInput ? be.smeltCheck.getRecipeFor(be, level).orElse(null) : null;
 
                 if(!be.isLit() && be.canBurn(recipe)) { // Handle starting off a stack of fuel or refreshing burn timer.
-                    be.burnProgress = Services.PLATFORM.getBurnTime(fuelStack, RecipeType.SMELTING);
+                    be.burnProgress = CommonServices.PLATFORM.getBurnTime(fuelStack, RecipeType.SMELTING);
                     be.burnDuration = be.burnProgress;
                     if (be.isLit()) {
                         isChanged = true;
-                        if(Services.PLATFORM.hasCraftingRemainingItem(fuelStack))
-                            be.inventory.set(1, Services.PLATFORM.getCraftingRemainingItem(fuelStack));
+                        if(CommonServices.PLATFORM.hasCraftingRemainingItem(fuelStack))
+                            be.inventory.set(1, CommonServices.PLATFORM.getCraftingRemainingItem(fuelStack));
                         else if(hasFuel) {
                             fuelStack.shrink(1);
                             if(fuelStack.isEmpty())
-                                be.inventory.set(1, Services.PLATFORM.getCraftingRemainingItem(fuelStack));
+                                be.inventory.set(1, CommonServices.PLATFORM.getCraftingRemainingItem(fuelStack));
                         }
                     }
                 }

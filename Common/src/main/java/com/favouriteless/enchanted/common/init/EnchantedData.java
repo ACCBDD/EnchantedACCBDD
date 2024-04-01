@@ -5,7 +5,7 @@ import com.favouriteless.enchanted.common.init.registry.AltarUpgradeRegistry;
 import com.favouriteless.enchanted.common.init.registry.PowerProviderRegistry;
 import com.favouriteless.enchanted.common.reloadlisteners.altar.AltarUpgradeReloadListener;
 import com.favouriteless.enchanted.common.reloadlisteners.altar.PowerProviderReloadListener;
-import com.favouriteless.enchanted.platform.Services;
+import com.favouriteless.enchanted.platform.CommonServices;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
@@ -28,7 +28,7 @@ public class EnchantedData {
     }
 
     public static void register(String id, SimpleJsonResourceReloadListener reloadListener) {
-        Services.COMMON_REGISTRY.register(Enchanted.location(id), reloadListener);
+        CommonServices.COMMON_REGISTRY.register(Enchanted.location(id), reloadListener);
     }
 
     private static Block createBlockKey(ResourceLocation key) {

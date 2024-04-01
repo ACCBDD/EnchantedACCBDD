@@ -1,7 +1,7 @@
 {
     "schemaVersion": 1,
     "id": "enchanted",
-    "version": "${version}",
+    "version": "2.0.1",
     "name": "Enchanted",
     "description": "Enchanted is your mod for all things occult or witchcraft.",
     "authors": [

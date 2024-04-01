@@ -1,6 +1,6 @@
 package com.favouriteless.enchanted.common.blocks.entity;
 
-import com.favouriteless.enchanted.platform.Services;
+import com.favouriteless.enchanted.platform.CommonServices;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
@@ -30,7 +30,7 @@ public abstract class ContainerBlockEntityBase extends BlockEntity implements Co
     }
 
     protected int getBurnTime(ItemStack fuel, @Nullable RecipeType<?> type) {
-        return fuel.isEmpty() ? 0 : Services.PLATFORM.getBurnTime(fuel, type);
+        return fuel.isEmpty() ? 0 : CommonServices.PLATFORM.getBurnTime(fuel, type);
     }
 
     protected void updateBlock() {

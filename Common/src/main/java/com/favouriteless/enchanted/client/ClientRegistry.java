@@ -15,7 +15,7 @@ import com.favouriteless.enchanted.client.render.model.entity.BroomstickModel;
 import com.favouriteless.enchanted.client.screens.*;
 import com.favouriteless.enchanted.common.init.registry.*;
 import com.favouriteless.enchanted.common.items.EarmuffsItem;
-import com.favouriteless.enchanted.platform.Services;
+import com.favouriteless.enchanted.platform.ClientServices;
 import com.favouriteless.enchanted.platform.services.IClientRegistryHelper;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.particle.ParticleEngine;
@@ -24,7 +24,7 @@ import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 public class ClientRegistry {
 
     public static void register() {
-        IClientRegistryHelper registry = Services.CLIENT_REGISTRY;
+        IClientRegistryHelper registry = ClientServices.CLIENT_REGISTRY;
 
         // Armor renderers
         registry.register(EarmuffsItem.class, EarmuffsRenderer::new, EnchantedItems.EARMUFFS.get());
@@ -38,7 +38,7 @@ public class ClientRegistry {
     }
 
     public static void registerEntityRenderers() {
-        IClientRegistryHelper registry = Services.CLIENT_REGISTRY;
+        IClientRegistryHelper registry = ClientServices.CLIENT_REGISTRY;
 
         // Entity renderers
         registry.register(EnchantedEntityTypes.MANDRAKE.get(), context -> new SimpleAnimatedGeoRenderer<>(context, "entity", "mandrake"));
@@ -55,7 +55,7 @@ public class ClientRegistry {
     }
 
     public static void registerLayerDefinitions() {
-        IClientRegistryHelper registry = Services.CLIENT_REGISTRY;
+        IClientRegistryHelper registry = ClientServices.CLIENT_REGISTRY;
 
         // Layer definitions
         registry.register(ModelLayerLocations.BROOMSTICK, BroomstickModel::createLayerDefinition);
@@ -90,7 +90,7 @@ public class ClientRegistry {
     }
 
     public static void registerItemModelPredicates() {
-        IClientRegistryHelper registry = Services.CLIENT_REGISTRY;
+        IClientRegistryHelper registry = ClientServices.CLIENT_REGISTRY;
 
         registry.register(EnchantedItems.CIRCLE_TALISMAN.get(), Enchanted.location("small"), (stack, world, living, seed) -> stack.hasTag() ? stack.getTag().getByte("small") * 0.3F : 0F);
         registry.register(EnchantedItems.CIRCLE_TALISMAN.get(), Enchanted.location("medium"), (stack, world, living, seed) -> stack.hasTag() ? stack.getTag().getByte("medium") * 0.3F : 0F);

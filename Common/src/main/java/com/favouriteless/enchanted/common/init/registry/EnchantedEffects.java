@@ -1,7 +1,7 @@
 package com.favouriteless.enchanted.common.init.registry;
 
 import com.favouriteless.enchanted.common.effects.SimpleEffect;
-import com.favouriteless.enchanted.platform.Services;
+import com.favouriteless.enchanted.platform.CommonServices;
 import net.minecraft.core.Registry;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -16,7 +16,7 @@ public class EnchantedEffects {
 
 
 	private static <T extends MobEffect> Supplier<T> register(String name, Supplier<T> effectSupplier) {
-		return Services.COMMON_REGISTRY.register(Registry.MOB_EFFECT, name, effectSupplier);
+		return CommonServices.COMMON_REGISTRY.register(Registry.MOB_EFFECT, name, effectSupplier);
 	}
 
 }

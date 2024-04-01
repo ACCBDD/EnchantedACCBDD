@@ -7,7 +7,7 @@ import com.favouriteless.enchanted.common.items.brews.SimpleEffectBrewItem;
 import com.favouriteless.enchanted.common.items.brews.throwable.LoveBrewItem;
 import com.favouriteless.enchanted.common.items.poppets.*;
 import com.favouriteless.enchanted.common.poppet.PoppetColour;
-import com.favouriteless.enchanted.platform.Services;
+import com.favouriteless.enchanted.platform.CommonServices;
 import net.minecraft.core.Registry;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
@@ -179,7 +179,7 @@ public class EnchantedItems {
 
 
 	private static <T extends Item> Supplier<T> register(String name, Supplier<T> itemSupplier) {
-		return Services.COMMON_REGISTRY.register(Registry.ITEM, name, itemSupplier);
+		return CommonServices.COMMON_REGISTRY.register(Registry.ITEM, name, itemSupplier);
 	}
 
 	private static Properties defaultProperties() {

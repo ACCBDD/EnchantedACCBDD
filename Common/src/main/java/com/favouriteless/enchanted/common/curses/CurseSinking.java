@@ -3,7 +3,7 @@ package com.favouriteless.enchanted.common.curses;
 import com.favouriteless.enchanted.api.curses.Curse;
 import com.favouriteless.enchanted.common.init.registry.CurseTypes;
 import com.favouriteless.enchanted.common.network.packets.EnchantedSinkingCursePacket;
-import com.favouriteless.enchanted.platform.Services;
+import com.favouriteless.enchanted.platform.CommonServices;
 import net.minecraft.server.level.ServerLevel;
 
 public class CurseSinking extends Curse {
@@ -23,11 +23,11 @@ public class CurseSinking extends Curse {
 
 			if(isSwimming != wasSwimming || isFlying != wasFlying) {
 				if(isSwimming)
-					Services.NETWORK.sendToPlayer(new EnchantedSinkingCursePacket(-0.025D * (level + 1)), targetPlayer);
+					CommonServices.NETWORK.sendToPlayer(new EnchantedSinkingCursePacket(-0.025D * (level + 1)), targetPlayer);
 				else if(isFlying)
-					Services.NETWORK.sendToPlayer(new EnchantedSinkingCursePacket(-0.05D * (level + 1)), targetPlayer);
+					CommonServices.NETWORK.sendToPlayer(new EnchantedSinkingCursePacket(-0.05D * (level + 1)), targetPlayer);
 				else
-					Services.NETWORK.sendToPlayer(new EnchantedSinkingCursePacket(0.0D), targetPlayer);
+					CommonServices.NETWORK.sendToPlayer(new EnchantedSinkingCursePacket(0.0D), targetPlayer);
 				wasSwimming = isSwimming;
 				wasFlying = isFlying;
 			}
@@ -39,7 +39,7 @@ public class CurseSinking extends Curse {
 		if(targetPlayer == null || targetPlayer.isRemoved())
 			targetPlayer = level.getServer().getPlayerList().getPlayer(targetUUID);
 		if(targetPlayer != null) {
-			Services.NETWORK.sendToPlayer(new EnchantedSinkingCursePacket(0.0D), targetPlayer); // Reset the player's sinking when removed
+			CommonServices.NETWORK.sendToPlayer(new EnchantedSinkingCursePacket(0.0D), targetPlayer); // Reset the player's sinking when removed
 		}
 	}
 

@@ -18,9 +18,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public class RiteTypes {
 
@@ -112,6 +110,14 @@ public class RiteTypes {
     public static AbstractRite getDefaultByName(ResourceLocation id) {
         RiteType<?> type = RITE_TYPES.get(id);
         return type != null ? type.create() : null;
+    }
+
+    /**
+     * Get a collection of all entries for the registry.
+     * @return Registry values collection.
+     */
+    public static Collection<RiteType<?>> getEntries() {
+        return RITE_TYPES.values();
     }
 
 }
