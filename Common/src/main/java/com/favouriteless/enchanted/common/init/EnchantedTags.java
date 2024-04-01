@@ -47,6 +47,7 @@ public class EnchantedTags {
         public static final TagKey<Block> LEAVES = createBlockTag(Enchanted.location("leaves"));
         public static final TagKey<Block> LOGS = createBlockTag(Enchanted.location("logs"));
         public static final TagKey<Block> MUTANDIS_BLACKLIST = createBlockTag(Enchanted.location("mutandis_blacklist_plants"));
+        public static final TagKey<Block> MUTANDIS_EXTREMIS_BLACKLIST = createBlockTag(Enchanted.location("mutandis_extremis_blaclist"));
         public static final TagKey<Block> MUTANDIS_EXTREMIS_PLANTS = createBlockTag(Enchanted.location("mutandis_extremis_plants"));
         public static final TagKey<Block> MUTANDIS_PLANTS = createBlockTag(Enchanted.location("mutandis_plants"));
         public static final TagKey<Block> PLANKS = createBlockTag(Enchanted.location("planks"));

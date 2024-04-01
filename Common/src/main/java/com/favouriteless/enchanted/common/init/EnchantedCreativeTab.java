@@ -1,7 +1,7 @@
 package com.favouriteless.enchanted.common.init;
 
 import com.favouriteless.enchanted.common.init.registry.EnchantedItems;
-import com.favouriteless.enchanted.platform.Services;
+import com.favouriteless.enchanted.platform.CommonServices;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
@@ -11,7 +11,7 @@ import net.minecraft.world.item.ItemStack;
 
 public class EnchantedCreativeTab {
 
-    public static final CreativeModeTab TAB = Services.COMMON_REGISTRY.getCreativeTab("main",
+    public static final CreativeModeTab TAB = CommonServices.COMMON_REGISTRY.getCreativeTab("main",
             () -> EnchantedItems.ENCHANTED_BROOMSTICK.get().getDefaultInstance(),
             (items, tab) -> {
                 for(Item item : Registry.ITEM)

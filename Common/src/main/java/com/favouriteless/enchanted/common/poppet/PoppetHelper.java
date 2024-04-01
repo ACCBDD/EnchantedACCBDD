@@ -6,7 +6,7 @@ import com.favouriteless.enchanted.common.items.poppets.AbstractPoppetItem;
 import com.favouriteless.enchanted.common.items.poppets.ItemProtectionPoppetItem;
 import com.favouriteless.enchanted.common.network.packets.EnchantedPoppetAnimationPacket;
 import com.favouriteless.enchanted.common.poppet.PoppetShelfSavedData.PoppetEntry;
-import com.favouriteless.enchanted.platform.Services;
+import com.favouriteless.enchanted.platform.CommonServices;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -188,7 +188,7 @@ public class PoppetHelper {
 	private static boolean handlePoppetResult(PoppetResult result, ItemStack poppetItemOriginal, Player player) {
 		if(result == PoppetResult.SUCCESS || result == PoppetResult.SUCCESS_BREAK) {
 			if(!player.level.isClientSide)
-				Services.NETWORK.sendToAllPlayers(new EnchantedPoppetAnimationPacket(result, poppetItemOriginal, player.getId()), player.level.getServer());
+				CommonServices.NETWORK.sendToAllPlayers(new EnchantedPoppetAnimationPacket(result, poppetItemOriginal, player.getId()), player.level.getServer());
 			return true;
 		}
 		return false;

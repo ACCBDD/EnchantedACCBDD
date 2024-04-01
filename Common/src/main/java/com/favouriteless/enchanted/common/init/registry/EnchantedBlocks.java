@@ -14,7 +14,7 @@ import com.favouriteless.enchanted.common.blocks.chalk.GoldChalkBlock;
 import com.favouriteless.enchanted.common.blocks.crops.*;
 import com.favouriteless.enchanted.common.init.EnchantedMaterials;
 import com.favouriteless.enchanted.common.world.features.EnchantedTreeGrower;
-import com.favouriteless.enchanted.platform.Services;
+import com.favouriteless.enchanted.platform.CommonServices;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleTypes;
@@ -93,7 +93,7 @@ public class EnchantedBlocks {
     //-------------------------------------------------------- UTILITY FUNCTIONS FOR CREATING BLOCKS --------------------------------------------------------
 
     private static <T extends Block> Supplier<T> register(String name, Supplier<T> blockSupplier) {
-        return Services.COMMON_REGISTRY.register(Registry.BLOCK, name, blockSupplier);
+        return CommonServices.COMMON_REGISTRY.register(Registry.BLOCK, name, blockSupplier);
     }
 
     private static ToIntFunction<BlockState> getLightValueLit(int lightValue) {

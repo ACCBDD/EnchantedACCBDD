@@ -19,11 +19,12 @@ dependencies {
     compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.3.5"))
 
     compileOnly "software.bernie.geckolib:geckolib-forge-1.19:${geckolib_version_forge}"
-    compileOnly "vazkii.patchouli:Patchouli:${patchouli_version}" // We use the forge impl in common so the processors etc work.
+    compileOnly "vazkii.patchouli:Patchouli:${patchouli_version}"
+    // We use the forge impl in common so the processors etc work.
     compileOnly "net.tslat.smartbrainlib:SmartBrainLib-forge-${minecraft_version}:${sbl_version}"
     compileOnly "com.favouriteless:StateObserver-common-${minecraft_version}:${stateobserver_version}"
     compileOnly "net.minecraftforge:forgeconfigapiport-fabric:${forge_config_api_version}"
-
+    compileOnly "mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"
 }
 
 processResources {

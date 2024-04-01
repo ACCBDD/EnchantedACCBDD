@@ -2,8 +2,8 @@ package com.favouriteless.enchanted.common.blocks;
 
 import com.favouriteless.enchanted.common.blocks.entity.PoppetShelfBlockEntity;
 import com.favouriteless.enchanted.common.poppet.PoppetShelfManager;
+import com.favouriteless.enchanted.platform.CommonServices;
 import com.favouriteless.enchanted.util.ItemStackHelper;
-import com.favouriteless.enchanted.platform.Services;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.state.BlockState;
@@ -51,7 +51,7 @@ public class PoppetShelfBlock extends BaseEntityBlock {
 		if(!worldIn.isClientSide) {
 			BlockEntity blockEntity = worldIn.getBlockEntity(pos);
 			if(blockEntity instanceof PoppetShelfBlockEntity be)
-				Services.PLATFORM.openMenuScreen((ServerPlayer)player, be, pos);
+				CommonServices.PLATFORM.openMenuScreen((ServerPlayer)player, be, pos);
 		}
 		return InteractionResult.SUCCESS;
 	}

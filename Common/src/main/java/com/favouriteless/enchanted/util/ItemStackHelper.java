@@ -1,7 +1,7 @@
 package com.favouriteless.enchanted.util;
 
 import com.favouriteless.enchanted.Enchanted;
-import com.favouriteless.enchanted.platform.Services;
+import com.favouriteless.enchanted.platform.CommonServices;
 import com.google.gson.JsonObject;
 import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
@@ -49,7 +49,7 @@ public class ItemStackHelper {
 	 * @return True if stack's burn value > 0.
 	 */
 	public static boolean isFuel(ItemStack stack) {
-		return Services.PLATFORM.getBurnTime(stack, null) > 0;
+		return CommonServices.PLATFORM.getBurnTime(stack, null) > 0;
 	}
 
 	/**
