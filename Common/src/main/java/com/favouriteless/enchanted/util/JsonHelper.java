@@ -38,16 +38,27 @@ public class JsonHelper {
         return out;
     }
 
-    public static int[] readRGB(JsonObject json) {
-        if(json.has("red") && json.has("green") && json.has("blue")) {
-            int red = GsonHelper.getAsInt(json, "red");
-            int green = GsonHelper.getAsInt(json, "green");
-            int blue = GsonHelper.getAsInt(json, "blue");
-
-            return new int[] { red, green, blue };
-        } else {
+    public static int[] readRgb(JsonArray json) {
+        if(json.size() != 3)
             throw new JsonParseException("Invalid colour in json");
-        }
+
+        return new int[] { json.get(0).getAsInt(), json.get(1).getAsInt(), json.get(2).getAsInt() };
+    }
+
+    public static JsonArray rgbAsJson(int red, int green, int blue) {
+        JsonArray out = new JsonArray();
+        out.add(red);
+        out.add(green);
+        out.add(blue);
+        return out;
+    }
+
+    public static JsonArray rgbAsJson(int[] rgb) {
+        JsonArray out = new JsonArray();
+        out.add(rgb[0]);
+        out.add(rgb[1]);
+        out.add(rgb[2]);
+        return out;
     }
 
     public static CompoundTag readTag(JsonElement element) {

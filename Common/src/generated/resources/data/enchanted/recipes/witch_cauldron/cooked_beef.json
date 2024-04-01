@@ -1,0 +1,22 @@
+{
+  "type": "enchanted:witch_cauldron",
+  "cookingColor": [
+    24,
+    48,
+    22
+  ],
+  "finalColor": [
+    28,
+    94,
+    22
+  ],
+  "ingredients": [
+    {
+      "item": "minecraft:beef"
+    }
+  ],
+  "power": 0,
+  "result": {
+    "item": "minecraft:cooked_beef"
+  }
+}

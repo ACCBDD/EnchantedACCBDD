@@ -17,8 +17,8 @@ public abstract class CauldronTypeRecipe implements Recipe<Container> {
     private final ItemStack itemOut;
     private final int power;
 
-    private int[] cookColor;
-    private int[] finalColor;
+    private final int[] cookColor;
+    private final int[] finalColor;
 
     public CauldronTypeRecipe(RecipeType<?> type, ResourceLocation id, NonNullList<ItemStack> itemsIn, ItemStack itemOut, int power, int[] cookColor, int[] finalColor) {
         this.type = type;

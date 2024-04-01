@@ -1,0 +1,22 @@
+{
+  "type": "enchanted:witch_cauldron",
+  "cookingColor": [
+    82,
+    40,
+    84
+  ],
+  "finalColor": [
+    110,
+    22,
+    115
+  ],
+  "ingredients": [
+    {
+      "item": "minecraft:chicken"
+    }
+  ],
+  "power": 0,
+  "result": {
+    "item": "minecraft:cooked_chicken"
+  }
+}

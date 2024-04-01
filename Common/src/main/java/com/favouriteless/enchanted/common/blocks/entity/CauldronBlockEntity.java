@@ -80,7 +80,7 @@ public abstract class CauldronBlockEntity<T extends CauldronTypeRecipe> extends 
 	}
 
 
-	public static <T extends BlockEntity> void tick(Level level, BlockPos blockPos, BlockState blockState, T t) {
+	public static <T extends BlockEntity> void tick(Level level, BlockPos pos, BlockState blockState, T t) {
 		if(t instanceof CauldronBlockEntity<?> be) {
 			if(be.firstTick)
 				be.firstTick();
@@ -234,7 +234,7 @@ public abstract class CauldronBlockEntity<T extends CauldronTypeRecipe> extends 
 			inventory.add(itemEntity.getItem());
 			matchRecipes();
 
-			if (potentialRecipes.isEmpty()) {
+			if(potentialRecipes.isEmpty()) {
 				if(CommonConfig.CAULDRON_ITEM_SPOIL.get())
 					setFailed();
 				else {

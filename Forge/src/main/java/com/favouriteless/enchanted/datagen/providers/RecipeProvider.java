@@ -2,9 +2,7 @@ package com.favouriteless.enchanted.datagen.providers;
 
 import com.favouriteless.enchanted.common.init.EnchantedTags;
 import com.favouriteless.enchanted.common.init.registry.EnchantedItems;
-import com.favouriteless.enchanted.datagen.builders.recipe.ByproductRecipeBuilder;
-import com.favouriteless.enchanted.datagen.builders.recipe.DistillingRecipeBuilder;
-import com.favouriteless.enchanted.datagen.builders.recipe.SpinningRecipeBuilder;
+import com.favouriteless.enchanted.datagen.builders.recipe.*;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
@@ -38,6 +36,8 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
 		buildByproductRecipes(consumer);
 		buildSpinningRecipes(consumer);
 		buildDistillingRecipes(consumer);
+		buildCauldronRecipes(consumer);
+		buildKettleRecipes(consumer);
 	}
 
 	protected void buildShapedRecipes(Consumer<FinishedRecipe> consumer) {
@@ -288,6 +288,119 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
 		DistillingRecipeBuilder.create(EnchantedItems.CLAY_JAR.get(), EnchantedItems.FOUL_FUME.get(), EnchantedItems.QUICKLIME.get())
 				.results(EnchantedItems.GYPSUM.get(), EnchantedItems.OIL_OF_VITRIOL.get(), Items.SLIME_BALL)
 				.cookTime(300).save(consumer);
+	}
+
+	protected void buildCauldronRecipes(Consumer<FinishedRecipe> consumer) {
+		CauldronTypeRecipeBuilder.cauldron(stack(Items.COOKED_BEEF), 0)
+				.inputs(Items.BEEF)
+				.cookColor(24, 48, 22)
+				.finalColor(28, 94, 22).save(consumer);
+		CauldronTypeRecipeBuilder.cauldron(stack(EnchantedItems.CHALK_GOLD.get()), 3000)
+				.inputs(EnchantedItems.MANDRAKE_ROOT.get(), Items.GOLD_NUGGET, EnchantedItems.CHALK_WHITE.get())
+				.cookColor(89, 64, 0)
+				.finalColor(194, 155, 0).save(consumer);
+		CauldronTypeRecipeBuilder.cauldron(stack(EnchantedItems.CHALK_PURPLE.get()), 2000)
+				.inputs(Items.NETHER_WART, EnchantedItems.TEAR_OF_THE_GODDESS.get(), Items.ENDER_PEARL,
+						EnchantedItems.CHALK_WHITE.get())
+				.cookColor(49, 21, 74)
+				.finalColor(73, 13, 130).save(consumer);
+		CauldronTypeRecipeBuilder.cauldron(stack(EnchantedItems.CHALK_RED.get()), 2000)
+				.inputs(Items.NETHER_WART, Items.BLAZE_POWDER, EnchantedItems.CHALK_WHITE.get())
+				.cookColor(84, 1, 26)
+				.finalColor(156, 1, 47).save(consumer);
+		CauldronTypeRecipeBuilder.cauldron(stack(Items.COOKED_CHICKEN), 0)
+				.inputs(Items.CHICKEN)
+				.cookColor(82, 40, 84)
+				.finalColor(110, 22, 115).save(consumer);
+		CauldronTypeRecipeBuilder.cauldron(stack(EnchantedItems.DROP_OF_LUCK.get()), 7000)
+				.inputs(EnchantedItems.MANDRAKE_ROOT.get(), Items.NETHER_WART, EnchantedItems.TEAR_OF_THE_GODDESS.get(),
+						EnchantedItems.REFINED_EVIL.get(), EnchantedItems.MUTANDIS_EXTREMIS.get())
+				.cookColor(0, 69, 23)
+				.finalColor(0, 117, 39).save(consumer);
+		CauldronTypeRecipeBuilder.cauldron(stack(EnchantedItems.MUTANDIS.get(), 6), 0)
+				.inputs(EnchantedItems.MANDRAKE_ROOT.get(), EnchantedItems.EXHALE_OF_THE_HORNED_ONE.get(), Items.EGG)
+				.cookColor(26, 71, 35)
+				.finalColor(62, 128, 78).save(consumer);
+		CauldronTypeRecipeBuilder.cauldron(stack(EnchantedItems.MUTANDIS_EXTREMIS.get()), 7000)
+				.inputs(EnchantedItems.MUTANDIS.get(), Items.NETHER_WART)
+				.cookColor(84, 24, 24)
+				.finalColor(128, 29, 29).save(consumer);
+		CauldronTypeRecipeBuilder.cauldron(stack(Items.NETHER_WART), 0)
+				.inputs(EnchantedItems.MANDRAKE_ROOT.get(), EnchantedItems.TEAR_OF_THE_GODDESS.get(),
+						EnchantedItems.DIAMOND_VAPOUR.get(), Items.ENDER_PEARL, Items.WHEAT,
+						EnchantedItems.MUTANDIS.get())
+				.cookColor(92, 35, 0)
+				.finalColor(153, 52, 0).save(consumer);
+		CauldronTypeRecipeBuilder.cauldron(stack(Items.COOKED_PORKCHOP), 0)
+				.inputs(Items.PORKCHOP)
+				.cookColor(61, 69, 24)
+				.finalColor(98, 110, 19).save(consumer);
+	}
+
+	protected void buildKettleRecipes(Consumer<FinishedRecipe> consumer) {
+		CauldronTypeRecipeBuilder.kettle(stack(EnchantedItems.BREW_OF_LOVE.get(), 3), 0)
+				.inputs(Items.POPPY, Items.GOLDEN_CARROT, Items.LILY_PAD, Items.COCOA_BEANS,
+						EnchantedItems.WHIFF_OF_MAGIC.get(), EnchantedItems.ARTICHOKE.get())
+				.cookColor(176, 70, 165)
+				.finalColor(247, 143, 235).save(consumer);
+		CauldronTypeRecipeBuilder.kettle(stack(EnchantedItems.BREW_OF_SPROUTING.get(), 3), 0)
+				.inputs(EnchantedItems.ROWAN_SAPLING.get(), EnchantedItems.TONGUE_OF_DOG.get(),
+						EnchantedItems.ALDER_SAPLING.get(), EnchantedItems.MANDRAKE_ROOT.get(),
+						EnchantedItems.HAWTHORN_SAPLING.get(), Items.POPPY)
+				.cookColor(92, 60, 22)
+				.finalColor(128, 90, 43).save(consumer);
+		CauldronTypeRecipeBuilder.kettle(stack(EnchantedItems.BREW_OF_THE_DEPTHS.get(), 3), 0)
+				.inputs(Items.LILY_PAD, Items.INK_SAC, EnchantedItems.MANDRAKE_ROOT.get(),
+						EnchantedItems.TEAR_OF_THE_GODDESS.get(), EnchantedItems.ARTICHOKE.get(),
+						EnchantedItems.ODOUR_OF_PURITY.get())
+				.cookColor(24, 110, 168)
+				.finalColor(84, 186, 214).save(consumer);
+		CauldronTypeRecipeBuilder.kettle(stack(EnchantedItems.BREW_OF_THE_GROTESQUE.get(), 3), 750)
+				.inputs(EnchantedItems.MUTANDIS_EXTREMIS.get(), EnchantedItems.MANDRAKE_ROOT.get(),
+						EnchantedItems.ARTICHOKE.get(), Items.GOLDEN_APPLE, EnchantedItems.TONGUE_OF_DOG.get(),
+						Items.POISONOUS_POTATO)
+				.cookColor(54, 42, 33)
+				.finalColor(128, 95, 70).save(consumer);
+		CauldronTypeRecipeBuilder.kettle(stack(EnchantedItems.FLYING_OINTMENT.get()), 3000)
+				.inputs(EnchantedItems.REDSTONE_SOUP.get())
+				.inputs(PotionUtils.setPotion(Items.POTION.getDefaultInstance(), Potions.LONG_SWIFTNESS))
+				.inputs(Items.DIAMOND, Items.FEATHER, EnchantedItems.WOOL_OF_BAT.get(),
+						EnchantedItems.BELLADONNA_FLOWER.get())
+				.cookColor(112, 102, 21)
+				.finalColor(219, 199, 42).save(consumer);
+		CauldronTypeRecipeBuilder.kettle(stack(EnchantedItems.HAPPENSTANCE_OIL.get()), 2000)
+				.inputs(EnchantedItems.REDSTONE_SOUP.get())
+				.inputs(PotionUtils.setPotion(Items.POTION.getDefaultInstance(), Potions.LONG_NIGHT_VISION))
+				.inputs(Items.ENDER_EYE, Items.GOLDEN_CARROT, Items.SPIDER_EYE, EnchantedItems.MANDRAKE_ROOT.get())
+				.cookColor(50, 15, 110)
+				.finalColor(84, 26, 184).save(consumer);
+		CauldronTypeRecipeBuilder.kettle(stack(EnchantedItems.MYSTIC_UNGUENT.get()), 3000)
+				.inputs(EnchantedItems.REDSTONE_SOUP.get())
+				.inputs(PotionUtils.setPotion(Items.POTION.getDefaultInstance(), Potions.LONG_STRENGTH))
+				.inputs(Items.DIAMOND, EnchantedItems.ROWAN_SAPLING.get(), EnchantedItems.CREEPER_HEART.get(),
+						EnchantedItems.DEMONIC_BLOOD.get())
+				.cookColor(24, 48, 22)
+				.finalColor(28, 94, 22).save(consumer);
+		CauldronTypeRecipeBuilder.kettle(stack(EnchantedItems.REDSTONE_SOUP.get()), 1000)
+				.inputs(Items.REDSTONE, EnchantedItems.DROP_OF_LUCK.get(), EnchantedItems.WOOL_OF_BAT.get(),
+						EnchantedItems.TONGUE_OF_DOG.get(), EnchantedItems.BELLADONNA_FLOWER.get(),
+						EnchantedItems.MANDRAKE_ROOT.get())
+				.cookColor(128, 30, 23)
+				.finalColor(222, 49, 29).save(consumer);
+		CauldronTypeRecipeBuilder.kettle(stack(EnchantedItems.SOUL_OF_THE_WORLD.get(), 2), 4000)
+				.inputs(EnchantedItems.REDSTONE_SOUP.get())
+				.inputs(PotionUtils.setPotion(Items.POTION.getDefaultInstance(), Potions.LONG_REGENERATION))
+				.inputs(EnchantedItems.ROWAN_SAPLING.get(), EnchantedItems.ATTUNED_STONE.get(),
+						EnchantedItems.MANDRAKE_ROOT.get(), Items.GOLDEN_APPLE)
+				.cookColor(13, 92, 25)
+				.finalColor(9, 153, 31).save(consumer);
+		CauldronTypeRecipeBuilder.kettle(stack(EnchantedItems.SPIRIT_OF_OTHERWHERE.get(), 2), 4000)
+				.inputs(EnchantedItems.REDSTONE_SOUP.get())
+				.inputs(PotionUtils.setPotion(Items.POTION.getDefaultInstance(), Potions.LONG_SWIFTNESS))
+				.inputs(EnchantedItems.WOOL_OF_BAT.get(), Items.ENDER_EYE, Items.ENDER_EYE,
+						EnchantedItems.DROP_OF_LUCK.get())
+				.cookColor(47, 22, 69)
+				.finalColor(78, 22, 128).save(consumer);
 	}
 
 	protected static void spinning(Consumer<FinishedRecipe> consumer, ItemLike result, ItemLike first, Item second, Item third) {

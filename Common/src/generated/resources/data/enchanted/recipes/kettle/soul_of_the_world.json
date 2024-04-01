@@ -1,0 +1,39 @@
+{
+  "type": "enchanted:kettle",
+  "cookingColor": [
+    13,
+    92,
+    25
+  ],
+  "finalColor": [
+    9,
+    153,
+    31
+  ],
+  "ingredients": [
+    {
+      "item": "enchanted:redstone_soup"
+    },
+    {
+      "item": "minecraft:potion",
+      "nbt": "{Potion:\"minecraft:long_regeneration\"}"
+    },
+    {
+      "item": "enchanted:rowan_sapling"
+    },
+    {
+      "item": "enchanted:attuned_stone"
+    },
+    {
+      "item": "enchanted:mandrake_root"
+    },
+    {
+      "item": "minecraft:golden_apple"
+    }
+  ],
+  "power": 4000,
+  "result": {
+    "count": 2,
+    "item": "enchanted:soul_of_the_world"
+  }
+}

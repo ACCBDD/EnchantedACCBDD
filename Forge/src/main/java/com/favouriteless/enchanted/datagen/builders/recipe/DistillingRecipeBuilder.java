@@ -31,7 +31,7 @@ public class DistillingRecipeBuilder extends EnchantedRecipeBuilder {
     }
 
     /**
-     * Create a new {@link DistillingRecipeBuilder} with the specified result and ingredients.
+     * Create a new {@link DistillingRecipeBuilder} with the specified ingredients.
      * @param inputs The {@link ItemLike}s this recipe takes.
      * @return A new {@link DistillingRecipeBuilder} with the specified parameters.
      */
@@ -42,7 +42,7 @@ public class DistillingRecipeBuilder extends EnchantedRecipeBuilder {
     }
 
     /**
-     * Create a new {@link DistillingRecipeBuilder} with the specified result and ingredients.
+     * Create a new {@link DistillingRecipeBuilder} with the specified ingredients.
      * @param inputs The {@link ItemLike}s this recipe takes.
      * @return A new {@link DistillingRecipeBuilder} with the specified parameters.
      */

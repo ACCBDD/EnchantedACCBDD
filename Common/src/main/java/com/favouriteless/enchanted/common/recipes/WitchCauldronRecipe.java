@@ -34,8 +34,8 @@ public class WitchCauldronRecipe extends CauldronTypeRecipe {
             NonNullList<ItemStack> itemsIn = JsonHelper.readItemStackList(GsonHelper.getAsJsonArray(json, "ingredients"), true);
             ItemStack itemOut = ItemStackHelper.fromJson(GsonHelper.getAsJsonObject(json, "result"), true);
             int power = GsonHelper.getAsInt(json, "power");
-            int[] cookingColour = JsonHelper.readRGB(GsonHelper.getAsJsonObject(json, "cookingColour"));
-            int[] finalColour = JsonHelper.readRGB(GsonHelper.getAsJsonObject(json, "finalColour"));
+            int[] cookingColour = JsonHelper.readRgb(GsonHelper.getAsJsonArray(json, "cookingColour"));
+            int[] finalColour = JsonHelper.readRgb(GsonHelper.getAsJsonArray(json, "finalColour"));
 
             return new WitchCauldronRecipe(recipeId, itemsIn, itemOut, power, cookingColour, finalColour);
         }
