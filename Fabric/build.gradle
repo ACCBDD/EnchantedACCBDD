@@ -42,9 +42,9 @@ loom {
             runDir("runServer")
         }
     }
-    accessWidenerPath = file("${project(':Common').projectDir.path}/src/main/resources/${mod_id}_common.accesswidener")
+    accessWidenerPath = file("${project(':Common').projectDir.path}/src/main/resources/enchanted_common.accesswidener")
     mixin {
-        defaultRefmapName = "${mod_id}.refmap.json"
+        defaultRefmapName = "enchanted.refmap.json"
     }
 }
 

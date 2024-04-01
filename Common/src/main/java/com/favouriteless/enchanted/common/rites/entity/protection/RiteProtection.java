@@ -60,7 +60,6 @@ public class RiteProtection extends AbstractRite {
     protected void onTick() {
         if(targetLevel.isLoaded(targetPos))
             if(ticks % 20 == 0) {
-                generateSphere(block);
                 stateObserver.checkChanges();
                 targetLevel.sendParticles(new DoubleParticleData(EnchantedParticleTypes.PROTECTION_SEED.get(), radius), targetPos.getX()+0.5D, targetPos.getY()+0.6D, targetPos.getZ()+0.5D, 1, 0.0D, 0.0D, 0.0D, 0.0D);
             }
