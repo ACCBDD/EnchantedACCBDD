@@ -124,7 +124,7 @@ public class EnchantedItems {
 	public static final Supplier<Item> GYPSUM = registerItem("gypsum");
 	public static final Supplier<Item> QUICKLIME = registerItem("quicklime");
 	public static final Supplier<Item> REFINED_EVIL = registerItem("refined_evil");
-	public static final Supplier<Item> ROWAN_BERRIES = registerFoodItem("rowan_berries", 3);
+	public static final Supplier<Item> ROWAN_BERRIES = registerFoodItem("rowan_berries", 3, true, false);
 	public static final Supplier<Item> WOOD_ASH = registerItem("wood_ash");
 	public static final Supplier<Item> FUME_FILTER = registerItem("fume_filter");
 	public static final Supplier<Item> WOOL_OF_BAT = registerItem("wool_of_bat");
@@ -214,8 +214,13 @@ public class EnchantedItems {
 		return register(name, () -> new ItemNameBlockItem(block.get(), defaultProperties()));
 	}
 
-	private static Supplier<Item> registerFoodItem(String name, int nutrition) {
-		return register(name, () -> new Item(defaultProperties().food(new FoodProperties.Builder().nutrition(nutrition).build())));
+	private static Supplier<Item> registerFoodItem(String name, int nutrition, boolean fast, boolean meat) {
+		FoodProperties.Builder builder = new FoodProperties.Builder().nutrition(nutrition);
+		if(fast)
+			builder.fast();
+		if(meat)
+			builder.meat();
+		return register(name, () -> new Item(defaultProperties().food(builder.build())));
 	}
 
 	private static Supplier<Item> registerFoodItem(String name, int nutrition, MobEffect effect, int duration, int amplification, float chance) {

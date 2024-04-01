@@ -13,6 +13,7 @@ import com.favouriteless.enchanted.common.init.registry.EnchantedParticleTypes;
 import com.favouriteless.enchanted.common.recipes.CauldronTypeRecipe;
 import com.favouriteless.enchanted.util.PlayerInventoryHelper;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
@@ -23,6 +24,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -40,7 +42,7 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class CauldronBlockEntity<T extends CauldronTypeRecipe> extends ContainerBlockEntityBase implements IPowerConsumer {
+public abstract class CauldronBlockEntity<T extends CauldronTypeRecipe> extends ContainerBlockEntityBase implements IPowerConsumer, WorldlyContainer {
 
 	private final SimplePowerPosHolder posHolder;
 
@@ -459,6 +461,21 @@ public abstract class CauldronBlockEntity<T extends CauldronTypeRecipe> extends 
 	@NotNull
 	public IPowerConsumer.IPowerPosHolder getPosHolder() {
 		return posHolder;
+	}
+
+	@Override
+	public int[] getSlotsForFace(Direction direction) {
+		return new int[0];
+	}
+
+	@Override
+	public boolean canPlaceItemThroughFace(int i, ItemStack itemStack, @org.jetbrains.annotations.Nullable Direction direction) {
+		return false;
+	}
+
+	@Override
+	public boolean canTakeItemThroughFace(int i, ItemStack itemStack, Direction direction) {
+		return false;
 	}
 
 }

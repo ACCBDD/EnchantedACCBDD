@@ -59,8 +59,9 @@ public class EnchantedTags {
     }
 
     public static class Items {
-        public static final TagKey<Item> ARMOUR_POPPET_BLACKLIST = createItemTag(Enchanted.location("armour_poppet_blacklist"));
-        public static final TagKey<Item> ARMOUR_POPPET_WHITELIST = createItemTag(Enchanted.location("armour_poppet_whitelist"));
+        public static final TagKey<Item> ARMORS = createItemTag(Enchanted.location("armors"));
+        public static final TagKey<Item> ARMOR_POPPET_BLACKLIST = createItemTag(Enchanted.location("armor_poppet_blacklist"));
+        public static final TagKey<Item> ARMOR_POPPET_WHITELIST = createItemTag(Enchanted.location("armor_poppet_whitelist"));
         public static final TagKey<Item> CHALICES = createItemTag(Enchanted.location("chalices"));
         public static final TagKey<Item> CHALKS = createItemTag(Enchanted.location("chalks"));
         public static final TagKey<Item> LEAVES = createItemTag(Enchanted.location("leaves"));
@@ -70,6 +71,8 @@ public class EnchantedTags {
         public static final TagKey<Item> SAPLINGS = createItemTag(Enchanted.location("saplings"));
         public static final TagKey<Item> SLABS = createItemTag(Enchanted.location("slabs"));
         public static final TagKey<Item> STAIRS = createItemTag(Enchanted.location("stairs"));
+        public static final TagKey<Item> SWORDS = createItemTag(Enchanted.location("swords"));
+        public static final TagKey<Item> TOOLS = createItemTag(Enchanted.location("tools"));
         public static final TagKey<Item> TOOL_POPPET_BLACKLIST = createItemTag(Enchanted.location("tool_poppet_blacklist"));
         public static final TagKey<Item> TOOL_POPPET_WHITELIST = createItemTag(Enchanted.location("tool_poppet_whitelist"));
         public static final TagKey<Item> WITCH_OVEN_BLACKLIST = createItemTag(Enchanted.location("witch_oven_blacklist"));

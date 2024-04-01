@@ -43,7 +43,7 @@ public class WitchOvenBlockEntity extends ContainerBlockEntityBase implements Me
     private static final int[] TOP_SLOTS = new int[] { 0 };
     private static final int[] SIDE_SLOTS = new int[] { 1 };
     private static final int[] FACE_SLOTS = new int[] { 2 };
-    private static final int[] BOTTOM_SLOTS = new int[] { 3, 2, 4 };
+    private static final int[] BOTTOM_SLOTS = new int[] { 3, 4 };
 
     private final RecipeManager.CachedCheck<Container, SmeltingRecipe> smeltCheck;
     private final RecipeManager.CachedCheck<Container, ByproductRecipe> ovenCheck;

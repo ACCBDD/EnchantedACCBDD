@@ -1,9 +1,9 @@
 package com.favouriteless.enchanted.common.blocks.entity;
 
 import com.favouriteless.enchanted.client.particles.types.SimpleColouredParticleType.SimpleColouredData;
-import com.favouriteless.enchanted.common.init.registry.EnchantedParticleTypes;
 import com.favouriteless.enchanted.common.init.registry.EnchantedBlockEntityTypes;
 import com.favouriteless.enchanted.common.init.registry.EnchantedBlocks;
+import com.favouriteless.enchanted.common.init.registry.EnchantedParticleTypes;
 import com.favouriteless.enchanted.common.init.registry.EnchantedRecipeTypes;
 import com.favouriteless.enchanted.common.recipes.WitchCauldronRecipe;
 import net.minecraft.core.BlockPos;

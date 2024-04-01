@@ -1,6 +1,5 @@
 package com.favouriteless.enchanted.common.poppet;
 
-import com.favouriteless.enchanted.common.CommonConfig;
 import com.favouriteless.enchanted.common.init.EnchantedTags.Items;
 import com.favouriteless.enchanted.common.init.registry.EnchantedItems;
 import com.favouriteless.enchanted.common.items.poppets.AbstractDeathPoppetItem;
@@ -49,7 +48,7 @@ public class PoppetEvents {
 	}
 
 	public static void onPlayerItemBreak(Player player, ItemStack item, InteractionHand hand) {
-		if(item.is(Items.TOOL_POPPET_BLACKLIST) && (!CommonConfig.WHITELIST_TOOL_POPPET.get() && item.is(Items.TOOL_POPPET_WHITELIST))) {
+		if(item.is(Items.TOOL_POPPET_WHITELIST) && !item.is(Items.TOOL_POPPET_BLACKLIST)) {
 			Queue<ItemStack> poppetQueue = new PriorityQueue<>(new PoppetComparator());
 			for(ItemStack itemStack : player.getInventory().items)
 				if(EnchantedItems.isToolPoppet(itemStack.getItem()))
@@ -71,26 +70,26 @@ public class PoppetEvents {
 
 	public static void onLivingEntityBreak(LivingEntity entity, EquipmentSlot slot) {
 		if(entity instanceof Player player) {
-			ItemStack armourStack = entity.getItemBySlot(slot).copy();
+			ItemStack item = entity.getItemBySlot(slot).copy();
 
-			if(armourStack.is(Items.ARMOUR_POPPET_BLACKLIST) && (!CommonConfig.WHITELIST_ARMOUR_POPPET.get() && armourStack.is(Items.ARMOUR_POPPET_WHITELIST))) {
+			if(item.is(Items.ARMOR_POPPET_WHITELIST) && !item.is(Items.ARMOR_POPPET_BLACKLIST)) {
 				Queue<ItemStack> poppetQueue = new PriorityQueue<>(new PoppetComparator());
 				for(ItemStack itemStack : player.getInventory().items)
 					if(itemStack.getItem() instanceof ItemProtectionPoppetItem)
 						if(EnchantedItems.isArmourPoppet(itemStack.getItem()))
 							poppetQueue.add(itemStack);
 
-				boolean canceled = PoppetHelper.tryUseItemProtectionPoppetQueue(poppetQueue, player, armourStack);
+				boolean canceled = PoppetHelper.tryUseItemProtectionPoppetQueue(poppetQueue, player, item);
 				if(!canceled) {
 					Queue<PoppetEntry> poppetEntryQueue = new PriorityQueue<>(new PoppetEntryComparator());
 					for(PoppetEntry entry : PoppetShelfManager.getEntriesFor(player))
-						if(EnchantedItems.isArmourPoppet(armourStack.getItem()))
+						if(EnchantedItems.isArmourPoppet(entry.item().getItem()))
 							poppetEntryQueue.add(entry);
-					canceled = PoppetHelper.tryUseItemProtectionPoppetEntryQueue(poppetEntryQueue, player, armourStack);
+					canceled = PoppetHelper.tryUseItemProtectionPoppetEntryQueue(poppetEntryQueue, player, item);
 				}
 
 				if(canceled)
-					player.setItemSlot(slot, armourStack);
+					player.setItemSlot(slot, item);
 			}
 		}
 	}

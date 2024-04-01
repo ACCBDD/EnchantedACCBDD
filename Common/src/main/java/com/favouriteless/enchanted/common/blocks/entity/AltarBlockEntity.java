@@ -295,6 +295,8 @@ public class AltarBlockEntity extends BlockEntity implements MenuProvider, IPowe
         return false;
     }
 
+
+
     public static class AltarBlockData implements ISerializable<CompoundTag> {
         public Map<Block, Integer> blockCounts = new HashMap<>();
         public Map<TagKey<Block>, Integer> tagCounts = new HashMap<>();

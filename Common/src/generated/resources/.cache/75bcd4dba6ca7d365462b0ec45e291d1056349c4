@@ -1,4 +1,4 @@
-// 1.19.2	2024-03-27T19:01:41.4861357	Tags for minecraft:block
+// 1.19.2	2024-04-01T06:45:10.1339492	Tags for minecraft:block
 69c396cb051bbe9a130e6979b67065e5041b179d data/enchanted/tags/blocks/blight_decayable_blocks.json
 d7b586bbe2081b57c98765eb70ddbf16670a018a data/enchanted/tags/blocks/blight_decayable_plants.json
 032a28906df93325eea0f3c0b2070e0f2344aa47 data/enchanted/tags/blocks/blight_decay_blocks.json
@@ -8,7 +8,7 @@ bc7721a66aee97cea11dffcfa62295799c09460b data/enchanted/tags/blocks/crops.json
 847203a50ec44d614777e94b9ece91cefd7d94fa data/enchanted/tags/blocks/leaves.json
 84980a2aaeb2cfd9ec5ba7157d843a877013c53c data/enchanted/tags/blocks/logs.json
 209fa349faede1a584c86a1947378fbb6651eaf1 data/enchanted/tags/blocks/mutandis_blacklist_plants.json
-e1150285e08c7adbf1919d0fc8791069276b8f26 data/enchanted/tags/blocks/mutandis_extremis_plants.json
+ce562b9b13990ff63ffd15966c83931b1ce955fe data/enchanted/tags/blocks/mutandis_extremis_plants.json
 f22486071a9fdebdda194e2bc9f42cca95c9e845 data/enchanted/tags/blocks/mutandis_plants.json
 e47cedad84283e8d4746c2aeff8d12fe2618a430 data/enchanted/tags/blocks/planks.json
 d30a4306f77d6935375ce59a590bec6148b59157 data/enchanted/tags/blocks/rite_forest_replaceable.json

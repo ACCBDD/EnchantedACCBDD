@@ -18,10 +18,6 @@ public class CommonConfig {
     // Kettle
     public static final ConfigValue<Boolean> KETTLE_ITEM_SPOIL;
 
-    // Poppets
-    public static final ConfigValue<Boolean> WHITELIST_TOOL_POPPET;
-    public static final ConfigValue<Boolean> WHITELIST_ARMOUR_POPPET;
-
     // Rites
     public static final ConfigValue<Integer> TOTAL_ECLIPSE_COOLDOWN;
     public static final ConfigValue<Integer> SKY_WRATH_COOLDOWN;
@@ -53,11 +49,6 @@ public class CommonConfig {
 
         BUILDER.push("Kettle Options");
         KETTLE_ITEM_SPOIL = BUILDER.comment("Allow incorrect items to spoil brew #default true").define("kettle_item_spoil", true);
-        BUILDER.pop();
-
-        BUILDER.push("Poppet Options");
-        WHITELIST_TOOL_POPPET = BUILDER.comment("Enable the #enchanted:tool_poppet_whitelist tag #default false").define("tool_poppet_whitelist", false);
-        WHITELIST_ARMOUR_POPPET = BUILDER.comment("Enable the #enchanted:armour_poppet_whitelist tag #default false").define("armour_poppet_whitelist", false);
         BUILDER.pop();
 
         BUILDER.push("Rite Options");
