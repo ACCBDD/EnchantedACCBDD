@@ -7,6 +7,9 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
+import net.minecraft.client.renderer.item.ItemPropertyFunction;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.ArmorItem;
@@ -62,6 +65,13 @@ public interface IClientRegistryHelper {
     @SuppressWarnings("rawtypes")
     void register(Class<? extends ArmorItem> clazz, Supplier<GeoArmorRenderer> rendererSupplier, Item... items);
 
+    /**
+     * Register an item model predicate.
+     * @param item The {@link Item} the predicate is for.
+     * @param location The {@link ResourceLocation} of the predicate.
+     * @param function {@link ItemPropertyFunction} determining if the predicate is true or not.
+     */
+    void register(Item item, ResourceLocation location, ClampedItemPropertyFunction function);
 
     /**
      * Represents Forge's enum of the same name, so this can actually compile. Forge implementation will grab the ordinal

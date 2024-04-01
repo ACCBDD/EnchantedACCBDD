@@ -8,6 +8,9 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
+import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.ArmorItem;
@@ -52,6 +55,11 @@ public class ForgeClientRegistryHelper implements IClientRegistryHelper {
 	@SuppressWarnings("rawtypes")
 	public void register(Class<? extends ArmorItem> clazz, Supplier<GeoArmorRenderer> rendererSupplier, Item... items) {
 		GeoArmorRenderer.registerArmorRenderer(clazz, rendererSupplier);
+	}
+
+	@Override
+	public void register(Item item, ResourceLocation location, ClampedItemPropertyFunction function) {
+		ItemProperties.register(item, location, function);
 	}
 
 }

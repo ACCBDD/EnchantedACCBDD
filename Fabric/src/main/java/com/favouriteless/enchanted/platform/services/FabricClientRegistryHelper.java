@@ -1,6 +1,5 @@
 package com.favouriteless.enchanted.platform.services;
 
-import com.favouriteless.enchanted.platform.services.IClientRegistryHelper;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.KeyMapping;
@@ -9,6 +8,9 @@ import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
+import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.ArmorItem;
@@ -45,6 +47,11 @@ public class FabricClientRegistryHelper implements IClientRegistryHelper {
 	@SuppressWarnings("rawtypes")
 	public void register(Class<? extends ArmorItem> clazz, Supplier<GeoArmorRenderer> rendererSupplier, Item... items) {
 		GeoArmorRenderer.registerArmorRenderer(rendererSupplier.get(), items);
+	}
+
+	@Override
+	public void register(Item item, ResourceLocation location, ClampedItemPropertyFunction function) {
+		ItemProperties.register(item, location, function);
 	}
 
 }
