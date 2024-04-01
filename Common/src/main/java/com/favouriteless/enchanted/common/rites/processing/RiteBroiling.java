@@ -2,6 +2,7 @@ package com.favouriteless.enchanted.common.rites.processing;
 
 import com.favouriteless.enchanted.api.rites.AbstractRite;
 import com.favouriteless.enchanted.common.CommonConfig;
+import com.favouriteless.enchanted.common.init.EnchantedTags;
 import com.favouriteless.enchanted.common.init.registry.EnchantedBlocks;
 import com.favouriteless.enchanted.common.init.registry.EnchantedItems;
 import com.favouriteless.enchanted.common.init.registry.EnchantedParticleTypes;
@@ -51,7 +52,7 @@ public class RiteBroiling extends AbstractRite {
 
             if(level != null) {
                 List<Entity> entitiesInside = CirclePart.SMALL.getEntitiesInside(level, pos, entity -> entity instanceof ItemEntity); // Get all ItemEntity
-                entitiesInside.removeIf(e -> ((ItemEntity)e).getItem().getItem().getFoodProperties() == null);
+                entitiesInside.removeIf(e -> !((ItemEntity)e).getItem().is(EnchantedTags.Items.RAW_FOODS));
                 entitiesInside.sort((a, b) -> a.distanceToSqr(pos.getX() + 0.5D, pos.getY(), pos.getX() + 0.5D) > b.distanceToSqr(pos.getX() + 0.5D, pos.getY(), pos.getX() + 0.5D) ? 1 : 0); // Sort by distance.
 
                 if(entitiesInside.isEmpty()) { // If no food left to cook

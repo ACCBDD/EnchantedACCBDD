@@ -1,5 +1,6 @@
 package com.favouriteless.enchanted.common.init.registry;
 
+import com.favouriteless.enchanted.common.init.EnchantedCreativeTab;
 import com.favouriteless.enchanted.common.init.EnchantedTags;
 import com.favouriteless.enchanted.common.items.*;
 import com.favouriteless.enchanted.common.items.brews.SimpleEffectBrewItem;
@@ -8,7 +9,6 @@ import com.favouriteless.enchanted.common.items.poppets.*;
 import com.favouriteless.enchanted.common.poppet.PoppetColour;
 import com.favouriteless.enchanted.platform.Services;
 import net.minecraft.core.Registry;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -183,7 +183,7 @@ public class EnchantedItems {
 	}
 
 	private static Properties defaultProperties() {
-		return new Properties().tab(TAB);
+		return new Properties().tab(EnchantedCreativeTab.TAB);
 	}
 
 	private static Supplier<Item> registerItem(String name) {
@@ -299,19 +299,6 @@ public class EnchantedItems {
 		ComposterBlock.COMPOSTABLES.put(WOLFSBANE_FLOWER.get(), 0.65F);
 		ComposterBlock.COMPOSTABLES.put(GARLIC.get(), 0.45F);
 	}
-
-	public static final CreativeModeTab TAB = Services.COMMON_REGISTRY.getCreativeTab("main",
-			() -> EnchantedItems.ENCHANTED_BROOMSTICK.get().getDefaultInstance(),
-			(items) -> {
-				for(int i = 1; i < 4; i++) {
-					for(String key : new String[] { "small", "medium", "large" }) {
-						ItemStack stack = new ItemStack(CIRCLE_TALISMAN.get());
-						CompoundTag nbt = stack.getOrCreateTag();
-						nbt.putInt(key, i);
-						items.add(stack);
-					}
-				}
-	});
 
 	public static void load() {} // Method which exists purely to load the class.
 

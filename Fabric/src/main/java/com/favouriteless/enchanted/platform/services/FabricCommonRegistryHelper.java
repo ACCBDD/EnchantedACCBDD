@@ -22,7 +22,7 @@ import net.minecraft.world.level.block.SoundType;
 import org.apache.commons.lang3.function.TriFunction;
 
 import java.util.List;
-import java.util.function.Consumer;
+import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
 public class FabricCommonRegistryHelper implements ICommonRegistryHelper {
@@ -67,7 +67,7 @@ public class FabricCommonRegistryHelper implements ICommonRegistryHelper {
 	}
 
 	@Override
-	public CreativeModeTab getCreativeTab(String name, Supplier<ItemStack> iconSupplier, Consumer<List<ItemStack>> itemAppender) {
+	public CreativeModeTab getCreativeTab(String name, Supplier<ItemStack> iconSupplier, BiConsumer<List<ItemStack>, CreativeModeTab> itemAppender) {
 		return FabricItemGroupBuilder.create(Enchanted.location("main"))
 				.icon(iconSupplier)
 				.appendItems(itemAppender)

@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Consumer;
+import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
 public class ForgeCommonRegistryHelper implements ICommonRegistryHelper {
@@ -70,7 +70,7 @@ public class ForgeCommonRegistryHelper implements ICommonRegistryHelper {
 	}
 
 	@Override
-	public CreativeModeTab getCreativeTab(String name, Supplier<ItemStack> iconSupplier, Consumer<List<ItemStack>> itemAppender) {
+	public CreativeModeTab getCreativeTab(String name, Supplier<ItemStack> iconSupplier, BiConsumer<List<ItemStack>, CreativeModeTab> itemAppender) {
 		return new CreativeModeTab(Enchanted.MOD_ID + ".main") {
 
 			@Override
@@ -80,8 +80,7 @@ public class ForgeCommonRegistryHelper implements ICommonRegistryHelper {
 
 			@Override
 			public void fillItemList(NonNullList<ItemStack> items) {
-				super.fillItemList(items);
-				itemAppender.accept(items);
+				itemAppender.accept(items, this);
 			}
 		};
 	}
