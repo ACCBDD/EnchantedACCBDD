@@ -9,7 +9,7 @@
     },
     {
       "type": "enchanted:kettle_recipe",
-      "recipe": "enchanted:kettle_spirit_of_otherwhere"
+      "recipe": "enchanted:kettle/spirit_of_otherwhere"
     }
   ],
   "read_by_default": true

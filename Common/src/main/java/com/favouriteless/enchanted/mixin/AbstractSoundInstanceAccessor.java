@@ -10,4 +10,7 @@ public interface AbstractSoundInstanceAccessor {
     @Accessor("volume")
     void setVolume(float volume);
 
+    @Accessor("volume")
+    float getVolume();
+
 }

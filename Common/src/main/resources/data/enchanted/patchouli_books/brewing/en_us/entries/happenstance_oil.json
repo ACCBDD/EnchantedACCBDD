@@ -9,7 +9,7 @@
     },
     {
       "type": "enchanted:kettle_recipe",
-      "recipe": "enchanted:kettle_happenstance_oil"
+      "recipe": "enchanted:kettle/happenstance_oil"
     }
   ],
   "read_by_default": true

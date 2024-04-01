@@ -9,7 +9,7 @@
     },
     {
       "type": "enchanted:cauldron_recipe",
-      "recipe": "enchanted:cauldron_beef"
+      "recipe": "enchanted:witch_cauldron/cooked_beef"
     }
   ],
   "read_by_default": true

@@ -3,7 +3,7 @@ package com.favouriteless.enchanted.platform.services;
 import com.favouriteless.enchanted.Enchanted;
 import com.favouriteless.enchanted.mixin.fabric.DamageSourceAccessor;
 import com.favouriteless.enchanted.platform.JsonDataLoaderWrapper;
-import com.favouriteless.enchanted.platform.services.ICommonRegistryHelper;
+import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;
 import net.minecraft.core.Registry;
@@ -16,9 +16,13 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.SoundType;
 import org.apache.commons.lang3.function.TriFunction;
 
+import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class FabricCommonRegistryHelper implements ICommonRegistryHelper {
@@ -62,6 +66,13 @@ public class FabricCommonRegistryHelper implements ICommonRegistryHelper {
 		return new SoundType(volume, pitch, breakSound.get(), stepSound.get(), placeSound.get(), hitSound.get(), fallSound.get());
 	}
 
+	@Override
+	public CreativeModeTab getCreativeTab(String name, Supplier<ItemStack> iconSupplier, Consumer<List<ItemStack>> itemAppender) {
+		return FabricItemGroupBuilder.create(Enchanted.location("main"))
+				.icon(iconSupplier)
+				.appendItems(itemAppender)
+				.build();
+	}
 
 
 	private static class EnchantedDamageSource extends DamageSource {

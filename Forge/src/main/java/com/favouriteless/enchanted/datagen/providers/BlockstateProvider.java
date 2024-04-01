@@ -80,7 +80,9 @@ public class BlockstateProvider extends BlockStateProvider {
 			String name = "block/" + ForgeRegistries.BLOCKS.getKey(EnchantedBlocks.BLOOD_POPPY.get()).getPath();
 			if(state.getValue(BloodPoppyBlock.FILLED)) name = name + "_filled";
 			return ConfiguredModel.builder()
-					.modelFile(models().withExistingParent(name, mcLoc("block/cross")).texture("cross", name))
+					.modelFile(models().withExistingParent(name, mcLoc("block/cross"))
+							.texture("cross", name)
+							.renderType("minecraft:cutout"))
 					.build();
 		});
 		simpleItem(EnchantedBlocks.BLOOD_POPPY.get());

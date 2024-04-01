@@ -111,7 +111,7 @@ public class DistillingRecipeBuilder extends EnchantedRecipeBuilder {
     @Override
     protected String getRecipeName() {
         StringBuilder name = new StringBuilder();
-        for(ItemStack item : results)
+        for(ItemStack item : inputs)
             if(item.getItem() != EnchantedItems.CLAY_JAR.get())
                 name.append(ForgeRegistries.ITEMS.getKey(item.getItem()).getPath()).append("_");
         name.deleteCharAt(name.length() - 1); // Delete trailing _

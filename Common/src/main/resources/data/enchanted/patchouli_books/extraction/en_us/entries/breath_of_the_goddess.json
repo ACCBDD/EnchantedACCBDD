@@ -9,7 +9,7 @@
     },
     {
       "type": "enchanted:witch_oven_recipe_single",
-      "recipe": "enchanted:byproduct_breath_of_the_goddess",
+      "recipe": "enchanted:byproduct/breath_of_the_goddess_birch_sapling",
       "itemIn": "minecraft:birch_sapling",
       "resultItem": "enchanted:wood_ash"
     }

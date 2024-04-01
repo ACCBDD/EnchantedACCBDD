@@ -9,7 +9,7 @@
     },
     {
       "type": "enchanted:kettle_recipe",
-      "recipe": "enchanted:kettle_soul_of_the_world"
+      "recipe": "enchanted:kettle/soul_of_the_world"
     }
   ],
   "read_by_default": true

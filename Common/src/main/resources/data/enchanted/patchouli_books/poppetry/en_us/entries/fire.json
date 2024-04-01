@@ -9,7 +9,7 @@
     },
     {
       "type": "enchanted:spinning_wheel_recipe",
-      "recipe": "enchanted:spin_fire_poppet"
+      "recipe": "enchanted:spinning/fire_poppet"
     }
   ],
   "read_by_default": true,

@@ -9,7 +9,7 @@
     },
     {
       "type": "enchanted:cauldron_recipe",
-      "recipe": "enchanted:cauldron_nether_wart"
+      "recipe": "enchanted:witch_cauldron/nether_wart"
     }
   ],
   "read_by_default": true

@@ -32,8 +32,8 @@ public class KettleRecipe extends CauldronTypeRecipe {
             NonNullList<ItemStack> itemsIn = JsonHelper.readItemStackList(GsonHelper.getAsJsonArray(json, "ingredients"), true);
             ItemStack itemOut = ItemStackHelper.fromJson(GsonHelper.getAsJsonObject(json, "result"), true);
             int power = GsonHelper.getAsInt(json, "power");
-            int[] cookingColour = JsonHelper.readRgb(GsonHelper.getAsJsonArray(json, "cookingColour"));
-            int[] finalColour = JsonHelper.readRgb(GsonHelper.getAsJsonArray(json, "finalColour"));
+            int[] cookingColour = JsonHelper.readRgb(GsonHelper.getAsJsonArray(json, "cookingColor"));
+            int[] finalColour = JsonHelper.readRgb(GsonHelper.getAsJsonArray(json, "finalColor"));
 
             return new KettleRecipe(recipeId, itemsIn, itemOut, power, cookingColour, finalColour);
         }

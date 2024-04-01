@@ -9,7 +9,7 @@
     },
     {
       "type": "enchanted:cauldron_recipe",
-      "recipe": "enchanted:cauldron_drop_of_luck"
+      "recipe": "enchanted:witch_cauldron/drop_of_luck"
     }
   ],
   "read_by_default": true

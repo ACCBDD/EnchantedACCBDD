@@ -9,7 +9,7 @@
     },
     {
       "type": "enchanted:cauldron_recipe",
-      "recipe": "enchanted:cauldron_chalk_purple"
+      "recipe": "enchanted:witch_cauldron/chalk_purple"
     }
   ],
   "read_by_default": true

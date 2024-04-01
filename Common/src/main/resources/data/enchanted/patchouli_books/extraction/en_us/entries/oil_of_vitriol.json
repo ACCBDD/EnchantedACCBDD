@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "enchanted:distillery_recipe",
-      "recipe": "enchanted:distillery_foul_fume_quicklime"
+      "recipe": "enchanted:distilling/foul_fume_quicklime"
     }
   ],
   "read_by_default": true

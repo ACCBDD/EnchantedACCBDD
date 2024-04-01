@@ -9,7 +9,7 @@
     },
     {
       "type": "enchanted:kettle_recipe",
-      "recipe": "enchanted:kettle_redstone_soup"
+      "recipe": "enchanted:kettle/redstone_soup"
     }
   ],
   "read_by_default": true

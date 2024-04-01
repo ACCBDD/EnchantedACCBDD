@@ -5,11 +5,11 @@
   "pages": [
     {
       "type": "enchanted:distillery_recipe",
-      "recipe": "enchanted:distillery_breath_of_the_goddess_lapis"
+      "recipe": "enchanted:distilling/breath_of_the_goddess_lapis_lazuli"
     },
     {
       "type": "enchanted:distillery_recipe",
-      "recipe": "enchanted:distillery_diamond_vapour_ghast_tear"
+      "recipe": "enchanted:distilling/diamond_vapour_ghast_tear"
     }
   ],
   "read_by_default": true

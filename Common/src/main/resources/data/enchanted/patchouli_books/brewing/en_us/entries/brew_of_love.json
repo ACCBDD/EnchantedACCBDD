@@ -9,7 +9,7 @@
     },
     {
       "type": "enchanted:kettle_recipe",
-      "recipe": "enchanted:kettle_brew_of_love"
+      "recipe": "enchanted:kettle/brew_of_love"
     }
   ],
   "read_by_default": true

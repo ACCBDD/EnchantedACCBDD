@@ -9,7 +9,7 @@
     },
     {
       "type": "enchanted:kettle_recipe",
-      "recipe": "enchanted:kettle_flying_ointment"
+      "recipe": "enchanted:kettle/flying_ointment"
     }
   ],
   "read_by_default": true

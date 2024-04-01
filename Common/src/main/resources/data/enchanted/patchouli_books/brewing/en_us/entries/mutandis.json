@@ -9,7 +9,7 @@
     },
     {
       "type": "enchanted:cauldron_recipe",
-      "recipe": "enchanted:cauldron_mutandis"
+      "recipe": "enchanted:witch_cauldron/mutandis"
     }
   ],
   "read_by_default": true

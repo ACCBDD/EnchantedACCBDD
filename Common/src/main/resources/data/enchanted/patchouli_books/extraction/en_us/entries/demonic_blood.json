@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "enchanted:distillery_recipe",
-      "recipe": "enchanted:distillery_demon_heart_diamond_vapour"
+      "recipe": "enchanted:distilling/demon_heart_diamond_vapour"
     }
   ],
   "read_by_default": true

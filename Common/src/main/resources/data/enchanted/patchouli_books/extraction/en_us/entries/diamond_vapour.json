@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "enchanted:distillery_recipe",
-      "recipe": "enchanted:distillery_diamond_oil_of_vitriol"
+      "recipe": "enchanted:distilling/diamond_oil_of_vitriol"
     }
   ],
   "read_by_default": true

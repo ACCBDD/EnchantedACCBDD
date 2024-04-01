@@ -18,10 +18,10 @@ public class WitchOvenRecipeProcessor implements IComponentProcessor {
 
 	@Override
 	public void setup(IVariableProvider variables) {
-		String recipeId = variables.get("recipe").asString();
+		ResourceLocation recipeId = new ResourceLocation(variables.get("recipe").asString());
 
 		RecipeManager recipeManager = Minecraft.getInstance().level.getRecipeManager();
-		byproductRecipe = (ByproductRecipe)recipeManager.byKey(new ResourceLocation(recipeId)).orElseThrow(IllegalArgumentException::new);
+		byproductRecipe = (ByproductRecipe)recipeManager.byKey(recipeId).orElseThrow(() -> new IllegalArgumentException("Could not find recipe for: " + recipeId));
 		itemIn = variables.get("itemIn").as(ItemStack.class);
 		resultItem = variables.get("resultItem").as(ItemStack.class);
 	}

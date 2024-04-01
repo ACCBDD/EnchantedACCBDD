@@ -1,6 +1,5 @@
 package com.favouriteless.enchanted.common.init.registry;
 
-import com.favouriteless.enchanted.Enchanted;
 import com.favouriteless.enchanted.common.init.EnchantedTags;
 import com.favouriteless.enchanted.common.items.*;
 import com.favouriteless.enchanted.common.items.brews.SimpleEffectBrewItem;
@@ -8,7 +7,6 @@ import com.favouriteless.enchanted.common.items.brews.throwable.LoveBrewItem;
 import com.favouriteless.enchanted.common.items.poppets.*;
 import com.favouriteless.enchanted.common.poppet.PoppetColour;
 import com.favouriteless.enchanted.platform.Services;
-import net.minecraft.core.NonNullList;
 import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.damagesource.DamageSource;
@@ -297,28 +295,18 @@ public class EnchantedItems {
 		ComposterBlock.COMPOSTABLES.put(GARLIC.get(), 0.45F);
 	}
 
-	public static final CreativeModeTab TAB = new CreativeModeTab(CreativeModeTab.TABS.length - 1, Enchanted.MOD_ID + ".main") {
-
-		@Override
-		public ItemStack makeIcon() {
-			return new ItemStack(EnchantedItems.ENCHANTED_BROOMSTICK.get());
-		}
-
-		@Override
-		public void fillItemList(NonNullList<ItemStack> items) {
-			super.fillItemList(items);
-
-			String[] keys = new String[] { "small", "medium", "large" };
-			for(int i = 1; i < 4; i++) {
-				for(String key : keys) {
-					ItemStack stack = new ItemStack(CIRCLE_TALISMAN.get());
-					CompoundTag nbt = stack.getOrCreateTag();
-					nbt.putInt(key, i);
-					items.add(stack);
+	public static final CreativeModeTab TAB = Services.COMMON_REGISTRY.getCreativeTab("main",
+			() -> EnchantedItems.ENCHANTED_BROOMSTICK.get().getDefaultInstance(),
+			(items) -> {
+				for(int i = 1; i < 4; i++) {
+					for(String key : new String[] { "small", "medium", "large" }) {
+						ItemStack stack = new ItemStack(CIRCLE_TALISMAN.get());
+						CompoundTag nbt = stack.getOrCreateTag();
+						nbt.putInt(key, i);
+						items.add(stack);
+					}
 				}
-			}
-		}
-	};
+	});
 
 	public static void load() {} // Method which exists purely to load the class.
 

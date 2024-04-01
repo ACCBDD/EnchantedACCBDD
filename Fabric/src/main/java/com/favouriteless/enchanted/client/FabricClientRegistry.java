@@ -1,16 +1,14 @@
 package com.favouriteless.enchanted.client;
 
 import com.favouriteless.enchanted.Enchanted;
-import com.favouriteless.enchanted.client.particles.*;
 import com.favouriteless.enchanted.client.render.blockentity.item.SpinningWheelItemRenderer;
-import com.favouriteless.enchanted.common.init.registry.EnchantedParticleTypes;
 import com.favouriteless.enchanted.common.init.registry.EnchantedBlocks;
 import com.favouriteless.enchanted.common.init.registry.EnchantedItems;
-import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
+import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
-import net.minecraft.client.renderer.texture.TextureAtlas;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.inventory.InventoryMenu;
 
 public class FabricClientRegistry {
@@ -19,6 +17,7 @@ public class FabricClientRegistry {
         registerItemRenderers();
         registerBlockColors();
         registerParticles();
+        registerBlockRenderTypes();
     }
 
     private static void registerItemRenderers() {
@@ -42,6 +41,26 @@ public class FabricClientRegistry {
             event.register(Enchanted.location("particle/sky_wrath"));
             event.register(Enchanted.location("particle/static_flame"));
         }));
+    }
+
+    private static void registerBlockRenderTypes() {
+        BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(), EnchantedBlocks.CHALK_GOLD.get());
+        BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(), EnchantedBlocks.CHALK_WHITE.get());
+        BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(), EnchantedBlocks.CHALK_RED.get());
+        BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(), EnchantedBlocks.CHALK_PURPLE.get());
+        BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(), EnchantedBlocks.ROWAN_SAPLING.get());
+        BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(), EnchantedBlocks.HAWTHORN_SAPLING.get());
+        BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(), EnchantedBlocks.ALDER_SAPLING.get());
+        BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(), EnchantedBlocks.BELLADONNA.get());
+        BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(), EnchantedBlocks.SNOWBELL.get());
+        BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(), EnchantedBlocks.ARTICHOKE.get());
+        BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(), EnchantedBlocks.MANDRAKE.get());
+        BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(), EnchantedBlocks.GARLIC.get());
+        BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(), EnchantedBlocks.WOLFSBANE.get());
+        BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(), EnchantedBlocks.GLINT_WEED.get());
+        BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(), EnchantedBlocks.EMBER_MOSS.get());
+        BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(), EnchantedBlocks.SPANISH_MOSS.get());
+        BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(), EnchantedBlocks.BLOOD_POPPY.get());
     }
 
 }

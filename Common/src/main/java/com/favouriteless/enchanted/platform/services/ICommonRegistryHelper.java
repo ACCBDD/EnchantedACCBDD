@@ -9,9 +9,13 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.SoundType;
 import org.apache.commons.lang3.function.TriFunction;
 
+import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public interface ICommonRegistryHelper {
@@ -80,5 +84,17 @@ public interface ICommonRegistryHelper {
      */
     SoundType getSoundType(float volume, float pitch, Supplier<SoundEvent> breakSound, Supplier<SoundEvent> stepSound,
                            Supplier<SoundEvent> placeSound, Supplier<SoundEvent> hitSound, Supplier<SoundEvent> fallSound);
+
+    /**
+     * Creates a new {@link CreativeModeTab}. On Forge, this calls the coremodded constructor. On Fabric, this uses the
+     * API's tab builder.
+     *
+     * @param name The name of the tab.
+     * @param iconSupplier A {@link Supplier} returning the icon of the tab.
+     * @param itemAppender A {@link Consumer} used to add any extra items to the tab.
+     *
+     * @return A new {@link CreativeModeTab} with the specified icon and appender.
+     */
+    CreativeModeTab getCreativeTab(String name, Supplier<ItemStack> iconSupplier, Consumer<List<ItemStack>> itemAppender);
 
 }

@@ -9,7 +9,7 @@
     },
     {
       "type": "enchanted:spinning_wheel_recipe",
-      "recipe": "enchanted:spin_void_poppet"
+      "recipe": "enchanted:spinning/void_poppet"
     }
   ],
   "read_by_default": true,

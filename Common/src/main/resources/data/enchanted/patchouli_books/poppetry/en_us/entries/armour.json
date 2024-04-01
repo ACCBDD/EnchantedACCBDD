@@ -9,7 +9,7 @@
     },
     {
       "type": "enchanted:spinning_wheel_recipe",
-      "recipe": "enchanted:spin_armour_poppet"
+      "recipe": "enchanted:spinning/armour_poppet"
     }
   ],
   "read_by_default": true,

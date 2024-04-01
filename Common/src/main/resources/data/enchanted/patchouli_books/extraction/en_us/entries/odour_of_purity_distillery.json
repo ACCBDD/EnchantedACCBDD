@@ -5,11 +5,11 @@
   "pages": [
     {
       "type": "enchanted:distillery_recipe",
-      "recipe": "enchanted:distillery_diamond_oil_of_vitriol"
+      "recipe": "enchanted:distilling/diamond_oil_of_vitriol"
     },
     {
       "type": "enchanted:distillery_recipe",
-      "recipe": "enchanted:distillery_diamond_vapour_ghast_tear"
+      "recipe": "enchanted:distilling/diamond_vapour_ghast_tear"
     }
   ],
   "read_by_default": true

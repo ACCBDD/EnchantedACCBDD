@@ -5,7 +5,7 @@
   "pages": [
     {
       "type": "enchanted:distillery_recipe",
-      "recipe": "enchanted:distillery_ender_pearl"
+      "recipe": "enchanted:distilling/ender_pearl"
     }
   ],
   "read_by_default": true

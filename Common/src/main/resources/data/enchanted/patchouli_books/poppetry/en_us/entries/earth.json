@@ -9,7 +9,7 @@
     },
     {
       "type": "enchanted:spinning_wheel_recipe",
-      "recipe": "enchanted:spin_earth_poppet"
+      "recipe": "enchanted:spinning/earth_poppet"
     }
   ],
   "read_by_default": true,

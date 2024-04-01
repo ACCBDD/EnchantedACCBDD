@@ -1,7 +1,7 @@
 package com.favouriteless.enchanted.platform.services;
 
 import com.favouriteless.enchanted.Enchanted;
-import com.favouriteless.enchanted.platform.services.ICommonRegistryHelper;
+import net.minecraft.core.NonNullList;
 import net.minecraft.core.Registry;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -11,17 +11,23 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraftforge.common.extensions.IForgeMenuType;
 import net.minecraftforge.common.util.ForgeSoundType;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.*;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistry;
+import net.minecraftforge.registries.RegistryManager;
+import net.minecraftforge.registries.RegistryObject;
 import org.apache.commons.lang3.function.TriFunction;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class ForgeCommonRegistryHelper implements ICommonRegistryHelper {
@@ -61,6 +67,23 @@ public class ForgeCommonRegistryHelper implements ICommonRegistryHelper {
 	@Override
 	public SoundType getSoundType(float volume, float pitch, Supplier<SoundEvent> breakSound, Supplier<SoundEvent> stepSound, Supplier<SoundEvent> placeSound, Supplier<SoundEvent> hitSound, Supplier<SoundEvent> fallSound) {
 		return new ForgeSoundType(volume, pitch, breakSound, stepSound, placeSound, hitSound, fallSound);
+	}
+
+	@Override
+	public CreativeModeTab getCreativeTab(String name, Supplier<ItemStack> iconSupplier, Consumer<List<ItemStack>> itemAppender) {
+		return new CreativeModeTab(Enchanted.MOD_ID + ".main") {
+
+			@Override
+			public ItemStack makeIcon() {
+				return iconSupplier.get();
+			}
+
+			@Override
+			public void fillItemList(NonNullList<ItemStack> items) {
+				super.fillItemList(items);
+				itemAppender.accept(items);
+			}
+		};
 	}
 
 

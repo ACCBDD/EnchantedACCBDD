@@ -54,7 +54,7 @@ public class BlockTagProvider extends BlockTagsProvider {
                 .addTag(EnchantedTags.Blocks.MUTANDIS_PLANTS)
                 .addTag(EnchantedTags.Blocks.CROPS)
                 .addTag(BlockTags.CROPS)
-                .add(Blocks.SUGAR_CANE)
+                .add(Blocks.SUGAR_CANE, Blocks.CACTUS)
                 .add(EnchantedBlocks.BLOOD_POPPY.get());
         tag(EnchantedTags.Blocks.MUTANDIS_PLANTS)
                 .addTag(BlockTags.SAPLINGS)

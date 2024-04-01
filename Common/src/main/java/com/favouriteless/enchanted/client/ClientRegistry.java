@@ -1,5 +1,6 @@
 package com.favouriteless.enchanted.client;
 
+import com.favouriteless.enchanted.Enchanted;
 import com.favouriteless.enchanted.client.particles.*;
 import com.favouriteless.enchanted.client.render.armor.EarmuffsRenderer;
 import com.favouriteless.enchanted.client.render.blockentity.CauldronWaterRenderer;
@@ -19,6 +20,7 @@ import com.favouriteless.enchanted.platform.services.IClientRegistryHelper;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.particle.ParticleEngine;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import net.minecraft.client.renderer.item.ItemProperties;
 
 public class ClientRegistry {
 
@@ -86,6 +88,12 @@ public class ClientRegistry {
         particleEngine.register(EnchantedParticleTypes.PROTECTION.get(), ProtectionParticle.Factory::new);
         particleEngine.register(EnchantedParticleTypes.BIND_FAMILIAR_SEED.get(), BindFamiliarSeedParticle.Factory::new);
         particleEngine.register(EnchantedParticleTypes.BIND_FAMILIAR.get(), BindFamiliarParticle.Factory::new);
+    }
+
+    public static void registerItemModelPredicates() {
+        ItemProperties.register(EnchantedItems.CIRCLE_TALISMAN.get(), Enchanted.location("small"), (stack, world, living, seed) -> stack.hasTag() ? stack.getTag().getByte("small") * 0.3F : 0F);
+        ItemProperties.register(EnchantedItems.CIRCLE_TALISMAN.get(), Enchanted.location("medium"), (stack, world, living, seed) -> stack.hasTag() ? stack.getTag().getByte("medium") * 0.3F : 0F);
+        ItemProperties.register(EnchantedItems.CIRCLE_TALISMAN.get(), Enchanted.location("large"), (stack, world, living, seed) -> stack.hasTag() ? stack.getTag().getByte("large") * 0.3F : 0F);
     }
 
 }

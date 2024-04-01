@@ -13,6 +13,7 @@ public class EnchantedFabricClient implements ClientModInitializer {
         new FabricClientRegistryHelper();
         EnchantedClient.init();
         FabricClientRegistry.registerAll();
+        ClientRegistry.registerItemModelPredicates();
         ClientEventsFabric.register();
         ModLoadingContext.registerConfig(Enchanted.MOD_ID, Type.CLIENT, ClientConfig.SPEC, "enchanted-client.toml");
     }

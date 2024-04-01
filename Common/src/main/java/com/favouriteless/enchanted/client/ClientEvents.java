@@ -41,8 +41,10 @@ public class ClientEvents {
 
 		if(player != null) {
 			if(player.getItemBySlot(EquipmentSlot.HEAD).getItem() == EnchantedItems.EARMUFFS.get()) {
-				if(soundInstance instanceof AbstractSoundInstance sound)
-					((AbstractSoundInstanceAccessor)sound).setVolume(sound.getVolume() * 0.06F);
+				if(soundInstance instanceof AbstractSoundInstance sound) {
+					AbstractSoundInstanceAccessor accessor = (AbstractSoundInstanceAccessor)sound;
+					accessor.setVolume(accessor.getVolume() * 0.06F);
+				}
 			}
 		}
 	}

@@ -9,7 +9,7 @@
     },
     {
       "type": "enchanted:kettle_recipe",
-      "recipe": "enchanted:kettle_mystic_unguent"
+      "recipe": "enchanted:kettle/mystic_unguent"
     }
   ],
   "read_by_default": true
