@@ -12,6 +12,7 @@ import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.At.Shift;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -41,7 +42,7 @@ public class PlayerMixin {
             CommonEventsFabric.playerDestroyItemEvent((Player)(Object)this, itemStack2, hand);
     }
 
-    @Inject(method="attack", at=@At(value="INVOKE", target="Lnet/minecraft/world/entity/player/Player;setItemInHand(Lnet/minecraft/world/InteractionHand;Lnet/minecraft/world/item/ItemStack;)V"), locals=LocalCapture.CAPTURE_FAILHARD)
+    @Inject(method="attack", at=@At(value="INVOKE", target="Lnet/minecraft/world/entity/player/Player;setItemInHand(Lnet/minecraft/world/InteractionHand;Lnet/minecraft/world/item/ItemStack;)V", shift=Shift.AFTER), locals=LocalCapture.CAPTURE_FAILHARD)
     private void itemBreakAttack(Entity target, CallbackInfo ci, @Local ItemStack itemStack) {
         ItemStack original; // TODO Somehow replace this weird jank with getting an actual copy of the item before it gets passed into ItemStack#hurt.
         if(itemStack.isEmpty()) {
