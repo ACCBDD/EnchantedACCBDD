@@ -18,7 +18,7 @@ import java.util.List;
 
 public class LootExtensions {
 
-    private static final List<LootExtension> entity = new ArrayList<>();
+    private static final List<LootExtension> blockLootExtensions = new ArrayList<>();
     private static final List<LootExtension> entityLootExtensions = new ArrayList<>();
 
     static {
@@ -29,9 +29,9 @@ public class LootExtensions {
     }
 
     public static void registerBlock(LootExtension extension) {
-        if(entity.contains(extension))
+        if(blockLootExtensions.contains(extension))
             throw new IllegalArgumentException("Tried to register a duplicate Block loot extension.");
-        entity.add(extension);
+        blockLootExtensions.add(extension);
     }
 
     public static void registerEntity(LootExtension extension) {
@@ -44,7 +44,7 @@ public class LootExtensions {
 
     public static ObjectArrayList<ItemStack> tryRollBlock(BlockState state, LootContext.Builder builder) {
         ObjectArrayList<ItemStack> out = new ObjectArrayList<>();
-        for(LootExtension extension : entity) {
+        for(LootExtension extension : blockLootExtensions) {
             if(extension.canApply(state.getBlock())) {
                 LootContext context = builder.withParameter(LootContextParams.BLOCK_STATE, state).create(LootContextParamSets.BLOCK);
                 ServerLevel level = context.getLevel();
@@ -55,7 +55,7 @@ public class LootExtensions {
     }
 
     public static void tryRollEntity(LivingEntity entity, LootContext.Builder builder) {
-        for(LootExtension extension : LootExtensions.entity) {
+        for(LootExtension extension : LootExtensions.entityLootExtensions) {
             if(extension.canApply(entity.getType())) {
                 LootContext context = builder.create(LootContextParamSets.ENTITY);
                 context.getLevel().getServer().getLootTables().get(extension.getTable()).getRandomItems(context, entity::spawnAtLocation);

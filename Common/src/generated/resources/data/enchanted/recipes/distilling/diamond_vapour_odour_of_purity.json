@@ -1,0 +1,25 @@
+{
+  "type": "enchanted:distilling",
+  "cookTime": 300,
+  "ingredients": [
+    {
+      "count": 3,
+      "item": "enchanted:clay_jar"
+    },
+    {
+      "item": "minecraft:diamond"
+    },
+    {
+      "item": "enchanted:oil_of_vitriol"
+    }
+  ],
+  "results": [
+    {
+      "count": 2,
+      "item": "enchanted:diamond_vapour"
+    },
+    {
+      "item": "enchanted:odour_of_purity"
+    }
+  ]
+}

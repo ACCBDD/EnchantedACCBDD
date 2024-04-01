@@ -8,7 +8,7 @@ import com.favouriteless.enchanted.common.init.registry.EnchantedBlockEntityType
 import com.favouriteless.enchanted.common.init.registry.EnchantedItems;
 import com.favouriteless.enchanted.common.init.registry.EnchantedRecipeTypes;
 import com.favouriteless.enchanted.common.menus.DistilleryMenu;
-import com.favouriteless.enchanted.common.recipes.DistilleryRecipe;
+import com.favouriteless.enchanted.common.recipes.DistillingRecipe;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
@@ -41,7 +41,7 @@ public class DistilleryBlockEntity extends ContainerBlockEntityBase implements I
     private static final int[] SIDE_SLOTS = new int[] { 0 };
     private static final int[] BOTTOM_SLOTS = new int[] { 3, 4, 5, 6 };
 
-    private final RecipeManager.CachedCheck<Container, DistilleryRecipe> recipeCheck;
+    private final RecipeManager.CachedCheck<Container, DistillingRecipe> recipeCheck;
     private final SimplePowerPosHolder posHolder;
 
     private boolean isBurning = false;
@@ -77,7 +77,7 @@ public class DistilleryBlockEntity extends ContainerBlockEntityBase implements I
     public DistilleryBlockEntity(BlockPos pos, BlockState state) {
         super(EnchantedBlockEntityTypes.DISTILLERY.get(), pos, state, NonNullList.withSize(7, ItemStack.EMPTY));
         this.posHolder = new SimplePowerPosHolder(pos);
-        this.recipeCheck = RecipeManager.createCheck(EnchantedRecipeTypes.DISTILLERY.get());
+        this.recipeCheck = RecipeManager.createCheck(EnchantedRecipeTypes.DISTILLING.get());
     }
 
     public static <T extends BlockEntity> void serverTick(Level level, BlockPos blockPos, BlockState blockState, T t) {
@@ -89,7 +89,7 @@ public class DistilleryBlockEntity extends ContainerBlockEntityBase implements I
             boolean hasInput = !be.inventory.get(1).isEmpty() ||!be.inventory.get(2).isEmpty();
 
             if(hasInput && powerProvider != null) {
-                DistilleryRecipe recipe = be.recipeCheck.getRecipeFor(be, level).orElse(null);
+                DistillingRecipe recipe = be.recipeCheck.getRecipeFor(be, level).orElse(null);
 
                 if(be.canDistill(recipe) && powerProvider.tryConsumePower(10.0D)) {
                     isCooking = true;
@@ -118,9 +118,9 @@ public class DistilleryBlockEntity extends ContainerBlockEntityBase implements I
 
     /**
      * Attempt to distill the items in this {@link DistilleryBlockEntity}'s input slots.
-     * @param recipe The {@link DistilleryRecipe} to use.
+     * @param recipe The {@link DistillingRecipe} to use.
      */
-    protected void distill(DistilleryRecipe recipe) {
+    protected void distill(DistillingRecipe recipe) {
         if(recipe != null) {
             for(ItemStack recipeItem : recipe.getItemsIn()) { // First, attempt to remove the input items.
                 for(int i = 0; i < 3; i++) {
@@ -166,7 +166,7 @@ public class DistilleryBlockEntity extends ContainerBlockEntityBase implements I
      * @param recipe The recipe to check for.
      * @return True if space is found, otherwise false.
      */
-    private boolean canDistill(DistilleryRecipe recipe) {
+    private boolean canDistill(DistillingRecipe recipe) {
         if(recipe != null) {
             List<ItemStack> itemsOut = new ArrayList<>(recipe.getItemsOut());
 
@@ -199,7 +199,7 @@ public class DistilleryBlockEntity extends ContainerBlockEntityBase implements I
     }
 
     private static int getTotalCookTime(Level level, DistilleryBlockEntity be) {
-        return be.recipeCheck.getRecipeFor(be, level).map(DistilleryRecipe::getCookTime).orElse(200);
+        return be.recipeCheck.getRecipeFor(be, level).map(DistillingRecipe::getCookTime).orElse(200);
     }
 
     @Override

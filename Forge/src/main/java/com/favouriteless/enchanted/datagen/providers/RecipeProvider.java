@@ -3,6 +3,7 @@ package com.favouriteless.enchanted.datagen.providers;
 import com.favouriteless.enchanted.common.init.EnchantedTags;
 import com.favouriteless.enchanted.common.init.registry.EnchantedItems;
 import com.favouriteless.enchanted.datagen.builders.recipe.ByproductRecipeBuilder;
+import com.favouriteless.enchanted.datagen.builders.recipe.DistillingRecipeBuilder;
 import com.favouriteless.enchanted.datagen.builders.recipe.SpinningRecipeBuilder;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.FinishedRecipe;
@@ -36,6 +37,7 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
 		buildSmeltingRecipes(consumer);
 		buildByproductRecipes(consumer);
 		buildSpinningRecipes(consumer);
+		buildDistillingRecipes(consumer);
 	}
 
 	protected void buildShapedRecipes(Consumer<FinishedRecipe> consumer) {
@@ -245,9 +247,9 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
 		spinningSet(consumer, EnchantedItems.ARMOUR_POPPET.get(), EnchantedItems.ARMOUR_POPPET_INFUSED.get(), EnchantedItems.ARMOUR_POPPET_STURDY.get(),
 				EnchantedItems.HINT_OF_REBIRTH.get(), Items.DIAMOND_BOOTS);
 		spinningSet(consumer, EnchantedItems.EARTH_POPPET.get(), EnchantedItems.EARTH_POPPET_INFUSED.get(), EnchantedItems.EARTH_POPPET_STURDY.get(),
-				EnchantedItems.MANDRAKE_ROOT.get().getDefaultInstance(), PotionUtils.setPotion(Items.POTION.getDefaultInstance(), Potions.LONG_SLOW_FALLING));
+				stack(EnchantedItems.MANDRAKE_ROOT.get(), 1), PotionUtils.setPotion(stack(Items.POTION, 1), Potions.LONG_SLOW_FALLING));
 		spinningSet(consumer, EnchantedItems.FIRE_POPPET.get(), EnchantedItems.FIRE_POPPET_INFUSED.get(), EnchantedItems.FIRE_POPPET_STURDY.get(),
-				EnchantedItems.EMBER_MOSS.get().getDefaultInstance(), PotionUtils.setPotion(Items.POTION.getDefaultInstance(), Potions.LONG_FIRE_RESISTANCE));
+				stack(EnchantedItems.EMBER_MOSS.get(), 1), PotionUtils.setPotion(stack(Items.POTION, 1), Potions.LONG_FIRE_RESISTANCE));
 		spinningSet(consumer, EnchantedItems.HUNGER_POPPET.get(), EnchantedItems.HUNGER_POPPET_INFUSED.get(), EnchantedItems.HUNGER_POPPET_STURDY.get(),
 				EnchantedItems.ROWAN_BERRIES.get(), Items.ROTTEN_FLESH);
 		spinningSet(consumer, EnchantedItems.TOOL_POPPET.get(), EnchantedItems.TOOL_POPPET_INFUSED.get(), EnchantedItems.TOOL_POPPET_STURDY.get(),
@@ -255,7 +257,37 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
 		spinningSet(consumer, EnchantedItems.VOID_POPPET.get(), EnchantedItems.VOID_POPPET_INFUSED.get(), EnchantedItems.VOID_POPPET_STURDY.get(),
 				EnchantedItems.CHALK_PURPLE.get(), EnchantedItems.ENDER_DEW.get());
 		spinningSet(consumer, EnchantedItems.WATER_POPPET.get(), EnchantedItems.WATER_POPPET_INFUSED.get(), EnchantedItems.WATER_POPPET_STURDY.get(),
-				EnchantedItems.ARTICHOKE.get().getDefaultInstance(), PotionUtils.setPotion(Items.POTION.getDefaultInstance(), Potions.LONG_WATER_BREATHING));
+				stack(EnchantedItems.ARTICHOKE.get(), 1), PotionUtils.setPotion(stack(Items.POTION, 1), Potions.LONG_WATER_BREATHING));
+	}
+
+	protected void buildDistillingRecipes(Consumer<FinishedRecipe> consumer) {
+		DistillingRecipeBuilder.create(Items.BLAZE_POWDER, Items.GUNPOWDER)
+				.results(stack(Items.GLOWSTONE_DUST, 2))
+				.cookTime(300).save(consumer);
+		DistillingRecipeBuilder.create(stack(EnchantedItems.CLAY_JAR.get(), 3), stack(EnchantedItems.BREATH_OF_THE_GODDESS.get()), stack(Items.LAPIS_LAZULI))
+				.results(EnchantedItems.TEAR_OF_THE_GODDESS.get(), EnchantedItems.WHIFF_OF_MAGIC.get(), Items.SLIME_BALL, EnchantedItems.FOUL_FUME.get())
+				.cookTime(300).save(consumer);
+		DistillingRecipeBuilder.create(stack(EnchantedItems.CLAY_JAR.get(), 2), stack(EnchantedItems.DEMON_HEART.get()), stack(EnchantedItems.DIAMOND_VAPOUR.get()))
+				.results(stack(EnchantedItems.DEMONIC_BLOOD.get(), 2))
+				.results(EnchantedItems.REFINED_EVIL.get())
+				.cookTime(300).save(consumer);
+		DistillingRecipeBuilder.create(stack(EnchantedItems.CLAY_JAR.get(), 3), stack(Items.DIAMOND), stack(EnchantedItems.OIL_OF_VITRIOL.get()))
+				.results(stack(EnchantedItems.DIAMOND_VAPOUR.get(), 2))
+				.results(EnchantedItems.ODOUR_OF_PURITY.get())
+				.cookTime(300).save(consumer);
+		DistillingRecipeBuilder.create(EnchantedItems.CLAY_JAR.get(), EnchantedItems.DIAMOND_VAPOUR.get(), Items.BLAZE_ROD)
+				.results(EnchantedItems.DEMONIC_BLOOD.get())
+				.cookTime(300).save(consumer);
+		DistillingRecipeBuilder.create(stack(EnchantedItems.CLAY_JAR.get(), 3), stack(EnchantedItems.DIAMOND_VAPOUR.get()), stack(Items.GHAST_TEAR))
+				.results(EnchantedItems.ODOUR_OF_PURITY.get(), EnchantedItems.REEK_OF_MISFORTUNE.get(), EnchantedItems.FOUL_FUME.get(), EnchantedItems.REFINED_EVIL.get())
+				.cookTime(300).save(consumer);
+		DistillingRecipeBuilder.create(stack(EnchantedItems.CLAY_JAR.get(), 6), stack(Items.ENDER_PEARL))
+				.results(stack(EnchantedItems.ENDER_DEW.get(), 5))
+				.results(EnchantedItems.WHIFF_OF_MAGIC.get())
+				.cookTime(300).save(consumer);
+		DistillingRecipeBuilder.create(EnchantedItems.CLAY_JAR.get(), EnchantedItems.FOUL_FUME.get(), EnchantedItems.QUICKLIME.get())
+				.results(EnchantedItems.GYPSUM.get(), EnchantedItems.OIL_OF_VITRIOL.get(), Items.SLIME_BALL)
+				.cookTime(300).save(consumer);
 	}
 
 	protected static void spinning(Consumer<FinishedRecipe> consumer, ItemLike result, ItemLike first, Item second, Item third) {
@@ -288,6 +320,14 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
 
 	protected static void stairs(Consumer<FinishedRecipe> consumer, ItemLike stairs, ItemLike material) {
 		stairBuilder(stairs, Ingredient.of(material)).unlockedBy(getHasName(material), has(material)).save(consumer);
+	}
+
+	private static ItemStack stack(ItemLike item, int count) {
+		return new ItemStack(item, count);
+	}
+
+	private static ItemStack stack(ItemLike item) {
+		return stack(item, 1);
 	}
 
 }

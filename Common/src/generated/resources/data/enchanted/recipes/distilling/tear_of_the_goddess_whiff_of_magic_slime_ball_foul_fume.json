@@ -1,0 +1,30 @@
+{
+  "type": "enchanted:distilling",
+  "cookTime": 300,
+  "ingredients": [
+    {
+      "count": 3,
+      "item": "enchanted:clay_jar"
+    },
+    {
+      "item": "enchanted:breath_of_the_goddess"
+    },
+    {
+      "item": "minecraft:lapis_lazuli"
+    }
+  ],
+  "results": [
+    {
+      "item": "enchanted:tear_of_the_goddess"
+    },
+    {
+      "item": "enchanted:whiff_of_magic"
+    },
+    {
+      "item": "minecraft:slime_ball"
+    },
+    {
+      "item": "enchanted:foul_fume"
+    }
+  ]
+}

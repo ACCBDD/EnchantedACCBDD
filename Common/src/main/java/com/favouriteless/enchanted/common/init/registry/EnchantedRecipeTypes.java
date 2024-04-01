@@ -14,8 +14,8 @@ public class EnchantedRecipeTypes {
     public static Supplier<RecipeType<ByproductRecipe>> BYPRODUCT = registerType("byproduct");
     public static Supplier<ByproductRecipe.Serializer> BYPRODUCT_SERIALIZER = EnchantedRecipeTypes.registerSerializer("byproduct", ByproductRecipe.Serializer::new);
 
-    public static Supplier<RecipeType<DistilleryRecipe>> DISTILLERY = registerType("distillery");
-    public static Supplier<DistilleryRecipe.Serializer> DISTILLERY_SERIALIZER = EnchantedRecipeTypes.registerSerializer("distillery", DistilleryRecipe.Serializer::new);
+    public static Supplier<RecipeType<DistillingRecipe>> DISTILLING = registerType("distilling");
+    public static Supplier<DistillingRecipe.Serializer> DISTILLING_SERIALIZER = EnchantedRecipeTypes.registerSerializer("distilling", DistillingRecipe.Serializer::new);
 
     public static Supplier<RecipeType<WitchCauldronRecipe>> WITCH_CAULDRON = registerType("witch_cauldron");
     public static Supplier<WitchCauldronRecipe.Serializer> WITCH_CAULDRON_SERIALIZER = EnchantedRecipeTypes.registerSerializer("witch_cauldron", WitchCauldronRecipe.Serializer::new);

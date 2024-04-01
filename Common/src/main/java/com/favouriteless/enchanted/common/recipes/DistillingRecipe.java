@@ -15,7 +15,7 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
-public class DistilleryRecipe implements Recipe<Container> {
+public class DistillingRecipe implements Recipe<Container> {
 
     protected final RecipeType<?> type;
     protected final ResourceLocation id;
@@ -24,9 +24,8 @@ public class DistilleryRecipe implements Recipe<Container> {
     private final NonNullList<ItemStack> itemsOut;
     private final int cookTime;
 
-
-    public DistilleryRecipe(ResourceLocation id, NonNullList<ItemStack> itemsIn, NonNullList<ItemStack> itemsOut, int cookTime) {
-        this.type = EnchantedRecipeTypes.DISTILLERY.get();
+    public DistillingRecipe(ResourceLocation id, NonNullList<ItemStack> itemsIn, NonNullList<ItemStack> itemsOut, int cookTime) {
+        this.type = EnchantedRecipeTypes.DISTILLING.get();
         this.id = id;
 
         this.itemsIn = itemsIn;
@@ -75,7 +74,7 @@ public class DistilleryRecipe implements Recipe<Container> {
     }
 
     /**
-     * @deprecated Use {@link DistilleryRecipe#getItemsOut()} instead.
+     * @deprecated Use {@link DistillingRecipe#getItemsOut()} instead.
      */
     @Override
     @Deprecated
@@ -89,7 +88,7 @@ public class DistilleryRecipe implements Recipe<Container> {
     }
 
     /**
-     * @deprecated Use {@link DistilleryRecipe#getItemsOut()} instead.
+     * @deprecated Use {@link DistillingRecipe#getItemsOut()} instead.
      */
     @Override
     @Deprecated
@@ -106,7 +105,7 @@ public class DistilleryRecipe implements Recipe<Container> {
     @Override
     @NotNull
     public RecipeSerializer<?> getSerializer() {
-        return EnchantedRecipeTypes.DISTILLERY_SERIALIZER.get();
+        return EnchantedRecipeTypes.DISTILLING_SERIALIZER.get();
     }
 
     @Override
@@ -120,23 +119,21 @@ public class DistilleryRecipe implements Recipe<Container> {
         return true;
     }
 
-
-
-    public static class Serializer implements RecipeSerializer<DistilleryRecipe> {
+    public static class Serializer implements RecipeSerializer<DistillingRecipe> {
 
         @Override
         @NotNull
-        public DistilleryRecipe fromJson(@NotNull ResourceLocation recipeId, @NotNull JsonObject json) {
+        public DistillingRecipe fromJson(@NotNull ResourceLocation recipeId, @NotNull JsonObject json) {
             NonNullList<ItemStack> itemsIn = JsonHelper.readItemStackList(GsonHelper.getAsJsonArray(json, "ingredients"), true);
-            NonNullList<ItemStack> itemsOut = JsonHelper.readItemStackList(GsonHelper.getAsJsonArray(json, "result"), true);
+            NonNullList<ItemStack> itemsOut = JsonHelper.readItemStackList(GsonHelper.getAsJsonArray(json, "results"), true);
             int cookTime = GsonHelper.getAsInt(json, "cookTime", 200);
 
-            return new DistilleryRecipe(recipeId, itemsIn, itemsOut, cookTime);
+            return new DistillingRecipe(recipeId, itemsIn, itemsOut, cookTime);
         }
 
         @Override
         @NotNull
-        public DistilleryRecipe fromNetwork(@NotNull ResourceLocation recipeId, FriendlyByteBuf buffer) {
+        public DistillingRecipe fromNetwork(@NotNull ResourceLocation recipeId, FriendlyByteBuf buffer) {
             int inSize = buffer.readInt();
             NonNullList<ItemStack> itemsIn = NonNullList.create();
             for (int x = 0; x < inSize; ++x)
@@ -149,11 +146,11 @@ public class DistilleryRecipe implements Recipe<Container> {
 
             int cookTime = buffer.readInt();
 
-            return new DistilleryRecipe(recipeId, itemsIn, itemsOut, cookTime);
+            return new DistillingRecipe(recipeId, itemsIn, itemsOut, cookTime);
         }
 
         @Override
-        public void toNetwork(FriendlyByteBuf buffer, DistilleryRecipe recipe) {
+        public void toNetwork(FriendlyByteBuf buffer, DistillingRecipe recipe) {
             buffer.writeInt(recipe.getItemsIn().size());
             for (ItemStack stack : recipe.getItemsIn())
                 buffer.writeItem(stack);

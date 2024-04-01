@@ -1,6 +1,6 @@
 package com.favouriteless.enchanted.patchouli.processors;
 
-import com.favouriteless.enchanted.common.recipes.DistilleryRecipe;
+import com.favouriteless.enchanted.common.recipes.DistillingRecipe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
@@ -13,7 +13,7 @@ import vazkii.patchouli.api.IVariableProvider;
 
 public class DistilleryRecipeProcessor implements IComponentProcessor {
 
-	private DistilleryRecipe recipe;
+	private DistillingRecipe recipe;
 
 	@Override
 	public void setup(IVariableProvider variables) {
@@ -21,9 +21,9 @@ public class DistilleryRecipeProcessor implements IComponentProcessor {
 
 		RecipeManager recipeManager = Minecraft.getInstance().level.getRecipeManager();
 		Recipe<?> recipeIn = recipeManager.byKey(new ResourceLocation(recipeId)).orElseThrow(IllegalArgumentException::new);
-		if(!(recipeIn instanceof DistilleryRecipe))
+		if(!(recipeIn instanceof DistillingRecipe))
 			throw new IllegalStateException();
-		recipe = (DistilleryRecipe)recipeIn;
+		recipe = (DistillingRecipe)recipeIn;
 	}
 
 	@Override
