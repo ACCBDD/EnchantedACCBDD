@@ -1,6 +1,5 @@
 package com.favouriteless.enchanted.platform.services;
 
-import com.favouriteless.enchanted.platform.services.IPlatformHelper;
 import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.fabricmc.loader.api.FabricLoader;
@@ -56,7 +55,8 @@ public class FabricPlatformHelper implements IPlatformHelper {
 
     @Override
     public int getBurnTime(ItemStack stack, @Nullable RecipeType<?> recipeType) {
-        return FuelRegistry.INSTANCE.get(stack.getItem());
+        Integer time = FuelRegistry.INSTANCE.get(stack.getItem());
+        return time != null ? time : 0;
     }
 
     @Override

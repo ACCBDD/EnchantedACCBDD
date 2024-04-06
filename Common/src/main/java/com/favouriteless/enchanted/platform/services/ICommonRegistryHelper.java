@@ -11,6 +11,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import org.apache.commons.lang3.function.TriFunction;
 
@@ -97,5 +98,14 @@ public interface ICommonRegistryHelper {
      * @return A new {@link CreativeModeTab} with the specified icon and appender.
      */
     CreativeModeTab getCreativeTab(String name, Supplier<ItemStack> iconSupplier, BiConsumer<List<ItemStack>, CreativeModeTab> itemAppender);
+
+    /**
+     * Register a block as flammable (i.e. can catch on fire).
+     *
+     * @param block The {@link Block} to make flammable.
+     * @param igniteOdds
+     * @param burnOdds
+     */
+    void setFlammable(Block block, int igniteOdds, int burnOdds);
 
 }

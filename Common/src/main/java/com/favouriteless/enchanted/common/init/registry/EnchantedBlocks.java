@@ -15,6 +15,7 @@ import com.favouriteless.enchanted.common.blocks.crops.*;
 import com.favouriteless.enchanted.common.init.EnchantedMaterials;
 import com.favouriteless.enchanted.common.world.features.EnchantedTreeGrower;
 import com.favouriteless.enchanted.platform.CommonServices;
+import com.favouriteless.enchanted.platform.services.ICommonRegistryHelper;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleTypes;
@@ -89,6 +90,25 @@ public class EnchantedBlocks {
     public static final Supplier<Block> PROTECTION_BARRIER_TEMPORARY = register("protection_barrier_temporary",() -> new TemporaryProtectionBarrierBlock(Properties.copy(Blocks.BARRIER)));
 
     //public static final Supplier<Block> DEMON_HEART = register("demon_heart", DemonHeart::new);
+
+    public static void registerFlammables() {
+        ICommonRegistryHelper registry = CommonServices.COMMON_REGISTRY;
+        registry.setFlammable(ROWAN_LOG.get(), 5, 5);
+        registry.setFlammable(ROWAN_PLANKS.get(), 5, 20);
+        registry.setFlammable(ROWAN_STAIRS.get(), 5, 20);
+        registry.setFlammable(ROWAN_SLAB.get(), 5, 20);
+        registry.setFlammable(ROWAN_LEAVES.get(), 30, 60);
+        registry.setFlammable(ALDER_LOG.get(), 5, 5);
+        registry.setFlammable(ALDER_PLANKS.get(), 5, 20);
+        registry.setFlammable(ALDER_STAIRS.get(), 5, 20);
+        registry.setFlammable(ALDER_SLAB.get(), 5, 20);
+        registry.setFlammable(ALDER_LEAVES.get(), 30, 60);
+        registry.setFlammable(HAWTHORN_LOG.get(), 5, 5);
+        registry.setFlammable(HAWTHORN_PLANKS.get(), 5, 20);
+        registry.setFlammable(HAWTHORN_STAIRS.get(), 5, 20);
+        registry.setFlammable(HAWTHORN_SLAB.get(), 5, 20);
+        registry.setFlammable(HAWTHORN_LEAVES.get(), 30, 60);
+    }
 
     //-------------------------------------------------------- UTILITY FUNCTIONS FOR CREATING BLOCKS --------------------------------------------------------
 

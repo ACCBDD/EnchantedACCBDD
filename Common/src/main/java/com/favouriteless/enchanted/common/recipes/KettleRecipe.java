@@ -11,8 +11,6 @@ import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 
-import javax.annotation.Nullable;
-
 public class KettleRecipe extends CauldronTypeRecipe {
 
     public KettleRecipe(ResourceLocation id, NonNullList<ItemStack> itemsIn, ItemStack itemOut, int power, int[] cookingColour, int[] finalColour) {
@@ -38,7 +36,6 @@ public class KettleRecipe extends CauldronTypeRecipe {
             return new KettleRecipe(recipeId, itemsIn, itemOut, power, cookingColour, finalColour);
         }
 
-        @Nullable
         @Override
         public KettleRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
 
