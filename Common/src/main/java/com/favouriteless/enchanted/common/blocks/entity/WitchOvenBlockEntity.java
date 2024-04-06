@@ -6,6 +6,7 @@ import com.favouriteless.enchanted.common.blocks.WitchOvenBlock;
 import com.favouriteless.enchanted.common.init.EnchantedTags;
 import com.favouriteless.enchanted.common.init.registry.EnchantedBlockEntityTypes;
 import com.favouriteless.enchanted.common.init.registry.EnchantedBlocks;
+import com.favouriteless.enchanted.common.init.registry.EnchantedItems;
 import com.favouriteless.enchanted.common.init.registry.EnchantedRecipeTypes;
 import com.favouriteless.enchanted.common.menus.WitchOvenMenu;
 import com.favouriteless.enchanted.common.recipes.ByproductRecipe;
@@ -337,6 +338,8 @@ public class WitchOvenBlockEntity extends ContainerBlockEntityBase implements Me
 
     @Override
     public boolean canPlaceItemThroughFace(int index, @NotNull ItemStack stack, @Nullable Direction face) {
+        if(index == 1)
+            return stack.getItem() == EnchantedItems.CLAY_JAR.get();
         return index != 3 && index != 4;
     }
 

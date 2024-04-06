@@ -4,6 +4,7 @@ import com.favouriteless.enchanted.Enchanted;
 import com.favouriteless.enchanted.mixin.fabric.DamageSourceAccessor;
 import com.favouriteless.enchanted.platform.JsonDataLoaderWrapper;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
+import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;
 import net.minecraft.core.Registry;
@@ -18,6 +19,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import org.apache.commons.lang3.function.TriFunction;
 
@@ -72,6 +74,11 @@ public class FabricCommonRegistryHelper implements ICommonRegistryHelper {
 				.icon(iconSupplier)
 				.appendItems(itemAppender)
 				.build();
+	}
+
+	@Override
+	public void setFlammable(Block block, int igniteOdds, int burnOdds) {
+		FlammableBlockRegistry.getDefaultInstance().add(block, igniteOdds, burnOdds);
 	}
 
 

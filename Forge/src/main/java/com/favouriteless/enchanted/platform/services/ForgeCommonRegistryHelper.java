@@ -1,6 +1,7 @@
 package com.favouriteless.enchanted.platform.services;
 
 import com.favouriteless.enchanted.Enchanted;
+import com.favouriteless.enchanted.common.init.registry.EnchantedBlocks;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.Registry;
 import net.minecraft.network.FriendlyByteBuf;
@@ -13,6 +14,9 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.FireBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraftforge.common.extensions.IForgeMenuType;
 import net.minecraftforge.common.util.ForgeSoundType;
@@ -85,6 +89,10 @@ public class ForgeCommonRegistryHelper implements ICommonRegistryHelper {
 		};
 	}
 
+	@Override
+	public void setFlammable(Block block, int igniteOdds, int burnOdds) {
+		((FireBlock)Blocks.FIRE).setFlammable(block, igniteOdds, burnOdds);
+	}
 
 	private static class RegistryMap {
 

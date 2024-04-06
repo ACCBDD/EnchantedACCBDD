@@ -1,4 +1,4 @@
-package com.favouriteless.enchanted.mixin.forge;
+package com.favouriteless.enchanted.mixin.forge.client;
 
 import com.favouriteless.enchanted.common.items.EarmuffsItem;
 import net.minecraft.client.model.HumanoidModel;
@@ -15,7 +15,7 @@ import software.bernie.geckolib3.renderers.geo.GeoArmorRenderer;
 import java.util.function.Consumer;
 
 @Mixin(EarmuffsItem.class)
-public abstract class EarmuffsItemMixin {
+public abstract class CEarmuffsItemMixin {
 
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
         consumer.accept(new IClientItemExtensions() {

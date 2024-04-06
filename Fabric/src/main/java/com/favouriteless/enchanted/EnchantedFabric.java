@@ -5,6 +5,7 @@ import com.favouriteless.enchanted.common.CommonEventsFabric;
 import com.favouriteless.enchanted.common.entities.Ent;
 import com.favouriteless.enchanted.common.entities.FamiliarCat;
 import com.favouriteless.enchanted.common.entities.Mandrake;
+import com.favouriteless.enchanted.common.init.registry.EnchantedBlocks;
 import com.favouriteless.enchanted.common.init.registry.EnchantedEntityTypes;
 import com.favouriteless.enchanted.common.init.registry.EnchantedItems;
 import net.fabricmc.api.ModInitializer;
@@ -20,6 +21,7 @@ public class EnchantedFabric implements ModInitializer {
         registerEntityAttributes();
         CommonEventsFabric.register();
         EnchantedItems.registerCompostables();
+        EnchantedBlocks.registerFlammables();
         ModLoadingContext.registerConfig(Enchanted.MOD_ID, Type.COMMON, CommonConfig.SPEC, "enchanted-common.toml");
     }
 
