@@ -25,7 +25,6 @@
 package com.favouriteless.enchanted.common.init;
 
 import com.favouriteless.enchanted.Enchanted;
-import com.favouriteless.enchanted.common.entities.Ent;
 import com.favouriteless.enchanted.common.entities.FamiliarCat;
 import com.favouriteless.enchanted.common.entities.Mandrake;
 import com.favouriteless.enchanted.common.init.registry.EnchantedBlocks;
@@ -59,7 +58,6 @@ public class CommonSetupEvents {
     @SubscribeEvent
     public static void registerEntityAttributes(EntityAttributeCreationEvent event) {
         event.put(EnchantedEntityTypes.MANDRAKE.get(), Mandrake.createAttributes().build());
-        event.put(EnchantedEntityTypes.ENT.get(), Ent.createAttributes().build());
         event.put(EnchantedEntityTypes.FAMILIAR_CAT.get(), FamiliarCat.createAttributes().build());
     }
 

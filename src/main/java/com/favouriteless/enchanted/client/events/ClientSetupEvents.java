@@ -29,14 +29,13 @@ import com.favouriteless.enchanted.client.render.blockentity.CauldronWaterRender
 import com.favouriteless.enchanted.client.render.blockentity.PoppetShelfRenderer;
 import com.favouriteless.enchanted.client.render.blockentity.SpinningWheelRenderer;
 import com.favouriteless.enchanted.client.render.entity.BroomstickRenderer;
-import com.favouriteless.enchanted.client.render.entity.ent.EntRenderer;
 import com.favouriteless.enchanted.client.render.entity.FamiliarCatRenderer;
 import com.favouriteless.enchanted.client.render.entity.SimpleAnimatedGeoRenderer;
 import com.favouriteless.enchanted.client.render.model.BroomstickModel;
 import com.favouriteless.enchanted.client.render.model.ModelLayerLocations;
 import com.favouriteless.enchanted.client.render.model.armor.EarmuffsModel;
 import com.favouriteless.enchanted.client.screens.*;
-import com.favouriteless.enchanted.common.init.*;
+import com.favouriteless.enchanted.common.init.EnchantedKeybinds;
 import com.favouriteless.enchanted.common.init.registry.EnchantedBlockEntityTypes;
 import com.favouriteless.enchanted.common.init.registry.EnchantedBlocks;
 import com.favouriteless.enchanted.common.init.registry.EnchantedEntityTypes;
@@ -77,7 +76,6 @@ public class ClientSetupEvents {
 	@SubscribeEvent
 	public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
 		event.registerEntityRenderer(EnchantedEntityTypes.MANDRAKE.get(), context -> new SimpleAnimatedGeoRenderer<>(context, "mandrake"));
-		event.registerEntityRenderer(EnchantedEntityTypes.ENT.get(), EntRenderer::new);
 		event.registerEntityRenderer(EnchantedEntityTypes.BROOMSTICK.get(), BroomstickRenderer::new);
 		event.registerEntityRenderer(EnchantedEntityTypes.THROWABLE_BREW.get(), ThrownItemRenderer::new);
 		event.registerEntityRenderer(EnchantedEntityTypes.FAMILIAR_CAT.get(), FamiliarCatRenderer::new);

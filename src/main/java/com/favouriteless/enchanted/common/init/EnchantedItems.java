@@ -207,8 +207,6 @@ public class EnchantedItems {
     public static final RegistryObject<Item> ARMOUR_POPPET_STURDY = registerItemProtectionPoppet("armour_poppet_sturdy", 0.0F, 2, 0.9F, PoppetColour.EQUIPMENT);
 
     public static final RegistryObject<Item> MANDRAKE_SPAWN_EGG = registerSpawnEgg("mandrake_spawn_egg", EnchantedEntityTypes.MANDRAKE::get, 0x634C39, 0x291A0E);
-    public static final RegistryObject<Item> ENT_SPAWN_EGG = registerSpawnEgg("ent_spawn_egg", EnchantedEntityTypes.ENT::get, 0x2A5422, 0x183812);
-
 
 
 
