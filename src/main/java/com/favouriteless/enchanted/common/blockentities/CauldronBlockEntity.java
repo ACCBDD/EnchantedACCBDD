@@ -71,8 +71,7 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.templates.FluidTank;
 import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandlerModifiable;
-import net.minecraftforge.items.wrapper.InvWrapper;
+import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 
@@ -88,8 +87,42 @@ public abstract class CauldronBlockEntity<T extends CauldronTypeRecipe> extends 
 	private final LazyOptional<IFluidHandler> fluidHandler;
 
 	private NonNullList<ItemStack> inventoryContents = NonNullList.create();
-	private final IItemHandlerModifiable items = new InvWrapper(this);
-	private final LazyOptional<IItemHandlerModifiable> itemHandler = LazyOptional.of(() -> items);
+	private IItemHandler items = new IItemHandler() {
+		@Override
+		public int getSlots() {
+			return inventoryContents.size();
+		}
+
+		@NotNull
+		@Override
+		public ItemStack getStackInSlot(int slot) {
+			return inventoryContents.get(slot);
+		}
+
+		@NotNull
+		@Override
+		public ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
+			return stack;
+		}
+
+		@NotNull
+		@Override
+		public ItemStack extractItem(int slot, int amount, boolean simulate) {
+			return ItemStack.EMPTY;
+		}
+
+		@Override
+		public int getSlotLimit(int slot) {
+			return 1;
+		}
+
+		@Override
+		public boolean isItemValid(int slot, @NotNull ItemStack stack) {
+			return true;
+		}
+
+	};
+	private LazyOptional<IItemHandler> itemHandler = LazyOptional.of(() -> items);
 
 	private static final int WARMING_MAX = 80;
 	private static final int BLENDING_MILLISECONDS = 500;
@@ -514,11 +547,11 @@ public abstract class CauldronBlockEntity<T extends CauldronTypeRecipe> extends 
 	@Override
 	@Nonnull
 	public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> capability, @Nullable Direction facing) {
-		if (capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY)
+		if(capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY)
 			return fluidHandler.cast();
-		else if(capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+		if(capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
 			return itemHandler.cast();
-		return super.getCapability(capability, facing);
+		return LazyOptional.empty();
 	}
 
 	@Override

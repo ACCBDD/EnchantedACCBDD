@@ -144,7 +144,6 @@ public class EnchantedItemModelProvider extends ItemModelProvider {
 		simpleItem(EnchantedItems.ARMOUR_POPPET_STURDY.get());
 
 		spawnEggItem(EnchantedItems.MANDRAKE_SPAWN_EGG.get());
-		spawnEggItem(EnchantedItems.ENT_SPAWN_EGG.get());
 	}
 
 	private void simpleItem(Item item) {

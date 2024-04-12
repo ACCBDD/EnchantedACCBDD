@@ -31,9 +31,12 @@ import com.favouriteless.enchanted.common.init.registry.EnchantedParticles;
 import com.favouriteless.enchanted.common.init.registry.EnchantedRecipeTypes;
 import com.favouriteless.enchanted.common.recipes.WitchCauldronRecipe;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
 
 public class WitchCauldronBlockEntity extends CauldronBlockEntity<WitchCauldronRecipe> {
 
@@ -76,4 +79,5 @@ public class WitchCauldronBlockEntity extends CauldronBlockEntity<WitchCauldronR
     protected Component getDefaultName() {
         return new TranslatableComponent("container.witch_cauldron");
     }
+
 }
