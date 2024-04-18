@@ -1,9 +1,0 @@
-{
-  "type": "enchanted:byproduct",
-  "ingredient": {
-    "item": "minecraft:oak_sapling"
-  },
-  "result": {
-    "item": "enchanted:exhale_of_the_horned_one"
-  }
-}

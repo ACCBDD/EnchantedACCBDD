@@ -1,9 +1,0 @@
-{
-  "type": "enchanted:byproduct",
-  "ingredient": {
-    "tag": "minecraft:logs_that_burn"
-  },
-  "result": {
-    "item": "enchanted:foul_fume"
-  }
-}
