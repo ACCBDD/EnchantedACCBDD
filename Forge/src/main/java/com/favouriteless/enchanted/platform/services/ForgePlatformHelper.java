@@ -1,6 +1,5 @@
 package com.favouriteless.enchanted.platform.services;
 
-import com.favouriteless.enchanted.platform.services.IPlatformHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.MenuProvider;
