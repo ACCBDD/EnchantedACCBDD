@@ -1,0 +1,26 @@
+{
+  "type": "enchanted:distilling",
+  "cookTime": 300,
+  "ingredients": [
+    {
+      "item": "enchanted:clay_jar"
+    },
+    {
+      "item": "enchanted:foul_fume"
+    },
+    {
+      "item": "enchanted:quicklime"
+    }
+  ],
+  "results": [
+    {
+      "item": "enchanted:gypsum"
+    },
+    {
+      "item": "enchanted:oil_of_vitriol"
+    },
+    {
+      "item": "minecraft:slime_ball"
+    }
+  ]
+}

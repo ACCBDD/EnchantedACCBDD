@@ -1,0 +1,38 @@
+{
+  "type": "enchanted:kettle",
+  "cookingColor": [
+    92,
+    60,
+    22
+  ],
+  "finalColor": [
+    128,
+    90,
+    43
+  ],
+  "ingredients": [
+    {
+      "item": "enchanted:rowan_sapling"
+    },
+    {
+      "item": "enchanted:tongue_of_dog"
+    },
+    {
+      "item": "enchanted:alder_sapling"
+    },
+    {
+      "item": "enchanted:mandrake_root"
+    },
+    {
+      "item": "enchanted:hawthorn_sapling"
+    },
+    {
+      "item": "minecraft:poppy"
+    }
+  ],
+  "power": 0,
+  "result": {
+    "count": 3,
+    "item": "enchanted:brew_of_sprouting"
+  }
+}

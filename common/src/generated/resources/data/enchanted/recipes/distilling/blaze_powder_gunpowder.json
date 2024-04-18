@@ -1,0 +1,18 @@
+{
+  "type": "enchanted:distilling",
+  "cookTime": 300,
+  "ingredients": [
+    {
+      "item": "minecraft:blaze_powder"
+    },
+    {
+      "item": "minecraft:gunpowder"
+    }
+  ],
+  "results": [
+    {
+      "count": 2,
+      "item": "minecraft:glowstone_dust"
+    }
+  ]
+}

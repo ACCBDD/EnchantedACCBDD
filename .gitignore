@@ -38,7 +38,3 @@ build.bat
 !core/gradlew.bat
 !gradle/wrapper
 !gradlew.bat
-
-Forge
-Fabric
-Common

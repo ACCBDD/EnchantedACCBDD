@@ -1,0 +1,37 @@
+{
+  "type": "enchanted:witch_cauldron",
+  "cookingColor": [
+    92,
+    35,
+    0
+  ],
+  "finalColor": [
+    153,
+    52,
+    0
+  ],
+  "ingredients": [
+    {
+      "item": "enchanted:mandrake_root"
+    },
+    {
+      "item": "enchanted:tear_of_the_goddess"
+    },
+    {
+      "item": "enchanted:diamond_vapour"
+    },
+    {
+      "item": "minecraft:ender_pearl"
+    },
+    {
+      "item": "minecraft:wheat"
+    },
+    {
+      "item": "enchanted:mutandis"
+    }
+  ],
+  "power": 0,
+  "result": {
+    "item": "minecraft:nether_wart"
+  }
+}
