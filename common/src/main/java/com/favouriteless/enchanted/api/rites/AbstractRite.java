@@ -9,12 +9,12 @@ import com.favouriteless.enchanted.common.items.TaglockFilledItem;
 import com.favouriteless.enchanted.common.rites.CirclePart;
 import com.favouriteless.enchanted.common.rites.RiteType;
 import com.favouriteless.enchanted.common.rites.RiteType.RiteFactory;
-import com.mojang.math.Vector3f;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
@@ -33,6 +33,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.phys.AABB;
+import org.joml.Vector3f;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -145,7 +146,7 @@ public abstract class AbstractRite {
             itemsConsumed.remove(stack);
         }
 
-        level.playSound(null, pos, SoundEvents.NOTE_BLOCK_SNARE, SoundSource.MASTER, 1.0F, 1.0F);
+        level.playSound(null, pos, SoundEvents.NOTE_BLOCK_SNARE.value(), SoundSource.MASTER, 1.0F, 1.0F);
 
         Player player = level.getServer().getPlayerList().getPlayer(casterUUID);
         if(player != null) player.displayClientMessage(Component.literal("Rite failed.").withStyle(ChatFormatting.RED), false);
@@ -259,7 +260,7 @@ public abstract class AbstractRite {
     }
 
     public boolean load(CompoundTag nbt, Level level) {
-        this.level = level.getServer().getLevel(ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(nbt.getString("dimension"))));
+        this.level = level.getServer().getLevel(ResourceKey.create(Registries.DIMENSION, new ResourceLocation(nbt.getString("dimension"))));
         this.pos = new BlockPos(nbt.getInt("x"), nbt.getInt("y"), nbt.getInt("z"));
         this.casterUUID = nbt.getUUID("caster");
         this.ticks = nbt.getLong("ticks");
@@ -537,10 +538,10 @@ public abstract class AbstractRite {
     }
 
     protected void replaceItem(ItemEntity entity, ItemStack... newItems) {
-        if(!entity.level.isClientSide) {
+        if(!entity.level().isClientSide) {
             for(ItemStack stack : newItems) {
-                ItemEntity newEntity = new ItemEntity(entity.level, entity.position().x(), entity.position().y(), entity.position().z(), stack);
-                entity.level.addFreshEntity(newEntity);
+                ItemEntity newEntity = new ItemEntity(entity.level(), entity.position().x(), entity.position().y(), entity.position().z(), stack);
+                entity.level().addFreshEntity(newEntity);
             }
             entity.discard();
         }

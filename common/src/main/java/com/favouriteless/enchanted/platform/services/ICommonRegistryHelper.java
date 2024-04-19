@@ -10,6 +10,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTab.DisplayItemsGenerator;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
@@ -93,11 +94,11 @@ public interface ICommonRegistryHelper {
      *
      * @param name The name of the tab.
      * @param iconSupplier A {@link Supplier} returning the icon of the tab.
-     * @param itemAppender A {@link Consumer} used to add any extra items to the tab.
+     * @param itemsGenerator A {@link DisplayItemsGenerator} used to add items to the tab.
      *
-     * @return A new {@link CreativeModeTab} with the specified icon and appender.
+     * @return A new {@link CreativeModeTab} with the specified icon and generator.
      */
-    CreativeModeTab getCreativeTab(String name, Supplier<ItemStack> iconSupplier, BiConsumer<List<ItemStack>, CreativeModeTab> itemAppender);
+    CreativeModeTab getCreativeTab(String name, Supplier<ItemStack> iconSupplier, DisplayItemsGenerator itemsGenerator);
 
     /**
      * Register a block as flammable (i.e. can catch on fire).

@@ -24,6 +24,7 @@ public class RiteTypes {
 
     private static final Map<ResourceLocation, RiteType<?>> RITE_TYPES = new HashMap<>();
 
+    public static final RiteType<RiteBindingFamiliar> BINDING_FAMILIAR = register("binding_familiar", RiteBindingFamiliar::new);
     public static final RiteType<RiteBindingTalisman> BINDING_TALISMAN = register("binding_talisman", RiteBindingTalisman::new);
     public static final RiteType<RiteBindingTalismanCharged> BINDING_TALISMAN_CHARGED = register("binding_talisman_charged", RiteBindingTalismanCharged::new);
     public static final RiteType<RiteBindingWaystone> BINDING_WAYSTONE = register("binding_waystone", RiteBindingWaystone::new);
@@ -32,7 +33,6 @@ public class RiteTypes {
     public static final RiteType<RiteBindingWaystoneDuplicateCharged> BINDING_WAYSTONE_DUPLICATE_CHARGED = register("binding_waystone_duplicate_charged", RiteBindingWaystoneDuplicateCharged::new);
     public static final RiteType<RiteBindingWaystonePlayer> BINDING_WAYSTONE_PLAYER = register("binding_waystone_player", RiteBindingWaystonePlayer::new);
     public static final RiteType<RiteBindingWaystonePlayerCharged> BINDING_WAYSTONE_PLAYER_CHARGED = register("binding_waystone_player_charged", RiteBindingWaystonePlayerCharged::new);
-    public static final RiteType<RiteBindingFamiliar> BINDING_FAMILIAR = register("binding_familiar", RiteBindingFamiliar::new);
     public static final RiteType<RiteBroiling> BROILING = register("broiling", RiteBroiling::new);
     public static final RiteType<RiteBroilingCharged> BROILING_CHARGED = register("broiling_charged", RiteBroilingCharged::new);
     public static final RiteType<RiteChargingStone> CHARGING_STONE = register("charging_stone", RiteChargingStone::new);

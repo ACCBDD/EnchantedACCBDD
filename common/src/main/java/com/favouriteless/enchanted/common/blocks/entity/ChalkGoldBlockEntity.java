@@ -6,7 +6,6 @@ import com.favouriteless.enchanted.common.altar.SimplePowerPosHolder;
 import com.favouriteless.enchanted.common.init.registry.EnchantedBlockEntityTypes;
 import com.favouriteless.enchanted.common.init.registry.RiteTypes;
 import com.favouriteless.enchanted.common.rites.RiteManager;
-import com.mojang.math.Vector3f;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.nbt.CompoundTag;
@@ -20,6 +19,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
+import org.joml.Vector3f;
 
 public class ChalkGoldBlockEntity extends BlockEntity implements IPowerConsumer {
 
@@ -42,7 +42,7 @@ public class ChalkGoldBlockEntity extends BlockEntity implements IPowerConsumer 
                     RiteManager.addRite(currentRite);
                     currentRite.start();
                 } else {
-                    level.playSound(null, pos.getX(), pos.getY() + 1, pos.getZ(), SoundEvents.NOTE_BLOCK_SNARE, SoundSource.MASTER, 2f, 1f);
+                    level.playSound(null, pos.getX(), pos.getY() + 1, pos.getZ(), SoundEvents.NOTE_BLOCK_SNARE.value(), SoundSource.MASTER, 2f, 1f);
                 }
             }
             else {

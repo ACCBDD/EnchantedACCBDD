@@ -4,7 +4,9 @@ import com.favouriteless.enchanted.Enchanted;
 import com.favouriteless.enchanted.common.init.registry.EnchantedBlocks;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
 import net.minecraft.sounds.SoundEvent;
@@ -13,6 +15,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTab.DisplayItemsGenerator;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -46,7 +49,7 @@ public class ForgeCommonRegistryHelper implements ICommonRegistryHelper {
 
 	@Override
 	public <T extends AbstractContainerMenu> Supplier<MenuType<T>> registerMenu(String name, TriFunction<Integer, Inventory, FriendlyByteBuf, T> create) {
-		return register(Registry.MENU, name, () -> IForgeMenuType.create(create::apply));
+		return register(BuiltInRegistries.MENU, name, () -> IForgeMenuType.create(create::apply));
 	}
 
 	@Override
@@ -74,19 +77,12 @@ public class ForgeCommonRegistryHelper implements ICommonRegistryHelper {
 	}
 
 	@Override
-	public CreativeModeTab getCreativeTab(String name, Supplier<ItemStack> iconSupplier, BiConsumer<List<ItemStack>, CreativeModeTab> itemAppender) {
-		return new CreativeModeTab(Enchanted.MOD_ID + ".main") {
-
-			@Override
-			public ItemStack makeIcon() {
-				return iconSupplier.get();
-			}
-
-			@Override
-			public void fillItemList(NonNullList<ItemStack> items) {
-				itemAppender.accept(items, this);
-			}
-		};
+	public CreativeModeTab getCreativeTab(String name, Supplier<ItemStack> iconSupplier, DisplayItemsGenerator itemGenerator) {
+		return CreativeModeTab.builder()
+				.title(Component.translatable(Enchanted.MOD_ID + "." + name))
+				.icon(iconSupplier)
+				.displayItems(itemGenerator)
+				.build();
 	}
 
 	@Override

@@ -3,12 +3,14 @@ package com.favouriteless.enchanted.platform.services;
 import com.favouriteless.enchanted.Enchanted;
 import com.favouriteless.enchanted.mixin.fabric.DamageSourceAccessor;
 import com.favouriteless.enchanted.platform.JsonDataLoaderWrapper;
-import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
+import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
@@ -18,6 +20,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTab.DisplayItemsGenerator;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
@@ -38,7 +41,7 @@ public class FabricCommonRegistryHelper implements ICommonRegistryHelper {
 
 	@Override
 	public <T extends AbstractContainerMenu> Supplier<MenuType<T>> registerMenu(String name, TriFunction<Integer, Inventory, FriendlyByteBuf, T> create) {
-		return register(Registry.MENU, name, () -> new ExtendedScreenHandlerType<>(create::apply));
+		return register(BuiltInRegistries.MENU, name, () -> new ExtendedScreenHandlerType<>(create::apply));
 	}
 
 	@Override
@@ -69,10 +72,11 @@ public class FabricCommonRegistryHelper implements ICommonRegistryHelper {
 	}
 
 	@Override
-	public CreativeModeTab getCreativeTab(String name, Supplier<ItemStack> iconSupplier, BiConsumer<List<ItemStack>, CreativeModeTab> itemAppender) {
-		return FabricItemGroupBuilder.create(Enchanted.location("main"))
+	public CreativeModeTab getCreativeTab(String name, Supplier<ItemStack> iconSupplier, DisplayItemsGenerator itemsGenerator) {
+		return FabricItemGroup.builder()
+				.title(Component.translatable(Enchanted.MOD_ID + "." + name))
 				.icon(iconSupplier)
-				.appendItems(itemAppender)
+				.displayItems(itemsGenerator)
 				.build();
 	}
 
