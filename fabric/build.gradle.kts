@@ -40,16 +40,23 @@ repositories {
     }
 }
 
+
 dependencies {
-    minecraft(libs.minecraft)
+    minecraft( libs.minecraft )
     mappings(loom.layered() {
         officialMojangMappings()
         parchment("org.parchmentmc.data:parchment-${parchment_minecraft_version}:${parchment_version}@zip")
     })
-    modImplementation(libs.fabric)
-    modImplementation(libs.fabric.api)
-    compileOnly(project(":common"))
-   // implementation("com.google.code.findbugs:jsr305:3.0.1") //Provides the Nullable annotations
+    modImplementation( libs.fabric )
+    modImplementation( libs.fabric.api )
+    compileOnly( project(":common") )
+
+    modImplementation( libs.geckolib.fabric )
+    modImplementation( libs.patchouli.fabric )
+    modImplementation( libs.sbl.fabric )
+    modImplementation( libs.stateobserver.fabric )
+    modApi( libs.forgeconfigapi.fabric )
+    modRuntimeOnly( libs.jei.fabric )
 }
 
 loom {

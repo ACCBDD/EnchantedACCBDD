@@ -81,19 +81,23 @@ minecraft {
 
 dependencies {
     minecraft(libs.forge)
-    compileOnly(project(":common"))
+    compileOnly( project(":common") )
 
     if (System.getProperty("idea.sync.active") != "true")
         annotationProcessor(variantOf(libs.mixin) { classifier("processor") })
 
-    compileOnly(libs.mixinextras.common)
-    annotationProcessor(libs.mixinextras.common)
-    testCompileOnly(libs.mixinextras.common)
+    compileOnly( libs.mixinextras.common )
+    annotationProcessor( libs.mixinextras.common )
+    testCompileOnly( libs.mixinextras.common )
 
     runtimeOnly(libs.mixinextras.forge)
-    jarJar(libs.mixinextras.forge) {
-        jarJar.ranged(this, libs.versions.mixinextras.range.get())
-    }
+    jarJar(libs.mixinextras.forge) { jarJar.ranged(this, libs.versions.mixinextras.range.get()) }
+
+    implementation( libs.geckolib.forge )
+    implementation( libs.patchouli.forge )
+    implementation( libs.sbl.forge )
+    implementation( libs.stateobserver.forge )
+    runtimeOnly( libs.jei.forge )
 }
 
 //Make the result of the jarJar task the one with no classifier instead of no classifier and "all"

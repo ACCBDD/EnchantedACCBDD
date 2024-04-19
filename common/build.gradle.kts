@@ -18,9 +18,17 @@ minecraft {
 }
 
 dependencies {
-    compileOnly(libs.mixin)
-    compileOnly(libs.mixinextras.common)
-    //implementation("com.google.code.findbugs:jsr305:3.0.1")
+    compileOnly( libs.mixin )
+    compileOnly( libs.mixinextras.common )
+
+    // Use gecko/patchouli forge to compile because they don't have common yet
+    compileOnly( libs.geckolib.forge )
+    compileOnly( libs.patchouli.forge )
+
+    compileOnly( libs.stateobserver.common )
+    compileOnly( libs.sbl.common )
+    compileOnly( libs.jei.common.api )
+    compileOnly( libs.forgeconfigapi.common )
 }
 
 publishing {
