@@ -19,6 +19,7 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -99,31 +100,32 @@ public class RiteCategory implements IRecipeCategory<AbstractCreateItemRite> {
 
 
     @Override
-    public void draw(AbstractCreateItemRite rite, IRecipeSlotsView recipeSlotsView, PoseStack poseStack, double mouseX, double mouseY) {
+    public void draw(AbstractCreateItemRite rite, IRecipeSlotsView recipeSlotsView, GuiGraphics gui, double mouseX, double mouseY) {
         for(IDrawableStatic drawable : circles) {
-            drawable.draw(poseStack, 0, 14);
+            drawable.draw(gui, 0, 14);
         }
-        glyph_golden.draw(poseStack, 0, 14);
-        this.arrow.draw(poseStack, 95, 53);
+        glyph_golden.draw(gui, 0, 14);
+        this.arrow.draw(gui, 95, 53);
 
         ResourceLocation riteName = rite.getType().getId();
         String nameText = Component.translatable("rite." + riteName.getNamespace() + "." + riteName.getPath()).getString();
-        drawText(Minecraft.getInstance(), poseStack, nameText, 180, 0, 0xFFFFFFFF);
-        drawText(Minecraft.getInstance(), poseStack, "Required Altar Power : " + rite.POWER, 180, 112, 0xFFFFFFFF);
+        drawText(Minecraft.getInstance(), gui, nameText, 180, 0, 0xFFFFFFFF);
+        drawText(Minecraft.getInstance(), gui, "Required Altar Power : " + rite.POWER, 180, 112, 0xFFFFFFFF);
 
         if(!rite.ENTITIES_REQUIRED.isEmpty() || rite.hasAdditionalRequirements()) {
+            PoseStack poseStack = gui.pose();
             poseStack.pushPose();
             poseStack.scale(0.5F, 0.5F, 0.5F);
-            drawText(Minecraft.getInstance(), poseStack, "Has additional requirements", 360, 18, 0xFFFFFFFF);
+            drawText(Minecraft.getInstance(), gui, "Has additional requirements", 360, 18, 0xFFFFFFFF);
             poseStack.popPose();
         }
     }
 
-    private void drawText(Minecraft minecraft, PoseStack poseStack, String text, int x, int y, int mainColor) {
+    private void drawText(Minecraft minecraft, GuiGraphics gui, String text, int x, int y, int mainColor) {
         int shadowColor = 0xFF000000 | (mainColor & 0xFCFCFC) >> 2;
         int width = minecraft.font.width(text);
         int cx = x/2 - width/2 - 1;
-        minecraft.font.draw(poseStack, text, cx + 1, y, shadowColor);
+        gui.drawString(minecraft.font, text, cx + 1, y, shadowColor);
     }
 
     private IDrawableStatic buildTexture(ResourceLocation resourceLocation, int width, int height, IJeiHelpers helper) {

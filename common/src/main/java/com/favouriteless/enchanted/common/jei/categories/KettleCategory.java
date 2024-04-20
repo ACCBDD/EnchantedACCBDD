@@ -3,7 +3,7 @@ package com.favouriteless.enchanted.common.jei.categories;
 import com.favouriteless.enchanted.Enchanted;
 import com.favouriteless.enchanted.common.init.registry.EnchantedItems;
 import com.favouriteless.enchanted.common.recipes.KettleRecipe;
-import com.mojang.blaze3d.vertex.PoseStack;
+import com.favouriteless.enchanted.util.RecipeUtils;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -16,6 +16,7 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 
@@ -40,18 +41,18 @@ public class KettleCategory implements IRecipeCategory<KettleRecipe> {
     }
 
     @Override
-    public void draw(KettleRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack poseStack, double mouseX, double mouseY) {
-        this.arrow.draw(poseStack, 85, 29);
-        drawPowerCost(Minecraft.getInstance(), poseStack, "Required Altar Power : " + recipe.getPower(), 0xFFFFFFFF);
+    public void draw(KettleRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics gui, double mouseX, double mouseY) {
+        this.arrow.draw(gui, 85, 29);
+        drawPowerCost(Minecraft.getInstance(), gui, "Required Altar Power : " + recipe.getPower(), 0xFFFFFFFF);
     }
 
-    private void drawPowerCost(Minecraft minecraft, PoseStack poseStack, String text, int mainColor) {
+    private void drawPowerCost(Minecraft minecraft, GuiGraphics gui, String text, int mainColor) {
         int shadowColor = 0xFF000000 | (mainColor & 0xFCFCFC) >> 2;
         int width = minecraft.font.width(text);
         int x = GUI_WIDTH/2 - width/2 - 1;
         int y = 55;
 
-        minecraft.font.draw(poseStack, text, x + 1, y, shadowColor);
+        gui.drawString(minecraft.font, text, x + 1, y, shadowColor);
     }
 
     @Override
@@ -61,7 +62,7 @@ public class KettleCategory implements IRecipeCategory<KettleRecipe> {
             builder.addSlot(RecipeIngredientRole.INPUT,5+offset,5).addIngredient(VanillaTypes.ITEM_STACK,i);
             offset += 20;
         }
-        builder.addSlot(RecipeIngredientRole.OUTPUT,110,30).addIngredient(VanillaTypes.ITEM_STACK,recipe.getResultItem());
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 110, 30).addIngredient(VanillaTypes.ITEM_STACK, RecipeUtils.getResultItem(recipe));
     }
 
     @Override

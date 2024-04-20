@@ -1,7 +1,7 @@
 package com.favouriteless.enchanted.common.jei.recipes;
 
 import net.minecraft.core.HolderSet.Named;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.ItemStack;
@@ -17,7 +17,7 @@ public class JEIMutandisRecipe {
     private final ItemStack output;
 
     public JEIMutandisRecipe(TagKey<Block> inputs, ItemStack output, Component description) {
-        Named<Block> tagContents = Registry.BLOCK.getTag(inputs).orElse(null);
+        Named<Block> tagContents = BuiltInRegistries.BLOCK.getTag(inputs).orElse(null);
         this.inputs = tagContents != null ? tagContents.stream().map(holder -> new ItemStack(holder.value())).toList() : new ArrayList<>();
         this.output = output;
         this.description = description;

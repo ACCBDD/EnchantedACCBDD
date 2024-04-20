@@ -23,7 +23,7 @@ import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.registration.*;
 import net.minecraft.client.Minecraft;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -67,12 +67,12 @@ public class EnchantedJEIPlugin implements IModPlugin {
                 .map(rite -> (AbstractCreateItemRite)rite).toList();
         registration.addRecipes(JEIRecipeTypes.RECIPE_TYPE_RITE, riteCrafts);
 
-        Registry.BLOCK.getTag(Blocks.MUTANDIS_PLANTS).ifPresent(tag -> registration.addRecipes(JEIRecipeTypes.RECIPE_TYPE_MUTANDIS, tag.stream()
-                .filter(block -> !Registry.BLOCK.getTag(Blocks.MUTANDIS_BLACKLIST).map(t -> t.contains(block)).orElse(false))
+        BuiltInRegistries.BLOCK.getTag(Blocks.MUTANDIS_PLANTS).ifPresent(tag -> registration.addRecipes(JEIRecipeTypes.RECIPE_TYPE_MUTANDIS, tag.stream()
+                .filter(block -> !BuiltInRegistries.BLOCK.getTag(Blocks.MUTANDIS_BLACKLIST).map(t -> t.contains(block)).orElse(false))
                 .map(block -> new JEIMutandisRecipe(Blocks.MUTANDIS_PLANTS, new ItemStack(block.value()), Component.translatable("jei.enchanted.mutandis.description"))).toList()));
 
-        Registry.BLOCK.getTag(Blocks.MUTANDIS_EXTREMIS_PLANTS).ifPresent(tag -> registration.addRecipes(JEIRecipeTypes.RECIPE_TYPE_MUTANDIS_EXTREMIS, tag.stream()
-                .filter(block -> !Registry.BLOCK.getTag(Blocks.MUTANDIS_EXTREMIS_BLACKLIST).map(t -> t.contains(block)).orElse(false))
+        BuiltInRegistries.BLOCK.getTag(Blocks.MUTANDIS_EXTREMIS_PLANTS).ifPresent(tag -> registration.addRecipes(JEIRecipeTypes.RECIPE_TYPE_MUTANDIS_EXTREMIS, tag.stream()
+                .filter(block -> !BuiltInRegistries.BLOCK.getTag(Blocks.MUTANDIS_EXTREMIS_BLACKLIST).map(t -> t.contains(block)).orElse(false))
                 .map(block -> new JEIMutandisRecipe(Blocks.MUTANDIS_EXTREMIS_PLANTS, new ItemStack(block.value()), Component.translatable("jei.enchanted.mutandis.description"))).toList()));
 
         registration.addIngredientInfo(new ItemStack(EnchantedItems.CHALICE_FILLED.get()), VanillaTypes.ITEM_STACK, Component.translatable("jei.enchanted.chalice_filled"));

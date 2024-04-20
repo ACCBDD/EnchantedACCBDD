@@ -3,7 +3,6 @@ package com.favouriteless.enchanted.common.jei.categories;
 import com.favouriteless.enchanted.Enchanted;
 import com.favouriteless.enchanted.common.init.registry.EnchantedItems;
 import com.favouriteless.enchanted.common.recipes.DistillingRecipe;
-import com.mojang.blaze3d.vertex.PoseStack;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -15,6 +14,7 @@ import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 
@@ -37,9 +37,9 @@ public class DistilleryCategory implements IRecipeCategory<DistillingRecipe> {
     }
 
     @Override
-    public void draw(DistillingRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack stack, double mouseX, double mouseY) {
-        this.bubbles.draw(stack, 88, 22);
-        this.arrow.draw(stack, 65, 8);
+    public void draw(DistillingRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics gui, double mouseX, double mouseY) {
+        this.bubbles.draw(gui, 88, 22);
+        this.arrow.draw(gui, 65, 8);
     }
 
     @Override

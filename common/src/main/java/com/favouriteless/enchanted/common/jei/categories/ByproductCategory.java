@@ -3,7 +3,7 @@ package com.favouriteless.enchanted.common.jei.categories;
 import com.favouriteless.enchanted.Enchanted;
 import com.favouriteless.enchanted.common.init.registry.EnchantedItems;
 import com.favouriteless.enchanted.common.recipes.ByproductRecipe;
-import com.mojang.blaze3d.vertex.PoseStack;
+import com.favouriteless.enchanted.util.RecipeUtils;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -16,6 +16,7 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 
@@ -61,21 +62,21 @@ public class ByproductCategory implements IRecipeCategory<ByproductRecipe> {
             Minecraft.getInstance().level.getRecipeManager().getAllRecipesFor(net.minecraft.world.item.crafting.RecipeType.SMELTING)
                     .stream()
                     .filter(smelt -> smelt.getIngredients().get(0).test(stack))
-                    .findFirst().ifPresent(smeltingRecipe -> itemsOut.add(smeltingRecipe.getResultItem()));
+                    .findFirst().ifPresent(smeltingRecipe -> itemsOut.add(RecipeUtils.getResultItem(smeltingRecipe)));
         }
 
         if(!itemsOut.isEmpty()) {
             builder.addSlot(RecipeIngredientRole.INPUT, 13, 7).addIngredients(recipe.getInput());
             builder.addSlot(RecipeIngredientRole.OUTPUT, 67, 7).addItemStacks(itemsOut);
-            builder.addSlot(RecipeIngredientRole.OUTPUT, 67, 43).addIngredient(VanillaTypes.ITEM_STACK, recipe.getResultItem());
-            builder.addSlot(RecipeIngredientRole.CATALYST, 13, 43).addIngredient(VanillaTypes.ITEM_STACK, new ItemStack(EnchantedItems.CLAY_JAR.get(), recipe.getResultItem().getCount()));
+            builder.addSlot(RecipeIngredientRole.OUTPUT, 67, 43).addIngredient(VanillaTypes.ITEM_STACK, RecipeUtils.getResultItem(recipe));
+            builder.addSlot(RecipeIngredientRole.CATALYST, 13, 43).addIngredient(VanillaTypes.ITEM_STACK, new ItemStack(EnchantedItems.CLAY_JAR.get(), RecipeUtils.getResultItem(recipe).getCount()));
         }
     }
 
     @Override
-    public void draw(ByproductRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack stack, double mouseX, double mouseY) {
-        fire.draw(stack, 40, 27);
-        arrow.draw(stack, 36, 6);
+    public void draw(ByproductRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics gui, double mouseX, double mouseY) {
+        fire.draw(gui, 40, 27);
+        arrow.draw(gui, 36, 6);
     }
 
     @Override

@@ -69,7 +69,7 @@ public class CauldronWaterRenderer<T extends CauldronBlockEntity<?>> implements 
                 Vec2 quadUvs = uvs[i];
 
                 Vector4f posVector = new Vector4f(localPos.x()/16.0F, localPos.y()/16.0F, localPos.z()/16.0F, 1.0F);
-                posVector.transform(poseMatrix);
+                poseMatrix.transform(posVector);
 
                 vertexBuilder.vertex(posVector.x(), posVector.y(), posVector.z(),
                         red/255F, green/255F, blue/255F, alpha/255F,
