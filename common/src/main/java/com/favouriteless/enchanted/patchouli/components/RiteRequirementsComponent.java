@@ -10,6 +10,7 @@ import com.google.gson.annotations.SerializedName;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -67,16 +68,16 @@ public class RiteRequirementsComponent implements ICustomComponent {
 	}
 
 	@Override
-	public void render(PoseStack matrix, IComponentRenderContext context, float partialticks, int mouseX, int mouseY) {
+	public void render(GuiGraphics guiGraphics, IComponentRenderContext context, float partialticks, int mouseX, int mouseY) {
 		if(rite != null && context.getGui() instanceof GuiBook gui) {
 			for(ResourceLocation resourceLocation : circleImages) {
-				renderCircle(matrix, resourceLocation);
+				renderCircle(guiGraphics, resourceLocation);
 			}
 			for(ItemRing ring : itemRings) {
-				ring.render(matrix, gui, mouseX, mouseY);
+				ring.render(guiGraphics, gui, mouseX, mouseY);
 			}
 
-			powerTextRenderer.render(matrix, mouseX, mouseY);
+			powerTextRenderer.render(guiGraphics, mouseX, mouseY);
 		}
 	}
 
@@ -110,13 +111,13 @@ public class RiteRequirementsComponent implements ICustomComponent {
 		return null;
 	}
 
-	private void renderCircle(PoseStack matrix, ResourceLocation resourceLocation) {
-		RenderSystem.setShaderTexture(0, resourceLocation);
-		matrix.pushPose();
-		matrix.translate(x-IMAGE_OFFSET, y-IMAGE_OFFSET, 0);
+	private void renderCircle(GuiGraphics guiGraphics, ResourceLocation resourceLocation) {
+		PoseStack poseStack = guiGraphics.pose();
+		poseStack.pushPose();
+		poseStack.translate(x-IMAGE_OFFSET, y-IMAGE_OFFSET, 0);
 		RenderSystem.enableBlend();
-		GuiComponent.blit(matrix, 0, 0, 0, 0, IMAGE_SIZE, IMAGE_SIZE, TEXTURE_SIZE, TEXTURE_SIZE);
-		matrix.popPose();
+		guiGraphics.blit(resourceLocation, 0, 0, 0, 0, IMAGE_SIZE, IMAGE_SIZE, TEXTURE_SIZE, TEXTURE_SIZE);
+		poseStack.popPose();
 	}
 
 	@Override
@@ -199,26 +200,24 @@ public class RiteRequirementsComponent implements ICustomComponent {
 			}
 		}
 
-		private void render(PoseStack matrix, GuiBook gui, int mouseX, int mouseY) {
-			matrix.pushPose();
-			matrix.scale(scale, scale, scale);
+		private void render(GuiGraphics graphics, GuiBook gui, int mouseX, int mouseY) {
+			PoseStack poseStack = graphics.pose();
+			poseStack.pushPose();
+			poseStack.scale(scale, scale, scale);
 			for(int i = 0; i < items.size(); i++) {
 				ItemStack item = items.get(i);
 				Vector2i scaledPos = scaledPositions[i];
 				Vector2i absPos = absPositions[i];
 
 				Minecraft mc = Minecraft.getInstance();
-
-				RenderHelper.transferMsToGl(matrix, () -> {
-					mc.getItemRenderer().renderAndDecorateItem(item, scaledPos.x, scaledPos.y);
-					mc.getItemRenderer().renderGuiItemDecorations(mc.font, item, scaledPos.x, scaledPos.y);
-				});
+				graphics.renderItem(item, scaledPos.x, scaledPos.y);
+				graphics.renderItemDecorations(mc.font, item, scaledPos.x, scaledPos.y);
 
 				if(gui.isMouseInRelativeRange(mouseX, mouseY, absPos.x, absPos.y, itemSize, itemSize)) {
 					gui.setTooltipStack(item);
 				}
 			}
-			matrix.popPose();
+			poseStack.popPose();
 		}
 	}
 

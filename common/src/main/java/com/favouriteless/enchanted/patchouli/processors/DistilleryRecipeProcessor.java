@@ -1,11 +1,11 @@
 package com.favouriteless.enchanted.patchouli.processors;
 
 import com.favouriteless.enchanted.common.recipes.DistillingRecipe;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.level.Level;
 import vazkii.patchouli.api.IComponentProcessor;
 import vazkii.patchouli.api.IVariable;
 import vazkii.patchouli.api.IVariableProvider;
@@ -15,14 +15,14 @@ public class DistilleryRecipeProcessor implements IComponentProcessor {
 	private DistillingRecipe recipe;
 
 	@Override
-	public void setup(IVariableProvider variables) {
+	public void setup(Level level, IVariableProvider variables) {
 		ResourceLocation recipeId = new ResourceLocation(variables.get("recipe").asString());
-		RecipeManager recipeManager = Minecraft.getInstance().level.getRecipeManager();
+		RecipeManager recipeManager = level.getRecipeManager();
 		recipe = (DistillingRecipe)recipeManager.byKey(recipeId).orElseThrow(() -> new IllegalArgumentException("Could not find recipe for: " + recipeId));;
 	}
 
 	@Override
-	public IVariable process(String key) {
+	public IVariable process(Level level, String key) {
 
 		int index = Integer.parseInt(String.valueOf(key.charAt(key.length() - 1)));
 		if(key.startsWith("in")) {

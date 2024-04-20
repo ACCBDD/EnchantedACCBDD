@@ -1,6 +1,6 @@
 package com.favouriteless.enchanted.patchouli.components;
 
-import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.item.ItemStack;
 import vazkii.patchouli.api.IComponentRenderContext;
 import vazkii.patchouli.api.ICustomComponent;
@@ -31,9 +31,9 @@ public class ItemListComponent implements ICustomComponent {
 	}
 
 	@Override
-	public void render(PoseStack matrix, IComponentRenderContext context, float partialTicks, int mouseX, int mouseY) {
+	public void render(GuiGraphics gui, IComponentRenderContext context, float partialTicks, int mouseX, int mouseY) {
 		for(ItemRow row : itemRows) {
-			row.render(matrix, context, mouseX, mouseY);
+			row.render(gui, context, mouseX, mouseY);
 		}
 	}
 
@@ -67,10 +67,10 @@ public class ItemListComponent implements ICustomComponent {
 			this.y = y;
 		}
 
-		private void render(PoseStack matrix, IComponentRenderContext context, int mouseX, int mouseY) {
+		private void render(GuiGraphics gui, IComponentRenderContext context, int mouseX, int mouseY) {
 			int xOffset = 0;
 			for(ItemStack stack : items) {
-				context.renderItemStack(matrix, x+xOffset, y, mouseX, mouseY, stack);
+				context.renderItemStack(gui, x + xOffset, y, mouseX, mouseY, stack);
 				xOffset += 16;
 			}
 		}
