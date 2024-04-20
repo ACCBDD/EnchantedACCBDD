@@ -2,9 +2,7 @@ package com.favouriteless.enchanted.datagen.providers;
 
 import com.favouriteless.enchanted.Enchanted;
 import com.favouriteless.enchanted.common.init.registry.EnchantedItems;
-import net.minecraft.core.Registry;
-import net.minecraft.data.BuiltinRegistries;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ModelFile;
@@ -15,9 +13,10 @@ public class ItemModelProvider extends net.minecraftforge.client.model.generator
 
 	private static ModelFile ITEM_GENERATED;
 
-	public ItemModelProvider(DataGenerator generator, ExistingFileHelper existingFileHelper) {
-		super(generator, Enchanted.MOD_ID, existingFileHelper);
+	public ItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
+		super(output, Enchanted.MOD_ID, existingFileHelper);
 	}
+
 
 	@Override
 	protected void registerModels() {

@@ -3,22 +3,26 @@ package com.favouriteless.enchanted.datagen.providers.tag;
 import com.favouriteless.enchanted.Enchanted;
 import com.favouriteless.enchanted.common.init.EnchantedTags.EntityTypes;
 import com.favouriteless.enchanted.common.init.registry.EnchantedEntityTypes;
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.tags.EntityTypeTagsProvider;
+import net.minecraft.core.HolderLookup.Provider;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.PackOutput;
+import net.minecraft.data.tags.IntrinsicHolderTagsProvider;
 import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
 
-public class EntityTypeTagProvider extends EntityTypeTagsProvider {
+import java.util.concurrent.CompletableFuture;
 
-    public EntityTypeTagProvider(DataGenerator generator, @Nullable ExistingFileHelper fileHelper) {
-        super(generator, Enchanted.MOD_ID, fileHelper);
+public class EntityTypeTagProvider extends IntrinsicHolderTagsProvider<EntityType<?>> {
+
+
+    public EntityTypeTagProvider(PackOutput output, CompletableFuture<Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
+        super(output, Registries.ENTITY_TYPE, lookupProvider, entityType -> entityType.builtInRegistryHolder().key(), Enchanted.MOD_ID, existingFileHelper);
     }
 
     @Override
-    protected void addTags() {
+    protected void addTags(Provider provider) {
         addEnchantedTags();
-        addVanillaTags();
     }
 
     public void addEnchantedTags() {
@@ -34,10 +38,6 @@ public class EntityTypeTagProvider extends EntityTypeTagsProvider {
         tag(EntityTypes.TAGLOCK_BLACKLIST)
                 .add(EntityType.ENDER_DRAGON, EntityType.WITHER, EnchantedEntityTypes.ENT.get(),
                         EnchantedEntityTypes.FAMILIAR_CAT.get());
-    }
-
-    public void addVanillaTags() {
-
     }
 
 }

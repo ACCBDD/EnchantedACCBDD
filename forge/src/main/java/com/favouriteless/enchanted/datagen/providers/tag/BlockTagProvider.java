@@ -3,26 +3,31 @@ package com.favouriteless.enchanted.datagen.providers.tag;
 import com.favouriteless.enchanted.Enchanted;
 import com.favouriteless.enchanted.common.init.EnchantedTags;
 import com.favouriteless.enchanted.common.init.registry.EnchantedBlocks;
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.tags.BlockTagsProvider;
+import net.minecraft.core.HolderLookup.Provider;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.PackOutput;
+import net.minecraft.data.tags.IntrinsicHolderTagsProvider;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
 
-public class BlockTagProvider extends BlockTagsProvider {
+import java.util.concurrent.CompletableFuture;
 
-    public BlockTagProvider(DataGenerator generator, @Nullable ExistingFileHelper fileHelper) {
-        super(generator, Enchanted.MOD_ID, fileHelper);
+public class BlockTagProvider extends IntrinsicHolderTagsProvider<Block> {
+
+    public BlockTagProvider(PackOutput output, CompletableFuture<Provider> lookupProvider, ExistingFileHelper existingFileHelper) {
+        super(output, Registries.BLOCK, lookupProvider, block -> block.builtInRegistryHolder().key(), Enchanted.MOD_ID, existingFileHelper);
     }
 
     @Override
-    protected void addTags() {
-        addEnchantedTags();
-        addVanillaTags();
+    protected void addTags(@NotNull Provider provider) {
+        addEnchantedTags(provider);
+        addVanillaTags(provider);
     }
 
-    public void addEnchantedTags() {
+    public void addEnchantedTags(Provider provider) {
         tag(EnchantedTags.Blocks.BLIGHT_DECAY_BLOCKS)
                 .add(Blocks.SAND, Blocks.COARSE_DIRT, Blocks.ROOTED_DIRT);
         tag(EnchantedTags.Blocks.BLIGHT_DECAYABLE_BLOCKS)
@@ -84,7 +89,7 @@ public class BlockTagProvider extends BlockTagsProvider {
                         EnchantedBlocks.HAWTHORN_STAIRS.get());
     }
 
-    public void addVanillaTags() {
+    public void addVanillaTags(Provider provider) {
         // Mineable
         tag(BlockTags.MINEABLE_WITH_AXE)
                 .add(EnchantedBlocks.SPINNING_WHEEL.get());
@@ -121,5 +126,4 @@ public class BlockTagProvider extends BlockTagsProvider {
                 .addTag(EnchantedTags.Blocks.WOODEN_STAIRS);
 
     }
-
 }

@@ -38,10 +38,10 @@ minecraft {
         }
 
         create("client") {
-            workingDirectory(project.file("runs/" + name))
+            workingDirectory(project.file("runs/$name"))
             ideaModule("${rootProject.name}.${project.name}.main")
             isSingleInstance = true
-            taskName("Forge Client")
+            taskName("Client")
             args("--username", "Favouriteless", "--uuid", "9410df73-6be3-41d5-a620-51b2e9be667b")
 
             property("forge.logging.console.level", "debug")
@@ -59,15 +59,38 @@ minecraft {
         }
 
         create("server") {
-            workingDirectory(project.file("runs/"+ name))
+            workingDirectory(project.file("runs/$name"))
             ideaModule("${rootProject.name}.${project.name}.main")
             isSingleInstance = true
-            taskName("Forge Server")
+            taskName("Server")
 
             property("forge.logging.console.level", "debug")
             property("mixin.env.remapRefMap", "true")
             property("mixin.env.refMapRemappingFile", "${project.projectDir}/build/createSrgToMcp/output.srg")
             args("-mixin.config=${mod_id}.mixins.json")
+
+            mods {
+                create(mod_id) {
+                    source(project(":common").sourceSets.main.get())
+                    source(sourceSets.main.get())
+                }
+            }
+        }
+
+        create("data") {
+            workingDirectory(project.file("runs/$name"))
+            ideaModule("${rootProject.name}.${project.name}.main")
+            isSingleInstance = true
+            taskName("Data")
+
+            property("forge.logging.console.level", "debug")
+            property("mixin.env.remapRefMap", "true")
+            property("mixin.env.refMapRemappingFile", "${project.projectDir}/build/createSrgToMcp/output.srg")
+            args("-mixin.config=${mod_id}.mixins.json",
+                "--mod", mod_id, "--all",
+                "--output", file("src/generated/resources/").absolutePath,
+                "--existing", file("src/main/resources/").absolutePath
+            )
 
             mods {
                 create(mod_id) {

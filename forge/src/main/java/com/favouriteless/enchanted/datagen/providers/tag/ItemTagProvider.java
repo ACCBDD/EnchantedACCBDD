@@ -4,28 +4,31 @@ import com.favouriteless.enchanted.Enchanted;
 import com.favouriteless.enchanted.common.init.EnchantedTags;
 import com.favouriteless.enchanted.common.init.EnchantedTags.Blocks;
 import com.favouriteless.enchanted.common.init.registry.EnchantedItems;
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.tags.BlockTagsProvider;
+import net.minecraft.core.HolderLookup.Provider;
+import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import org.jetbrains.annotations.Nullable;
+
+import java.util.concurrent.CompletableFuture;
 
 public class ItemTagProvider extends ItemTagsProvider {
 
-    public ItemTagProvider(DataGenerator generator, BlockTagsProvider blockTagsProvider, @Nullable ExistingFileHelper fileHelper) {
-        super(generator, blockTagsProvider, Enchanted.MOD_ID, fileHelper);
+    public ItemTagProvider(PackOutput output, CompletableFuture<Provider> lookupProvider, ExistingFileHelper existingFileHelper, CompletableFuture<TagLookup<Block>> blockTags) {
+        super(output, lookupProvider, blockTags, Enchanted.MOD_ID, existingFileHelper);
     }
 
     @Override
-    protected void addTags() {
-        addEnchantedTags();
-        addVanillaTags();
+    protected void addTags(Provider provider) {
+        addEnchantedTags(provider);
+        addVanillaTags(provider);
     }
 
-    public void addEnchantedTags() {
+    @SuppressWarnings("unchecked")
+    public void addEnchantedTags(Provider provider) {
         // Copied block tags
         copy(Blocks.CHALICES, EnchantedTags.Items.CHALICES);
         copy(Blocks.CHALKS, EnchantedTags.Items.CHALKS);
@@ -60,21 +63,18 @@ public class ItemTagProvider extends ItemTagsProvider {
         tag(EnchantedTags.Items.TOOL_POPPET_BLACKLIST)
                 .addTag(EnchantedTags.Items.CHALKS);
         tag(EnchantedTags.Items.TOOL_POPPET_WHITELIST)
+                .addTags(ItemTags.SWORDS, ItemTags.PICKAXES, ItemTags.SHOVELS, ItemTags.AXES, ItemTags.HOES)
                 .addOptionalTag(new ResourceLocation("forge", "tools"))
-                .addOptionalTag(new ResourceLocation("c", "axes"))
                 .addOptionalTag(new ResourceLocation("c", "hoes"))
-                .addOptionalTag(new ResourceLocation("c", "pickaxes"))
                 .addOptionalTag(new ResourceLocation("c", "shears"))
                 .addOptionalTag(new ResourceLocation("c", "shields"))
-                .addOptionalTag(new ResourceLocation("c", "shovels"))
-                .addOptionalTag(new ResourceLocation("c", "spears"))
-                .addOptionalTag(new ResourceLocation("c", "swords"));
+                .addOptionalTag(new ResourceLocation("c", "spears"));
         tag(EnchantedTags.Items.WITCH_OVEN_BLACKLIST)
                 .addOptionalTag(new ResourceLocation("forge", "ores"))
                 .addOptionalTag(new ResourceLocation("c", "ores"));
     }
 
-    public void addVanillaTags() {
+    public void addVanillaTags(Provider provider) {
         tag(ItemTags.LEAVES)
                 .addTag(EnchantedTags.Items.LEAVES);
         tag(ItemTags.LOGS_THAT_BURN)

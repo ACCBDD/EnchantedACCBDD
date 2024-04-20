@@ -28,8 +28,8 @@ public class CauldronTypeRecipeBuilder extends EnchantedRecipeBuilder {
     private final ItemStack result;
     private final int power;
 
-    private int[] cookColor = new int[] { 128, 30, 23 };
-    private int[] finalColor = new int[] { 222, 49, 29 };
+    private final int[] cookColor = new int[] { 128, 30, 23 };
+    private final int[] finalColor = new int[] { 222, 49, 29 };
 
     private CauldronTypeRecipeBuilder(RecipeType<? extends CauldronTypeRecipe> type, ItemStack result, int power) {
         super(ForgeRegistries.RECIPE_TYPES.getKey(type).getPath());
