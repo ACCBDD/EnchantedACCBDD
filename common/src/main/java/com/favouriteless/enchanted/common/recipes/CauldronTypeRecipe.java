@@ -1,5 +1,6 @@
 package com.favouriteless.enchanted.common.recipes;
 
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
@@ -13,12 +14,12 @@ public abstract class CauldronTypeRecipe implements Recipe<Container> {
     protected final RecipeType<?> type;
     protected final ResourceLocation id;
 
-    private final NonNullList<ItemStack> itemsIn;
-    private final ItemStack itemOut;
-    private final int power;
+    protected final NonNullList<ItemStack> itemsIn;
+    protected final ItemStack itemOut;
+    protected final int power;
 
-    private final int[] cookColor;
-    private final int[] finalColor;
+    protected final int[] cookColor;
+    protected final int[] finalColor;
 
     public CauldronTypeRecipe(RecipeType<?> type, ResourceLocation id, NonNullList<ItemStack> itemsIn, ItemStack itemOut, int power, int[] cookColor, int[] finalColor) {
         this.type = type;
@@ -34,12 +35,10 @@ public abstract class CauldronTypeRecipe implements Recipe<Container> {
 
     /**
      * Returns true if inventory is a partial match for this recipe
-     * @param inventory
-     * @param world
      * @return isMatch
      */
     @Override
-    public boolean matches(Container inventory, Level world) {
+    public boolean matches(Container inventory, Level level) {
         if(inventory.isEmpty() || inventory.getContainerSize() > itemsIn.size())
             return false; // Too many items
 
@@ -106,12 +105,12 @@ public abstract class CauldronTypeRecipe implements Recipe<Container> {
     }
 
     @Override
-    public ItemStack getResultItem() {
+    public ItemStack getResultItem(RegistryAccess registryAccess) {
         return itemOut.copy();
     }
 
     @Override
-    public ItemStack assemble(Container inv) {
+    public ItemStack assemble(Container inv, RegistryAccess registryAccess) {
         return itemOut.copy();
     }
 
@@ -134,4 +133,5 @@ public abstract class CauldronTypeRecipe implements Recipe<Container> {
     public boolean isSpecial() {
         return true;
     }
+
 }

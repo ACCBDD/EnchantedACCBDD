@@ -2,7 +2,7 @@ package com.favouriteless.enchanted.client.render.armor;
 
 import com.favouriteless.enchanted.client.render.model.SimpleAnimatedGeoModel;
 import com.favouriteless.enchanted.common.items.EarmuffsItem;
-import software.bernie.geckolib3.renderers.geo.GeoArmorRenderer;
+import software.bernie.geckolib.renderer.GeoArmorRenderer;
 
 public class EarmuffsRenderer extends GeoArmorRenderer<EarmuffsItem> {
 

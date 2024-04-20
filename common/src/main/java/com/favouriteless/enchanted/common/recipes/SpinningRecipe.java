@@ -5,6 +5,7 @@ import com.favouriteless.enchanted.util.ItemStackHelper;
 import com.favouriteless.enchanted.util.JsonHelper;
 import com.google.gson.JsonObject;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
@@ -17,12 +18,12 @@ import net.minecraft.world.level.Level;
 
 public class SpinningRecipe implements Recipe<Container> {
 
-    private final RecipeType<?> type;
-    private final ResourceLocation id;
+    protected final RecipeType<?> type;
+    protected final ResourceLocation id;
 
-    private final NonNullList<ItemStack> itemsIn;
-    private final ItemStack result;
-    private final int power;
+    protected final NonNullList<ItemStack> itemsIn;
+    protected final ItemStack result;
+    protected final int power;
 
     public SpinningRecipe(ResourceLocation id, NonNullList<ItemStack> itemsIn, ItemStack result, int power) {
         this.type = EnchantedRecipeTypes.SPINNING.get();
@@ -35,7 +36,7 @@ public class SpinningRecipe implements Recipe<Container> {
     @Override
     public boolean matches(Container inv, Level level) {
         ItemStack mainIn = inv.getItem(0);
-        if(!mainIn.sameItem(itemsIn.get(0)) || mainIn.getCount() < itemsIn.get(0).getCount()) // If "main" input does not match
+        if(!ItemStack.isSameItem(mainIn, itemsIn.get(0)) || mainIn.getCount() < itemsIn.get(0).getCount()) // If "main" input does not match
             return false;
 
         for(int i = 1; i < itemsIn.size(); i++) {
@@ -53,8 +54,9 @@ public class SpinningRecipe implements Recipe<Container> {
         return true;
     }
 
+
     @Override
-    public ItemStack assemble(Container inv) {
+    public ItemStack assemble(Container inv, RegistryAccess registryAccess) {
         return result.copy();
     }
 
@@ -64,7 +66,7 @@ public class SpinningRecipe implements Recipe<Container> {
     }
 
     @Override
-    public ItemStack getResultItem() {
+    public ItemStack getResultItem(RegistryAccess registryAccess) {
         return result.copy();
     }
 
@@ -130,10 +132,9 @@ public class SpinningRecipe implements Recipe<Container> {
 
         @Override
         public void toNetwork(FriendlyByteBuf buffer, SpinningRecipe recipe) {
-            NonNullList<ItemStack> items = recipe.getItemsIn();
-            buffer.writeInt(items.size());
-            items.forEach(buffer::writeItem);
-            buffer.writeItem(recipe.getResultItem());
+            buffer.writeInt(recipe.itemsIn.size());
+            recipe.itemsIn.forEach(buffer::writeItem);
+            buffer.writeItem(recipe.result);
             buffer.writeInt(recipe.getPower());
         }
 

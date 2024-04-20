@@ -2,12 +2,12 @@ package com.favouriteless.enchanted.client.render.poppet;
 
 import com.favouriteless.enchanted.Enchanted;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.block.model.ItemTransforms.TransformType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.util.Mth;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 
 public class PoppetAnimation {
@@ -43,12 +43,12 @@ public class PoppetAnimation {
 
 		float rotationCurve = 10.25F * workCb*workSq - 24.95F * workSq*workSq + 25.5F * workSq*work - 13.8F * workSq + 4.0F * work;
 		float piCurve = rotationCurve * (float)Math.PI;
-		poseStack.mulPose(Vector3f.YP.rotationDegrees(900.0F * Mth.abs(Mth.sin(piCurve))));
-		poseStack.mulPose(Vector3f.XP.rotationDegrees(6.0F * Mth.cos(work * 8.0F)));
-		poseStack.mulPose(Vector3f.ZP.rotationDegrees(6.0F * Mth.cos(work * 8.0F)));
+		poseStack.mulPose(Axis.YP.rotationDegrees(900.0F * Mth.abs(Mth.sin(piCurve))));
+		poseStack.mulPose(Axis.XP.rotationDegrees(6.0F * Mth.cos(work * 8.0F)));
+		poseStack.mulPose(Axis.ZP.rotationDegrees(6.0F * Mth.cos(work * 8.0F)));
 
 		MultiBufferSource.BufferSource renderTypeBuffer = Minecraft.getInstance().renderBuffers().bufferSource();
-		minecraft.getItemRenderer().renderStatic(itemStack, TransformType.FIXED, 15728880, OverlayTexture.NO_OVERLAY, poseStack, renderTypeBuffer, 0);
+		minecraft.getItemRenderer().renderStatic(itemStack, ItemDisplayContext.FIXED, 15728880, OverlayTexture.NO_OVERLAY, poseStack, renderTypeBuffer, minecraft.level, 0);
 
 		poseStack.popPose();
 		renderTypeBuffer.endBatch();

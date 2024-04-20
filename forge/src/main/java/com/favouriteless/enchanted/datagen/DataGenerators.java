@@ -31,6 +31,7 @@ public class DataGenerators {
 		gen.addProvider(true, new EntityTypeTagProvider(output, provider, fileHelper));
 		gen.addProvider(true, new MobEffectTagProvider(output, provider, fileHelper));
 		gen.addProvider(true, new BiomeTagProvider(output, provider, fileHelper));
+		gen.addProvider(true, new DamageTypeTagProvider(output, provider, fileHelper));
 
 		gen.addProvider(true, new BlockstateProvider(output, fileHelper));
 		gen.addProvider(true, new ItemModelProvider(output, fileHelper));

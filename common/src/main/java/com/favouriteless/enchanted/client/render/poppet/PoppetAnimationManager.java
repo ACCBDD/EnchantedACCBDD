@@ -3,9 +3,9 @@ package com.favouriteless.enchanted.client.render.poppet;
 import com.favouriteless.enchanted.common.poppet.PoppetHelper.PoppetResult;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
 import net.minecraft.Util;
 import net.minecraft.world.item.ItemStack;
+import org.joml.Vector3f;
 
 import java.util.ArrayList;
 import java.util.List;

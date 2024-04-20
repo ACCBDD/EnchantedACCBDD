@@ -5,6 +5,7 @@ import com.favouriteless.enchanted.common.init.registry.EnchantedItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -75,7 +76,7 @@ public class Broomstick extends Entity {
         if(isControlledByLocalInstance()) {
             //setPacketCoordinates(getX(), getY(), getZ());
 
-            if(level.isClientSide) {
+            if(level().isClientSide) {
                 deltaRotX *= 0.8F;
                 deltaRotY *= 0.8F;
                 BroomstickEntityClientHandler.controlBroom(this);
@@ -172,7 +173,7 @@ public class Broomstick extends Entity {
             return InteractionResult.SUCCESS;
         }
         else {
-            if(!level.isClientSide) {
+            if(!level().isClientSide) {
                 return pPlayer.startRiding(this) ? InteractionResult.CONSUME : InteractionResult.PASS;
             }
             else {
@@ -202,16 +203,14 @@ public class Broomstick extends Entity {
     }
 
     @Override
-    @NotNull
-    public Packet<?> getAddEntityPacket() {
+    public Packet<ClientGamePacketListener> getAddEntityPacket() {
         return new ClientboundAddEntityPacket(this);
     }
 
     @Override
-    public void positionRider(@NotNull Entity passenger) {
+    public void positionRider(@NotNull Entity passenger, Entity.MoveFunction moveFunction) {
         if(hasPassenger(passenger)) {
-            passenger.setPos(getX(), getY() + getPassengersRidingOffset(), getZ());
-
+            moveFunction.accept(passenger, getX(), getY() + getPassengersRidingOffset(), getZ());
             clampRotation(passenger);
         }
     }
@@ -222,15 +221,17 @@ public class Broomstick extends Entity {
             return ((Player) entity).isLocalPlayer();
         }
         else {
-            return !level.isClientSide;
+            return !level().isClientSide;
         }
     }
 
     @Nullable
     @Override
-    public Entity getControllingPassenger() {
+    public LivingEntity getControllingPassenger() {
         List<Entity> list = getPassengers();
-        return list.isEmpty() ? null : list.get(0);
+        if(list.isEmpty())
+            return null;
+        return list.get(0) instanceof LivingEntity le ? le : null;
     }
 
     @Override
@@ -270,14 +271,14 @@ public class Broomstick extends Entity {
         if(isInvulnerableTo(source)) {
             return false;
         }
-        else if(!level.isClientSide && !isRemoved()) {
+        else if(!level().isClientSide && !isRemoved()) {
             setHurtDir(-getHurtDir());
             setHurtTime(10);
             setDamage(getDamage() + pAmount * 10.0F);
             markHurt();
             boolean isSurvivalPlayer = source.getEntity() instanceof Player && ((Player) source.getEntity()).getAbilities().instabuild;
             if(isSurvivalPlayer || getDamage() > 40.0F) {
-                if(!isSurvivalPlayer && level.getGameRules().getBoolean(GameRules.RULE_DOENTITYDROPS)) {
+                if(!isSurvivalPlayer && level().getGameRules().getBoolean(GameRules.RULE_DOENTITYDROPS)) {
                     spawnAtLocation(EnchantedItems.ENCHANTED_BROOMSTICK.get());
                 }
 
@@ -337,7 +338,7 @@ public class Broomstick extends Entity {
      * Setups the entity to do the hurt animation. Only used by packets in multiplayer.
      */
     @Override
-    public void animateHurt() {
+    public void animateHurt(float yaw) {
         setHurtDir(-getHurtDir());
         setHurtTime(10);
         setDamage(getDamage() * 11.0F);

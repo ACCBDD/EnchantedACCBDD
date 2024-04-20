@@ -3,14 +3,15 @@ package com.favouriteless.enchanted.client.render.blockentity;
 import com.favouriteless.enchanted.common.blocks.entity.PoppetShelfBlockEntity;
 import com.favouriteless.enchanted.common.poppet.PoppetShelfInventory;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.block.model.ItemTransforms.TransformType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider.Context;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.world.item.ItemDisplayContext;
+import org.joml.Vector3f;
 
 public class PoppetShelfRenderer implements BlockEntityRenderer<PoppetShelfBlockEntity> {
 
@@ -32,10 +33,10 @@ public class PoppetShelfRenderer implements BlockEntityRenderer<PoppetShelfBlock
             ItemRenderer renderer = Minecraft.getInstance().getItemRenderer();
             poseStack.pushPose();
             poseStack.translate(ITEM_POS[i].x(), ITEM_POS[i].y(), ITEM_POS[i].z());
-            poseStack.mulPose(Vector3f.XP.rotationDegrees(90));
-            poseStack.mulPose(Vector3f.ZP.rotationDegrees(90 * i));
+            poseStack.mulPose(Axis.XP.rotationDegrees(90));
+            poseStack.mulPose(Axis.ZP.rotationDegrees(90 * i));
             poseStack.scale(0.3F, 0.3F, 0.3F);
-            renderer.renderStatic(inventory.get(i), TransformType.FIXED, 15728880, OverlayTexture.NO_OVERLAY, poseStack, buffer, 0);
+            renderer.renderStatic(inventory.get(i), ItemDisplayContext.FIXED, 15728880, OverlayTexture.NO_OVERLAY, poseStack, buffer, blockEntity.getLevel(), 0);
             poseStack.popPose();
         }
     }

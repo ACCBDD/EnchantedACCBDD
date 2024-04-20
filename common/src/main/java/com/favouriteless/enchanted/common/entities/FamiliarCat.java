@@ -5,6 +5,7 @@ import com.favouriteless.enchanted.api.familiars.FamiliarHelper;
 import com.favouriteless.enchanted.api.familiars.FamiliarSavedData;
 import com.favouriteless.enchanted.api.familiars.IFamiliarCapability.IFamiliarEntry;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
@@ -25,10 +26,10 @@ public class FamiliarCat extends Cat {
 	@Override
 	public InteractionResult mobInteract(Player player, InteractionHand hand) {
 		if(player.isCrouching() && hand == InteractionHand.MAIN_HAND) {
-			if(!level.isClientSide) {
+			if(!level().isClientSide) {
 				if(player.getUUID().equals(getOwnerUUID())) {
 					FamiliarHelper.dismiss(this);
-					return InteractionResult.sidedSuccess(level.isClientSide);
+					return InteractionResult.sidedSuccess(level().isClientSide);
 				}
 			}
 		}
@@ -38,9 +39,9 @@ public class FamiliarCat extends Cat {
 	@Override
 	public void tick() {
 		super.tick();
-		if(!level.isClientSide) {
+		if(!level().isClientSide) {
 
-			IFamiliarEntry entry = FamiliarSavedData.get(level).getEntry(getOwnerUUID());
+			IFamiliarEntry entry = FamiliarSavedData.get(level()).getEntry(getOwnerUUID());
 			if(entry == null || !getUUID().equals(entry.getUUID())) {
 				discard();
 				Enchanted.LOG.info(String.format("Found familiar with non-matching UUID for %s, discarding.", getOwnerUUID()));
@@ -51,8 +52,8 @@ public class FamiliarCat extends Cat {
 	@Override
 	public void addAdditionalSaveData(CompoundTag nbt) {
 		super.addAdditionalSaveData(nbt);
-		if(!level.isClientSide) {
-			FamiliarSavedData data = FamiliarSavedData.get(level);
+		if(!level().isClientSide) {
+			FamiliarSavedData data = FamiliarSavedData.get(level());
 			IFamiliarEntry entry = data.getEntry(getOwnerUUID());
 			if(entry != null) {
 				entry.setNbt(nbt);
@@ -64,7 +65,7 @@ public class FamiliarCat extends Cat {
 	@Override
 	public void die(DamageSource cause) {
 		super.die(cause);
-		if(!level.isClientSide)
+		if(!level().isClientSide)
 			FamiliarHelper.dismiss(this);
 	}
 
@@ -79,11 +80,10 @@ public class FamiliarCat extends Cat {
 
 	@Override
 	public boolean isInvulnerableTo(DamageSource source) {
-		return source == DamageSource.LAVA ||
-				source == DamageSource.IN_FIRE ||
-				source == DamageSource.ON_FIRE ||
-				source == DamageSource.FALL ||
-				source == DamageSource.DROWN;
+		return source.is(DamageTypeTags.IS_FIRE) ||
+				source.is(DamageTypeTags.IS_FALL) ||
+				source.is(DamageTypeTags.IS_DROWNING) ||
+				super.isInvulnerableTo(source);
 	}
 
 }

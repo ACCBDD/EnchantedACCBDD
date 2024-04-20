@@ -3,6 +3,7 @@ package com.favouriteless.enchanted.common.recipes;
 import com.favouriteless.enchanted.common.init.registry.EnchantedRecipeTypes;
 import com.favouriteless.enchanted.util.ItemStackHelper;
 import com.google.gson.JsonObject;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
@@ -17,11 +18,11 @@ import org.jetbrains.annotations.NotNull;
 
 public class ByproductRecipe implements Recipe<Container> {
 
-    private final RecipeType<?> type;
-    private final ResourceLocation id;
+    protected final RecipeType<?> type;
+    protected final ResourceLocation id;
 
-    private final Ingredient ingredient;
-    private final ItemStack result;
+    protected final Ingredient ingredient;
+    protected final ItemStack result;
 
     public ByproductRecipe(ResourceLocation id, Ingredient ingredient, ItemStack result) {
         this.type = EnchantedRecipeTypes.BYPRODUCT.get();
@@ -40,7 +41,7 @@ public class ByproductRecipe implements Recipe<Container> {
     }
 
     @Override
-    public ItemStack assemble(Container inv) {
+    public ItemStack assemble(Container inv, RegistryAccess registryAccess) {
         return result.copy();
     }
 
@@ -50,7 +51,7 @@ public class ByproductRecipe implements Recipe<Container> {
     }
 
     @Override
-    public ItemStack getResultItem() {
+    public ItemStack getResultItem(RegistryAccess registryAccess) {
         return result.copy();
     }
 
@@ -79,26 +80,26 @@ public class ByproductRecipe implements Recipe<Container> {
 
         @Override
         @NotNull
-        public ByproductRecipe fromJson(@NotNull ResourceLocation recipeId, @NotNull JsonObject json) {
+        public ByproductRecipe fromJson(@NotNull ResourceLocation id, @NotNull JsonObject json) {
             Ingredient ingredient = Ingredient.fromJson(GsonHelper.getAsJsonObject(json, "ingredient"));
             ItemStack result = ItemStackHelper.fromJson(GsonHelper.getAsJsonObject(json, "result"), true);
 
-            return new ByproductRecipe(recipeId, ingredient, result);
+            return new ByproductRecipe(id, ingredient, result);
         }
 
         @Override
         @NotNull
-        public ByproductRecipe fromNetwork(@NotNull ResourceLocation recipeId, @NotNull FriendlyByteBuf buffer) {
+        public ByproductRecipe fromNetwork(@NotNull ResourceLocation id, @NotNull FriendlyByteBuf buffer) {
             Ingredient ingredient = Ingredient.fromNetwork(buffer);
             ItemStack result = buffer.readItem();
 
-            return new ByproductRecipe(recipeId, ingredient, result);
+            return new ByproductRecipe(id, ingredient, result);
         }
 
         @Override
         public void toNetwork(@NotNull FriendlyByteBuf buffer, ByproductRecipe recipe) {
             recipe.ingredient.toNetwork(buffer);
-            buffer.writeItem(recipe.getResultItem());
+            buffer.writeItem(recipe.result);
         }
 
     }

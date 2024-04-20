@@ -1,8 +1,6 @@
 package com.favouriteless.enchanted.platform.services;
 
 import com.favouriteless.enchanted.Enchanted;
-import com.favouriteless.enchanted.common.init.registry.EnchantedBlocks;
-import net.minecraft.core.NonNullList;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.FriendlyByteBuf;
@@ -10,7 +8,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
@@ -34,7 +31,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.BiConsumer;
 import java.util.function.Supplier;
 
 public class ForgeCommonRegistryHelper implements ICommonRegistryHelper {
@@ -55,20 +51,6 @@ public class ForgeCommonRegistryHelper implements ICommonRegistryHelper {
 	@Override
 	public void register(ResourceLocation id, SimpleJsonResourceReloadListener loader) {
 		DATA_LOADERS.dataLoaders.add(loader);
-	}
-
-	@Override
-	public DamageSource getDamageSource(String id, boolean bypassArmour, boolean bypassMagic, boolean bypassInvul, boolean isMagic) {
-		DamageSource source = new DamageSource(id);
-		if(bypassArmour)
-			source.bypassArmor();
-		if(bypassMagic)
-			source.bypassMagic();
-		if(bypassInvul)
-			source.bypassInvul();
-		if(isMagic)
-			source.setMagic();
-		return source;
 	}
 
 	@Override

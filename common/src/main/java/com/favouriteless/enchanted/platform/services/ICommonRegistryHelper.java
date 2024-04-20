@@ -5,7 +5,6 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
 import net.minecraft.sounds.SoundEvent;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
@@ -16,9 +15,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import org.apache.commons.lang3.function.TriFunction;
 
-import java.util.List;
-import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public interface ICommonRegistryHelper {
@@ -56,20 +52,6 @@ public interface ICommonRegistryHelper {
      * @param loader An instance of the ReloadListener.
      */
     void register(ResourceLocation id, SimpleJsonResourceReloadListener loader);
-
-    /**
-     * Create a new {@link DamageSource}, necessary because Forge transforms constructor to public, but Fabric does not
-     * and requires a mixin.
-     *
-     * @param id {@link String} ID of the damage source.
-     * @param bypassArmour source should bypass armour.
-     * @param bypassMagic source should bypass potions/enchantments.
-     * @param bypassInvul source should bypass invulnerability.
-     * @param isMagic source is magic.
-     *
-     * @return A new instance of {@link DamageSource} with the provided properties.
-     */
-    DamageSource getDamageSource(String id, boolean bypassArmour, boolean bypassMagic, boolean bypassInvul, boolean isMagic);
 
     /**
      * Create a new {@link SoundType}, this is necessary because Forge's deferred registers cause crashes when the

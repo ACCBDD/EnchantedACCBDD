@@ -2,12 +2,12 @@ package com.favouriteless.enchanted.client.render.entity;
 
 
 import com.favouriteless.enchanted.Enchanted;
-import com.favouriteless.enchanted.client.render.model.entity.BroomstickModel;
 import com.favouriteless.enchanted.client.render.model.ModelLayerLocations;
+import com.favouriteless.enchanted.client.render.model.entity.BroomstickModel;
 import com.favouriteless.enchanted.common.entities.Broomstick;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context;
@@ -30,17 +30,15 @@ public class BroomstickRenderer extends EntityRenderer<Broomstick> {
 		poseStack.pushPose();
 
 		poseStack.translate(0.0D, 0.7D, 0.0D);
-		poseStack.mulPose(Vector3f.YP.rotationDegrees(180.0F - yaw));
-		poseStack.mulPose(Vector3f.XP.rotationDegrees(180.0F - Mth.lerp(partialTicks, broomstick.xRotO, broomstick.getXRot())));
+		poseStack.mulPose(Axis.YP.rotationDegrees(180.0F - yaw));
+		poseStack.mulPose(Axis.XP.rotationDegrees(180.0F - Mth.lerp(partialTicks, broomstick.xRotO, broomstick.getXRot())));
 
 		float f = broomstick.getHurtTime() - partialTicks;
 		float f1 = broomstick.getDamage() - partialTicks;
-		if (f1 < 0.0F) {
+		if (f1 < 0.0F)
 			f1 = 0.0F;
-		}
-		if (f > 0.0F) {
-			poseStack.mulPose(Vector3f.XP.rotationDegrees(Mth.sin(f) * f * f1 / 10.0F * (float)broomstick.getHurtDir()));
-		}
+		if (f > 0.0F)
+			poseStack.mulPose(Axis.XP.rotationDegrees(Mth.sin(f) * f * f1 / 10.0F * (float)broomstick.getHurtDir()));
 
 		VertexConsumer ivertexbuilder = buffer.getBuffer(this.model.renderType(this.getTextureLocation(broomstick)));
 		this.model.renderToBuffer(poseStack, ivertexbuilder, packedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);

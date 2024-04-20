@@ -4,6 +4,7 @@ import com.favouriteless.enchanted.common.init.registry.EnchantedRecipeTypes;
 import com.favouriteless.enchanted.util.JsonHelper;
 import com.google.gson.JsonObject;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
@@ -20,9 +21,9 @@ public class DistillingRecipe implements Recipe<Container> {
     protected final RecipeType<?> type;
     protected final ResourceLocation id;
 
-    private final NonNullList<ItemStack> itemsIn;
-    private final NonNullList<ItemStack> itemsOut;
-    private final int cookTime;
+    protected final NonNullList<ItemStack> itemsIn;
+    protected final NonNullList<ItemStack> itemsOut;
+    protected final int cookTime;
 
     public DistillingRecipe(ResourceLocation id, NonNullList<ItemStack> itemsIn, NonNullList<ItemStack> itemsOut, int cookTime) {
         this.type = EnchantedRecipeTypes.DISTILLING.get();
@@ -78,7 +79,7 @@ public class DistillingRecipe implements Recipe<Container> {
      */
     @Override
     @Deprecated
-    public ItemStack assemble(Container inv) {
+    public ItemStack assemble(Container inv, RegistryAccess registryAccess) {
         return null; // Has multiple outputs, don't use this.
     }
 
@@ -92,7 +93,7 @@ public class DistillingRecipe implements Recipe<Container> {
      */
     @Override
     @Deprecated
-    public ItemStack getResultItem() {
+    public ItemStack getResultItem(RegistryAccess registryAccess) {
         return ItemStack.EMPTY;
     }
 
@@ -123,17 +124,17 @@ public class DistillingRecipe implements Recipe<Container> {
 
         @Override
         @NotNull
-        public DistillingRecipe fromJson(@NotNull ResourceLocation recipeId, @NotNull JsonObject json) {
+        public DistillingRecipe fromJson(@NotNull ResourceLocation id, @NotNull JsonObject json) {
             NonNullList<ItemStack> itemsIn = JsonHelper.readItemStackList(GsonHelper.getAsJsonArray(json, "ingredients"), true);
             NonNullList<ItemStack> itemsOut = JsonHelper.readItemStackList(GsonHelper.getAsJsonArray(json, "results"), true);
             int cookTime = GsonHelper.getAsInt(json, "cookTime", 200);
 
-            return new DistillingRecipe(recipeId, itemsIn, itemsOut, cookTime);
+            return new DistillingRecipe(id, itemsIn, itemsOut, cookTime);
         }
 
         @Override
         @NotNull
-        public DistillingRecipe fromNetwork(@NotNull ResourceLocation recipeId, FriendlyByteBuf buffer) {
+        public DistillingRecipe fromNetwork(@NotNull ResourceLocation id, FriendlyByteBuf buffer) {
             int inSize = buffer.readInt();
             NonNullList<ItemStack> itemsIn = NonNullList.create();
             for (int x = 0; x < inSize; ++x)
@@ -146,17 +147,17 @@ public class DistillingRecipe implements Recipe<Container> {
 
             int cookTime = buffer.readInt();
 
-            return new DistillingRecipe(recipeId, itemsIn, itemsOut, cookTime);
+            return new DistillingRecipe(id, itemsIn, itemsOut, cookTime);
         }
 
         @Override
         public void toNetwork(FriendlyByteBuf buffer, DistillingRecipe recipe) {
-            buffer.writeInt(recipe.getItemsIn().size());
-            for (ItemStack stack : recipe.getItemsIn())
+            buffer.writeInt(recipe.itemsIn.size());
+            for (ItemStack stack : recipe.itemsIn)
                 buffer.writeItem(stack);
 
-            buffer.writeInt(recipe.getItemsOut().size());
-            for (ItemStack stack : recipe.getItemsOut())
+            buffer.writeInt(recipe.itemsOut.size());
+            for (ItemStack stack : recipe.itemsOut)
                 buffer.writeItem(stack);
 
             buffer.writeInt(recipe.getCookTime());

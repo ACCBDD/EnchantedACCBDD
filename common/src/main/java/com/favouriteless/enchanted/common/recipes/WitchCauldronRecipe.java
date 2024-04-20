@@ -29,7 +29,7 @@ public class WitchCauldronRecipe extends CauldronTypeRecipe {
     public static class Serializer implements RecipeSerializer<WitchCauldronRecipe> {
 
         @Override
-        public WitchCauldronRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
+        public WitchCauldronRecipe fromJson(ResourceLocation id, JsonObject json) {
 
             NonNullList<ItemStack> itemsIn = JsonHelper.readItemStackList(GsonHelper.getAsJsonArray(json, "ingredients"), true);
             ItemStack itemOut = ItemStackHelper.fromJson(GsonHelper.getAsJsonObject(json, "result"), true);
@@ -37,12 +37,12 @@ public class WitchCauldronRecipe extends CauldronTypeRecipe {
             int[] cookingColour = JsonHelper.readRgb(GsonHelper.getAsJsonArray(json, "cookingColor"));
             int[] finalColour = JsonHelper.readRgb(GsonHelper.getAsJsonArray(json, "finalColor"));
 
-            return new WitchCauldronRecipe(recipeId, itemsIn, itemOut, power, cookingColour, finalColour);
+            return new WitchCauldronRecipe(id, itemsIn, itemOut, power, cookingColour, finalColour);
         }
 
         @Nullable
         @Override
-        public WitchCauldronRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
+        public WitchCauldronRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buffer) {
 
             int inSize = buffer.readInt();
             NonNullList<ItemStack> itemsIn = NonNullList.create();
@@ -54,17 +54,16 @@ public class WitchCauldronRecipe extends CauldronTypeRecipe {
             int[] cookingColour = new int[] {(int)buffer.readShort(), (int)buffer.readShort(), (int)buffer.readShort() };
             int[] finalColour = new int[] {(int)buffer.readShort(), (int)buffer.readShort(), (int)buffer.readShort() };
 
-            return new WitchCauldronRecipe(recipeId, itemsIn, itemOut, power, cookingColour, finalColour);
+            return new WitchCauldronRecipe(id, itemsIn, itemOut, power, cookingColour, finalColour);
         }
 
         @Override
         public void toNetwork(FriendlyByteBuf buffer, WitchCauldronRecipe recipe) {
-
-            buffer.writeInt(recipe.getItemsIn().size());
-            for (ItemStack item : recipe.getItemsIn()) {
+            buffer.writeInt(recipe.itemsIn.size());
+            for (ItemStack item : recipe.itemsIn) {
                 buffer.writeItem(item);
             }
-            buffer.writeItem(recipe.getResultItem());
+            buffer.writeItem(recipe.itemOut);
             buffer.writeInt(recipe.getPower());
             buffer.writeShort(recipe.getCookRed());
             buffer.writeShort(recipe.getCookGreen());
