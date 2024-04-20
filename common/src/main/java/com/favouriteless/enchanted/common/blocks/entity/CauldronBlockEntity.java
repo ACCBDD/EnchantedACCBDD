@@ -15,7 +15,7 @@ import com.favouriteless.enchanted.util.PlayerInventoryHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
@@ -190,7 +190,7 @@ public abstract class CauldronBlockEntity<T extends CauldronTypeRecipe> extends 
 	}
 
 	private void setComplete() {
-		itemOut = potentialRecipes.get(0).getResultItem().copy();
+		itemOut = potentialRecipes.get(0).getResultItem(level.registryAccess()).copy();
 		resetValues();
 		isComplete = true;
 		recalculateTargetColour();
@@ -203,7 +203,7 @@ public abstract class CauldronBlockEntity<T extends CauldronTypeRecipe> extends 
 				level.playSound(null, worldPosition, SoundEvents.BUCKET_EMPTY, SoundSource.PLAYERS, 1.0F, 1.0F);
 			}
 			else
-				fluidAmount -= fluidCapacity / potentialRecipes.get(0).getResultItem().getCount() + 1;
+				fluidAmount -= fluidCapacity / potentialRecipes.get(0).getResultItem(level.registryAccess()).getCount() + 1;
 
 			if(!itemOut.isEmpty()) {
 				if(player != null)
@@ -399,7 +399,7 @@ public abstract class CauldronBlockEntity<T extends CauldronTypeRecipe> extends 
 		ContainerHelper.saveAllItems(nbt, inventory);
 		if(itemOut != ItemStack.EMPTY) {
 			CompoundTag itemNbt = new CompoundTag();
-			itemNbt.putString("item", Registry.ITEM.getKey(itemOut.getItem()).toString());
+			itemNbt.putString("item", BuiltInRegistries.ITEM.getKey(itemOut.getItem()).toString());
 			itemNbt.putInt("count", itemOut.getCount());
 			nbt.put("itemOut", itemNbt);
 		}
@@ -424,7 +424,7 @@ public abstract class CauldronBlockEntity<T extends CauldronTypeRecipe> extends 
 
 			if(nbt.contains("itemOut")) {
 				CompoundTag itemNbt = (CompoundTag)nbt.get("itemOut");
-				itemOut = new ItemStack(Registry.ITEM.get(new ResourceLocation(itemNbt.getString("item"))), itemNbt.getInt("count"));
+				itemOut = new ItemStack(BuiltInRegistries.ITEM.get(new ResourceLocation(itemNbt.getString("item"))), itemNbt.getInt("count"));
 			}
 		}
 		else if(nbt.contains("hasItems"))

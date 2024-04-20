@@ -7,7 +7,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
@@ -35,7 +35,7 @@ public class AltarUpgradeReloadListener extends SimpleJsonResourceReloadListener
                     if(element.isJsonObject()) {
                         JsonObject upgradeObject = (JsonObject)element;
 
-                        Block block = Registry.BLOCK.get(new ResourceLocation(GsonHelper.getAsString(upgradeObject, "block")));
+                        Block block = BuiltInRegistries.BLOCK.get(new ResourceLocation(GsonHelper.getAsString(upgradeObject, "block")));
                         float rechargeMultiplier = GsonHelper.getAsFloat(upgradeObject, "rechargeMultiplier");
                         float powerMultiplier = GsonHelper.getAsFloat(upgradeObject, "powerMultiplier");
                         int priority = GsonHelper.getAsInt(upgradeObject, "priority");

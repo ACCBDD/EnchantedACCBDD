@@ -10,6 +10,7 @@ import com.favouriteless.enchanted.common.init.registry.EnchantedBlocks;
 import com.favouriteless.enchanted.common.init.registry.EnchantedItems;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundSoundPacket;
@@ -52,7 +53,7 @@ public class TaglockItem extends Item {
                 failChance += 4;
             }
             if (Enchanted.RANDOM.nextInt(10) >= failChance) {
-                if(!player.level.isClientSide) {
+                if(!player.level().isClientSide) {
                     player.displayClientMessage(Component.literal("Taglock attempt failed").withStyle(ChatFormatting.RED), false);
                     ((ServerPlayer) target).displayClientMessage(Component.literal(player.getDisplayName().getString() + " has tried to taglock you").withStyle(ChatFormatting.RED), false);
                 }
@@ -122,14 +123,14 @@ public class TaglockItem extends Item {
             newStack.setTag(nbt);
 
             if (!player.getInventory().add(newStack)) {
-                ItemEntity itemEntity = new ItemEntity(player.level, player.getX(), player.getY(0.5), player.getZ(), newStack);
+                ItemEntity itemEntity = new ItemEntity(player.level(), player.getX(), player.getY(0.5), player.getZ(), newStack);
                 itemEntity.setNoPickUpDelay();
-                itemEntity.setOwner(player.getUUID());
-                player.level.addFreshEntity(itemEntity);
+                itemEntity.setThrower(player.getUUID());
+                player.level().addFreshEntity(itemEntity);
             }
 
             // Send sound packet to player
-            player.connection.send(new ClientboundSoundPacket(SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.MASTER, player.getX(), player.getY(), player.getZ(), 1.0F, 1.0F, Enchanted.RANDOM.nextLong()));
+            player.connection.send(new ClientboundSoundPacket(BuiltInRegistries.SOUND_EVENT.wrapAsHolder(SoundEvents.EXPERIENCE_ORB_PICKUP), SoundSource.MASTER, player.getX(), player.getY(), player.getZ(), 1.0F, 1.0F, Enchanted.RANDOM.nextLong()));
             stack.shrink(1);
         }
     }

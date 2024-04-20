@@ -3,7 +3,7 @@ package com.favouriteless.enchanted.client.screens;
 import com.favouriteless.enchanted.Enchanted;
 import com.favouriteless.enchanted.common.menus.PoppetShelfMenu;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
@@ -25,26 +25,26 @@ public class PoppetShelfScreen extends AbstractContainerScreen<PoppetShelfMenu> 
     }
 
     @Override
-    public void render(PoseStack poseStack, int xMouse, int yMouse, float partialTicks) {
-        this.renderBackground(poseStack);
-        super.render(poseStack, xMouse, yMouse, partialTicks);
-        this.renderTooltip(poseStack, xMouse, yMouse);
+    public void render(GuiGraphics gui, int xMouse, int yMouse, float partialTicks) {
+        this.renderBackground(gui);
+        super.render(gui, xMouse, yMouse, partialTicks);
+        this.renderTooltip(gui, xMouse, yMouse);
     }
 
     @Override
-    protected void renderBg(PoseStack poseStack, float partialTicks, int x, int y) {
+    protected void renderBg(GuiGraphics gui, float partialTicks, int x, int y) {
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.setShaderTexture(0, TEXTURE);
 
         int edgeSpacingX = (this.width - this.imageWidth) / 2;
         int edgeSpacingY = (this.height - this.imageHeight) / 2;
-        this.blit(poseStack, edgeSpacingX, edgeSpacingY, 0, 0, this.imageWidth, this.imageHeight);
+        gui.blit(TEXTURE, edgeSpacingX, edgeSpacingY, 0, 0, this.imageWidth, this.imageHeight);
     }
 
     @Override
-    protected void renderLabels(PoseStack poseStack, int x, int y) {
-        font.draw(poseStack, title, (float)(imageWidth / 2 - font.width(title) / 2), (float)titleLabelY, Color.DARK_GRAY.getRGB());
+    protected void renderLabels(GuiGraphics gui, int x, int y) {
+        gui.drawString(font, title, (imageWidth / 2 - font.width(title) / 2), titleLabelY, Color.DARK_GRAY.getRGB());
     }
 
 }

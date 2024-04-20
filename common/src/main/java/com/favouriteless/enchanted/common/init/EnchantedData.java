@@ -6,7 +6,8 @@ import com.favouriteless.enchanted.common.init.registry.PowerProviderRegistry;
 import com.favouriteless.enchanted.common.reloadlisteners.altar.AltarUpgradeReloadListener;
 import com.favouriteless.enchanted.common.reloadlisteners.altar.PowerProviderReloadListener;
 import com.favouriteless.enchanted.platform.CommonServices;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
 import net.minecraft.tags.TagKey;
@@ -32,7 +33,7 @@ public class EnchantedData {
     }
 
     private static Block createBlockKey(ResourceLocation key) {
-        Block block = Registry.BLOCK.get(key);
+        Block block = BuiltInRegistries.BLOCK.get(key);
         if(block != Blocks.AIR)
             return block;
         else
@@ -40,7 +41,7 @@ public class EnchantedData {
     }
 
     private static TagKey<Block> createBlockTagKey(ResourceLocation key) {
-        return TagKey.create(Registry.BLOCK_REGISTRY, key);
+        return TagKey.create(Registries.BLOCK, key);
     }
 
     public static void load() {} // Method which exists purely to load the class.

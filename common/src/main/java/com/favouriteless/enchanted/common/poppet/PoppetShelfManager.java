@@ -36,8 +36,8 @@ public class PoppetShelfManager {
 	}
 
 	public static List<PoppetEntry> getEntriesFor(Player player) {
-		if(!player.level.isClientSide) {
-			PoppetShelfSavedData data = PoppetShelfSavedData.get(player.level);
+		if(!player.level().isClientSide) {
+			PoppetShelfSavedData data = PoppetShelfSavedData.get(player.level());
 			if(data.PLAYER_POPPETS.containsKey(player.getUUID())) {
 				List<PoppetEntry> list = data.PLAYER_POPPETS.get(player.getUUID());
 				if(list != null)

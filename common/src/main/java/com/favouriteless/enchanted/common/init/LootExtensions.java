@@ -9,7 +9,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.storage.loot.LootContext;
+import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 
@@ -42,23 +42,23 @@ public class LootExtensions {
 
     // ----------------------------------------- IMPLEMENTATION DETAILS BELOW -----------------------------------------
 
-    public static ObjectArrayList<ItemStack> tryRollBlock(BlockState state, LootContext.Builder builder) {
+    public static ObjectArrayList<ItemStack> tryRollBlock(BlockState state, LootParams.Builder builder) {
         ObjectArrayList<ItemStack> out = new ObjectArrayList<>();
         for(LootExtension extension : blockLootExtensions) {
             if(extension.canApply(state.getBlock())) {
-                LootContext context = builder.withParameter(LootContextParams.BLOCK_STATE, state).create(LootContextParamSets.BLOCK);
-                ServerLevel level = context.getLevel();
-                out.addAll(level.getServer().getLootTables().get(extension.getTable()).getRandomItems(context));
+                LootParams params = builder.withParameter(LootContextParams.BLOCK_STATE, state).create(LootContextParamSets.BLOCK);
+                ServerLevel level = params.getLevel();
+                out.addAll(level.getServer().getLootData().getLootTable(extension.getTable()).getRandomItems(params));
             }
         }
         return out;
     }
 
-    public static void tryRollEntity(LivingEntity entity, LootContext.Builder builder) {
+    public static void tryRollEntity(LivingEntity entity, LootParams.Builder builder) {
         for(LootExtension extension : LootExtensions.entityLootExtensions) {
             if(extension.canApply(entity.getType())) {
-                LootContext context = builder.create(LootContextParamSets.ENTITY);
-                context.getLevel().getServer().getLootTables().get(extension.getTable()).getRandomItems(context, entity::spawnAtLocation);
+                LootParams params = builder.create(LootContextParamSets.ENTITY);
+                params.getLevel().getServer().getLootData().getLootTable(extension.getTable()).getRandomItems(params, entity::spawnAtLocation);
             }
         }
     }

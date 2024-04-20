@@ -35,10 +35,10 @@ public class RiteTranspositionPlayer extends AbstractRite {
             ServerLevel targetLevel = (ServerLevel)WaystoneHelper.getLevel(level, stack);
 
             if(targetLevel != null && targetPos != null) {
-                spawnParticles((ServerLevel)caster.level, caster.getX(), caster.getY(), caster.getZ());
+                spawnParticles((ServerLevel)caster.level(), caster.getX(), caster.getY(), caster.getZ());
 
                 level.playSound(null, caster.position().x, caster.position().y, caster.position().z, SoundEvents.ENDERMAN_TELEPORT, SoundSource.MASTER, 1.0F, 1.0F);
-                if(caster.level != targetLevel) {
+                if(caster.level() != targetLevel) {
                     caster.changeDimension(targetLevel);
                 }
                 caster.teleportTo(targetPos.getX() + 0.5D, targetPos.getY() + 0.5D, targetPos.getZ() + 0.5D);

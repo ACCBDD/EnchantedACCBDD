@@ -2,7 +2,6 @@ package com.favouriteless.enchanted;
 
 import com.favouriteless.enchanted.common.CommonConfig;
 import com.favouriteless.enchanted.common.CommonEventsFabric;
-import com.favouriteless.enchanted.common.entities.Ent;
 import com.favouriteless.enchanted.common.entities.FamiliarCat;
 import com.favouriteless.enchanted.common.entities.Mandrake;
 import com.favouriteless.enchanted.common.init.registry.EnchantedBlocks;

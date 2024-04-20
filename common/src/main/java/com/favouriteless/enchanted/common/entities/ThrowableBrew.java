@@ -30,11 +30,11 @@ public class ThrowableBrew extends ThrowableItemProjectile {
 	@Override
 	protected void onHitBlock(BlockHitResult result) {
 		super.onHitBlock(result);
-		if (!this.level.isClientSide) {
+		if (!level().isClientSide) {
 			ItemStack itemstack = this.getItem();
 			if(itemstack.getItem() instanceof ThrowableBrewItem item) {
-				item.applyEffect(getOwner(), level, result.getLocation());
-				this.level.levelEvent(LevelEvent.PARTICLES_SPELL_POTION_SPLASH, this.blockPosition(), item.getColour());
+				item.applyEffect(getOwner(), level(), result.getLocation());
+				level().levelEvent(LevelEvent.PARTICLES_SPELL_POTION_SPLASH, this.blockPosition(), item.getColour());
 			}
 			discard();
 		}
@@ -43,11 +43,11 @@ public class ThrowableBrew extends ThrowableItemProjectile {
 	@Override
 	protected void onHitEntity(EntityHitResult result) {
 		super.onHitEntity(result);
-		if (!this.level.isClientSide) {
+		if (!level().isClientSide) {
 			ItemStack itemstack = this.getItem();
 			if(itemstack.getItem() instanceof ThrowableBrewItem item) {
-				item.applyEffect(getOwner(), level, result.getLocation());
-				this.level.levelEvent(LevelEvent.PARTICLES_SPELL_POTION_SPLASH, this.blockPosition(), item.getColour());
+				item.applyEffect(getOwner(), level(), result.getLocation());
+				level().levelEvent(LevelEvent.PARTICLES_SPELL_POTION_SPLASH, this.blockPosition(), item.getColour());
 			}
 			discard();
 		}

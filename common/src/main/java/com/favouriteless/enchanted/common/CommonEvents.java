@@ -14,9 +14,9 @@ import net.minecraft.world.level.block.entity.BedBlockEntity;
 public class CommonEvents {
 
     public static void onPlayerSleeping(Player player, BlockPos pos) {
-        if(player != null && pos != null && !player.level.isClientSide) {
-            if(player.level.getBlockEntity(pos) instanceof BedBlockEntity bed) {
-                BedTaglockSavedData data = BedTaglockSavedData.get(player.level);
+        if(player != null && pos != null && !player.level().isClientSide) {
+            if(player.level().getBlockEntity(pos) instanceof BedBlockEntity bed) {
+                BedTaglockSavedData data = BedTaglockSavedData.get(player.level());
                 IBedTaglock entry = data.getEntry(bed);
                 entry.setUUID(player.getUUID());
                 entry.setName(player.getDisplayName().getString());

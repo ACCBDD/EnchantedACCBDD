@@ -1,6 +1,8 @@
 package com.favouriteless.enchanted.common.entities;
 
+import com.favouriteless.enchanted.common.init.EnchantedDamageTypes;
 import com.favouriteless.enchanted.common.init.registry.EnchantedItems;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -19,21 +21,22 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
-import software.bernie.geckolib3.core.IAnimatable;
-import software.bernie.geckolib3.core.PlayState;
-import software.bernie.geckolib3.core.builder.AnimationBuilder;
-import software.bernie.geckolib3.core.builder.ILoopType.EDefaultLoopTypes;
-import software.bernie.geckolib3.core.controller.AnimationController;
-import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
-import software.bernie.geckolib3.core.manager.AnimationData;
-import software.bernie.geckolib3.core.manager.AnimationFactory;
-import software.bernie.geckolib3.util.GeckoLibUtil;
+import software.bernie.geckolib.animatable.GeoEntity;
+import software.bernie.geckolib.core.animatable.GeoAnimatable;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.AnimatableManager.ControllerRegistrar;
+import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.core.animation.AnimationState;
+import software.bernie.geckolib.core.animation.RawAnimation;
+import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.List;
 
-public class Mandrake extends Monster implements IAnimatable {
+public class Mandrake extends Monster implements GeoEntity {
 
-    private final AnimationFactory animationFactory = GeckoLibUtil.createFactory(this);
+    private final AnimatableInstanceCache animationCache = GeckoLibUtil.createInstanceCache(this);
+    private static final RawAnimation SPIN_ANIM = RawAnimation.begin().thenPlay("animation.mandrake.walk");
 
     public Mandrake(EntityType<? extends Monster> type, Level world) {
         super(type, world);
@@ -74,24 +77,24 @@ public class Mandrake extends Monster implements IAnimatable {
         return false;
     }
 
+
     @Override
-    public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController<>(this, "controller", 0, this::predicate));
+    public void registerControllers(ControllerRegistrar registrar) {
+        registrar.add(new AnimationController<>(this, "controller", 5, this::predicate));
     }
 
-    private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
+    private <E extends GeoAnimatable> PlayState predicate(AnimationState<E> event) {
         if (event.isMoving()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.mandrake.walk", EDefaultLoopTypes.LOOP));
+            event.getController().setAnimation(SPIN_ANIM);
             return PlayState.CONTINUE;
         } else {
-            event.getController().clearAnimationCache();
             return PlayState.STOP;
         }
     }
 
     @Override
-    public AnimationFactory getFactory() {
-        return animationFactory;
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return animationCache;
     }
 
     protected class MandrakeAttackGoal extends Goal {
@@ -117,18 +120,18 @@ public class Mandrake extends Monster implements IAnimatable {
         @Override
         public void tick() {
             if(--this.ticksUntilNextAttack <= 0) {
-                List<LivingEntity> entitiesInRange = mob.level.getEntitiesOfClass(LivingEntity.class,
+                List<LivingEntity> entitiesInRange = mob.level().getEntitiesOfClass(LivingEntity.class,
                         new AABB(this.mob.position().x - 8, this.mob.position().y - 8, this.mob.position().z - 8,
                                 this.mob.position().x + 8, this.mob.position().y + 8, this.mob.position().z + 8), entity -> !(entity instanceof Mandrake) );
 
                 for(LivingEntity entity : entitiesInRange) {
                     if(entity.getItemBySlot(EquipmentSlot.HEAD).getItem() != EnchantedItems.EARMUFFS.get()) {
-                        entity.hurt(DamageSource.mobAttack(this.mob), 1.0F);
+                        entity.hurt(new DamageSource(level().registryAccess().registry(Registries.DAMAGE_TYPE).get().getHolderOrThrow(EnchantedDamageTypes.SACRIFICE), mob), 1.0F);
                         if(entity instanceof Player player && !player.isCreative())
                             entity.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 200, 1));
                     }
                 }
-                this.mob.level.playSound(null, this.mob.getX(), this.mob.getY(), this.mob.getZ(), SoundEvents.GHAST_HURT, SoundSource.HOSTILE, 10.0F,0.85F + random.nextFloat() * 0.1F);
+                this.mob.level().playSound(null, this.mob.getX(), this.mob.getY(), this.mob.getZ(), SoundEvents.GHAST_HURT, SoundSource.HOSTILE, 10.0F,0.85F + random.nextFloat() * 0.1F);
 
                 this.ticksUntilNextAttack = 30;
             }

@@ -74,7 +74,7 @@ public class RiteBroiling extends AbstractRite {
                         burnedCount++;
 
                 level.playSound(null, itemEntity, SoundEvents.BLAZE_SHOOT, SoundSource.MASTER, 1.0F, 1.0F);
-                replaceItem(itemEntity, new ItemStack(recipe.getResultItem().getItem(), recipe.getResultItem().getCount() * (totalCount - burnedCount)), new ItemStack(Items.CHARCOAL, burnedCount));
+                replaceItem(itemEntity, new ItemStack(recipe.getResultItem(level.registryAccess()).getItem(), recipe.getResultItem(level.registryAccess()).getCount() * (totalCount - burnedCount)), new ItemStack(Items.CHARCOAL, burnedCount));
 
                 level.sendParticles(ParticleTypes.SMALL_FLAME, itemEntity.position().x(), itemEntity.position().y(), itemEntity.position().z, 25, 0.2D, 0.2D, 0.2D, 0.0D);
                 level.sendParticles(EnchantedParticleTypes.BROILING_SEED.get(), pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, 1, 0.0D, 0.0D, 0.0D, 0.0D);

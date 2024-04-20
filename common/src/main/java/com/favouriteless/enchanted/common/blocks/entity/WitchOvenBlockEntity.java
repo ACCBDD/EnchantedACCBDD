@@ -157,7 +157,7 @@ public class WitchOvenBlockEntity extends ContainerBlockEntityBase implements Me
         if(canBurn(recipe)) {
             ItemStack input = getInput();
             ItemStack fuel = getFuel();
-            ItemStack result = recipe.getResultItem();
+            ItemStack result = recipe.getResultItem(level.registryAccess());
             ItemStack output = getOutput();
 
             if(Enchanted.RANDOM.nextDouble() <= getByproductChance())
@@ -184,7 +184,7 @@ public class WitchOvenBlockEntity extends ContainerBlockEntityBase implements Me
     private boolean canBurn(@Nullable Recipe<?> recipe) {
         ItemStack input = getInput();
         if(recipe != null && !input.is(EnchantedTags.Items.WITCH_OVEN_BLACKLIST)) {
-            ItemStack result = ((Recipe<Container>)recipe).assemble(this);
+            ItemStack result = ((Recipe<Container>)recipe).assemble(this, level.registryAccess());
             if(result.isEmpty())
                 return false; // Don't bother checking recipes with no output.
             else {
@@ -208,7 +208,7 @@ public class WitchOvenBlockEntity extends ContainerBlockEntityBase implements Me
      */
     private void tryCreateByproduct(@Nullable ByproductRecipe recipe) {
         if(recipe != null && !getInput().isEmpty()) {
-            ItemStack result = recipe.assemble(this);
+            ItemStack result = recipe.assemble(this, level.registryAccess());
             if(!result.isEmpty()) {
                 ItemStack jars = getJarInput();
 

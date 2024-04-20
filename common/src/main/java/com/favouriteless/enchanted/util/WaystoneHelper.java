@@ -2,7 +2,7 @@ package com.favouriteless.enchanted.util;
 
 import com.favouriteless.enchanted.common.init.registry.EnchantedItems;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -33,7 +33,7 @@ public class WaystoneHelper {
 			if(stack.hasTag()) {
 				CompoundTag nbt = stack.getTag();
 				if(nbt.contains("dimension"))
-					return level.getServer().getLevel(ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(nbt.getString("dimension"))));
+					return level.getServer().getLevel(ResourceKey.create(Registries.DIMENSION, new ResourceLocation(nbt.getString("dimension"))));
 			}
 		}
 		return null;

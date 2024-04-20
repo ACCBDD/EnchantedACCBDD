@@ -105,7 +105,7 @@ public class SpinningWheelBlockEntity extends ContainerBlockEntityBase implement
 			}
 		}
 
-		ItemStack result = recipe.assemble(this);
+		ItemStack result = recipe.assemble(this, level.registryAccess());
 		ItemStack output = inventory.get(3);
 		if(output.isEmpty())
 			inventory.set(3, result);
@@ -124,7 +124,7 @@ public class SpinningWheelBlockEntity extends ContainerBlockEntityBase implement
 			if(output.isEmpty())
 				return true;
 
-			ItemStack result = recipe.assemble(this);
+			ItemStack result = recipe.assemble(this, level.registryAccess());
 			if(ItemStack.isSameItemSameTags(result, output))
 				return output.getCount() + result.getCount() <= output.getMaxStackSize();
 		}

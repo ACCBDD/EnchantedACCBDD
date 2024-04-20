@@ -4,7 +4,7 @@ import com.favouriteless.enchanted.Enchanted;
 import com.favouriteless.enchanted.common.blocks.entity.SpinningWheelBlockEntity;
 import com.favouriteless.enchanted.common.menus.SpinningWheelMenu;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
@@ -40,46 +40,46 @@ public class SpinningWheelScreen extends AbstractContainerScreen<SpinningWheelMe
         imageHeight = 166;
     }
 
-    public void render(PoseStack poseStack, int xMouse, int yMouse, float partialTicks) {
-        this.renderBackground(poseStack);
-        super.render(poseStack, xMouse, yMouse, partialTicks);
-        this.renderTooltip(poseStack, xMouse, yMouse);
+    public void render(GuiGraphics gui, int xMouse, int yMouse, float partialTicks) {
+        this.renderBackground(gui);
+        super.render(gui, xMouse, yMouse, partialTicks);
+        this.renderTooltip(gui, xMouse, yMouse);
     }
 
     @Override
-    protected void renderBg(PoseStack poseStack, float partialTicks, int x, int y) {
+    protected void renderBg(GuiGraphics gui, float partialTicks, int x, int y) {
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.setShaderTexture(0, TEXTURE);
 
         int edgeSpacingX = (width - imageWidth) / 2;
         int edgeSpacingY = (height - imageHeight) / 2;
-        blit(poseStack, edgeSpacingX, edgeSpacingY, 0, 0, imageWidth, imageHeight);
+        gui.blit(TEXTURE, edgeSpacingX, edgeSpacingY, 0, 0, imageWidth, imageHeight);
 
         double progression = (double)menu.getSpinProgress() / SpinningWheelBlockEntity.SPIN_DURATION;
 
         int barSize = (int)Math.round(BAR_HEIGHT * Math.min(progression * 10.0D, 1.0D));
         if(menu.getSlot(1).hasItem())
-            blit(poseStack, leftPos + BAR0_XPOS, topPos + BAR_YPOS + BAR_HEIGHT - barSize, ICONS_U, BAR0_ICON_V + BAR_HEIGHT - barSize, BAR_WIDTH, barSize);
+            gui.blit(TEXTURE, leftPos + BAR0_XPOS, topPos + BAR_YPOS + BAR_HEIGHT - barSize, ICONS_U, BAR0_ICON_V + BAR_HEIGHT - barSize, BAR_WIDTH, barSize);
         if(menu.getSlot(2).hasItem())
-            blit(poseStack, leftPos + BAR1_XPOS, topPos + BAR_YPOS + BAR_HEIGHT - barSize, ICONS_U, BAR1_ICON_V + BAR_HEIGHT - barSize, BAR_WIDTH, barSize);
+            gui.blit(TEXTURE, leftPos + BAR1_XPOS, topPos + BAR_YPOS + BAR_HEIGHT - barSize, ICONS_U, BAR1_ICON_V + BAR_HEIGHT - barSize, BAR_WIDTH, barSize);
 
         if(progression > 0.1D) { // If over 10%, spin wheel
 
             int frame = (int)Math.round((progression - 0.1D) * 200) % 3;
 
             if(frame == 0)
-                blit(poseStack, leftPos + WHEEL_XPOS, topPos + WHEEL_YPOS, ICONS_U, WHEEL_FRAME2_V, WHEEL_SIZE, WHEEL_SIZE);
+                gui.blit(TEXTURE, leftPos + WHEEL_XPOS, topPos + WHEEL_YPOS, ICONS_U, WHEEL_FRAME2_V, WHEEL_SIZE, WHEEL_SIZE);
             else if(frame == 2)
-                blit(poseStack, leftPos + WHEEL_XPOS, topPos + WHEEL_YPOS, ICONS_U, WHEEL_FRAME1_V, WHEEL_SIZE, WHEEL_SIZE);
+                gui.blit(TEXTURE, leftPos + WHEEL_XPOS, topPos + WHEEL_YPOS, ICONS_U, WHEEL_FRAME1_V, WHEEL_SIZE, WHEEL_SIZE);
         }
 
     }
 
     @Override
-    protected void renderLabels(PoseStack poseStack, int xMouse, int yMouse) {
-        font.draw(poseStack, title, (float)(imageWidth / 2 - font.width(title) / 2), titleLabelY, Color.DARK_GRAY.getRGB());
-        font.draw(poseStack, minecraft.player.getInventory().getDisplayName(), inventoryLabelX, inventoryLabelY, Color.DARK_GRAY.getRGB());
+    protected void renderLabels(GuiGraphics gui, int xMouse, int yMouse) {
+        gui.drawString(font, title, (imageWidth / 2 - font.width(title) / 2), titleLabelY, Color.DARK_GRAY.getRGB());
+        gui.drawString(font, minecraft.player.getInventory().getDisplayName(), inventoryLabelX, inventoryLabelY, Color.DARK_GRAY.getRGB());
     }
 
 }

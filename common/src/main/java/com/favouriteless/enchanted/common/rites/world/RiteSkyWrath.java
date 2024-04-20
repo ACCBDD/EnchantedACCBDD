@@ -71,7 +71,7 @@ public class RiteSkyWrath extends AbstractRite {
                         Entity targetEntity = getTargetEntity();
                         if(targetEntity != null) {
                             targetPos = targetEntity.blockPosition();
-                            targetLevel = targetEntity.level;
+                            targetLevel = targetEntity.level();
                             itemEntity.setNeverPickUp();
                             itemEntity.discard();
                             playConsumeEffects(itemEntity);

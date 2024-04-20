@@ -4,7 +4,7 @@ import com.favouriteless.enchanted.api.curses.RandomCurse;
 import com.favouriteless.enchanted.common.init.EnchantedTags.MobEffects;
 import com.favouriteless.enchanted.common.init.registry.CurseTypes;
 import net.minecraft.core.Holder;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -19,7 +19,7 @@ public class CurseMisfortune extends RandomCurse {
 
 	@Override
 	protected void execute() {
-		Holder<MobEffect> effect = Registry.MOB_EFFECT.getOrCreateTag(MobEffects.MISFORTUNE_EFFECTS).getRandomElement(random).orElse(null);
+		Holder<MobEffect> effect = BuiltInRegistries.MOB_EFFECT.getOrCreateTag(MobEffects.MISFORTUNE_EFFECTS).getRandomElement(random).orElse(null);
 		if(effect != null) {
 			int effectLevel = 0;
 			int effectDuration = 30;

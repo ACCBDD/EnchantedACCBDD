@@ -7,6 +7,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 
@@ -14,14 +15,14 @@ import java.util.Locale;
 
 public class TwoToneColouredParticleType extends ParticleType<TwoToneColouredParticleType.TwoToneColouredData> {
     public static final Codec<TwoToneColouredData> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-            Codec.STRING.fieldOf("particle_type").forGetter(data -> Registry.PARTICLE_TYPE.getKey(data.particleType).toString()),
+            Codec.STRING.fieldOf("particle_type").forGetter(data -> BuiltInRegistries.PARTICLE_TYPE.getKey(data.particleType).toString()),
             Codec.INT.fieldOf("red0").forGetter(data -> data.red),
             Codec.INT.fieldOf("green0").forGetter(data -> data.green),
             Codec.INT.fieldOf("blue0").forGetter(data -> data.blue),
             Codec.INT.fieldOf("red1").forGetter(data -> data.red1),
             Codec.INT.fieldOf("green1").forGetter(data -> data.green1),
             Codec.INT.fieldOf("blue1").forGetter(data -> data.blue1)
-    ).apply(instance, (type, red, green, blue, red1, green1, blue1) -> new TwoToneColouredData((ParticleType<TwoToneColouredData>)Registry.PARTICLE_TYPE.get(new ResourceLocation(type)), red, green, blue, red1, green1, blue1)));
+    ).apply(instance, (type, red, green, blue, red1, green1, blue1) -> new TwoToneColouredData((ParticleType<TwoToneColouredData>)BuiltInRegistries.PARTICLE_TYPE.get(new ResourceLocation(type)), red, green, blue, red1, green1, blue1)));
 
     public TwoToneColouredParticleType(boolean alwaysShow) {
         super(alwaysShow, TwoToneColouredData.DESERIALIZER);
@@ -78,7 +79,7 @@ public class TwoToneColouredParticleType extends ParticleType<TwoToneColouredPar
 
         @Override
         public String writeToString() {
-            return String.format(Locale.ROOT, "%s Primary: %d %d %d Secondary: %d %d %d", Registry.PARTICLE_TYPE.getKey(getType()), red, green, blue, red1, green1, blue1);
+            return String.format(Locale.ROOT, "%s Primary: %d %d %d Secondary: %d %d %d", BuiltInRegistries.PARTICLE_TYPE.getKey(getType()), red, green, blue, red1, green1, blue1);
         }
 
         @Override

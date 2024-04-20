@@ -5,9 +5,9 @@ import com.mojang.brigadier.StringReader;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 
@@ -15,9 +15,9 @@ import java.util.Locale;
 
 public class DoubleParticleType extends ParticleType<DoubleParticleData> {
 	public static final Codec<DoubleParticleData> CODEC = RecordCodecBuilder.create(instance -> instance.group(
-			Codec.STRING.fieldOf("particle_type").forGetter(data -> Registry.PARTICLE_TYPE.getKey(data.particleType).toString()),
+			Codec.STRING.fieldOf("particle_type").forGetter(data -> BuiltInRegistries.PARTICLE_TYPE.getKey(data.particleType).toString()),
 			Codec.DOUBLE.fieldOf("value").forGetter(data -> data.value)
-	).apply(instance, (type, value) -> new DoubleParticleData((ParticleType<DoubleParticleData>)Registry.PARTICLE_TYPE.get(new ResourceLocation(type)),  value)));
+	).apply(instance, (type, value) -> new DoubleParticleData((ParticleType<DoubleParticleData>)BuiltInRegistries.PARTICLE_TYPE.get(new ResourceLocation(type)),  value)));
 
 	public DoubleParticleType(boolean alwaysShow) {
 		super(alwaysShow, DoubleParticleData.DESERIALIZER);
@@ -54,7 +54,7 @@ public class DoubleParticleType extends ParticleType<DoubleParticleData> {
 
 		@Override
 		public String writeToString() {
-			return String.format(Locale.ROOT, "%s", Registry.PARTICLE_TYPE.getKey(getType()), value);
+			return String.format(Locale.ROOT, "%s", BuiltInRegistries.PARTICLE_TYPE.getKey(getType()), value);
 		}
 
 		@Override

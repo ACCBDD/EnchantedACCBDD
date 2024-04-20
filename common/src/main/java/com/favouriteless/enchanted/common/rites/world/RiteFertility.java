@@ -11,7 +11,7 @@ import com.favouriteless.enchanted.common.rites.CirclePart;
 import com.favouriteless.enchanted.common.rites.RiteType;
 import com.favouriteless.enchanted.mixin.ZombieVillagerAccessor;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -74,7 +74,7 @@ public class RiteFertility extends AbstractRite {
                         List<MobEffect> toRemove = new ArrayList<>();
                         for(MobEffectInstance effect : effects) {
 
-                            if(Registry.MOB_EFFECT.getHolder(MobEffect.getId(effect.getEffect())).get().is(MobEffects.FERTILITY_CURE_EFFECTS))
+                            if(BuiltInRegistries.MOB_EFFECT.getHolder(MobEffect.getId(effect.getEffect())).get().is(MobEffects.FERTILITY_CURE_EFFECTS))
                                 toRemove.add(effect.getEffect());
                         }
                         for(MobEffect effect : toRemove) {

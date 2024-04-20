@@ -121,7 +121,7 @@ public class PoppetHelper {
 
 	public static boolean handleTryUseDeathPoppet(Player player, ItemStack item, String shelfIdentifier) {
 		ItemStack poppetItemOriginal = item.copy();
-		PoppetResult result = PoppetHelper.tryUseDeathPoppet(player, item, (ServerLevel)player.level, shelfIdentifier);
+		PoppetResult result = PoppetHelper.tryUseDeathPoppet(player, item, (ServerLevel)player.level(), shelfIdentifier);
 		return handlePoppetResult(result, poppetItemOriginal, player);
 	}
 
@@ -158,7 +158,7 @@ public class PoppetHelper {
 
 	public static boolean handleTryUseItemProtectionPoppet(Player player, ItemStack poppetStack, ItemStack toolStack, String shelfIdentifier) {
 		ItemStack poppetItemOriginal = poppetStack.copy();
-		PoppetResult result = PoppetHelper.tryUseItemProtectionPoppet(player, poppetStack, toolStack, (ServerLevel)player.level, shelfIdentifier);
+		PoppetResult result = PoppetHelper.tryUseItemProtectionPoppet(player, poppetStack, toolStack, (ServerLevel)player.level(), shelfIdentifier);
 		return handlePoppetResult(result, poppetItemOriginal, player);
 	}
 
@@ -187,8 +187,8 @@ public class PoppetHelper {
 
 	private static boolean handlePoppetResult(PoppetResult result, ItemStack poppetItemOriginal, Player player) {
 		if(result == PoppetResult.SUCCESS || result == PoppetResult.SUCCESS_BREAK) {
-			if(!player.level.isClientSide)
-				CommonServices.NETWORK.sendToAllPlayers(new EnchantedPoppetAnimationPacket(result, poppetItemOriginal, player.getId()), player.level.getServer());
+			if(!player.level().isClientSide)
+				CommonServices.NETWORK.sendToAllPlayers(new EnchantedPoppetAnimationPacket(result, poppetItemOriginal, player.getId()), player.level().getServer());
 			return true;
 		}
 		return false;

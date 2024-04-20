@@ -1,9 +1,11 @@
 package com.favouriteless.enchanted.common.init.registry;
 
 import com.favouriteless.enchanted.Enchanted;
-import com.favouriteless.enchanted.common.entities.*;
+import com.favouriteless.enchanted.common.entities.Broomstick;
+import com.favouriteless.enchanted.common.entities.FamiliarCat;
+import com.favouriteless.enchanted.common.entities.Mandrake;
+import com.favouriteless.enchanted.common.entities.ThrowableBrew;
 import com.favouriteless.enchanted.platform.CommonServices;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EntityType.Builder;
@@ -16,8 +18,8 @@ public class EnchantedEntityTypes {
     public static final Supplier<EntityType<Broomstick>> BROOMSTICK = register("broomstick", () -> Builder.of(Broomstick::new, MobCategory.MISC)
             .sized(1.0F, 1.0F).clientTrackingRange(10).build(Enchanted.location("broomstick").toString()));
 
-    public static final Supplier<EntityType<Ent>> ENT = register("ent", () -> Builder.of(Ent::new, MobCategory.MONSTER)
-            .sized(2F, 3.0F).build(Enchanted.location("ent").toString()));
+//    public static final Supplier<EntityType<Ent>> ENT = register("ent", () -> Builder.of(Ent::new, MobCategory.MONSTER)
+//            .sized(2F, 3.0F).build(Enchanted.location("ent").toString()));
 
     public static final Supplier<EntityType<FamiliarCat>> FAMILIAR_CAT = register("familiar_cat", () -> Builder.of(FamiliarCat::new, MobCategory.CREATURE)
             .sized(0.6F, 0.7F).clientTrackingRange(8).build(Enchanted.location("familiar_cat").toString()));

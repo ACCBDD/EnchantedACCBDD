@@ -75,7 +75,7 @@ public class CurseManager {
 	}
 
 	public static void playerLoggedIn(ServerPlayer player) {
-		CurseSavedData data = CurseSavedData.get(player.getLevel());
+		CurseSavedData data = CurseSavedData.get(player.level());
 		UUID uuid = player.getUUID();
 		if(data.entries.containsKey(uuid))
 			ACTIVE_CURSES.put(uuid, data.entries.get(uuid));

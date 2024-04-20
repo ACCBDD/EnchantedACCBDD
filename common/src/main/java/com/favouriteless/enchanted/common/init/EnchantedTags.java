@@ -26,6 +26,7 @@ package com.favouriteless.enchanted.common.init;
 
 import com.favouriteless.enchanted.Enchanted;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -103,23 +104,23 @@ public class EnchantedTags {
     }
 
     public static TagKey<Item> createItemTag(ResourceLocation name) {
-        return createTag(Registry.ITEM_REGISTRY, name);
+        return createTag(Registries.ITEM, name);
     }
 
     public static TagKey<Block> createBlockTag(ResourceLocation name) {
-        return createTag(Registry.BLOCK_REGISTRY, name);
+        return createTag(Registries.BLOCK, name);
     }
 
     public static TagKey<EntityType<?>> createEntityTag(ResourceLocation name) {
-        return createTag(Registry.ENTITY_TYPE_REGISTRY, name);
+        return createTag(Registries.ENTITY_TYPE, name);
     }
 
     public static TagKey<Biome> createBiomeTag(ResourceLocation name) {
-        return createTag(Registry.BIOME_REGISTRY, name);
+        return createTag(Registries.BIOME, name);
     }
 
     public static TagKey<MobEffect> createEffectTag(ResourceLocation name) {
-        return createTag(Registry.MOB_EFFECT_REGISTRY, name);
+        return createTag(Registries.MOB_EFFECT, name);
     }
 
 }

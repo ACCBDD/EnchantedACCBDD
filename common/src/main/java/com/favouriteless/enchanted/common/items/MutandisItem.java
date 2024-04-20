@@ -3,8 +3,8 @@ package com.favouriteless.enchanted.common.items;
 import com.favouriteless.enchanted.Enchanted;
 import com.favouriteless.enchanted.common.init.EnchantedTags.Blocks;
 import net.minecraft.core.HolderSet.Named;
-import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.TagKey;
@@ -28,8 +28,8 @@ public class MutandisItem extends Item {
     public InteractionResult useOn(UseOnContext context) {
         BlockState state = context.getLevel().getBlockState(context.getClickedPos());
 
-        Named<Block> blacklistTag = Registry.BLOCK.getOrCreateTag(Blocks.MUTANDIS_BLACKLIST);
-        Named<Block> validTag = Registry.BLOCK.getOrCreateTag(validBlocks);
+        Named<Block> blacklistTag = BuiltInRegistries.BLOCK.getOrCreateTag(Blocks.MUTANDIS_BLACKLIST);
+        Named<Block> validTag = BuiltInRegistries.BLOCK.getOrCreateTag(validBlocks);
 
         if(validTag.size() == 0 || validTag.stream().allMatch(blacklistTag::contains)) { // This check prevents the while loop below from becoming infinite.
             Enchanted.LOG.error("Mutandis tag is invalid! This means the tag is empty, or every item in it is blacklisted.");

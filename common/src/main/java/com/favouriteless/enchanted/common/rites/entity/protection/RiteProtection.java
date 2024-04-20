@@ -2,16 +2,16 @@ package com.favouriteless.enchanted.common.rites.entity.protection;
 
 import com.favouriteless.enchanted.api.rites.AbstractRite;
 import com.favouriteless.enchanted.client.particles.types.DoubleParticleType.DoubleParticleData;
-import com.favouriteless.enchanted.common.init.registry.EnchantedParticleTypes;
 import com.favouriteless.enchanted.common.init.registry.EnchantedBlocks;
 import com.favouriteless.enchanted.common.init.registry.EnchantedItems;
+import com.favouriteless.enchanted.common.init.registry.EnchantedParticleTypes;
 import com.favouriteless.enchanted.common.rites.CirclePart;
 import com.favouriteless.enchanted.common.rites.RiteType;
 import com.favouriteless.enchanted.util.WaystoneHelper;
 import com.favouriteless.stateobserver.StateObserverManager;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -103,7 +103,7 @@ public class RiteProtection extends AbstractRite {
                 }
                 else if(stack.getItem() == EnchantedItems.BLOODED_WAYSTONE.get()) {
                     setTargetEntity(WaystoneHelper.getEntity(level, stack));
-                    targetLevel = (ServerLevel)getTargetEntity().getLevel();
+                    targetLevel = (ServerLevel)getTargetEntity().level();
                     targetPos = getTargetEntity().blockPosition();
                     consumeItemNoRequirement(itemEntity);
                     break;
@@ -127,7 +127,7 @@ public class RiteProtection extends AbstractRite {
         if(!nbt.contains("targetZ"))
             return false;
 
-        targetLevel = level.getServer().getLevel(ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(nbt.getString("targetLevel"))));
+        targetLevel = level.getServer().getLevel(ResourceKey.create(Registries.DIMENSION, new ResourceLocation(nbt.getString("targetLevel"))));
         targetPos = new BlockPos(nbt.getInt("targetX"), nbt.getInt("targetY"), nbt.getInt("targetZ"));
         getOrCreateObserver();
         generateSphere(block);

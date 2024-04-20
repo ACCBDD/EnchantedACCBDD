@@ -51,7 +51,7 @@ public class RiteSummonFamiliar extends AbstractRite {
                 entry.setUUID(targetEntity.getUUID()); // Update the UUID entry
             }
 
-            if(targetEntity.getLevel() != level)
+            if(targetEntity.level() != level)
                 targetEntity.changeDimension(level);
             else
                 targetEntity.teleportTo(vec3.x, vec3.y, vec3.z);

@@ -6,7 +6,7 @@ import com.favouriteless.enchanted.common.blocks.SpinningWheelBlock;
 import com.favouriteless.enchanted.common.blocks.entity.SpinningWheelBlockEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
@@ -61,8 +61,8 @@ public class SpinningWheelRenderer implements BlockEntityRenderer<SpinningWheelB
 		float rotationYDegrees = blockEntity.getLevel() != null ? blockEntity.getBlockState().getValue(SpinningWheelBlock.FACING).getOpposite().toYRot() : 0;
 
 		poseStack.translate(0.5F, 1.5F, 0.5F);
-		poseStack.mulPose(Vector3f.YN.rotationDegrees(rotationYDegrees));
-		poseStack.mulPose(Vector3f.ZP.rotationDegrees(180));
+		poseStack.mulPose(Axis.YN.rotationDegrees(rotationYDegrees));
+		poseStack.mulPose(Axis.ZP.rotationDegrees(180));
 
 		float spinProgress = blockEntity.getSpinProgress() >= 1 ? blockEntity.getSpinProgress() + partialTicks - 1 : 0;
 		float turnFactor = 25;

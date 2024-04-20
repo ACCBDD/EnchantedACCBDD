@@ -3,7 +3,7 @@ package com.favouriteless.enchanted.util;
 import com.favouriteless.enchanted.Enchanted;
 import com.favouriteless.enchanted.platform.CommonServices;
 import com.google.gson.JsonObject;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
@@ -60,7 +60,7 @@ public class ItemStackHelper {
 	 * @return The {@link ItemStack} which was stored in json.
 	 */
 	public static ItemStack fromJson(JsonObject json, boolean readNbt) {
-		Item item = Registry.ITEM.get(new ResourceLocation(GsonHelper.getAsString(json, "item")));
+		Item item = BuiltInRegistries.ITEM.get(new ResourceLocation(GsonHelper.getAsString(json, "item")));
 		int count = GsonHelper.getAsInt(json, "count", 1); // Get count, default to 1 if there was no count.
 		ItemStack out = new ItemStack(item, count);
 
@@ -92,7 +92,7 @@ public class ItemStackHelper {
 	public static JsonObject asJson(Item item, int count, CompoundTag nbt) {
 		JsonObject obj = new JsonObject();
 
-		obj.addProperty("item", Registry.ITEM.getKey(item).toString());
+		obj.addProperty("item", BuiltInRegistries.ITEM.getKey(item).toString());
 		if(count > 1)
 			obj.addProperty("count", count);
 

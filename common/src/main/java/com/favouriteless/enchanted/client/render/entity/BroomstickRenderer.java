@@ -1,6 +1,5 @@
 package com.favouriteless.enchanted.client.render.entity;
 
-
 import com.favouriteless.enchanted.Enchanted;
 import com.favouriteless.enchanted.client.render.model.ModelLayerLocations;
 import com.favouriteless.enchanted.client.render.model.entity.BroomstickModel;

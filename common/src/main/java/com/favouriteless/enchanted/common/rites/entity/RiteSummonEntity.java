@@ -37,12 +37,12 @@ public class RiteSummonEntity extends AbstractRite {
         Entity targetEntity = getTargetEntity();
         if(level != null && pos != null && targetEntity != null) {
             spawnParticles(level, pos.getX()+0.5D, pos.getY()+0.5D, pos.getZ()+0.5D);
-            spawnParticles((ServerLevel)targetEntity.level, targetEntity.getX(), targetEntity.getY(), targetEntity.getZ());
+            spawnParticles((ServerLevel)targetEntity.level(), targetEntity.getX(), targetEntity.getY(), targetEntity.getZ());
             level.playSound(null, pos.getX()+0.5D, pos.getY()+0.5D, pos.getZ()+0.5D, SoundEvents.ENDERMAN_TELEPORT, SoundSource.MASTER, 1.0F, 1.0F);
-            targetEntity.level.playSound(null, targetEntity.getX(), targetEntity.getX(), targetEntity.getY(), SoundEvents.ENDERMAN_TELEPORT, SoundSource.MASTER, 1.0F, 1.0F);
+            targetEntity.level().playSound(null, targetEntity.getX(), targetEntity.getX(), targetEntity.getY(), SoundEvents.ENDERMAN_TELEPORT, SoundSource.MASTER, 1.0F, 1.0F);
 
             Vec3 destination = new Vec3(pos.getX()+0.5D, pos.getY()+0.5D, pos.getZ()+0.5D);
-            if(level != targetEntity.level)
+            if(level != targetEntity.level())
                 targetEntity.changeDimension(level);
             else
                 targetEntity.teleportTo(destination.x, destination.y, destination.z);

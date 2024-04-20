@@ -2,17 +2,17 @@ package com.favouriteless.enchanted.common.poppet;
 
 import com.favouriteless.enchanted.Enchanted;
 import com.favouriteless.enchanted.common.blocks.entity.PoppetShelfBlockEntity;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Registry;
-import net.minecraft.world.level.Level;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.level.storage.DimensionDataStorage;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.saveddata.SavedData;
+import net.minecraft.world.level.storage.DimensionDataStorage;
 
 import java.util.*;
 
@@ -114,7 +114,7 @@ public class PoppetShelfSavedData extends SavedData {
 
 	public ServerLevel getLevelFromShelfIdentifier(String shelfIdentifier) {
 		String levelString = shelfIdentifier.substring(0, shelfIdentifier.indexOf("+"));
-		return level.getServer().getLevel(ResourceKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(levelString)));
+		return level.getServer().getLevel(ResourceKey.create(Registries.DIMENSION, new ResourceLocation(levelString)));
 	}
 
 	public BlockPos getBlockPosFromShelfIdentifier(String shelfIdentifier) {

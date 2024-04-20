@@ -15,8 +15,8 @@ public class CatFamiliarType extends FamiliarType<Cat, FamiliarCat> {
 
 	@Override
 	public FamiliarCat create(Cat from) {
-		FamiliarCat familiar = EnchantedEntityTypes.FAMILIAR_CAT.get().create(from.getLevel());
-		familiar.setCatVariant(from.getCatVariant());
+		FamiliarCat familiar = EnchantedEntityTypes.FAMILIAR_CAT.get().create(from.level());
+		familiar.setVariant(from.getVariant());
 		familiar.setCollarColor(from.getCollarColor());
 		return familiar;
 	}

@@ -13,8 +13,8 @@ public class CurseOverheating extends RandomCurse {
 
 	@Override
 	protected void execute() {
-		if(targetPlayer.getLevel().getBiome(targetPlayer.blockPosition()).is(Biomes.OVERHEATING_BIOMES)
-		|| targetPlayer.getLevel().dimension() == Level.NETHER) {
+		if(targetPlayer.level().getBiome(targetPlayer.blockPosition()).is(Biomes.OVERHEATING_BIOMES)
+		|| targetPlayer.level().dimension() == Level.NETHER) {
 			int duration = 4;
 			for(int i = 0; i < level; i++) {
 				if(Math.random() < 0.75D)

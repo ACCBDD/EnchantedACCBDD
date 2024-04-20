@@ -36,15 +36,15 @@ public class RiteTranspositionPlayerBlooded extends AbstractRite {
             Entity targetEntity = getTargetEntity();
 
             if(targetEntity != null) {
-                spawnParticles((ServerLevel)caster.level, caster.getX(), caster.getY(), caster.getZ());
+                spawnParticles((ServerLevel)caster.level(), caster.getX(), caster.getY(), caster.getZ());
 
                 level.playSound(null, caster.position().x, caster.position().y, caster.position().z, SoundEvents.ENDERMAN_TELEPORT, SoundSource.MASTER, 1.0F, 1.0F);
-                if(caster.level != targetEntity.level) {
-                    caster.changeDimension((ServerLevel)targetEntity.level);
+                if(caster.level() != targetEntity.level()) {
+                    caster.changeDimension((ServerLevel)targetEntity.level());
                 }
                 caster.teleportTo(targetEntity.getX(), targetEntity.getY(), targetEntity.getZ());
                 level.playSound(null, caster.position().x, caster.position().y, caster.position().z, SoundEvents.ENDERMAN_TELEPORT, SoundSource.MASTER, 1.0F, 1.0F);
-                spawnParticles((ServerLevel)targetEntity.level, targetEntity.getX(), targetEntity.getX(), targetEntity.getZ());
+                spawnParticles((ServerLevel)targetEntity.level(), targetEntity.getX(), targetEntity.getX(), targetEntity.getZ());
             }
             else {
                 cancel();

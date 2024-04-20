@@ -12,7 +12,7 @@ public class DeathPoppetEffectItem extends AbstractDeathPoppetItem {
 
 	protected Supplier<MobEffectInstance> deathEffect;
 
-	public DeathPoppetEffectItem(float failRate, int durability, PoppetColour colour, Predicate<DamageSource> sourcePredicate, Supplier<MobEffectInstance> deathEffect) {
+	public DeathPoppetEffectItem(float failRate, int durability, PoppetColour colour, Supplier<MobEffectInstance> deathEffect, Predicate<DamageSource> sourcePredicate) {
 		super(failRate, durability, colour, sourcePredicate);
 		this.deathEffect = deathEffect;
 	}

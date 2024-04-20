@@ -3,7 +3,7 @@ package com.favouriteless.enchanted.client.screens;
 import com.favouriteless.enchanted.Enchanted;
 import com.favouriteless.enchanted.common.menus.WitchOvenMenu;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
@@ -36,38 +36,38 @@ public class WitchOvenScreen extends AbstractContainerScreen<WitchOvenMenu> {
         this.imageHeight = 166;
     }
 
-    public void render(PoseStack poseStack, int xMouse, int yMouse, float partialTicks) {
-        renderBackground(poseStack);
-        super.render(poseStack, xMouse, yMouse, partialTicks);
-        renderTooltip(poseStack, xMouse, yMouse);
+    public void render(GuiGraphics gui, int xMouse, int yMouse, float partialTicks) {
+        renderBackground(gui);
+        super.render(gui, xMouse, yMouse, partialTicks);
+        renderTooltip(gui, xMouse, yMouse);
     }
 
     @Override
-    protected void renderBg(PoseStack poseStack, float partialTicks, int x, int y) {
+    protected void renderBg(GuiGraphics gui, float partialTicks, int x, int y) {
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.setShaderTexture(0, TEXTURE);
 
         int edgeSpacingX = (width - imageWidth) / 2;
         int edgeSpacingY = (height - imageHeight) / 2;
-        blit(poseStack, edgeSpacingX, edgeSpacingY, 0, 0, imageWidth, imageHeight);
+        gui.blit(TEXTURE, edgeSpacingX, edgeSpacingY, 0, 0, imageWidth, imageHeight);
 
         int cookProgressionScaled = getCookProgressionScaled();
-        blit(poseStack, leftPos + COOK_BAR_XPOS, topPos + COOK_BAR_YPOS, COOK_BAR_ICON_U, COOK_BAR_ICON_V, cookProgressionScaled + 1, COOK_BAR_HEIGHT);
+        gui.blit(TEXTURE, leftPos + COOK_BAR_XPOS, topPos + COOK_BAR_YPOS, COOK_BAR_ICON_U, COOK_BAR_ICON_V, cookProgressionScaled + 1, COOK_BAR_HEIGHT);
 
 
         // Draw fuel remaining bar
         if (menu.getBurnDuration() > 0) {
             int burnLeftScaled = getBurnLeftScaled();
-            blit(poseStack, leftPos + FLAME_XPOS, topPos + FLAME_YPOS + 12 - burnLeftScaled, FLAME_ICON_U, FLAME_ICON_V - burnLeftScaled, FLAME_SIZE, burnLeftScaled + 1);
+            gui.blit(TEXTURE, leftPos + FLAME_XPOS, topPos + FLAME_YPOS + 12 - burnLeftScaled, FLAME_ICON_U, FLAME_ICON_V - burnLeftScaled, FLAME_SIZE, burnLeftScaled + 1);
         }
 
     }
 
     @Override
-    protected void renderLabels(PoseStack poseStack, int xMouse, int yMouse) {
-        font.draw(poseStack, title, (float)(imageWidth / 2 - font.width(title) / 2), titleLabelY, Color.DARK_GRAY.getRGB());
-        font.draw(poseStack, minecraft.player.getInventory().getDisplayName(), inventoryLabelX, inventoryLabelY, Color.DARK_GRAY.getRGB());
+    protected void renderLabels(GuiGraphics gui, int xMouse, int yMouse) {
+        gui.drawString(font, title, (imageWidth / 2 - font.width(title) / 2), titleLabelY, Color.DARK_GRAY.getRGB());
+        gui.drawString(font, minecraft.player.getInventory().getDisplayName(), inventoryLabelX, inventoryLabelY, Color.DARK_GRAY.getRGB());
     }
 
     public int getBurnLeftScaled() {

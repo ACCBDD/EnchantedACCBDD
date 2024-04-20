@@ -23,17 +23,17 @@ public class DamageTypeTagProvider extends DamageTypeTagsProvider {
 
     public void addVanillaTags(Provider provider) {
         tag(DamageTypeTags.BYPASSES_ARMOR)
-                .add(EnchantedDamageTypes.SACRIFICE);
+                .add(EnchantedDamageTypes.SACRIFICE, EnchantedDamageTypes.SOUND);
         tag(DamageTypeTags.BYPASSES_EFFECTS)
-                .add(EnchantedDamageTypes.SACRIFICE);
+                .add(EnchantedDamageTypes.SACRIFICE, EnchantedDamageTypes.SOUND);
         tag(DamageTypeTags.BYPASSES_COOLDOWN)
                 .add(EnchantedDamageTypes.SACRIFICE);
         tag(DamageTypeTags.BYPASSES_ENCHANTMENTS)
-                .add(EnchantedDamageTypes.SACRIFICE);
+                .add(EnchantedDamageTypes.SACRIFICE, EnchantedDamageTypes.SOUND);
         tag(DamageTypeTags.BYPASSES_INVULNERABILITY)
                 .add(EnchantedDamageTypes.SACRIFICE);
         tag(DamageTypeTags.BYPASSES_RESISTANCE)
-                .add(EnchantedDamageTypes.SACRIFICE);
+                .add(EnchantedDamageTypes.SACRIFICE, EnchantedDamageTypes.SOUND);
     }
 
 }
