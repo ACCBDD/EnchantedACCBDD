@@ -88,8 +88,8 @@ minecraft {
             property("mixin.env.refMapRemappingFile", "${project.projectDir}/build/createSrgToMcp/output.srg")
             args("-mixin.config=${mod_id}.mixins.json",
                 "--mod", mod_id, "--all",
-                "--output",  project(":common").file("src/generated/resources/"),
-                "--existing", project(":common").file("src/main/resources/")
+                "--output", project(":common").file("src/generated/resources/").absolutePath,
+                "--existing", project(":common").file("src/main/resources/").absolutePath
             )
 
             mods {

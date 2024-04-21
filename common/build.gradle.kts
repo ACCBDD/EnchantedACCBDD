@@ -1,6 +1,5 @@
 plugins {
     id("enchanted-convention")
-
     alias(libs.plugins.vanillagradle)
 }
 
@@ -41,3 +40,5 @@ publishing {
         }
     }
 }
+
+sourceSets.main.get().resources.srcDir(project(":common").file("src/generated/resources"))
