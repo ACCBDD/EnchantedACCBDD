@@ -1,6 +1,8 @@
 package com.favouriteless.enchanted.platform.services;
 
 import com.favouriteless.enchanted.Enchanted;
+import com.favouriteless.enchanted.common.items.ForgeNonAnimatedArmorItem;
+import com.favouriteless.enchanted.common.items.NonAnimatedArmorItem;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.FriendlyByteBuf;
@@ -11,8 +13,11 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.item.ArmorItem.Type;
+import net.minecraft.world.item.ArmorMaterials;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTab.DisplayItemsGenerator;
+import net.minecraft.world.item.Item.Properties;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -70,6 +75,11 @@ public class ForgeCommonRegistryHelper implements ICommonRegistryHelper {
 	@Override
 	public void setFlammable(Block block, int igniteOdds, int burnOdds) {
 		((FireBlock)Blocks.FIRE).setFlammable(block, igniteOdds, burnOdds);
+	}
+
+	@Override
+	public Supplier<NonAnimatedArmorItem> registerNonAnimatedArmorItem(String name, ArmorMaterials material, Type type, String assetPath, Properties properties) {
+		return register(BuiltInRegistries.ITEM, name, () -> new ForgeNonAnimatedArmorItem(material, type, assetPath, properties));
 	}
 
 	private static class RegistryMap {

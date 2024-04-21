@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "building",
   "key": {
     "s": {
       "tag": "minecraft:saplings"
@@ -12,5 +13,6 @@
   ],
   "result": {
     "item": "enchanted:wicker_bundle"
-  }
+  },
+  "show_notification": true
 }

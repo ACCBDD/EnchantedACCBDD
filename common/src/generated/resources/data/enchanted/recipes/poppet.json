@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "key": {
     "a": {
       "item": "enchanted:attuned_stone"
@@ -24,5 +25,6 @@
   ],
   "result": {
     "item": "enchanted:poppet"
-  }
+  },
+  "show_notification": true
 }

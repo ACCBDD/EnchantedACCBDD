@@ -1,5 +1,3 @@
-import net.fabricmc.loom.task.RemapJarTask
-
 plugins {
     id("enchanted-convention")
 
@@ -43,6 +41,7 @@ repositories {
 
 dependencies {
     minecraft( libs.minecraft )
+    implementation( libs.jsr305 )
     mappings(loom.layered() {
         officialMojangMappings()
         parchment("org.parchmentmc.data:parchment-${parchment_minecraft_version}:${parchment_version}@zip")
@@ -56,7 +55,8 @@ dependencies {
     modImplementation( libs.sbl.fabric )
     modImplementation( libs.stateobserver.fabric )
     modApi( libs.forgeconfigapi.fabric )
-    modRuntimeOnly( libs.jei.fabric )
+
+    modImplementation( libs.jei.fabric )
 }
 
 loom {

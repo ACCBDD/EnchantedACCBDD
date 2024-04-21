@@ -26,7 +26,6 @@ public class EnchantedForge {
     @SubscribeEvent
     public static void registerEntityAttributes(EntityAttributeCreationEvent event) {
         event.put(EnchantedEntityTypes.MANDRAKE.get(), Mandrake.createAttributes());
-        event.put(EnchantedEntityTypes.ENT.get(), Ent.createAttributes());
         event.put(EnchantedEntityTypes.FAMILIAR_CAT.get(), FamiliarCat.createCatAttributes());
     }
 

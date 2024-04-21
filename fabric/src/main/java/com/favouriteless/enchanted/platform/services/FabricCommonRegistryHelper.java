@@ -1,6 +1,8 @@
 package com.favouriteless.enchanted.platform.services;
 
 import com.favouriteless.enchanted.Enchanted;
+import com.favouriteless.enchanted.common.items.FabricNonAnimatedArmorItem;
+import com.favouriteless.enchanted.common.items.NonAnimatedArmorItem;
 import com.favouriteless.enchanted.platform.JsonDataLoaderWrapper;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
@@ -17,8 +19,11 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.item.ArmorItem.Type;
+import net.minecraft.world.item.ArmorMaterials;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTab.DisplayItemsGenerator;
+import net.minecraft.world.item.Item.Properties;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
@@ -62,6 +67,11 @@ public class FabricCommonRegistryHelper implements ICommonRegistryHelper {
 	@Override
 	public void setFlammable(Block block, int igniteOdds, int burnOdds) {
 		FlammableBlockRegistry.getDefaultInstance().add(block, igniteOdds, burnOdds);
+	}
+
+	@Override
+	public Supplier<NonAnimatedArmorItem> registerNonAnimatedArmorItem(String name, ArmorMaterials material, Type type, String assetPath, Properties properties) {
+		return register(BuiltInRegistries.ITEM, name, () -> new FabricNonAnimatedArmorItem(material, type, assetPath, properties));
 	}
 
 }

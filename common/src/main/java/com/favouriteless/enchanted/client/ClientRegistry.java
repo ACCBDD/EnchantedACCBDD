@@ -2,7 +2,6 @@ package com.favouriteless.enchanted.client;
 
 import com.favouriteless.enchanted.Enchanted;
 import com.favouriteless.enchanted.client.particles.*;
-import com.favouriteless.enchanted.client.render.armor.DefaultedGeoArmorRenderer;
 import com.favouriteless.enchanted.client.render.blockentity.CauldronWaterRenderer;
 import com.favouriteless.enchanted.client.render.blockentity.PoppetShelfRenderer;
 import com.favouriteless.enchanted.client.render.blockentity.SpinningWheelRenderer;
@@ -13,7 +12,6 @@ import com.favouriteless.enchanted.client.render.model.ModelLayerLocations;
 import com.favouriteless.enchanted.client.render.model.entity.BroomstickModel;
 import com.favouriteless.enchanted.client.screens.*;
 import com.favouriteless.enchanted.common.init.registry.*;
-import com.favouriteless.enchanted.common.items.EarmuffsItem;
 import com.favouriteless.enchanted.platform.ClientServices;
 import com.favouriteless.enchanted.platform.services.IClientRegistryHelper;
 import net.minecraft.client.gui.screens.MenuScreens;
@@ -26,7 +24,7 @@ public class ClientRegistry {
         IClientRegistryHelper registry = ClientServices.CLIENT_REGISTRY;
 
         // Armor renderers
-        registry.register(EarmuffsItem.class, () -> new DefaultedGeoArmorRenderer("armor/earmuffs"), EnchantedItems.EARMUFFS.get());
+        //registry.register(EarmuffsItem.class, () -> new DefaultedGeoArmorRenderer("armor/earmuffs"), EnchantedItems.EARMUFFS.get());
 
         // MenuScreens
         MenuScreens.register(EnchantedMenuTypes.WITCH_OVEN.get(), WitchOvenScreen::new);

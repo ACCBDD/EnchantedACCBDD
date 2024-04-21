@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "key": {
     "c": {
       "item": "minecraft:clay"
@@ -12,5 +13,6 @@
   "result": {
     "count": 4,
     "item": "enchanted:clay_jar_soft"
-  }
+  },
+  "show_notification": true
 }

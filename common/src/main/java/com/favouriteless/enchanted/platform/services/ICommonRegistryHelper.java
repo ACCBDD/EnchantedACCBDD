@@ -1,5 +1,6 @@
 package com.favouriteless.enchanted.platform.services;
 
+import com.favouriteless.enchanted.common.items.NonAnimatedArmorItem;
 import net.minecraft.core.Registry;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -8,9 +9,8 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
-import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.CreativeModeTab.DisplayItemsGenerator;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import org.apache.commons.lang3.function.TriFunction;
@@ -90,5 +90,20 @@ public interface ICommonRegistryHelper {
      * @param burnOdds
      */
     void setFlammable(Block block, int igniteOdds, int burnOdds);
+
+    /**
+     * Create a new {@link NonAnimatedArmorItem}, register it and return the object. Needed because Geckolib armor
+     * renderers aren't compatible with Multiloader setups on this version.
+     *
+     * @param name The name of this {@link NonAnimatedArmorItem}. This will automatically use Enchanted's namespace.
+     * @param material The {@link ArmorMaterials} for the item.
+     * @param type The {@link ArmorItem.Type} descibing the slot this item uses.
+     * @param assetPath The path of this geckolib assets for this {@link NonAnimatedArmorItem}.
+     * @param properties {@link Item.Properties} for the returned {@link Item}
+     *
+     * @return A {@link Supplier} returning a new instance of {@link NonAnimatedArmorItem}.
+     */
+    Supplier<NonAnimatedArmorItem> registerNonAnimatedArmorItem(String name, ArmorMaterials material, ArmorItem.Type type,
+                                                                String assetPath, Item.Properties properties);
 
 }

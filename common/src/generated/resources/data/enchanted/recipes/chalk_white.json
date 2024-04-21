@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "equipment",
   "key": {
     "a": {
       "item": "enchanted:wood_ash"
@@ -19,5 +20,6 @@
   "result": {
     "count": 2,
     "item": "enchanted:chalk_white"
-  }
+  },
+  "show_notification": true
 }

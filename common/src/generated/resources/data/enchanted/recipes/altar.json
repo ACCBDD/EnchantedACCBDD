@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "building",
   "key": {
     "b": {
       "item": "enchanted:breath_of_the_goddess"
@@ -27,5 +28,6 @@
   ],
   "result": {
     "item": "enchanted:altar"
-  }
+  },
+  "show_notification": true
 }

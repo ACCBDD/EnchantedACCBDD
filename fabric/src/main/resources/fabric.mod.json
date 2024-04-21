@@ -8,7 +8,7 @@
         "${author}"
     ],
     "contact": {
-        "homepage": "{$display_url"
+        "homepage": "{$display_url}"
     },
     "license": "${license}",
     "icon": "${mod_id}.png",
@@ -32,8 +32,8 @@
         "minecraft": "${minecraft_version}",
         "stateobserver": ">=${stateobserver_version}",
         "smartbrainlib": ">=${sbl_version}",
-        "patchouli": ">=${geckolib_version_fabric}",
-        "geckolib4": ">=${geckolib_version_fabric}",
+        "patchouli": ">=${patchouli_fabric_version}",
+        "geckolib4": ">=${geckolib_fabric_version}",
         "forgeconfigapiport": ">=${forgeconfigapi_version}",
         "java": ">=17"
     },

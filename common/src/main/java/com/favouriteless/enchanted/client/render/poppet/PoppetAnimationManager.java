@@ -4,6 +4,7 @@ import com.favouriteless.enchanted.common.poppet.PoppetHelper.PoppetResult;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.Util;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.item.ItemStack;
 import org.joml.Vector3f;
 
@@ -39,12 +40,12 @@ public class PoppetAnimationManager {
 		ACTIVE_ANIMATIONS.removeIf((anim) -> anim.ticks <= 0);
 	}
 
-	public static void render(PoseStack matrixStack, float partialTicks, int widthScaled, int heightScaled) {
+	public static void render(GuiGraphics graphics, float partialTicks, int widthScaled, int heightScaled) {
 		RenderSystem.enableDepthTest();
 		RenderSystem.disableCull();
 		RenderSystem.setupGui3DDiffuseLighting(DIFFUSE_LIGHT_0, DIFFUSE_LIGHT_1);
 		for(PoppetAnimation animation : ACTIVE_ANIMATIONS) {
-			animation.render(matrixStack, partialTicks, widthScaled, heightScaled);
+			animation.render(graphics.pose(), partialTicks, widthScaled, heightScaled);
 		}
 		RenderSystem.enableCull();
 		RenderSystem.disableDepthTest();

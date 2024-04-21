@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "misc",
   "key": {
     "a": {
       "item": "enchanted:attuned_stone"
@@ -18,5 +19,6 @@
   ],
   "result": {
     "item": "enchanted:fume_filter"
-  }
+  },
+  "show_notification": true
 }

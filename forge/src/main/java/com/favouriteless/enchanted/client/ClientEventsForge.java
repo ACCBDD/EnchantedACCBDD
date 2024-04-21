@@ -27,7 +27,7 @@ public class ClientEventsForge {
 
     @SubscribeEvent
     public static void onRenderGuiPost(RenderGuiEvent.Post event) {
-        ClientEvents.onRenderGui(event.getPoseStack(), event.getPartialTick(), event.getWindow());
+        ClientEvents.onRenderGui(event.getGuiGraphics(), event.getPartialTick(), event.getWindow());
     }
 
     @SubscribeEvent

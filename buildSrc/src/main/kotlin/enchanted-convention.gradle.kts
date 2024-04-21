@@ -17,8 +17,10 @@ val libs = project.versionCatalogs.find("libs")
 val mod_id: String by project
 val mod_name: String by project
 val author: String by project
+val credits: String by project
 val license: String by project
-val description: String by project
+val mod_description: String by project
+val display_url: String by project
 val version = libs.get().findVersion("enchanted").get()
 val minecraft_version = libs.get().findVersion("minecraft").get()
 val forge_version = libs.get().findVersion("forge").get()
@@ -64,9 +66,10 @@ tasks.withType<ProcessResources>().configureEach {
     val expandProps = mapOf(
             "version" to version,
             "group" to project.group, // Else we target the task's group.
+            "display_url" to display_url, // Else we target the task's group.
             "minecraft_version" to minecraft_version,
             "forge_version" to forge_version,
-            "forge_loader_range" to fml_version_range,
+            "fml_version_range" to fml_version_range,
             "forge_version_range" to forge_version_range,
             "minecraft_version_range" to minecraft_version_range,
             "fabric_api_version" to fapi_version,
@@ -75,7 +78,8 @@ tasks.withType<ProcessResources>().configureEach {
             "author" to author,
             "mod_id" to mod_id,
             "license" to license,
-            "description" to description,
+            "credits" to credits,
+            "description" to mod_description,
             "geckolib_forge_version" to geckolib_forge_version,
             "geckolib_fabric_version" to geckolib_fabric_version,
             "patchouli_forge_version" to patchouli_forge_version,

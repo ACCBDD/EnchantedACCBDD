@@ -13,11 +13,9 @@ import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import software.bernie.geckolib3.renderers.geo.GeoArmorRenderer;
 
 import java.util.function.Supplier;
 
@@ -41,12 +39,6 @@ public class FabricClientRegistryHelper implements IClientRegistryHelper {
 	@Override
 	public void register(ModelLayerLocation layerLocation, Supplier<LayerDefinition> supplier) {
 		EntityModelLayerRegistry.registerModelLayer(layerLocation, supplier::get);
-	}
-
-	@Override
-	@SuppressWarnings("rawtypes")
-	public void register(Class<? extends ArmorItem> clazz, Supplier<GeoArmorRenderer> rendererSupplier, Item... items) {
-		GeoArmorRenderer.registerArmorRenderer(rendererSupplier.get(), items);
 	}
 
 	@Override

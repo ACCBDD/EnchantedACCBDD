@@ -18,12 +18,12 @@ minecraft {
 }
 
 dependencies {
+    implementation( libs.jsr305 )
     compileOnly( libs.mixin )
     compileOnly( libs.mixinextras.common )
 
-    // Use gecko/patchouli forge to compile because they don't have common yet
-    compileOnly( libs.geckolib.forge )
-    compileOnly( libs.patchouli.forge )
+    compileOnly( libs.geckolib.forge ) // Geckolib doesn't have common
+    compileOnly( libs.patchouli.forge ) // Patchouli doesn't have common
 
     compileOnly( libs.stateobserver.common )
     compileOnly( libs.sbl.common )

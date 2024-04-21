@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "building",
   "key": {
     "#": {
       "item": "enchanted:hawthorn_planks"
@@ -11,5 +12,6 @@
   "result": {
     "count": 6,
     "item": "enchanted:hawthorn_slab"
-  }
+  },
+  "show_notification": true
 }

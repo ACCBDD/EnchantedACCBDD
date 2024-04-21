@@ -28,7 +28,7 @@ license = "${license}"
     side = "BOTH"
 
 [[dependencies.${mod_id}]]
-    modId = "geckolib4"
+    modId = "geckolib"
     mandatory = true
     versionRange = "[${geckolib_forge_version},)"
     ordering = "NONE"
@@ -48,7 +48,7 @@ license = "${license}"
     ordering = "NONE"
     side = "BOTH"
 
-[[dependencies.enchanted]]
+[[dependencies.${mod_id}]]
     modId = "smartbrainlib"
     mandatory = true
     versionRange = "[${sbl_version},)"

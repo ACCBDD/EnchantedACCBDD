@@ -88,8 +88,8 @@ minecraft {
             property("mixin.env.refMapRemappingFile", "${project.projectDir}/build/createSrgToMcp/output.srg")
             args("-mixin.config=${mod_id}.mixins.json",
                 "--mod", mod_id, "--all",
-                "--output", file("src/generated/resources/").absolutePath,
-                "--existing", file("src/main/resources/").absolutePath
+                "--output",  project(":common").file("src/generated/resources/"),
+                "--existing", project(":common").file("src/main/resources/")
             )
 
             mods {
@@ -104,6 +104,7 @@ minecraft {
 
 dependencies {
     minecraft(libs.forge)
+    implementation( libs.jsr305 )
     compileOnly( project(":common") )
 
     if (System.getProperty("idea.sync.active") != "true")
@@ -116,11 +117,11 @@ dependencies {
     runtimeOnly(libs.mixinextras.forge)
     jarJar(libs.mixinextras.forge) { jarJar.ranged(this, libs.versions.mixinextras.range.get()) }
 
-    implementation( libs.geckolib.forge )
-    implementation( libs.patchouli.forge )
-    implementation( libs.sbl.forge )
-    implementation( libs.stateobserver.forge )
-    runtimeOnly( libs.jei.forge )
+    implementation( fg.deobf(libs.geckolib.forge.get()) )
+    implementation( fg.deobf(libs.patchouli.forge.get()) )
+    implementation( fg.deobf(libs.sbl.forge.get()) )
+    implementation( fg.deobf(libs.stateobserver.forge.get()) )
+    implementation( fg.deobf(libs.jei.forge.get()) )
 }
 
 //Make the result of the jarJar task the one with no classifier instead of no classifier and "all"

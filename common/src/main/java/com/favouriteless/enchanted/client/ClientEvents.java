@@ -8,6 +8,7 @@ import com.mojang.blaze3d.platform.Window;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.resources.sounds.AbstractSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.network.chat.Component;
@@ -21,8 +22,8 @@ import java.util.List;
 
 public class ClientEvents {
 
-	public static void onRenderGui(PoseStack poseStack, float partialTicks, Window window) {
-		PoppetAnimationManager.render(poseStack, partialTicks, window.getGuiScaledWidth(), window.getGuiScaledHeight());
+	public static void onRenderGui(GuiGraphics graphics, float partialTicks, Window window) {
+		PoppetAnimationManager.render(graphics, partialTicks, window.getGuiScaledWidth(), window.getGuiScaledHeight());
 	}
 
 	public static void clientTickPost() {
