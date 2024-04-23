@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "enchanted:block/rowan_pressure_plate"
+    },
+    "powered=true": {
+      "model": "enchanted:block/rowan_pressure_plate_down"
+    }
+  }
+}

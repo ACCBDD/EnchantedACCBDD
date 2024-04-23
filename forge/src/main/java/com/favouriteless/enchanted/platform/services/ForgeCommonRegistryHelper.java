@@ -5,6 +5,7 @@ import com.favouriteless.enchanted.common.items.ForgeNonAnimatedArmorItem;
 import com.favouriteless.enchanted.common.items.NonAnimatedArmorItem;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -40,6 +41,7 @@ import java.util.function.Supplier;
 
 public class ForgeCommonRegistryHelper implements ICommonRegistryHelper {
 
+	public static final DeferredRegister<CreativeModeTab> TAB_REGISTRY = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Enchanted.MOD_ID);
 	public static final DataLoaderRegister DATA_LOADERS = new DataLoaderRegister();
 	private static final RegistryMap registryMap = new RegistryMap();
 
@@ -64,12 +66,12 @@ public class ForgeCommonRegistryHelper implements ICommonRegistryHelper {
 	}
 
 	@Override
-	public CreativeModeTab getCreativeTab(String name, Supplier<ItemStack> iconSupplier, DisplayItemsGenerator itemGenerator) {
-		return CreativeModeTab.builder()
-				.title(Component.translatable(Enchanted.MOD_ID + "." + name))
+	public Supplier<CreativeModeTab> registerCreativeTab(String name, Supplier<ItemStack> iconSupplier, DisplayItemsGenerator itemGenerator) {
+		return TAB_REGISTRY.register(name, () -> CreativeModeTab.builder()
+				.title(Component.translatable("tab." + Enchanted.MOD_ID + "." + name))
 				.icon(iconSupplier)
 				.displayItems(itemGenerator)
-				.build();
+				.build());
 	}
 
 	@Override

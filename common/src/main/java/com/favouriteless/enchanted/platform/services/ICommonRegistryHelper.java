@@ -71,8 +71,8 @@ public interface ICommonRegistryHelper {
                            Supplier<SoundEvent> placeSound, Supplier<SoundEvent> hitSound, Supplier<SoundEvent> fallSound);
 
     /**
-     * Creates a new {@link CreativeModeTab}. On Forge, this calls the coremodded constructor. On Fabric, this uses the
-     * API's tab builder.
+     * Creates a new {@link CreativeModeTab} and registers it. On Forge, this calls the coremodded constructor. On
+     * Fabric, this uses the API's tab builder.
      *
      * @param name The name of the tab.
      * @param iconSupplier A {@link Supplier} returning the icon of the tab.
@@ -80,7 +80,7 @@ public interface ICommonRegistryHelper {
      *
      * @return A new {@link CreativeModeTab} with the specified icon and generator.
      */
-    CreativeModeTab getCreativeTab(String name, Supplier<ItemStack> iconSupplier, DisplayItemsGenerator itemsGenerator);
+    Supplier<CreativeModeTab> registerCreativeTab(String name, Supplier<ItemStack> iconSupplier, DisplayItemsGenerator itemsGenerator);
 
     /**
      * Register a block as flammable (i.e. can catch on fire).

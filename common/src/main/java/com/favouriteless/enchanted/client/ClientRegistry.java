@@ -38,7 +38,7 @@ public class ClientRegistry {
         IClientRegistryHelper registry = ClientServices.CLIENT_REGISTRY;
 
         // Entity renderers
-        registry.register(EnchantedEntityTypes.MANDRAKE.get(), context -> new SimpleAnimatedGeoRenderer<>(context, "entity/mandrake"));
+        registry.register(EnchantedEntityTypes.MANDRAKE.get(), context -> new SimpleAnimatedGeoRenderer<>(context, "mandrake"));
         registry.register(EnchantedEntityTypes.BROOMSTICK.get(), BroomstickRenderer::new);
         registry.register(EnchantedEntityTypes.THROWABLE_BREW.get(), ThrownItemRenderer::new);
         registry.register(EnchantedEntityTypes.FAMILIAR_CAT.get(), FamiliarCatRenderer::new);

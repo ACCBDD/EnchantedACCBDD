@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/button",
+  "textures": {
+    "texture": "enchanted:block/hawthorn_planks"
+  }
+}

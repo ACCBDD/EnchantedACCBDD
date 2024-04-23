@@ -10,13 +10,9 @@ import com.favouriteless.enchanted.common.blocks.crops.CropsBlockAgeFive;
 import com.favouriteless.enchanted.common.init.registry.EnchantedBlocks;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Plane;
-import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.RotatedPillarBlock;
-import net.minecraft.world.level.block.SlabBlock;
-import net.minecraft.world.level.block.StairBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.client.model.generators.*;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -30,53 +26,68 @@ public class BlockstateProvider extends BlockStateProvider {
 
 	@Override
 	protected void registerStatesAndModels() {
-		rotatedPillarBlockWithItem(EnchantedBlocks.ROWAN_LOG.get());
-		rotatedPillarBlockWithItem(EnchantedBlocks.HAWTHORN_LOG.get());
-		rotatedPillarBlockWithItem(EnchantedBlocks.ALDER_LOG.get());
-		rotatedPillarBlockWithItem(EnchantedBlocks.WICKER_BUNDLE.get());
-		simpleBlockWithItem(EnchantedBlocks.ROWAN_PLANKS.get());
-		simpleBlockWithItem(EnchantedBlocks.HAWTHORN_PLANKS.get());
-		simpleBlockWithItem(EnchantedBlocks.ALDER_PLANKS.get());
-		slabBlockWithItem(EnchantedBlocks.ROWAN_SLAB.get(), EnchantedBlocks.ROWAN_PLANKS.get());
-		slabBlockWithItem(EnchantedBlocks.HAWTHORN_SLAB.get(), EnchantedBlocks.HAWTHORN_PLANKS.get());
-		slabBlockWithItem(EnchantedBlocks.ALDER_SLAB.get(), EnchantedBlocks.ALDER_PLANKS.get());
-		stairsBlockWithItem(EnchantedBlocks.ROWAN_STAIRS.get(), EnchantedBlocks.ROWAN_PLANKS.get());
-		stairsBlockWithItem(EnchantedBlocks.HAWTHORN_STAIRS.get(), EnchantedBlocks.HAWTHORN_PLANKS.get());
-		stairsBlockWithItem(EnchantedBlocks.ALDER_STAIRS.get(), EnchantedBlocks.ALDER_PLANKS.get());
-		leafRandomBlockWithItem(EnchantedBlocks.ROWAN_LEAVES.get(), 4);
-		leafRandomBlockWithItem(EnchantedBlocks.HAWTHORN_LEAVES.get(), 4);
-		leafRandomBlockWithItem(EnchantedBlocks.ALDER_LEAVES.get(), 4);
-		crossBlockWithItem(EnchantedBlocks.ROWAN_SAPLING.get());
-		crossBlockWithItem(EnchantedBlocks.HAWTHORN_SAPLING.get());
-		crossBlockWithItem(EnchantedBlocks.ALDER_SAPLING.get());
+		logWithItem(EnchantedBlocks.ROWAN_LOG.get());
+		logWithItem(EnchantedBlocks.HAWTHORN_LOG.get());
+		logWithItem(EnchantedBlocks.ALDER_LOG.get());
+		logWithItem(EnchantedBlocks.WICKER_BUNDLE.get());
+		logWithItem(EnchantedBlocks.STRIPPED_ALDER_LOG.get());
+		logWithItem(EnchantedBlocks.STRIPPED_ROWAN_LOG.get());
+		logWithItem(EnchantedBlocks.STRIPPED_HAWTHORN_LOG.get());
+		fenceWithItem(EnchantedBlocks.ALDER_FENCE.get(), blockTexture(EnchantedBlocks.ALDER_PLANKS.get()));
+		fenceWithItem(EnchantedBlocks.ROWAN_FENCE.get(), blockTexture(EnchantedBlocks.ROWAN_PLANKS.get()));
+		fenceWithItem(EnchantedBlocks.HAWTHORN_FENCE.get(), blockTexture(EnchantedBlocks.HAWTHORN_PLANKS.get()));
+		fenceGateWithItem(EnchantedBlocks.ALDER_GATE.get(), blockTexture(EnchantedBlocks.ALDER_PLANKS.get()));
+		fenceGateWithItem(EnchantedBlocks.ROWAN_GATE.get(), blockTexture(EnchantedBlocks.ROWAN_PLANKS.get()));
+		fenceGateWithItem(EnchantedBlocks.HAWTHORN_GATE.get(), blockTexture(EnchantedBlocks.HAWTHORN_PLANKS.get()));
+		buttonWithItem(EnchantedBlocks.ALDER_BUTTON.get(), blockTexture(EnchantedBlocks.ALDER_PLANKS.get()));
+		buttonWithItem(EnchantedBlocks.HAWTHORN_BUTTON.get(), blockTexture(EnchantedBlocks.HAWTHORN_PLANKS.get()));
+		buttonWithItem(EnchantedBlocks.ROWAN_BUTTON.get(), blockTexture(EnchantedBlocks.ROWAN_PLANKS.get()));
+		pressurePlateWithItem(EnchantedBlocks.ROWAN_PRESSURE_PLATE.get(), blockTexture(EnchantedBlocks.ROWAN_PLANKS.get()));
+		pressurePlateWithItem(EnchantedBlocks.ALDER_PRESSURE_PLATE.get(), blockTexture(EnchantedBlocks.ALDER_PLANKS.get()));
+		pressurePlateWithItem(EnchantedBlocks.HAWTHORN_PRESSURE_PLATE.get(), blockTexture(EnchantedBlocks.HAWTHORN_PLANKS.get()));
+		simpleWithItem(EnchantedBlocks.ROWAN_PLANKS.get());
+		simpleWithItem(EnchantedBlocks.HAWTHORN_PLANKS.get());
+		simpleWithItem(EnchantedBlocks.ALDER_PLANKS.get());
+		slabWithItem(EnchantedBlocks.ROWAN_SLAB.get(), EnchantedBlocks.ROWAN_PLANKS.get());
+		slabWithItem(EnchantedBlocks.HAWTHORN_SLAB.get(), EnchantedBlocks.HAWTHORN_PLANKS.get());
+		slabWithItem(EnchantedBlocks.ALDER_SLAB.get(), EnchantedBlocks.ALDER_PLANKS.get());
+		stairsWithItem(EnchantedBlocks.ROWAN_STAIRS.get(), EnchantedBlocks.ROWAN_PLANKS.get());
+		stairsWithItem(EnchantedBlocks.HAWTHORN_STAIRS.get(), EnchantedBlocks.HAWTHORN_PLANKS.get());
+		stairsWithItem(EnchantedBlocks.ALDER_STAIRS.get(), EnchantedBlocks.ALDER_PLANKS.get());
+		leafRandomWithItem(EnchantedBlocks.ROWAN_LEAVES.get(), 4);
+		leafRandomWithItem(EnchantedBlocks.HAWTHORN_LEAVES.get(), 4);
+		leafRandomWithItem(EnchantedBlocks.ALDER_LEAVES.get(), 4);
+		crossWithItem(EnchantedBlocks.ROWAN_SAPLING.get());
+		crossWithItem(EnchantedBlocks.HAWTHORN_SAPLING.get());
+		crossWithItem(EnchantedBlocks.ALDER_SAPLING.get());
 
-		chalkBlockWithItem(EnchantedBlocks.CHALK_WHITE.get());
-		chalkBlockWithItem(EnchantedBlocks.CHALK_RED.get());
-		chalkBlockWithItem(EnchantedBlocks.CHALK_PURPLE.get());
-		goldChalkBlockWithItem(EnchantedBlocks.CHALK_GOLD.get());
+		chalkWithItem(EnchantedBlocks.CHALK_WHITE.get());
+		chalkWithItem(EnchantedBlocks.CHALK_RED.get());
+		chalkWithItem(EnchantedBlocks.CHALK_PURPLE.get());
+		goldChalkWithItem(EnchantedBlocks.CHALK_GOLD.get());
 
 		simpleBlockItem(EnchantedBlocks.ALTAR.get(), models().getExistingFile(modLoc("block/altar")));
-		horizontalLitBlockWithItem(EnchantedBlocks.WITCH_OVEN.get(), "_on", 180);
+		horizontalLitWithItem(EnchantedBlocks.WITCH_OVEN.get(), "_on", 180);
 		fumeFunnelWithItem(EnchantedBlocks.FUME_FUNNEL.get());
 		fumeFunnelWithItem(EnchantedBlocks.FUME_FUNNEL_FILTERED.get());
-		horizontalLitBlockWithItem(EnchantedBlocks.DISTILLERY.get(), "", 180);
-		complexBlockWithItem(EnchantedBlocks.WITCH_CAULDRON.get());
-		complexBlockWithItem(EnchantedBlocks.CHALICE.get());
-		complexBlockWithItem(EnchantedBlocks.CHALICE_FILLED.get());
-		complexBlockWithItem(EnchantedBlocks.CHALICE_FILLED_MILK.get());
-		complexBlockWithItem(EnchantedBlocks.INFINITY_EGG.get(), "block/dragon_egg");
-		complexBlockWithItem(EnchantedBlocks.CANDELABRA.get());
-		kettleBlockWithItem(EnchantedBlocks.KETTLE.get());
-		complexBlockWithItem(EnchantedBlocks.POPPET_SHELF.get());
+		horizontalLitWithItem(EnchantedBlocks.DISTILLERY.get(), "", 180);
+		complexWithItem(EnchantedBlocks.WITCH_CAULDRON.get());
+		complexWithItem(EnchantedBlocks.CHALICE.get());
+		complexWithItem(EnchantedBlocks.CHALICE_FILLED.get());
+		complexWithItem(EnchantedBlocks.CHALICE_FILLED_MILK.get());
+		complexWithItem(EnchantedBlocks.INFINITY_EGG.get(), "block/dragon_egg");
+		complexWithItem(EnchantedBlocks.CANDELABRA.get());
+		kettleWithItem(EnchantedBlocks.KETTLE.get());
+		complexWithItem(EnchantedBlocks.POPPET_SHELF.get());
 
-		cropsBlockWithItem(EnchantedBlocks.BELLADONNA.get(), "crop");
-		cropsBlockWithItem(EnchantedBlocks.SNOWBELL.get(), "cross");
-		cropsBlockWithItem(EnchantedBlocks.ARTICHOKE.get(), "crop");
-		cropsBlockWithItem(EnchantedBlocks.MANDRAKE.get(), "crop");
-		cropsBlockWithItem(EnchantedBlocks.GARLIC.get(), "crop");
-		cropsBlockWithItem(EnchantedBlocks.WOLFSBANE.get(), "cross");
-		crossBlockWithItem(EnchantedBlocks.GLINT_WEED.get());
-		crossBlockWithItem(EnchantedBlocks.EMBER_MOSS.get());
+		cropsWithItem(EnchantedBlocks.BELLADONNA.get(), "crop");
+		cropsWithItem(EnchantedBlocks.SNOWBELL.get(), "cross");
+		cropsWithItem(EnchantedBlocks.ARTICHOKE.get(), "crop");
+		cropsWithItem(EnchantedBlocks.MANDRAKE.get(), "crop");
+		cropsWithItem(EnchantedBlocks.GARLIC.get(), "crop");
+		cropsWithItem(EnchantedBlocks.WOLFSBANE.get(), "cross");
+		crossWithItem(EnchantedBlocks.GLINT_WEED.get());
+		crossWithItem(EnchantedBlocks.EMBER_MOSS.get());
 		getVariantBuilder(EnchantedBlocks.BLOOD_POPPY.get()).forAllStates(state -> {
 			String name = "block/" + ForgeRegistries.BLOCKS.getKey(EnchantedBlocks.BLOOD_POPPY.get()).getPath();
 			if(state.getValue(BloodPoppyBlock.FILLED)) name = name + "_filled";
@@ -91,7 +102,7 @@ public class BlockstateProvider extends BlockStateProvider {
 
 	}
 
-	private void kettleBlockWithItem(Block block) {
+	private void kettleWithItem(Block block) {
 		getVariantBuilder(block).forAllStates(state -> ConfiguredModel.builder()
 				.modelFile(models().getExistingFile(state.getValue(KettleBlock.TYPE) == 0 ? modLoc("block/kettle") : state.getValue(KettleBlock.TYPE) == 1 ? modLoc("block/kettle_hanging") : modLoc("block/kettle_hanging_beam")))
 				.rotationY((int)state.getValue(KettleBlock.FACING).toYRot() % 360)
@@ -107,7 +118,7 @@ public class BlockstateProvider extends BlockStateProvider {
 				.texture("layer0", ModelProvider.BLOCK_FOLDER + "/" + name);
 	}
 
-	private void chalkBlockWithItem(Block block) {
+	private void chalkWithItem(Block block) {
 		getVariantBuilder(block).forAllStates(state -> ConfiguredModel.builder()
 						.modelFile(models().withExistingParent("block/glyph_" + (state.getValue(ChalkCircleBlock.GLYPH)%12), modLoc("block/glyph")).texture("top", "block/glyph_"+(state.getValue(ChalkCircleBlock.GLYPH)%12)))
 						.rotationY((state.getValue(ChalkCircleBlock.GLYPH) % 4 * 90))
@@ -118,7 +129,7 @@ public class BlockstateProvider extends BlockStateProvider {
 				.texture("layer0", modLoc(ModelProvider.ITEM_FOLDER + "/" + ForgeRegistries.BLOCKS.getKey(block).getPath()));
 	}
 
-	private void goldChalkBlockWithItem(Block block) {
+	private void goldChalkWithItem(Block block) {
 		VariantBlockStateBuilder builder = getVariantBuilder(block);
 		String name = ForgeRegistries.BLOCKS.getKey(block).getPath();
 
@@ -132,35 +143,35 @@ public class BlockstateProvider extends BlockStateProvider {
 				.texture("layer0", modLoc(ModelProvider.ITEM_FOLDER + "/" + name));
 	}
 
-	private void simpleBlockWithItem(Block block) {
+	private void simpleWithItem(Block block) {
 		simpleBlock(block);
 		simpleBlockItem(block, models().getExistingFile(modLoc("block/" + ForgeRegistries.BLOCKS.getKey(block).getPath())));
 	}
 
-	private void complexBlockWithItem(Block block) {
+	private void complexWithItem(Block block) {
 		ModelFile model = models().getExistingFile(modLoc("block/" + ForgeRegistries.BLOCKS.getKey(block).getPath()));
 		simpleBlock(block, model);
 		simpleBlockItem(block, model);
 	}
 
-	private void complexBlockWithItem(Block block, String location) {
+	private void complexWithItem(Block block, String location) {
 		ModelFile model = models().getExistingFile(mcLoc(location));
 		simpleBlock(block, model);
 		simpleBlockItem(block, model);
 	}
 
-	private void slabBlockWithItem(SlabBlock block, Block parent) {
+	private void slabWithItem(SlabBlock block, Block parent) {
 		ResourceLocation path = blockTexture(parent);
 		slabBlock(block, path, blockTexture(parent));
 		simpleBlockItem(block, models().getExistingFile(blockTexture(block)));
 	}
 
-	private void stairsBlockWithItem(StairBlock block, Block parent) {
+	private void stairsWithItem(StairBlock block, Block parent) {
 		stairsBlock(block, blockTexture(parent));
 		simpleBlockItem(block, models().getExistingFile(blockTexture(block)));
 	}
 
-	private void horizontalLitBlockWithItem(Block block, String onSuffix, int angleOffset) {
+	private void horizontalLitWithItem(Block block, String onSuffix, int angleOffset) {
 		String name = ForgeRegistries.BLOCKS.getKey(block).getPath();
 
 		ModelFile modelUnlit = models().getExistingFile(modLoc("block/" + name));
@@ -195,7 +206,7 @@ public class BlockstateProvider extends BlockStateProvider {
 				.parent(models().getExistingFile(modLoc("block/" + name + types[0])));
 	}
 
-	private void leafRandomBlockWithItem(Block block, int numVariants) {
+	private void leafRandomWithItem(Block block, int numVariants) {
 		String name = ForgeRegistries.BLOCKS.getKey(block).getPath();
 		ConfiguredModel[] models = new ConfiguredModel[numVariants];
 		for(int i = 0; i < numVariants; i++) {
@@ -206,22 +217,50 @@ public class BlockstateProvider extends BlockStateProvider {
 				.parent(models().getExistingFile(modLoc("block/" + name + "_0")));
 	}
 
-	private void rotatedPillarBlockWithItem(RotatedPillarBlock block) {
+	private void logWithItem(RotatedPillarBlock block) {
 		logBlock(block);
 		simpleBlockItem(block, models().getExistingFile(blockTexture(block)));
 	}
 
-	private void crossBlock(Block block) {
+	private void fenceWithItem(FenceBlock block, ResourceLocation texture) {
+		fenceBlock(block, texture);
+		ResourceLocation key = ForgeRegistries.BLOCKS.getKey(block);
+		itemModels().getBuilder(key.getPath())
+				.parent(models().getExistingFile(mcLoc("block/fence_inventory")))
+				.texture("texture", texture);
+	}
+
+	private void fenceGateWithItem(FenceGateBlock block, ResourceLocation texture) {
+		fenceGateBlock(block, texture);
+		ResourceLocation key = ForgeRegistries.BLOCKS.getKey(block);
+		itemModels().getBuilder(key.getPath()).parent(models().getExistingFile(modLoc("block/" + key.getPath())));
+	}
+
+	private void buttonWithItem(ButtonBlock block, ResourceLocation texture) {
+		buttonBlock(block, texture);
+		ResourceLocation key = ForgeRegistries.BLOCKS.getKey(block);
+		itemModels().getBuilder(key.getPath())
+				.parent(models().getExistingFile(mcLoc("block/button_inventory")))
+				.texture("texture", texture);;
+	}
+
+	private void pressurePlateWithItem(PressurePlateBlock block, ResourceLocation texture) {
+		pressurePlateBlock(block, texture);
+		ResourceLocation key = ForgeRegistries.BLOCKS.getKey(block);
+		itemModels().getBuilder(key.getPath()).parent(models().getExistingFile(modLoc("block/" + key.getPath())));
+	}
+
+	private void cross(Block block) {
 		ResourceLocation path = blockTexture(block);
 		simpleBlock(block, models().cross(path.toString(), path).renderType(new ResourceLocation("cutout")));
 	}
 
-	private void crossBlockWithItem(Block block) {
-		crossBlock(block);
+	private void crossWithItem(Block block) {
+		cross(block);
 		simpleItem(block);
 	}
 
-	private void cropsBlockWithItem(CropsBlockAgeFive block, String parent) {
+	private void cropsWithItem(CropsBlockAgeFive block, String parent) {
 		String path = BlockModelProvider.BLOCK_FOLDER + "/" + ForgeRegistries.BLOCKS.getKey(block).getPath() + "_stage_";
 		getVariantBuilder(block).forAllStates(state -> ConfiguredModel.builder()
 						.modelFile(models()

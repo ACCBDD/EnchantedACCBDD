@@ -2,15 +2,10 @@ package com.favouriteless.enchanted.common.init;
 
 import com.favouriteless.enchanted.common.init.registry.EnchantedItems;
 import com.favouriteless.enchanted.platform.CommonServices;
-import com.favouriteless.enchanted.platform.services.ICommonRegistryHelper;
-import net.minecraft.core.NonNullList;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTab.DisplayItemsGenerator;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.function.Supplier;
@@ -20,6 +15,33 @@ public class EnchantedCreativeTab {
     public static final Supplier<CreativeModeTab> TAB = register("main",
             () -> EnchantedItems.ENCHANTED_BROOMSTICK.get().getDefaultInstance(),
             (params, out) -> {
+                out.accept(EnchantedItems.ALDER_LOG.get());
+                out.accept(EnchantedItems.STRIPPED_ALDER_LOG.get());
+                out.accept(EnchantedItems.ALDER_PLANKS.get());
+                out.accept(EnchantedItems.ALDER_STAIRS.get());
+                out.accept(EnchantedItems.ALDER_SLAB.get());
+                out.accept(EnchantedItems.ALDER_FENCE.get());
+                out.accept(EnchantedItems.ALDER_GATE.get());
+                out.accept(EnchantedItems.ALDER_PRESSURE_PLATE.get());
+                out.accept(EnchantedItems.ALDER_BUTTON.get());
+                out.accept(EnchantedItems.HAWTHORN_LOG.get());
+                out.accept(EnchantedItems.STRIPPED_HAWTHORN_LOG.get());
+                out.accept(EnchantedItems.HAWTHORN_PLANKS.get());
+                out.accept(EnchantedItems.HAWTHORN_STAIRS.get());
+                out.accept(EnchantedItems.HAWTHORN_SLAB.get());
+                out.accept(EnchantedItems.HAWTHORN_FENCE.get());
+                out.accept(EnchantedItems.HAWTHORN_GATE.get());
+                out.accept(EnchantedItems.HAWTHORN_PRESSURE_PLATE.get());
+                out.accept(EnchantedItems.HAWTHORN_BUTTON.get());
+                out.accept(EnchantedItems.ROWAN_LOG.get());
+                out.accept(EnchantedItems.STRIPPED_ROWAN_LOG.get());
+                out.accept(EnchantedItems.ROWAN_PLANKS.get());
+                out.accept(EnchantedItems.ROWAN_STAIRS.get());
+                out.accept(EnchantedItems.ROWAN_SLAB.get());
+                out.accept(EnchantedItems.ROWAN_FENCE.get());
+                out.accept(EnchantedItems.ROWAN_GATE.get());
+                out.accept(EnchantedItems.ROWAN_PRESSURE_PLATE.get());
+                out.accept(EnchantedItems.ROWAN_BUTTON.get());
 
                 out.accept(EnchantedItems.ALTAR.get());
                 out.accept(EnchantedItems.WITCH_OVEN.get());
@@ -35,19 +57,6 @@ public class EnchantedCreativeTab {
                 out.accept(EnchantedItems.CHALICE_FILLED.get());
                 out.accept(EnchantedItems.CANDELABRA.get());
                 out.accept(EnchantedItems.INFINITY_EGG.get());
-
-                out.accept(EnchantedItems.ALDER_LOG.get());
-                out.accept(EnchantedItems.ALDER_PLANKS.get());
-                out.accept(EnchantedItems.ALDER_STAIRS.get());
-                out.accept(EnchantedItems.ALDER_SLAB.get());
-                out.accept(EnchantedItems.HAWTHORN_LOG.get());
-                out.accept(EnchantedItems.HAWTHORN_PLANKS.get());
-                out.accept(EnchantedItems.HAWTHORN_STAIRS.get());
-                out.accept(EnchantedItems.HAWTHORN_SLAB.get());
-                out.accept(EnchantedItems.ROWAN_LOG.get());
-                out.accept(EnchantedItems.ROWAN_PLANKS.get());
-                out.accept(EnchantedItems.ROWAN_STAIRS.get());
-                out.accept(EnchantedItems.ROWAN_SLAB.get());
 
                 out.accept(EnchantedItems.WICKER_BUNDLE.get());
 
@@ -172,9 +181,9 @@ public class EnchantedCreativeTab {
 
 
     public static Supplier<CreativeModeTab> register(String name, Supplier<ItemStack> iconSupplier, DisplayItemsGenerator itemsGenerator) {
-        return CommonServices.COMMON_REGISTRY.register(BuiltInRegistries.CREATIVE_MODE_TAB, name,
-                () -> CommonServices.COMMON_REGISTRY.getCreativeTab(name, iconSupplier, itemsGenerator)
-        );
+        return CommonServices.COMMON_REGISTRY.registerCreativeTab(name, iconSupplier, itemsGenerator);
     }
+
+    public static void load() {} // Method which exists purely to load the class.
 
 }

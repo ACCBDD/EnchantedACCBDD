@@ -18,10 +18,16 @@ import com.favouriteless.enchanted.platform.services.ICommonRegistryHelper;
 import net.minecraft.core.Direction.Axis;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.flag.FeatureFlag;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.PressurePlateBlock.Sensitivity;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
+import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 
@@ -30,9 +36,13 @@ import java.util.function.ToIntFunction;
 
 public class EnchantedBlocks {
 
+    public static final Supplier<ButtonBlock> ALDER_BUTTON = register("alder_button", EnchantedBlocks::woodenButton);
+    public static final Supplier<FenceBlock> ALDER_FENCE = register("alder_fence", () -> new FenceBlock(Properties.copy(Blocks.OAK_FENCE)));
+    public static final Supplier<FenceGateBlock> ALDER_GATE = register("alder_gate", () -> new FenceGateBlock(Properties.copy(Blocks.OAK_FENCE_GATE), WoodType.OAK));
     public static final Supplier<Block> ALDER_LEAVES = register("alder_leaves", () -> new LeavesBlock(Properties.copy(Blocks.OAK_LEAVES)));
     public static final Supplier<RotatedPillarBlock> ALDER_LOG = register("alder_log", () -> log(MapColor.COLOR_ORANGE, MapColor.STONE));
     public static final Supplier<Block> ALDER_PLANKS = register("alder_planks", () -> new Block(Properties.copy(Blocks.OAK_PLANKS)));
+    public static final Supplier<PressurePlateBlock> ALDER_PRESSURE_PLATE = register("alder_pressure_plate", () -> woodenPressurePlate(MapColor.COLOR_ORANGE));
     public static final Supplier<SaplingBlock> ALDER_SAPLING = register("alder_sapling", () -> new EnchantedSaplingBlock(new EnchantedTreeGrower("alder_tree"), Properties.copy(Blocks.OAK_SAPLING)));
     public static final Supplier<SlabBlock> ALDER_SLAB = register("alder_slab", () -> new SlabBlock(Properties.copy(Blocks.OAK_SLAB)));
     public static final Supplier<StairBlock> ALDER_STAIRS = register("alder_stairs", () -> new EnchantedStairBlock(ALDER_PLANKS.get().defaultBlockState(), Properties.copy(ALDER_PLANKS.get())));
@@ -54,9 +64,13 @@ public class EnchantedBlocks {
     public static final Supplier<Block> FUME_FUNNEL_FILTERED = register("fume_funnel_filtered", () -> new FumeFunnelBlock(Properties.copy(FUME_FUNNEL.get())));
     public static final Supplier<CropsBlockAgeFive> GARLIC = register("garlic", () -> new GarlicBlock(Properties.copy(Blocks.WHEAT)));
     public static final Supplier<Block> GLINT_WEED = register("glint_weed", () -> new GlintWeedBlock(Properties.copy(Blocks.POPPY).lightLevel((a) -> 14).randomTicks()));
+    public static final Supplier<ButtonBlock> HAWTHORN_BUTTON = register("hawthorn_button", EnchantedBlocks::woodenButton);
+    public static final Supplier<FenceBlock> HAWTHORN_FENCE = register("hawthorn_fence", () -> new FenceBlock(Properties.copy(Blocks.OAK_FENCE)));
+    public static final Supplier<FenceGateBlock> HAWTHORN_GATE = register("hawthorn_gate", () -> new FenceGateBlock(Properties.copy(Blocks.OAK_FENCE_GATE), WoodType.OAK));
     public static final Supplier<Block> HAWTHORN_LEAVES = register("hawthorn_leaves", () -> new LeavesBlock(Properties.copy(Blocks.OAK_LEAVES)));
     public static final Supplier<RotatedPillarBlock> HAWTHORN_LOG = register("hawthorn_log", () -> log(MapColor.CLAY, MapColor.CLAY));
     public static final Supplier<Block> HAWTHORN_PLANKS = register("hawthorn_planks", () -> new Block(Properties.copy(Blocks.OAK_PLANKS)));
+    public static final Supplier<PressurePlateBlock> HAWTHORN_PRESSURE_PLATE = register("hawthorn_pressure_plate", () -> woodenPressurePlate(MapColor.CLAY));
     public static final Supplier<SaplingBlock> HAWTHORN_SAPLING = register("hawthorn_sapling", () -> new EnchantedSaplingBlock(new EnchantedTreeGrower("hawthorn_tree"), Properties.copy(Blocks.OAK_SAPLING)));
     public static final Supplier<SlabBlock> HAWTHORN_SLAB = register("hawthorn_slab", () -> new SlabBlock(Properties.copy(Blocks.OAK_SLAB)));
     public static final Supplier<StairBlock> HAWTHORN_STAIRS = register("hawthorn_stairs", () -> new EnchantedStairBlock(HAWTHORN_PLANKS.get().defaultBlockState(), Properties.copy(HAWTHORN_PLANKS.get())));
@@ -66,15 +80,22 @@ public class EnchantedBlocks {
     public static final Supplier<Block> POPPET_SHELF = register("poppet_shelf", () -> new PoppetShelfBlock(Properties.copy(Blocks.ENCHANTING_TABLE).noOcclusion()));
     public static final Supplier<Block> PROTECTION_BARRIER = register("protection_barrier", () -> new ProtectionBarrierBlock(Properties.copy(Blocks.BARRIER)));
     public static final Supplier<Block> PROTECTION_BARRIER_TEMPORARY = register("protection_barrier_temporary", () -> new TemporaryProtectionBarrierBlock(Properties.copy(Blocks.BARRIER)));
+    public static final Supplier<ButtonBlock> ROWAN_BUTTON = register("rowan_button", EnchantedBlocks::woodenButton);
+    public static final Supplier<FenceBlock> ROWAN_FENCE = register("rowan_fence", () -> new FenceBlock(Properties.copy(Blocks.OAK_FENCE)));
+    public static final Supplier<FenceGateBlock> ROWAN_GATE = register("rowan_gate", () -> new FenceGateBlock(Properties.copy(Blocks.OAK_FENCE_GATE), WoodType.OAK));
     public static final Supplier<Block> ROWAN_LEAVES = register("rowan_leaves", () -> new LeavesBlock(Properties.copy(Blocks.OAK_LEAVES)));
     public static final Supplier<RotatedPillarBlock> ROWAN_LOG = register("rowan_log", () -> log(MapColor.WOOD, MapColor.PODZOL));
     public static final Supplier<Block> ROWAN_PLANKS = register("rowan_planks", () -> new Block(Properties.copy(Blocks.OAK_PLANKS)));
+    public static final Supplier<PressurePlateBlock> ROWAN_PRESSURE_PLATE = register("rowan_pressure_plate", () -> woodenPressurePlate(MapColor.WOOD));
     public static final Supplier<SaplingBlock> ROWAN_SAPLING = register("rowan_sapling", () -> new EnchantedSaplingBlock(new EnchantedTreeGrower("rowan_tree"), Properties.copy(Blocks.OAK_SAPLING)));
     public static final Supplier<SlabBlock> ROWAN_SLAB = register("rowan_slab", () -> new SlabBlock(Properties.copy(Blocks.OAK_SLAB)));
     public static final Supplier<StairBlock> ROWAN_STAIRS = register("rowan_stairs", () -> new EnchantedStairBlock(ROWAN_PLANKS.get().defaultBlockState(), Properties.copy(ROWAN_PLANKS.get())));
     public static final Supplier<CropsBlockAgeFive> SNOWBELL = register("snowbell", () -> new SnowbellBlock(Properties.copy(Blocks.WHEAT)));
     public static final Supplier<Block> SPANISH_MOSS = register("spanish_moss", () -> new SpanishMossBlock(Properties.copy(Blocks.VINE)));
     public static final Supplier<Block> SPINNING_WHEEL = register("spinning_wheel", () -> new SpinningWheelBlock(Properties.copy(Blocks.OAK_PLANKS).noOcclusion()));
+    public static final Supplier<RotatedPillarBlock> STRIPPED_ALDER_LOG = register("stripped_alder_log", () -> log(MapColor.COLOR_ORANGE, MapColor.COLOR_ORANGE));
+    public static final Supplier<RotatedPillarBlock> STRIPPED_HAWTHORN_LOG = register("stripped_hawthorn_log", () -> log(MapColor.CLAY, MapColor.CLAY));
+    public static final Supplier<RotatedPillarBlock> STRIPPED_ROWAN_LOG = register("stripped_rowan_log", () -> log(MapColor.WOOD, MapColor.WOOD));
     public static final Supplier<RotatedPillarBlock> WICKER_BUNDLE = register("wicker_bundle", () -> new HayBlock(Properties.copy(Blocks.HAY_BLOCK)));
     public static final Supplier<Block> WITCH_CAULDRON = register("witch_cauldron", () -> new WitchCauldronBlock(Properties.copy(Blocks.CAULDRON).noOcclusion()));
     public static final Supplier<Block> WITCH_OVEN = register("witch_oven", () -> new WitchOvenBlock(Properties.copy(DISTILLERY.get())));
@@ -116,6 +137,17 @@ public class EnchantedBlocks {
                 .mapColor(state -> state.getValue(RotatedPillarBlock.AXIS) == Axis.Y ? topColor : barkColor)
         );
     }
+
+    private static ButtonBlock woodenButton() {
+        return new ButtonBlock(BlockBehaviour.Properties.of().noCollission().strength(0.5F).pushReaction(PushReaction.DESTROY), BlockSetType.OAK, 30, true);
+    }
+
+    private static PressurePlateBlock woodenPressurePlate(MapColor mapColor) {
+        return new PressurePlateBlock(Sensitivity.EVERYTHING,
+                Properties.of().mapColor(mapColor).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(0.5F).ignitedByLava().pushReaction(PushReaction.DESTROY),
+                BlockSetType.OAK);
+    }
+
 
     public static void load() {} // Method which exists purely to load the class.
 

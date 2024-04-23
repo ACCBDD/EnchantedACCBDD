@@ -24,9 +24,13 @@ import java.util.function.Supplier;
 
 public class EnchantedItems {
 
-	public static final Supplier<Item> ALDER_LEAVES = registerBlock("alder_leaves", EnchantedBlocks.ALDER_LEAVES);
+	public static final Supplier<Item> ALDER_BUTTON = registerBlock("alder_button", EnchantedBlocks.ALDER_BUTTON);
+	public static final Supplier<Item> ALDER_FENCE = registerBlock("alder_fence", EnchantedBlocks.ALDER_FENCE);
+	public static final Supplier<Item> ALDER_GATE = registerBlock("alder_gate", EnchantedBlocks.ALDER_GATE);
 	public static final Supplier<Item> ALDER_LOG = registerBlock("alder_log", EnchantedBlocks.ALDER_LOG);
+	public static final Supplier<Item> ALDER_LEAVES = registerBlock("alder_leaves", EnchantedBlocks.ALDER_LEAVES);
 	public static final Supplier<Item> ALDER_PLANKS = registerBlock("alder_planks", EnchantedBlocks.ALDER_PLANKS);
+	public static final Supplier<Item> ALDER_PRESSURE_PLATE = registerBlock("alder_pressure_plate", EnchantedBlocks.ALDER_PRESSURE_PLATE);
 	public static final Supplier<Item> ALDER_SAPLING = registerBlock("alder_sapling", EnchantedBlocks.ALDER_SAPLING);
 	public static final Supplier<Item> ALDER_SLAB = registerBlock("alder_slab", EnchantedBlocks.ALDER_SLAB);
 	public static final Supplier<Item> ALDER_STAIRS = registerBlock("alder_stairs", EnchantedBlocks.ALDER_STAIRS);
@@ -93,9 +97,13 @@ public class EnchantedItems {
 	public static final Supplier<Item> GLINT_WEED = registerBlock("glint_weed", EnchantedBlocks.GLINT_WEED);
 	public static final Supplier<Item> GYPSUM = registerItem("gypsum");
 	public static final Supplier<Item> HAPPENSTANCE_OIL = registerBrew("happenstance_oil", MobEffects.NIGHT_VISION, 1200, 0);
+	public static final Supplier<Item> HAWTHORN_BUTTON = registerBlock("hawthorn_button", EnchantedBlocks.HAWTHORN_BUTTON);
+	public static final Supplier<Item> HAWTHORN_FENCE = registerBlock("hawthorn_fence", EnchantedBlocks.HAWTHORN_FENCE);
+	public static final Supplier<Item> HAWTHORN_GATE = registerBlock("hawthorn_gate", EnchantedBlocks.HAWTHORN_GATE);
 	public static final Supplier<Item> HAWTHORN_LEAVES = registerBlock("hawthorn_leaves", EnchantedBlocks.HAWTHORN_LEAVES);
 	public static final Supplier<Item> HAWTHORN_LOG = registerBlock("hawthorn_log", EnchantedBlocks.HAWTHORN_LOG);
 	public static final Supplier<Item> HAWTHORN_PLANKS = registerBlock("hawthorn_planks", EnchantedBlocks.HAWTHORN_PLANKS);
+	public static final Supplier<Item> HAWTHORN_PRESSURE_PLATE = registerBlock("hawthorn_pressure_plate", EnchantedBlocks.HAWTHORN_PRESSURE_PLATE);
 	public static final Supplier<Item> HAWTHORN_SAPLING = registerBlock("hawthorn_sapling", EnchantedBlocks.HAWTHORN_SAPLING);
 	public static final Supplier<Item> HAWTHORN_SLAB = registerBlock("hawthorn_slab", EnchantedBlocks.HAWTHORN_SLAB);
 	public static final Supplier<Item> HAWTHORN_STAIRS = registerBlock("hawthorn_stairs", EnchantedBlocks.HAWTHORN_STAIRS);
@@ -125,9 +133,13 @@ public class EnchantedItems {
 	public static final Supplier<Item> REEK_OF_MISFORTUNE = registerItem("reek_of_misfortune");
 	public static final Supplier<Item> REFINED_EVIL = registerItem("refined_evil");
 	public static final Supplier<Item> ROWAN_BERRIES = registerFood("rowan_berries", 3, true, false);
+	public static final Supplier<Item> ROWAN_BUTTON = registerBlock("rowan_button", EnchantedBlocks.ROWAN_BUTTON);
+	public static final Supplier<Item> ROWAN_FENCE = registerBlock("rowan_fence", EnchantedBlocks.ROWAN_FENCE);
+	public static final Supplier<Item> ROWAN_GATE = registerBlock("rowan_gate", EnchantedBlocks.ROWAN_GATE);
 	public static final Supplier<Item> ROWAN_LEAVES = registerBlock("rowan_leaves", EnchantedBlocks.ROWAN_LEAVES);
 	public static final Supplier<Item> ROWAN_LOG = registerBlock("rowan_log", EnchantedBlocks.ROWAN_LOG);
 	public static final Supplier<Item> ROWAN_PLANKS = registerBlock("rowan_planks", EnchantedBlocks.ROWAN_PLANKS);
+	public static final Supplier<Item> ROWAN_PRESSURE_PLATE = registerBlock("rowan_pressure_plate", EnchantedBlocks.ROWAN_PRESSURE_PLATE);
 	public static final Supplier<Item> ROWAN_SAPLING = registerBlock("rowan_sapling", EnchantedBlocks.ROWAN_SAPLING);
 	public static final Supplier<Item> ROWAN_SLAB = registerBlock("rowan_slab", EnchantedBlocks.ROWAN_SLAB);
 	public static final Supplier<Item> ROWAN_STAIRS = registerBlock("rowan_stairs", EnchantedBlocks.ROWAN_STAIRS);
@@ -136,6 +148,9 @@ public class EnchantedItems {
 	public static final Supplier<Item> SPANISH_MOSS = registerBlock("spanish_moss", EnchantedBlocks.SPANISH_MOSS);
 	public static final Supplier<Item> SPINNING_WHEEL = register("spinning_wheel", () -> new SpinningWheelBlockItem(defaultProperties()));
 	public static final Supplier<Item> SPIRIT_OF_OTHERWHERE = registerBrew("spirit_of_otherwhere", MobEffects.POISON, 1200, 1);
+	public static final Supplier<Item> STRIPPED_ALDER_LOG = registerBlock("stripped_alder_log", EnchantedBlocks.STRIPPED_ALDER_LOG);
+	public static final Supplier<Item> STRIPPED_HAWTHORN_LOG = registerBlock("stripped_hawthorn_log", EnchantedBlocks.STRIPPED_HAWTHORN_LOG);
+	public static final Supplier<Item> STRIPPED_ROWAN_LOG = registerBlock("stripped_rowan_log", EnchantedBlocks.STRIPPED_ROWAN_LOG);
 	public static final Supplier<Item> TAGLOCK = register("taglock",  () -> new TaglockItem(defaultProperties()));
 	public static final Supplier<Item> TAGLOCK_FILLED =  register("taglock_filled",  () -> new TaglockFilledItem(new Properties()));
 	public static final Supplier<Item> TEAR_OF_THE_GODDESS = registerItem("tear_of_the_goddess");

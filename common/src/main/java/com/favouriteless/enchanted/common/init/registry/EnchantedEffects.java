@@ -18,4 +18,6 @@ public class EnchantedEffects {
 		return CommonServices.COMMON_REGISTRY.register(BuiltInRegistries.MOB_EFFECT, name, effectSupplier);
 	}
 
+	public static void load() {} // Method which exists purely to load the class.
+
 }

@@ -10,6 +10,7 @@ import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -56,12 +57,13 @@ public class FabricCommonRegistryHelper implements ICommonRegistryHelper {
 	}
 
 	@Override
-	public CreativeModeTab getCreativeTab(String name, Supplier<ItemStack> iconSupplier, DisplayItemsGenerator itemsGenerator) {
-		return FabricItemGroup.builder()
-				.title(Component.translatable(Enchanted.MOD_ID + "." + name))
-				.icon(iconSupplier)
-				.displayItems(itemsGenerator)
-				.build();
+	public Supplier<CreativeModeTab> registerCreativeTab(String name, Supplier<ItemStack> iconSupplier, DisplayItemsGenerator itemsGenerator) {
+		return register(BuiltInRegistries.CREATIVE_MODE_TAB, name,
+				() -> FabricItemGroup.builder()
+						.title(Component.translatable("tab." + Enchanted.MOD_ID + "." + name))
+						.icon(iconSupplier)
+						.displayItems(itemsGenerator)
+						.build());
 	}
 
 	@Override

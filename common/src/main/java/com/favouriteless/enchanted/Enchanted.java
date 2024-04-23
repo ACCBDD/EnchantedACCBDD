@@ -1,5 +1,6 @@
 package com.favouriteless.enchanted;
 
+import com.favouriteless.enchanted.common.init.EnchantedCreativeTab;
 import com.favouriteless.enchanted.common.init.EnchantedData;
 import com.favouriteless.enchanted.common.init.registry.*;
 import com.favouriteless.enchanted.common.network.EnchantedPackets;
@@ -29,10 +30,12 @@ public class Enchanted {
         EnchantedBlocks.load();
         EnchantedBlockEntityTypes.load();
         EnchantedEntityTypes.load();
+        EnchantedEffects.load();
         EnchantedParticleTypes.load();
         EnchantedMenuTypes.load();
         EnchantedRecipeTypes.load();
         EnchantedData.load();
+        EnchantedCreativeTab.load();
     }
 
     public static ResourceLocation location(String path) {
