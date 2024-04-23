@@ -1,4 +1,4 @@
-package com.favouriteless.enchanted.common.jei;
+package com.favouriteless.enchanted.jei;
 
 import com.favouriteless.enchanted.common.menus.DistilleryMenu;
 import com.favouriteless.enchanted.common.recipes.DistillingRecipe;

@@ -1,4 +1,4 @@
-package com.favouriteless.enchanted.common.jei.categories;
+package com.favouriteless.enchanted.jei.categories;
 
 import com.favouriteless.enchanted.Enchanted;
 import com.favouriteless.enchanted.common.init.registry.EnchantedItems;
@@ -52,7 +52,7 @@ public class KettleCategory implements IRecipeCategory<KettleRecipe> {
         int x = GUI_WIDTH/2 - width/2 - 1;
         int y = 55;
 
-        gui.drawString(minecraft.font, text, x + 1, y, shadowColor);
+        gui.drawString(minecraft.font, text, x + 1, y, shadowColor, false);
     }
 
     @Override

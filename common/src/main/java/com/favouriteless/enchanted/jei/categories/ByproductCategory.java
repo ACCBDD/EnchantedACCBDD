@@ -1,4 +1,4 @@
-package com.favouriteless.enchanted.common.jei.categories;
+package com.favouriteless.enchanted.jei.categories;
 
 import com.favouriteless.enchanted.Enchanted;
 import com.favouriteless.enchanted.common.init.registry.EnchantedItems;

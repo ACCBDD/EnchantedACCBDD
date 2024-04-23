@@ -1,4 +1,4 @@
-package com.favouriteless.enchanted.common.jei.recipes;
+package com.favouriteless.enchanted.jei.recipes;
 
 import net.minecraft.core.HolderSet.Named;
 import net.minecraft.core.registries.BuiltInRegistries;

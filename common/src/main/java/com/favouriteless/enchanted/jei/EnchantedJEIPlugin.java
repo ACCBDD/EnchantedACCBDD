@@ -1,4 +1,4 @@
-package com.favouriteless.enchanted.common.jei;
+package com.favouriteless.enchanted.jei;
 
 import com.favouriteless.enchanted.Enchanted;
 import com.favouriteless.enchanted.api.rites.AbstractCreateItemRite;
@@ -10,11 +10,11 @@ import com.favouriteless.enchanted.common.init.registry.EnchantedItems;
 import com.favouriteless.enchanted.common.init.registry.EnchantedMenuTypes;
 import com.favouriteless.enchanted.common.init.registry.EnchantedRecipeTypes;
 import com.favouriteless.enchanted.common.init.registry.RiteTypes;
-import com.favouriteless.enchanted.common.jei.categories.*;
-import com.favouriteless.enchanted.common.jei.container_handlers.DistilleryContainerHandler;
-import com.favouriteless.enchanted.common.jei.container_handlers.SpinningWheelContainerHandler;
-import com.favouriteless.enchanted.common.jei.container_handlers.WitchOvenContainerHandler;
-import com.favouriteless.enchanted.common.jei.recipes.JEIMutandisRecipe;
+import com.favouriteless.enchanted.jei.categories.*;
+import com.favouriteless.enchanted.jei.container_handlers.DistilleryContainerHandler;
+import com.favouriteless.enchanted.jei.container_handlers.SpinningWheelContainerHandler;
+import com.favouriteless.enchanted.jei.container_handlers.WitchOvenContainerHandler;
+import com.favouriteless.enchanted.jei.recipes.JEIMutandisRecipe;
 import com.favouriteless.enchanted.common.menus.SpinningWheelMenu;
 import com.favouriteless.enchanted.common.menus.WitchOvenMenu;
 import com.favouriteless.enchanted.common.rites.RiteType;

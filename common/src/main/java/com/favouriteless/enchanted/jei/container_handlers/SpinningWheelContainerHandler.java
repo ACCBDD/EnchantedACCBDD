@@ -1,7 +1,7 @@
-package com.favouriteless.enchanted.common.jei.container_handlers;
+package com.favouriteless.enchanted.jei.container_handlers;
 
 import com.favouriteless.enchanted.client.screens.SpinningWheelScreen;
-import com.favouriteless.enchanted.common.jei.JEIRecipeTypes;
+import com.favouriteless.enchanted.jei.JEIRecipeTypes;
 import mezz.jei.api.gui.handlers.IGuiClickableArea;
 import mezz.jei.api.gui.handlers.IGuiContainerHandler;
 import mezz.jei.api.recipe.IFocusFactory;

@@ -1,9 +1,9 @@
-package com.favouriteless.enchanted.common.jei.categories;
+package com.favouriteless.enchanted.jei.categories;
 
 import com.favouriteless.enchanted.Enchanted;
 import com.favouriteless.enchanted.api.rites.AbstractCreateItemRite;
 import com.favouriteless.enchanted.common.init.registry.EnchantedItems;
-import com.favouriteless.enchanted.common.jei.EnchantedJEITextures;
+import com.favouriteless.enchanted.jei.EnchantedJEITextures;
 import com.favouriteless.enchanted.common.rites.CirclePart;
 import com.mojang.blaze3d.vertex.PoseStack;
 import mezz.jei.api.constants.VanillaTypes;
@@ -125,7 +125,7 @@ public class RiteCategory implements IRecipeCategory<AbstractCreateItemRite> {
         int shadowColor = 0xFF000000 | (mainColor & 0xFCFCFC) >> 2;
         int width = minecraft.font.width(text);
         int cx = x/2 - width/2 - 1;
-        gui.drawString(minecraft.font, text, cx + 1, y, shadowColor);
+        gui.drawString(minecraft.font, text, cx + 1, y, shadowColor, false);
     }
 
     private IDrawableStatic buildTexture(ResourceLocation resourceLocation, int width, int height, IJeiHelpers helper) {

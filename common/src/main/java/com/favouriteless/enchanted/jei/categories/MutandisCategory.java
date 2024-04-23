@@ -1,7 +1,7 @@
-package com.favouriteless.enchanted.common.jei.categories;
+package com.favouriteless.enchanted.jei.categories;
 
 import com.favouriteless.enchanted.Enchanted;
-import com.favouriteless.enchanted.common.jei.recipes.JEIMutandisRecipe;
+import com.favouriteless.enchanted.jei.recipes.JEIMutandisRecipe;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -60,7 +60,7 @@ public class MutandisCategory implements IRecipeCategory<JEIMutandisRecipe> {
             return;
         }
         int cx = x/2 - width/2 - 1;
-        gui.drawString(minecraft.font, text, cx + 1, y, shadowColor);
+        gui.drawString(minecraft.font, text, cx + 1, y, shadowColor, false);
     }
 
     @Override

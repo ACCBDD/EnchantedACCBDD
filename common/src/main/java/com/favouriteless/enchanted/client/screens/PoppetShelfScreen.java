@@ -33,10 +33,6 @@ public class PoppetShelfScreen extends AbstractContainerScreen<PoppetShelfMenu> 
 
     @Override
     protected void renderBg(GuiGraphics gui, float partialTicks, int x, int y) {
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
-        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-        RenderSystem.setShaderTexture(0, TEXTURE);
-
         int edgeSpacingX = (this.width - this.imageWidth) / 2;
         int edgeSpacingY = (this.height - this.imageHeight) / 2;
         gui.blit(TEXTURE, edgeSpacingX, edgeSpacingY, 0, 0, this.imageWidth, this.imageHeight);
@@ -44,7 +40,7 @@ public class PoppetShelfScreen extends AbstractContainerScreen<PoppetShelfMenu> 
 
     @Override
     protected void renderLabels(GuiGraphics gui, int x, int y) {
-        gui.drawString(font, title, (imageWidth / 2 - font.width(title) / 2), titleLabelY, Color.DARK_GRAY.getRGB());
+        gui.drawString(font, title, (imageWidth / 2 - font.width(title) / 2), titleLabelY, Color.DARK_GRAY.getRGB(), false);
     }
 
 }

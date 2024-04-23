@@ -1,8 +1,8 @@
-package com.favouriteless.enchanted.common.jei;
+package com.favouriteless.enchanted.jei;
 
 import com.favouriteless.enchanted.Enchanted;
 import com.favouriteless.enchanted.api.rites.AbstractCreateItemRite;
-import com.favouriteless.enchanted.common.jei.recipes.JEIMutandisRecipe;
+import com.favouriteless.enchanted.jei.recipes.JEIMutandisRecipe;
 import com.favouriteless.enchanted.common.recipes.*;
 import mezz.jei.api.recipe.RecipeType;
 
