@@ -5,6 +5,7 @@ import com.favouriteless.enchanted.common.poppet.PoppetShelfManager;
 import com.favouriteless.enchanted.platform.CommonServices;
 import com.favouriteless.enchanted.util.ItemStackHelper;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.BaseEntityBlock;
@@ -26,8 +27,8 @@ public class PoppetShelfBlock extends BaseEntityBlock {
 
 	public static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D);
 
-	public PoppetShelfBlock(Properties properties) {
-		super(properties);
+	public PoppetShelfBlock() {
+		super(Properties.copy(Blocks.ENCHANTING_TABLE).noOcclusion());
 	}
 
 	@Nullable

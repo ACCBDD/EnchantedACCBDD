@@ -12,6 +12,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -19,8 +20,8 @@ import javax.annotation.Nullable;
 
 public class MandrakeBlock extends CropsBlockAgeFive {
 
-    public MandrakeBlock(Properties properties) {
-        super(properties);
+    public MandrakeBlock() {
+        super(Properties.copy(Blocks.WHEAT));
     }
 
     protected ItemLike getBaseSeedId() {

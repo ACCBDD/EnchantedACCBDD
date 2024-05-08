@@ -12,8 +12,8 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class CandelabraBlock extends AltarDecorationBlock {
 
-    public CandelabraBlock(Properties properties) {
-        super(properties);
+    public CandelabraBlock() {
+        super(Properties.of().strength(1.0F, 6.0F).lightLevel((state) -> 14));
     }
 
     @Override

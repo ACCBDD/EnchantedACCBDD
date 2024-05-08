@@ -1,8 +1,11 @@
 package com.favouriteless.enchanted.platform.services;
 
 import com.favouriteless.enchanted.Enchanted;
+import com.favouriteless.enchanted.common.init.registry.util.BlockRegistryDescriptor;
+import com.favouriteless.enchanted.common.init.registry.util.BlockRegistryDescriptor.LootType;
 import com.favouriteless.enchanted.common.items.ForgeNonAnimatedArmorItem;
 import com.favouriteless.enchanted.common.items.NonAnimatedArmorItem;
+import com.favouriteless.enchanted.datagen.providers.loot_tables.BlockLootSubProvider;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -28,8 +31,6 @@ import net.minecraftforge.common.extensions.IForgeMenuType;
 import net.minecraftforge.common.util.ForgeSoundType;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistry;
-import net.minecraftforge.registries.RegistryManager;
 import net.minecraftforge.registries.RegistryObject;
 import org.apache.commons.lang3.function.TriFunction;
 
@@ -48,6 +49,13 @@ public class ForgeCommonRegistryHelper implements ICommonRegistryHelper {
 	@Override
 	public <T> Supplier<T> register(Registry<? super T> registry, String name, Supplier<T> entry) {
 		return registryMap.register(registry, name, entry);
+	}
+
+	public <T extends Block> Supplier<T> registerBlock(BlockRegistryDescriptor<T> descriptor) {
+		Supplier<T> registryObject = register(BuiltInRegistries.BLOCK, descriptor.getName(), descriptor.getSupplier());
+		if(descriptor.getLootInfo().type != LootType.NONE)
+			BlockLootSubProvider.addAuto(registryObject, descriptor.getLootInfo());
+		return registryObject;
 	}
 
 	@Override
@@ -84,25 +92,26 @@ public class ForgeCommonRegistryHelper implements ICommonRegistryHelper {
 		return register(BuiltInRegistries.ITEM, name, () -> new ForgeNonAnimatedArmorItem(material, type, assetPath, properties));
 	}
 
-	private static class RegistryMap {
+	public static RegistryMap getRegistryMap() {
+		return registryMap;
+	}
+
+	public static class RegistryMap {
 
 		private final Map<ResourceLocation, DeferredRegister<?>> registries = new HashMap<>();
 
-		@SuppressWarnings({"unchecked", "rawtypes"})
 		private <T> RegistryObject<T> register(Registry<? super T> registry, String name, Supplier<T> entry) {
-			DeferredRegister<T> reg = (DeferredRegister<T>)registries.computeIfAbsent(registry.key().location(), (key) -> {
-				ForgeRegistry forgeReg = RegistryManager.ACTIVE.getRegistry(key);
+			DeferredRegister<T> reg = getDeferred(registry);
+			return reg != null ? reg.register(name, entry) : null;
+		}
 
-				if(forgeReg == null)
-					return null;
-
-				DeferredRegister<T> defReg = DeferredRegister.create(forgeReg, Enchanted.MOD_ID);
+		@SuppressWarnings({"unchecked"})
+		public <T> DeferredRegister<T> getDeferred(Registry<? super T> registry) {
+            return (DeferredRegister<T>)registries.computeIfAbsent(registry.key().location(), (key) -> {
+				DeferredRegister<T> defReg = DeferredRegister.create(registry.key().location(), Enchanted.MOD_ID);
 				defReg.register(FMLJavaModLoadingContext.get().getModEventBus());
-
 				return defReg;
 			});
-
-			return reg != null ? reg.register(name, entry) : null;
 		}
 
 	}

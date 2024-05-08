@@ -1,6 +1,7 @@
 package com.favouriteless.enchanted.platform.services;
 
 import com.favouriteless.enchanted.Enchanted;
+import com.favouriteless.enchanted.common.init.registry.util.BlockRegistryDescriptor;
 import com.favouriteless.enchanted.common.items.FabricNonAnimatedArmorItem;
 import com.favouriteless.enchanted.common.items.NonAnimatedArmorItem;
 import com.favouriteless.enchanted.platform.JsonDataLoaderWrapper;
@@ -10,7 +11,6 @@ import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerType;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -39,6 +39,11 @@ public class FabricCommonRegistryHelper implements ICommonRegistryHelper {
 		T value = entry.get();
 		Registry.register(registry, Enchanted.location(name), value);
 		return () -> value;
+	}
+
+	@Override
+	public <T extends Block> Supplier<T> registerBlock(BlockRegistryDescriptor<T> descriptor) {
+		return register(BuiltInRegistries.BLOCK, descriptor.getName(), descriptor.getSupplier());
 	}
 
 	@Override

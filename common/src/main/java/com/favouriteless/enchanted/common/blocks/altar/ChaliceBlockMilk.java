@@ -14,8 +14,8 @@ import net.minecraft.world.InteractionResult;
 
 public class ChaliceBlockMilk extends ChaliceBlock {
 
-    public ChaliceBlockMilk(Properties properties) {
-        super(properties, false);
+    public ChaliceBlockMilk() {
+        super(false);
     }
 
     @Override

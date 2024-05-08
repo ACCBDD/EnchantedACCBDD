@@ -26,8 +26,8 @@ public class ChaliceBlock extends Block {
 
     private final boolean isFilled;
 
-    public ChaliceBlock(Properties properties, boolean filled) {
-        super(properties);
+    public ChaliceBlock(boolean filled) {
+        super(Properties.of().strength(1.0F, 6.0F).noOcclusion());
         this.isFilled = filled;
     }
 

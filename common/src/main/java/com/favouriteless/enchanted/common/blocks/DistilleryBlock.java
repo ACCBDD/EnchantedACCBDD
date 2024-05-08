@@ -1,12 +1,14 @@
 package com.favouriteless.enchanted.common.blocks;
 
 import com.favouriteless.enchanted.common.blocks.entity.DistilleryBlockEntity;
+import com.favouriteless.enchanted.common.init.registry.EnchantedBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -34,8 +36,8 @@ public class DistilleryBlock extends SimpleContainerBlockBase {
     public static final VoxelShape SHAPE_WEST = Stream.of(Block.box(0, 0, 0, 5, 1, 16), Block.box(6, 14, 7, 10, 16, 9), Block.box(8, 12, 6, 12, 14, 10), Block.box(7, 9, 5, 13, 12, 11), Block.box(6, 5, 4, 14, 9, 12), Block.box(7, 4, 5, 13, 5, 11), Block.box(1, 1, 5, 4, 3, 10), Block.box(1, 1, 11, 4, 6, 14), Block.box(2, 1, 15, 3, 7, 16), Block.box(2, 7, 0, 3, 8, 2), Block.box(2, 7, 14, 3, 8, 16), Block.box(2, 8, 1, 3, 9, 15), Block.box(2, 1, 0, 3, 7, 1), Block.box(6, 1, 9, 14, 3, 11), Block.box(6, 1, 5, 14, 3, 7), Block.box(7, 0, 4, 9, 2, 12), Block.box(11, 0, 4, 13, 2, 12), Block.box(1, 1, 2, 3, 4, 4), Block.box(1.5, 4, 2.5, 2.5, 5, 3.5)).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
     public static final VoxelShape SHAPE_EAST = Stream.of(Block.box(11, 0, 0, 16, 1, 16), Block.box(6, 14, 7, 10, 16, 9), Block.box(4, 12, 6, 8, 14, 10), Block.box(3, 9, 5, 9, 12, 11), Block.box(2, 5, 4, 10, 9, 12), Block.box(3, 4, 5, 9, 5, 11), Block.box(12, 1, 6, 15, 3, 11), Block.box(12, 1, 2, 15, 6, 5), Block.box(13, 1, 0, 14, 7, 1), Block.box(13, 7, 14, 14, 8, 16), Block.box(13, 7, 0, 14, 8, 2), Block.box(13, 8, 1, 14, 9, 15), Block.box(13, 1, 15, 14, 7, 16), Block.box(2, 1, 5, 10, 3, 7), Block.box(2, 1, 9, 10, 3, 11), Block.box(7, 0, 4, 9, 2, 12), Block.box(3, 0, 4, 5, 2, 12), Block.box(13, 1, 12, 15, 4, 14), Block.box(13.5, 4, 12.5, 14.5, 5, 13.5)).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
 
-    public DistilleryBlock(Properties builder) {
-        super(builder);
+    public DistilleryBlock() {
+        super(Properties.copy(Blocks.ANVIL).lightLevel(EnchantedBlocks.getLightValueLit(13)).noOcclusion());
         this.registerDefaultState(this.defaultBlockState().setValue(FACING, Direction.NORTH).setValue(LIT, false));
     }
 

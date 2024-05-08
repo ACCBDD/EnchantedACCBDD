@@ -8,6 +8,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.FlowerBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -22,8 +23,8 @@ public class BloodPoppyBlock extends FlowerBlock implements EntityBlock {
 
     public static final BooleanProperty FILLED = BooleanProperty.create("filled");
 
-    public BloodPoppyBlock(Properties properties) {
-        super(MobEffects.WITHER, 1200, properties);
+    public BloodPoppyBlock() {
+        super(MobEffects.WITHER, 1200, Properties.copy(Blocks.POPPY));
         registerDefaultState(defaultBlockState().setValue(FILLED, false));
     }
 

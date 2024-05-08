@@ -2,6 +2,7 @@ package com.favouriteless.enchanted.common.blocks;
 
 import com.favouriteless.enchanted.common.blocks.entity.WitchOvenBlockEntity;
 import com.favouriteless.enchanted.common.init.registry.EnchantedBlockEntityTypes;
+import com.favouriteless.enchanted.common.init.registry.EnchantedBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -41,8 +42,8 @@ public class WitchOvenBlock extends SimpleContainerBlockBase {
     private static final VoxelShape SHAPE_WEST = Shapes.join(Shapes.box(1.0D/16, 0.0D, 1.0D/16, 15.0D/16, 12.0D/16, 15.0D/16),
             Shapes.box(8.0D/16, 0.0D, 5.0D/16, 14.0D/16, 1.0D, 11.0D/16), BooleanOp.OR);
 
-    public WitchOvenBlock(Properties builder) {
-        super(builder);
+    public WitchOvenBlock() {
+        super(Properties.copy(EnchantedBlocks.DISTILLERY.get()));
         this.registerDefaultState(this.getStateDefinition().any().setValue(FACING, Direction.NORTH).setValue(LIT, false));
     }
 

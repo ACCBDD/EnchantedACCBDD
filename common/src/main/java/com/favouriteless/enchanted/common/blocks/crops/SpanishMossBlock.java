@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.VineBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
@@ -12,8 +13,8 @@ import javax.annotation.Nullable;
 
 public class SpanishMossBlock extends VineBlock {
 
-    public SpanishMossBlock(Properties properties) {
-        super(properties);
+    public SpanishMossBlock() {
+        super(Properties.copy(Blocks.VINE));
         this.registerDefaultState(this.defaultBlockState().setValue(SOUTH, true));
     }
 

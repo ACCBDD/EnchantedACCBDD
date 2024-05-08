@@ -5,14 +5,16 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 
 public class ArtichokeBlock extends CropsBlockAgeFive {
 
-    public ArtichokeBlock(Properties properties) {
-        super(properties);
+    public ArtichokeBlock() {
+        super(Properties.copy(Blocks.WHEAT).sound(SoundType.LILY_PAD));
     }
 
     protected ItemLike getBaseSeedId() {

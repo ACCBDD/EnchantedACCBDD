@@ -1,5 +1,6 @@
 package com.favouriteless.enchanted.platform.services;
 
+import com.favouriteless.enchanted.common.init.registry.util.BlockRegistryDescriptor;
 import com.favouriteless.enchanted.common.items.NonAnimatedArmorItem;
 import net.minecraft.core.Registry;
 import net.minecraft.network.FriendlyByteBuf;
@@ -29,6 +30,16 @@ public interface ICommonRegistryHelper {
      * @return A {@link Supplier} providing the registered object.
      */
     <T> Supplier<T> register(Registry<? super T> registry, String name, Supplier<T> entry);
+
+    /**
+     * Register a block into either A.) A vanilla registry (fabric) or B.) A deferred registry (forge). Allows for
+     * automated datagen using {@link BlockRegistryDescriptor}.
+     *
+     * @param descriptor The {@link BlockRegistryDescriptor} to be used for this object.
+     *
+     * @return A {@link Supplier} providing the registered object.
+     */
+    <T extends Block> Supplier<T> registerBlock(BlockRegistryDescriptor<T> descriptor);
 
     /**
      * Create a {@link MenuType} and register it via {@link ICommonRegistryHelper#register(Registry, String, Supplier)}.

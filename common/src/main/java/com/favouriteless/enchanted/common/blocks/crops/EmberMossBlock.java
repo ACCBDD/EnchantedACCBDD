@@ -14,8 +14,8 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class EmberMossBlock extends AbstractSpreadingBlock {
 
-    public EmberMossBlock(Properties properties) {
-        super(properties);
+    public EmberMossBlock() {
+        super(Properties.copy(Blocks.POPPY).lightLevel((a) -> 6).randomTicks());
     }
 
     @Override

@@ -16,10 +16,6 @@ import org.jetbrains.annotations.NotNull;
 
 public class ProtectionBarrierBlock extends TemporaryProtectionBarrierBlock {
 
-	public ProtectionBarrierBlock(Properties properties) {
-		super(properties);
-	}
-
 	@Override
 	@NotNull
 	public VoxelShape getCollisionShape(@NotNull BlockState state, @NotNull BlockGetter level, @NotNull BlockPos pos, @NotNull CollisionContext context) {

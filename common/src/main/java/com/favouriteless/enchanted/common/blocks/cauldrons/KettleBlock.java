@@ -7,6 +7,7 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SupportType;
 import net.minecraft.world.level.block.WallBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -27,8 +28,8 @@ public class KettleBlock extends CauldronBlockBase {
     public static final VoxelShape TYPE_1_SHAPE = Shapes.box(0.1875, 0.125, 0.1875, 0.8125, 0.5, 0.8125);
     public static final VoxelShape TYPE_2_SHAPE = Shapes.box(0.1875, 0, 0.1875, 0.8125, 0.375, 0.8125);
 
-    public KettleBlock(Properties properties) {
-        super(properties);
+    public KettleBlock() {
+        super(Properties.copy(Blocks.CAULDRON).noOcclusion());
     }
 
     @Nullable

@@ -10,8 +10,8 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class GlintWeedBlock extends AbstractSpreadingBlock {
 
-    public GlintWeedBlock(Properties properties) {
-        super(properties);
+    public GlintWeedBlock() {
+        super(Properties.copy(Blocks.POPPY).lightLevel((a) -> 14).randomTicks());
     }
 
     @Override

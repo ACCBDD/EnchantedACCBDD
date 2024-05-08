@@ -3,6 +3,7 @@ package com.favouriteless.enchanted.datagen;
 import com.favouriteless.enchanted.Enchanted;
 import com.favouriteless.enchanted.datagen.providers.BlockstateProvider;
 import com.favouriteless.enchanted.datagen.providers.ItemModelProvider;
+import com.favouriteless.enchanted.datagen.providers.LootTableProvider;
 import com.favouriteless.enchanted.datagen.providers.RecipeProvider;
 import com.favouriteless.enchanted.datagen.providers.tag.*;
 import net.minecraft.core.HolderLookup;
@@ -36,6 +37,7 @@ public class DataGenerators {
 		gen.addProvider(true, new BlockstateProvider(output, fileHelper));
 		gen.addProvider(true, new ItemModelProvider(output, fileHelper));
 		gen.addProvider(true, new RecipeProvider(output));
+		gen.addProvider(true, new LootTableProvider(output));
 	}
 
 }

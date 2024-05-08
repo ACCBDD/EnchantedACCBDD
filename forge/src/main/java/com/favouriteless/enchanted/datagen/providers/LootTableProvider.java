@@ -1,15 +1,21 @@
 package com.favouriteless.enchanted.datagen.providers;
 
+import com.favouriteless.enchanted.datagen.providers.loot_tables.BlockLootSubProvider;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 
+import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 public class LootTableProvider extends net.minecraft.data.loot.LootTableProvider {
 
-    public LootTableProvider(PackOutput output, Set<ResourceLocation> requiredTables, List<SubProviderEntry> subProviders) {
-        super(output, requiredTables, subProviders);
+    public LootTableProvider(PackOutput output) {
+        super(output, Collections.emptySet(), List.of(
+                new LootTableProvider.SubProviderEntry(
+                        BlockLootSubProvider::new,
+                        LootContextParamSets.BLOCK
+                )
+        ));
     }
 
 }

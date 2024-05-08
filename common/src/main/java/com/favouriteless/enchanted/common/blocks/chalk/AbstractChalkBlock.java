@@ -17,7 +17,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 public abstract class AbstractChalkBlock extends Block {
 
     public AbstractChalkBlock() {
-        super(Properties.of().pushReaction(PushReaction.DESTROY).noOcclusion().noCollission().strength(0.5f, 0f));
+        super(Properties.of().pushReaction(PushReaction.DESTROY).noOcclusion().noCollission().strength(0.5f, 0f).noLootTable());
     }
 
     @Override
