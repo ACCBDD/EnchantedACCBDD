@@ -28,6 +28,7 @@ import com.favouriteless.enchanted.Enchanted;
 import com.favouriteless.enchanted.api.capabilities.EnchantedCapabilities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.event.entity.player.PlayerSleepInBedEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -43,10 +44,13 @@ public class BedCapabilityManager {
         BlockPos pos = event.getPos();
         Player player = event.getPlayer();
         if(pos != null) {
-            event.getPlayer().level.getBlockEntity(pos).getCapability(EnchantedCapabilities.BED).ifPresent(source ->  {
-                source.setUUID(player.getUUID());
-                source.setName(player.getDisplayName().getString());
-            });
+            BlockEntity be = event.getPlayer().level.getBlockEntity(pos);
+            if(be != null) {
+                be.getCapability(EnchantedCapabilities.BED).ifPresent(source ->  {
+                    source.setUUID(player.getUUID());
+                    source.setName(player.getDisplayName().getString());
+                });
+            }
         }
     }
 
