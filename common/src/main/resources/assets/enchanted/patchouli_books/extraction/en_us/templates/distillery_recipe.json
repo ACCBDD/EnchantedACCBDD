@@ -1,5 +1,5 @@
 {
-  "processor": "com.favouriteless.enchanted.patchouli.processors.DistilleryRecipeProcessor",
+  "processor": "favouriteless.enchanted.patchouli.processors.DistilleryRecipeProcessor",
   "components": [
     {
       "type": "patchouli:header",

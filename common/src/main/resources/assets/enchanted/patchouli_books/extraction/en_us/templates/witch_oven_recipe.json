@@ -1,5 +1,5 @@
 {
-  "processor": "com.favouriteless.enchanted.patchouli.processors.WitchOvenRecipeProcessor",
+  "processor": "favouriteless.enchanted.patchouli.processors.WitchOvenRecipeProcessor",
   "components": [
     {
       "type": "patchouli:item",
