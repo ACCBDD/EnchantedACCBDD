@@ -45,9 +45,9 @@ public class RiteCategory implements IRecipeCategory<AbstractCreateItemRite> {
     public RiteCategory(IJeiHelpers jeiHelpers, RecipeType<AbstractCreateItemRite> recipeTypeRite) {
         this.jeiHelpers = jeiHelpers;
         this.recipeTypeRite = recipeTypeRite;
-        IDrawableStatic arrow = jeiHelpers.getGuiHelper().createDrawable(Enchanted.location("textures/gui/witch_oven.png"), 176, 14, 24, 17);
+        IDrawableStatic arrow = jeiHelpers.getGuiHelper().createDrawable(Enchanted.id("textures/gui/witch_oven.png"), 176, 14, 24, 17);
         this.arrow = jeiHelpers.getGuiHelper().createAnimatedDrawable(arrow, 120, IDrawableAnimated.StartDirection.LEFT, false);
-        glyph_golden = buildTexture(Enchanted.location("textures/gui/jei/gold_glyph.png"), GLYPH_SIZE, GLYPH_SIZE, jeiHelpers);
+        glyph_golden = buildTexture(Enchanted.id("textures/gui/jei/gold_glyph.png"), GLYPH_SIZE, GLYPH_SIZE, jeiHelpers);
     }
 
     @Override
@@ -141,12 +141,12 @@ public class RiteCategory implements IRecipeCategory<AbstractCreateItemRite> {
 
     @Override
     public IDrawable getBackground() {
-        return jeiHelpers.getGuiHelper().createDrawable(Enchanted.location("textures/gui/jei/circle_magic.png"), 0, 0, 180, 120);
+        return jeiHelpers.getGuiHelper().createDrawable(Enchanted.id("textures/gui/jei/circle_magic.png"), 0, 0, 180, 120);
     }
 
     @Override
     public IDrawable getIcon() {
-        return this.jeiHelpers.getGuiHelper().createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(EnchantedItems.CHALK_WHITE.get()));
+        return this.jeiHelpers.getGuiHelper().createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(EnchantedItems.RITUAL_CHALK.get()));
     }
 
     @Override

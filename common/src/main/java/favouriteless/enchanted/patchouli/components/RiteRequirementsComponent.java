@@ -41,9 +41,9 @@ public class RiteRequirementsComponent implements ICustomComponent {
 	public static final HashMap<Block, String> BLOCK_IMAGES = new HashMap<>();
 
 	static {
-		BLOCK_IMAGES.put(EnchantedBlocks.CHALK_WHITE.get(), PATH + "white");
-		BLOCK_IMAGES.put(EnchantedBlocks.CHALK_RED.get(), PATH + "red");
-		BLOCK_IMAGES.put(EnchantedBlocks.CHALK_PURPLE.get(), PATH + "purple");
+		BLOCK_IMAGES.put(EnchantedBlocks.RITUAL_CHALK.get(), PATH + "white");
+		BLOCK_IMAGES.put(EnchantedBlocks.NETHER_CHALK.get(), PATH + "red");
+		BLOCK_IMAGES.put(EnchantedBlocks.OTHERWHERE_CHALK.get(), PATH + "purple");
 	}
 
 	public int startRadius;
@@ -92,7 +92,7 @@ public class RiteRequirementsComponent implements ICustomComponent {
 	private void repopulateCircleResources() {
 		circleImages.clear();
 		if(rite != null) {
-			circleImages.add(Enchanted.location(PATH + "gold" + FILE_END));
+			circleImages.add(Enchanted.id(PATH + "gold" + FILE_END));
 
 			ResourceLocation small = getImageResource(CirclePart.SMALL, "small");
 			ResourceLocation medium = getImageResource(CirclePart.MEDIUM, "medium");
@@ -106,7 +106,7 @@ public class RiteRequirementsComponent implements ICustomComponent {
 	private ResourceLocation getImageResource(CirclePart part, String suffix) {
 		for(Block block : BLOCK_IMAGES.keySet()) {
 			if(rite.hasCircle(part, block))
-				return Enchanted.location(BLOCK_IMAGES.get(block) + "_" + suffix + FILE_END);
+				return Enchanted.id(BLOCK_IMAGES.get(block) + "_" + suffix + FILE_END);
 		}
 		return null;
 	}

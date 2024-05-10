@@ -1,8 +1,6 @@
 package favouriteless.enchanted.platform.services;
 
 import favouriteless.enchanted.Enchanted;
-import favouriteless.enchanted.common.init.registry.util.BlockRegistryDescriptor;
-import favouriteless.enchanted.common.init.registry.util.BlockRegistryDescriptor.LootType;
 import favouriteless.enchanted.common.items.ForgeNonAnimatedArmorItem;
 import favouriteless.enchanted.common.items.NonAnimatedArmorItem;
 import favouriteless.enchanted.datagen.providers.loot_tables.BlockLootSubProvider;
@@ -49,13 +47,6 @@ public class ForgeCommonRegistryHelper implements ICommonRegistryHelper {
 	@Override
 	public <T> Supplier<T> register(Registry<? super T> registry, String name, Supplier<T> entry) {
 		return registryMap.register(registry, name, entry);
-	}
-
-	public <T extends Block> Supplier<T> registerBlock(BlockRegistryDescriptor<T> descriptor) {
-		Supplier<T> registryObject = register(BuiltInRegistries.BLOCK, descriptor.getName(), descriptor.getSupplier());
-		if(descriptor.getLootInfo().type != LootType.NONE)
-			BlockLootSubProvider.addAuto(registryObject, descriptor.getLootInfo());
-		return registryObject;
 	}
 
 	@Override

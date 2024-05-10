@@ -36,9 +36,9 @@ public class BlockstateProvider extends BlockStateProvider {
 		fenceWithItem(EnchantedBlocks.ALDER_FENCE.get(), blockTexture(EnchantedBlocks.ALDER_PLANKS.get()));
 		fenceWithItem(EnchantedBlocks.ROWAN_FENCE.get(), blockTexture(EnchantedBlocks.ROWAN_PLANKS.get()));
 		fenceWithItem(EnchantedBlocks.HAWTHORN_FENCE.get(), blockTexture(EnchantedBlocks.HAWTHORN_PLANKS.get()));
-		fenceGateWithItem(EnchantedBlocks.ALDER_GATE.get(), blockTexture(EnchantedBlocks.ALDER_PLANKS.get()));
-		fenceGateWithItem(EnchantedBlocks.ROWAN_GATE.get(), blockTexture(EnchantedBlocks.ROWAN_PLANKS.get()));
-		fenceGateWithItem(EnchantedBlocks.HAWTHORN_GATE.get(), blockTexture(EnchantedBlocks.HAWTHORN_PLANKS.get()));
+		fenceGateWithItem(EnchantedBlocks.ALDER_FENCE_GATE.get(), blockTexture(EnchantedBlocks.ALDER_PLANKS.get()));
+		fenceGateWithItem(EnchantedBlocks.ROWAN_FENCE_GATE.get(), blockTexture(EnchantedBlocks.ROWAN_PLANKS.get()));
+		fenceGateWithItem(EnchantedBlocks.HAWTHORN_FENCE_GATE.get(), blockTexture(EnchantedBlocks.HAWTHORN_PLANKS.get()));
 		buttonWithItem(EnchantedBlocks.ALDER_BUTTON.get(), blockTexture(EnchantedBlocks.ALDER_PLANKS.get()));
 		buttonWithItem(EnchantedBlocks.HAWTHORN_BUTTON.get(), blockTexture(EnchantedBlocks.HAWTHORN_PLANKS.get()));
 		buttonWithItem(EnchantedBlocks.ROWAN_BUTTON.get(), blockTexture(EnchantedBlocks.ROWAN_PLANKS.get()));
@@ -61,10 +61,10 @@ public class BlockstateProvider extends BlockStateProvider {
 		crossWithItem(EnchantedBlocks.HAWTHORN_SAPLING.get());
 		crossWithItem(EnchantedBlocks.ALDER_SAPLING.get());
 
-		chalkWithItem(EnchantedBlocks.CHALK_WHITE.get());
-		chalkWithItem(EnchantedBlocks.CHALK_RED.get());
-		chalkWithItem(EnchantedBlocks.CHALK_PURPLE.get());
-		goldChalkWithItem(EnchantedBlocks.CHALK_GOLD.get());
+		chalkWithItem(EnchantedBlocks.RITUAL_CHALK.get());
+		chalkWithItem(EnchantedBlocks.NETHER_CHALK.get());
+		chalkWithItem(EnchantedBlocks.OTHERWHERE_CHALK.get());
+		goldChalkWithItem(EnchantedBlocks.GOLDEN_CHALK.get());
 
 		simpleBlockItem(EnchantedBlocks.ALTAR.get(), models().getExistingFile(modLoc("block/altar")));
 		horizontalLitWithItem(EnchantedBlocks.WITCH_OVEN.get(), "_on", 180);
@@ -74,7 +74,6 @@ public class BlockstateProvider extends BlockStateProvider {
 		complexWithItem(EnchantedBlocks.WITCH_CAULDRON.get());
 		complexWithItem(EnchantedBlocks.CHALICE.get());
 		complexWithItem(EnchantedBlocks.CHALICE_FILLED.get());
-		complexWithItem(EnchantedBlocks.CHALICE_FILLED_MILK.get());
 		complexWithItem(EnchantedBlocks.INFINITY_EGG.get(), "block/dragon_egg");
 		complexWithItem(EnchantedBlocks.CANDELABRA.get());
 		kettleWithItem(EnchantedBlocks.KETTLE.get());
@@ -82,7 +81,7 @@ public class BlockstateProvider extends BlockStateProvider {
 
 		cropsWithItem(EnchantedBlocks.BELLADONNA.get(), "crop");
 		cropsWithItem(EnchantedBlocks.SNOWBELL.get(), "cross");
-		cropsWithItem(EnchantedBlocks.ARTICHOKE.get(), "crop");
+		cropsWithItem(EnchantedBlocks.WATER_ARTICHOKE.get(), "crop");
 		cropsWithItem(EnchantedBlocks.MANDRAKE.get(), "crop");
 		cropsWithItem(EnchantedBlocks.GARLIC.get(), "crop");
 		cropsWithItem(EnchantedBlocks.WOLFSBANE.get(), "cross");

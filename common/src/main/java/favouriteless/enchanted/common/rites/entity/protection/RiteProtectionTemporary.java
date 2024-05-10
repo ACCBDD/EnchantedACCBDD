@@ -16,7 +16,7 @@ public class RiteProtectionTemporary extends RiteProtection {
 
     public RiteProtectionTemporary(RiteType<?> type, ServerLevel level, BlockPos pos, UUID caster) {
         super(type, level, pos, caster, 0, 0, 4, EnchantedBlocks.PROTECTION_BARRIER_TEMPORARY.get()); // Power, power per tick, radius
-        CIRCLES_REQUIRED.put(CirclePart.SMALL, EnchantedBlocks.CHALK_WHITE.get());
+        CIRCLES_REQUIRED.put(CirclePart.SMALL, EnchantedBlocks.RITUAL_CHALK.get());
         ITEMS_REQUIRED.put(Items.OBSIDIAN, 1);
         ITEMS_REQUIRED.put(EnchantedItems.ATTUNED_STONE_CHARGED.get(), 1);
     }

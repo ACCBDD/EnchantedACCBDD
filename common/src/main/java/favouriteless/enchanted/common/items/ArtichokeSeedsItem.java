@@ -1,5 +1,6 @@
 package favouriteless.enchanted.common.items;
 
+import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
@@ -14,8 +15,8 @@ import net.minecraft.world.phys.BlockHitResult;
 
 public class ArtichokeSeedsItem extends ItemNameBlockItem {
     
-    public ArtichokeSeedsItem(Block block, Properties properties) {
-        super(block, properties);
+    public ArtichokeSeedsItem() {
+        super(EnchantedBlocks.WATER_ARTICHOKE.get(), new Properties());
     }
 
     public InteractionResult useOn(UseOnContext pContext) {

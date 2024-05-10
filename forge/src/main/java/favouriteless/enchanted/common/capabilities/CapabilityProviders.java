@@ -28,7 +28,7 @@ public class CapabilityProviders {
         BlockEntity be = event.getObject();
         BlockEntityType<?> type = be.getType();
         if(type == EnchantedBlockEntityTypes.WITCH_OVEN.get())
-            event.addCapability(Enchanted.location("inventory"), new ICapabilityProvider() {
+            event.addCapability(Enchanted.id("inventory"), new ICapabilityProvider() {
 
                 final LazyOptional<IItemHandlerModifiable>[] inv = SidedInvWrapper.create(
                         (WorldlyContainer)be, Direction.values());
@@ -42,7 +42,7 @@ public class CapabilityProviders {
                 }
             });
         else if(type == EnchantedBlockEntityTypes.DISTILLERY.get())
-            event.addCapability(Enchanted.location("inventory"), new ICapabilityProvider() {
+            event.addCapability(Enchanted.id("inventory"), new ICapabilityProvider() {
 
                 final LazyOptional<IItemHandlerModifiable>[] inv = SidedInvWrapper.create((WorldlyContainer)be,
                         Direction.UP, Direction.DOWN, Direction.NORTH);
@@ -61,7 +61,7 @@ public class CapabilityProviders {
                 }
             });
         else if(type == EnchantedBlockEntityTypes.SPINNING_WHEEL.get())
-            event.addCapability(Enchanted.location("inventory"), new ICapabilityProvider() {
+            event.addCapability(Enchanted.id("inventory"), new ICapabilityProvider() {
 
                 final LazyOptional<IItemHandlerModifiable>[] inv = SidedInvWrapper.create((WorldlyContainer)be,
                         Direction.DOWN, Direction.DOWN);

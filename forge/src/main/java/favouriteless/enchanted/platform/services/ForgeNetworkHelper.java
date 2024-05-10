@@ -2,7 +2,6 @@ package favouriteless.enchanted.platform.services;
 
 import favouriteless.enchanted.Enchanted;
 import favouriteless.enchanted.common.network.EnchantedPacket;
-import favouriteless.enchanted.platform.services.INetworkHelper;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
@@ -16,7 +15,7 @@ public class ForgeNetworkHelper implements INetworkHelper {
 
     private static final String PROTOCOL_VERSION = "1";
     public static final SimpleChannel INSTANCE = NetworkRegistry.newSimpleChannel(
-            Enchanted.location("main"),
+            Enchanted.id("main"),
             () -> PROTOCOL_VERSION,
             PROTOCOL_VERSION::equals,
             PROTOCOL_VERSION::equals

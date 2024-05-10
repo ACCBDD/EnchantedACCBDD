@@ -11,8 +11,8 @@ import net.minecraft.world.phys.Vec3;
 
 public class BroomstickItem extends Item {
 
-	public BroomstickItem(Properties pProperties) {
-		super(pProperties);
+	public BroomstickItem() {
+		super(new Properties());
 	}
 
 	@Override

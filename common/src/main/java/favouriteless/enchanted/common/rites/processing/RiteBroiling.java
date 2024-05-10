@@ -33,7 +33,7 @@ public class RiteBroiling extends AbstractRite {
 
     public RiteBroiling(RiteType<?> type, ServerLevel level, BlockPos pos, UUID caster) {
         this(type, level, pos, caster, 1000); // Power, power per tick
-        CIRCLES_REQUIRED.put(CirclePart.SMALL, EnchantedBlocks.CHALK_RED.get());
+        CIRCLES_REQUIRED.put(CirclePart.SMALL, EnchantedBlocks.NETHER_CHALK.get());
         ITEMS_REQUIRED.put(Items.COAL, 1);
         ITEMS_REQUIRED.put(Items.BLAZE_ROD, 1);
         ITEMS_REQUIRED.put(EnchantedItems.WOOD_ASH.get(), 1);

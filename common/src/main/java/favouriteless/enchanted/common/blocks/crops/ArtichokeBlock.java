@@ -18,7 +18,7 @@ public class ArtichokeBlock extends CropsBlockAgeFive {
     }
 
     protected ItemLike getBaseSeedId() {
-        return EnchantedItems.ARTICHOKE_SEEDS.get();
+        return EnchantedItems.WATER_ARTICHOKE_SEEDS.get();
     }
 
     @Override

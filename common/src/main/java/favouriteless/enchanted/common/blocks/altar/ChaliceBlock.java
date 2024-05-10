@@ -44,16 +44,6 @@ public class ChaliceBlock extends Block {
                 }
                 return InteractionResult.SUCCESS;
             }
-
-            else if(player.getItemInHand(hand).getItem() == Items.MILK_BUCKET) {
-                if (!level.isClientSide) {
-                    level.playSound(null, pos, SoundEvents.FISHING_BOBBER_SPLASH, SoundSource.BLOCKS, 0.4F, 1.0F);
-                    level.setBlockAndUpdate(pos, EnchantedBlocks.CHALICE_FILLED_MILK.get().defaultBlockState());
-                    player.setItemInHand(hand, new ItemStack(Items.BUCKET, 1));
-                    return InteractionResult.CONSUME;
-                }
-                return InteractionResult.SUCCESS;
-            }
         }
         return InteractionResult.FAIL;
     }

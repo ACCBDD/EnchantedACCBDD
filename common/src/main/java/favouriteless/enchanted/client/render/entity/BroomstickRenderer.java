@@ -16,7 +16,7 @@ import net.minecraft.util.Mth;
 
 public class BroomstickRenderer extends EntityRenderer<Broomstick> {
 
-	public static final ResourceLocation TEXTURE = Enchanted.location("textures/entity/broomstick.png");
+	public static final ResourceLocation TEXTURE = Enchanted.id("textures/entity/broomstick.png");
 	protected final BroomstickModel model;
 
 	public BroomstickRenderer(Context context) {

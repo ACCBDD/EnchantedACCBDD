@@ -38,7 +38,7 @@ public class RiteSkyWrath extends AbstractRite {
 
     public RiteSkyWrath(RiteType<?> type, ServerLevel level, BlockPos pos, UUID caster) {
         this(type, level, pos, caster, 1000, 0); // Power, power per tick
-        CIRCLES_REQUIRED.put(CirclePart.SMALL, EnchantedBlocks.CHALK_WHITE.get());
+        CIRCLES_REQUIRED.put(CirclePart.SMALL, EnchantedBlocks.RITUAL_CHALK.get());
         ITEMS_REQUIRED.put(Items.IRON_SWORD, 1);
         ITEMS_REQUIRED.put(EnchantedItems.QUICKLIME.get(), 1);
     }

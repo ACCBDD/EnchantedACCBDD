@@ -41,7 +41,7 @@ public class RiteForest extends AbstractRite {
 
     public RiteForest(RiteType<?> type, ServerLevel level, BlockPos pos, UUID caster) {
         super(type, level, pos, caster, 4000, 0); // Power, power per tick
-        CIRCLES_REQUIRED.put(CirclePart.MEDIUM, EnchantedBlocks.CHALK_WHITE.get());
+        CIRCLES_REQUIRED.put(CirclePart.MEDIUM, EnchantedBlocks.RITUAL_CHALK.get());
         ITEMS_REQUIRED.put(EnchantedItems.WICKER_BUNDLE.get(), 1);
         ITEMS_REQUIRED.put(EnchantedItems.BREW_OF_SPROUTING.get(), 1);
         ITEMS_REQUIRED.put(EnchantedItems.ENT_TWIG.get(), 1);

@@ -2,7 +2,6 @@ package favouriteless.enchanted.platform.services;
 
 import favouriteless.enchanted.Enchanted;
 import favouriteless.enchanted.common.network.EnchantedPacket;
-import favouriteless.enchanted.platform.services.INetworkHelper;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
@@ -29,7 +28,7 @@ public class FabricNetworkHelper implements INetworkHelper {
 
     @Override
     public <T extends EnchantedPacket> void register(String name, Class<T> clazz, Function<FriendlyByteBuf, T> constructor) {
-        ResourceLocation id = Enchanted.location(name);
+        ResourceLocation id = Enchanted.id(name);
         ids.put(clazz, id);
 
         ServerPlayNetworking.registerGlobalReceiver(id, (server, player, handler, buffer, sender) -> {

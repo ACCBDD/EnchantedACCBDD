@@ -14,7 +14,7 @@ public class RiteSkyWrathCharged extends RiteSkyWrath {
 
     public RiteSkyWrathCharged(RiteType<?> type, ServerLevel level, BlockPos pos, UUID caster) {
         super(type, level, pos, caster, 0, 0); // Power, power per tick
-        CIRCLES_REQUIRED.put(CirclePart.SMALL, EnchantedBlocks.CHALK_WHITE.get());
+        CIRCLES_REQUIRED.put(CirclePart.SMALL, EnchantedBlocks.RITUAL_CHALK.get());
         ITEMS_REQUIRED.put(Items.IRON_SWORD, 1);
         ITEMS_REQUIRED.put(EnchantedItems.QUICKLIME.get(), 1);
         ITEMS_REQUIRED.put(EnchantedItems.ATTUNED_STONE_CHARGED.get(), 1);

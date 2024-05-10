@@ -1,8 +1,8 @@
-// 1.20.1	2024-04-23T00:08:20.1423813	Tags for minecraft:item mod id enchanted
+// 1.20.1	2024-05-10T01:19:41.1070215	Tags for minecraft:item mod id enchanted
 472c8d9b5b2662130a73e930c548a07cbee95c70 data/enchanted/tags/items/armors.json
 f24a8d97196c48573340680ccf913a094e799f30 data/enchanted/tags/items/armor_poppet_whitelist.json
-3417ee3ef05e30f24367eb8cbc928a2225ed4b7e data/enchanted/tags/items/chalices.json
-844b6ebc39e105bb6db321be907ec43b2115b1e2 data/enchanted/tags/items/chalks.json
+e7ff58a601c24e056dc5521f018555f7e596ec4e data/enchanted/tags/items/chalices.json
+cc0b47d4892d7d2ed9f5813df5bc1d69754bd3ef data/enchanted/tags/items/chalks.json
 847203a50ec44d614777e94b9ece91cefd7d94fa data/enchanted/tags/items/leaves.json
 84980a2aaeb2cfd9ec5ba7157d843a877013c53c data/enchanted/tags/items/logs.json
 e47cedad84283e8d4746c2aeff8d12fe2618a430 data/enchanted/tags/items/planks.json

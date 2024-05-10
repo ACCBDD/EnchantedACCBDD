@@ -43,7 +43,7 @@ public class MutandisCategory implements IRecipeCategory<JEIMutandisRecipe> {
 
     @Override
     public IDrawable getBackground() {
-        return jeiHelpers.getGuiHelper().createDrawable(Enchanted.location("textures/gui/jei/mutandis.png"), 0, 0, 120, 68);
+        return jeiHelpers.getGuiHelper().createDrawable(Enchanted.id("textures/gui/jei/mutandis.png"), 0, 0, 120, 68);
     }
 
     @Override

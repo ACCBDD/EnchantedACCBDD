@@ -38,8 +38,8 @@ import java.util.UUID;
 
 public class TaglockItem extends Item {
 
-    public TaglockItem(Properties properties) {
-        super(properties);
+    public TaglockItem() {
+        super(new Properties());
     }
 
     @Override

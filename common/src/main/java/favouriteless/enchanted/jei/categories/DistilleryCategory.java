@@ -30,9 +30,9 @@ public class DistilleryCategory implements IRecipeCategory<DistillingRecipe> {
     public DistilleryCategory(IJeiHelpers helper, RecipeType<DistillingRecipe> type) {
         this.helper = helper;
         this.type = type;
-        IDrawableStatic bubbles = helper.getGuiHelper().createDrawable(Enchanted.location("textures/gui/distillery.png"), 176, 0, 12, 29);
+        IDrawableStatic bubbles = helper.getGuiHelper().createDrawable(Enchanted.id("textures/gui/distillery.png"), 176, 0, 12, 29);
         this.bubbles = helper.getGuiHelper().createAnimatedDrawable(bubbles, 120, IDrawableAnimated.StartDirection.BOTTOM, false);
-        IDrawableStatic arrow = helper.getGuiHelper().createDrawable(Enchanted.location("textures/gui/distillery.png"), 176, 29, 57, 61);
+        IDrawableStatic arrow = helper.getGuiHelper().createDrawable(Enchanted.id("textures/gui/distillery.png"), 176, 29, 57, 61);
         this.arrow = helper.getGuiHelper().createAnimatedDrawable(arrow, 120, IDrawableAnimated.StartDirection.LEFT, false);
     }
 
@@ -65,7 +65,7 @@ public class DistilleryCategory implements IRecipeCategory<DistillingRecipe> {
 
     @Override
     public IDrawable getBackground() {
-        return this.helper.getGuiHelper().createDrawable(Enchanted.location("textures/gui/distillery.png"), 4, 5, 146, 75);
+        return this.helper.getGuiHelper().createDrawable(Enchanted.id("textures/gui/distillery.png"), 4, 5, 146, 75);
     }
 
     @Override

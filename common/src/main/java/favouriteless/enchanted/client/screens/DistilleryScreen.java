@@ -2,10 +2,8 @@ package favouriteless.enchanted.client.screens;
 
 import favouriteless.enchanted.Enchanted;
 import favouriteless.enchanted.common.menus.DistilleryMenu;
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
@@ -15,7 +13,7 @@ import java.awt.*;
 
 public class DistilleryScreen extends AbstractContainerScreen<DistilleryMenu> {
 
-    private static final ResourceLocation TEXTURE = Enchanted.location("textures/gui/distillery.png");
+    private static final ResourceLocation TEXTURE = Enchanted.id("textures/gui/distillery.png");
 
     public static final int COOK_BAR_XPOS = 69;
     public static final int COOK_BAR_YPOS = 12;

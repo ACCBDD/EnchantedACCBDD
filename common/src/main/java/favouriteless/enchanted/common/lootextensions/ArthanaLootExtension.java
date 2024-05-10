@@ -9,7 +9,7 @@ import net.minecraft.world.level.storage.loot.LootContext;
 public class ArthanaLootExtension extends LootExtension {
 
     public ArthanaLootExtension(EntityType<?> type) {
-        super(Enchanted.location("extensions/entities/" + BuiltInRegistries.ENTITY_TYPE.getKey(type).getPath()));
+        super(Enchanted.id("extensions/entities/" + BuiltInRegistries.ENTITY_TYPE.getKey(type).getPath()));
         addType(type);
     }
 

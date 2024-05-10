@@ -1,6 +1,6 @@
 {
   "name": "Taglocks",
-  "icon": "enchanted:taglock_filled",
+  "icon": "enchanted:taglock",
   "category": "enchanted:crafting_materials",
   "pages": [
     {
@@ -9,7 +9,7 @@
     },
     {
       "type": "patchouli:crafting",
-      "recipe": "enchanted:taglock"
+      "recipe": "enchanted:taglock_kit"
     }
   ],
   "read_by_default": true

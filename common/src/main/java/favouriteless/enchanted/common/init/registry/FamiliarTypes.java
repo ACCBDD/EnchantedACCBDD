@@ -14,7 +14,7 @@ public class FamiliarTypes {
 
 	private static final Map<ResourceLocation, FamiliarType<?, ?>> FAMILIAR_TYPES = new HashMap<>();
 
-	public static final FamiliarType<?, ?> CAT = register("cat", new CatFamiliarType(Enchanted.location("cat")));
+	public static final FamiliarType<?, ?> CAT = register("cat", new CatFamiliarType(Enchanted.id("cat")));
 
 
 
@@ -27,7 +27,7 @@ public class FamiliarTypes {
 	}
 
 	public static <T extends TamableAnimal, C extends TamableAnimal> FamiliarType<T, C> register(String id, FamiliarType<T, C> type) {
-		return register(Enchanted.location(id), type);
+		return register(Enchanted.id(id), type);
 	}
 
 	public static FamiliarType<?, ?> get(ResourceLocation id) {

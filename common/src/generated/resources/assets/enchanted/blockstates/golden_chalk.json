@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "glyph=0": {
+      "model": "enchanted:block/golden_chalk"
+    },
+    "glyph=1": {
+      "model": "enchanted:block/golden_chalk",
+      "y": 90
+    },
+    "glyph=2": {
+      "model": "enchanted:block/golden_chalk",
+      "y": 180
+    },
+    "glyph=3": {
+      "model": "enchanted:block/golden_chalk",
+      "y": 270
+    }
+  }
+}

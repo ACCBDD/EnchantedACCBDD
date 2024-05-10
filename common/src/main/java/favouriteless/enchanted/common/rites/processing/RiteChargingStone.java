@@ -17,8 +17,8 @@ public class RiteChargingStone extends AbstractCreateItemRite {
 
     public RiteChargingStone(RiteType<?> type, ServerLevel level, BlockPos pos, UUID caster) {
         super(type, level, pos, caster, 2000, SoundEvents.ZOMBIE_VILLAGER_CURE, new ItemStack(EnchantedItems.ATTUNED_STONE_CHARGED.get(), 1)); // Power, power per tick
-        CIRCLES_REQUIRED.put(CirclePart.SMALL, EnchantedBlocks.CHALK_WHITE.get());
-        CIRCLES_REQUIRED.put(CirclePart.MEDIUM, EnchantedBlocks.CHALK_WHITE.get());
+        CIRCLES_REQUIRED.put(CirclePart.SMALL, EnchantedBlocks.RITUAL_CHALK.get());
+        CIRCLES_REQUIRED.put(CirclePart.MEDIUM, EnchantedBlocks.RITUAL_CHALK.get());
         ITEMS_REQUIRED.put(EnchantedItems.ATTUNED_STONE.get(), 1);
         ITEMS_REQUIRED.put(Items.GLOWSTONE_DUST, 1);
         ITEMS_REQUIRED.put(Items.REDSTONE, 1);

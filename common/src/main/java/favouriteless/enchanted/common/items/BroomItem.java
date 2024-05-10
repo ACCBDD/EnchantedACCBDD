@@ -12,8 +12,8 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class BroomItem extends Item {
 
-	public BroomItem(Properties properties) {
-		super(properties);
+	public BroomItem() {
+		super(new Properties());
 	}
 
 	@Override

@@ -2,7 +2,6 @@ package favouriteless.enchanted.common.init;
 
 import favouriteless.enchanted.common.init.registry.EnchantedItems;
 import favouriteless.enchanted.platform.CommonServices;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTab.DisplayItemsGenerator;
@@ -21,7 +20,7 @@ public class EnchantedCreativeTab {
                 out.accept(EnchantedItems.ALDER_STAIRS.get());
                 out.accept(EnchantedItems.ALDER_SLAB.get());
                 out.accept(EnchantedItems.ALDER_FENCE.get());
-                out.accept(EnchantedItems.ALDER_GATE.get());
+                out.accept(EnchantedItems.ALDER_FENCE_GATE.get());
                 out.accept(EnchantedItems.ALDER_PRESSURE_PLATE.get());
                 out.accept(EnchantedItems.ALDER_BUTTON.get());
                 out.accept(EnchantedItems.HAWTHORN_LOG.get());
@@ -30,7 +29,7 @@ public class EnchantedCreativeTab {
                 out.accept(EnchantedItems.HAWTHORN_STAIRS.get());
                 out.accept(EnchantedItems.HAWTHORN_SLAB.get());
                 out.accept(EnchantedItems.HAWTHORN_FENCE.get());
-                out.accept(EnchantedItems.HAWTHORN_GATE.get());
+                out.accept(EnchantedItems.HAWTHORN_FENCE_GATE.get());
                 out.accept(EnchantedItems.HAWTHORN_PRESSURE_PLATE.get());
                 out.accept(EnchantedItems.HAWTHORN_BUTTON.get());
                 out.accept(EnchantedItems.ROWAN_LOG.get());
@@ -39,7 +38,7 @@ public class EnchantedCreativeTab {
                 out.accept(EnchantedItems.ROWAN_STAIRS.get());
                 out.accept(EnchantedItems.ROWAN_SLAB.get());
                 out.accept(EnchantedItems.ROWAN_FENCE.get());
-                out.accept(EnchantedItems.ROWAN_GATE.get());
+                out.accept(EnchantedItems.ROWAN_FENCE_GATE.get());
                 out.accept(EnchantedItems.ROWAN_PRESSURE_PLATE.get());
                 out.accept(EnchantedItems.ROWAN_BUTTON.get());
 
@@ -63,14 +62,14 @@ public class EnchantedCreativeTab {
                 out.accept(EnchantedItems.ALDER_SAPLING.get());
                 out.accept(EnchantedItems.HAWTHORN_SAPLING.get());
                 out.accept(EnchantedItems.ROWAN_SAPLING.get());
-                out.accept(EnchantedItems.ARTICHOKE_SEEDS.get());
+                out.accept(EnchantedItems.WATER_ARTICHOKE_SEEDS.get());
                 out.accept(EnchantedItems.BELLADONNA_SEEDS.get());
                 out.accept(EnchantedItems.MANDRAKE_SEEDS.get());
                 out.accept(EnchantedItems.SNOWBELL_SEEDS.get());
                 out.accept(EnchantedItems.WOLFSBANE_SEEDS.get());
                 out.accept(EnchantedItems.GARLIC.get());
                 out.accept(EnchantedItems.ROWAN_BERRIES.get());
-                out.accept(EnchantedItems.ARTICHOKE.get());
+                out.accept(EnchantedItems.WATER_ARTICHOKE.get());
                 out.accept(EnchantedItems.BELLADONNA_FLOWER.get());
                 out.accept(EnchantedItems.MANDRAKE_ROOT.get());
                 out.accept(EnchantedItems.ICY_NEEDLE.get());
@@ -85,17 +84,17 @@ public class EnchantedCreativeTab {
                 out.accept(EnchantedItems.MUTANDIS.get());
                 out.accept(EnchantedItems.MUTANDIS_EXTREMIS.get());
                 out.accept(EnchantedItems.TAGLOCK.get());
-                out.accept(EnchantedItems.CHALK_GOLD.get());
-                out.accept(EnchantedItems.CHALK_WHITE.get());
-                out.accept(EnchantedItems.CHALK_RED.get());
-                out.accept(EnchantedItems.CHALK_PURPLE.get());
+                out.accept(EnchantedItems.GOLDEN_CHALK.get());
+                out.accept(EnchantedItems.RITUAL_CHALK.get());
+                out.accept(EnchantedItems.NETHER_CHALK.get());
+                out.accept(EnchantedItems.OTHERWHERE_CHALK.get());
 
                 out.accept(EnchantedItems.ARTHANA.get());
                 out.accept(EnchantedItems.EARMUFFS.get());
                 out.accept(EnchantedItems.BROOM.get());
                 out.accept(EnchantedItems.ENCHANTED_BROOMSTICK.get());
 
-                out.accept(EnchantedItems.CLAY_JAR_SOFT.get());
+                out.accept(EnchantedItems.SOFT_CLAY_JAR.get());
                 out.accept(EnchantedItems.CLAY_JAR.get());
                 out.accept(EnchantedItems.BREATH_OF_THE_GODDESS.get());
                 out.accept(EnchantedItems.EXHALE_OF_THE_HORNED_ONE.get());

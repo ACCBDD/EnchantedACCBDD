@@ -8,7 +8,7 @@ import net.minecraft.world.damagesource.DamageType;
 
 public class EnchantedDamageTypes {
 
-    public static final ResourceKey<DamageType> SACRIFICE = ResourceKey.create(Registries.DAMAGE_TYPE, Enchanted.location("sacrifice"));
-    public static final ResourceKey<DamageType> SOUND = ResourceKey.create(Registries.DAMAGE_TYPE, Enchanted.location("sound"));
+    public static final ResourceKey<DamageType> SACRIFICE = ResourceKey.create(Registries.DAMAGE_TYPE, Enchanted.id("sacrifice"));
+    public static final ResourceKey<DamageType> SOUND = ResourceKey.create(Registries.DAMAGE_TYPE, Enchanted.id("sound"));
 
 }

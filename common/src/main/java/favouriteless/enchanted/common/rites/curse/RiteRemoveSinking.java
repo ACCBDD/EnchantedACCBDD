@@ -16,7 +16,7 @@ public class RiteRemoveSinking extends AbstractRemoveCurseRite {
 
     public RiteRemoveSinking(RiteType<?> type, ServerLevel level, BlockPos pos, UUID caster) {
         super(type, level, pos, caster, 2000, 0, CurseTypes.SINKING); // Power, power per tick, curse type
-        CIRCLES_REQUIRED.put(CirclePart.SMALL, EnchantedBlocks.CHALK_WHITE.get());
+        CIRCLES_REQUIRED.put(CirclePart.SMALL, EnchantedBlocks.RITUAL_CHALK.get());
         ITEMS_REQUIRED.put(EnchantedItems.TAGLOCK_FILLED.get(), 1);
         ITEMS_REQUIRED.put(EnchantedItems.BREATH_OF_THE_GODDESS.get(), 1);
         ITEMS_REQUIRED.put(Items.BONE_MEAL, 1);

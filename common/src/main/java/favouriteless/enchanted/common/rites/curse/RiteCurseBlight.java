@@ -42,7 +42,7 @@ public class RiteCurseBlight extends AbstractRite {
 
     public RiteCurseBlight(RiteType<?> type, ServerLevel level, BlockPos pos, UUID caster) {
         super(type, level, pos, caster, 0, 0); // Power, power per tick
-        CIRCLES_REQUIRED.put(CirclePart.MEDIUM, EnchantedBlocks.CHALK_RED.get());
+        CIRCLES_REQUIRED.put(CirclePart.MEDIUM, EnchantedBlocks.NETHER_CHALK.get());
         ITEMS_REQUIRED.put(EnchantedItems.ATTUNED_STONE_CHARGED.get(), 1);
         ITEMS_REQUIRED.put(EnchantedItems.REDSTONE_SOUP.get(), 1);
         ITEMS_REQUIRED.put(EnchantedItems.REEK_OF_MISFORTUNE.get(), 1);

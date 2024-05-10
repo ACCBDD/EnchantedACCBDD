@@ -1,0 +1,19 @@
+{
+  "type": "enchanted:wheel",
+  "ingredients": [
+    {
+      "item": "enchanted:infused_poppet"
+    },
+    {
+      "item": "enchanted:ember_moss"
+    },
+    {
+      "item": "minecraft:potion",
+      "nbt": "{Potion:\"minecraft:long_fire_resistance\"}"
+    }
+  ],
+  "power": 1000,
+  "result": {
+    "item": "enchanted:infused_fire_poppet"
+  }
+}

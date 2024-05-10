@@ -50,6 +50,7 @@ dependencies {
     modImplementation( libs.fabric.api )
     compileOnly( project(":common") )
 
+
     modImplementation( libs.geckolib.fabric )
     modImplementation( libs.patchouli.fabric )
     modImplementation( libs.sbl.fabric )

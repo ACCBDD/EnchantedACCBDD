@@ -2,10 +2,8 @@ package favouriteless.enchanted.client.screens;
 
 import favouriteless.enchanted.Enchanted;
 import favouriteless.enchanted.common.menus.PoppetShelfMenu;
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
@@ -14,7 +12,7 @@ import java.awt.*;
 
 public class PoppetShelfScreen extends AbstractContainerScreen<PoppetShelfMenu> {
 
-    private static final ResourceLocation TEXTURE = Enchanted.location("textures/gui/poppet_shelf.png");
+    private static final ResourceLocation TEXTURE = Enchanted.id("textures/gui/poppet_shelf.png");
 
     public PoppetShelfScreen(PoppetShelfMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);

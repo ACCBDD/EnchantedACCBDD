@@ -20,7 +20,7 @@ public class RiteSummonEntity extends AbstractRite {
 
     public RiteSummonEntity(RiteType<?> type, ServerLevel level, BlockPos pos, UUID caster) {
         super(type, level, pos, caster, 3000, 0); // Power, power per tick
-        CIRCLES_REQUIRED.put(CirclePart.MEDIUM, EnchantedBlocks.CHALK_PURPLE.get());
+        CIRCLES_REQUIRED.put(CirclePart.MEDIUM, EnchantedBlocks.OTHERWHERE_CHALK.get());
         ITEMS_REQUIRED.put(EnchantedItems.WAYSTONE.get(), 1);
         ITEMS_REQUIRED.put(EnchantedItems.TAGLOCK_FILLED.get(), 1);
         ITEMS_REQUIRED.put(EnchantedItems.ENDER_DEW.get(), 1);

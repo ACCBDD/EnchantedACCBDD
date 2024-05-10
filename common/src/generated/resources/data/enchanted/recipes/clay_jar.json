@@ -4,7 +4,7 @@
   "cookingtime": 200,
   "experience": 0.1,
   "ingredient": {
-    "item": "enchanted:clay_jar_soft"
+    "item": "enchanted:soft_clay_jar"
   },
   "result": "enchanted:clay_jar"
 }

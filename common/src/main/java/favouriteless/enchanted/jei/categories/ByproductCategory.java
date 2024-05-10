@@ -34,9 +34,9 @@ public class ByproductCategory implements IRecipeCategory<ByproductRecipe> {
     public ByproductCategory(IJeiHelpers helper, RecipeType<ByproductRecipe> type) {
         this.type = type;
         this.helper = helper;
-        IDrawableStatic fire = helper.getGuiHelper().createDrawable(Enchanted.location("textures/gui/witch_oven.png"), 176, 0, 14, 14);
+        IDrawableStatic fire = helper.getGuiHelper().createDrawable(Enchanted.id("textures/gui/witch_oven.png"), 176, 0, 14, 14);
         this.fire = helper.getGuiHelper().createAnimatedDrawable(fire, 120, IDrawableAnimated.StartDirection.BOTTOM, false);
-        IDrawableStatic arrow = helper.getGuiHelper().createDrawable(Enchanted.location("textures/gui/witch_oven.png"), 176, 14, 24, 17);
+        IDrawableStatic arrow = helper.getGuiHelper().createDrawable(Enchanted.id("textures/gui/witch_oven.png"), 176, 14, 24, 17);
         this.arrow = helper.getGuiHelper().createAnimatedDrawable(arrow, 120, IDrawableAnimated.StartDirection.LEFT, false);
     }
 
@@ -47,7 +47,7 @@ public class ByproductCategory implements IRecipeCategory<ByproductRecipe> {
 
     @Override
     public IDrawable getBackground() {
-        return helper.getGuiHelper().createDrawable(Enchanted.location("textures/gui/witch_oven.png"), 40, 10, 96, 65);
+        return helper.getGuiHelper().createDrawable(Enchanted.id("textures/gui/witch_oven.png"), 40, 10, 96, 65);
     }
 
     @Override

@@ -83,9 +83,9 @@ public class RiteBindingTalisman extends AbstractRite {
     private byte testForCircle(CirclePart circle) {
         ServerLevel level = getLevel();
         BlockPos pos = getPos();
-        if(circle.match(level, pos, EnchantedBlocks.CHALK_WHITE.get())) return 1;
-        if(circle.match(level, pos, EnchantedBlocks.CHALK_RED.get())) return 2;
-        if(circle.match(level, pos, EnchantedBlocks.CHALK_PURPLE.get())) return 3;
+        if(circle.match(level, pos, EnchantedBlocks.RITUAL_CHALK.get())) return 1;
+        if(circle.match(level, pos, EnchantedBlocks.NETHER_CHALK.get())) return 2;
+        if(circle.match(level, pos, EnchantedBlocks.OTHERWHERE_CHALK.get())) return 3;
         return 0;
     }
 

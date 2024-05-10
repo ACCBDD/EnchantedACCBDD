@@ -1,0 +1,18 @@
+{
+  "type": "enchanted:wheel",
+  "ingredients": [
+    {
+      "item": "enchanted:infused_poppet"
+    },
+    {
+      "item": "enchanted:otherwhere_chalk"
+    },
+    {
+      "item": "enchanted:ender_dew"
+    }
+  ],
+  "power": 1000,
+  "result": {
+    "item": "enchanted:infused_void_poppet"
+  }
+}

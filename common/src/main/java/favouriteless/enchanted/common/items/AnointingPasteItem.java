@@ -15,8 +15,8 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class AnointingPasteItem extends Item {
 
-    public AnointingPasteItem(Properties properties) {
-        super(properties);
+    public AnointingPasteItem() {
+        super(new Properties());
     }
 
     @Override

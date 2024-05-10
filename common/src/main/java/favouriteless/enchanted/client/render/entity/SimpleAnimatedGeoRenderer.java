@@ -10,7 +10,7 @@ import software.bernie.geckolib.renderer.GeoEntityRenderer;
 public class SimpleAnimatedGeoRenderer<T extends LivingEntity & GeoEntity> extends GeoEntityRenderer<T> {
 
     public SimpleAnimatedGeoRenderer(Context context, String name) {
-        super(context, new DefaultedEntityGeoModel<>(Enchanted.location(name)));
+        super(context, new DefaultedEntityGeoModel<>(Enchanted.id(name)));
     }
 
 }

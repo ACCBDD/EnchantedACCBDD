@@ -13,8 +13,8 @@ import java.util.List;
 
 public class BloodedWaystoneItem extends Item {
 
-    public BloodedWaystoneItem(Properties properties) {
-        super(properties);
+    public BloodedWaystoneItem() {
+        super(new Properties());
     }
 
     @Override

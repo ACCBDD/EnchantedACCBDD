@@ -1,10 +1,7 @@
 package favouriteless.enchanted.datagen;
 
 import favouriteless.enchanted.Enchanted;
-import favouriteless.enchanted.datagen.providers.BlockstateProvider;
-import favouriteless.enchanted.datagen.providers.ItemModelProvider;
-import favouriteless.enchanted.datagen.providers.LootTableProvider;
-import favouriteless.enchanted.datagen.providers.RecipeProvider;
+import favouriteless.enchanted.datagen.providers.*;
 import favouriteless.enchanted.datagen.providers.tag.*;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
@@ -38,6 +35,7 @@ public class DataGenerators {
 		gen.addProvider(true, new ItemModelProvider(output, fileHelper));
 		gen.addProvider(true, new RecipeProvider(output));
 		gen.addProvider(true, new LootTableProvider(output));
+		gen.addProvider(true, new LanguageProvider(output));
 	}
 
 }

@@ -33,7 +33,7 @@ public class CurseTypes {
     }
 
     private static <T extends Curse> CurseType<T> register(String id, Supplier<T> curseSupplier) {
-        return register(Enchanted.location(id), curseSupplier);
+        return register(Enchanted.id(id), curseSupplier);
     }
 
     public static Curse getInstance(ResourceLocation id) {

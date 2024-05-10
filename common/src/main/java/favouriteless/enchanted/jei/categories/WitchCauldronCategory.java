@@ -32,7 +32,7 @@ public class WitchCauldronCategory implements IRecipeCategory<WitchCauldronRecip
         this.jeiHelpers = jeiHelpers;
         this.type = type;
 
-        IDrawableStatic arrow = jeiHelpers.getGuiHelper().createDrawable(Enchanted.location("textures/gui/witch_oven.png"), 176, 14, 24, 17);
+        IDrawableStatic arrow = jeiHelpers.getGuiHelper().createDrawable(Enchanted.id("textures/gui/witch_oven.png"), 176, 14, 24, 17);
         this.arrow = jeiHelpers.getGuiHelper().createAnimatedDrawable(arrow, 120, IDrawableAnimated.StartDirection.LEFT, false);
     }
 
@@ -59,7 +59,7 @@ public class WitchCauldronCategory implements IRecipeCategory<WitchCauldronRecip
 
     @Override
     public IDrawable getBackground() {
-        return jeiHelpers.getGuiHelper().createDrawable(Enchanted.location("textures/gui/jei/witch_cauldron.png"), 4, 4, GUI_WIDTH, 70);
+        return jeiHelpers.getGuiHelper().createDrawable(Enchanted.id("textures/gui/jei/witch_cauldron.png"), 4, 4, GUI_WIDTH, 70);
     }
 
     @Override

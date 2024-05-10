@@ -18,7 +18,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class SpinningWheelRenderer implements BlockEntityRenderer<SpinningWheelBlockEntity> {
 
-	public static final ResourceLocation TEXTURE = Enchanted.location("textures/block/spinning_wheel.png");
+	public static final ResourceLocation TEXTURE = Enchanted.id("textures/block/spinning_wheel.png");
 
 	private final ModelPart wheel;
 	private final ModelPart body;

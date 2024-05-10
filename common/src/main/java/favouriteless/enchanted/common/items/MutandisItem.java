@@ -19,8 +19,8 @@ public class MutandisItem extends Item {
 
     private final TagKey<Block> validBlocks;
 
-    public MutandisItem(TagKey<Block> validBlocks, Properties properties) {
-        super(properties);
+    public MutandisItem(TagKey<Block> validBlocks) {
+        super(new Properties());
         this.validBlocks = validBlocks;
     }
 

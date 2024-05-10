@@ -88,9 +88,9 @@ public class ClientRegistry {
     public static void registerItemModelPredicates() {
         IClientRegistryHelper registry = ClientServices.CLIENT_REGISTRY;
 
-        registry.register(EnchantedItems.CIRCLE_TALISMAN.get(), Enchanted.location("small"), (stack, world, living, seed) -> stack.hasTag() ? stack.getTag().getByte("small") * 0.3F : 0F);
-        registry.register(EnchantedItems.CIRCLE_TALISMAN.get(), Enchanted.location("medium"), (stack, world, living, seed) -> stack.hasTag() ? stack.getTag().getByte("medium") * 0.3F : 0F);
-        registry.register(EnchantedItems.CIRCLE_TALISMAN.get(), Enchanted.location("large"), (stack, world, living, seed) -> stack.hasTag() ? stack.getTag().getByte("large") * 0.3F : 0F);
+        registry.register(EnchantedItems.CIRCLE_TALISMAN.get(), Enchanted.id("small"), (stack, world, living, seed) -> stack.hasTag() ? stack.getTag().getByte("small") * 0.3F : 0F);
+        registry.register(EnchantedItems.CIRCLE_TALISMAN.get(), Enchanted.id("medium"), (stack, world, living, seed) -> stack.hasTag() ? stack.getTag().getByte("medium") * 0.3F : 0F);
+        registry.register(EnchantedItems.CIRCLE_TALISMAN.get(), Enchanted.id("large"), (stack, world, living, seed) -> stack.hasTag() ? stack.getTag().getByte("large") * 0.3F : 0F);
     }
 
 }

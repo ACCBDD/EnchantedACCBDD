@@ -11,10 +11,7 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Mirror;
-import net.minecraft.world.level.block.RenderShape;
-import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -37,8 +34,8 @@ public class FumeFunnelBlock extends Block {
     private static final VoxelShape SHAPE_TOP_EAST = Shapes.box(2.0D/16, 0.0D, 5.0D/16, 8.0D/16, 8.0D/16, 11.0D/16);
     private static final VoxelShape SHAPE_TOP_WEST = Shapes.box(8.0D/16, 0.0D, 5.0D/16, 14.0D/16, 8.0D/16, 11.0D/16);
 
-    public FumeFunnelBlock(Properties properties) {
-        super(properties);
+    public FumeFunnelBlock() {
+        super(Properties.copy(EnchantedBlocks.DISTILLERY.get()));
         this.registerDefaultState(this.getStateDefinition().any().setValue(FACING, Direction.NORTH).setValue(LIT, false).setValue(TYPE, 0));
     }
 

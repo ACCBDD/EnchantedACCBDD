@@ -16,8 +16,8 @@ public class RiteInfusionBroom extends AbstractCreateItemRite {
 
     public RiteInfusionBroom(RiteType<?> type, ServerLevel level, BlockPos pos, UUID caster) {
         super(type, level, pos, caster, 3000, SoundEvents.ZOMBIE_VILLAGER_CURE, new ItemStack(EnchantedItems.ENCHANTED_BROOMSTICK.get(), 1)); // Power, power per tick
-        CIRCLES_REQUIRED.put(CirclePart.SMALL, EnchantedBlocks.CHALK_WHITE.get());
-        CIRCLES_REQUIRED.put(CirclePart.MEDIUM, EnchantedBlocks.CHALK_WHITE.get());
+        CIRCLES_REQUIRED.put(CirclePart.SMALL, EnchantedBlocks.RITUAL_CHALK.get());
+        CIRCLES_REQUIRED.put(CirclePart.MEDIUM, EnchantedBlocks.RITUAL_CHALK.get());
         ITEMS_REQUIRED.put(EnchantedItems.BROOM.get(), 1);
         ITEMS_REQUIRED.put(EnchantedItems.FLYING_OINTMENT.get(), 1);
     }

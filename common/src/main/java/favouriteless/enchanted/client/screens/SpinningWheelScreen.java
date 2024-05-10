@@ -3,10 +3,8 @@ package favouriteless.enchanted.client.screens;
 import favouriteless.enchanted.Enchanted;
 import favouriteless.enchanted.common.blocks.entity.SpinningWheelBlockEntity;
 import favouriteless.enchanted.common.menus.SpinningWheelMenu;
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
@@ -15,7 +13,7 @@ import java.awt.*;
 
 public class SpinningWheelScreen extends AbstractContainerScreen<SpinningWheelMenu> {
 
-    private static final ResourceLocation TEXTURE = Enchanted.location("textures/gui/spinning_wheel.png");
+    private static final ResourceLocation TEXTURE = Enchanted.id("textures/gui/spinning_wheel.png");
 
     public static final int ICONS_U = 176;
 

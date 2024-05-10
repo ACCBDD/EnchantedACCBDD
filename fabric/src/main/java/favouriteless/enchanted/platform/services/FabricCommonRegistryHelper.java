@@ -1,7 +1,6 @@
 package favouriteless.enchanted.platform.services;
 
 import favouriteless.enchanted.Enchanted;
-import favouriteless.enchanted.common.init.registry.util.BlockRegistryDescriptor;
 import favouriteless.enchanted.common.items.FabricNonAnimatedArmorItem;
 import favouriteless.enchanted.common.items.NonAnimatedArmorItem;
 import favouriteless.enchanted.platform.JsonDataLoaderWrapper;
@@ -37,13 +36,8 @@ public class FabricCommonRegistryHelper implements ICommonRegistryHelper {
 	@Override
 	public <T> Supplier<T> register(Registry<? super T> registry, String name, Supplier<T> entry) {
 		T value = entry.get();
-		Registry.register(registry, Enchanted.location(name), value);
+		Registry.register(registry, Enchanted.id(name), value);
 		return () -> value;
-	}
-
-	@Override
-	public <T extends Block> Supplier<T> registerBlock(BlockRegistryDescriptor<T> descriptor) {
-		return register(BuiltInRegistries.BLOCK, descriptor.getName(), descriptor.getSupplier());
 	}
 
 	@Override

@@ -23,7 +23,7 @@ public class EnchantedJEITextures {
 
 	public static ResourceLocation getCircleTextureLocation(CirclePart circle, Block block) {
 		return (CIRCLE_PART_TEXTURE_NAMES.containsKey(circle) && BLOCK_TEXTURE_SUFFIXES.containsKey(block)) ?
-				Enchanted.location("textures/gui/jei/" + CIRCLE_PART_TEXTURE_NAMES.get(circle) + "_" + BLOCK_TEXTURE_SUFFIXES.get(block) + ".png") : null;
+				Enchanted.id("textures/gui/jei/" + CIRCLE_PART_TEXTURE_NAMES.get(circle) + "_" + BLOCK_TEXTURE_SUFFIXES.get(block) + ".png") : null;
 	}
 
 }

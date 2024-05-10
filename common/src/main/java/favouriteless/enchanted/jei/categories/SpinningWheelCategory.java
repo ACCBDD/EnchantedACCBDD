@@ -36,11 +36,11 @@ public class SpinningWheelCategory implements IRecipeCategory<SpinningRecipe> {
     public SpinningWheelCategory(IJeiHelpers jeiHelpers, RecipeType<SpinningRecipe> recipeTypeSpinningWheel) {
         this.jeiHelpers = jeiHelpers;
         this.type = recipeTypeSpinningWheel;
-        IDrawableStatic leftArrow = jeiHelpers.getGuiHelper().createDrawable(Enchanted.location("textures/gui/spinning_wheel.png"), 176, 0, 15, 20);
+        IDrawableStatic leftArrow = jeiHelpers.getGuiHelper().createDrawable(Enchanted.id("textures/gui/spinning_wheel.png"), 176, 0, 15, 20);
         this.leftArrow = jeiHelpers.getGuiHelper().createAnimatedDrawable(leftArrow, 120, IDrawableAnimated.StartDirection.BOTTOM, false);
-        IDrawableStatic rightArrow = jeiHelpers.getGuiHelper().createDrawable(Enchanted.location("textures/gui/spinning_wheel.png"), 176, 20, 15, 20);
+        IDrawableStatic rightArrow = jeiHelpers.getGuiHelper().createDrawable(Enchanted.id("textures/gui/spinning_wheel.png"), 176, 20, 15, 20);
         this.rightArrow = jeiHelpers.getGuiHelper().createAnimatedDrawable(rightArrow, 120, IDrawableAnimated.StartDirection.BOTTOM, false);
-        this.background = jeiHelpers.getGuiHelper().createDrawable(Enchanted.location("textures/gui/spinning_wheel.png"), 20, 10, 140, 60);
+        this.background = jeiHelpers.getGuiHelper().createDrawable(Enchanted.id("textures/gui/spinning_wheel.png"), 20, 10, 140, 60);
     }
 
     @Override

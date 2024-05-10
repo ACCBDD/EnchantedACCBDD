@@ -36,7 +36,7 @@ public class EnchantedJEIPlugin implements IModPlugin {
 
     @Override
     public ResourceLocation getPluginUid() {
-        return Enchanted.location("jei_plugin");
+        return Enchanted.id("jei_plugin");
     }
 
     @Override
@@ -76,7 +76,6 @@ public class EnchantedJEIPlugin implements IModPlugin {
                 .map(block -> new JEIMutandisRecipe(Blocks.MUTANDIS_EXTREMIS_PLANTS, new ItemStack(block.value()), Component.translatable("jei.enchanted.mutandis.description"))).toList()));
 
         registration.addIngredientInfo(new ItemStack(EnchantedItems.CHALICE_FILLED.get()), VanillaTypes.ITEM_STACK, Component.translatable("jei.enchanted.chalice_filled"));
-        registration.addIngredientInfo(new ItemStack(EnchantedItems.CHALICE_FILLED_MILK.get()), VanillaTypes.ITEM_STACK, Component.translatable("jei.enchanted.chalice_filled_milk"));
     }
 
     @Override
@@ -95,10 +94,10 @@ public class EnchantedJEIPlugin implements IModPlugin {
         registration.addRecipeCatalyst(EnchantedItems.SPINNING_WHEEL.get().getDefaultInstance(), JEIRecipeTypes.RECIPE_TYPE_SPINNING);
         registration.addRecipeCatalyst(EnchantedItems.WITCH_CAULDRON.get().getDefaultInstance(), JEIRecipeTypes.RECIPE_TYPE_WITCH_CAULDRON);
         registration.addRecipeCatalyst(EnchantedItems.KETTLE.get().getDefaultInstance(), JEIRecipeTypes.RECIPE_TYPE_KETTLE);
-        registration.addRecipeCatalyst(EnchantedItems.CHALK_WHITE.get().getDefaultInstance(), JEIRecipeTypes.RECIPE_TYPE_RITE);
-        registration.addRecipeCatalyst(EnchantedItems.CHALK_GOLD.get().getDefaultInstance(), JEIRecipeTypes.RECIPE_TYPE_RITE);
-        registration.addRecipeCatalyst(EnchantedItems.CHALK_PURPLE.get().getDefaultInstance(), JEIRecipeTypes.RECIPE_TYPE_RITE);
-        registration.addRecipeCatalyst(EnchantedItems.CHALK_RED.get().getDefaultInstance(), JEIRecipeTypes.RECIPE_TYPE_RITE);
+        registration.addRecipeCatalyst(EnchantedItems.RITUAL_CHALK.get().getDefaultInstance(), JEIRecipeTypes.RECIPE_TYPE_RITE);
+        registration.addRecipeCatalyst(EnchantedItems.GOLDEN_CHALK.get().getDefaultInstance(), JEIRecipeTypes.RECIPE_TYPE_RITE);
+        registration.addRecipeCatalyst(EnchantedItems.OTHERWHERE_CHALK.get().getDefaultInstance(), JEIRecipeTypes.RECIPE_TYPE_RITE);
+        registration.addRecipeCatalyst(EnchantedItems.NETHER_CHALK.get().getDefaultInstance(), JEIRecipeTypes.RECIPE_TYPE_RITE);
         registration.addRecipeCatalyst(EnchantedItems.MUTANDIS.get().getDefaultInstance(), JEIRecipeTypes.RECIPE_TYPE_MUTANDIS);
         registration.addRecipeCatalyst(EnchantedItems.MUTANDIS_EXTREMIS.get().getDefaultInstance(), JEIRecipeTypes.RECIPE_TYPE_MUTANDIS_EXTREMIS);
     }

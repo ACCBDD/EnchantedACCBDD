@@ -14,8 +14,8 @@ public class LoveBrewItem extends ThrowableBrewItem {
 
 	public static final double RANGE = 4.0D;
 
-	public LoveBrewItem(Properties properties) {
-		super(properties);
+	public LoveBrewItem() {
+		super(new Properties());
 	}
 
 	@Override

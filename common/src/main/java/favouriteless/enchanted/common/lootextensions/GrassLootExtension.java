@@ -11,7 +11,7 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 public class GrassLootExtension extends LootExtension {
 
     public GrassLootExtension() {
-        super(Enchanted.location("extensions/blocks/grass_seeds"));
+        super(Enchanted.id("extensions/blocks/grass_seeds"));
         addType(Blocks.GRASS_BLOCK);
         addType(Blocks.TALL_GRASS);
     }

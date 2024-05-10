@@ -18,7 +18,7 @@ public class InfinityEggBlock extends FallingBlock {
 		super(Properties.copy(Blocks.DRAGON_EGG).noLootTable());
 	}
 
-	public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
+	public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext collisionContext) {
 		return SHAPE;
 	}
 

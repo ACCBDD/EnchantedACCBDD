@@ -38,11 +38,10 @@ public class BlockTagProvider extends IntrinsicHolderTagsProvider<Block> {
                 .add(Blocks.GRASS, Blocks.FERN, Blocks.SWEET_BERRY_BUSH)
                 .add(EnchantedBlocks.GLINT_WEED.get());
         tag(EnchantedTags.Blocks.CHALICES)
-                .add(EnchantedBlocks.CHALICE.get(), EnchantedBlocks.CHALICE_FILLED.get(),
-                        EnchantedBlocks.CHALICE_FILLED_MILK.get());
+                .add(EnchantedBlocks.CHALICE.get(), EnchantedBlocks.CHALICE_FILLED.get());
         tag(EnchantedTags.Blocks.CHALKS)
-                .add(EnchantedBlocks.CHALK_GOLD.get(), EnchantedBlocks.CHALK_WHITE.get(),
-                        EnchantedBlocks.CHALK_RED.get(), EnchantedBlocks.CHALK_PURPLE.get());
+                .add(EnchantedBlocks.GOLDEN_CHALK.get(), EnchantedBlocks.RITUAL_CHALK.get(),
+                        EnchantedBlocks.NETHER_CHALK.get(), EnchantedBlocks.OTHERWHERE_CHALK.get());
         tag(EnchantedTags.Blocks.CROPS)
                 .add(EnchantedBlocks.BELLADONNA.get(), EnchantedBlocks.SNOWBELL.get(), EnchantedBlocks.MANDRAKE.get(),
                         EnchantedBlocks.GARLIC.get(), EnchantedBlocks.WOLFSBANE.get());

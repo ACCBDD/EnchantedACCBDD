@@ -22,7 +22,7 @@ import java.util.UUID;
  */
 public interface IFamiliarCapability extends ISerializable<CompoundTag> {
 
-	ResourceLocation LOCATION = Enchanted.location("familiars");
+	ResourceLocation LOCATION = Enchanted.id("familiars");
 
 	/**
 	 * Grab familiar entry owned by the player with the specified UUID.

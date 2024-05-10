@@ -9,7 +9,6 @@ import net.minecraft.util.RandomSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Date;
 import java.util.Random;
 
 public class Enchanted {
@@ -39,8 +38,12 @@ public class Enchanted {
         EnchantedCreativeTab.load();
     }
 
-    public static ResourceLocation location(String path) {
+    public static ResourceLocation id(String path) {
         return new ResourceLocation(MOD_ID, path);
+    }
+
+    public static String translationKey(String prefix, String suffix) {
+        return String.format("%s.%s.%s", prefix, MOD_ID, suffix);
     }
 
 }

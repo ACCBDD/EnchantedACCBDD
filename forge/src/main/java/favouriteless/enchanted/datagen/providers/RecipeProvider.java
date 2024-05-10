@@ -83,7 +83,7 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
 				.define('n', Items.GOLD_NUGGET).define('g', Items.GOLD_INGOT)
 				.define('a', EnchantedItems.ATTUNED_STONE.get())
 				.unlockedBy("has_attuned_stone", has(EnchantedItems.ATTUNED_STONE.get())).save(consumer);
-		ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, EnchantedItems.CHALK_WHITE.get(), 2)
+		ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, EnchantedItems.RITUAL_CHALK.get(), 2)
 				.pattern("ata")
 				.pattern("aga")
 				.pattern("aga")
@@ -96,7 +96,7 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
 				.pattern("ngn").define('n', Items.GOLD_NUGGET)
 				.define('g', Items.GOLD_INGOT).define('a', EnchantedItems.ATTUNED_STONE.get())
 				.unlockedBy("has_attuned_stone", has(EnchantedItems.ATTUNED_STONE.get())).save(consumer);
-		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, EnchantedItems.CLAY_JAR_SOFT.get(), 4)
+		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, EnchantedItems.SOFT_CLAY_JAR.get(), 4)
 				.pattern(" c ")
 				.pattern("ccc")
 				.define('c', Items.CLAY)
@@ -186,7 +186,7 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
 
 	protected void buildShapelessRecipes(Consumer<FinishedRecipe> consumer) {
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, EnchantedItems.ANOINTING_PASTE.get())
-				.requires(EnchantedItems.ARTICHOKE_SEEDS.get()).requires(EnchantedItems.MANDRAKE_SEEDS.get())
+				.requires(EnchantedItems.WATER_ARTICHOKE_SEEDS.get()).requires(EnchantedItems.MANDRAKE_SEEDS.get())
 				.requires(EnchantedItems.BELLADONNA_SEEDS.get()).requires(EnchantedItems.SNOWBELL_SEEDS.get())
 				.unlockedBy("has_seeds", has(EnchantedItems.BELLADONNA_SEEDS.get())).save(consumer);
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, EnchantedItems.BONE_NEEDLE.get(), 8)
@@ -215,9 +215,9 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
 
 	protected void buildSmeltingRecipes(Consumer<FinishedRecipe> consumer) {
 		SimpleCookingRecipeBuilder.smelting(
-						Ingredient.of(EnchantedItems.CLAY_JAR_SOFT.get()), RecipeCategory.MISC, EnchantedItems.CLAY_JAR.get(),
+						Ingredient.of(EnchantedItems.SOFT_CLAY_JAR.get()), RecipeCategory.MISC, EnchantedItems.CLAY_JAR.get(),
 						0.1F, 200)
-				.unlockedBy("has_clay_jar_soft", has(EnchantedItems.CLAY_JAR_SOFT.get())).save(consumer);
+				.unlockedBy("has_clay_jar_soft", has(EnchantedItems.SOFT_CLAY_JAR.get())).save(consumer);
 		SimpleCookingRecipeBuilder.smelting(
 						Ingredient.of(ItemTags.SAPLINGS), RecipeCategory.MISC, EnchantedItems.WOOD_ASH.get(),
 						0.1F, 150)
@@ -254,9 +254,9 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
 		spinningSet(consumer, EnchantedItems.TOOL_POPPET.get(), EnchantedItems.TOOL_POPPET_INFUSED.get(), EnchantedItems.TOOL_POPPET_STURDY.get(),
 				EnchantedItems.HINT_OF_REBIRTH.get(), Items.DIAMOND_SWORD);
 		spinningSet(consumer, EnchantedItems.VOID_POPPET.get(), EnchantedItems.VOID_POPPET_INFUSED.get(), EnchantedItems.VOID_POPPET_STURDY.get(),
-				EnchantedItems.CHALK_PURPLE.get(), EnchantedItems.ENDER_DEW.get());
+				EnchantedItems.OTHERWHERE_CHALK.get(), EnchantedItems.ENDER_DEW.get());
 		spinningSet(consumer, EnchantedItems.WATER_POPPET.get(), EnchantedItems.WATER_POPPET_INFUSED.get(), EnchantedItems.WATER_POPPET_STURDY.get(),
-				stack(EnchantedItems.ARTICHOKE.get(), 1), PotionUtils.setPotion(stack(Items.POTION, 1), Potions.LONG_WATER_BREATHING));
+				stack(EnchantedItems.WATER_ARTICHOKE.get(), 1), PotionUtils.setPotion(stack(Items.POTION, 1), Potions.LONG_WATER_BREATHING));
 	}
 
 	protected void buildDistillingRecipes(Consumer<FinishedRecipe> consumer) {
@@ -294,17 +294,17 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
 				.inputs(Items.BEEF)
 				.cookColor(24, 48, 22)
 				.finalColor(28, 94, 22).save(consumer);
-		CauldronTypeRecipeBuilder.cauldron(stack(EnchantedItems.CHALK_GOLD.get()), 3000)
-				.inputs(EnchantedItems.MANDRAKE_ROOT.get(), Items.GOLD_NUGGET, EnchantedItems.CHALK_WHITE.get())
+		CauldronTypeRecipeBuilder.cauldron(stack(EnchantedItems.GOLDEN_CHALK.get()), 3000)
+				.inputs(EnchantedItems.MANDRAKE_ROOT.get(), Items.GOLD_NUGGET, EnchantedItems.RITUAL_CHALK.get())
 				.cookColor(89, 64, 0)
 				.finalColor(194, 155, 0).save(consumer);
-		CauldronTypeRecipeBuilder.cauldron(stack(EnchantedItems.CHALK_PURPLE.get()), 2000)
+		CauldronTypeRecipeBuilder.cauldron(stack(EnchantedItems.OTHERWHERE_CHALK.get()), 2000)
 				.inputs(Items.NETHER_WART, EnchantedItems.TEAR_OF_THE_GODDESS.get(), Items.ENDER_PEARL,
-						EnchantedItems.CHALK_WHITE.get())
+						EnchantedItems.RITUAL_CHALK.get())
 				.cookColor(49, 21, 74)
 				.finalColor(73, 13, 130).save(consumer);
-		CauldronTypeRecipeBuilder.cauldron(stack(EnchantedItems.CHALK_RED.get()), 2000)
-				.inputs(Items.NETHER_WART, Items.BLAZE_POWDER, EnchantedItems.CHALK_WHITE.get())
+		CauldronTypeRecipeBuilder.cauldron(stack(EnchantedItems.NETHER_CHALK.get()), 2000)
+				.inputs(Items.NETHER_WART, Items.BLAZE_POWDER, EnchantedItems.RITUAL_CHALK.get())
 				.cookColor(84, 1, 26)
 				.finalColor(156, 1, 47).save(consumer);
 		CauldronTypeRecipeBuilder.cauldron(stack(Items.COOKED_CHICKEN), 0)
@@ -339,7 +339,7 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
 	protected void buildKettleRecipes(Consumer<FinishedRecipe> consumer) {
 		CauldronTypeRecipeBuilder.kettle(stack(EnchantedItems.BREW_OF_LOVE.get(), 3), 0)
 				.inputs(Items.POPPY, Items.GOLDEN_CARROT, Items.LILY_PAD, Items.COCOA_BEANS,
-						EnchantedItems.WHIFF_OF_MAGIC.get(), EnchantedItems.ARTICHOKE.get())
+						EnchantedItems.WHIFF_OF_MAGIC.get(), EnchantedItems.WATER_ARTICHOKE.get())
 				.cookColor(176, 70, 165)
 				.finalColor(247, 143, 235).save(consumer);
 		CauldronTypeRecipeBuilder.kettle(stack(EnchantedItems.BREW_OF_SPROUTING.get(), 3), 0)
@@ -350,13 +350,13 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
 				.finalColor(128, 90, 43).save(consumer);
 		CauldronTypeRecipeBuilder.kettle(stack(EnchantedItems.BREW_OF_THE_DEPTHS.get(), 3), 0)
 				.inputs(Items.LILY_PAD, Items.INK_SAC, EnchantedItems.MANDRAKE_ROOT.get(),
-						EnchantedItems.TEAR_OF_THE_GODDESS.get(), EnchantedItems.ARTICHOKE.get(),
+						EnchantedItems.TEAR_OF_THE_GODDESS.get(), EnchantedItems.WATER_ARTICHOKE.get(),
 						EnchantedItems.ODOUR_OF_PURITY.get())
 				.cookColor(24, 110, 168)
 				.finalColor(84, 186, 214).save(consumer);
 		CauldronTypeRecipeBuilder.kettle(stack(EnchantedItems.BREW_OF_THE_GROTESQUE.get(), 3), 750)
 				.inputs(EnchantedItems.MUTANDIS_EXTREMIS.get(), EnchantedItems.MANDRAKE_ROOT.get(),
-						EnchantedItems.ARTICHOKE.get(), Items.GOLDEN_APPLE, EnchantedItems.TONGUE_OF_DOG.get(),
+						EnchantedItems.WATER_ARTICHOKE.get(), Items.GOLDEN_APPLE, EnchantedItems.TONGUE_OF_DOG.get(),
 						Items.POISONOUS_POTATO)
 				.cookColor(54, 42, 33)
 				.finalColor(128, 95, 70).save(consumer);

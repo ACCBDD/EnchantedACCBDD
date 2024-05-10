@@ -72,7 +72,7 @@ public class RiteTypes {
     }
 
     private static <T extends AbstractRite> RiteType<T> register(String id, RiteType.RiteFactory<T> factory) {
-        return register(Enchanted.location(id), factory);
+        return register(Enchanted.id(id), factory);
     }
 
     public static RiteType<?> get(ResourceLocation id) {

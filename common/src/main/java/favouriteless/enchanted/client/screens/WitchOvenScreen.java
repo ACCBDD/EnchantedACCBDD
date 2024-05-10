@@ -2,10 +2,8 @@ package favouriteless.enchanted.client.screens;
 
 import favouriteless.enchanted.Enchanted;
 import favouriteless.enchanted.common.menus.WitchOvenMenu;
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
@@ -14,7 +12,7 @@ import java.awt.*;
 
 public class WitchOvenScreen extends AbstractContainerScreen<WitchOvenMenu> {
 
-    private static final ResourceLocation TEXTURE = Enchanted.location("textures/gui/witch_oven.png");
+    private static final ResourceLocation TEXTURE = Enchanted.id("textures/gui/witch_oven.png");
 
     public static final int COOK_BAR_XPOS = 76;
     public static final int COOK_BAR_YPOS = 16;

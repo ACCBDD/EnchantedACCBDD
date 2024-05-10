@@ -27,7 +27,7 @@ public class RiteTotalEclipse extends AbstractRite {
 
     public RiteTotalEclipse(RiteType<?> type, ServerLevel level, BlockPos pos, UUID caster) {
         this(type, level, pos, caster, 3000, 0); // Power, power per tick
-        CIRCLES_REQUIRED.put(CirclePart.SMALL, EnchantedBlocks.CHALK_WHITE.get());
+        CIRCLES_REQUIRED.put(CirclePart.SMALL, EnchantedBlocks.RITUAL_CHALK.get());
         ITEMS_REQUIRED.put(Items.STONE_AXE, 1);
         ITEMS_REQUIRED.put(EnchantedItems.QUICKLIME.get(), 1);
     }

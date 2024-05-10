@@ -13,7 +13,7 @@ public class RiteBindingWaystoneCharged extends RiteBindingWaystone {
 
     public RiteBindingWaystoneCharged(RiteType<?> type, ServerLevel level, BlockPos pos, UUID caster) {
         super(type, level, pos, caster, 0); // Power, power per tick
-        CIRCLES_REQUIRED.put(CirclePart.SMALL, EnchantedBlocks.CHALK_WHITE.get());
+        CIRCLES_REQUIRED.put(CirclePart.SMALL, EnchantedBlocks.RITUAL_CHALK.get());
         ITEMS_REQUIRED.put(EnchantedItems.WAYSTONE.get(), 1);
         ITEMS_REQUIRED.put(EnchantedItems.ENDER_DEW.get(), 1);
         ITEMS_REQUIRED.put(EnchantedItems.WOOD_ASH.get(), 1);

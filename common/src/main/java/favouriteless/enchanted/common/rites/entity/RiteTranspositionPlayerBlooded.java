@@ -21,7 +21,7 @@ public class RiteTranspositionPlayerBlooded extends AbstractRite {
 
     public RiteTranspositionPlayerBlooded(RiteType<?> type, ServerLevel level, BlockPos pos, UUID caster) {
         super(type, level, pos, caster, 0, 0); // Power, power per tick
-        CIRCLES_REQUIRED.put(CirclePart.SMALL, EnchantedBlocks.CHALK_PURPLE.get());
+        CIRCLES_REQUIRED.put(CirclePart.SMALL, EnchantedBlocks.OTHERWHERE_CHALK.get());
         ITEMS_REQUIRED.put(EnchantedItems.BLOODED_WAYSTONE.get(), 1);
     }
 

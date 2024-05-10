@@ -14,7 +14,7 @@ public class RiteFertilityCharged extends RiteFertility {
 
     public RiteFertilityCharged(RiteType<?> type, ServerLevel level, BlockPos pos, UUID caster) {
         super(type, level, pos, caster, 0);
-        CIRCLES_REQUIRED.put(CirclePart.SMALL, EnchantedBlocks.CHALK_WHITE.get());
+        CIRCLES_REQUIRED.put(CirclePart.SMALL, EnchantedBlocks.RITUAL_CHALK.get());
         ITEMS_REQUIRED.put(Items.BONE_MEAL, 1);
         ITEMS_REQUIRED.put(EnchantedItems.HINT_OF_REBIRTH.get(), 1);
         ITEMS_REQUIRED.put(EnchantedItems.DIAMOND_VAPOUR.get(), 1);

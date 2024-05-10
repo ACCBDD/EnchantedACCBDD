@@ -29,7 +29,7 @@ public class EnchantedData {
     }
 
     public static void register(String id, SimpleJsonResourceReloadListener reloadListener) {
-        CommonServices.COMMON_REGISTRY.register(Enchanted.location(id), reloadListener);
+        CommonServices.COMMON_REGISTRY.register(Enchanted.id(id), reloadListener);
     }
 
     private static Block createBlockKey(ResourceLocation key) {

@@ -31,7 +31,7 @@ public class RiteBindingFamiliar extends AbstractRite {
 
 	public RiteBindingFamiliar(RiteType<?> type, ServerLevel level, BlockPos pos, UUID caster) {
 		super(type, level, pos, caster, 8000, 0);
-		CIRCLES_REQUIRED.put(CirclePart.MEDIUM, EnchantedBlocks.CHALK_WHITE.get());
+		CIRCLES_REQUIRED.put(CirclePart.MEDIUM, EnchantedBlocks.RITUAL_CHALK.get());
 		ITEMS_REQUIRED.put(EnchantedItems.TEAR_OF_THE_GODDESS.get(), 1);
 		ITEMS_REQUIRED.put(EnchantedItems.ODOUR_OF_PURITY.get(), 1);
 		ITEMS_REQUIRED.put(EnchantedItems.WHIFF_OF_MAGIC.get(), 1);

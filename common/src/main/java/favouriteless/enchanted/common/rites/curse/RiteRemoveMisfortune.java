@@ -16,7 +16,7 @@ public class RiteRemoveMisfortune extends AbstractRemoveCurseRite {
 
     public RiteRemoveMisfortune(RiteType<?> type, ServerLevel level, BlockPos pos, UUID caster) {
         super(type, level, pos, caster, 2000, 0, CurseTypes.MISFORTUNE); // Power, power per tick, curse type
-        CIRCLES_REQUIRED.put(CirclePart.SMALL, EnchantedBlocks.CHALK_WHITE.get());
+        CIRCLES_REQUIRED.put(CirclePart.SMALL, EnchantedBlocks.RITUAL_CHALK.get());
         ITEMS_REQUIRED.put(EnchantedItems.TAGLOCK_FILLED.get(), 1);
         ITEMS_REQUIRED.put(EnchantedItems.BREATH_OF_THE_GODDESS.get(), 1);
         ITEMS_REQUIRED.put(Items.SPIDER_EYE, 1);

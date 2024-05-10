@@ -1,8 +1,8 @@
 {
   "values": [
-    "enchanted:chalk_gold",
-    "enchanted:chalk_white",
-    "enchanted:chalk_red",
-    "enchanted:chalk_purple"
+    "enchanted:golden_chalk",
+    "enchanted:ritual_chalk",
+    "enchanted:nether_chalk",
+    "enchanted:otherwhere_chalk"
   ]
 }

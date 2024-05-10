@@ -15,8 +15,8 @@ import net.minecraft.world.level.Level;
 
 public class CircleTalismanItem extends Item {
 
-	public CircleTalismanItem(Properties properties) {
-		super(properties);
+	public CircleTalismanItem() {
+		super(new Properties().stacksTo(1));
 	}
 
 	@Override
@@ -34,20 +34,20 @@ public class CircleTalismanItem extends Item {
 				byte large = nbt.contains("large") ? nbt.getByte("large") : 0;
 
 				if(small != 0 || medium != 0 || large != 0) {
-					boolean validPlace = world.getBlockState(pos).isAir() && EnchantedBlocks.CHALK_GOLD.get().canSurvive(null, world, pos);
+					boolean validPlace = world.getBlockState(pos).isAir() && EnchantedBlocks.GOLDEN_CHALK.get().canSurvive(null, world, pos);
 					if(validPlace) {
 						if(small != 0 && !CirclePart.SMALL.canPlace(world, pos)) validPlace = false;
 						if(medium != 0 && !CirclePart.MEDIUM.canPlace(world, pos)) validPlace = false;
 						if(large != 0 && !CirclePart.LARGE.canPlace(world, pos)) validPlace = false;
 
 						if(validPlace) {
-							world.setBlockAndUpdate(pos, EnchantedBlocks.CHALK_GOLD.get().getStateForPlacement(new BlockPlaceContext(context)));
+							world.setBlockAndUpdate(pos, EnchantedBlocks.GOLDEN_CHALK.get().getStateForPlacement(new BlockPlaceContext(context)));
 							if(small != 0)
-								CirclePart.SMALL.place(world, pos, small == 1 ? EnchantedBlocks.CHALK_WHITE.get() : small == 2 ? EnchantedBlocks.CHALK_RED.get() : EnchantedBlocks.CHALK_PURPLE.get(), context);
+								CirclePart.SMALL.place(world, pos, small == 1 ? EnchantedBlocks.RITUAL_CHALK.get() : small == 2 ? EnchantedBlocks.NETHER_CHALK.get() : EnchantedBlocks.OTHERWHERE_CHALK.get(), context);
 							if(medium != 0)
-								CirclePart.MEDIUM.place(world, pos, medium == 1 ? EnchantedBlocks.CHALK_WHITE.get() : medium == 2 ? EnchantedBlocks.CHALK_RED.get() : EnchantedBlocks.CHALK_PURPLE.get(), context);
+								CirclePart.MEDIUM.place(world, pos, medium == 1 ? EnchantedBlocks.RITUAL_CHALK.get() : medium == 2 ? EnchantedBlocks.NETHER_CHALK.get() : EnchantedBlocks.OTHERWHERE_CHALK.get(), context);
 							if(large != 0)
-								CirclePart.LARGE.place(world, pos, large == 1 ? EnchantedBlocks.CHALK_WHITE.get() : large == 2 ? EnchantedBlocks.CHALK_RED.get() : EnchantedBlocks.CHALK_PURPLE.get(), context);
+								CirclePart.LARGE.place(world, pos, large == 1 ? EnchantedBlocks.RITUAL_CHALK.get() : large == 2 ? EnchantedBlocks.NETHER_CHALK.get() : EnchantedBlocks.OTHERWHERE_CHALK.get(), context);
 
 							stack.setTag(new CompoundTag());
 

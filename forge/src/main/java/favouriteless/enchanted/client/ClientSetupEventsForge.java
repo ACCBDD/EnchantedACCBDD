@@ -30,9 +30,9 @@ public class ClientSetupEventsForge {
 
 	@SubscribeEvent
 	public static void registerBlockColors(RegisterColorHandlersEvent.Block event) {
-		event.register((a, b, c, d) -> 0xF0F0F0, EnchantedBlocks.CHALK_WHITE.get());
-		event.register((a, b, c, d) -> 0x801818, EnchantedBlocks.CHALK_RED.get());
-		event.register((a, b, c, d) -> 0x4F2F78, EnchantedBlocks.CHALK_PURPLE.get());
+		event.register((a, b, c, d) -> 0xF0F0F0, EnchantedBlocks.RITUAL_CHALK.get());
+		event.register((a, b, c, d) -> 0x801818, EnchantedBlocks.NETHER_CHALK.get());
+		event.register((a, b, c, d) -> 0x4F2F78, EnchantedBlocks.OTHERWHERE_CHALK.get());
 	}
 
 	@SubscribeEvent

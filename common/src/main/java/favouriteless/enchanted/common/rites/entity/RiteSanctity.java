@@ -24,7 +24,7 @@ public class RiteSanctity extends AbstractRite {
 
     public RiteSanctity(RiteType<?> type, ServerLevel level, BlockPos pos, UUID caster) {
         super(type, level, pos, caster, 500, 3); // Power, power per tick
-        CIRCLES_REQUIRED.put(CirclePart.SMALL, EnchantedBlocks.CHALK_WHITE.get());
+        CIRCLES_REQUIRED.put(CirclePart.SMALL, EnchantedBlocks.RITUAL_CHALK.get());
         ITEMS_REQUIRED.put(Items.FEATHER, 1);
         ITEMS_REQUIRED.put(Items.REDSTONE, 1);
     }

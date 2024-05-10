@@ -22,12 +22,12 @@ public class ItemModelProvider extends net.minecraftforge.client.model.generator
 	protected void registerModels() {
 		ITEM_GENERATED = getExistingFile(mcLoc("item/generated"));
 
-		simpleItem(EnchantedItems.ARTICHOKE_SEEDS.get());
+		simpleItem(EnchantedItems.WATER_ARTICHOKE_SEEDS.get());
 		simpleItem(EnchantedItems.BELLADONNA_SEEDS.get());
 		simpleItem(EnchantedItems.MANDRAKE_SEEDS.get());
 		simpleItem(EnchantedItems.SNOWBELL_SEEDS.get());
 		simpleItem(EnchantedItems.WOLFSBANE_SEEDS.get());
-		simpleItem(EnchantedItems.ARTICHOKE.get());
+		simpleItem(EnchantedItems.WATER_ARTICHOKE.get());
 		simpleItem(EnchantedItems.BELLADONNA_FLOWER.get());
 		simpleItem(EnchantedItems.MANDRAKE_ROOT.get());
 		simpleItem(EnchantedItems.WOLFSBANE_FLOWER.get());
@@ -38,7 +38,7 @@ public class ItemModelProvider extends net.minecraftforge.client.model.generator
 		simpleItem(EnchantedItems.MUTANDIS_EXTREMIS.get());
 		simpleItem(EnchantedItems.TAGLOCK.get());
 		simpleItem(EnchantedItems.TAGLOCK_FILLED.get());
-		simpleItem(EnchantedItems.CLAY_JAR_SOFT.get());
+		simpleItem(EnchantedItems.SOFT_CLAY_JAR.get());
 		simpleItem(EnchantedItems.CLAY_JAR.get());
 		simpleItem(EnchantedItems.BREATH_OF_THE_GODDESS.get());
 		simpleItem(EnchantedItems.EXHALE_OF_THE_HORNED_ONE.get());

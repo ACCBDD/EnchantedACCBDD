@@ -8,8 +8,8 @@ import net.minecraft.world.item.BlockItem;
  */
 public class SpinningWheelBlockItem extends BlockItem {
 
-	public SpinningWheelBlockItem(Properties properties) {
-		super(EnchantedBlocks.SPINNING_WHEEL.get(), properties);
+	public SpinningWheelBlockItem() {
+		super(EnchantedBlocks.SPINNING_WHEEL.get(), new Properties());
 	}
 
 }

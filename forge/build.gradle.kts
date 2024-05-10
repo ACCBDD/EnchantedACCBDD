@@ -154,6 +154,12 @@ mixin {
     config("${mod_id}.mixins.json")
 }
 
+reobf {
+    jarJar { }
+}
+
+tasks.jarJar.get().finalizedBy("reobfJarJar")
+
 publishing {
     publishing {
         publications {

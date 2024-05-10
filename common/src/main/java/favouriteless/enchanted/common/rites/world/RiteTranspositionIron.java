@@ -28,7 +28,7 @@ public class RiteTranspositionIron extends AbstractRite {
 
 	public RiteTranspositionIron(RiteType<?> type, ServerLevel level, BlockPos pos, UUID caster) {
 		super(type, level, pos, caster, 0, 0);
-		CIRCLES_REQUIRED.put(CirclePart.LARGE, EnchantedBlocks.CHALK_PURPLE.get());
+		CIRCLES_REQUIRED.put(CirclePart.LARGE, EnchantedBlocks.OTHERWHERE_CHALK.get());
 		ITEMS_REQUIRED.put(Items.ENDER_PEARL, 1);
 		ITEMS_REQUIRED.put(Items.IRON_INGOT, 1);
 		ITEMS_REQUIRED.put(Items.BLAZE_POWDER, 1);
