@@ -1,36 +1,23 @@
 package favouriteless.enchanted.common.init;
 
 import favouriteless.enchanted.Enchanted;
-import favouriteless.enchanted.common.init.registry.AltarUpgradeRegistry;
-import favouriteless.enchanted.common.init.registry.PowerProviderRegistry;
-import favouriteless.enchanted.common.reloadlisteners.altar.AltarUpgradeReloadListener;
-import favouriteless.enchanted.common.reloadlisteners.altar.PowerProviderReloadListener;
-import favouriteless.enchanted.platform.CommonServices;
+import favouriteless.enchanted.common.altar.PowerProvider;
+import favouriteless.enchanted.common.altar.AltarUpgrade;
+import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
 public class EnchantedData {
 
-    public static final PowerProviderRegistry<Block> POWER_BLOCKS = new PowerProviderRegistry<>();
-    public static final PowerProviderRegistry<TagKey<Block>> POWER_TAGS = new PowerProviderRegistry<>();
-    public static final AltarUpgradeRegistry ALTAR_UPGRADES = new AltarUpgradeRegistry();
-
-
-
-    static {
-        register("altar_blocks", new PowerProviderReloadListener<>("altar/blocks", EnchantedData::createBlockKey, EnchantedData.POWER_BLOCKS));
-        register("altar_tags", new PowerProviderReloadListener<>("altar/tags", EnchantedData::createBlockTagKey, EnchantedData.POWER_TAGS));
-        register("altar_upgrade", new AltarUpgradeReloadListener());
-    }
-
-    public static void register(String id, SimpleJsonResourceReloadListener reloadListener) {
-        CommonServices.COMMON_REGISTRY.register(Enchanted.id(id), reloadListener);
-    }
+    // These datapack registries need to be registered separately because Forge defers it. See EnchantedForge and EnchantedFabric.
+    public static final ResourceKey<Registry<AltarUpgrade>> ALTAR_UPGRADE_REGISTRY = ResourceKey.createRegistryKey(Enchanted.id("altar/upgrades"));
+    public static final ResourceKey<Registry<PowerProvider<Block>>> ALTAR_BLOCK_REGISTRY = ResourceKey.createRegistryKey(Enchanted.id("altar/blocks"));
+    public static final ResourceKey<Registry<PowerProvider<TagKey<Block>>>> ALTAR_TAG_REGISTRY = ResourceKey.createRegistryKey(Enchanted.id("altar/tags"));
 
     private static Block createBlockKey(ResourceLocation key) {
         Block block = BuiltInRegistries.BLOCK.get(key);
@@ -44,6 +31,6 @@ public class EnchantedData {
         return TagKey.create(Registries.BLOCK, key);
     }
 
-    public static void load() {} // Method which exists purely to load the class.
+    public static void load() {}
 
 }

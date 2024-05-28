@@ -1,9 +1,11 @@
 package favouriteless.enchanted.platform.services;
 
+import com.mojang.serialization.Codec;
 import favouriteless.enchanted.Enchanted;
 import favouriteless.enchanted.common.items.FabricNonAnimatedArmorItem;
 import favouriteless.enchanted.common.items.NonAnimatedArmorItem;
 import favouriteless.enchanted.platform.JsonDataLoaderWrapper;
+import net.fabricmc.fabric.api.event.registry.DynamicRegistries;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
@@ -12,6 +14,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;

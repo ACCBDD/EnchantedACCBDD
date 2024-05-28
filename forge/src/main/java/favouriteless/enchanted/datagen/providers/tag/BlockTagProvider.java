@@ -45,6 +45,11 @@ public class BlockTagProvider extends IntrinsicHolderTagsProvider<Block> {
         tag(EnchantedTags.Blocks.CROPS)
                 .add(EnchantedBlocks.BELLADONNA.get(), EnchantedBlocks.SNOWBELL.get(), EnchantedBlocks.MANDRAKE.get(),
                         EnchantedBlocks.GARLIC.get(), EnchantedBlocks.WOLFSBANE.get());
+        tag(EnchantedTags.Blocks.FENCES)
+                .addTag(EnchantedTags.Blocks.WOODEN_FENCES);
+        tag(EnchantedTags.Blocks.FENCE_GATES)
+                .add(EnchantedBlocks.ALDER_FENCE_GATE.get(), EnchantedBlocks.HAWTHORN_FENCE_GATE.get(),
+                        EnchantedBlocks.ROWAN_FENCE_GATE.get());
         tag(EnchantedTags.Blocks.LEAVES)
                 .add(EnchantedBlocks.ALDER_LEAVES.get(), EnchantedBlocks.ROWAN_LEAVES.get(),
                         EnchantedBlocks.HAWTHORN_LEAVES.get());
@@ -83,6 +88,9 @@ public class BlockTagProvider extends IntrinsicHolderTagsProvider<Block> {
         tag(EnchantedTags.Blocks.WOODEN_SLABS)
                 .add(EnchantedBlocks.ROWAN_SLAB.get(), EnchantedBlocks.ALDER_SLAB.get(),
                         EnchantedBlocks.HAWTHORN_SLAB.get());
+        tag(EnchantedTags.Blocks.WOODEN_FENCES)
+                .add(EnchantedBlocks.ROWAN_FENCE.get(), EnchantedBlocks.ALDER_FENCE.get(),
+                        EnchantedBlocks.HAWTHORN_FENCE.get());
         tag(EnchantedTags.Blocks.WOODEN_STAIRS)
                 .add(EnchantedBlocks.ROWAN_STAIRS.get(), EnchantedBlocks.ALDER_STAIRS.get(),
                         EnchantedBlocks.HAWTHORN_STAIRS.get());
@@ -105,6 +113,10 @@ public class BlockTagProvider extends IntrinsicHolderTagsProvider<Block> {
         // Other tags
         tag(BlockTags.CROPS)
                 .addTag(EnchantedTags.Blocks.CROPS);
+        tag(BlockTags.FENCES)
+                .addTag(EnchantedTags.Blocks.FENCES);
+        tag(BlockTags.FENCE_GATES)
+                .addTag(EnchantedTags.Blocks.FENCE_GATES);
         tag(BlockTags.LEAVES)
                 .addTag(EnchantedTags.Blocks.LEAVES);
         tag(BlockTags.LOGS_THAT_BURN)
@@ -119,6 +131,8 @@ public class BlockTagProvider extends IntrinsicHolderTagsProvider<Block> {
                 .addTag(EnchantedTags.Blocks.STAIRS);
         tag(BlockTags.SMALL_FLOWERS)
                 .add(EnchantedBlocks.BLOOD_POPPY.get());
+        tag(BlockTags.WOODEN_FENCES)
+                .addTag(EnchantedTags.Blocks.WOODEN_FENCES);
         tag(BlockTags.WOODEN_SLABS)
                 .addTag(EnchantedTags.Blocks.WOODEN_SLABS);
         tag(BlockTags.WOODEN_STAIRS)

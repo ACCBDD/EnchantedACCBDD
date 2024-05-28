@@ -1,25 +1,25 @@
 package favouriteless.enchanted.common.init.registry;
 
-import favouriteless.enchanted.common.altar.AltarPowerProvider;
+import favouriteless.enchanted.common.altar.PowerProvider;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PowerProviderRegistry<T> {
 
-	private final List<AltarPowerProvider<T>> providers = new ArrayList<>();
+	private final List<PowerProvider<T>> providers = new ArrayList<>();
 
-	public void register(AltarPowerProvider<T> provider) {
+	public void register(PowerProvider<T> provider) {
 		if(!providers.isEmpty()) {
 			for(int i = 0; i < providers.size(); i++) {
-				AltarPowerProvider<T> oldProvider = providers.get(i);
+				PowerProvider<T> oldProvider = providers.get(i);
 
-				if(provider.getPower() > oldProvider.getPower()) { // Prioritise the highest power per block first.
+				if(provider.power() > oldProvider.power()) { // Prioritise the highest power per block first.
 					providers.add(i, provider);
 					break;
 				}
-				else if(provider.getPower() == oldProvider.getPower()) { // Then prioritise whatever has the highest limit
-					if(provider.getLimit() > oldProvider.getLimit()) {
+				else if(provider.power() == oldProvider.power()) { // Then prioritise whatever has the highest limit
+					if(provider.limit() > oldProvider.limit()) {
 						providers.add(i, provider);
 						break;
 					}
@@ -34,15 +34,15 @@ public class PowerProviderRegistry<T> {
 		}
 	}
 
-	public AltarPowerProvider<T> get(T key) {
-		for(AltarPowerProvider<T> provider : providers) {
+	public PowerProvider<T> get(T key) {
+		for(PowerProvider<T> provider : providers) {
 			if(provider.is(key))
 				return provider;
 		}
 		return null;
 	}
 
-	public List<AltarPowerProvider<T>> getAll() {
+	public List<PowerProvider<T>> getAll() {
 		return providers;
 	}
 

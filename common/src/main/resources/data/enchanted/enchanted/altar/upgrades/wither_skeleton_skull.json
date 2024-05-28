@@ -1,0 +1,7 @@
+{
+  "type": "enchanted:skull",
+  "block": "minecraft:wither_skeleton_skull",
+  "power": 2.0,
+  "recharge": 2.0,
+  "priority": 1
+}

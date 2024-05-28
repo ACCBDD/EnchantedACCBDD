@@ -1,0 +1,7 @@
+{
+  "type": "enchanted:torch",
+  "block": "minecraft:torch",
+  "power": 0.0,
+  "recharge": 0.5,
+  "priority": 0
+}

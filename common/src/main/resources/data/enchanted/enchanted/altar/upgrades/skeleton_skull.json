@@ -1,0 +1,7 @@
+{
+  "type": "enchanted:skull",
+  "block": "minecraft:skeleton_skull",
+  "power": 1.0,
+  "recharge": 1.0,
+  "priority": 0
+}

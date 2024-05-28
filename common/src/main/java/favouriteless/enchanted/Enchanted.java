@@ -15,6 +15,7 @@ public class Enchanted {
 
     public static final String MOD_ID = "enchanted";
     public static final Logger LOG = LoggerFactory.getLogger(MOD_ID);
+
     public static final Random RANDOM = new Random();
     public static final RandomSource RANDOMSOURCE = RandomSource.create();
 

@@ -38,3 +38,6 @@ build.bat
 !core/gradlew.bat
 !gradle/wrapper
 !gradlew.bat
+
+
+blockbench/

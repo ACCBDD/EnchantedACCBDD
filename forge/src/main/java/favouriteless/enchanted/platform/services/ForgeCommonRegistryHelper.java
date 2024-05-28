@@ -3,7 +3,6 @@ package favouriteless.enchanted.platform.services;
 import favouriteless.enchanted.Enchanted;
 import favouriteless.enchanted.common.items.ForgeNonAnimatedArmorItem;
 import favouriteless.enchanted.common.items.NonAnimatedArmorItem;
-import favouriteless.enchanted.datagen.providers.loot_tables.BlockLootSubProvider;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -41,8 +40,10 @@ import java.util.function.Supplier;
 public class ForgeCommonRegistryHelper implements ICommonRegistryHelper {
 
 	public static final DeferredRegister<CreativeModeTab> TAB_REGISTRY = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Enchanted.MOD_ID);
-	public static final DataLoaderRegister DATA_LOADERS = new DataLoaderRegister();
 	private static final RegistryMap registryMap = new RegistryMap();
+
+	public static final List<SimpleJsonResourceReloadListener> dataLoaders = new ArrayList<>();
+
 
 	@Override
 	public <T> Supplier<T> register(Registry<? super T> registry, String name, Supplier<T> entry) {
@@ -56,7 +57,7 @@ public class ForgeCommonRegistryHelper implements ICommonRegistryHelper {
 
 	@Override
 	public void register(ResourceLocation id, SimpleJsonResourceReloadListener loader) {
-		DATA_LOADERS.dataLoaders.add(loader);
+		dataLoaders.add(loader);
 	}
 
 	@Override
@@ -103,16 +104,6 @@ public class ForgeCommonRegistryHelper implements ICommonRegistryHelper {
 				defReg.register(FMLJavaModLoadingContext.get().getModEventBus());
 				return defReg;
 			});
-		}
-
-	}
-
-	public static class DataLoaderRegister {
-
-		private final List<SimpleJsonResourceReloadListener> dataLoaders = new ArrayList<>(); // Doing no setter means only the RegistrationImpl class can get access to registering more loaders.
-
-		public List<SimpleJsonResourceReloadListener> getLoaders() {
-			return dataLoaders;
 		}
 
 	}

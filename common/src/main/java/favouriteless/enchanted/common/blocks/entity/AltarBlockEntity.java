@@ -1,24 +1,19 @@
 package favouriteless.enchanted.common.blocks.entity;
 
 import favouriteless.enchanted.Enchanted;
-import favouriteless.enchanted.api.ISerializable;
 import favouriteless.enchanted.api.power.IPowerConsumer;
 import favouriteless.enchanted.api.power.IPowerProvider;
 import favouriteless.enchanted.common.CommonConfig;
-import favouriteless.enchanted.common.altar.AltarPowerProvider;
+import favouriteless.enchanted.common.altar.AltarBlockData;
 import favouriteless.enchanted.common.altar.AltarStateObserver;
+import favouriteless.enchanted.common.altar.AltarUpgradeData;
 import favouriteless.enchanted.common.blocks.altar.AltarBlock;
-import favouriteless.enchanted.common.init.EnchantedData;
-import favouriteless.enchanted.common.init.EnchantedTags;
 import favouriteless.enchanted.common.init.registry.EnchantedBlockEntityTypes;
 import favouriteless.enchanted.common.menus.AltarMenu;
 import com.favouriteless.stateobserver.StateObserverManager;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -31,8 +26,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
-import java.util.HashMap;
-import java.util.Map;
 
 public class AltarBlockEntity extends BlockEntity implements MenuProvider, IPowerProvider {
 
@@ -115,7 +108,7 @@ public class AltarBlockEntity extends BlockEntity implements MenuProvider, IPowe
                 Vec3.atLowerCornerOf(worldPosition).add(1.0D, 0.0D, 0.5D) :
                 Vec3.atLowerCornerOf(worldPosition).add(0.5D, 0.0D, 1.0D);
         if(firstLoad)
-            recalculatePower();
+            recalculateAll();
         firstTick = false;
     }
 
@@ -126,8 +119,8 @@ public class AltarBlockEntity extends BlockEntity implements MenuProvider, IPowe
         nbt.putDouble("maxPower", maxPower);
         nbt.putDouble("powerMultiplier", powerMultiplier);
         nbt.putDouble("rechargeMultiplier", rechargeMultiplier);
-        nbt.put("blockData", altarBlockData.serialize());
-        nbt.put("upgradeData", altarUpgradeData.serialize());
+        nbt.put("blockData", altarBlockData.save());
+        nbt.put("upgradeData", altarUpgradeData.save(level));
     }
 
     @Override
@@ -139,8 +132,8 @@ public class AltarBlockEntity extends BlockEntity implements MenuProvider, IPowe
         powerMultiplier = nbt.getDouble("powerMultiplier");
         rechargeMultiplier = nbt.getDouble("rechargeMultiplier");
         if(nbt.contains("blockData") && nbt.contains("upgradeData")) {
-            altarBlockData.deserialize((CompoundTag) nbt.get("blockData"));
-            altarUpgradeData.deserialize((CompoundTag) nbt.get("upgradeData"));
+            altarBlockData.load(nbt.getCompound("blockData"));
+            altarUpgradeData.load(nbt.getCompound("upgradeData"));
         }
         else
             Enchanted.LOG.info(String.format("Failed to load power block data for altar at x:%s y:%s z:%s", getBlockPos().getX(), getBlockPos().getY(), getBlockPos().getZ()));
@@ -148,26 +141,36 @@ public class AltarBlockEntity extends BlockEntity implements MenuProvider, IPowe
         firstLoad = false;
     }
 
-    private void recalculatePower() {
+    /**
+     * Clear the {@link AltarBlockData} and {@link AltarUpgradeData} for this {@link AltarBlockEntity} and recalculate
+     * their values.
+     */
+    private void recalculateAll() {
         recalculateUpgrades();
         recalculateBlocks();
     }
 
+    /**
+     * Clear the {@link AltarUpgradeData} for this {@link AltarBlockEntity} and recalculate its values.
+     */
     private void recalculateUpgrades() {
         if(level != null && !level.isClientSide) {
             BlockPos minPos = worldPosition.above();
             BlockPos maxPos = facingX ? minPos.offset(2, 0, 1) : minPos.offset(1, 0, 2);
 
             altarUpgradeData.reset();
-            for(BlockPos pos : BlockPos.betweenClosed(minPos, maxPos)) {
-                altarUpgradeData.addBlock(level.getBlockState(pos).getBlock());
-            }
-            powerMultiplier = altarUpgradeData.calculatePowerMultiplier();
-            rechargeMultiplier = altarUpgradeData.calculateRechargeMultiplier();
+            for(BlockPos pos : BlockPos.betweenClosed(minPos, maxPos))
+                altarUpgradeData.addBlock(level, level.getBlockState(pos).getBlock());
+
+            powerMultiplier = altarUpgradeData.calculatePowerMultiplier(level);
+            rechargeMultiplier = altarUpgradeData.calculateRechargeMultiplier(level);
             setChanged();
         }
     }
 
+    /**
+     * Clear the {@link AltarBlockData} for this {@link AltarBlockEntity} and recalculate its values.
+     */
     private void recalculateBlocks() {
         if(level != null && !level.isClientSide) {
             int range = CommonConfig.ALTAR_RANGE.get();
@@ -193,6 +196,14 @@ public class AltarBlockEntity extends BlockEntity implements MenuProvider, IPowe
         }
     }
 
+    /**
+     * Check if a given position is within this Altar's range.
+     *
+     * @param pos The {@link BlockPos} to check.
+     * @param range The range to check for.
+     *
+     * @return True if in range, otherwise false.
+     */
     public boolean posWithinRange(BlockPos pos, int range) {
         if(this.level != null) {
             double rx = facingX ? range+1 : range;
@@ -205,13 +216,13 @@ public class AltarBlockEntity extends BlockEntity implements MenuProvider, IPowe
         return false;
     }
 
-    public double distanceTo(BlockPos pos) {
-        double dx = pos.getX() - centerPos.x;
-        double dy = pos.getY() - centerPos.y;
-        double dz = pos.getZ() - centerPos.z;
-        return Math.sqrt((dx * dx) + (dy * dy) + (dz * dz));
-    }
-
+    /**
+     * Check if a given position is an upgrade (i.e. on top of the Altar).
+     *
+     * @param pos The {@link BlockPos} to check.
+     *
+     * @return True if position is an upgrade, otherwise false.
+     */
     public boolean posIsUpgrade(BlockPos pos) {
         if(this.level != null) {
             int xMax;
@@ -234,43 +245,68 @@ public class AltarBlockEntity extends BlockEntity implements MenuProvider, IPowe
         return false;
     }
 
+    /**
+     * Set the maximum power for this Altar and clamp the current power to it.
+     *
+     * @param power New max power.
+     */
     public void setMaxPower(double power) {
         maxPower = power;
-        if(currentPower > maxPower) currentPower = maxPower;
-        this.setChanged();
+        if(currentPower > maxPower)
+            currentPower = maxPower;
+        setChanged();
     }
 
+    /**
+     * Add a block to this {@link AltarBlockEntity}'s {@link AltarBlockData} and calculate the power gain from it.
+     *
+     * @param block The {@link Block} to add.
+     */
     public void addBlock(Block block) {
-        maxPower += altarBlockData.addBlock(block) * powerMultiplier;
+        setMaxPower(maxPower + altarBlockData.addBlock(level, block) * powerMultiplier);
         setChanged();
     }
 
+    /**
+     * Remove a block from this {@link AltarBlockEntity}'s {@link AltarBlockData} and calculate the power loss from it.
+     *
+     * @param block The {@link Block} to remove.
+     */
     public void removeBlock(Block block) {
-        maxPower -= altarBlockData.removeBlock(block) * powerMultiplier;
-        if(currentPower > maxPower) currentPower = maxPower;
+        setMaxPower(maxPower - altarBlockData.removeBlock(level, block) * powerMultiplier);
         setChanged();
     }
 
+    /**
+     * Add a block to this {@link AltarBlockEntity}'s {@link AltarUpgradeData} and calculate the power gain from it.
+     *
+     * @param block The {@link Block} to add.
+     */
     public void addUpgrade(Block block) {
-        if(altarUpgradeData.addBlock(block)) {
-            double newPowerMultiplier = altarUpgradeData.calculatePowerMultiplier();
+        if(altarUpgradeData.addBlock(level, block)) {
+            double newPowerMultiplier = altarUpgradeData.calculatePowerMultiplier(level);
             if(newPowerMultiplier != powerMultiplier) {
                 powerMultiplier = newPowerMultiplier;
-                setMaxPower(altarBlockData.calculatePower(powerMultiplier));
+                setMaxPower(altarBlockData.calculatePower(level, powerMultiplier));
             }
-            rechargeMultiplier = altarUpgradeData.calculateRechargeMultiplier();
+            rechargeMultiplier = altarUpgradeData.calculateRechargeMultiplier(level);
             setChanged();
         }
     }
 
+    /**
+     * Remove a block from this {@link AltarBlockEntity}'s {@link AltarUpgradeData} and calculate the power loss from it.
+     *
+     * @param block The {@link Block} to remove.
+     */
     public void removeUpgrade(Block block) {
-        if(altarUpgradeData.removeBlock(block)) {
-            double newPowerMultiplier = altarUpgradeData.calculatePowerMultiplier();
+        if(altarUpgradeData.removeBlock(level, block)) {
+            double newPowerMultiplier = altarUpgradeData.calculatePowerMultiplier(level);
             if(newPowerMultiplier != powerMultiplier) {
                 powerMultiplier = newPowerMultiplier;
-                setMaxPower(altarBlockData.calculatePower(powerMultiplier));
+                setMaxPower(altarBlockData.calculatePower(level, powerMultiplier));
             }
-            rechargeMultiplier = altarUpgradeData.calculateRechargeMultiplier();
+            rechargeMultiplier = altarUpgradeData.calculateRechargeMultiplier(level);
             setChanged();
         }
     }
@@ -294,240 +330,5 @@ public class AltarBlockEntity extends BlockEntity implements MenuProvider, IPowe
         }
         return false;
     }
-
-
-
-    public static class AltarBlockData implements ISerializable<CompoundTag> {
-        public Map<Block, Integer> blockCounts = new HashMap<>();
-        public Map<TagKey<Block>, Integer> tagCounts = new HashMap<>();
-
-        public AltarBlockData() {
-            for(AltarPowerProvider<Block> provider : EnchantedData.POWER_BLOCKS.getAll())
-                blockCounts.put(provider.getKey(), 0);
-            for(AltarPowerProvider<TagKey<Block>> provider : EnchantedData.POWER_TAGS.getAll())
-                tagCounts.put(provider.getKey(), 0);
-        }
-
-        public CompoundTag serialize() {
-            CompoundTag nbt = new CompoundTag();
-            CompoundTag blockNbt = new CompoundTag();
-            CompoundTag tagNbt = new CompoundTag();
-
-            for(Block block : blockCounts.keySet()) {
-                blockNbt.putInt(BuiltInRegistries.BLOCK.getKey(block).toString(), blockCounts.get(block));
-            }
-            for(TagKey<Block> tag : tagCounts.keySet()) {
-                tagNbt.putInt(tag.location().toString(), tagCounts.get(tag));
-            }
-
-            nbt.put("blocksAmount", blockNbt);
-            nbt.put("tagsAmount", tagNbt);
-            return nbt;
-        }
-
-        public void deserialize(CompoundTag nbt) {
-            CompoundTag blockNbt = (CompoundTag)nbt.get("blocksAmount");
-            CompoundTag tagNbt = (CompoundTag)nbt.get("tagsAmount");
-
-            for(String name : blockNbt.getAllKeys()) {
-                blockCounts.put(BuiltInRegistries.BLOCK.get(new ResourceLocation(name)), blockNbt.getInt(name));
-            }
-            for(String name : tagNbt.getAllKeys()) {
-                tagCounts.put(EnchantedTags.createBlockTag(new ResourceLocation(name)), tagNbt.getInt(name));
-            }
-
-        }
-
-        public double addBlock(Block block) {
-            Integer amount = blockCounts.get(block);
-
-            if(amount == null) { // Not in blocks
-                for(AltarPowerProvider<TagKey<Block>> provider : EnchantedData.POWER_TAGS.getAll()) { // For all tag power providers
-                    if(block.builtInRegistryHolder().is(provider.getKey())) { // If block part of provider tag
-                        amount = tagCounts.get(provider.getKey());
-                        tagCounts.replace(provider.getKey(), tagCounts.get(provider.getKey()) + 1);
-                        return amount < provider.getLimit() ? provider.getPower() : 0; // Return 0 if above limit
-                    }
-                }
-            }
-            if(amount == null) { // Not in blocks OR tags
-                return 0;
-            }
-
-            AltarPowerProvider<Block> provider = EnchantedData.POWER_BLOCKS.get(block);
-            blockCounts.replace(block, amount + 1);
-            return amount < provider.getLimit() ? provider.getPower() : 0; // Return 0 if above limit
-        }
-
-        public double removeBlock(Block block) {
-            Integer amount = blockCounts.get(block);
-
-            if(amount == null) { // Not in blocks
-                for(AltarPowerProvider<TagKey<Block>> provider : EnchantedData.POWER_TAGS.getAll()) { // For all tag power providers
-                    if(block.builtInRegistryHolder().is(provider.getKey())) { // If block part of provider tag
-                        amount = tagCounts.get(provider.getKey());
-                        tagCounts.replace(provider.getKey(), tagCounts.get(provider.getKey()) - 1);
-
-                        return amount > provider.getLimit() ? 0 : provider.getPower(); // Return 0 if above limit
-                    }
-                }
-            }
-            if(amount == null) { // Not in blocks or tags
-                return 0;
-            }
-
-            AltarPowerProvider<Block> provider = EnchantedData.POWER_BLOCKS.get(block);
-            blockCounts.replace(block, amount - 1);
-            return amount > provider.getLimit() ? 0 : provider.getPower(); // Return 0 if above limit
-        }
-
-        public double calculatePower(double powerMultiplier) {
-            double newPower = 0.0D;
-
-            for(Block block : blockCounts.keySet()) {
-                AltarPowerProvider<Block> powerProvider = EnchantedData.POWER_BLOCKS.get(block);
-                if(powerProvider == null) {
-                    blockCounts.remove(powerProvider.getKey());
-                    break;
-                }
-                newPower += Math.max(0, Math.min(powerProvider.getLimit(), blockCounts.get(block))) * powerProvider.getPower() * powerMultiplier;
-            }
-            for(TagKey<Block> tag : tagCounts.keySet()) {
-                AltarPowerProvider<TagKey<Block>> powerProvider = EnchantedData.POWER_TAGS.get(tag);
-                if(powerProvider == null) {
-                    tagCounts.remove(powerProvider.getKey());
-                    break;
-                }
-                newPower += Math.max(0, Math.min(powerProvider.getLimit(), tagCounts.get(tag))) * powerProvider.getPower() * powerMultiplier;
-            }
-
-            return newPower;
-        }
-
-        public void reset() {
-            blockCounts.replaceAll((key, value) -> value = 0);
-            tagCounts.replaceAll((key, value) -> value = 0);
-        }
-
-    }
-
-    public static class AltarUpgradeData implements ISerializable<CompoundTag> {
-        public final Map<String, Map<AltarUpgrade, Integer>> upgradesByType = new HashMap<>();
-
-        public AltarUpgradeData() {
-            for(AltarUpgrade upgrade : EnchantedData.ALTAR_UPGRADES.getAll()) {
-                String type = upgrade.type().toString();
-                if(!upgradesByType.containsKey(type))
-                    upgradesByType.put(type, new HashMap<>());
-                Map<AltarUpgrade, Integer> upgrades = upgradesByType.get(type);
-                if(!upgrades.containsKey(upgrade))
-                    upgrades.put(upgrade, 0);
-            }
-        }
-
-        public CompoundTag serialize() {
-            CompoundTag nbt = new CompoundTag();
-
-            for(String type : upgradesByType.keySet()) {
-                CompoundTag typeTag = new CompoundTag();
-
-                Map<AltarUpgrade, Integer> map = upgradesByType.get(type);
-                for(AltarUpgrade upgrade : map.keySet()) {
-                    typeTag.putInt(BuiltInRegistries.BLOCK.getKey(upgrade.block()).toString(), map.get(upgrade));
-                }
-                nbt.put(type, typeTag);
-            }
-            return nbt;
-        }
-
-        public void deserialize(CompoundTag nbt) {
-            for(String type : nbt.getAllKeys()) {
-                upgradesByType.get(type).replaceAll((key, value) -> nbt.getInt(BuiltInRegistries.BLOCK.getKey(key.block()).toString()));
-            }
-        }
-
-        public boolean addBlock(Block block) {
-            AltarUpgrade upgrade = getUpgrade(block);
-            if(upgrade == null)
-                return false;
-
-            String type = upgrade.type().toString();
-            upgradesByType.get(type).put(upgrade, upgradesByType.get(type).get(upgrade)+1);
-            return true;
-        }
-
-        public boolean removeBlock(Block block) {
-            AltarUpgrade upgrade = getUpgrade(block);
-            if(upgrade == null)
-                return false;
-
-            String type = upgrade.type().toString();
-            int count = upgradesByType.get(type).get(upgrade);
-            if(count > 0)
-                upgradesByType.get(type).put(upgrade, count-1);
-            return true;
-        }
-
-        private AltarUpgrade getUpgrade(Block block) {
-            for(AltarUpgrade upgrade : EnchantedData.ALTAR_UPGRADES.getAll()) {
-                if(upgrade.block() == block)
-                    return upgrade;
-            }
-            return null;
-        }
-
-        public double calculatePowerMultiplier() {
-            double multiplier = 1.0D;
-            for(String type : upgradesByType.keySet()) {
-                AltarUpgrade highestPriority = null;
-
-                Map<AltarUpgrade, Integer> map = upgradesByType.get(type);
-                for(AltarUpgrade upgrade : map.keySet()) {
-                    if(map.get(upgrade) > 0) { // If has upgrade
-                        if(highestPriority == null)
-                            highestPriority = upgrade;
-                        else if(highestPriority.priority() < upgrade.priority())
-                            highestPriority = upgrade;
-                    }
-                }
-
-                if(highestPriority != null) {
-                    multiplier += highestPriority.powerMultiplier();
-                }
-            }
-            return multiplier;
-        }
-
-        public double calculateRechargeMultiplier() {
-            double multiplier = 1.0D;
-            for(String type : upgradesByType.keySet()) {
-                AltarUpgrade highestPriority = null;
-
-                Map<AltarUpgrade, Integer> map = upgradesByType.get(type);
-                for(AltarUpgrade upgrade : map.keySet()) {
-                    if(map.get(upgrade) > 0) { // If has upgrade
-                        if(highestPriority == null)
-                            highestPriority = upgrade;
-                        else if(highestPriority.priority() < upgrade.priority())
-                            highestPriority = upgrade;
-                    }
-                }
-
-                if(highestPriority != null) {
-                    multiplier += highestPriority.rechargeMultiplier();
-                }
-            }
-            return multiplier;
-        }
-
-        public void reset() {
-            for(Map<AltarUpgrade, Integer> map : upgradesByType.values()) {
-                map.replaceAll((key, value) -> 0);
-            }
-        }
-
-    }
-
-    public record AltarUpgrade(ResourceLocation type, Block block, double rechargeMultiplier, double powerMultiplier, int priority) { }
 
 }

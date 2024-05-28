@@ -1,10 +1,12 @@
-// 1.20.1	2024-05-10T01:19:41.1060211	Tags for minecraft:block mod id enchanted
+// 1.20.1	2024-05-28T16:43:16.3705171	Tags for minecraft:block mod id enchanted
 69c396cb051bbe9a130e6979b67065e5041b179d data/enchanted/tags/blocks/blight_decayable_blocks.json
 d7b586bbe2081b57c98765eb70ddbf16670a018a data/enchanted/tags/blocks/blight_decayable_plants.json
 032a28906df93325eea0f3c0b2070e0f2344aa47 data/enchanted/tags/blocks/blight_decay_blocks.json
 e7ff58a601c24e056dc5521f018555f7e596ec4e data/enchanted/tags/blocks/chalices.json
 cc0b47d4892d7d2ed9f5813df5bc1d69754bd3ef data/enchanted/tags/blocks/chalks.json
 bc7721a66aee97cea11dffcfa62295799c09460b data/enchanted/tags/blocks/crops.json
+af21188360929836cdf79542ec2c5b1ff6032459 data/enchanted/tags/blocks/fences.json
+11c11e8d3eb37d55c44dfbad3c5d2fc892bd4fd2 data/enchanted/tags/blocks/fence_gates.json
 847203a50ec44d614777e94b9ece91cefd7d94fa data/enchanted/tags/blocks/leaves.json
 84980a2aaeb2cfd9ec5ba7157d843a877013c53c data/enchanted/tags/blocks/logs.json
 209fa349faede1a584c86a1947378fbb6651eaf1 data/enchanted/tags/blocks/mutandis_blacklist_plants.json
@@ -15,9 +17,12 @@ d30a4306f77d6935375ce59a590bec6148b59157 data/enchanted/tags/blocks/rite_forest_
 3bd801c9b78565d3ac5135054487bd37e13085b9 data/enchanted/tags/blocks/saplings.json
 7e3768100cc5ced9173c6f166e9f4fd2b701fe38 data/enchanted/tags/blocks/slabs.json
 7e3768100cc5ced9173c6f166e9f4fd2b701fe38 data/enchanted/tags/blocks/stairs.json
+0a3dba649516045ab1e81041515bc9f491c3e1c7 data/enchanted/tags/blocks/wooden_fences.json
 08b6def3e9de617893655d4017801562f26b4bb1 data/enchanted/tags/blocks/wooden_slabs.json
 990b5a153ba74d4169b814216548205322d8dc22 data/enchanted/tags/blocks/wooden_stairs.json
 26218d57e208f3721ed88151e14ff84c0d671c55 data/minecraft/tags/blocks/crops.json
+a63c9ec100ada9b80c9c27ba66474b9ccdaff9ef data/minecraft/tags/blocks/fences.json
+db79e7fde09cdd640b1b64f690b5471b2911d128 data/minecraft/tags/blocks/fence_gates.json
 115f6d9fa2c6915eed7935e8b664a6a502fc0624 data/minecraft/tags/blocks/leaves.json
 6300f7d8da269a5dcee09988742bf91315883e2a data/minecraft/tags/blocks/logs_that_burn.json
 ec1c16676edb829a286ebfed3b7d0209b979c2d9 data/minecraft/tags/blocks/mineable/axe.json
@@ -28,5 +33,6 @@ cb85cd9dd77b8516b5251869dc44dbbdb3ee4fc6 data/minecraft/tags/blocks/mineable/hoe
 b6c4d3a26e658d777700b2e7ee38db667c04bce5 data/minecraft/tags/blocks/slabs.json
 7009f10883e1442aeddc354cf74482aceafc2e28 data/minecraft/tags/blocks/small_flowers.json
 e7d8c18de943c4d75c996da4e7cab000c4a84fed data/minecraft/tags/blocks/stairs.json
+af21188360929836cdf79542ec2c5b1ff6032459 data/minecraft/tags/blocks/wooden_fences.json
 7e3768100cc5ced9173c6f166e9f4fd2b701fe38 data/minecraft/tags/blocks/wooden_slabs.json
 06c0ff2a10b36ce67064c4dd12a66a943f5b5639 data/minecraft/tags/blocks/wooden_stairs.json

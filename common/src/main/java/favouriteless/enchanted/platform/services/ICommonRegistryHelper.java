@@ -1,8 +1,10 @@
 package favouriteless.enchanted.platform.services;
 
+import com.mojang.serialization.Codec;
 import favouriteless.enchanted.common.items.NonAnimatedArmorItem;
 import net.minecraft.core.Registry;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
 import net.minecraft.sounds.SoundEvent;

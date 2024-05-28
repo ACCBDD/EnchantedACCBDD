@@ -1,6 +1,6 @@
 {
   "name": "Witchcraft: Circle Magic",
-  "icon": "patchouli:textures/items/book_purple.png",
+  "icon": "patchouli:textures/item/book_purple.png",
   "category": "enchanted:additional_resources",
   "pages": [
     {

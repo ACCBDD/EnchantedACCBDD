@@ -45,6 +45,8 @@ public class EnchantedTags {
         public static final TagKey<Block> CHALICES = createBlockTag(Enchanted.id("chalices"));
         public static final TagKey<Block> CHALKS = createBlockTag(Enchanted.id("chalks"));
         public static final TagKey<Block> CROPS = createBlockTag(Enchanted.id("crops"));
+        public static final TagKey<Block> FENCES = createBlockTag(Enchanted.id("fences"));
+        public static final TagKey<Block> FENCE_GATES = createBlockTag(Enchanted.id("fence_gates"));
         public static final TagKey<Block> LEAVES = createBlockTag(Enchanted.id("leaves"));
         public static final TagKey<Block> LOGS = createBlockTag(Enchanted.id("logs"));
         public static final TagKey<Block> MUTANDIS_BLACKLIST = createBlockTag(Enchanted.id("mutandis_blacklist_plants"));
@@ -56,6 +58,7 @@ public class EnchantedTags {
         public static final TagKey<Block> SAPLINGS = createBlockTag(Enchanted.id("saplings"));
         public static final TagKey<Block> SLABS = createBlockTag(Enchanted.id("slabs"));
         public static final TagKey<Block> STAIRS = createBlockTag(Enchanted.id("stairs"));
+        public static final TagKey<Block> WOODEN_FENCES = createBlockTag(Enchanted.id("wooden_fences"));
         public static final TagKey<Block> WOODEN_SLABS = createBlockTag(Enchanted.id("wooden_slabs"));
         public static final TagKey<Block> WOODEN_STAIRS = createBlockTag(Enchanted.id("wooden_stairs"));
     }
