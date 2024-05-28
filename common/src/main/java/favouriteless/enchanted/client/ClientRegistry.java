@@ -21,11 +21,6 @@ import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 public class ClientRegistry {
 
     public static void register() {
-        IClientRegistryHelper registry = ClientServices.CLIENT_REGISTRY;
-
-        // Armor renderers
-        //registry.register(EarmuffsItem.class, () -> new DefaultedGeoArmorRenderer("armor/earmuffs"), EnchantedItems.EARMUFFS.get());
-
         // MenuScreens
         MenuScreens.register(EnchantedMenuTypes.WITCH_OVEN.get(), WitchOvenScreen::new);
         MenuScreens.register(EnchantedMenuTypes.DISTILLERY.get(), DistilleryScreen::new);
@@ -56,33 +51,6 @@ public class ClientRegistry {
         // Layer definitions
         registry.register(ModelLayerLocations.BROOMSTICK, BroomstickModel::createLayerDefinition);
         registry.register(ModelLayerLocations.SPINNING_WHEEL, SpinningWheelRenderer::createLayerDefinition);
-    }
-
-
-    public static void registerParticleFactories(ParticleEngine particleEngine) {
-        particleEngine.register(EnchantedParticleTypes.BOILING.get(), BoilingParticle.Factory::new);
-        particleEngine.register(EnchantedParticleTypes.CAULDRON_BREW.get(), CauldronBrewParticle.Factory::new);
-        particleEngine.register(EnchantedParticleTypes.CAULDRON_COOK.get(), CauldronCookParticle.Factory::new);
-        particleEngine.register(EnchantedParticleTypes.KETTLE_COOK.get(), KettleCookParticle.Factory::new);
-        particleEngine.register(EnchantedParticleTypes.CIRCLE_MAGIC.get(), CircleMagicParticle.Factory::new);
-        particleEngine.register(EnchantedParticleTypes.POPPET.get(), PoppetParticle.Factory::new);
-        particleEngine.register(EnchantedParticleTypes.IMPRISONMENT_CAGE.get(), ImprisonmentCageParticle.Factory::new);
-        particleEngine.register(EnchantedParticleTypes.IMPRISONMENT_CAGE_SEED.get(), ImprisonmentCageSeedParticle.Factory::new);
-        particleEngine.register(EnchantedParticleTypes.TRANSPOSITION_IRON_SEED.get(), TranspositionIronSeedParticle.Factory::new);
-        particleEngine.register(EnchantedParticleTypes.BROILING_SEED.get(), BroilingSeedParticle.Factory::new);
-        particleEngine.register(EnchantedParticleTypes.SKY_WRATH_SEED.get(), SkyWrathSeedParticle.Factory::new);
-        particleEngine.register(EnchantedParticleTypes.SKY_WRATH.get(), SkyWrathParticle.Factory::new);
-        particleEngine.register(EnchantedParticleTypes.CURSE_SEED.get(), CurseSeedParticle.Factory::new);
-        particleEngine.register(EnchantedParticleTypes.CURSE_BLIGHT_SEED.get(), CurseBlightSeedParticle.Factory::new);
-        particleEngine.register(EnchantedParticleTypes.CURSE_BLIGHT.get(), RepellingParticle.Factory::new);
-        particleEngine.register(EnchantedParticleTypes.REMOVE_CURSE_SEED.get(), RemoveCurseSeedParticle.Factory::new);
-        particleEngine.register(EnchantedParticleTypes.REMOVE_CURSE.get(), RemoveCurseParticle.Factory::new);
-        particleEngine.register(EnchantedParticleTypes.FERTILITY_SEED.get(), FertilitySeedParticle.Factory::new);
-        particleEngine.register(EnchantedParticleTypes.FERTILITY.get(), RepellingParticle.Factory::new);
-        particleEngine.register(EnchantedParticleTypes.PROTECTION_SEED.get(), ProtectionSeedParticle.Factory::new);
-        particleEngine.register(EnchantedParticleTypes.PROTECTION.get(), ProtectionParticle.Factory::new);
-        particleEngine.register(EnchantedParticleTypes.BIND_FAMILIAR_SEED.get(), BindFamiliarSeedParticle.Factory::new);
-        particleEngine.register(EnchantedParticleTypes.BIND_FAMILIAR.get(), BindFamiliarParticle.Factory::new);
     }
 
     public static void registerItemModelPredicates() {
