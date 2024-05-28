@@ -10,9 +10,9 @@ import org.spongepowered.asm.mixin.Mixin;
 import java.util.function.Consumer;
 
 @Mixin(SpinningWheelBlockItem.class)
-public abstract class CSpinningWheelBlockItemMixin extends Item {
+public abstract class SpinningWheelBlockItemMixin extends Item {
 
-    public CSpinningWheelBlockItemMixin(Properties properties) {
+    public SpinningWheelBlockItemMixin(Properties properties) {
         super(properties);
     }
 

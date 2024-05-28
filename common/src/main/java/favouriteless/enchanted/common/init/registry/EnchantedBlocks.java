@@ -34,11 +34,14 @@ import java.util.function.ToIntFunction;
 
 public class EnchantedBlocks {
 
+    public static final Supplier<RotatedPillarBlock> STRIPPED_ALDER_LOG = register("stripped_alder_log", () -> log(MapColor.COLOR_ORANGE, MapColor.COLOR_ORANGE));
+    public static final Supplier<RotatedPillarBlock> STRIPPED_HAWTHORN_LOG = register("stripped_hawthorn_log", () -> log(MapColor.CLAY, MapColor.CLAY));
+    public static final Supplier<RotatedPillarBlock> STRIPPED_ROWAN_LOG = register("stripped_rowan_log", () -> log(MapColor.WOOD, MapColor.WOOD));
     public static final Supplier<ButtonBlock> ALDER_BUTTON = register("alder_button", EnchantedBlocks::woodenButton);
     public static final Supplier<FenceBlock> ALDER_FENCE = register("alder_fence", EnchantedBlocks::woodenFence);
     public static final Supplier<FenceGateBlock> ALDER_FENCE_GATE = register("alder_fence_gate", EnchantedBlocks::woodenGate);
     public static final Supplier<Block> ALDER_LEAVES = register("alder_leaves", EnchantedBlocks::leaves);
-    public static final Supplier<RotatedPillarBlock> ALDER_LOG = register("alder_log", () -> log(MapColor.COLOR_ORANGE, MapColor.STONE));
+    public static final Supplier<EnchantedLog> ALDER_LOG = register("alder_log", () -> strippableLog(MapColor.COLOR_ORANGE, MapColor.STONE, STRIPPED_ALDER_LOG));
     public static final Supplier<Block> ALDER_PLANKS = register("alder_planks", () -> block(Blocks.OAK_PLANKS));
     public static final Supplier<PressurePlateBlock> ALDER_PRESSURE_PLATE = register("alder_pressure_plate", () -> woodenPressurePlate(MapColor.COLOR_ORANGE));
     public static final Supplier<SaplingBlock> ALDER_SAPLING = register("alder_sapling", () -> sapling("alder_tree"));
@@ -61,7 +64,7 @@ public class EnchantedBlocks {
     public static final Supplier<FenceBlock> HAWTHORN_FENCE = register("hawthorn_fence", EnchantedBlocks::woodenFence);
     public static final Supplier<FenceGateBlock> HAWTHORN_FENCE_GATE = register("hawthorn_fence_gate", EnchantedBlocks::woodenGate);
     public static final Supplier<Block> HAWTHORN_LEAVES = register("hawthorn_leaves", EnchantedBlocks::leaves);
-    public static final Supplier<RotatedPillarBlock> HAWTHORN_LOG = register("hawthorn_log", () -> log(MapColor.CLAY, MapColor.CLAY));
+    public static final Supplier<EnchantedLog> HAWTHORN_LOG = register("hawthorn_log", () -> strippableLog(MapColor.CLAY, MapColor.CLAY, STRIPPED_HAWTHORN_LOG));
     public static final Supplier<Block> HAWTHORN_PLANKS = register("hawthorn_planks", () -> block(Blocks.OAK_PLANKS));
     public static final Supplier<PressurePlateBlock> HAWTHORN_PRESSURE_PLATE = register("hawthorn_pressure_plate", () -> woodenPressurePlate(MapColor.CLAY));
     public static final Supplier<SaplingBlock> HAWTHORN_SAPLING = register("hawthorn_sapling", () -> sapling("hawthorn_tree"));
@@ -80,7 +83,7 @@ public class EnchantedBlocks {
     public static final Supplier<FenceBlock> ROWAN_FENCE = register("rowan_fence", EnchantedBlocks::woodenFence);
     public static final Supplier<FenceGateBlock> ROWAN_FENCE_GATE = register("rowan_fence_gate", EnchantedBlocks::woodenGate);
     public static final Supplier<Block> ROWAN_LEAVES = register("rowan_leaves", EnchantedBlocks::leaves);
-    public static final Supplier<RotatedPillarBlock> ROWAN_LOG = register("rowan_log", () -> log(MapColor.WOOD, MapColor.PODZOL));
+    public static final Supplier<EnchantedLog> ROWAN_LOG = register("rowan_log", () -> strippableLog(MapColor.WOOD, MapColor.PODZOL, STRIPPED_ROWAN_LOG));
     public static final Supplier<Block> ROWAN_PLANKS = register("rowan_planks", () -> block(Blocks.OAK_PLANKS));
     public static final Supplier<PressurePlateBlock> ROWAN_PRESSURE_PLATE = register("rowan_pressure_plate", () -> woodenPressurePlate(MapColor.WOOD));
     public static final Supplier<SaplingBlock> ROWAN_SAPLING = register("rowan_sapling", () -> sapling("rowan_tree"));
@@ -89,9 +92,6 @@ public class EnchantedBlocks {
     public static final Supplier<CropsBlockAgeFive> SNOWBELL = register("snowbell", SnowbellBlock::new);
     public static final Supplier<Block> SPANISH_MOSS = register("spanish_moss", SpanishMossBlock::new);
     public static final Supplier<Block> SPINNING_WHEEL = register("spinning_wheel", SpinningWheelBlock::new);
-    public static final Supplier<RotatedPillarBlock> STRIPPED_ALDER_LOG = register("stripped_alder_log", () -> log(MapColor.COLOR_ORANGE, MapColor.COLOR_ORANGE));
-    public static final Supplier<RotatedPillarBlock> STRIPPED_HAWTHORN_LOG = register("stripped_hawthorn_log", () -> log(MapColor.CLAY, MapColor.CLAY));
-    public static final Supplier<RotatedPillarBlock> STRIPPED_ROWAN_LOG = register("stripped_rowan_log", () -> log(MapColor.WOOD, MapColor.WOOD));
     public static final Supplier<CropsBlockAgeFive> WATER_ARTICHOKE = register("water_artichoke", ArtichokeBlock::new);
     public static final Supplier<RotatedPillarBlock> WICKER_BUNDLE = register("wicker_bundle", () -> new HayBlock(Properties.copy(Blocks.HAY_BLOCK)));
     public static final Supplier<Block> WITCH_CAULDRON = register("witch_cauldron", WitchCauldronBlock::new);
@@ -131,8 +131,12 @@ public class EnchantedBlocks {
 
     private static RotatedPillarBlock log(MapColor topColor, MapColor barkColor) {
         return new RotatedPillarBlock(Properties.copy(Blocks.OAK_LOG)
-                .mapColor(state -> state.getValue(RotatedPillarBlock.AXIS) == Axis.Y ? topColor : barkColor)
-        );
+                .mapColor(state -> state.getValue(RotatedPillarBlock.AXIS) == Axis.Y ? topColor : barkColor));
+    }
+
+    private static EnchantedLog strippableLog(MapColor topColor, MapColor barkColor, Supplier<RotatedPillarBlock> stripped) {
+        return new EnchantedLog(Properties.copy(Blocks.OAK_LOG)
+                .mapColor(state -> state.getValue(RotatedPillarBlock.AXIS) == Axis.Y ? topColor : barkColor), stripped);
     }
 
     private static ButtonBlock woodenButton() {
