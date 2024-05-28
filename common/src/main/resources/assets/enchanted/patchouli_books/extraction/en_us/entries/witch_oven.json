@@ -36,7 +36,7 @@
     },
     {
       "type": "patchouli:crafting",
-      "recipe": "enchanted:clay_jar_soft"
+      "recipe": "enchanted:soft_clay_jar"
     },
     {
       "type": "patchouli:smelting",
