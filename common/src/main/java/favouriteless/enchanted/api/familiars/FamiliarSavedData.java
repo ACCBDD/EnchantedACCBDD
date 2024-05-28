@@ -1,6 +1,5 @@
 package favouriteless.enchanted.api.familiars;
 
-import favouriteless.enchanted.api.familiars.IFamiliarCapability.IFamiliarEntry;
 import favouriteless.enchanted.api.taglock.BedTaglockSavedData;
 import favouriteless.enchanted.common.init.registry.FamiliarTypes;
 import net.minecraft.nbt.CompoundTag;

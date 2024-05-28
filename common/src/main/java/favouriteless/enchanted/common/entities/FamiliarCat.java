@@ -3,7 +3,7 @@ package favouriteless.enchanted.common.entities;
 import favouriteless.enchanted.Enchanted;
 import favouriteless.enchanted.api.familiars.FamiliarHelper;
 import favouriteless.enchanted.api.familiars.FamiliarSavedData;
-import favouriteless.enchanted.api.familiars.IFamiliarCapability.IFamiliarEntry;
+import favouriteless.enchanted.api.familiars.IFamiliarEntry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.InteractionHand;

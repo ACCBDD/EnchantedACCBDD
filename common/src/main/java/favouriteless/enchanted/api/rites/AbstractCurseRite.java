@@ -2,7 +2,7 @@ package favouriteless.enchanted.api.rites;
 
 import favouriteless.enchanted.api.curses.Curse;
 import favouriteless.enchanted.api.familiars.FamiliarSavedData;
-import favouriteless.enchanted.api.familiars.IFamiliarCapability.IFamiliarEntry;
+import favouriteless.enchanted.api.familiars.IFamiliarEntry;
 import favouriteless.enchanted.common.curses.CurseManager;
 import favouriteless.enchanted.common.curses.CurseType;
 import favouriteless.enchanted.common.init.registry.EnchantedParticleTypes;

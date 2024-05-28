@@ -171,7 +171,6 @@ public abstract class AbstractRite {
     /**
      * Override this to save any additional info to the rite's nbt tag
      * @param nbt
-     * @return Final nbt tag
      */
     protected void saveAdditional(CompoundTag nbt) {}
 

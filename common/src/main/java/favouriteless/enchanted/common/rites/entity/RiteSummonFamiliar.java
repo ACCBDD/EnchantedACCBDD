@@ -1,7 +1,7 @@
 package favouriteless.enchanted.common.rites.entity;
 
 import favouriteless.enchanted.api.familiars.FamiliarSavedData;
-import favouriteless.enchanted.api.familiars.IFamiliarCapability.IFamiliarEntry;
+import favouriteless.enchanted.api.familiars.IFamiliarEntry;
 import favouriteless.enchanted.api.rites.AbstractRite;
 import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
 import favouriteless.enchanted.common.init.registry.EnchantedItems;

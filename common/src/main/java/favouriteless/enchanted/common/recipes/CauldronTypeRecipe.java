@@ -54,8 +54,9 @@ public abstract class CauldronTypeRecipe implements Recipe<Container> {
 
     /**
      * Returns true if inventory is a full match to this recipe
+     *
      * @param inventory
-     * @param world
+     *
      * @return isMatch
      */
     public boolean fullMatch(Container inventory) {
