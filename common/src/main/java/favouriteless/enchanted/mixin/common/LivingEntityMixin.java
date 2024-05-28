@@ -1,4 +1,4 @@
-package favouriteless.enchanted.mixin;
+package favouriteless.enchanted.mixin.common;
 
 import favouriteless.enchanted.common.CommonConfig;
 import favouriteless.enchanted.common.init.LootExtensions;

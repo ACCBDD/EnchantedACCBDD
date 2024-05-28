@@ -1,4 +1,4 @@
-package favouriteless.enchanted.mixin;
+package favouriteless.enchanted.mixin.common;
 
 import favouriteless.enchanted.common.init.LootExtensions;
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;

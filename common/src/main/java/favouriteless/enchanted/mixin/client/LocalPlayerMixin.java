@@ -1,4 +1,4 @@
-package favouriteless.enchanted.mixin;
+package favouriteless.enchanted.mixin.client;
 
 import favouriteless.enchanted.client.client_handlers.misc.EnchantedClientValues;
 import net.minecraft.client.player.LocalPlayer;

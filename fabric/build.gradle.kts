@@ -24,11 +24,6 @@ base {
 }
 
 repositories {
-    //mavenCentral {
-    //    content {
-    //        includeGroup("com.google.code.findbugs")
-    //    }
-    //}
     maven {
         name = "ParchmentMC"
         url = uri("https://maven.parchmentmc.org")
@@ -42,7 +37,7 @@ repositories {
 dependencies {
     minecraft( libs.minecraft )
     implementation( libs.jsr305 )
-    mappings(loom.layered() {
+    mappings(loom.layered {
         officialMojangMappings()
         parchment("org.parchmentmc.data:parchment-${parchment_minecraft_version}:${parchment_version}@zip")
     })

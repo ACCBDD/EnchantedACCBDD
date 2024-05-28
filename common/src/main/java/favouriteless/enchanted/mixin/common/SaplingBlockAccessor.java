@@ -1,4 +1,4 @@
-package favouriteless.enchanted.mixin;
+package favouriteless.enchanted.mixin.common;
 
 import net.minecraft.world.level.block.SaplingBlock;
 import net.minecraft.world.level.block.grower.AbstractTreeGrower;

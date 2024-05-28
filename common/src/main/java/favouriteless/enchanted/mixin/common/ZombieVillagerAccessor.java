@@ -1,4 +1,4 @@
-package favouriteless.enchanted.mixin;
+package favouriteless.enchanted.mixin.common;
 
 import net.minecraft.world.entity.monster.ZombieVillager;
 import org.spongepowered.asm.mixin.Mixin;

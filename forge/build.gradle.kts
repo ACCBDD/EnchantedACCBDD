@@ -48,7 +48,6 @@ minecraft {
             property("mixin.env.remapRefMap", "true")
 
             property("mixin.env.refMapRemappingFile", "${project.projectDir}/build/createSrgToMcp/output.srg")
-            args("-mixin.config=${mod_id}.mixins.json")
 
             mods {
                 create(mod_id) {
@@ -67,7 +66,6 @@ minecraft {
             property("forge.logging.console.level", "debug")
             property("mixin.env.remapRefMap", "true")
             property("mixin.env.refMapRemappingFile", "${project.projectDir}/build/createSrgToMcp/output.srg")
-            args("-mixin.config=${mod_id}.mixins.json")
 
             mods {
                 create(mod_id) {
@@ -86,8 +84,7 @@ minecraft {
             property("forge.logging.console.level", "debug")
             property("mixin.env.remapRefMap", "true")
             property("mixin.env.refMapRemappingFile", "${project.projectDir}/build/createSrgToMcp/output.srg")
-            args("-mixin.config=${mod_id}.mixins.json",
-                "--mod", mod_id, "--all",
+            args("--mod", mod_id, "--all",
                 "--output", project(":common").file("src/generated/resources/").absolutePath,
                 "--existing", project(":common").file("src/main/resources/").absolutePath
             )
@@ -124,6 +121,12 @@ dependencies {
     implementation( fg.deobf(libs.jei.forge.get()) )
 }
 
+mixin {
+    add(sourceSets.getByName("main"), "${mod_id}.refmap.json")
+    config("${mod_id}.mixins.json")
+    config("${mod_id}.forge.mixins.json")
+}
+
 //Make the result of the jarJar task the one with no classifier instead of no classifier and "all"
 tasks.named<Jar>("jar").configure {
     archiveClassifier.set("slim")
@@ -147,11 +150,6 @@ tasks.withType<Javadoc>().configureEach {
 
 tasks.withType<ProcessResources>().configureEach {
     from(project(":common").sourceSets.getByName("main").resources)
-}
-
-mixin {
-    add(sourceSets.getByName("main"), "${mod_id}.refmap.json")
-    config("${mod_id}.mixins.json")
 }
 
 reobf {
