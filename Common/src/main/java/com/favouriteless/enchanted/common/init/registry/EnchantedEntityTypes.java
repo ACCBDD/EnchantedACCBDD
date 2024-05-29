@@ -15,9 +15,6 @@ public class EnchantedEntityTypes {
     public static final Supplier<EntityType<Mandrake>> MANDRAKE = register("mandrake", () -> Builder.of(Mandrake::new, MobCategory.MONSTER)
             .sized(0.4F, 0.7F).build(Enchanted.location("mandrake").toString()));
 
-    public static final Supplier<EntityType<Ent>> ENT = register("ent", () -> Builder.of(Ent::new, MobCategory.MONSTER)
-            .sized(2F, 3.0F).build(Enchanted.location("ent").toString()));
-
     public static final Supplier<EntityType<Broomstick>> BROOMSTICK = register("broomstick", () -> Builder.of(Broomstick::new, MobCategory.MISC)
             .sized(1.0F, 1.0F).clientTrackingRange(10).build(Enchanted.location("broomstick").toString()));
 
