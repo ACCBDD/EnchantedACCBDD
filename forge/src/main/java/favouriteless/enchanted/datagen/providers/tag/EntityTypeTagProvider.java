@@ -34,9 +34,9 @@ public class EntityTypeTagProvider extends IntrinsicHolderTagsProvider<EntityTyp
                         EntityType.PILLAGER, EntityType.RAVAGER, EntityType.SHULKER, EntityType.SILVERFISH,
                         EntityType.SKELETON, EntityType.SLIME, EntityType.SPIDER, EntityType.STRAY, EntityType.VEX,
                         EntityType.WITCH, EntityType.WITHER_SKELETON, EntityType.ZOMBIE, EntityType.ZOMBIE_VILLAGER,
-                        EntityType.ZOMBIFIED_PIGLIN, EntityType.ZOGLIN);
+                        EntityType.ZOMBIFIED_PIGLIN, EntityType.ZOGLIN, EntityType.WARDEN);
         tag(EntityTypes.TAGLOCK_BLACKLIST)
-                .add(EntityType.ENDER_DRAGON, EntityType.WITHER, EnchantedEntityTypes.FAMILIAR_CAT.get());
+                .add(EntityType.ENDER_DRAGON, EntityType.WITHER, EntityType.WARDEN, EnchantedEntityTypes.FAMILIAR_CAT.get());
     }
 
 }

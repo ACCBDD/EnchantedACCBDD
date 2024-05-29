@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_rowan_log": {
+    "has_alder_planks": {
       "conditions": {
         "items": [
           {
             "items": [
-              "enchanted:rowan_log"
+              "enchanted:alder_planks"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "enchanted:rowan_planks"
+        "recipe": "enchanted:alder_button"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_rowan_log",
+      "has_alder_planks",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "enchanted:rowan_planks"
+      "enchanted:alder_button"
     ]
   },
   "sends_telemetry_event": false

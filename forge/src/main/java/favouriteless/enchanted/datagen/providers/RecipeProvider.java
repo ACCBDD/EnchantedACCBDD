@@ -48,27 +48,27 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
 				.define('b', EnchantedItems.BREATH_OF_THE_GODDESS.get())
 				.define('e', EnchantedItems.EXHALE_OF_THE_HORNED_ONE.get())
 				.define('w', StrictNBTIngredient.of(Items.POTION.getDefaultInstance()))
-				.unlockedBy("has_rowan_log", has(EnchantedItems.ROWAN_LOG.get())).save(consumer);
+				.unlockedBy(getHasName(EnchantedItems.ROWAN_LOG.get()), has(EnchantedItems.ROWAN_LOG.get())).save(consumer);
 		ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, EnchantedItems.ARTHANA.get())
 				.pattern(" i ")
 				.pattern("nen")
 				.pattern(" s ")
 				.define('i', Items.GOLD_INGOT).define('n', Items.GOLD_NUGGET)
 				.define('e', Items.EMERALD).define('s', Items.STICK)
-				.unlockedBy("has_gold_ingot", has(Items.GOLD_INGOT)).save(consumer);
+				.unlockedBy(getHasName(Items.GOLD_INGOT), has(Items.GOLD_INGOT)).save(consumer);
 		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, EnchantedItems.ATTUNED_STONE.get())
 				.pattern("w")
 				.pattern("d")
 				.pattern("l")
 				.define('w', EnchantedItems.WHIFF_OF_MAGIC.get()).define('d', Items.DIAMOND)
 				.define('l', Items.LAVA_BUCKET)
-				.unlockedBy("has_whiff_of_magic", has(EnchantedItems.WHIFF_OF_MAGIC.get())).save(consumer);
+				.unlockedBy(getHasName(EnchantedItems.WHIFF_OF_MAGIC.get()), has(EnchantedItems.WHIFF_OF_MAGIC.get())).save(consumer);
 		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, EnchantedItems.BROOM.get())
 				.pattern(" s ")
 				.pattern(" s ")
 				.pattern("hhh")
 				.define('s', Items.STICK).define('h', EnchantedItems.HAWTHORN_SAPLING.get())
-				.unlockedBy("has_hawthorn_sapling", has(EnchantedItems.HAWTHORN_SAPLING.get())).save(consumer);
+				.unlockedBy(getHasName(EnchantedItems.HAWTHORN_SAPLING.get()), has(EnchantedItems.HAWTHORN_SAPLING.get())).save(consumer);
 		ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, EnchantedItems.CANDELABRA.get())
 				.pattern("ccc")
 				.pattern("iai")
@@ -82,7 +82,7 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
 				.pattern(" g ")
 				.define('n', Items.GOLD_NUGGET).define('g', Items.GOLD_INGOT)
 				.define('a', EnchantedItems.ATTUNED_STONE.get())
-				.unlockedBy("has_attuned_stone", has(EnchantedItems.ATTUNED_STONE.get())).save(consumer);
+				.unlockedBy(getHasName(EnchantedItems.ATTUNED_STONE.get()), has(EnchantedItems.ATTUNED_STONE.get())).save(consumer);
 		ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, EnchantedItems.RITUAL_CHALK.get(), 2)
 				.pattern("ata")
 				.pattern("aga")
@@ -90,17 +90,17 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
 				.define('g', EnchantedItems.GYPSUM.get())
 				.define('t', EnchantedItems.TEAR_OF_THE_GODDESS.get())
 				.define('a', EnchantedItems.WOOD_ASH.get())
-				.unlockedBy("has_tear_of_the_Goddess", has(EnchantedItems.TEAR_OF_THE_GODDESS.get())).save(consumer);
+				.unlockedBy(getHasName(EnchantedItems.TEAR_OF_THE_GODDESS.get()), has(EnchantedItems.TEAR_OF_THE_GODDESS.get())).save(consumer);
 		ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, EnchantedItems.CIRCLE_TALISMAN.get())
 				.pattern("ngn").pattern("gag")
 				.pattern("ngn").define('n', Items.GOLD_NUGGET)
 				.define('g', Items.GOLD_INGOT).define('a', EnchantedItems.ATTUNED_STONE.get())
-				.unlockedBy("has_attuned_stone", has(EnchantedItems.ATTUNED_STONE.get())).save(consumer);
+				.unlockedBy(getHasName(EnchantedItems.ATTUNED_STONE.get()), has(EnchantedItems.ATTUNED_STONE.get())).save(consumer);
 		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, EnchantedItems.SOFT_CLAY_JAR.get(), 4)
 				.pattern(" c ")
 				.pattern("ccc")
 				.define('c', Items.CLAY)
-				.unlockedBy("has_clay", has(Items.CLAY)).save(consumer);
+				.unlockedBy(getHasName(Items.CLAY), has(Items.CLAY)).save(consumer);
 		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, EnchantedItems.DISTILLERY.get())
 				.pattern("cic")
 				.pattern("iii")
@@ -108,21 +108,21 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
 				.define('i', Items.IRON_INGOT).define('g', Items.GOLD_NUGGET)
 				.define('c', EnchantedItems.CLAY_JAR.get())
 				.define('a', EnchantedItems.ATTUNED_STONE.get())
-				.unlockedBy("has_attuned_stone", has(EnchantedItems.ATTUNED_STONE.get())).save(consumer);
+				.unlockedBy(getHasName(EnchantedItems.ATTUNED_STONE.get()), has(EnchantedItems.ATTUNED_STONE.get())).save(consumer);
 		ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, EnchantedItems.EARMUFFS.get())
 				.pattern(" i ")
 				.pattern("whw")
 				.define('i', Items.IRON_INGOT).define('w', ItemTags.WOOL)
 				.define('h', Items.LEATHER_HELMET)
 				.unlockedBy("has_wool", has(ItemTags.WOOL))
-				.unlockedBy("has_leather_helmet", has(Items.LEATHER_HELMET)).save(consumer);
+				.unlockedBy(getHasName(Items.LEATHER_HELMET), has(Items.LEATHER_HELMET)).save(consumer);
 		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, EnchantedItems.FUME_FILTER.get())
 				.pattern("ggg")
 				.pattern("iai")
 				.pattern("ggg")
 				.define('g', Items.GLASS).define('i', Items.IRON_INGOT)
 				.define('a', EnchantedItems.ATTUNED_STONE.get())
-				.unlockedBy("has_attuned_stone", has(EnchantedItems.ATTUNED_STONE.get())).save(consumer);
+				.unlockedBy(getHasName(EnchantedItems.ATTUNED_STONE.get()), has(EnchantedItems.ATTUNED_STONE.get())).save(consumer);
 		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, EnchantedItems.FUME_FUNNEL.get())
 				.pattern("blb")
 				.pattern("bgb")
@@ -130,14 +130,14 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
 				.define('g', Items.GLOWSTONE).define('i', Items.IRON_BLOCK)
 				.define('b', Items.BUCKET).define('l', Items.LAVA_BUCKET)
 				.define('f', Items.IRON_BARS)
-				.unlockedBy("has_glowstone", has(Items.GLOWSTONE)).save(consumer);
+				.unlockedBy(getHasName(Items.GLOWSTONE), has(Items.GLOWSTONE)).save(consumer);
 		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, EnchantedItems.KETTLE.get())
 				.pattern("wsw")
 				.pattern("sas")
 				.pattern(" c ").define('w', Items.STICK)
 				.define('s', Items.STRING).define('c', Items.CAULDRON
 				).define('a', EnchantedItems.ATTUNED_STONE.get())
-				.unlockedBy("has_attuned_stone", has(EnchantedItems.ATTUNED_STONE.get())).save(consumer);
+				.unlockedBy(getHasName(EnchantedItems.ATTUNED_STONE.get()), has(EnchantedItems.ATTUNED_STONE.get())).save(consumer);
 		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, EnchantedItems.POPPET.get())
 				.pattern("wmw")
 				.pattern("bms")
@@ -146,14 +146,14 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
 				.define('m', EnchantedItems.SPANISH_MOSS.get())
 				.define('b', EnchantedItems.BONE_NEEDLE.get())
 				.define('a', EnchantedItems.ATTUNED_STONE.get())
-				.unlockedBy("has_attuned_stone", has(EnchantedItems.ATTUNED_STONE.get())).save(consumer);
+				.unlockedBy(getHasName(EnchantedItems.ATTUNED_STONE.get()), has(EnchantedItems.ATTUNED_STONE.get())).save(consumer);
 		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, EnchantedItems.POPPET_SHELF.get())
 				.pattern("apa")
 				.pattern("pwp")
 				.pattern("apa")
 				.define('w', Items.GREEN_WOOL).define('p', Items.DARK_OAK_PLANKS)
 				.define('a', EnchantedItems.ATTUNED_STONE.get())
-				.unlockedBy("has_attuned_stone", has(EnchantedItems.ATTUNED_STONE.get())).save(consumer);
+				.unlockedBy(getHasName(EnchantedItems.ATTUNED_STONE.get()), has(EnchantedItems.ATTUNED_STONE.get())).save(consumer);
 		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, EnchantedItems.SPINNING_WHEEL.get())
 				.pattern("wrr")
 				.pattern("srr")
@@ -162,7 +162,7 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
 				.define('a', EnchantedItems.ATTUNED_STONE.get())
 				.define('p', EnchantedItems.ALDER_PLANKS.get())
 				.define('r', EnchantedItems.ROWAN_STAIRS.get())
-				.unlockedBy("has_attuned_stone", has(EnchantedItems.ATTUNED_STONE.get())).save(consumer);
+				.unlockedBy(getHasName(EnchantedItems.ATTUNED_STONE.get()), has(EnchantedItems.ATTUNED_STONE.get())).save(consumer);
 		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, EnchantedItems.WICKER_BUNDLE.get())
 				.pattern("sss")
 				.pattern("sss")
@@ -173,7 +173,7 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
 				.pattern(" b ").pattern("iii")
 				.pattern("ibi")
 				.define('i', Items.IRON_INGOT).define('b', Items.IRON_BARS)
-				.unlockedBy("has_iron_ingot", has(Items.IRON_INGOT)).save(consumer);
+				.unlockedBy(getHasName(Items.IRON_INGOT), has(Items.IRON_INGOT)).save(consumer);
 
 		slab(consumer, RecipeCategory.BUILDING_BLOCKS, EnchantedItems.ROWAN_SLAB.get(), EnchantedItems.ROWAN_PLANKS.get());
 		slab(consumer, RecipeCategory.BUILDING_BLOCKS, EnchantedItems.ALDER_SLAB.get(), EnchantedItems.ALDER_PLANKS.get());
@@ -182,31 +182,57 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
 		stairs(consumer, EnchantedItems.ROWAN_STAIRS.get(), EnchantedItems.ROWAN_PLANKS.get());
 		stairs(consumer, EnchantedItems.ALDER_STAIRS.get(), EnchantedItems.ALDER_PLANKS.get());
 		stairs(consumer, EnchantedItems.HAWTHORN_STAIRS.get(), EnchantedItems.HAWTHORN_PLANKS.get());
+
+		pressurePlate(consumer, EnchantedItems.ALDER_PRESSURE_PLATE.get(), EnchantedItems.ALDER_PLANKS.get());
+		pressurePlate(consumer, EnchantedItems.HAWTHORN_PRESSURE_PLATE.get(), EnchantedItems.HAWTHORN_PLANKS.get());
+		pressurePlate(consumer, EnchantedItems.ROWAN_PRESSURE_PLATE.get(), EnchantedItems.ROWAN_PLANKS.get());
+
+		fenceBuilder(EnchantedItems.ALDER_FENCE.get(), Ingredient.of(EnchantedItems.ALDER_PLANKS.get()))
+				.unlockedBy(getHasName(EnchantedItems.ALDER_PLANKS.get()), has(EnchantedItems.ALDER_PLANKS.get())).save(consumer);
+		fenceBuilder(EnchantedItems.HAWTHORN_FENCE.get(), Ingredient.of(EnchantedItems.HAWTHORN_PLANKS.get()))
+				.unlockedBy(getHasName(EnchantedItems.HAWTHORN_PLANKS.get()), has(EnchantedItems.HAWTHORN_PLANKS.get())).save(consumer);
+		fenceBuilder(EnchantedItems.ROWAN_FENCE.get(), Ingredient.of(EnchantedItems.ROWAN_PLANKS.get()))
+				.unlockedBy(getHasName(EnchantedItems.ROWAN_PLANKS.get()), has(EnchantedItems.ROWAN_PLANKS.get())).save(consumer);
+
+		fenceGateBuilder(EnchantedItems.ALDER_FENCE_GATE.get(), Ingredient.of(EnchantedItems.ALDER_PLANKS.get()))
+				.unlockedBy(getHasName(EnchantedItems.ALDER_PLANKS.get()), has(EnchantedItems.ALDER_PLANKS.get())).save(consumer);
+		fenceGateBuilder(EnchantedItems.HAWTHORN_FENCE_GATE.get(), Ingredient.of(EnchantedItems.HAWTHORN_PLANKS.get()))
+				.unlockedBy(getHasName(EnchantedItems.HAWTHORN_PLANKS.get()), has(EnchantedItems.HAWTHORN_PLANKS.get())).save(consumer);
+		fenceGateBuilder(EnchantedItems.ROWAN_FENCE_GATE.get(), Ingredient.of(EnchantedItems.ROWAN_PLANKS.get()))
+				.unlockedBy(getHasName(EnchantedItems.ROWAN_PLANKS.get()), has(EnchantedItems.ROWAN_PLANKS.get())).save(consumer);
 	}
 
 	protected void buildShapelessRecipes(Consumer<FinishedRecipe> consumer) {
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, EnchantedItems.ANOINTING_PASTE.get())
 				.requires(EnchantedItems.WATER_ARTICHOKE_SEEDS.get()).requires(EnchantedItems.MANDRAKE_SEEDS.get())
 				.requires(EnchantedItems.BELLADONNA_SEEDS.get()).requires(EnchantedItems.SNOWBELL_SEEDS.get())
-				.unlockedBy("has_seeds", has(EnchantedItems.BELLADONNA_SEEDS.get())).save(consumer);
+				.unlockedBy(getHasName(EnchantedItems.BELLADONNA_SEEDS.get()), has(EnchantedItems.BELLADONNA_SEEDS.get())).save(consumer);
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, EnchantedItems.BONE_NEEDLE.get(), 8)
 				.requires(Items.FLINT).requires(Items.BONE)
-				.unlockedBy("has_bone", has(Items.BONE)).save(consumer);
+				.unlockedBy(getHasName(Items.BONE), has(Items.BONE)).save(consumer);
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, EnchantedItems.FUME_FUNNEL_FILTERED.get())
 				.requires(EnchantedItems.FUME_FUNNEL.get()).requires(EnchantedItems.FUME_FILTER.get())
-				.unlockedBy("has_fume_funnel", has(EnchantedItems.FUME_FUNNEL.get())).save(consumer);
+				.unlockedBy(getHasName(EnchantedItems.FUME_FUNNEL.get()), has(EnchantedItems.FUME_FUNNEL.get())).save(consumer);
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, EnchantedItems.PURIFIED_MILK.get()).requires(Items.MILK_BUCKET)
 				.requires(EnchantedItems.ODOUR_OF_PURITY.get()).requires(EnchantedItems.CLAY_JAR.get(), 3)
-				.unlockedBy("has_odour_of_purity", has(EnchantedItems.ODOUR_OF_PURITY.get())).save(consumer);
+				.unlockedBy(getHasName(EnchantedItems.ODOUR_OF_PURITY.get()), has(EnchantedItems.ODOUR_OF_PURITY.get())).save(consumer);
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, EnchantedItems.QUICKLIME.get())
 				.requires(EnchantedItems.WOOD_ASH.get())
-				.unlockedBy("has_wood_ash", has(EnchantedItems.WOOD_ASH.get())).save(consumer);
+				.unlockedBy(getHasName(EnchantedItems.WOOD_ASH.get()), has(EnchantedItems.WOOD_ASH.get())).save(consumer);
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, EnchantedItems.TAGLOCK.get())
 				.requires(Items.GLASS_BOTTLE).requires(EnchantedItems.BONE_NEEDLE.get())
-				.unlockedBy("has_bone_needle", has(EnchantedItems.BONE_NEEDLE.get())).save(consumer);
+				.unlockedBy(getHasName(EnchantedItems.BONE_NEEDLE.get()), has(EnchantedItems.BONE_NEEDLE.get())).save(consumer);
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, EnchantedItems.WAYSTONE.get())
 				.requires(Items.FLINT).requires(EnchantedItems.BONE_NEEDLE.get())
-				.unlockedBy("has_bone_needle", has(EnchantedItems.BONE_NEEDLE.get())).save(consumer);
+				.unlockedBy(getHasName(EnchantedItems.BONE_NEEDLE.get()), has(EnchantedItems.BONE_NEEDLE.get())).save(consumer);
+
+
+		buttonBuilder(EnchantedItems.ALDER_BUTTON.get(), Ingredient.of(EnchantedItems.ALDER_PLANKS.get()))
+				.unlockedBy(getHasName(EnchantedItems.ALDER_PLANKS.get()), has(EnchantedItems.ALDER_PLANKS.get())).save(consumer);
+		buttonBuilder(EnchantedItems.HAWTHORN_BUTTON.get(), Ingredient.of(EnchantedItems.HAWTHORN_PLANKS.get()))
+				.unlockedBy(getHasName(EnchantedItems.HAWTHORN_PLANKS.get()), has(EnchantedItems.HAWTHORN_PLANKS.get())).save(consumer);
+		buttonBuilder(EnchantedItems.ROWAN_BUTTON.get(), Ingredient.of(EnchantedItems.ROWAN_PLANKS.get()))
+				.unlockedBy(getHasName(EnchantedItems.ROWAN_PLANKS.get()), has(EnchantedItems.ROWAN_PLANKS.get())).save(consumer);
 
 		planksFromLog(consumer, EnchantedItems.ROWAN_PLANKS.get(), EnchantedItems.ROWAN_LOG.get());
 		planksFromLog(consumer, EnchantedItems.ALDER_PLANKS.get(), EnchantedItems.ALDER_LOG.get());
@@ -217,7 +243,7 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
 		SimpleCookingRecipeBuilder.smelting(
 						Ingredient.of(EnchantedItems.SOFT_CLAY_JAR.get()), RecipeCategory.MISC, EnchantedItems.CLAY_JAR.get(),
 						0.1F, 200)
-				.unlockedBy("has_clay_jar_soft", has(EnchantedItems.SOFT_CLAY_JAR.get())).save(consumer);
+				.unlockedBy(getHasName(EnchantedItems.SOFT_CLAY_JAR.get()), has(EnchantedItems.SOFT_CLAY_JAR.get())).save(consumer);
 		SimpleCookingRecipeBuilder.smelting(
 						Ingredient.of(ItemTags.SAPLINGS), RecipeCategory.MISC, EnchantedItems.WOOD_ASH.get(),
 						0.1F, 150)
@@ -427,7 +453,7 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
 	}
 
 	protected static void planksFromLog(Consumer<FinishedRecipe> consumer, ItemLike planks, ItemLike logs) {
-		ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, planks, 4).requires(logs).group("planks").unlockedBy("has_log", has(logs)).save(consumer);
+		ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, planks, 4).requires(logs).group("planks").unlockedBy(getHasName(logs), has(logs)).save(consumer);
 	}
 
 	protected static void stairs(Consumer<FinishedRecipe> consumer, ItemLike stairs, ItemLike material) {

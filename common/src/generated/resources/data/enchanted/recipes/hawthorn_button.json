@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "enchanted:hawthorn_planks"
+    }
+  ],
+  "result": {
+    "item": "enchanted:hawthorn_button"
+  }
+}

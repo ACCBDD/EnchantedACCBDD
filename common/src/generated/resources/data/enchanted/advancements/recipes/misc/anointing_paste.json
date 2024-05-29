@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_seeds": {
+    "has_belladonna_seeds": {
       "conditions": {
         "items": [
           {
@@ -22,7 +22,7 @@
   },
   "requirements": [
     [
-      "has_seeds",
+      "has_belladonna_seeds",
       "has_the_recipe"
     ]
   ],

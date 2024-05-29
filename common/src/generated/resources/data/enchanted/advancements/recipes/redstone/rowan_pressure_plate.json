@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_rowan_log": {
+    "has_rowan_planks": {
       "conditions": {
         "items": [
           {
             "items": [
-              "enchanted:rowan_log"
+              "enchanted:rowan_planks"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "enchanted:rowan_planks"
+        "recipe": "enchanted:rowan_pressure_plate"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_rowan_log",
+      "has_rowan_planks",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "enchanted:rowan_planks"
+      "enchanted:rowan_pressure_plate"
     ]
   },
   "sends_telemetry_event": false

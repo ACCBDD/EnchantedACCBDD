@@ -14,7 +14,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class WitchCauldronBlock extends CauldronBlockBase {
 
-    public static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 9, 16);
+    public static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 9.0D, 16.0D);
 
     public WitchCauldronBlock() {
         super(Properties.copy(Blocks.CAULDRON).noOcclusion());
