@@ -32,8 +32,7 @@ public class EntityTypeTagProvider extends EntityTypeTagsProvider {
                         EntityType.WITCH, EntityType.WITHER_SKELETON, EntityType.ZOMBIE, EntityType.ZOMBIE_VILLAGER,
                         EntityType.ZOMBIFIED_PIGLIN, EntityType.ZOGLIN);
         tag(EntityTypes.TAGLOCK_BLACKLIST)
-                .add(EntityType.ENDER_DRAGON, EntityType.WITHER, EnchantedEntityTypes.ENT.get(),
-                        EnchantedEntityTypes.FAMILIAR_CAT.get());
+                .add(EntityType.ENDER_DRAGON, EntityType.WITHER, EnchantedEntityTypes.FAMILIAR_CAT.get());
     }
 
     public void addVanillaTags() {

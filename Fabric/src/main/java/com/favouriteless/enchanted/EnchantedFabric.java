@@ -2,7 +2,6 @@ package com.favouriteless.enchanted;
 
 import com.favouriteless.enchanted.common.CommonConfig;
 import com.favouriteless.enchanted.common.CommonEventsFabric;
-import com.favouriteless.enchanted.common.entities.Ent;
 import com.favouriteless.enchanted.common.entities.FamiliarCat;
 import com.favouriteless.enchanted.common.entities.Mandrake;
 import com.favouriteless.enchanted.common.init.registry.EnchantedBlocks;
@@ -27,7 +26,6 @@ public class EnchantedFabric implements ModInitializer {
 
     private static void registerEntityAttributes() {
         FabricDefaultAttributeRegistry.register(EnchantedEntityTypes.MANDRAKE.get(), Mandrake.createAttributes());
-        FabricDefaultAttributeRegistry.register(EnchantedEntityTypes.ENT.get(), Ent.createAttributes());
         FabricDefaultAttributeRegistry.register(EnchantedEntityTypes.FAMILIAR_CAT.get(), FamiliarCat.createCatAttributes());
     }
 
