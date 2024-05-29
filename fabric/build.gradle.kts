@@ -76,6 +76,10 @@ loom {
             runDir("runs/" + name)
         }
     }
+
+    mixin {
+        defaultRefmapName.convention("${mod_id}.refmap.json")
+    }
 }
 
 tasks.withType<JavaCompile>().configureEach {

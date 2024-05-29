@@ -3,6 +3,7 @@ package favouriteless.enchanted.common.blocks.cauldrons;
 import favouriteless.enchanted.common.blocks.entity.WitchCauldronBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -12,6 +13,8 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
 public class WitchCauldronBlock extends CauldronBlockBase {
+
+    public static final VoxelShape SHAPE = Block.box(0, 0, 0, 16, 9, 16);
 
     public WitchCauldronBlock() {
         super(Properties.copy(Blocks.CAULDRON).noOcclusion());
@@ -24,8 +27,8 @@ public class WitchCauldronBlock extends CauldronBlockBase {
     }
 
     @Override
-    public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
-        return Shapes.box(0.125, 0, 0.125, 0.875, 0.75, 0.875);
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return SHAPE;
     }
 
 }
