@@ -1,0 +1,7 @@
+**Changes:**
+
+- Added missing recipes for new wood blocks.
+- Made the new logs strippable.
+- New cauldron model courtesy of @feranogame , though only one variant of it is added in this version.
+- Fixed fabric mixin refmap crash.
+- Fixed the elusive particle registry crash. Still no idea how this fix did anything but it did.

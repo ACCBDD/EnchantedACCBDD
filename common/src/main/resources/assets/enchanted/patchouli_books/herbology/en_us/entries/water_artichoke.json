@@ -1,6 +1,6 @@
 {
   "name": "Water Artichoke",
-  "icon": "enchanted:textures/item/waer_artichoke.png",
+  "icon": "enchanted:textures/item/water_artichoke.png",
   "category": "enchanted:common_plants",
   "pages": [
     {

@@ -1,3 +1,4 @@
+import net.darkhax.curseforgegradle.TaskPublishCurseForge
 import net.minecraftforge.gradle.userdev.tasks.JarJar
 
 plugins {
@@ -100,9 +101,9 @@ minecraft {
 }
 
 dependencies {
+    compileOnly( project(":common") )
     minecraft(libs.forge)
     implementation( libs.jsr305 )
-    compileOnly( project(":common") )
 
     if (System.getProperty("idea.sync.active") != "true")
         annotationProcessor(variantOf(libs.mixin) { classifier("processor") })
@@ -158,15 +159,65 @@ reobf {
 
 tasks.jarJar.get().finalizedBy("reobfJarJar")
 
+modrinth {
+    token = System.getenv("MODRINTH_TOKEN") ?: "Invalid/No API Token Found"
+
+    projectId = "HsbpdVo9"
+    versionName = "Forge ${minecraft_version}"
+    versionNumber.set(project.version.toString())
+
+    uploadFile.set(tasks.jarJar)
+    changelog.set(rootProject.file("changelog.txt").readText(Charsets.UTF_8))
+
+    loaders.set(listOf("forge"))
+    gameVersions.set(listOf(minecraft_version))
+
+    dependencies {
+        required.project("geckolib")
+        required.project("patchouli")
+        required.project("smartbrainlib")
+        required.project("stateobserver")
+    }
+    //debugMode = true
+    //https://github.com/modrinth/minotaur#available-properties
+}
+
+tasks.register<TaskPublishCurseForge>("publishToCurseForge") {
+    group = "publishing"
+    apiToken = System.getenv("CURSEFORGE_TOKEN") ?: "Invalid/No API Token Found"
+
+    val mainFile = upload(560363, tasks.jarJar)
+    mainFile.releaseType = "release"
+    mainFile.addModLoader("Forge", "NeoForge")
+    mainFile.addGameVersion(minecraft_version)
+    mainFile.addJavaVersion("Java 17")
+    mainFile.changelog = rootProject.file("changelog.txt").readText(Charsets.UTF_8)
+
+    mainFile.addRequirement(
+        "geckolib",
+        "patchouli",
+        "smartbrainlib",
+        "stateobserver"
+    )
+
+    //debugMode = true
+    //https://github.com/Darkhax/CurseForgeGradle#available-properties
+}
+
 publishing {
-    publishing {
-        publications {
-            create<MavenPublication>(mod_id) {
-                from(components["java"])
-                jarJar.component(this)
-                artifactId = base.archivesName.get()
-            }
+    publications {
+        create<MavenPublication>(mod_id) {
+            from(components["java"])
+            jarJar.component(this)
+            artifactId = base.archivesName.get()
         }
     }
 }
+
+tasks.named<DefaultTask>("publish").configure {
+    finalizedBy("modrinth")
+    finalizedBy("publishToCurseForge")
+}
+
+
 

@@ -1,3 +1,6 @@
+import net.darkhax.curseforgegradle.TaskPublishCurseForge
+import net.fabricmc.loom.task.RemapJarTask
+
 plugins {
     id("enchanted-convention")
 
@@ -35,6 +38,7 @@ repositories {
 
 
 dependencies {
+    compileOnly( project(":common") )
     minecraft( libs.minecraft )
     implementation( libs.jsr305 )
     mappings(loom.layered {
@@ -43,15 +47,15 @@ dependencies {
     })
     modImplementation( libs.fabric )
     modImplementation( libs.fabric.api )
-    compileOnly( project(":common") )
 
-
+    // Required
     modImplementation( libs.geckolib.fabric )
     modImplementation( libs.patchouli.fabric )
     modImplementation( libs.sbl.fabric )
     modImplementation( libs.stateobserver.fabric )
     modApi( libs.forgeconfigapi.fabric )
 
+    // Optional
     modImplementation( libs.jei.fabric )
 }
 
@@ -98,6 +102,54 @@ tasks.withType<ProcessResources>().configureEach {
    from(project(":common").sourceSets.getByName("main").resources)
 }
 
+modrinth {
+    token = System.getenv("MODRINTH_TOKEN") ?: "Invalid/No API Token Found"
+
+    projectId = "HsbpdVo9"
+    versionName = "Fabric ${minecraft_version}"
+    versionNumber.set(project.version.toString())
+
+    uploadFile.set(tasks.named<RemapJarTask>("remapJar"))
+    changelog.set(rootProject.file("changelog.txt").readText(Charsets.UTF_8))
+
+    loaders.set(listOf("fabric"))
+    gameVersions.set(listOf(minecraft_version))
+
+    dependencies {
+        required.project("fabric-api")
+        required.project("geckolib")
+        required.project("patchouli")
+        required.project("smartbrainlib")
+        required.project("stateobserver")
+        required.project("forge-config-api-port")
+    }
+    //debugMode = true
+    //https://github.com/modrinth/minotaur#available-properties
+}
+
+tasks.register<TaskPublishCurseForge>("publishToCurseForge") {
+    group = "publishing"
+    apiToken = System.getenv("CURSEFORGE_TOKEN") ?: "Invalid/No API Token Found"
+
+    val mainFile = upload(560363, tasks.remapJar)
+    mainFile.releaseType = "release"
+    mainFile.addModLoader("Fabric")
+    mainFile.addGameVersion(minecraft_version)
+    mainFile.addJavaVersion("Java 17")
+    mainFile.changelog = rootProject.file("changelog.txt").readText(Charsets.UTF_8)
+
+    mainFile.addRequirement(
+        "fabric-api",
+        "geckolib",
+        "patchouli-fabric",
+        "smartbrainlib",
+        "stateobserver",
+        "forge-config-api-port-fabric"
+    )
+
+    //debugMode = true
+    //https://github.com/Darkhax/CurseForgeGradle#available-properties
+}
 
 publishing {
     publications {
@@ -107,3 +159,9 @@ publishing {
         }
     }
 }
+
+tasks.named<DefaultTask>("publish").configure {
+    finalizedBy("modrinth")
+    finalizedBy("publishToCurseForge")
+}
+
