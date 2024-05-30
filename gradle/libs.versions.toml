@@ -1,9 +1,9 @@
 [versions]
 # Enchanted
-    enchanted = "3.0.1"
+    enchanted = "3.0.2"
 
 # Mod Dependencies (Common)
-    stateobserver = "1.4.0"
+    stateobserver = "1.4.2"
     sbl = "1.14"
     jei = "15.3.0.4"
     forgeconfigapi = "8.0.0"
@@ -51,7 +51,7 @@
 
 [libraries]
 # Mod Dependencies (Common)
-    stateobserver-common = { group = "com.favouriteless", name = "StateObserver-common-1.20.1", version.ref = "stateobserver" }
+    stateobserver-common = { group = "net.favouriteless.stateobserver", name = "stateobserver-common-1.20.1", version.ref = "stateobserver" }
     sbl-common = { group = "net.tslat.smartbrainlib", name = "SmartBrainLib-common-1.20.1", version.ref = "sbl" }
     jei-common-api = { group = "mezz.jei", name = "jei-1.20.1-common-api", version.ref = "jei" }
     forgeconfigapi-common = { group = "fuzs.forgeconfigapiport", name = "forgeconfigapiport-common", version.ref = "forgeconfigapi" }
@@ -59,14 +59,14 @@
 # Mod Dependencies (Forge)
     geckolib-forge = { group = "software.bernie.geckolib", name = "geckolib-forge-1.20.1", version.ref = "geckolib-forge" }
     patchouli-forge = { group = "vazkii.patchouli", name = "Patchouli", version.ref = "patchouli-forge" }
-    stateobserver-forge = { group = "com.favouriteless", name = "StateObserver-forge-1.20.1", version.ref = "stateobserver" }
+    stateobserver-forge = { group = "net.favouriteless.stateobserver", name = "stateobserver-forge-1.20.1", version.ref = "stateobserver" }
     sbl-forge = { group = "net.tslat.smartbrainlib", name = "SmartBrainLib-forge-1.20.1", version.ref = "sbl" }
     jei-forge = { group = "mezz.jei", name = "jei-1.20.1-forge", version.ref = "jei" }
 
 # Mod Dependencies (Fabric)
     geckolib-fabric = { group = "software.bernie.geckolib", name = "geckolib-fabric-1.20.1", version.ref = "geckolib-fabric" }
     patchouli-fabric = { group = "vazkii.patchouli", name = "Patchouli", version.ref = "patchouli-fabric" }
-    stateobserver-fabric = { group = "com.favouriteless", name = "StateObserver-fabric-1.20.1", version.ref = "stateobserver" }
+    stateobserver-fabric = { group = "net.favouriteless.stateobserver", name = "stateobserver-fabric-1.20.1", version.ref = "stateobserver" }
     sbl-fabric = { group = "net.tslat.smartbrainlib", name = "SmartBrainLib-fabric-1.20.1", version.ref = "sbl" }
     jei-fabric = { group = "mezz.jei", name = "jei-1.20.1-fabric", version.ref = "jei" }
     forgeconfigapi-fabric = { group = "fuzs.forgeconfigapiport", name = "forgeconfigapiport-fabric", version.ref = "forgeconfigapi" }

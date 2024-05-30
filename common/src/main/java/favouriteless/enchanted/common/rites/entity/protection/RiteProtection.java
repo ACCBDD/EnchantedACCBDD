@@ -8,7 +8,7 @@ import favouriteless.enchanted.common.init.registry.EnchantedParticleTypes;
 import favouriteless.enchanted.common.rites.CirclePart;
 import favouriteless.enchanted.common.rites.RiteType;
 import favouriteless.enchanted.util.WaystoneHelper;
-import com.favouriteless.stateobserver.StateObserverManager;
+import net.favouriteless.stateobserver.api.StateObserverManager;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockPos.MutableBlockPos;
 import net.minecraft.core.registries.Registries;
@@ -68,7 +68,7 @@ public class RiteProtection extends AbstractRite {
     @Override
     public void onStopExecuting() {
         generateSphere(Blocks.AIR);
-        StateObserverManager.removeObserver(stateObserver);
+        StateObserverManager.get().removeObserver(stateObserver);
     }
 
     protected void generateSphere(Block block) {
@@ -145,9 +145,9 @@ public class RiteProtection extends AbstractRite {
 
     protected void getOrCreateObserver() {
         if(stateObserver == null)
-            stateObserver = StateObserverManager.getObserver(getLevel(), targetPos, RiteOfProtectionObserver.class);
+            stateObserver = StateObserverManager.get().getObserver(getLevel(), targetPos, RiteOfProtectionObserver.class);
         if(stateObserver == null)
-            stateObserver = StateObserverManager.createObserver(new RiteOfProtectionObserver(targetLevel, targetPos, radius + 1, radius + 1, radius + 1, block));
+            stateObserver = StateObserverManager.get().addObserver(new RiteOfProtectionObserver(targetLevel, targetPos, radius + 1, radius + 1, radius + 1, block));
     }
 
 }

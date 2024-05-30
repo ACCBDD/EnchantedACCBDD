@@ -10,7 +10,7 @@ import favouriteless.enchanted.common.altar.AltarUpgradeData;
 import favouriteless.enchanted.common.blocks.altar.AltarBlock;
 import favouriteless.enchanted.common.init.registry.EnchantedBlockEntityTypes;
 import favouriteless.enchanted.common.menus.AltarMenu;
-import com.favouriteless.stateobserver.StateObserverManager;
+import net.favouriteless.stateobserver.api.StateObserverManager;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -98,10 +98,10 @@ public class AltarBlockEntity extends BlockEntity implements MenuProvider, IPowe
 
     public void firstTick() {
         if(stateObserver == null)
-            stateObserver = StateObserverManager.getObserver(level, worldPosition, AltarStateObserver.class);
+            stateObserver = StateObserverManager.get().getObserver(level, worldPosition, AltarStateObserver.class);
         if(stateObserver == null) {
             int range = CommonConfig.ALTAR_RANGE.get();
-            stateObserver = StateObserverManager.createObserver(new AltarStateObserver(level, worldPosition, range + 4, range + 4, range + 4));
+            stateObserver = StateObserverManager.get().addObserver(new AltarStateObserver(level, worldPosition, range + 4, range + 4, range + 4));
         }
         facingX = level.getBlockState(worldPosition).getValue(AltarBlock.FACING_X);
         centerPos = facingX ?

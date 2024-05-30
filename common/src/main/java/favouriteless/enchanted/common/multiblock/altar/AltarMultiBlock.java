@@ -5,7 +5,7 @@ import favouriteless.enchanted.common.blocks.entity.AltarBlockEntity;
 import favouriteless.enchanted.common.blocks.altar.AltarBlock;
 import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
 import favouriteless.enchanted.common.multiblock.IMultiBlockType;
-import com.favouriteless.stateobserver.StateObserverManager;
+import net.favouriteless.stateobserver.api.StateObserverManager;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -71,9 +71,9 @@ public class AltarMultiBlock implements IMultiBlockType {
         BlockState state = level.getBlockState(pos);
         if(state.is(EnchantedBlocks.ALTAR.get())) {
             if(state.getValue(AltarBlock.FORMED) == AltarPartIndex.P000) {
-                AltarStateObserver observer = StateObserverManager.getObserver(level, pos, AltarStateObserver.class);
+                AltarStateObserver observer = StateObserverManager.get().getObserver(level, pos, AltarStateObserver.class);
                 if(observer != null)
-                    StateObserverManager.removeObserver(observer);
+                    StateObserverManager.get().removeObserver(observer);
 
                 if(level.getBlockEntity(pos) instanceof AltarBlockEntity)
                     level.removeBlockEntity(pos);

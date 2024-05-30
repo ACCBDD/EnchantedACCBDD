@@ -1,17 +1,18 @@
 package favouriteless.enchanted.common.altar;
 
 import favouriteless.enchanted.api.power.IPowerConsumer;
+import favouriteless.enchanted.api.power.IPowerProvider;
 import favouriteless.enchanted.common.CommonConfig;
 import favouriteless.enchanted.common.blocks.entity.AltarBlockEntity;
-import com.favouriteless.stateobserver.api.StateChangeSet.StateChange;
-import com.favouriteless.stateobserver.api.StateObserver;
+import net.favouriteless.stateobserver.api.StateChangeSet.StateChange;
+import net.favouriteless.stateobserver.api.StateObserver;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
 /**
  * StateObserver implementation for {@link AltarBlockEntity}. This is used to notify every nearby {@link IPowerConsumer}
- * of the {@link favouriteless.enchanted.api.power.IPowerProvider} near them. Changes to the power/upgrades are also calculated in this StateObserver.
+ * of the {@link IPowerProvider} near them. Changes to the power/upgrades are also calculated in this StateObserver.
  */
 public class AltarStateObserver extends StateObserver {
 
@@ -25,7 +26,7 @@ public class AltarStateObserver extends StateObserver {
             BlockEntity be = getLevel().getBlockEntity(getPos());
             if (be instanceof AltarBlockEntity altar) { // Only apply this StateObserver to altars.
 
-                for (StateChange change : getStateChangeSet().getChanges()) { // For all changes
+                for (StateChange change : getChangeSet().getChanges()) { // For all changes
                     if (altar.posWithinRange(change.pos(), CommonConfig.ALTAR_RANGE.get())) { // Change is relevant
                         if(!change.oldState().is(change.newState().getBlock())) { // Block actually changed
                             if(getLevel().getBlockEntity(change.pos()) instanceof IPowerConsumer consumer)
