@@ -8,65 +8,53 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
-import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.level.block.state.BlockState;
-import org.joml.Vector3f;
-import org.joml.Vector4f;
+import org.joml.Matrix4f;
 
 public class CauldronWaterRenderer<T extends CauldronBlockEntity<?>> implements BlockEntityRenderer<T> {
 
     public static final ResourceLocation WATER_TEXTURE = new ResourceLocation("block/water_still");
 
-    private static final Vector3f[] positions = new Vector3f[] {
-            new Vector3f(0, 0, 0),
-            new Vector3f(0, 0, 1),
-            new Vector3f(1, 0, 1),
-            new Vector3f(1, 0, 0)
-    };
+    private final float apothem;
 
-    private final int width;
-
-    public CauldronWaterRenderer(int width) {
-        this.width = width;
+    public CauldronWaterRenderer(float width) {
+        this.apothem = width / 32;
     }
 
     @Override
     public void render(T be, float partialTicks, PoseStack poseStack, MultiBufferSource renderBuffer, int packedLight, int packedOverlay) {
         BlockState state = be.getLevel().getBlockState(be.getBlockPos());
         if(state.getBlock() instanceof CauldronBlockBase) {
-            int waterAmount = be.getWater();
-            if(waterAmount > 0) {
-
+            if(be.getWater() > 0) {
                 VertexConsumer consumer = renderBuffer.getBuffer(RenderType.translucent());
-                TextureAtlasSprite sprite = Minecraft.getInstance().getTextureAtlas(TextureAtlas.LOCATION_BLOCKS).apply(WATER_TEXTURE);
+                TextureAtlasSprite sprite = Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(WATER_TEXTURE);
 
                 long time = System.currentTimeMillis() - be.startTime;
-                float r = be.getRed(time) / 255F;
-                float g = be.getGreen(time) / 255F;
-                float b = be.getBlue(time) / 255F;
-                float a = 160 / 255F;
+                int r = be.getRed(time);
+                int g = be.getGreen(time);
+                int b = be.getBlue(time);
+                int a = 160;
 
                 poseStack.pushPose();
-                poseStack.translate(0, be.getWaterY(state), 0);
+                poseStack.translate(0.5D, be.getWaterY(state), 0.5D);
+                Matrix4f p = poseStack.last().pose();
 
-                for(int i = 0; i < 4; i++) {
-                    Vector3f localPos = positions[i];
-                    Vector4f posVector = new Vector4f(localPos.x()/16.0F, localPos.y()/16.0F, localPos.z()/16.0F, 1.0F);
-                    poseStack.last().pose().transform(posVector);
 
-                    consumer.vertex(posVector.x(), posVector.y(), posVector.z())
-                            .color(r, g, b, a)
-                            .uv(sprite.getU(16 * localPos.x), sprite.getU(16 * localPos.z))
-                            .uv2(packedLight)
-                            .normal(0.0F, 1.0F, 0.0F)
-                            .endVertex();
-                }
+                vertex(consumer, p, apothem, 0, -apothem, r, g, b, a, sprite.getU((0.5F + apothem)*16), sprite.getV((0.5F - apothem)*16), packedLight);
+                vertex(consumer, p, -apothem, 0, -apothem, r, g, b, a, sprite.getU((0.5F - apothem)*16), sprite.getV((0.5F - apothem)*16), packedLight);
+                vertex(consumer, p, -apothem, 0, apothem, r, g, b, a, sprite.getU((0.5F - apothem)*16), sprite.getV((0.5F + apothem)*16), packedLight);
+                vertex(consumer, p, apothem, 0, apothem, r, g, b, a, sprite.getU((0.5F + apothem)*16), sprite.getV((0.5F + apothem)*16), packedLight);
 
                 poseStack.popPose();
             }
         }
+    }
+
+    private void vertex(VertexConsumer consumer, Matrix4f poseMatrix, float x, float y, float z, int red, int green, int blue, int alpha, float u, float v, int packedLight) {
+        consumer.vertex(poseMatrix, x, y, z).color(red, green, blue, alpha).uv(u, v).uv2(packedLight).normal(0, 1, 0).endVertex();
     }
 
 }
