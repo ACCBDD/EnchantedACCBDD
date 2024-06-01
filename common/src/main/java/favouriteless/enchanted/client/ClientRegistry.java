@@ -1,7 +1,6 @@
 package favouriteless.enchanted.client;
 
 import favouriteless.enchanted.Enchanted;
-import favouriteless.enchanted.client.particles.*;
 import favouriteless.enchanted.client.render.blockentity.CauldronWaterRenderer;
 import favouriteless.enchanted.client.render.blockentity.PoppetShelfRenderer;
 import favouriteless.enchanted.client.render.blockentity.SpinningWheelRenderer;
@@ -11,11 +10,13 @@ import favouriteless.enchanted.client.render.entity.SimpleAnimatedGeoRenderer;
 import favouriteless.enchanted.client.render.model.ModelLayerLocations;
 import favouriteless.enchanted.client.render.model.entity.BroomstickModel;
 import favouriteless.enchanted.client.screens.*;
-import favouriteless.enchanted.common.init.registry.*;
+import favouriteless.enchanted.common.init.registry.EnchantedBlockEntityTypes;
+import favouriteless.enchanted.common.init.registry.EnchantedEntityTypes;
+import favouriteless.enchanted.common.init.registry.EnchantedItems;
+import favouriteless.enchanted.common.init.registry.EnchantedMenuTypes;
 import favouriteless.enchanted.platform.ClientServices;
 import favouriteless.enchanted.platform.services.IClientRegistryHelper;
 import net.minecraft.client.gui.screens.MenuScreens;
-import net.minecraft.client.particle.ParticleEngine;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 
 public class ClientRegistry {
@@ -39,7 +40,7 @@ public class ClientRegistry {
         registry.register(EnchantedEntityTypes.FAMILIAR_CAT.get(), FamiliarCatRenderer::new);
 
         // Block entity renderers
-        registry.register(EnchantedBlockEntityTypes.WITCH_CAULDRON.get(), context -> new CauldronWaterRenderer<>(10));
+        registry.register(EnchantedBlockEntityTypes.WITCH_CAULDRON.get(), context -> new CauldronWaterRenderer<>(12));
         registry.register(EnchantedBlockEntityTypes.KETTLE.get(), context -> new CauldronWaterRenderer<>(8));
         registry.register(EnchantedBlockEntityTypes.SPINNING_WHEEL.get(), SpinningWheelRenderer::new);
         registry.register(EnchantedBlockEntityTypes.POPPET_SHELF.get(), PoppetShelfRenderer::new);

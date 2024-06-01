@@ -1,17 +1,11 @@
 package favouriteless.enchanted.datagen.providers.loot_tables;
 
 import favouriteless.enchanted.Enchanted;
-import favouriteless.enchanted.common.blocks.*;
-import favouriteless.enchanted.common.blocks.altar.CandelabraBlock;
-import favouriteless.enchanted.common.blocks.altar.ChaliceBlock;
-import favouriteless.enchanted.common.blocks.cauldrons.KettleBlock;
-import favouriteless.enchanted.common.blocks.chalk.ChalkCircleBlock;
 import favouriteless.enchanted.common.blocks.crops.*;
 import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
 import favouriteless.enchanted.common.init.registry.EnchantedItems;
 import favouriteless.enchanted.platform.services.ForgeCommonRegistryHelper;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.flag.FeatureFlags;
@@ -19,8 +13,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
-import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -35,11 +27,9 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map.Entry;
 import java.util.Set;
-import java.util.function.Supplier;
 
 public class BlockLootSubProvider extends net.minecraft.data.loot.BlockLootSubProvider {
 

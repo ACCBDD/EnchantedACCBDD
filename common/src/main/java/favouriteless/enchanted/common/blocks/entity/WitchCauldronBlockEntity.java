@@ -18,7 +18,7 @@ public class WitchCauldronBlockEntity extends CauldronBlockEntity<WitchCauldronR
 
     @Override
     public double getWaterStartY(BlockState state) {
-        return 0.1875D;
+        return 0.0625D;
     }
 
     @Override
@@ -28,7 +28,7 @@ public class WitchCauldronBlockEntity extends CauldronBlockEntity<WitchCauldronR
 
     @Override
     public double getWaterWidth() {
-        return 0.625D;
+        return 0.875D;
     }
 
     @Override
