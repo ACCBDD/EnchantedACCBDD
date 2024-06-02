@@ -1,3 +1,8 @@
+import com.diluv.schoomp.Webhook
+import com.diluv.schoomp.message.Message
+import com.diluv.schoomp.message.embed.Embed
+import java.io.IOException
+
 plugins {
     alias(libs.plugins.minotaur) apply false
     alias(libs.plugins.curseforgegradle) apply false
@@ -9,10 +14,6 @@ plugins {
 subprojects {
 
     repositories {
-        flatDir {
-            dirs("../lib")
-        }
-
         maven("https://raw.githubusercontent.com/Fuzss/modresources/main/maven/") { name = "Fuzs  Maven" }
         maven("https://dl.cloudsmith.io/public/tslat/sbl/maven/") { name = "SmartBrainLib (SBL) Maven" }
         maven("https://maven.blamejared.com") { name = "BlameJared Maven" }

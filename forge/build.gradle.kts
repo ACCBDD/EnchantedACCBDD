@@ -169,7 +169,7 @@ modrinth {
     uploadFile.set(tasks.jarJar)
     changelog.set(rootProject.file("changelog.txt").readText(Charsets.UTF_8))
 
-    loaders.set(listOf("forge"))
+    loaders.set(listOf("forge", "neoforge"))
     gameVersions.set(listOf(minecraft_version))
 
     dependencies {
@@ -178,6 +178,7 @@ modrinth {
         required.project("smartbrainlib")
         required.project("stateobserver")
     }
+
     //debugMode = true
     //https://github.com/modrinth/minotaur#available-properties
 }
