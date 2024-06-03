@@ -161,7 +161,7 @@ public class EnchantedItems {
 	public static final Supplier<Item> VOID_POPPET = register("void_poppet", () -> new VoidPoppetItem(0.3F, 1, PoppetColour.VOID, source -> source.is(DamageTypes.FELL_OUT_OF_WORLD)));
 	public static final Supplier<Item> VOID_POPPET_INFUSED = register("infused_void_poppet", () -> new VoidPoppetEffectItem( 0.0F, 1, PoppetColour.VOID, () -> new MobEffectInstance(EnchantedEffects.FALL_RESISTANCE.get(), 150), source -> source.is(DamageTypes.FELL_OUT_OF_WORLD)));
 	public static final Supplier<Item> VOID_POPPET_STURDY = register("sturdy_void_poppet", () -> new VoidPoppetItem( 0.0F, 2, PoppetColour.VOID, source -> source.is(DamageTypes.FELL_OUT_OF_WORLD)));
-	public static final Supplier<Item> VOODOO_POPPET = register("voodoo_poppet", VoodooPoppetItem::new);
+	public static final Supplier<VoodooPoppetItem> VOODOO_POPPET = register("voodoo_poppet", VoodooPoppetItem::new);
 	public static final Supplier<Item> WATER_ARTICHOKE = registerFood("water_artichoke", 3, MobEffects.HUNGER, 100, 0, 1.0F);
 	public static final Supplier<ArtichokeSeedsItem> WATER_ARTICHOKE_SEEDS = register("water_artichoke_seeds", ArtichokeSeedsItem::new);
 	public static final Supplier<DeathPoppetEffectItem> WATER_POPPET = register("water_poppet", () -> new DeathPoppetEffectItem(0.3F, 1, PoppetColour.WATER, () -> new MobEffectInstance(EnchantedEffects.DROWN_RESISTANCE.get(), 100), source -> source.is(DamageTypeTags.IS_DROWNING)));
@@ -190,6 +190,7 @@ public class EnchantedItems {
 	private static Supplier<Item> registerItem(String name) {
 		return register(name, () -> new Item(new Properties()));
 	}
+
 	private static Supplier<Item> registerItem(String name, Properties properties) {
 		return register(name, () -> new Item(properties));
 	}

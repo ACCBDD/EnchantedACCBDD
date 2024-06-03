@@ -22,11 +22,11 @@ public class CommonEventsFabric {
         ServerLivingEntityEvents.ALLOW_DAMAGE.register(((entity, source, amount) -> !EffectEvents.onLivingHurt(entity, source, amount)));
         ServerTickEvents.START_WORLD_TICK.register(CommonEvents::onLevelTick);
 
-
         EntitySleepEvents.START_SLEEPING.register((entity, pos) -> {
             if(entity instanceof Player player)
                 CommonEvents.onPlayerSleeping(player, pos);
         });
+
     }
 
 }

@@ -28,12 +28,12 @@ public class ForgeClientRegistryHelper implements IClientRegistryHelper {
 	public static final List<Pair<ModelLayerLocation, Supplier<LayerDefinition>>> LAYER_DEFINITIONS = new ArrayList<>();
 
 	@Override
-	public <T extends Entity> void register(EntityType<T> type, EntityRendererProvider<T> constructor) {
+	public <T extends Entity> void register(EntityType<? extends T> type, EntityRendererProvider<T> constructor) {
 		EntityRenderers.register(type, constructor);
 	}
 
 	@Override
-	public <T extends BlockEntity> void register(BlockEntityType<T> type, BlockEntityRendererProvider<T> constructor) {
+	public <T extends BlockEntity> void register(BlockEntityType<? extends T> type, BlockEntityRendererProvider<T> constructor) {
 		BlockEntityRenderers.register(type, constructor);
 	}
 

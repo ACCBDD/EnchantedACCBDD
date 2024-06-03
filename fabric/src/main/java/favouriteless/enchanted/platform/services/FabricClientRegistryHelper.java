@@ -22,12 +22,12 @@ import java.util.function.Supplier;
 public class FabricClientRegistryHelper implements IClientRegistryHelper {
 
 	@Override
-	public <T extends Entity> void register(EntityType<T> type, EntityRendererProvider<T> constructor) {
+	public <T extends Entity> void register(EntityType<? extends T> type, EntityRendererProvider<T> constructor) {
 		EntityRendererRegistry.register(type, constructor);
 	}
 
 	@Override
-	public <T extends BlockEntity> void register(BlockEntityType<T> type, BlockEntityRendererProvider<T> constructor) {
+	public <T extends BlockEntity> void register(BlockEntityType<? extends T> type, BlockEntityRendererProvider<T> constructor) {
 		BlockEntityRenderers.register(type, constructor);
 	}
 

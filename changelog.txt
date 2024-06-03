@@ -1,4 +1,4 @@
 - Added magic protection poppet
 - Added voodoo poppet
-- Fixed mandrakes attacking players in creative mode
-- Fixed death messages
+- FIXED: Mandrakes can attack players in creative mode
+- FIXED: Death messages are missing lang entries

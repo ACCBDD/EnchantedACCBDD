@@ -1,10 +1,7 @@
 package favouriteless.enchanted.common.init.registry;
 
 import favouriteless.enchanted.Enchanted;
-import favouriteless.enchanted.common.entities.Broomstick;
-import favouriteless.enchanted.common.entities.FamiliarCat;
-import favouriteless.enchanted.common.entities.Mandrake;
-import favouriteless.enchanted.common.entities.ThrowableBrew;
+import favouriteless.enchanted.common.entities.*;
 import favouriteless.enchanted.platform.CommonServices;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.EntityType;
@@ -29,6 +26,9 @@ public class EnchantedEntityTypes {
 
     public static final Supplier<EntityType<ThrowableBrew>> THROWABLE_BREW = register("throwable_brew", () -> Builder.of(ThrowableBrew::new, MobCategory.MISC)
             .sized(0.25F, 0.25F).clientTrackingRange(4).updateInterval(10).build(Enchanted.id("throwable_brew").toString()));
+
+    public static final Supplier<EntityType<VoodooItemEntity>> VOODOO_ITEM = register("voodoo_item", () -> Builder.of(VoodooItemEntity::new, MobCategory.MISC)
+            .sized(0.25F, 0.25F).clientTrackingRange(6).updateInterval(20).build(Enchanted.id("voodoo_item").toString()));
 
 
 

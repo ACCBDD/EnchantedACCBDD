@@ -17,6 +17,7 @@ import favouriteless.enchanted.common.init.registry.EnchantedMenuTypes;
 import favouriteless.enchanted.platform.ClientServices;
 import favouriteless.enchanted.platform.services.IClientRegistryHelper;
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.renderer.entity.ItemEntityRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 
 public class ClientRegistry {
@@ -38,6 +39,7 @@ public class ClientRegistry {
         registry.register(EnchantedEntityTypes.BROOMSTICK.get(), BroomstickRenderer::new);
         registry.register(EnchantedEntityTypes.THROWABLE_BREW.get(), ThrownItemRenderer::new);
         registry.register(EnchantedEntityTypes.FAMILIAR_CAT.get(), FamiliarCatRenderer::new);
+        registry.register(EnchantedEntityTypes.VOODOO_ITEM.get(), ItemEntityRenderer::new);
 
         // Block entity renderers
         registry.register(EnchantedBlockEntityTypes.WITCH_CAULDRON.get(), context -> new CauldronWaterRenderer<>(12));

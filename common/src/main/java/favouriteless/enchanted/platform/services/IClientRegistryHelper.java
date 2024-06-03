@@ -25,14 +25,14 @@ public interface IClientRegistryHelper {
      * @param type The {@link EntityType} to use this renderer for.
      * @param constructor A {@link EntityRendererProvider} for the {@link EntityRenderer} being registered.
      */
-    <T extends Entity> void register(EntityType<T> type, EntityRendererProvider<T> constructor);
+    <T extends Entity> void register(EntityType<? extends T> type, EntityRendererProvider<T> constructor);
 
     /**
      * Register a {@link BlockEntityRenderer}.
      * @param type The {@link BlockEntityType} to use this renderer for.
      * @param constructor A {@link BlockEntityRendererProvider} for the {@link BlockEntityRenderer} being registered.
      */
-    <T extends BlockEntity> void register(BlockEntityType<T> type, BlockEntityRendererProvider<T> constructor);
+    <T extends BlockEntity> void register(BlockEntityType<? extends T> type, BlockEntityRendererProvider<T> constructor);
 
     /**
      * Register a {@link KeyMapping}.
