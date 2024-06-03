@@ -68,8 +68,10 @@ public abstract class AbstractPoppetItem extends Item {
 					CompoundTag nbt = taglockStack.getOrCreateTag();
 					Player target = level.getPlayerByUUID(nbt.getUUID("entity"));
 
-					if(target != null)
+					if(target != null) {
 						player.startUsingItem(hand);
+						return InteractionResultHolder.consume(player.getMainHandItem());
+					}
 				}
 			}
 		}

@@ -15,6 +15,7 @@ public class EnchantedCreativeTab {
             () -> EnchantedItems.ENCHANTED_BROOMSTICK.get().getDefaultInstance(),
             (params, out) -> {
                 out.accept(EnchantedItems.ALDER_LOG.get());
+                out.accept(EnchantedItems.ALDER_LEAVES.get());
                 out.accept(EnchantedItems.STRIPPED_ALDER_LOG.get());
                 out.accept(EnchantedItems.ALDER_PLANKS.get());
                 out.accept(EnchantedItems.ALDER_STAIRS.get());
@@ -24,6 +25,7 @@ public class EnchantedCreativeTab {
                 out.accept(EnchantedItems.ALDER_PRESSURE_PLATE.get());
                 out.accept(EnchantedItems.ALDER_BUTTON.get());
                 out.accept(EnchantedItems.HAWTHORN_LOG.get());
+                out.accept(EnchantedItems.HAWTHORN_LEAVES.get());
                 out.accept(EnchantedItems.STRIPPED_HAWTHORN_LOG.get());
                 out.accept(EnchantedItems.HAWTHORN_PLANKS.get());
                 out.accept(EnchantedItems.HAWTHORN_STAIRS.get());
@@ -33,6 +35,7 @@ public class EnchantedCreativeTab {
                 out.accept(EnchantedItems.HAWTHORN_PRESSURE_PLATE.get());
                 out.accept(EnchantedItems.HAWTHORN_BUTTON.get());
                 out.accept(EnchantedItems.ROWAN_LOG.get());
+                out.accept(EnchantedItems.ROWAN_LEAVES.get());
                 out.accept(EnchantedItems.STRIPPED_ROWAN_LOG.get());
                 out.accept(EnchantedItems.ROWAN_PLANKS.get());
                 out.accept(EnchantedItems.ROWAN_STAIRS.get());
@@ -143,27 +146,31 @@ public class EnchantedCreativeTab {
                 out.accept(EnchantedItems.POPPET.get());
                 out.accept(EnchantedItems.POPPET_INFUSED.get());
                 out.accept(EnchantedItems.POPPET_STURDY.get());
+                out.accept(EnchantedItems.ARMOUR_POPPET.get());
+                out.accept(EnchantedItems.ARMOUR_POPPET_INFUSED.get());
+                out.accept(EnchantedItems.ARMOUR_POPPET_STURDY.get());
                 out.accept(EnchantedItems.EARTH_POPPET.get());
                 out.accept(EnchantedItems.EARTH_POPPET_INFUSED.get());
                 out.accept(EnchantedItems.EARTH_POPPET_STURDY.get());
                 out.accept(EnchantedItems.FIRE_POPPET.get());
                 out.accept(EnchantedItems.FIRE_POPPET_INFUSED.get());
                 out.accept(EnchantedItems.FIRE_POPPET_STURDY.get());
-                out.accept(EnchantedItems.WATER_POPPET.get());
-                out.accept(EnchantedItems.WATER_POPPET_INFUSED.get());
-                out.accept(EnchantedItems.WATER_POPPET_STURDY.get());
                 out.accept(EnchantedItems.HUNGER_POPPET.get());
                 out.accept(EnchantedItems.HUNGER_POPPET_INFUSED.get());
                 out.accept(EnchantedItems.HUNGER_POPPET_STURDY.get());
+                out.accept(EnchantedItems.MAGIC_POPPET.get());
+                out.accept(EnchantedItems.MAGIC_POPPET_INFUSED.get());
+                out.accept(EnchantedItems.MAGIC_POPPET_STURDY.get());
+                out.accept(EnchantedItems.WATER_POPPET.get());
+                out.accept(EnchantedItems.WATER_POPPET_INFUSED.get());
+                out.accept(EnchantedItems.WATER_POPPET_STURDY.get());
                 out.accept(EnchantedItems.VOID_POPPET.get());
                 out.accept(EnchantedItems.VOID_POPPET_INFUSED.get());
                 out.accept(EnchantedItems.VOID_POPPET_STURDY.get());
+                out.accept(EnchantedItems.VOODOO_POPPET.get());
                 out.accept(EnchantedItems.TOOL_POPPET.get());
                 out.accept(EnchantedItems.TOOL_POPPET_INFUSED.get());
                 out.accept(EnchantedItems.TOOL_POPPET_STURDY.get());
-                out.accept(EnchantedItems.ARMOUR_POPPET.get());
-                out.accept(EnchantedItems.ARMOUR_POPPET_INFUSED.get());
-                out.accept(EnchantedItems.ARMOUR_POPPET_STURDY.get());
 
 
                 out.accept(EnchantedItems.CIRCLE_TALISMAN.get());

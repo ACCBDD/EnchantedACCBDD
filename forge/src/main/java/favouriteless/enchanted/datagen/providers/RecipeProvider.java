@@ -283,6 +283,11 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
 				EnchantedItems.OTHERWHERE_CHALK.get(), EnchantedItems.ENDER_DEW.get());
 		spinningSet(consumer, EnchantedItems.WATER_POPPET.get(), EnchantedItems.WATER_POPPET_INFUSED.get(), EnchantedItems.WATER_POPPET_STURDY.get(),
 				stack(EnchantedItems.WATER_ARTICHOKE.get(), 1), PotionUtils.setPotion(stack(Items.POTION, 1), Potions.LONG_WATER_BREATHING));
+		spinningSet(consumer, EnchantedItems.MAGIC_POPPET.get(), EnchantedItems.MAGIC_POPPET_INFUSED.get(), EnchantedItems.MAGIC_POPPET_STURDY.get(),
+				stack(EnchantedItems.ROWAN_BERRIES.get(), 1), PotionUtils.setPotion(stack(Items.POTION, 1), Potions.STRONG_HARMING));
+
+		// Special poppets
+		spinning(consumer, EnchantedItems.VOODOO_POPPET.get(), EnchantedItems.POPPET_INFUSED.get(), EnchantedItems.BONE_NEEDLE.get(), EnchantedItems.BREW_OF_THE_GROTESQUE.get());
 	}
 
 	protected void buildDistillingRecipes(Consumer<FinishedRecipe> consumer) {

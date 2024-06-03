@@ -33,6 +33,10 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
     protected void addTranslations() {
         add(Enchanted.translationKey("tab", "main"), "Enchanted");
 
+        add("death.attack.enchanted.sacrifice", "%1$s was sacrificed.");
+        add("death.attack.enchanted.sound", "%1$s had their eardrums pierced.");
+        add("death.attack.enchanted.voodoo", "%1$s died mysteriously.");
+
         addBlock(EnchantedBlocks.CHALICE_FILLED, "Chalice (Filled)");
         addBlock(EnchantedBlocks.FUME_FUNNEL_FILTERED, "Fume Funnel (Filtered)");
         addBlock(EnchantedBlocks.WITCH_CAULDRON, "Witch's Cauldron");

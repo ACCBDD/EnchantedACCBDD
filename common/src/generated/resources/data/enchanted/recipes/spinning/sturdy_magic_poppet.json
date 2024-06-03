@@ -1,0 +1,19 @@
+{
+  "type": "enchanted:wheel",
+  "ingredients": [
+    {
+      "item": "enchanted:sturdy_poppet"
+    },
+    {
+      "item": "enchanted:rowan_berries"
+    },
+    {
+      "item": "minecraft:potion",
+      "nbt": "{Potion:\"minecraft:strong_harming\"}"
+    }
+  ],
+  "power": 1000,
+  "result": {
+    "item": "enchanted:sturdy_magic_poppet"
+  }
+}

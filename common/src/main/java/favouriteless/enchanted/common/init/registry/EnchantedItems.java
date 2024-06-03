@@ -108,6 +108,9 @@ public class EnchantedItems {
 	public static final Supplier<SimpleEffectBrewItem> INFERNAL_ANIMUS = registerBrew("infernal_animus", MobEffects.WITHER, 1200, 2);
 	public static final Supplier<BlockItem> INFINITY_EGG = registerBlock("infinity_egg", EnchantedBlocks.INFINITY_EGG);
 	public static final Supplier<BlockItem> KETTLE = registerBlock("kettle", EnchantedBlocks.KETTLE);
+	public static final Supplier<DeathPoppetItem> MAGIC_POPPET = register("magic_poppet", () -> new DeathPoppetItem(0.3F, 1, PoppetColour.MAGIC, EnchantedEffects::isMagic));
+	public static final Supplier<DeathPoppetEffectItem> MAGIC_POPPET_INFUSED = register("infused_magic_poppet", () -> new DeathPoppetEffectItem( 0.0F, 1, PoppetColour.MAGIC, () -> new MobEffectInstance(EnchantedEffects.MAGIC_RESISTANCE.get(), 200), EnchantedEffects::isMagic));
+	public static final Supplier<DeathPoppetItem> MAGIC_POPPET_STURDY = register("sturdy_magic_poppet", () -> new DeathPoppetItem( 0.0F, 2, PoppetColour.MAGIC, EnchantedEffects::isMagic));
 	public static final Supplier<Item> MANDRAKE_ROOT = registerItem("mandrake_root");
 	public static final Supplier<ItemNameBlockItem> MANDRAKE_SEEDS = registerBlockNamed("mandrake_seeds", EnchantedBlocks.MANDRAKE);
 	public static final Supplier<Item> MELLIFLUOUS_HUNGER = registerItem("mellifluous_hunger");
@@ -158,6 +161,7 @@ public class EnchantedItems {
 	public static final Supplier<Item> VOID_POPPET = register("void_poppet", () -> new VoidPoppetItem(0.3F, 1, PoppetColour.VOID, source -> source.is(DamageTypes.FELL_OUT_OF_WORLD)));
 	public static final Supplier<Item> VOID_POPPET_INFUSED = register("infused_void_poppet", () -> new VoidPoppetEffectItem( 0.0F, 1, PoppetColour.VOID, () -> new MobEffectInstance(EnchantedEffects.FALL_RESISTANCE.get(), 150), source -> source.is(DamageTypes.FELL_OUT_OF_WORLD)));
 	public static final Supplier<Item> VOID_POPPET_STURDY = register("sturdy_void_poppet", () -> new VoidPoppetItem( 0.0F, 2, PoppetColour.VOID, source -> source.is(DamageTypes.FELL_OUT_OF_WORLD)));
+	public static final Supplier<Item> VOODOO_POPPET = register("voodoo_poppet", VoodooPoppetItem::new);
 	public static final Supplier<Item> WATER_ARTICHOKE = registerFood("water_artichoke", 3, MobEffects.HUNGER, 100, 0, 1.0F);
 	public static final Supplier<ArtichokeSeedsItem> WATER_ARTICHOKE_SEEDS = register("water_artichoke_seeds", ArtichokeSeedsItem::new);
 	public static final Supplier<DeathPoppetEffectItem> WATER_POPPET = register("water_poppet", () -> new DeathPoppetEffectItem(0.3F, 1, PoppetColour.WATER, () -> new MobEffectInstance(EnchantedEffects.DROWN_RESISTANCE.get(), 100), source -> source.is(DamageTypeTags.IS_DROWNING)));

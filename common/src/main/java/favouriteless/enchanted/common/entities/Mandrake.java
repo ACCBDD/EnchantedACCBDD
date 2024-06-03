@@ -2,11 +2,9 @@ package favouriteless.enchanted.common.entities;
 
 import favouriteless.enchanted.common.init.EnchantedDamageTypes;
 import favouriteless.enchanted.common.init.registry.EnchantedItems;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
@@ -125,10 +123,12 @@ public class Mandrake extends Monster implements GeoEntity {
                                 this.mob.position().x + 8, this.mob.position().y + 8, this.mob.position().z + 8), entity -> !(entity instanceof Mandrake) );
 
                 for(LivingEntity entity : entitiesInRange) {
+                    if(entity instanceof Player player && player.isCreative())
+                        continue;
+
                     if(entity.getItemBySlot(EquipmentSlot.HEAD).getItem() != EnchantedItems.EARMUFFS.get()) {
-                        entity.hurt(new DamageSource(level().registryAccess().registry(Registries.DAMAGE_TYPE).get().getHolderOrThrow(EnchantedDamageTypes.SACRIFICE), mob), 1.0F);
-                        if(entity instanceof Player player && !player.isCreative())
-                            entity.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 200, 1));
+                        entity.hurt(EnchantedDamageTypes.source(level(), EnchantedDamageTypes.SOUND, mob), 1.0F);
+                        entity.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 200, 1));
                     }
                 }
                 this.mob.level().playSound(null, this.mob.getX(), this.mob.getY(), this.mob.getZ(), SoundEvents.GHAST_HURT, SoundSource.HOSTILE, 10.0F,0.85F + random.nextFloat() * 0.1F);

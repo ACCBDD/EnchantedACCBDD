@@ -1,7 +1,7 @@
-// 1.20.1	2024-04-23T00:08:20.1453719	Tags for minecraft:damage_type mod id enchanted
-705f708fad9f0db7825a356ba878d46a1b439352 data/minecraft/tags/damage_type/bypasses_armor.json
+// 1.20.1	2024-06-03T13:41:16.3230262	Tags for minecraft:damage_type mod id enchanted
+3dcb9aa7dc56ebd0db8879641706043e4ed34562 data/minecraft/tags/damage_type/bypasses_armor.json
 c3100f33aa6e86063729db5a8efc164817d966f4 data/minecraft/tags/damage_type/bypasses_cooldown.json
-705f708fad9f0db7825a356ba878d46a1b439352 data/minecraft/tags/damage_type/bypasses_effects.json
-705f708fad9f0db7825a356ba878d46a1b439352 data/minecraft/tags/damage_type/bypasses_enchantments.json
+3dcb9aa7dc56ebd0db8879641706043e4ed34562 data/minecraft/tags/damage_type/bypasses_effects.json
+3dcb9aa7dc56ebd0db8879641706043e4ed34562 data/minecraft/tags/damage_type/bypasses_enchantments.json
 c3100f33aa6e86063729db5a8efc164817d966f4 data/minecraft/tags/damage_type/bypasses_invulnerability.json
-705f708fad9f0db7825a356ba878d46a1b439352 data/minecraft/tags/damage_type/bypasses_resistance.json
+3dcb9aa7dc56ebd0db8879641706043e4ed34562 data/minecraft/tags/damage_type/bypasses_resistance.json
