@@ -8,18 +8,13 @@ import net.minecraft.world.damagesource.DamageSource;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
-public class DeathPoppetEffectItem extends AbstractDeathPoppetItem {
+public class DeathPoppetEffectItem extends DeathPoppetItem {
 
 	protected Supplier<MobEffectInstance> deathEffect;
 
 	public DeathPoppetEffectItem(float failRate, int durability, PoppetColour colour, Supplier<MobEffectInstance> deathEffect, Predicate<DamageSource> sourcePredicate) {
 		super(failRate, durability, colour, sourcePredicate);
 		this.deathEffect = deathEffect;
-	}
-
-	@Override
-	public boolean canProtect(Player player) {
-		return true;
 	}
 
 	@Override

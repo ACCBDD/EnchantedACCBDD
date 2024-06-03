@@ -83,6 +83,7 @@ public class EnchantedTags {
         public static final TagKey<Item> WITCH_OVEN_BLACKLIST = createItemTag(Enchanted.id("witch_oven_blacklist"));
         public static final TagKey<Item> WOODEN_SLABS = createItemTag(Enchanted.id("wooden_slabs"));
         public static final TagKey<Item> WOODEN_STAIRS = createItemTag(Enchanted.id("wooden_stairs"));
+        public static final TagKey<Item> VOODOO_POPPETS = createItemTag(Enchanted.id("voodoo_poppets"));
     }
 
     public static class MobEffects {

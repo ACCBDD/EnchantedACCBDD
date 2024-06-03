@@ -7,7 +7,7 @@ public enum PoppetColour {
 	HUNGER(113, 184, 59, 78, 128, 65),
 	MAGIC(172, 74, 237, 200, 145, 237),
 	VOID(112, 63, 143, 58, 33, 74),
-//	VOODOO_PROTECTION(),
+	VOODOO_PROTECTION(41, 41, 41, 82, 82, 82),
 	WATER(73, 180, 230, 24, 52, 196);
 
 	public final int rPrimary;

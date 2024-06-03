@@ -162,6 +162,9 @@ public class EnchantedItems {
 	public static final Supplier<Item> VOID_POPPET_INFUSED = register("infused_void_poppet", () -> new VoidPoppetEffectItem( 0.0F, 1, PoppetColour.VOID, () -> new MobEffectInstance(EnchantedEffects.FALL_RESISTANCE.get(), 150), source -> source.is(DamageTypes.FELL_OUT_OF_WORLD)));
 	public static final Supplier<Item> VOID_POPPET_STURDY = register("sturdy_void_poppet", () -> new VoidPoppetItem( 0.0F, 2, PoppetColour.VOID, source -> source.is(DamageTypes.FELL_OUT_OF_WORLD)));
 	public static final Supplier<VoodooPoppetItem> VOODOO_POPPET = register("voodoo_poppet", VoodooPoppetItem::new);
+	public static final Supplier<Item> VOODOO_PROTECTION_POPPET = register("voodoo_protection_poppet", () -> new PoppetItem(0.3F, 1, PoppetColour.VOODOO_PROTECTION));
+	public static final Supplier<Item> VOODOO_PROTECTION_POPPET_INFUSED = register("infused_voodoo_protection_poppet", () -> new PoppetItem(0.0F, 1, PoppetColour.VOODOO_PROTECTION));
+	public static final Supplier<Item> VOODOO_PROTECTION_POPPET_STURDY = register("sturdy_voodoo_protection_poppet", () -> new PoppetItem(0.0F, 2, PoppetColour.VOODOO_PROTECTION));
 	public static final Supplier<Item> WATER_ARTICHOKE = registerFood("water_artichoke", 3, MobEffects.HUNGER, 100, 0, 1.0F);
 	public static final Supplier<ArtichokeSeedsItem> WATER_ARTICHOKE_SEEDS = register("water_artichoke_seeds", ArtichokeSeedsItem::new);
 	public static final Supplier<DeathPoppetEffectItem> WATER_POPPET = register("water_poppet", () -> new DeathPoppetEffectItem(0.3F, 1, PoppetColour.WATER, () -> new MobEffectInstance(EnchantedEffects.DROWN_RESISTANCE.get(), 100), source -> source.is(DamageTypeTags.IS_DROWNING)));
@@ -240,8 +243,12 @@ public class EnchantedItems {
 		return item == TOOL_POPPET.get() || item == TOOL_POPPET_INFUSED.get() || item == TOOL_POPPET_STURDY.get();
 	}
 
-	public static  boolean isArmourPoppet(Item item) {
+	public static boolean isArmourPoppet(Item item) {
 		return item == ARMOUR_POPPET.get() || item == ARMOUR_POPPET_INFUSED.get() || item == ARMOUR_POPPET_STURDY.get();
+	}
+
+	public static boolean isVoodooProtectionPoppet(Item item) {
+		return item == VOODOO_PROTECTION_POPPET.get() || item == VOODOO_PROTECTION_POPPET_INFUSED.get() || item == VOODOO_PROTECTION_POPPET_STURDY.get();
 	}
 
 	public static void registerCompostables() {

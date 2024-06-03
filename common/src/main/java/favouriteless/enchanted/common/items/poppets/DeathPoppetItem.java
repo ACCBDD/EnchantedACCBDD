@@ -1,25 +1,35 @@
 package favouriteless.enchanted.common.items.poppets;
 
 import favouriteless.enchanted.common.poppet.PoppetColour;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.damagesource.DamageSource;
 
 import java.util.function.Predicate;
 
-public class DeathPoppetItem extends AbstractDeathPoppetItem {
+public class DeathPoppetItem extends PoppetItem {
+
+	protected final Predicate<DamageSource> sourcePredicate;
 
 	public DeathPoppetItem(float failRate, int durability, PoppetColour colour, Predicate<DamageSource> sourcePredicate) {
-		super(failRate, durability, colour, sourcePredicate);
+		super(failRate, durability, colour);
+		this.sourcePredicate = sourcePredicate;
 	}
 
-	@Override
-	public boolean canProtect(Player player) {
-		return true;
+	/**
+	 * True if this poppet can protect against the specified DamageSource
+	 * @param damageSource
+	 * @return
+	 */
+	public boolean protectsAgainst(DamageSource damageSource) {
+		return sourcePredicate.test(damageSource);
 	}
 
-	@Override
+	/**
+	 * Apply protection effects to the given player
+	 * @param player
+	 */
 	public void protect(Player player) {
 		player.setHealth(1);
 		player.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 100, 1));

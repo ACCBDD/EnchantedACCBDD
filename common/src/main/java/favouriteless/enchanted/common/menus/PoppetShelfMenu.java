@@ -3,7 +3,7 @@ package favouriteless.enchanted.common.menus;
 import favouriteless.enchanted.common.blocks.entity.PoppetShelfBlockEntity;
 import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
 import favouriteless.enchanted.common.init.registry.EnchantedMenuTypes;
-import favouriteless.enchanted.common.items.poppets.AbstractPoppetItem;
+import favouriteless.enchanted.common.items.poppets.PoppetItem;
 import favouriteless.enchanted.util.MenuUtils;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Container;
@@ -82,7 +82,7 @@ public class PoppetShelfMenu extends AbstractContainerMenu {
 
 		@Override
 		public boolean mayPlace(ItemStack itemStack) {
-			return itemStack.getItem() instanceof AbstractPoppetItem;
+			return itemStack.getItem() instanceof PoppetItem;
 		}
 	}
 

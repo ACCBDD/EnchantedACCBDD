@@ -1,7 +1,8 @@
 package favouriteless.enchanted.common.entities;
 
-import favouriteless.enchanted.common.poppet.PoppetHelper;
+import favouriteless.enchanted.common.poppet.PoppetUtils;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
@@ -35,10 +36,9 @@ public class VoodooItemEntity extends ItemEntity {
     @Override
     public void tick() {
         super.tick();
-
-        if(level() instanceof ServerLevel level && PoppetHelper.isBound(getItem())) {
+        if(level() instanceof ServerLevel level && PoppetUtils.isBound(getItem())) {
             ItemStack item = getItem();
-            Player target = PoppetHelper.getBoundPlayer(item, level);
+            ServerPlayer target = PoppetUtils.getBoundPlayer(item, level);
 
             if(target != null) {
                 if(isInWaterOrBubble())
@@ -46,10 +46,10 @@ public class VoodooItemEntity extends ItemEntity {
                 else
                     underWaterTicks = 0;
 
-                if(underWaterTicks > 20 && target.hurt(level.damageSources().drown(), 1.0F))
+                if(underWaterTicks > 20 && PoppetUtils.tryVoodooPlayer(target, (ServerPlayer)getOwner(), item) && target.hurt(level.damageSources().drown(), 1.0F))
                     hurt(level.damageSources().generic(), 1);
 
-                if(isInLava() && target.hurt(level.damageSources().lava(), 4.0F)) {
+                if(isInLava() && PoppetUtils.tryVoodooPlayer(target, (ServerPlayer)getOwner(), item) && target.hurt(level.damageSources().lava(), 4.0F)) {
                     target.setSecondsOnFire(15);
                     hurt(level.damageSources().generic(), 4);
                 }

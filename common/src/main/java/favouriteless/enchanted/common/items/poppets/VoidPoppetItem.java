@@ -7,15 +7,10 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.function.Predicate;
 
-public class VoidPoppetItem extends AbstractDeathPoppetItem {
+public class VoidPoppetItem extends DeathPoppetItem {
 
 	public VoidPoppetItem(float failRate, int durability, PoppetColour colour, Predicate<DamageSource> sourcePredicate) {
 		super(failRate, durability, colour, sourcePredicate);
-	}
-
-	@Override
-	public boolean canProtect(Player player) {
-		return true;
 	}
 
 	@Override

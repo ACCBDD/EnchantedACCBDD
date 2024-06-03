@@ -1,4 +1,4 @@
-// 1.20.1	2024-06-03T12:53:21.6823018	Item Models: enchanted
+// 1.20.1	2024-06-03T17:48:18.2137203	Item Models: enchanted
 36c060b7c893ca734514c311651c4218bac5fe3d assets/enchanted/models/item/anointing_paste.json
 a884f9e3f59776578006dfa31809363e843eb79c assets/enchanted/models/item/armour_poppet.json
 2bbde80bc46104477fbf5473cf01773e09797e26 assets/enchanted/models/item/arthana.json
@@ -112,6 +112,7 @@ cb0ca1070ffa31e5535ec9219222d8d659b30da3 assets/enchanted/models/item/infused_hu
 26a2a96893ea362f71d5a836cf5255e2aa044c44 assets/enchanted/models/item/infused_poppet.json
 5a2f4bc42e81c87a70cc649b9a47ed0288cf2787 assets/enchanted/models/item/infused_tool_poppet.json
 330f40aec5de1d307d44b79c8935f3029c1bca48 assets/enchanted/models/item/infused_void_poppet.json
+ee66dd968ca9111da268dc497002fdca63e6dad5 assets/enchanted/models/item/infused_voodoo_protection_poppet.json
 e4c0fbd8780e09b5978123f5b6c3d33f0c76823e assets/enchanted/models/item/infused_water_poppet.json
 ae2d25adc34f2d55d04f769477376d72d7b328d0 assets/enchanted/models/item/magic_poppet.json
 3c5dc6cda8b6f69edf4b9bbddc5cbdf7ec924d9a assets/enchanted/models/item/mandrake_root.json
@@ -141,6 +142,7 @@ fc435c6b836e4788879c647075b33a1ab79437e3 assets/enchanted/models/item/sturdy_hun
 5b23ab8959e3c379f2ff7a3888ee043f96b52af0 assets/enchanted/models/item/sturdy_poppet.json
 57b8993a1f4d0994c998e6c938272587c67ab171 assets/enchanted/models/item/sturdy_tool_poppet.json
 812da7c6ea69df31aa28aa424283de860e95da95 assets/enchanted/models/item/sturdy_void_poppet.json
+2b94b21427b635517ac5eb0a398c84a5023c5ba9 assets/enchanted/models/item/sturdy_voodoo_protection_poppet.json
 670a7be7b55641dd096c2deaf5e9129b9edafe5b assets/enchanted/models/item/sturdy_water_poppet.json
 a3aa9c4510c0cbedb692e0aa7ed2ccafba6c2ea8 assets/enchanted/models/item/taglock.json
 ad35c13e6b4d4cdcc4a0f83fddbdc41069393eeb assets/enchanted/models/item/taglock_kit.json
@@ -149,6 +151,7 @@ d94a5f9e2dc10e2c664ecb3d723192b587dc6066 assets/enchanted/models/item/tongue_of_
 7110b008ce7762c645f2c9ee041361a493428be9 assets/enchanted/models/item/tool_poppet.json
 93e53ba33fdcca9ce048a4457ccc55b432cfcc48 assets/enchanted/models/item/void_poppet.json
 d2d9f8d41a7f092ece0cb82307aac6c6cbba67a9 assets/enchanted/models/item/voodoo_poppet.json
+5d5785f3a74d9723057fdaa640e504902ab2b205 assets/enchanted/models/item/voodoo_protection_poppet.json
 203a56ae4a4cb55ac3065537d8367c0636d39222 assets/enchanted/models/item/water_artichoke.json
 b68b58dea2cb247fe5b7d476ee895b0665003549 assets/enchanted/models/item/water_artichoke_seeds.json
 1b7772098beff214c55f3dcbb23b2655f6552cba assets/enchanted/models/item/water_poppet.json

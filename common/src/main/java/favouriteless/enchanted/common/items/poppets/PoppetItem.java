@@ -2,7 +2,7 @@ package favouriteless.enchanted.common.items.poppets;
 
 import favouriteless.enchanted.common.items.TaglockFilledItem;
 import favouriteless.enchanted.common.poppet.PoppetColour;
-import favouriteless.enchanted.common.poppet.PoppetHelper;
+import favouriteless.enchanted.common.poppet.PoppetUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -18,12 +18,12 @@ import net.minecraft.world.level.Level;
 
 import java.util.List;
 
-public abstract class AbstractPoppetItem extends Item {
+public class PoppetItem extends Item {
 
-	public final float failRate;
+	private final float failRate;
 	public final PoppetColour colour;
 
-	public AbstractPoppetItem(float failRate, int durability, PoppetColour colour) {
+	public PoppetItem(float failRate, int durability, PoppetColour colour) {
 		super(new Properties().durability(durability));
 		this.failRate = failRate;
 		this.colour = colour;
@@ -35,8 +35,8 @@ public abstract class AbstractPoppetItem extends Item {
 
 	public void appendHoverText(ItemStack stack, Level level, List<Component> toolTip, TooltipFlag flag) {
 		toolTip.add(Component.literal((int)(failRate * 100) + "% Chance to fail").withStyle(ChatFormatting.RED));
-		if(PoppetHelper.isBound(stack)) {
-			toolTip.add(Component.literal(PoppetHelper.getBoundName(stack)).withStyle(ChatFormatting.GRAY));
+		if(PoppetUtils.isBound(stack)) {
+			toolTip.add(Component.literal(PoppetUtils.getBoundName(stack)).withStyle(ChatFormatting.GRAY));
 		}
 	}
 
@@ -50,7 +50,7 @@ public abstract class AbstractPoppetItem extends Item {
 				Player target = level.getPlayerByUUID(nbt.getUUID("entity"));
 
 				if(target != null) {
-					PoppetHelper.bind(itemStack, target);
+					PoppetUtils.bind(itemStack, target);
 					if(!player.isCreative())
 						taglockStack.shrink(1);
 				}
@@ -62,7 +62,7 @@ public abstract class AbstractPoppetItem extends Item {
 	@Override
 	public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
 		if(hand == InteractionHand.MAIN_HAND) {
-			if(!PoppetHelper.isBound(player.getMainHandItem())) {
+			if(!PoppetUtils.isBound(player.getMainHandItem())) {
 				ItemStack taglockStack = player.getOffhandItem();
 				if(taglockStack.getItem() instanceof TaglockFilledItem) {
 					CompoundTag nbt = taglockStack.getOrCreateTag();

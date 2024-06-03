@@ -3,7 +3,7 @@ package favouriteless.enchanted.common.items.poppets;
 import favouriteless.enchanted.common.poppet.PoppetColour;
 import net.minecraft.world.item.ItemStack;
 
-public class ItemProtectionPoppetItem extends AbstractPoppetItem {
+public class ItemProtectionPoppetItem extends PoppetItem {
 
 	public float damageMultiplier;
 

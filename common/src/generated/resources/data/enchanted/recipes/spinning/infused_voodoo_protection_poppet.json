@@ -5,15 +5,15 @@
       "item": "enchanted:infused_poppet"
     },
     {
-      "item": "enchanted:anointing_paste"
+      "item": "enchanted:bone_needle"
     },
     {
       "item": "minecraft:potion",
-      "nbt": "{Potion:\"minecraft:strong_harming\"}"
+      "nbt": "{Potion:\"minecraft:strong_healing\"}"
     }
   ],
   "power": 1000,
   "result": {
-    "item": "enchanted:infused_magic_poppet"
+    "item": "enchanted:infused_voodoo_protection_poppet"
   }
 }

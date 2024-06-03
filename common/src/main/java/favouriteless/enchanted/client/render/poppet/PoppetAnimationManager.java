@@ -1,8 +1,7 @@
 package favouriteless.enchanted.client.render.poppet;
 
-import favouriteless.enchanted.common.poppet.PoppetHelper.PoppetResult;
+import favouriteless.enchanted.common.poppet.PoppetUseResult.ResultType;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.Util;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.item.ItemStack;
@@ -23,7 +22,7 @@ public class PoppetAnimationManager {
 	 * @param result
 	 * @param itemStack
 	 */
-	public static void startAnimation(PoppetResult result, ItemStack itemStack) {
+	public static void startAnimation(ResultType result, ItemStack itemStack) {
 		switch(result) {
 			case SUCCESS, SUCCESS_BREAK -> startAnimation(new PoppetAnimation(itemStack, 120));
 		}

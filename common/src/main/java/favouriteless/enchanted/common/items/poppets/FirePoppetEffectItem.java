@@ -15,11 +15,6 @@ public class FirePoppetEffectItem extends DeathPoppetEffectItem {
 	}
 
 	@Override
-	public boolean canProtect(Player player) {
-		return true;
-	}
-
-	@Override
 	public void protect(Player player) {
 		player.setHealth(1);
 		player.clearFire();

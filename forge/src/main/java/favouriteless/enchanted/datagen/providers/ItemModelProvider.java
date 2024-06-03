@@ -122,6 +122,9 @@ public class ItemModelProvider extends net.minecraftforge.client.model.generator
 		simpleItem(EnchantedItems.MAGIC_POPPET_INFUSED.get());
 		simpleItem(EnchantedItems.MAGIC_POPPET_STURDY.get());
 		simpleItem(EnchantedItems.VOODOO_POPPET.get());
+		simpleItem(EnchantedItems.VOODOO_PROTECTION_POPPET.get());
+		simpleItem(EnchantedItems.VOODOO_PROTECTION_POPPET_INFUSED.get());
+		simpleItem(EnchantedItems.VOODOO_PROTECTION_POPPET_STURDY.get());
 	}
 
 	private void simpleItem(Item item) {
