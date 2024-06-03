@@ -117,6 +117,15 @@ public class EnchantedBlocks {
         registry.setFlammable(HAWTHORN_STAIRS.get(), 5, 20);
         registry.setFlammable(HAWTHORN_SLAB.get(), 5, 20);
         registry.setFlammable(HAWTHORN_LEAVES.get(), 30, 60);
+        registry.setFlammable(STRIPPED_ALDER_LOG.get(), 5, 5);
+        registry.setFlammable(STRIPPED_HAWTHORN_LOG.get(), 5, 5);
+        registry.setFlammable(STRIPPED_ROWAN_LOG.get(), 5, 5);
+        registry.setFlammable(ALDER_FENCE.get(), 5, 20);
+        registry.setFlammable(ALDER_FENCE_GATE.get(), 5, 20);
+        registry.setFlammable(HAWTHORN_FENCE.get(), 5, 20);
+        registry.setFlammable(HAWTHORN_FENCE_GATE.get(), 5, 20);
+        registry.setFlammable(ROWAN_FENCE.get(), 5, 20);
+        registry.setFlammable(ROWAN_FENCE_GATE.get(), 5, 20);
     }
 
     //-------------------------------------------------------- UTILITY FUNCTIONS FOR CREATING BLOCKS --------------------------------------------------------
