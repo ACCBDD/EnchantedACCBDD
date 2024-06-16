@@ -80,6 +80,6 @@ public abstract class CauldronBlockBase extends Block implements EntityBlock {
 	@Nullable
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-		return CauldronBlockEntity::tick;
+		return !level.isClientSide() ? CauldronBlockEntity::serverTick : CauldronBlockEntity::clientTick;
 	}
 }

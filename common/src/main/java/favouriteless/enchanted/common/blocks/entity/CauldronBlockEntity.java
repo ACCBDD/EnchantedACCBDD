@@ -8,7 +8,6 @@ import favouriteless.enchanted.client.client_handlers.blockentities.CauldronBloc
 import favouriteless.enchanted.client.particles.types.SimpleColouredParticleType.SimpleColouredData;
 import favouriteless.enchanted.common.CommonConfig;
 import favouriteless.enchanted.common.altar.SimplePowerPosHolder;
-import favouriteless.enchanted.common.blocks.cauldrons.CauldronBlockBase;
 import favouriteless.enchanted.common.init.registry.EnchantedParticleTypes;
 import favouriteless.enchanted.common.recipes.CauldronTypeRecipe;
 import favouriteless.enchanted.util.PlayerInventoryHelper;
@@ -81,80 +80,81 @@ public abstract class CauldronBlockEntity<T extends CauldronTypeRecipe> extends 
 		this.cookDuration = cookDuration;
 	}
 
+	public static <T extends BlockEntity> void serverTick(Level level, BlockPos pos, BlockState state, T t) {
+		CauldronBlockEntity<?> be = (CauldronBlockEntity<?>)t;
+		if(be.firstTick)
+			be.firstTick();
+		if(be.isFailed || be.isComplete)
+			return;
 
-	public static <T extends BlockEntity> void tick(Level level, BlockPos pos, BlockState blockState, T t) {
-		if(t instanceof CauldronBlockEntity<?> be) {
-			if(be.firstTick)
-				be.firstTick();
-			if(!level.isClientSide) {
-				boolean shouldUpdate = false;
-				if(!be.isFailed && !be.isComplete) {
-					BlockState stateBelow = level.getBlockState(be.worldPosition.below());
-
-					if(providesHeat(stateBelow) && be.fluidAmount == be.fluidCapacity) { // On top of heat block, cauldron is full
-						if(be.warmingUp < WARMING_MAX) {
-							be.warmingUp++;
-							if(be.warmingUp == WARMING_MAX)
-								shouldUpdate = true;
-						} else if(be.potentialRecipes.size() == 1 && be.potentialRecipes.get(0).fullMatch(be)) { // Has final recipe
-							if(be.cookProgress < be.cookDuration) {
-								be.cookProgress++;
-								be.recalculateTargetColour();
-								if(be.cookProgress == 1 || be.cookProgress == be.cookDuration)
-									shouldUpdate = true;
-							} else {
-								CauldronTypeRecipe recipe = be.potentialRecipes.get(0);
-								IPowerProvider powerProvider = PowerHelper.tryGetPowerProvider(level, be.getPosHolder());
-								if(recipe.getPower() <= 0)
-									be.setComplete();
-								else if(powerProvider != null && powerProvider.tryConsumePower(recipe.getPower()))
-									be.setComplete();
-								else
-									be.setFailed(); // Fail if not enough power
-
-								shouldUpdate = true;
-							}
-						}
-					} else {
-						if(be.hasItems)
-							be.setFailed(); // Fail if heat or water is lost while cooking
-						if(be.warmingUp > 0)
-							shouldUpdate = true;
-						be.warmingUp = 0;
-					}
-				}
-				if(shouldUpdate)
-					be.updateBlock();
+		BlockState stateBelow = level.getBlockState(be.worldPosition.below());
+		if(!providesHeat(stateBelow) || be.fluidAmount != be.fluidCapacity) { // If cauldron not heated or full, fail/return.
+			if(be.hasItems)
+				be.setFailed();
+			if(be.warmingUp > 0) {
+				be.warmingUp = 0;
+				be.updateBlock();
+				return;
 			}
-			// ------------------------ CLIENT STUFF ------------------------
-			else {
-				if(blockState.getBlock() instanceof CauldronBlockBase) {
-					long time = System.currentTimeMillis() - be.startTime;
-					double waterY = be.getWaterY(blockState);
+		}
 
-					if(be.isHot() && Enchanted.RANDOM.nextInt(10) > 2) {
-						double dx = be.worldPosition.getX() + 0.5D + (Math.random() - 0.5D) * be.getWaterWidth();
-						double dy = be.worldPosition.getY() + waterY + 0.02D;
-						double dz = be.worldPosition.getZ() + 0.5D + (Math.random() - 0.5D) * be.getWaterWidth();
+		if(be.warmingUp < WARMING_MAX) { // Handle heating up
+			if(++be.warmingUp == WARMING_MAX)
+				be.updateBlock();
+			return;
+		}
 
-						level.addParticle(new SimpleColouredData(EnchantedParticleTypes.BOILING.get(), be.getRed(time), be.getGreen(time), be.getBlue(time)), dx, dy, dz, 0D, 0D, 0D);
-					}
-					if(!be.isFailed) {
-						if(!be.isComplete && be.cookProgress > 0 && be.cookProgress < be.cookDuration) {
-							be.handleCookParticles(time);
-						} else if(be.warmingUp == WARMING_MAX && be.hasItems && Enchanted.RANDOM.nextInt(10) > 6) {
-							double xOffset = 0.5D + (Math.random() - 0.5D) * be.getWaterWidth();
-							double zOffset = 0.5D + (Math.random() - 0.5D) * be.getWaterWidth();
-							double dx = be.worldPosition.getX() + xOffset;
-							double dy = be.worldPosition.getY() + waterY;
-							double dz = be.worldPosition.getZ() + zOffset;
-							Vec3 velocity = new Vec3(xOffset, 0, zOffset).subtract(0.5D, 0.0D, 0.5D).normalize().scale((1D + Math.random()) * 0.06D);
+		if(be.potentialRecipes.size() != 1 || !be.potentialRecipes.get(0).fullMatch(be)) // Has final recipe
+			return;
+		
+		if(be.cookProgress < be.cookDuration) {
+			be.cookProgress++;
+			be.recalculateTargetColour();
+			if(be.cookProgress == 1 || be.cookProgress == be.cookDuration)
+				be.updateBlock();
+		} else {
+			CauldronTypeRecipe recipe = be.potentialRecipes.get(0);
+			IPowerProvider powerProvider = PowerHelper.tryGetPowerProvider(level, be.getPosHolder());
+			if(recipe.getPower() <= 0)
+				be.setComplete();
+			else if(powerProvider != null && powerProvider.tryConsumePower(recipe.getPower()))
+				be.setComplete();
+			else
+				be.setFailed(); // Fail if not enough power
+			be.updateBlock();
+		}
+	}
 
-							level.addParticle(new SimpleColouredData(EnchantedParticleTypes.CAULDRON_BREW.get(), be.getRed(time), be.getGreen(time), be.getBlue(time)), dx, dy, dz, velocity.x, (1.0D + Math.random()) * 0.06D, velocity.z);
-						}
-					}
-				}
-			}
+	public static <T extends BlockEntity> void clientTick(Level level, BlockPos pos, BlockState state, T t) {
+		CauldronBlockEntity<?> be = (CauldronBlockEntity<?>)t;
+		if(be.firstTick)
+			be.firstTick();
+
+		long time = System.currentTimeMillis() - be.startTime;
+		double waterY = be.getWaterY(state);
+
+		if(be.isHot() && Enchanted.RANDOM.nextInt(10) > 2) {
+			double dx = pos.getX() + 0.5D + (Math.random() - 0.5D) * be.getWaterWidth();
+			double dy = pos.getY() + waterY + 0.02D;
+			double dz = pos.getZ() + 0.5D + (Math.random() - 0.5D) * be.getWaterWidth();
+
+			level.addParticle(new SimpleColouredData(EnchantedParticleTypes.BOILING.get(), be.getRed(time), be.getGreen(time), be.getBlue(time)), dx, dy, dz, 0, 0, 0);
+		}
+
+		if(be.isFailed)
+			return;
+
+		if(!be.isComplete && be.cookProgress > 0 && be.cookProgress < be.cookDuration)
+			be.handleCookParticles(time);
+		else if(be.warmingUp == WARMING_MAX && be.hasItems && Enchanted.RANDOM.nextInt(10) > 6) {
+			double xOffset = 0.5D + (Math.random() - 0.5D) * be.getWaterWidth();
+			double zOffset = 0.5D + (Math.random() - 0.5D) * be.getWaterWidth();
+			double dx = be.worldPosition.getX() + xOffset;
+			double dy = be.worldPosition.getY() + waterY;
+			double dz = be.worldPosition.getZ() + zOffset;
+			Vec3 velocity = new Vec3(xOffset, 0, zOffset).subtract(0.5D, 0.0D, 0.5D).normalize().scale((1D + Math.random()) * 0.06D);
+
+			level.addParticle(new SimpleColouredData(EnchantedParticleTypes.CAULDRON_BREW.get(), be.getRed(time), be.getGreen(time), be.getBlue(time)), dx, dy, dz, velocity.x, (1.0D + Math.random()) * 0.06D, velocity.z);
 		}
 	}
 

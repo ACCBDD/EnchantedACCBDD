@@ -1,6 +1,2 @@
-- Added magic protection poppet
-- Added voodoo poppet
-- Completely rewrote poppet logic
-- FIXED: Mandrakes can attack players in creative mode
-- FIXED: Death messages are missing lang entries
-- FIXED: Alder, hawthorn and rowan stripped logs, fences and fence gates are not flammable
+- Fixed a crash with the witch oven.
+- Added voodoo poppet to patchouli book.

@@ -117,8 +117,9 @@ public class WitchOvenBlockEntity extends ContainerBlockEntityBase implements Me
                             be.inventory.set(2, CommonServices.PLATFORM.getCraftingRemainingItem(fuelStack));
                         else if(hasFuel) {
                             fuelStack.shrink(1);
+                            ItemStack remainder = CommonServices.PLATFORM.getCraftingRemainingItem(fuelStack);
                             if(fuelStack.isEmpty())
-                                be.inventory.set(2, CommonServices.PLATFORM.getCraftingRemainingItem(fuelStack));
+                                be.inventory.set(2, remainder == null ? ItemStack.EMPTY : remainder);
                         }
                     }
                 }

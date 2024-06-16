@@ -63,6 +63,7 @@ minecraft {
             ideaModule("${rootProject.name}.${project.name}.main")
             isSingleInstance = true
             taskName("Server")
+            args("--nogui")
 
             property("forge.logging.console.level", "debug")
             property("mixin.env.remapRefMap", "true")
