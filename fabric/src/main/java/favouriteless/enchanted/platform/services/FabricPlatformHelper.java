@@ -11,6 +11,7 @@ import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeType;
 import org.jetbrains.annotations.Nullable;
@@ -66,7 +67,8 @@ public class FabricPlatformHelper implements IPlatformHelper {
 
     @Override
     public ItemStack getCraftingRemainingItem(ItemStack item) {
-        return new ItemStack(item.getItem().getCraftingRemainingItem());
+        Item remaining = item.getItem().getCraftingRemainingItem();
+        return remaining != null ? new ItemStack(remaining) : ItemStack.EMPTY;
     }
 
 }
