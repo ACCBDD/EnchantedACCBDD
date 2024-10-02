@@ -1,3 +1,1 @@
-- Fixed another crash with the witch oven. Thanks LordPINE for reporting and PRing it.
-
-- The rowan berries are not bugged and the witch oven is supposed to be random. Please use fortune/filters and stop pinging me about it.
+- Fixed a crash with curse removal rites, thanks LordPINE (again) for reporting it.

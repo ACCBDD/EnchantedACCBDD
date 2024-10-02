@@ -60,7 +60,7 @@ public abstract class AbstractRemoveCurseRite extends AbstractRite {
 
                 FamiliarSavedData data = FamiliarSavedData.get(level);
                 IFamiliarEntry familiarEntry = data.getEntry(getCasterUUID());
-                if(!familiarEntry.isDismissed() && familiarEntry.getType() == FamiliarTypes.CAT)
+                if(familiarEntry != null && !familiarEntry.isDismissed() && familiarEntry.getType() == FamiliarTypes.CAT)
                     casterLevel++;
 
 
