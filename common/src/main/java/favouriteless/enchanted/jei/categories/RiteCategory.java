@@ -1,7 +1,7 @@
 package favouriteless.enchanted.jei.categories;
 
 import favouriteless.enchanted.Enchanted;
-import favouriteless.enchanted.api.rites.AbstractCreateItemRite;
+import favouriteless.enchanted.api.rites.CreateItemRite;
 import favouriteless.enchanted.common.init.registry.EnchantedItems;
 import favouriteless.enchanted.jei.EnchantedJEITextures;
 import favouriteless.enchanted.common.rites.CirclePart;
@@ -29,10 +29,10 @@ import net.minecraft.world.level.block.Block;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RiteCategory implements IRecipeCategory<AbstractCreateItemRite> {
+public class RiteCategory implements IRecipeCategory<CreateItemRite> {
 
     private final IJeiHelpers jeiHelpers;
-    private final RecipeType<AbstractCreateItemRite> recipeTypeRite;
+    private final RecipeType<CreateItemRite> recipeTypeRite;
 
     private static final int GLYPH_SIZE = 110;
     private static final int START_RADIUS = 15;
@@ -42,7 +42,7 @@ public class RiteCategory implements IRecipeCategory<AbstractCreateItemRite> {
     private final List<IDrawableStatic> circles = new ArrayList<>();
     private final IDrawableAnimated arrow;
 
-    public RiteCategory(IJeiHelpers jeiHelpers, RecipeType<AbstractCreateItemRite> recipeTypeRite) {
+    public RiteCategory(IJeiHelpers jeiHelpers, RecipeType<CreateItemRite> recipeTypeRite) {
         this.jeiHelpers = jeiHelpers;
         this.recipeTypeRite = recipeTypeRite;
         IDrawableStatic arrow = jeiHelpers.getGuiHelper().createDrawable(Enchanted.id("textures/gui/witch_oven.png"), 176, 14, 24, 17);
@@ -51,10 +51,10 @@ public class RiteCategory implements IRecipeCategory<AbstractCreateItemRite> {
     }
 
     @Override
-    public void setRecipe(IRecipeLayoutBuilder builder, AbstractCreateItemRite rite, IFocusGroup focuses) {
+    public void setRecipe(IRecipeLayoutBuilder builder, CreateItemRite rite, IFocusGroup focuses) {
         List<ItemStack> itemList = new ArrayList<>();
-        for(Item item : rite.ITEMS_REQUIRED.keySet())
-            itemList.add(new ItemStack(item, rite.ITEMS_REQUIRED.get(item)));
+        for(Item item : rite.itemsRequired.keySet())
+            itemList.add(new ItemStack(item, rite.itemsRequired.get(item)));
 
         int circleNum = 1;
         int itemsRemaining = itemList.size();
@@ -89,8 +89,8 @@ public class RiteCategory implements IRecipeCategory<AbstractCreateItemRite> {
         }
 
         circles.clear();
-        for(CirclePart circlePart : rite.CIRCLES_REQUIRED.keySet()) {
-            Block block = rite.CIRCLES_REQUIRED.get(circlePart);
+        for(CirclePart circlePart : rite.circlesRequired.keySet()) {
+            Block block = rite.circlesRequired.get(circlePart);
             ResourceLocation textureLocation = EnchantedJEITextures.getCircleTextureLocation(circlePart, block);
             if(textureLocation != null) {
                 circles.add(buildTexture(textureLocation, GLYPH_SIZE, GLYPH_SIZE, jeiHelpers));
@@ -100,7 +100,7 @@ public class RiteCategory implements IRecipeCategory<AbstractCreateItemRite> {
 
 
     @Override
-    public void draw(AbstractCreateItemRite rite, IRecipeSlotsView recipeSlotsView, GuiGraphics gui, double mouseX, double mouseY) {
+    public void draw(CreateItemRite rite, IRecipeSlotsView recipeSlotsView, GuiGraphics gui, double mouseX, double mouseY) {
         for(IDrawableStatic drawable : circles) {
             drawable.draw(gui, 0, 14);
         }
@@ -110,9 +110,9 @@ public class RiteCategory implements IRecipeCategory<AbstractCreateItemRite> {
         ResourceLocation riteName = rite.getType().getId();
         String nameText = Component.translatable("rite." + riteName.getNamespace() + "." + riteName.getPath()).getString();
         drawText(Minecraft.getInstance(), gui, nameText, 180, 0, 0xFFFFFFFF);
-        drawText(Minecraft.getInstance(), gui, "Required Altar Power : " + rite.POWER, 180, 112, 0xFFFFFFFF);
+        drawText(Minecraft.getInstance(), gui, "Required Altar Power : " + rite.power, 180, 112, 0xFFFFFFFF);
 
-        if(!rite.ENTITIES_REQUIRED.isEmpty() || rite.hasAdditionalRequirements()) {
+        if(!rite.entitiesRequired.isEmpty() || rite.hasAdditionalRequirements()) {
             PoseStack poseStack = gui.pose();
             poseStack.pushPose();
             poseStack.scale(0.5F, 0.5F, 0.5F);
@@ -150,7 +150,7 @@ public class RiteCategory implements IRecipeCategory<AbstractCreateItemRite> {
     }
 
     @Override
-    public RecipeType<AbstractCreateItemRite> getRecipeType() {
+    public RecipeType<CreateItemRite> getRecipeType() {
         return recipeTypeRite;
     }
 

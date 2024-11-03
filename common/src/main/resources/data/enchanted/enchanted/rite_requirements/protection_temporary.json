@@ -1,0 +1,9 @@
+{
+  "circles": {
+    "small": "enchanted:ritual_chalk"
+  },
+  "items": {
+    "minecraft:obsidian": 1,
+    "enchanted:attuned_stone_charged": 1
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "circles": {
+    "small": "enchanted:ritual_chalk",
+    "medium": "enchanted:ritual_chalk"
+  },
+  "items": {
+    "enchanted:broom": 1,
+    "enchanted:flying_ointment": 1
+  },
+  "power": 3000
+}

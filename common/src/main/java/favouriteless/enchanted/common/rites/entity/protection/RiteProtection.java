@@ -19,7 +19,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -35,17 +34,14 @@ public class RiteProtection extends AbstractRite {
     protected ServerLevel targetLevel = null;
     protected BlockPos targetPos = null;
 
-    public RiteProtection(RiteType<?> type, ServerLevel level, BlockPos pos, UUID caster, int power, int powerTick, int radius, Block block) {
-        super(type, level, pos, caster, power, powerTick);
+    protected RiteProtection(RiteType<?> type, ServerLevel level, BlockPos pos, UUID caster, int radius, Block block) {
+        super(type, level, pos, caster);
         this.radius = radius;
         this.block = block;
     }
 
-    public RiteProtection(RiteType<?> type, ServerLevel level, BlockPos pos, UUID caster) {
-        this(type, level, pos, caster, 500, 4, 4, EnchantedBlocks.PROTECTION_BARRIER.get()); // Power, power per tick, radius
-        CIRCLES_REQUIRED.put(CirclePart.SMALL, EnchantedBlocks.RITUAL_CHALK.get());
-        ITEMS_REQUIRED.put(Items.OBSIDIAN, 1);
-        ITEMS_REQUIRED.put(Items.REDSTONE, 1);
+    public RiteProtection(RiteType<?> type, ServerLevel level, BlockPos pos, UUID caster, int radius) {
+        this(type, level, pos, caster, radius, EnchantedBlocks.PROTECTION_BARRIER.get()); // Power, power per tick, radius
     }
 
     @Override

@@ -4,8 +4,6 @@ import favouriteless.enchanted.Enchanted;
 import favouriteless.enchanted.api.rites.AbstractRite;
 import favouriteless.enchanted.common.CommonConfig;
 import favouriteless.enchanted.common.init.EnchantedTags;
-import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
-import favouriteless.enchanted.common.init.registry.EnchantedItems;
 import favouriteless.enchanted.common.init.registry.EnchantedParticleTypes;
 import favouriteless.enchanted.common.rites.CirclePart;
 import favouriteless.enchanted.common.rites.RiteType;
@@ -40,11 +38,7 @@ public class RiteForest extends AbstractRite {
     private SaplingBlock saplingBlock = null;
 
     public RiteForest(RiteType<?> type, ServerLevel level, BlockPos pos, UUID caster) {
-        super(type, level, pos, caster, 4000, 0); // Power, power per tick
-        CIRCLES_REQUIRED.put(CirclePart.MEDIUM, EnchantedBlocks.RITUAL_CHALK.get());
-        ITEMS_REQUIRED.put(EnchantedItems.WICKER_BUNDLE.get(), 1);
-        ITEMS_REQUIRED.put(EnchantedItems.BREW_OF_SPROUTING.get(), 1);
-        ITEMS_REQUIRED.put(EnchantedItems.ENT_TWIG.get(), 1);
+        super(type, level, pos, caster); // Power, power per tick
     }
 
     @Override

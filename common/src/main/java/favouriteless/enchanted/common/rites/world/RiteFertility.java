@@ -4,10 +4,7 @@ import favouriteless.enchanted.Enchanted;
 import favouriteless.enchanted.api.rites.AbstractRite;
 import favouriteless.enchanted.common.CommonConfig;
 import favouriteless.enchanted.common.init.EnchantedTags.MobEffects;
-import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
-import favouriteless.enchanted.common.init.registry.EnchantedItems;
 import favouriteless.enchanted.common.init.registry.EnchantedParticleTypes;
-import favouriteless.enchanted.common.rites.CirclePart;
 import favouriteless.enchanted.common.rites.RiteType;
 import favouriteless.enchanted.mixin.common.ZombieVillagerAccessor;
 import net.minecraft.core.BlockPos;
@@ -20,7 +17,6 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.ZombieVillager;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -37,19 +33,8 @@ public class RiteFertility extends AbstractRite {
 
     public int blockTicks = 0;
 
-    public RiteFertility(RiteType<?> type, ServerLevel level, BlockPos pos, UUID caster, int power) {
-        super(type, level, pos, caster, power, 0);
-    }
-
     public RiteFertility(RiteType<?> type, ServerLevel level, BlockPos pos, UUID caster) {
-        this(type, level, pos, caster, 3000); // Power, power per tick
-        CIRCLES_REQUIRED.put(CirclePart.SMALL, EnchantedBlocks.RITUAL_CHALK.get());
-        ITEMS_REQUIRED.put(Items.BONE_MEAL, 1);
-        ITEMS_REQUIRED.put(EnchantedItems.HINT_OF_REBIRTH.get(), 1);
-        ITEMS_REQUIRED.put(EnchantedItems.DIAMOND_VAPOUR.get(), 1);
-        ITEMS_REQUIRED.put(EnchantedItems.QUICKLIME.get(), 1);
-        ITEMS_REQUIRED.put(EnchantedItems.GYPSUM.get(), 1);
-        ITEMS_REQUIRED.put(EnchantedItems.MUTANDIS.get(), 1);
+        super(type, level, pos, caster);
     }
 
     @Override

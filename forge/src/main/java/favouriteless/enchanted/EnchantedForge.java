@@ -10,6 +10,7 @@ import favouriteless.enchanted.common.init.EnchantedData;
 import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
 import favouriteless.enchanted.common.init.registry.EnchantedEntityTypes;
 import favouriteless.enchanted.common.init.registry.EnchantedItems;
+import favouriteless.enchanted.common.rites.RiteRequirements;
 import favouriteless.enchanted.platform.services.ForgeCommonRegistryHelper;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -50,6 +51,7 @@ public class EnchantedForge {
         event.dataPackRegistry(EnchantedData.ALTAR_UPGRADE_REGISTRY, AltarUpgrade.CODEC);
         event.dataPackRegistry(EnchantedData.ALTAR_BLOCK_REGISTRY, PowerProvider.BLOCK_CODEC);
         event.dataPackRegistry(EnchantedData.ALTAR_TAG_REGISTRY, PowerProvider.TAG_CODEC);
+        event.dataPackRegistry(EnchantedData.RITE_REQUIREMENTS_REGISTRY, RiteRequirements.CODEC, RiteRequirements.CODEC);
     }
 
 }

@@ -1,0 +1,14 @@
+{
+  "circles": {
+    "medium": "enchanted:nether_chalk"
+  },
+  "items": {
+    "enchanted:attuned_stone_charged": 1,
+    "enchanted:redstone_soup": 1,
+    "enchanted:reek_of_misfortune": 1,
+    "minecraft:glistering_melon_slice": 1,
+    "minecraft:rotten_flesh": 1,
+    "minecraft:diamond": 1,
+    "minecraft:fermented_spider_eye": 1
+  }
+}

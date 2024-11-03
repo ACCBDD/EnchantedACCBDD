@@ -10,7 +10,7 @@
     },
     {
       "type": "enchanted:rite_requirements",
-      "rite": "enchanted:summoning_familiar"
+      "rite": "enchanted:summon_familiar"
     }
   ],
   "read_by_default": true

@@ -1,5 +1,7 @@
 package favouriteless.enchanted.common.rites;
 
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.DataResult;
 import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
@@ -52,6 +54,15 @@ public enum CirclePart {
             "  XOOOOOOOOOX  " +
             "   XOOOOOOOX   " +
             "    XXXXXXX    ");
+
+    public static final Codec<CirclePart> CODEC = Codec.STRING.comapFlatMap(s -> {
+            try {
+                return DataResult.success(CirclePart.valueOf(s.toUpperCase()));
+            }
+            catch(Exception e) {
+                return DataResult.error(() -> s + " is not a CirclePart name");
+            }
+        }, CirclePart::toString).stable();
 
     private final List<BlockPos> circlePoints = new ArrayList<>();
     private final List<BlockPos> insideCirclePoints = new ArrayList<>();

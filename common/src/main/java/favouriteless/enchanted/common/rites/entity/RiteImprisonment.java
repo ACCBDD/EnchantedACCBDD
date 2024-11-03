@@ -3,7 +3,6 @@ package favouriteless.enchanted.common.rites.entity;
 import favouriteless.enchanted.api.rites.AbstractRite;
 import favouriteless.enchanted.client.particles.ImprisonmentCageParticle;
 import favouriteless.enchanted.common.init.EnchantedTags.EntityTypes;
-import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
 import favouriteless.enchanted.common.init.registry.EnchantedParticleTypes;
 import favouriteless.enchanted.common.rites.CirclePart;
 import favouriteless.enchanted.common.rites.RiteType;
@@ -12,7 +11,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.*;
@@ -25,10 +23,7 @@ public class RiteImprisonment extends AbstractRite {
     private final Set<Entity> tetheredMonsters = new HashSet<>();
 
     public RiteImprisonment(RiteType<?> type, ServerLevel level, BlockPos pos, UUID caster) {
-        super(type, level, pos, caster, 500, 3); // Power, power per tick
-        CIRCLES_REQUIRED.put(CirclePart.SMALL, EnchantedBlocks.RITUAL_CHALK.get());
-        ITEMS_REQUIRED.put(Items.SLIME_BALL, 1);
-        ITEMS_REQUIRED.put(Items.REDSTONE, 1);
+        super(type, level, pos, caster); // Power, power per tick
     }
 
     @Override

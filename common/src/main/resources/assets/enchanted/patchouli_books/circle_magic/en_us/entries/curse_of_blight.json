@@ -10,7 +10,7 @@
     },
     {
       "type": "enchanted:rite_requirements",
-      "rite": "enchanted:curse_of_blight"
+      "rite": "enchanted:curse_blight"
     }
   ],
   "read_by_default": true,

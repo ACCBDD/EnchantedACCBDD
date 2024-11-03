@@ -1,0 +1,11 @@
+{
+  "circles": {
+    "medium": "enchanted:ritual_chalk"
+  },
+  "items": {
+    "minecraft:obsidian": 1,
+    "minecraft:glowstone_dust": 1
+  },
+  "power": 1000,
+  "tick_power": 6
+}

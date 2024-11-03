@@ -1,0 +1,13 @@
+{
+  "circles": {
+    "small": "enchanted:ritual_chalk"
+  },
+  "items": {
+    "enchanted:taglock": 1,
+    "enchanted:breath_of_the_goddess": 1,
+    "enchanted:brew_of_the_depths": 1,
+    "minecraft:bone_meal": 1,
+    "minecraft:nether_wart": 1
+  },
+  "power": 2000
+}

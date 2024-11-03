@@ -1,34 +1,20 @@
 package favouriteless.enchanted.common.rites.binding;
 
-import favouriteless.enchanted.api.rites.AbstractCreateItemRite;
-import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
+import favouriteless.enchanted.api.rites.CreateItemRite;
 import favouriteless.enchanted.common.init.registry.EnchantedItems;
 import favouriteless.enchanted.common.items.TaglockFilledItem;
-import favouriteless.enchanted.common.rites.CirclePart;
 import favouriteless.enchanted.common.rites.RiteType;
 import favouriteless.enchanted.util.WaystoneHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 
 import java.util.UUID;
 
-public class RiteBindingWaystonePlayer extends AbstractCreateItemRite {
-
-    protected RiteBindingWaystonePlayer(RiteType<?> type, ServerLevel level, BlockPos pos, UUID caster, int power) {
-        super(type, level, pos, caster, power, SoundEvents.ENDER_DRAGON_GROWL, new ItemStack(EnchantedItems.BLOODED_WAYSTONE.get(), 1));
-    }
+public class RiteBindingWaystonePlayer extends CreateItemRite {
 
     public RiteBindingWaystonePlayer(RiteType<?> type, ServerLevel level, BlockPos pos, UUID caster) {
-        this(type, level, pos, caster, 500); // Power, power per tick
-        CIRCLES_REQUIRED.put(CirclePart.SMALL, EnchantedBlocks.RITUAL_CHALK.get());
-        ITEMS_REQUIRED.put(EnchantedItems.WAYSTONE.get(), 1);
-        ITEMS_REQUIRED.put(EnchantedItems.ENDER_DEW.get(), 1);
-        ITEMS_REQUIRED.put(Items.SLIME_BALL, 1);
-        ITEMS_REQUIRED.put(Items.SNOWBALL, 1);
-        ITEMS_REQUIRED.put(EnchantedItems.TAGLOCK_FILLED.get(), 1);
+        super(type, level, pos, caster, new ItemStack(EnchantedItems.BLOODED_WAYSTONE.get(), 1));
     }
 
     @Override

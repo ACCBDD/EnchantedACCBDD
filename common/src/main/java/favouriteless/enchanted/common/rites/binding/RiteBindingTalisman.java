@@ -15,21 +15,14 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 
 import java.util.UUID;
 
 public class RiteBindingTalisman extends AbstractRite {
 
-    protected RiteBindingTalisman(RiteType<?> type, ServerLevel level, BlockPos pos, UUID caster, int power) {
-        super(type, level, pos, caster, power, 0);
-    }
-
     public RiteBindingTalisman(RiteType<?> type, ServerLevel level, BlockPos pos, UUID caster) {
-        this(type, level, pos, caster, 1000); // Power, power per tick
-        ITEMS_REQUIRED.put(EnchantedItems.CIRCLE_TALISMAN.get(), 1);
-        ITEMS_REQUIRED.put(Items.REDSTONE, 1);
+        super(type, level, pos, caster);
     }
 
     @Override

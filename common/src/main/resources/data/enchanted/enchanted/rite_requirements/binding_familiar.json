@@ -1,0 +1,13 @@
+{
+  "circles": {
+    "medium": "enchanted:ritual_chalk"
+  },
+  "items": {
+    "enchanted:tear_of_the_goddess": 1,
+    "enchanted:odour_of_purity": 1,
+    "enchanted:whiff_of_magic": 1,
+    "enchanted:demonic_blood": 1,
+    "minecraft:diamond": 1
+  },
+  "power": 8000
+}

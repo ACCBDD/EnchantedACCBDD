@@ -5,10 +5,7 @@ import favouriteless.enchanted.api.rites.AbstractRite;
 import favouriteless.enchanted.common.CommonConfig;
 import favouriteless.enchanted.common.init.EnchantedTags;
 import favouriteless.enchanted.common.init.EnchantedTags.MobEffects;
-import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
-import favouriteless.enchanted.common.init.registry.EnchantedItems;
 import favouriteless.enchanted.common.init.registry.EnchantedParticleTypes;
-import favouriteless.enchanted.common.rites.CirclePart;
 import favouriteless.enchanted.common.rites.RiteType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -22,7 +19,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.npc.Villager;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -41,15 +37,7 @@ public class RiteCurseBlight extends AbstractRite {
     public int blockTicks = 0;
 
     public RiteCurseBlight(RiteType<?> type, ServerLevel level, BlockPos pos, UUID caster) {
-        super(type, level, pos, caster, 0, 0); // Power, power per tick
-        CIRCLES_REQUIRED.put(CirclePart.MEDIUM, EnchantedBlocks.NETHER_CHALK.get());
-        ITEMS_REQUIRED.put(EnchantedItems.ATTUNED_STONE_CHARGED.get(), 1);
-        ITEMS_REQUIRED.put(EnchantedItems.REDSTONE_SOUP.get(), 1);
-        ITEMS_REQUIRED.put(EnchantedItems.REEK_OF_MISFORTUNE.get(), 1);
-        ITEMS_REQUIRED.put(Items.FERMENTED_SPIDER_EYE, 1);
-        ITEMS_REQUIRED.put(Items.GLISTERING_MELON_SLICE, 1);
-        ITEMS_REQUIRED.put(Items.ROTTEN_FLESH, 1);
-        ITEMS_REQUIRED.put(Items.DIAMOND, 1);
+        super(type, level, pos, caster); // Power, power per tick
     }
 
     @Override

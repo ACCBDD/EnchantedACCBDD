@@ -10,7 +10,7 @@
     },
     {
       "type": "enchanted:rite_requirements",
-      "rite": "enchanted:curse_of_misfortune"
+      "rite": "enchanted:curse_misfortune"
     }
   ],
   "read_by_default": true,

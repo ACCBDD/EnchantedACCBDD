@@ -29,8 +29,8 @@ public abstract class AbstractCurseRite extends AbstractRite {
 
     private final CurseType<?> curseType;
 
-    public AbstractCurseRite(RiteType<?> type, ServerLevel level, BlockPos pos, UUID caster, int power, CurseType<?> curseType) {
-        super(type, level, pos, caster, power, 0);
+    public AbstractCurseRite(RiteType<?> type, ServerLevel level, BlockPos pos, UUID caster, CurseType<?> curseType) {
+        super(type, level, pos, caster);
         this.curseType = curseType;
     }
 

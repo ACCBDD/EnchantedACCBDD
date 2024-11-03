@@ -1,7 +1,6 @@
 package favouriteless.enchanted.jei;
 
 import favouriteless.enchanted.Enchanted;
-import favouriteless.enchanted.api.rites.AbstractCreateItemRite;
 import favouriteless.enchanted.client.screens.DistilleryScreen;
 import favouriteless.enchanted.client.screens.SpinningWheelScreen;
 import favouriteless.enchanted.client.screens.WitchOvenScreen;
@@ -9,15 +8,13 @@ import favouriteless.enchanted.common.init.EnchantedTags.Blocks;
 import favouriteless.enchanted.common.init.registry.EnchantedItems;
 import favouriteless.enchanted.common.init.registry.EnchantedMenuTypes;
 import favouriteless.enchanted.common.init.registry.EnchantedRecipeTypes;
-import favouriteless.enchanted.common.init.registry.RiteTypes;
+import favouriteless.enchanted.common.menus.SpinningWheelMenu;
+import favouriteless.enchanted.common.menus.WitchOvenMenu;
 import favouriteless.enchanted.jei.categories.*;
 import favouriteless.enchanted.jei.container_handlers.DistilleryContainerHandler;
 import favouriteless.enchanted.jei.container_handlers.SpinningWheelContainerHandler;
 import favouriteless.enchanted.jei.container_handlers.WitchOvenContainerHandler;
 import favouriteless.enchanted.jei.recipes.JEIMutandisRecipe;
-import favouriteless.enchanted.common.menus.SpinningWheelMenu;
-import favouriteless.enchanted.common.menus.WitchOvenMenu;
-import favouriteless.enchanted.common.rites.RiteType;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.VanillaTypes;
@@ -28,8 +25,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeManager;
-
-import java.util.List;
 
 @JeiPlugin
 public class EnchantedJEIPlugin implements IModPlugin {
@@ -61,11 +56,11 @@ public class EnchantedJEIPlugin implements IModPlugin {
         registration.addRecipes(JEIRecipeTypes.RECIPE_TYPE_WITCH_CAULDRON, recipeManager.getAllRecipesFor(EnchantedRecipeTypes.WITCH_CAULDRON.get()));
         registration.addRecipes(JEIRecipeTypes.RECIPE_TYPE_KETTLE, recipeManager.getAllRecipesFor(EnchantedRecipeTypes.KETTLE.get()));
 
-        List<AbstractCreateItemRite> riteCrafts = RiteTypes.getEntries().stream()
-                .map(RiteType::create)
-                .filter(rite -> rite instanceof AbstractCreateItemRite)
-                .map(rite -> (AbstractCreateItemRite)rite).toList();
-        registration.addRecipes(JEIRecipeTypes.RECIPE_TYPE_RITE, riteCrafts);
+//        List<CreateItemRite> riteCrafts = RiteTypes.getEntries().stream()
+//                .map(type -> type.)
+//                .filter(rite -> rite instanceof CreateItemRite)
+//                .map(rite -> (CreateItemRite)rite).toList();
+//        registration.addRecipes(JEIRecipeTypes.RECIPE_TYPE_RITE, riteCrafts);
 
         BuiltInRegistries.BLOCK.getTag(Blocks.MUTANDIS_PLANTS).ifPresent(tag -> registration.addRecipes(JEIRecipeTypes.RECIPE_TYPE_MUTANDIS, tag.stream()
                 .filter(block -> !BuiltInRegistries.BLOCK.getTag(Blocks.MUTANDIS_BLACKLIST).map(t -> t.contains(block)).orElse(false))

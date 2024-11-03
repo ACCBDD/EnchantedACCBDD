@@ -2,7 +2,6 @@ package favouriteless.enchanted.common.rites.world;
 
 import favouriteless.enchanted.api.rites.AbstractRite;
 import favouriteless.enchanted.common.CommonConfig;
-import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
 import favouriteless.enchanted.common.init.registry.EnchantedItems;
 import favouriteless.enchanted.common.init.registry.EnchantedParticleTypes;
 import favouriteless.enchanted.common.rites.CirclePart;
@@ -17,7 +16,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 
 import java.util.List;
@@ -32,15 +30,8 @@ public class RiteSkyWrath extends AbstractRite {
     private BlockPos targetPos = null;
     private Level targetLevel = null;
 
-    public RiteSkyWrath(RiteType<?> type, ServerLevel level, BlockPos pos, UUID caster, int power, int powerTick) {
-        super(type, level, pos, caster, power, powerTick);
-    }
-
     public RiteSkyWrath(RiteType<?> type, ServerLevel level, BlockPos pos, UUID caster) {
-        this(type, level, pos, caster, 1000, 0); // Power, power per tick
-        CIRCLES_REQUIRED.put(CirclePart.SMALL, EnchantedBlocks.RITUAL_CHALK.get());
-        ITEMS_REQUIRED.put(Items.IRON_SWORD, 1);
-        ITEMS_REQUIRED.put(EnchantedItems.QUICKLIME.get(), 1);
+        super(type, level, pos, caster);
     }
 
     @Override

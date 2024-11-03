@@ -3,10 +3,12 @@ package favouriteless.enchanted.api.rites;
 import favouriteless.enchanted.api.power.IPowerProvider;
 import favouriteless.enchanted.api.power.PowerHelper;
 import favouriteless.enchanted.common.blocks.entity.ChalkGoldBlockEntity;
+import favouriteless.enchanted.common.init.EnchantedData;
 import favouriteless.enchanted.common.init.registry.EnchantedItems;
 import favouriteless.enchanted.common.init.registry.RiteTypes;
 import favouriteless.enchanted.common.items.TaglockFilledItem;
 import favouriteless.enchanted.common.rites.CirclePart;
+import favouriteless.enchanted.common.rites.RiteRequirements;
 import favouriteless.enchanted.common.rites.RiteType;
 import favouriteless.enchanted.common.rites.RiteType.RiteFactory;
 import net.minecraft.ChatFormatting;
@@ -35,10 +37,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.phys.AABB;
 import org.joml.Vector3f;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Base class for every Rite (circle magic ritual), containing all the logic required to detect/find the correct rite
@@ -53,11 +52,11 @@ public abstract class AbstractRite {
 
     private final RiteType<?> riteType;
 
-    public final HashMap<CirclePart, Block> CIRCLES_REQUIRED = new HashMap<>();
-    public final HashMap<EntityType<?>, Integer> ENTITIES_REQUIRED = new HashMap<>();
-    public final HashMap<Item, Integer> ITEMS_REQUIRED = new HashMap<>();
-    public final int POWER;
-    public final int POWER_TICK;
+    public final Map<CirclePart, Block> circlesRequired = new HashMap<>();
+    public final Map<EntityType<?>, Integer> entitiesRequired = new HashMap<>();
+    public final Map<Item, Integer> itemsRequired = new HashMap<>();
+    public final int power;
+    public final int tickPower;
 
     protected final List<ItemStack> itemsConsumed = new ArrayList<>();
 
@@ -75,18 +74,30 @@ public abstract class AbstractRite {
 
     public boolean isRemoved = false;
 
-    public AbstractRite(RiteType<?> type, ServerLevel level, BlockPos pos, UUID casterUUID, int power, int powerTick) {
+    public AbstractRite(RiteType<?> type, ServerLevel level, BlockPos pos, UUID casterUUID) {
         this.level = level;
         this.pos = pos;
         this.riteType = type;
         this.casterUUID = casterUUID;
-        this.POWER = power;
-        this.POWER_TICK = powerTick;
 
-        if(level != null && pos != null) {
+        if(level == null)
+            throw new IllegalStateException("Attempted to create a rite without a level");
+
+        if(pos != null) {
             if(level.getBlockEntity(pos) instanceof ChalkGoldBlockEntity chalk)
                 this.chalk = chalk;
         }
+
+        Optional<Registry<RiteRequirements>> optional = level.registryAccess().registry(EnchantedData.RITE_REQUIREMENTS_REGISTRY);
+        RiteRequirements requirements = optional.map(riteRequirements -> riteRequirements.get(type.getId())).orElse(null);
+        if(requirements == null)
+            throw new IllegalStateException(String.format("Tried to create rite of type %s without any requirements present.", type.getId()));
+
+        circlesRequired.putAll(requirements.circles());
+        entitiesRequired.putAll(requirements.entities());
+        itemsRequired.putAll(requirements.items());
+        power = requirements.power();
+        tickPower = requirements.tickPower();
     }
 
     /**
@@ -316,7 +327,7 @@ public abstract class AbstractRite {
                     boolean hasItem = false;
                     for(Entity entity : allEntities) {
                         if(entity instanceof ItemEntity itemEntity) {
-                            if(ITEMS_REQUIRED.containsKey(itemEntity.getItem().getItem())) {
+                            if(itemsRequired.containsKey(itemEntity.getItem().getItem())) {
                                 consumeItem(itemEntity);
                                 hasItem = true;
                                 break;
@@ -326,9 +337,9 @@ public abstract class AbstractRite {
 
                     boolean hasEntity = false;
                     if(!hasItem) {
-                        if(ITEMS_REQUIRED.isEmpty()) {
+                        if(itemsRequired.isEmpty()) {
                             for(Entity entity : allEntities) {
-                                if(ENTITIES_REQUIRED.containsKey(entity.getType())) {
+                                if(entitiesRequired.containsKey(entity.getType())) {
                                     hasEntity = true;
                                     consumeEntity(entity);
                                     break;
@@ -341,7 +352,7 @@ public abstract class AbstractRite {
                         }
 
                         if(!hasEntity) {
-                            if(ENTITIES_REQUIRED.isEmpty()) {
+                            if(entitiesRequired.isEmpty()) {
                                 startExecuting();
                             }
                             else {
@@ -352,7 +363,7 @@ public abstract class AbstractRite {
                 }
             }
             else if(!isRemoved) {
-                if(tryConsumePower(POWER_TICK))
+                if(tryConsumePower(tickPower))
                     onTick();
                 else
                     stopExecuting();
@@ -361,7 +372,7 @@ public abstract class AbstractRite {
     }
 
     protected void startExecuting() {
-        if(tryConsumePower(POWER) && checkAdditional()) {
+        if(tryConsumePower(power) && checkAdditional()) {
             this.isStarting = false;
             this.ticks = 0; // Reset ticks to make it less confusing
             execute();
@@ -384,11 +395,11 @@ public abstract class AbstractRite {
         entity.setNeverPickUp();
         ItemStack stack = entity.getItem();
         Item item = stack.getItem();
-        int amountNeeded = ITEMS_REQUIRED.get(stack.getItem());
+        int amountNeeded = itemsRequired.get(stack.getItem());
 
         if(amountNeeded >= stack.getCount()) { // Not enough/perfect
-            ITEMS_REQUIRED.put(item, ITEMS_REQUIRED.get(item)-stack.getCount());
-            if(ITEMS_REQUIRED.get(item) <= 0) ITEMS_REQUIRED.remove(item); // Remove if all consumed
+            itemsRequired.put(item, itemsRequired.get(item)-stack.getCount());
+            if(itemsRequired.get(item) <= 0) itemsRequired.remove(item); // Remove if all consumed
 
             if(item != EnchantedItems.ATTUNED_STONE_CHARGED.get())
                 itemsConsumed.add(stack);
@@ -400,7 +411,7 @@ public abstract class AbstractRite {
             entity.discard();
         }
         else { // Too much
-            ITEMS_REQUIRED.remove(item);
+            itemsRequired.remove(item);
 
             ItemStack consumed = new ItemStack(item, amountNeeded);
             consumed.setTag(stack.getTag());
@@ -435,12 +446,12 @@ public abstract class AbstractRite {
     }
 
     protected void consumeEntity(Entity entity) {
-        int newAmount = ENTITIES_REQUIRED.get(entity.getType())-1;
+        int newAmount = entitiesRequired.get(entity.getType())-1;
         if(newAmount > 0) {
-            ENTITIES_REQUIRED.put(entity.getType(), newAmount);
+            entitiesRequired.put(entity.getType(), newAmount);
         }
         else {
-            ENTITIES_REQUIRED.remove(entity.getType());
+            entitiesRequired.remove(entity.getType());
         }
         entity.discard();
 
@@ -454,7 +465,7 @@ public abstract class AbstractRite {
     }
 
     public boolean is(HashMap<CirclePart, Block> circles, HashMap<EntityType<?>, Integer> entities, HashMap<Item, Integer> items) {
-        return CIRCLES_REQUIRED.equals(circles) && ENTITIES_REQUIRED.equals(entities) && ITEMS_REQUIRED.equals(items);
+        return circlesRequired.equals(circles) && entitiesRequired.equals(entities) && itemsRequired.equals(items);
     }
 
     /**
@@ -464,8 +475,8 @@ public abstract class AbstractRite {
      * @return No. of extra requirement entities, -1 if not valid.
      */
     public int differenceAt(Level world, BlockPos pos) {
-        for(CirclePart circlePart : CIRCLES_REQUIRED.keySet()) {
-            if(!circlePart.match(world, pos, CIRCLES_REQUIRED.get(circlePart))) {
+        for(CirclePart circlePart : circlesRequired.keySet()) {
+            if(!circlePart.match(world, pos, circlesRequired.get(circlePart))) {
                 return -1;
             }
         }
@@ -494,21 +505,21 @@ public abstract class AbstractRite {
         }
 
         int diff = 0;
-        if(!ITEMS_REQUIRED.isEmpty()) {
-            for (Item item : ITEMS_REQUIRED.keySet()) { // Check if enough items
-                if (!(items.containsKey(item) && items.get(item) >= ITEMS_REQUIRED.get(item))) return -1;
+        if(!itemsRequired.isEmpty()) {
+            for (Item item : itemsRequired.keySet()) { // Check if enough items
+                if (!(items.containsKey(item) && items.get(item) >= itemsRequired.get(item))) return -1;
             }
             for (Item item : items.keySet()) {
-                if (!ITEMS_REQUIRED.containsKey(item)) diff += items.get(item);
+                if (!itemsRequired.containsKey(item)) diff += items.get(item);
             }
         }
-        if(!ENTITIES_REQUIRED.isEmpty()) {
-            for (EntityType<?> type : ENTITIES_REQUIRED.keySet()) { // Check if enough entities
-                if (!(entities.containsKey(type) && entities.get(type) >= ENTITIES_REQUIRED.get(type))) return -1;
+        if(!entitiesRequired.isEmpty()) {
+            for (EntityType<?> type : entitiesRequired.keySet()) { // Check if enough entities
+                if (!(entities.containsKey(type) && entities.get(type) >= entitiesRequired.get(type))) return -1;
             }
 
             for (EntityType<?> type : entities.keySet()) {
-                if (!ENTITIES_REQUIRED.containsKey(type)) diff += entities.get(type);
+                if (!entitiesRequired.containsKey(type)) diff += entities.get(type);
             }
         }
 
@@ -530,10 +541,6 @@ public abstract class AbstractRite {
 
     public boolean isStarting() {
         return isStarting;
-    }
-
-    public boolean hasCircle(CirclePart part, Block block) {
-        return CIRCLES_REQUIRED.containsKey(part) && CIRCLES_REQUIRED.get(part) == block;
     }
 
     protected void replaceItem(ItemEntity entity, ItemStack... newItems) {

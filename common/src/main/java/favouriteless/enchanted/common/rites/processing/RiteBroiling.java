@@ -3,8 +3,6 @@ package favouriteless.enchanted.common.rites.processing;
 import favouriteless.enchanted.api.rites.AbstractRite;
 import favouriteless.enchanted.common.CommonConfig;
 import favouriteless.enchanted.common.init.EnchantedTags;
-import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
-import favouriteless.enchanted.common.init.registry.EnchantedItems;
 import favouriteless.enchanted.common.init.registry.EnchantedParticleTypes;
 import favouriteless.enchanted.common.rites.CirclePart;
 import favouriteless.enchanted.common.rites.RiteType;
@@ -27,16 +25,8 @@ public class RiteBroiling extends AbstractRite {
 
     public static final double CIRCLE_RADIUS = 3.0D;
 
-    public RiteBroiling(RiteType<?> type, ServerLevel level, BlockPos pos, UUID caster, int power) {
-        super(type, level, pos, caster, power, 0);
-    }
-
     public RiteBroiling(RiteType<?> type, ServerLevel level, BlockPos pos, UUID caster) {
-        this(type, level, pos, caster, 1000); // Power, power per tick
-        CIRCLES_REQUIRED.put(CirclePart.SMALL, EnchantedBlocks.NETHER_CHALK.get());
-        ITEMS_REQUIRED.put(Items.COAL, 1);
-        ITEMS_REQUIRED.put(Items.BLAZE_ROD, 1);
-        ITEMS_REQUIRED.put(EnchantedItems.WOOD_ASH.get(), 1);
+        super(type, level, pos, caster);
     }
 
     @Override

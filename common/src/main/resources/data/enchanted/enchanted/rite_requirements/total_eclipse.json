@@ -1,0 +1,10 @@
+{
+  "circles": {
+    "small": "enchanted:ritual_chalk"
+  },
+  "items": {
+    "minecraft:stone_axe": 1,
+    "enchanted:quicklime": 1
+  },
+  "power": 3000
+}

@@ -1,9 +1,6 @@
 package favouriteless.enchanted.common.rites.entity;
 
 import favouriteless.enchanted.api.rites.AbstractRite;
-import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
-import favouriteless.enchanted.common.init.registry.EnchantedItems;
-import favouriteless.enchanted.common.rites.CirclePart;
 import favouriteless.enchanted.common.rites.RiteType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -11,7 +8,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.UUID;
@@ -19,12 +15,7 @@ import java.util.UUID;
 public class RiteSummonEntity extends AbstractRite {
 
     public RiteSummonEntity(RiteType<?> type, ServerLevel level, BlockPos pos, UUID caster) {
-        super(type, level, pos, caster, 3000, 0); // Power, power per tick
-        CIRCLES_REQUIRED.put(CirclePart.MEDIUM, EnchantedBlocks.OTHERWHERE_CHALK.get());
-        ITEMS_REQUIRED.put(EnchantedItems.WAYSTONE.get(), 1);
-        ITEMS_REQUIRED.put(EnchantedItems.TAGLOCK_FILLED.get(), 1);
-        ITEMS_REQUIRED.put(EnchantedItems.ENDER_DEW.get(), 1);
-        ITEMS_REQUIRED.put(Items.IRON_AXE, 1);
+        super(type, level, pos, caster); // Power, power per tick
     }
 
     @Override

@@ -1,0 +1,13 @@
+{
+  "circles": {
+    "small": "enchanted:ritual_chalk"
+  },
+  "items": {
+    "enchanted:hint_of_rebirth": 1,
+    "enchanted:diamond_vapour": 1,
+    "enchanted:quicklime": 1,
+    "enchanted:gypsum": 1,
+    "enchanted:mutandis_extremis": 1,
+    "enchanted:attuned_stone_charged": 1
+  }
+}

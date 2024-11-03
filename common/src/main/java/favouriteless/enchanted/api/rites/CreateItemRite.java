@@ -3,7 +3,7 @@ package favouriteless.enchanted.api.rites;
 import favouriteless.enchanted.common.rites.RiteType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
@@ -15,14 +15,12 @@ import java.util.UUID;
  *
  * <p>Rites implementing this will automatically have compatibility for JEI.</p>
  */
-public abstract class AbstractCreateItemRite extends AbstractRite {
+public class CreateItemRite extends AbstractRite {
 
-    private final SoundEvent createItemSound;
     private final ItemStack[] resultItems;
 
-    public AbstractCreateItemRite(RiteType<?> type, ServerLevel level, BlockPos pos, UUID caster, int power, SoundEvent createItemSound, ItemStack... resultItems) {
-        super(type, level, pos, caster, power, 0);
-        this.createItemSound = createItemSound;
+    public CreateItemRite(RiteType<?> type, ServerLevel level, BlockPos pos, UUID caster, ItemStack... resultItems) {
+        super(type, level, pos, caster);
         this.resultItems = resultItems;
     }
 
@@ -34,7 +32,7 @@ public abstract class AbstractCreateItemRite extends AbstractRite {
                 ItemEntity itemEntity = new ItemEntity(getLevel(), pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, stack.copy());
                 getLevel().addFreshEntity(itemEntity);
             }
-            getLevel().playSound(null, pos, createItemSound, SoundSource.MASTER, 0.5F, 1.0F);
+            getLevel().playSound(null, pos, SoundEvents.ZOMBIE_VILLAGER_CURE, SoundSource.MASTER, 0.5F, 1.0F);
             spawnMagicParticles();
         }
         stopExecuting();

@@ -1,21 +1,23 @@
 package favouriteless.enchanted.patchouli.components;
 
-import favouriteless.enchanted.Enchanted;
-import favouriteless.enchanted.api.rites.AbstractRite;
-import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
-import favouriteless.enchanted.common.init.registry.RiteTypes;
-import favouriteless.enchanted.common.rites.CirclePart;
-import favouriteless.enchanted.util.Vector2i;
 import com.google.gson.annotations.SerializedName;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import favouriteless.enchanted.Enchanted;
+import favouriteless.enchanted.common.init.EnchantedData;
+import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
+import favouriteless.enchanted.common.rites.CirclePart;
+import favouriteless.enchanted.common.rites.RiteRequirements;
+import favouriteless.enchanted.util.Vector2i;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.core.Registry;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.Vec3;
 import vazkii.patchouli.api.IComponentRenderContext;
@@ -25,10 +27,7 @@ import vazkii.patchouli.client.book.gui.BookTextRenderer;
 import vazkii.patchouli.client.book.gui.GuiBook;
 import vazkii.patchouli.client.book.gui.GuiBookEntry;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.function.UnaryOperator;
 
 public class RiteRequirementsComponent implements ICustomComponent {
@@ -52,7 +51,7 @@ public class RiteRequirementsComponent implements ICustomComponent {
 	@SerializedName("rite") public IVariable riteName;
 
 	private transient BookTextRenderer powerTextRenderer;
-	private transient AbstractRite rite;
+	private transient RiteRequirements riteRequirements;
 	private transient final List<ItemRing> itemRings = new ArrayList<>();
 	private transient final List<ResourceLocation> circleImages = new ArrayList<>();
 	private transient int x;
@@ -69,7 +68,7 @@ public class RiteRequirementsComponent implements ICustomComponent {
 
 	@Override
 	public void render(GuiGraphics guiGraphics, IComponentRenderContext context, float partialticks, int mouseX, int mouseY) {
-		if(rite != null && context.getGui() instanceof GuiBook gui) {
+		if(riteRequirements != null && context.getGui() instanceof GuiBook gui) {
 			for(ResourceLocation resourceLocation : circleImages) {
 				renderCircle(guiGraphics, resourceLocation);
 			}
@@ -85,13 +84,13 @@ public class RiteRequirementsComponent implements ICustomComponent {
 	public void onDisplayed(IComponentRenderContext context) {
 		Screen gui = context.getGui();
 		if(gui instanceof GuiBookEntry entry) {
-			this.powerTextRenderer = new BookTextRenderer(entry, Component.literal(rite.POWER + " Power Required"), 2, 140, 116, 9, 0x000000);
+			this.powerTextRenderer = new BookTextRenderer(entry, Component.literal(riteRequirements.power() + " Power Required"), 2, 140, 116, 9, 0x000000);
 		}
 	}
 
 	private void repopulateCircleResources() {
 		circleImages.clear();
-		if(rite != null) {
+		if(riteRequirements != null) {
 			circleImages.add(Enchanted.id(PATH + "gold" + FILE_END));
 
 			ResourceLocation small = getImageResource(CirclePart.SMALL, "small");
@@ -105,7 +104,8 @@ public class RiteRequirementsComponent implements ICustomComponent {
 
 	private ResourceLocation getImageResource(CirclePart part, String suffix) {
 		for(Block block : BLOCK_IMAGES.keySet()) {
-			if(rite.hasCircle(part, block))
+
+			if(riteRequirements.circles().containsKey(part) && riteRequirements.circles().get(part) == block)
 				return Enchanted.id(BLOCK_IMAGES.get(block) + "_" + suffix + FILE_END);
 		}
 		return null;
@@ -122,14 +122,17 @@ public class RiteRequirementsComponent implements ICustomComponent {
 
 	@Override
 	public void onVariablesAvailable(UnaryOperator<IVariable> lookup) {
-		AbstractRite rite = RiteTypes.getDefaultByName(new ResourceLocation(lookup.apply(riteName).asString()));
-		if(rite == null)
+		Level level = Minecraft.getInstance().level;
+
+		Optional<Registry<RiteRequirements>> optional = level.registryAccess().registry(EnchantedData.RITE_REQUIREMENTS_REGISTRY);
+		this.riteRequirements = optional.isPresent() ? optional.get().get(new ResourceLocation(lookup.apply(riteName).asString())) : null;
+
+		if(riteRequirements == null)
 			throw new IllegalStateException();
-		this.rite = rite;
 	}
 
 	public void repopulateRings() {
-		if(rite != null) {
+		if(riteRequirements != null) {
 			this.itemRings.clear();
 			List<ItemStack> items = getItems();
 
@@ -150,10 +153,10 @@ public class RiteRequirementsComponent implements ICustomComponent {
 	}
 
 	private List<ItemStack> getItems() {
-		ItemStack[] items = new ItemStack[rite.ITEMS_REQUIRED.keySet().size()];
+		ItemStack[] items = new ItemStack[riteRequirements.items().keySet().size()];
 		int i = 0;
-		for(Item item : rite.ITEMS_REQUIRED.keySet()) {
-			items[i] = new ItemStack(item, rite.ITEMS_REQUIRED.get(item));
+		for(Item item : riteRequirements.items().keySet()) {
+			items[i] = new ItemStack(item, riteRequirements.items().get(item));
 			i++;
 		}
 		return Arrays.asList(items);

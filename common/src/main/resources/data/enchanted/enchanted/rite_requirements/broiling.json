@@ -1,0 +1,11 @@
+{
+  "circles": {
+    "medium": "enchanted:nether_chalk"
+  },
+  "items": {
+    "enchanted:wood_ash": 1,
+    "minecraft:coal": 1,
+    "minecraft:blaze_rod": 1
+  },
+  "power": 1000
+}

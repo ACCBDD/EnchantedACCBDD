@@ -31,8 +31,8 @@ public abstract class AbstractRemoveCurseRite extends AbstractRite {
     public static final int START_SOUND = 190;
     private final CurseType<?> curseType;
 
-    public AbstractRemoveCurseRite(RiteType<?> type, ServerLevel level, BlockPos pos, UUID caster, int power, int powerTick, CurseType<?> curseType) {
-        super(type, level, pos, caster, power, powerTick);
+    public AbstractRemoveCurseRite(RiteType<?> type, ServerLevel level, BlockPos pos, UUID caster, CurseType<?> curseType) {
+        super(type, level, pos, caster);
         this.curseType = curseType;
     }
 

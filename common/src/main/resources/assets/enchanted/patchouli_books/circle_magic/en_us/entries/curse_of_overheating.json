@@ -10,7 +10,7 @@
     },
     {
       "type": "enchanted:rite_requirements",
-      "rite": "enchanted:curse_of_overheating"
+      "rite": "enchanted:curse_overheating"
     }
   ],
   "read_by_default": true,

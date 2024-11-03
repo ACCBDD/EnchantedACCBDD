@@ -1,9 +1,6 @@
 package favouriteless.enchanted.common.rites.entity;
 
 import favouriteless.enchanted.api.rites.AbstractRite;
-import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
-import favouriteless.enchanted.common.init.registry.EnchantedItems;
-import favouriteless.enchanted.common.rites.CirclePart;
 import favouriteless.enchanted.common.rites.RiteType;
 import favouriteless.enchanted.util.WaystoneHelper;
 import net.minecraft.core.BlockPos;
@@ -19,9 +16,7 @@ import java.util.UUID;
 public class RiteTranspositionPlayer extends AbstractRite {
 
     public RiteTranspositionPlayer(RiteType<?> type, ServerLevel level, BlockPos pos, UUID caster) {
-        super(type, level, pos, caster, 0, 0); // Power, power per tick
-        CIRCLES_REQUIRED.put(CirclePart.SMALL, EnchantedBlocks.OTHERWHERE_CHALK.get());
-        ITEMS_REQUIRED.put(EnchantedItems.BOUND_WAYSTONE.get(), 1);
+        super(type, level, pos, caster);
     }
 
     @Override

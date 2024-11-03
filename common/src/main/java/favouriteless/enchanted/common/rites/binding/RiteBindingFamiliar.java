@@ -4,7 +4,9 @@ import favouriteless.enchanted.Enchanted;
 import favouriteless.enchanted.api.familiars.FamiliarSavedData;
 import favouriteless.enchanted.api.familiars.FamiliarType;
 import favouriteless.enchanted.api.rites.AbstractRite;
-import favouriteless.enchanted.common.init.registry.*;
+import favouriteless.enchanted.common.init.registry.EnchantedParticleTypes;
+import favouriteless.enchanted.common.init.registry.EnchantedSoundEvents;
+import favouriteless.enchanted.common.init.registry.FamiliarTypes;
 import favouriteless.enchanted.common.rites.CirclePart;
 import favouriteless.enchanted.common.rites.RiteType;
 import net.minecraft.ChatFormatting;
@@ -17,7 +19,6 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.TamableAnimal;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
@@ -30,13 +31,7 @@ public class RiteBindingFamiliar extends AbstractRite {
 	public static final Vec3 OFFSET = new Vec3(0.5D, 2.5D, 0.5D);
 
 	public RiteBindingFamiliar(RiteType<?> type, ServerLevel level, BlockPos pos, UUID caster) {
-		super(type, level, pos, caster, 8000, 0);
-		CIRCLES_REQUIRED.put(CirclePart.MEDIUM, EnchantedBlocks.RITUAL_CHALK.get());
-		ITEMS_REQUIRED.put(EnchantedItems.TEAR_OF_THE_GODDESS.get(), 1);
-		ITEMS_REQUIRED.put(EnchantedItems.ODOUR_OF_PURITY.get(), 1);
-		ITEMS_REQUIRED.put(EnchantedItems.WHIFF_OF_MAGIC.get(), 1);
-		ITEMS_REQUIRED.put(Items.DIAMOND, 1);
-		ITEMS_REQUIRED.put(EnchantedItems.DEMONIC_BLOOD.get(), 1);
+		super(type, level, pos, caster);
 	}
 
 	@Override

@@ -1,0 +1,14 @@
+{
+  "circles": {
+    "small": "enchanted:ritual_chalk",
+    "medium": "enchanted:ritual_chalk"
+  },
+  "items": {
+    "enchanted:attuned_stone": 1,
+    "enchanted:wood_ash": 1,
+    "enchanted:quicklime": 1,
+    "minecraft:glowstone_dust": 1,
+    "minecraft:redstone": 1
+  },
+  "power": 2000
+}

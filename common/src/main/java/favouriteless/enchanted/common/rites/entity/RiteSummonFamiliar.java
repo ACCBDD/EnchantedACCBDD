@@ -3,9 +3,6 @@ package favouriteless.enchanted.common.rites.entity;
 import favouriteless.enchanted.api.familiars.FamiliarSavedData;
 import favouriteless.enchanted.api.familiars.IFamiliarEntry;
 import favouriteless.enchanted.api.rites.AbstractRite;
-import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
-import favouriteless.enchanted.common.init.registry.EnchantedItems;
-import favouriteless.enchanted.common.rites.CirclePart;
 import favouriteless.enchanted.common.rites.RiteType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -21,11 +18,7 @@ import java.util.UUID;
 public class RiteSummonFamiliar extends AbstractRite {
 
     public RiteSummonFamiliar(RiteType<?> type, ServerLevel level, BlockPos pos, UUID caster) {
-        super(type, level, pos, caster, 1000, 0); // Power, power per tick
-        CIRCLES_REQUIRED.put(CirclePart.MEDIUM, EnchantedBlocks.RITUAL_CHALK.get());
-        ITEMS_REQUIRED.put(EnchantedItems.BREATH_OF_THE_GODDESS.get(), 1);
-        ITEMS_REQUIRED.put(EnchantedItems.HINT_OF_REBIRTH.get(), 1);
-        ITEMS_REQUIRED.put(EnchantedItems.WHIFF_OF_MAGIC.get(), 1);
+        super(type, level, pos, caster); // Power, power per tick
     }
 
     @Override
