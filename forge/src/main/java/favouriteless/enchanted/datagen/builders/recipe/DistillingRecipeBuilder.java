@@ -24,6 +24,7 @@ public class DistillingRecipeBuilder extends EnchantedRecipeBuilder {
     private final ItemStack[] inputs;
     private final List<ItemStack> results = new ArrayList<>();
     private int cookTime;
+    private int power;
 
     private DistillingRecipeBuilder(ItemStack[] inputs) {
         super("distilling");
@@ -97,6 +98,13 @@ public class DistillingRecipeBuilder extends EnchantedRecipeBuilder {
         return this;
     }
 
+    public DistillingRecipeBuilder power(int power) {
+        if(power < 0)
+            throw new IllegalArgumentException("Distillery recipes cannot have a power smaller than 0.");
+        this.power = power;
+        return this;
+    }
+
     @Override
     @NotNull
     public Item getResult() {
@@ -105,7 +113,7 @@ public class DistillingRecipeBuilder extends EnchantedRecipeBuilder {
 
     @Override
     public void save(@NotNull Consumer<FinishedRecipe> consumer, @NotNull ResourceLocation id) {
-        consumer.accept(new Result(id, inputs, results.toArray(ItemStack[]::new), cookTime));
+        consumer.accept(new Result(id, inputs, results.toArray(ItemStack[]::new), cookTime, power));
     }
 
     @Override
@@ -124,12 +132,14 @@ public class DistillingRecipeBuilder extends EnchantedRecipeBuilder {
         private final ItemStack[] inputs;
         private final ItemStack[] results;
         private final int cookTime;
+        private final int power;
 
-        public Result(ResourceLocation id, ItemStack[] inputs, ItemStack[] results, int cookTime) {
+        public Result(ResourceLocation id, ItemStack[] inputs, ItemStack[] results, int cookTime, int power) {
             super(id);
             this.inputs = inputs;
             this.results = results;
             this.cookTime = cookTime;
+            this.power = power;
         }
 
         @Override
@@ -146,6 +156,7 @@ public class DistillingRecipeBuilder extends EnchantedRecipeBuilder {
             json.add("results", resultsArray);
 
             json.addProperty("cookTime", cookTime);
+            json.addProperty("power", power);
         }
 
         @NotNull

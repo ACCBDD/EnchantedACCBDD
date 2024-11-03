@@ -1,1 +1,5 @@
-- Fixed a crash with curse removal rites, thanks LordPINE (again) for reporting it.
+- CHANGE: Reduced altar power usage of the distillery by 75% across the board.
+- CHANGE: Distillery recipes now have a power field.
+- CHANGE: Circle magic rites now have data-driven inputs.
+- FIXED: Grass blocks dropping seeds rather than short grass.
+- FIXED: Undyed candles don't work as an altar upgrade.

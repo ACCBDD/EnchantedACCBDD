@@ -91,7 +91,7 @@ public class DistilleryBlockEntity extends ContainerBlockEntityBase implements I
             if(hasInput && powerProvider != null) {
                 DistillingRecipe recipe = be.recipeCheck.getRecipeFor(be, level).orElse(null);
 
-                if(be.canDistill(recipe) && powerProvider.tryConsumePower(10.0D)) {
+                if(be.canDistill(recipe) && powerProvider.tryConsumePower((double)recipe.getPower() / recipe.getCookTime())) {
                     isCooking = true;
                     be.isBurning = true;
 

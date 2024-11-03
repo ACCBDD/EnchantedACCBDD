@@ -12,7 +12,7 @@ public class GrassLootExtension extends LootExtension {
 
     public GrassLootExtension() {
         super(Enchanted.id("extensions/blocks/grass_seeds"));
-        addType(Blocks.GRASS_BLOCK);
+        addType(Blocks.GRASS);
         addType(Blocks.TALL_GRASS);
     }
 

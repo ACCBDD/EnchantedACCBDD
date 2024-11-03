@@ -29,7 +29,7 @@ import java.util.UUID;
 
 public class RiteProtection extends AbstractRite {
 
-    private RiteOfProtectionObserver stateObserver = null;
+    private RiteProtectionObserver stateObserver = null;
     protected final int radius;
     protected final Block block;
     protected ServerLevel targetLevel = null;
@@ -145,9 +145,9 @@ public class RiteProtection extends AbstractRite {
 
     protected void getOrCreateObserver() {
         if(stateObserver == null)
-            stateObserver = StateObserverManager.get().getObserver(getLevel(), targetPos, RiteOfProtectionObserver.class);
+            stateObserver = StateObserverManager.get().getObserver(getLevel(), targetPos, RiteProtectionObserver.class);
         if(stateObserver == null)
-            stateObserver = StateObserverManager.get().addObserver(new RiteOfProtectionObserver(targetLevel, targetPos, radius + 1, radius + 1, radius + 1, block));
+            stateObserver = StateObserverManager.get().addObserver(new RiteProtectionObserver(targetLevel, targetPos, radius + 1, radius + 1, radius + 1, block));
     }
 
 }

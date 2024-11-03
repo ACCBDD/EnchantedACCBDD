@@ -24,14 +24,17 @@ public class DistillingRecipe implements Recipe<Container> {
     protected final NonNullList<ItemStack> itemsIn;
     protected final NonNullList<ItemStack> itemsOut;
     protected final int cookTime;
+    protected final int power;
 
-    public DistillingRecipe(ResourceLocation id, NonNullList<ItemStack> itemsIn, NonNullList<ItemStack> itemsOut, int cookTime) {
+    public DistillingRecipe(ResourceLocation id, NonNullList<ItemStack> itemsIn, NonNullList<ItemStack> itemsOut,
+                            int cookTime, int power) {
         this.type = EnchantedRecipeTypes.DISTILLING.get();
         this.id = id;
 
         this.itemsIn = itemsIn;
         this.itemsOut = itemsOut;
         this.cookTime = cookTime;
+        this.power = power;
     }
 
     /**
@@ -120,6 +123,10 @@ public class DistillingRecipe implements Recipe<Container> {
         return true;
     }
 
+    public int getPower() {
+        return power;
+    }
+
     public static class Serializer implements RecipeSerializer<DistillingRecipe> {
 
         @Override
@@ -128,8 +135,9 @@ public class DistillingRecipe implements Recipe<Container> {
             NonNullList<ItemStack> itemsIn = JsonHelper.readItemStackList(GsonHelper.getAsJsonArray(json, "ingredients"), true);
             NonNullList<ItemStack> itemsOut = JsonHelper.readItemStackList(GsonHelper.getAsJsonArray(json, "results"), true);
             int cookTime = GsonHelper.getAsInt(json, "cookTime", 200);
+            int power = GsonHelper.getAsInt(json, "power", 0);
 
-            return new DistillingRecipe(id, itemsIn, itemsOut, cookTime);
+            return new DistillingRecipe(id, itemsIn, itemsOut, cookTime, power);
         }
 
         @Override
@@ -146,8 +154,9 @@ public class DistillingRecipe implements Recipe<Container> {
                 itemsOut.add(buffer.readItem());
 
             int cookTime = buffer.readInt();
+            int power = buffer.readInt();
 
-            return new DistillingRecipe(id, itemsIn, itemsOut, cookTime);
+            return new DistillingRecipe(id, itemsIn, itemsOut, cookTime, power);
         }
 
         @Override
@@ -161,6 +170,7 @@ public class DistillingRecipe implements Recipe<Container> {
                 buffer.writeItem(stack);
 
             buffer.writeInt(recipe.getCookTime());
+            buffer.writeInt(recipe.getPower());
         }
 
     }
