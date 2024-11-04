@@ -2,10 +2,12 @@ pluginManagement {
     repositories {
         gradlePluginPortal()
         maven {
-            name = "Forge"
-            url = uri("https://maven.minecraftforge.net/")
+            name = "NeoForge"
+            url = uri("https://maven.neoforged.net/releases")
             content {
-                includeGroupAndSubgroups("net.minecraftforge")
+                includeGroupAndSubgroups("net.neoforged")
+                includeGroup("codechicken")
+                includeGroup("net.covers1624")
             }
         }
         maven {
@@ -41,4 +43,4 @@ rootProject.name = "Enchanted"
 
 include("common")
 include("fabric")
-include("forge")
+include("neoforge")

@@ -1,17 +1,17 @@
 {
     "schemaVersion": 1,
-    "id": "${mod_id}",
+    "id": "enchanted",
     "version": "${version}",
-    "name": "${mod_name}",
-    "description": "${description}",
+    "name": "Enchanted",
+    "description": "Witchcraft and Occultism based on real history and folklore.",
     "authors": [
-        "${author}"
+        "Favouriteless"
     ],
     "contact": {
-        "homepage": "${display_url}"
+        "homepage": "https://github.com/Favouriteless/Enchanted"
     },
-    "license": "${license}",
-    "icon": "${mod_id}.png",
+    "license": "All Rights Reserved",
+    "icon": "enchanted.png",
     "environment": "*",
     "entrypoints": {
         "main": [
@@ -22,21 +22,16 @@
         ]
     },
     "mixins": [
-        "${mod_id}.mixins.json",
-        "${mod_id}.fabric.mixins.json"
+        "enchanted.mixins.json",
+        "enchanted.fabric.mixins.json"
     ],
     "depends": {
         "fabricloader": ">=${fabric_loader_version}",
         "fabric-api": ">=${fabric_api_version}",
         "fabric": "*",
         "minecraft": "${minecraft_version}",
-        "stateobserver": ">=${stateobserver_version}",
-        "smartbrainlib": ">=${sbl_version}",
-        "patchouli": ">=${patchouli_fabric_version}",
-        "geckolib": ">=${geckolib_fabric_version}",
-        "forgeconfigapiport": ">=${forgeconfigapi_version}",
-        "java": ">=17"
+        "java": ">=21"
     },
-    "accessWidener" : "${mod_id}.accesswidener"
+    "accessWidener" : "enchanted.accesswidener"
 }
   

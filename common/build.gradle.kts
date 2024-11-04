@@ -5,44 +5,36 @@ import java.io.IOException
 
 plugins {
     id("enchanted-convention")
-    alias(libs.plugins.vanillagradle)
+    alias(libs.plugins.moddevgradle)
 }
 
-val mod_name: String by project
-val mod_id: String by project
 version = libs.versions.enchanted.get()
-val minecraft_version = libs.versions.minecraft.asProvider().get()
+val mcVersion = libs.versions.minecraft.asProvider().get()
 
 base {
-    archivesName = "${mod_id}-common-${minecraft_version}"
+    archivesName = "enchanted-common-${mcVersion}"
 }
 
-minecraft {
-    version(minecraft_version)
-    accessWideners(file("src/main/resources/${mod_id}.accesswidener"))
+neoForge {
+    neoFormVersion = libs.versions.neoform.get()
+
+    accessTransformers.files.setFrom("src/main/resources/META-INF/accesstransformer.cfg")
+
+    parchment {
+        minecraftVersion = libs.versions.parchment.minecraft.get()
+        mappingsVersion = libs.versions.parchment.asProvider().get()
+    }
 }
 
 dependencies {
-    implementation( libs.jsr305 )
-    compileOnly( libs.mixin )
-    compileOnly( libs.mixinextras.common )
-
-    compileOnly( libs.geckolib.forge ) // Geckolib doesn't have common
-    compileOnly( libs.patchouli.forge ) // Patchouli doesn't have common
-
-    compileOnly( libs.stateobserver.common )
-    compileOnly( libs.sbl.common )
-    compileOnly( libs.jei.common.api )
-    compileOnly( libs.forgeconfigapi.common )
+    compileOnly(libs.mixinextras.common)
 }
 
 publishing {
-    publishing {
-        publications {
-            create<MavenPublication>(mod_id) {
-                from(components["java"])
-                artifactId = base.archivesName.get()
-            }
+    publications {
+        create<MavenPublication>("enchanted") {
+            from(components["java"])
+            artifactId = base.archivesName.get()
         }
     }
 }
@@ -52,12 +44,12 @@ sourceSets.main.get().resources.srcDir(project(":common").file("src/generated/re
 tasks.create("postDiscord") {
     doLast {
         try {
-            val webhook = Webhook(System.getenv("ENCHANTED_RELEASE_WEBHOOK"), "$mod_name Gradle Upload")
+            val webhook = Webhook(System.getenv("ENCHANTED_RELEASE_WEBHOOK"), "Enchanted Gradle Upload")
 
             val message = Message()
             message.username = "Elaina"
             message.avatarUrl = "https://i.imgur.com/I455GSr.jpeg"
-            message.content = "<@&1246846443944149145> $mod_name $version for Minecraft $minecraft_version has been published!"
+            message.content = "<@&1246846443944149145> Enchanted $version for Minecraft $mcVersion has been published!"
 
             val embed = Embed()
             embed.addField("Changelog", rootProject.file("changelog.txt").readText(Charsets.UTF_8), false)

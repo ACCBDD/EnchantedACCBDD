@@ -1,0 +1,31 @@
+modLoader = "javafml"
+loaderVersion = "${neoforge_loader_range}"
+license = "All Rights Reserved"
+
+
+[[mods]]
+    modId = "enchanted"
+    version = "${version}"
+    displayName = "Enchanted"
+    displayURL= "https://github.com/Favouriteless/Enchanted"
+    logoFile = "enchanted.png"
+    credits = "Heavily inspired by Emoniph's Witchery mod"
+    authors = "Favouriteless"
+    description = '''Witchcraft and Occultism based on real history and folklore.'''
+
+[[mixins]]
+    config="modopedia.neoforge.mixins.json"
+
+[[dependencies.enchanted]]
+    modId = "neoforge"
+    type="required" #mandatory
+    versionRange = "${neoforge_version_range}"
+    ordering = "NONE"
+    side = "BOTH"
+
+[[dependencies.enchanted]]
+    modId = "minecraft"
+    type="required" #mandatory
+    versionRange = "${minecraft_version_range}"
+    ordering = "NONE"
+    side = "BOTH"
