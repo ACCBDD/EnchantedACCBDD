@@ -13,6 +13,7 @@
       "item": "minecraft:lapis_lazuli"
     }
   ],
+  "power": 750,
   "results": [
     {
       "item": "enchanted:tear_of_the_goddess"

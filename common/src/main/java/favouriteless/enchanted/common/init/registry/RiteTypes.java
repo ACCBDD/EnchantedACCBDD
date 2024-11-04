@@ -120,4 +120,8 @@ public class RiteTypes {
         return RITE_TYPES.values();
     }
 
+    public static Collection<ResourceLocation> getKeys() {
+        return RITE_TYPES.keySet();
+    }
+
 }

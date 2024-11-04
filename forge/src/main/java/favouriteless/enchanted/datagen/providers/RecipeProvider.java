@@ -99,8 +99,8 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
 		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, EnchantedItems.SOFT_CLAY_JAR.get(), 4)
 				.pattern(" c ")
 				.pattern("ccc")
-				.define('c', Items.CLAY)
-				.unlockedBy(getHasName(Items.CLAY), has(Items.CLAY)).save(consumer);
+				.define('c', Items.CLAY_BALL)
+				.unlockedBy(getHasName(Items.CLAY_BALL), has(Items.CLAY_BALL)).save(consumer);
 		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, EnchantedItems.DISTILLERY.get())
 				.pattern("cic")
 				.pattern("iii")
@@ -295,31 +295,31 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
 	protected void buildDistillingRecipes(Consumer<FinishedRecipe> consumer) {
 		DistillingRecipeBuilder.create(Items.BLAZE_POWDER, Items.GUNPOWDER)
 				.results(stack(Items.GLOWSTONE_DUST, 2))
-				.cookTime(300).power(500).save(consumer);
+				.cookTime(300).power(750).save(consumer);
 		DistillingRecipeBuilder.create(stack(EnchantedItems.CLAY_JAR.get(), 3), stack(EnchantedItems.BREATH_OF_THE_GODDESS.get()), stack(Items.LAPIS_LAZULI))
 				.results(EnchantedItems.TEAR_OF_THE_GODDESS.get(), EnchantedItems.WHIFF_OF_MAGIC.get(), Items.SLIME_BALL, EnchantedItems.FOUL_FUME.get())
-				.cookTime(300).power(500).save(consumer);
+				.cookTime(300).power(750).save(consumer);
 		DistillingRecipeBuilder.create(stack(EnchantedItems.CLAY_JAR.get(), 2), stack(EnchantedItems.DEMON_HEART.get()), stack(EnchantedItems.DIAMOND_VAPOUR.get()))
 				.results(stack(EnchantedItems.DEMONIC_BLOOD.get(), 2))
 				.results(EnchantedItems.REFINED_EVIL.get())
-				.cookTime(300).power(500).save(consumer);
+				.cookTime(300).power(750).save(consumer);
 		DistillingRecipeBuilder.create(stack(EnchantedItems.CLAY_JAR.get(), 3), stack(Items.DIAMOND), stack(EnchantedItems.OIL_OF_VITRIOL.get()))
 				.results(stack(EnchantedItems.DIAMOND_VAPOUR.get(), 2))
 				.results(EnchantedItems.ODOUR_OF_PURITY.get())
-				.cookTime(300).power(500).save(consumer);
+				.cookTime(300).power(750).save(consumer);
 		DistillingRecipeBuilder.create(EnchantedItems.CLAY_JAR.get(), EnchantedItems.DIAMOND_VAPOUR.get(), Items.BLAZE_ROD)
 				.results(EnchantedItems.DEMONIC_BLOOD.get())
-				.cookTime(300).power(500).save(consumer);
+				.cookTime(300).power(750).save(consumer);
 		DistillingRecipeBuilder.create(stack(EnchantedItems.CLAY_JAR.get(), 3), stack(EnchantedItems.DIAMOND_VAPOUR.get()), stack(Items.GHAST_TEAR))
 				.results(EnchantedItems.ODOUR_OF_PURITY.get(), EnchantedItems.REEK_OF_MISFORTUNE.get(), EnchantedItems.FOUL_FUME.get(), EnchantedItems.REFINED_EVIL.get())
-				.cookTime(300).power(500).save(consumer);
+				.cookTime(300).power(750).save(consumer);
 		DistillingRecipeBuilder.create(stack(EnchantedItems.CLAY_JAR.get(), 6), stack(Items.ENDER_PEARL))
 				.results(stack(EnchantedItems.ENDER_DEW.get(), 5))
 				.results(EnchantedItems.WHIFF_OF_MAGIC.get())
-				.cookTime(300).power(500).save(consumer);
+				.cookTime(300).power(750).save(consumer);
 		DistillingRecipeBuilder.create(EnchantedItems.CLAY_JAR.get(), EnchantedItems.FOUL_FUME.get(), EnchantedItems.QUICKLIME.get())
 				.results(EnchantedItems.GYPSUM.get(), EnchantedItems.OIL_OF_VITRIOL.get(), Items.SLIME_BALL)
-				.cookTime(300).power(500).save(consumer);
+				.cookTime(300).power(750).save(consumer);
 	}
 
 	protected void buildCauldronRecipes(Consumer<FinishedRecipe> consumer) {

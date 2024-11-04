@@ -80,24 +80,28 @@ public abstract class AbstractRite {
         this.riteType = type;
         this.casterUUID = casterUUID;
 
-        if(level == null)
-            throw new IllegalStateException("Attempted to create a rite without a level");
 
         if(pos != null) {
             if(level.getBlockEntity(pos) instanceof ChalkGoldBlockEntity chalk)
                 this.chalk = chalk;
         }
 
-        Optional<Registry<RiteRequirements>> optional = level.registryAccess().registry(EnchantedData.RITE_REQUIREMENTS_REGISTRY);
-        RiteRequirements requirements = optional.map(riteRequirements -> riteRequirements.get(type.getId())).orElse(null);
-        if(requirements == null)
-            throw new IllegalStateException(String.format("Tried to create rite of type %s without any requirements present.", type.getId()));
+        if(level != null) {
+            Optional<Registry<RiteRequirements>> optional = level.registryAccess().registry(EnchantedData.RITE_REQUIREMENTS_REGISTRY);
+            RiteRequirements requirements = optional.map(riteRequirements -> riteRequirements.get(type.getId())).orElse(null);
+            if(requirements == null)
+                throw new IllegalStateException(String.format("Tried to create rite of type %s without any requirements present.", type.getId()));
 
-        circlesRequired.putAll(requirements.circles());
-        entitiesRequired.putAll(requirements.entities());
-        itemsRequired.putAll(requirements.items());
-        power = requirements.power();
-        tickPower = requirements.tickPower();
+            circlesRequired.putAll(requirements.circles());
+            entitiesRequired.putAll(requirements.entities());
+            itemsRequired.putAll(requirements.items());
+            power = requirements.power();
+            tickPower = requirements.tickPower();
+        }
+        else {
+            power = 0;
+            tickPower = 0;
+        }
     }
 
     /**

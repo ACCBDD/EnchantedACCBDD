@@ -1,11 +1,11 @@
 package favouriteless.enchanted.jei.categories;
 
 import favouriteless.enchanted.Enchanted;
-import favouriteless.enchanted.api.rites.CreateItemRite;
 import favouriteless.enchanted.common.init.registry.EnchantedItems;
 import favouriteless.enchanted.jei.EnchantedJEITextures;
 import favouriteless.enchanted.common.rites.CirclePart;
 import com.mojang.blaze3d.vertex.PoseStack;
+import favouriteless.enchanted.jei.recipes.JEIRiteRecipe;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -29,10 +29,10 @@ import net.minecraft.world.level.block.Block;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RiteCategory implements IRecipeCategory<CreateItemRite> {
+public class RiteCategory implements IRecipeCategory<JEIRiteRecipe> {
 
     private final IJeiHelpers jeiHelpers;
-    private final RecipeType<CreateItemRite> recipeTypeRite;
+    private final RecipeType<JEIRiteRecipe> recipeTypeRite;
 
     private static final int GLYPH_SIZE = 110;
     private static final int START_RADIUS = 15;
@@ -42,7 +42,7 @@ public class RiteCategory implements IRecipeCategory<CreateItemRite> {
     private final List<IDrawableStatic> circles = new ArrayList<>();
     private final IDrawableAnimated arrow;
 
-    public RiteCategory(IJeiHelpers jeiHelpers, RecipeType<CreateItemRite> recipeTypeRite) {
+    public RiteCategory(IJeiHelpers jeiHelpers, RecipeType<JEIRiteRecipe> recipeTypeRite) {
         this.jeiHelpers = jeiHelpers;
         this.recipeTypeRite = recipeTypeRite;
         IDrawableStatic arrow = jeiHelpers.getGuiHelper().createDrawable(Enchanted.id("textures/gui/witch_oven.png"), 176, 14, 24, 17);
@@ -51,10 +51,10 @@ public class RiteCategory implements IRecipeCategory<CreateItemRite> {
     }
 
     @Override
-    public void setRecipe(IRecipeLayoutBuilder builder, CreateItemRite rite, IFocusGroup focuses) {
+    public void setRecipe(IRecipeLayoutBuilder builder, JEIRiteRecipe recipe, IFocusGroup focuses) {
         List<ItemStack> itemList = new ArrayList<>();
-        for(Item item : rite.itemsRequired.keySet())
-            itemList.add(new ItemStack(item, rite.itemsRequired.get(item)));
+        for(Item item : recipe.requirements().items().keySet())
+            itemList.add(new ItemStack(item, recipe.requirements().items().get(item)));
 
         int circleNum = 1;
         int itemsRemaining = itemList.size();
@@ -78,7 +78,7 @@ public class RiteCategory implements IRecipeCategory<CreateItemRite> {
             circleNum++;
         }
 
-        ItemStack[] itemsOut = rite.getResultItems();
+        ItemStack[] itemsOut = recipe.output();
         int numRows = (int)Math.ceil(itemsOut.length / 3.0D);
         int height = numRows * 17;
         int startX = 119;
@@ -89,8 +89,8 @@ public class RiteCategory implements IRecipeCategory<CreateItemRite> {
         }
 
         circles.clear();
-        for(CirclePart circlePart : rite.circlesRequired.keySet()) {
-            Block block = rite.circlesRequired.get(circlePart);
+        for(CirclePart circlePart : recipe.requirements().circles().keySet()) {
+            Block block = recipe.requirements().circles().get(circlePart);
             ResourceLocation textureLocation = EnchantedJEITextures.getCircleTextureLocation(circlePart, block);
             if(textureLocation != null) {
                 circles.add(buildTexture(textureLocation, GLYPH_SIZE, GLYPH_SIZE, jeiHelpers));
@@ -98,21 +98,20 @@ public class RiteCategory implements IRecipeCategory<CreateItemRite> {
         }
     }
 
-
     @Override
-    public void draw(CreateItemRite rite, IRecipeSlotsView recipeSlotsView, GuiGraphics gui, double mouseX, double mouseY) {
+    public void draw(JEIRiteRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics gui, double mouseX, double mouseY) {
         for(IDrawableStatic drawable : circles) {
             drawable.draw(gui, 0, 14);
         }
         glyph_golden.draw(gui, 0, 14);
         this.arrow.draw(gui, 95, 53);
 
-        ResourceLocation riteName = rite.getType().getId();
+        ResourceLocation riteName = recipe.type().getId();
         String nameText = Component.translatable("rite." + riteName.getNamespace() + "." + riteName.getPath()).getString();
         drawText(Minecraft.getInstance(), gui, nameText, 180, 0, 0xFFFFFFFF);
-        drawText(Minecraft.getInstance(), gui, "Required Altar Power : " + rite.power, 180, 112, 0xFFFFFFFF);
+        drawText(Minecraft.getInstance(), gui, "Required Altar Power : " + recipe.requirements().power(), 180, 112, 0xFFFFFFFF);
 
-        if(!rite.entitiesRequired.isEmpty() || rite.hasAdditionalRequirements()) {
+        if(!recipe.requirements().entities().isEmpty()) {
             PoseStack poseStack = gui.pose();
             poseStack.pushPose();
             poseStack.scale(0.5F, 0.5F, 0.5F);
@@ -150,7 +149,7 @@ public class RiteCategory implements IRecipeCategory<CreateItemRite> {
     }
 
     @Override
-    public RecipeType<CreateItemRite> getRecipeType() {
+    public RecipeType<JEIRiteRecipe> getRecipeType() {
         return recipeTypeRite;
     }
 
