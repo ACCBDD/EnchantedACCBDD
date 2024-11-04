@@ -3,21 +3,26 @@
     enchanted = "4.0.0"
 
 # Common
-    minecraft = "1.21.1"
-    minecraft-range = "[1.21.1,)"
-    parchment-minecraft = "1.21"
-    parchment = "2024.07.28"
-    neoform = "1.21-20240613.152323"
+    stateobserver = "1.5.0"
+    geckolib = "4.7"
+    forgeconfigapi = "21.1.1"
 
-# Fabric
-    fabric = "0.16.7"
-    fabric-api = "0.106.0+1.21.1"
 
 # NeoForge
     neoforge-loader-range = "[4,)"
     neoforge-range = "[21.1.72,)"
     neoforge = "21.1.72"
 
+# Fabric
+    fabric = "0.16.7"
+    fabric-api = "0.106.0+1.21.1"
+
+# Platform
+    minecraft = "1.21.1"
+    minecraft-range = "[1.21.1,)"
+    parchment-minecraft = "1.21"
+    parchment = "2024.07.28"
+    neoform = "1.21-20240613.152323"
 
 # Dependencies
     mixin = "0.8.7"
@@ -33,6 +38,20 @@
     plugin-mixin = "0.7.+"
 
 [libraries]
+# Common
+    stateobserver-common = { group = "net.favouriteless.stateobserver", name = "stateobserver-common-1.21.1", version.ref = "stateobserver" }
+    geckolib-common = { group = "software.bernie.geckolib", name = "geckolib-common-1.21.1", version.ref = "geckolib" }
+    forgeconfigapi-common = { group = "fuzs.forgeconfigapiport", name = "forgeconfigapiport-common", version.ref = "forgeconfigapi" }
+
+# NeoForge
+    stateobserver-neoforge = { group = "net.favouriteless.stateobserver", name = "stateobserver-neoforge-1.21.1", version.ref = "stateobserver" }
+    geckolib-neoforge = { group = "software.bernie.geckolib", name = "geckolib-neoforge-1.21.1", version.ref = "geckolib" }
+
+# Fabric
+    stateobserver-fabric = { group = "net.favouriteless.stateobserver", name = "stateobserver-fabric-1.21.1", version.ref = "stateobserver" }
+    geckolib-fabric = { group = "software.bernie.geckolib", name = "geckolib-fabric-1.21.1", version.ref = "geckolib" }
+    forgeconfigapi-fabric = { group = "fuzs.forgeconfigapiport", name = "forgeconfigapiport-fabric", version.ref = "forgeconfigapi" }
+
 # Mixin
     mixin = { group = "org.spongepowered", name = "mixin", version.ref = "mixin" }
     mixinextras-common = { group = "io.github.llamalad7", name = "mixinextras-common", version.ref = "mixinextras" }

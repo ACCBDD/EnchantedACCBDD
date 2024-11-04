@@ -27,7 +27,10 @@ neoForge {
 }
 
 dependencies {
-    compileOnly(libs.mixinextras.common)
+    compileOnly( libs.mixinextras.common )
+    compileOnly( libs.stateobserver.common )
+    compileOnly( libs.geckolib.common )
+    compileOnly( libs.forgeconfigapi.common )
 }
 
 publishing {

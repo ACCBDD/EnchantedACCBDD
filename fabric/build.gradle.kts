@@ -40,6 +40,9 @@ dependencies {
     })
     modImplementation( libs.fabric )
     modImplementation( libs.fabric.api )
+    modImplementation( libs.stateobserver.fabric )
+    modImplementation( libs.geckolib.fabric )
+    modImplementation( libs.forgeconfigapi.fabric )
 }
 
 loom {
