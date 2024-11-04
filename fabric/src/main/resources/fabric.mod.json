@@ -18,7 +18,7 @@
             "favouriteless.enchanted.EnchantedFabric"
         ],
         "client": [
-            "favouriteless.enchanted.client.EnchantedFabricClient"
+          "favouriteless.enchanted.fabric.client.EnchantedFabricClient"
         ]
     },
     "mixins": [

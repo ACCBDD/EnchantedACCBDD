@@ -20,7 +20,7 @@ public class CurseOverheating extends RandomCurse {
 				if(Math.random() < 0.75D)
 					duration += 4;
 			}
-			targetPlayer.setSecondsOnFire(duration);
+			targetPlayer.setRemainingFireTicks(duration*20);
 		}
 	}
 

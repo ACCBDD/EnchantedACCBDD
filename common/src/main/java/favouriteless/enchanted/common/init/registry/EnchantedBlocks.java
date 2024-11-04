@@ -18,7 +18,6 @@ import net.minecraft.core.Direction.Axis;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.PressurePlateBlock.Sensitivity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.block.state.BlockState;
@@ -93,7 +92,7 @@ public class EnchantedBlocks {
     public static final Supplier<Block> SPANISH_MOSS = register("spanish_moss", SpanishMossBlock::new);
     public static final Supplier<Block> SPINNING_WHEEL = register("spinning_wheel", SpinningWheelBlock::new);
     public static final Supplier<CropsBlockAgeFive> WATER_ARTICHOKE = register("water_artichoke", ArtichokeBlock::new);
-    public static final Supplier<RotatedPillarBlock> WICKER_BUNDLE = register("wicker_bundle", () -> new HayBlock(Properties.copy(Blocks.HAY_BLOCK)));
+    public static final Supplier<RotatedPillarBlock> WICKER_BUNDLE = register("wicker_bundle", () -> new HayBlock(Properties.ofFullCopy(Blocks.HAY_BLOCK)));
     public static final Supplier<Block> WITCH_CAULDRON = register("witch_cauldron", WitchCauldronBlock::new);
     public static final Supplier<Block> WITCH_OVEN = register("witch_oven", WitchOvenBlock::new);
     public static final Supplier<CropsBlockAgeFive> WOLFSBANE = register("wolfsbane", WolfsbaneBlock::new);

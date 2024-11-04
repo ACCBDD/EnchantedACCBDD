@@ -1,43 +1,49 @@
 package favouriteless.enchanted.platform.services;
 
-import net.minecraft.network.FriendlyByteBuf;
+import favouriteless.enchanted.common.network.PacketContext;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 
-import java.util.function.Function;
+import java.util.function.BiConsumer;
 
 public interface INetworkHelper {
 
-    /**
-     * Register a packet.
-     *
-     * @param name The name of the packet, only used on Fabric.
-     * @param clazz The class of the packet being registered.
-     * @param constructor {@link Function} returning a new instance of the packet.
-     */
-    <T extends EnchantedPacket> void register(String name, Class<T> clazz, Function<FriendlyByteBuf, T> constructor);
+    <T extends CustomPacketPayload> void registerClient(CustomPacketPayload.Type<T> type,
+                                                        StreamCodec<? super RegistryFriendlyByteBuf, T> codec,
+                                                        BiConsumer<T, PacketContext> handler);
+
+    <T extends CustomPacketPayload> void registerServer(CustomPacketPayload.Type<T> type,
+                                                        StreamCodec<? super RegistryFriendlyByteBuf, T> codec,
+                                                        BiConsumer<T, PacketContext> handler);
+
+    <T extends CustomPacketPayload> void registerBidirectional(CustomPacketPayload.Type<T> type,
+                                                               StreamCodec<? super RegistryFriendlyByteBuf, T> codec,
+                                                               BiConsumer<T, PacketContext> handler);
 
     /**
      * Attempt to send a packet to a specific player FROM the server.
      *
-     * @param packet The {@link EnchantedPacket} to be sent.
+     * @param payload The {@link CustomPacketPayload} to be sent.
      * @param player The {@link ServerPlayer} receiving the packet.
      */
-    void sendToPlayer(EnchantedPacket packet, ServerPlayer player);
+    void sendToPlayer(CustomPacketPayload payload, ServerPlayer player);
 
     /**
      * Attempt to send a packet to all players FROM the server.
      *
-     * @param packet The {@link EnchantedPacket} to be sent.
+     * @param payload The {@link CustomPacketPayload} to be sent.
      * @param server Access to {@link MinecraftServer} for Fabric to grab players from.
      */
-    void sendToAllPlayers(EnchantedPacket packet, MinecraftServer server);
+    void sendToAllPlayers(CustomPacketPayload payload, MinecraftServer server);
 
     /**
      * Attempt to send a packet to the server FROM a client.
      *
-     * @param packet The {@link EnchantedPacket} to be sent.
+     * @param payload The {@link CustomPacketPayload} to be sent.
      */
-    void sendToServer(EnchantedPacket packet);
+    void sendToServer(CustomPacketPayload payload);
 
 }

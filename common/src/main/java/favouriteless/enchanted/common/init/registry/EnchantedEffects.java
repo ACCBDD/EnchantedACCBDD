@@ -1,6 +1,5 @@
 package favouriteless.enchanted.common.init.registry;
 
-import favouriteless.enchanted.common.effects.SimpleEffect;
 import favouriteless.enchanted.platform.CommonServices;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.damagesource.DamageSource;

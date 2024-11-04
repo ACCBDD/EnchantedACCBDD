@@ -5,7 +5,7 @@ import favouriteless.enchanted.common.init.registry.EnchantedItems;
 import favouriteless.enchanted.common.items.poppets.DeathPoppetItem;
 import favouriteless.enchanted.common.items.poppets.PoppetItem;
 import favouriteless.enchanted.common.items.poppets.ItemProtectionPoppetItem;
-import favouriteless.enchanted.common.network.packets.client.PoppetAnimationPacket;
+import favouriteless.enchanted.common.network.packets.client.PoppetAnimationPayload;
 import favouriteless.enchanted.common.poppet.PoppetShelfSavedData.PoppetEntry;
 import favouriteless.enchanted.common.poppet.PoppetUseResult.ResultType;
 import favouriteless.enchanted.platform.CommonServices;
@@ -280,7 +280,7 @@ public class PoppetUtils {
 	private static PoppetUseResult trySendAnimation(PoppetUseResult result, ItemStack poppetItemOriginal, Player player) {
 		if(result.isSuccess()) {
 			if(!player.level().isClientSide)
-				CommonServices.NETWORK.sendToAllPlayers(new PoppetAnimationPacket(result.type(), poppetItemOriginal, player.getId()), player.level().getServer());
+				CommonServices.NETWORK.sendToAllPlayers(new PoppetAnimationPayload(result.type(), poppetItemOriginal, player.getId()), player.level().getServer());
 		}
 		return result;
 	}

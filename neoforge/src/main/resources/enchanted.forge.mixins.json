@@ -1,12 +1,12 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "favouriteless.enchanted.mixin.forge",
+  "package": "favouriteless.enchanted.mixin.neoforge",
   "refmap": "${mod_id}.refmap.json",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "common.EnchantedLogMixin",
-    "common.SpinningWheelBlockItemMixin"
+    "favouriteless.enchanted.mixin.common.EnchantedLogMixin",
+    "favouriteless.enchanted.mixin.common.SpinningWheelBlockItemMixin"
   ],
   "client": [
   ],

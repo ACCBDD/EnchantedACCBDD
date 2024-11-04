@@ -1,7 +1,7 @@
 package favouriteless.enchanted;
 
 import favouriteless.enchanted.common.CommonConfig;
-import favouriteless.enchanted.common.CommonEventsFabric;
+import favouriteless.enchanted.fabric.common.CommonEventsFabric;
 import favouriteless.enchanted.common.altar.AltarUpgrade;
 import favouriteless.enchanted.common.altar.PowerProvider;
 import favouriteless.enchanted.common.entities.FamiliarCat;

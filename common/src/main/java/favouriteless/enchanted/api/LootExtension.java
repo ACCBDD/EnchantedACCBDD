@@ -13,7 +13,7 @@ import java.util.function.Supplier;
 /**
  * {@link LootExtension} represents an extra loot table for a {@link BlockState} or {@link EntityType} when it is
  * broken/killed.
- * <strong>IMPORTANT:</strong> All {@link LootExtension} must be registered using their respective method in
+ * <strong>IMPORTANT:</strong> All {@link LootExtension}s must be registered using their respective method in
  * {@link LootExtensions}.
  */
 public abstract class LootExtension {
