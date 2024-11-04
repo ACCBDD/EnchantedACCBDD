@@ -95,7 +95,7 @@ public class SpinningWheelBlockEntity extends ContainerBlockEntityBase implement
 	 * @param recipe The {@link SpinningRecipe} to use.
 	 */
 	protected void spin(SpinningRecipe recipe) {
-		for(ItemStack recipeStack : recipe.getItemsIn()) {
+		for(ItemStack recipeStack : recipe.getInputs()) {
 			for(int i = 0; i < 3; i++) {
 				ItemStack input = inventory.get(i);
 				if(ItemStack.isSameItemSameTags(recipeStack, input)) {

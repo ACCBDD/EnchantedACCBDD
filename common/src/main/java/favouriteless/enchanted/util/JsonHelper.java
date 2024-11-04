@@ -17,7 +17,7 @@ public class JsonHelper {
     public static NonNullList<ItemStack> readItemStackList(JsonArray array, boolean readNbt) {
         NonNullList<ItemStack> out = NonNullList.create();
         for (int i = 0; i < array.size(); ++i)
-            out.add(ItemStackHelper.fromJson(array.get(i).getAsJsonObject(), readNbt));
+            out.add(ItemUtil.fromJson(array.get(i).getAsJsonObject(), readNbt));
 
         return out;
     }
@@ -33,7 +33,7 @@ public class JsonHelper {
     public static NonNullList<Item> readItemList(JsonArray array) {
         NonNullList<Item> out = NonNullList.create();
         for (int i = 0; i < array.size(); ++i)
-            out.add(ItemStackHelper.fromJson(array.get(i).getAsJsonObject(), false).getItem());
+            out.add(ItemUtil.fromJson(array.get(i).getAsJsonObject(), false).getItem());
 
         return out;
     }

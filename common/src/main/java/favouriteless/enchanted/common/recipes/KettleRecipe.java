@@ -1,20 +1,40 @@
 package favouriteless.enchanted.common.recipes;
 
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import favouriteless.enchanted.common.init.registry.EnchantedRecipeTypes;
-import favouriteless.enchanted.util.ItemStackHelper;
-import favouriteless.enchanted.util.JsonHelper;
-import com.google.gson.JsonObject;
-import net.minecraft.core.NonNullList;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.GsonHelper;
+import favouriteless.enchanted.util.ExtraCodecs;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
+
+import java.util.List;
 
 public class KettleRecipe extends CauldronTypeRecipe {
 
-    public KettleRecipe(ResourceLocation id, NonNullList<ItemStack> itemsIn, ItemStack itemOut, int power, int[] cookingColour, int[] finalColour) {
-        super(EnchantedRecipeTypes.KETTLE.get(), id, itemsIn, itemOut, power, cookingColour, finalColour);
+    public static final MapCodec<KettleRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+            ItemStack.CODEC.listOf().fieldOf("ingredients").forGetter(recipe -> recipe.inputs),
+            ItemStack.CODEC.fieldOf("result").forGetter(recipe -> recipe.result),
+            Codec.INT.optionalFieldOf("power", 0).forGetter(recipe -> recipe.power),
+            ExtraCodecs.HEX_INT.optionalFieldOf("cook_colour", 0x2D155E).forGetter(recipe -> recipe.cookColor),
+            ExtraCodecs.HEX_INT.optionalFieldOf("final_colour", 0x4A1AAD).forGetter(recipe -> recipe.finalColor)
+    ).apply(instance, KettleRecipe::new));
+
+    public static final StreamCodec<RegistryFriendlyByteBuf, KettleRecipe> STREAM_CODEC = StreamCodec.composite(
+            ItemStack.LIST_STREAM_CODEC, recipe -> recipe.inputs,
+            ItemStack.STREAM_CODEC, recipe -> recipe.result,
+            ByteBufCodecs.INT, recipe -> recipe.power,
+            ByteBufCodecs.INT, recipe -> recipe.cookColor,
+            ByteBufCodecs.INT, recipe -> recipe.finalColor,
+            KettleRecipe::new
+    );
+
+    public KettleRecipe(List<ItemStack> inputs, ItemStack result, int power, int cookingColour, int finalColour) {
+        super(inputs, result, power, cookingColour, finalColour);
     }
 
     @Override
@@ -22,53 +42,9 @@ public class KettleRecipe extends CauldronTypeRecipe {
         return EnchantedRecipeTypes.KETTLE_SERIALIZER.get();
     }
 
-    public static class Serializer implements RecipeSerializer<KettleRecipe> {
-
-        @Override
-        public KettleRecipe fromJson(ResourceLocation id, JsonObject json) {
-
-            NonNullList<ItemStack> itemsIn = JsonHelper.readItemStackList(GsonHelper.getAsJsonArray(json, "ingredients"), true);
-            ItemStack itemOut = ItemStackHelper.fromJson(GsonHelper.getAsJsonObject(json, "result"), true);
-            int power = GsonHelper.getAsInt(json, "power");
-            int[] cookingColour = JsonHelper.readRgb(GsonHelper.getAsJsonArray(json, "cookingColor"));
-            int[] finalColour = JsonHelper.readRgb(GsonHelper.getAsJsonArray(json, "finalColor"));
-
-            return new KettleRecipe(id, itemsIn, itemOut, power, cookingColour, finalColour);
-        }
-
-        @Override
-        public KettleRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buffer) {
-
-            int inSize = buffer.readInt();
-            NonNullList<ItemStack> itemsIn = NonNullList.create();
-            for (int x = 0; x < inSize; ++x) {
-                itemsIn.add(buffer.readItem());
-            }
-            ItemStack itemOut = buffer.readItem();
-            int power = buffer.readInt();
-            int[] cookingColour = new int[] {(int)buffer.readShort(), (int)buffer.readShort(), (int)buffer.readShort() };
-            int[] finalColour = new int[] {(int)buffer.readShort(), (int)buffer.readShort(), (int)buffer.readShort() };
-
-            return new KettleRecipe(id, itemsIn, itemOut, power, cookingColour, finalColour);
-        }
-
-        @Override
-        public void toNetwork(FriendlyByteBuf buffer, KettleRecipe recipe) {
-            buffer.writeInt(recipe.itemsIn.size());
-            for (ItemStack item : recipe.itemsIn) {
-                buffer.writeItem(item);
-            }
-            buffer.writeItem(recipe.itemOut);
-            buffer.writeInt(recipe.getPower());
-            buffer.writeShort(recipe.getCookRed());
-            buffer.writeShort(recipe.getCookGreen());
-            buffer.writeShort(recipe.getCookBlue());
-            buffer.writeShort(recipe.getFinalRed());
-            buffer.writeShort(recipe.getFinalGreen());
-            buffer.writeShort(recipe.getFinalBlue());
-
-        }
-
+    @Override
+    public RecipeType<?> getType() {
+        return EnchantedRecipeTypes.KETTLE.get();
     }
 
 }

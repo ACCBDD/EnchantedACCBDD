@@ -310,7 +310,7 @@ public abstract class CauldronBlockEntity<T extends CauldronTypeRecipe> extends 
 			targetBlue = 228;
 		}
 		else if(isComplete) {
-			targetRed = potentialRecipes.get(0).getFinalRed();
+			targetRed = potentialRecipes.get(0).getFinalColour();
 			targetGreen = potentialRecipes.get(0).getFinalGreen();
 			targetBlue = potentialRecipes.get(0).getFinalBlue();
 		}
@@ -320,7 +320,7 @@ public abstract class CauldronBlockEntity<T extends CauldronTypeRecipe> extends 
 			targetBlue = 47;
 		}
 		else if(!potentialRecipes.isEmpty() && cookProgress > 0) {
-			targetRed = potentialRecipes.get(0).getCookRed();
+			targetRed = potentialRecipes.get(0).getCookColour();
 			targetGreen = potentialRecipes.get(0).getCookGreen();
 			targetBlue = potentialRecipes.get(0).getCookBlue();
 		}

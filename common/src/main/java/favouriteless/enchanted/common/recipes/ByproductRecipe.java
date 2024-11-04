@@ -1,73 +1,62 @@
 package favouriteless.enchanted.common.recipes;
 
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import favouriteless.enchanted.common.init.registry.EnchantedRecipeTypes;
-import favouriteless.enchanted.util.ItemStackHelper;
-import com.google.gson.JsonObject;
-import net.minecraft.core.RegistryAccess;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.GsonHelper;
-import net.minecraft.world.Container;
+import net.minecraft.core.HolderLookup.Provider;
+import net.minecraft.core.NonNullList;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.NotNull;
 
-public class ByproductRecipe implements Recipe<Container> {
+public class ByproductRecipe implements Recipe<SingleRecipeInput> {
 
-    protected final RecipeType<?> type;
-    protected final ResourceLocation id;
+    public static final MapCodec<ByproductRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group (
+            Ingredient.CODEC_NONEMPTY.fieldOf("ingredient").forGetter(recipe -> recipe.ingredient),
+            ItemStack.CODEC.fieldOf("result").forGetter(recipe -> recipe.result)
+    ).apply(instance, ByproductRecipe::new));
+
+    public static final StreamCodec<RegistryFriendlyByteBuf, ByproductRecipe> STREAM_CODEC = StreamCodec.composite(
+            Ingredient.CONTENTS_STREAM_CODEC, recipe -> recipe.ingredient,
+            ItemStack.STREAM_CODEC, recipe -> recipe.result,
+            ByproductRecipe::new
+    );
 
     protected final Ingredient ingredient;
     protected final ItemStack result;
 
-    public ByproductRecipe(ResourceLocation id, Ingredient ingredient, ItemStack result) {
-        this.type = EnchantedRecipeTypes.BYPRODUCT.get();
-        this.id = id;
+    public ByproductRecipe(Ingredient ingredient, ItemStack result) {
         this.ingredient = ingredient;
         this.result = result;
     }
 
-    public Ingredient getInput() {
-        return this.ingredient;
+    @Override
+    public boolean matches(SingleRecipeInput input, Level level) {
+        return ingredient.test(input.item());
     }
 
     @Override
-    public boolean matches(Container inv, Level level) {
-        return this.ingredient.test(inv.getItem(0));
-    }
-
-    @Override
-    public ItemStack assemble(Container inv, RegistryAccess registryAccess) {
+    public ItemStack assemble(SingleRecipeInput input, Provider registries) {
         return result.copy();
     }
 
     @Override
     public boolean canCraftInDimensions(int width, int height) {
-        return width * height >= 4;
+        return true;
     }
 
     @Override
-    public ItemStack getResultItem(RegistryAccess registryAccess) {
-        return result.copy();
+    public ItemStack getResultItem(Provider registries) {
+        return result;
     }
 
     @Override
-    public ResourceLocation getId() {
-        return id;
-    }
-
-    @Override
-    public RecipeSerializer<?> getSerializer() {
-        return EnchantedRecipeTypes.BYPRODUCT_SERIALIZER.get();
-    }
-
-    @Override
-    public RecipeType<?> getType() {
-        return type;
+    public NonNullList<Ingredient> getIngredients() {
+        NonNullList<Ingredient> ingredients = NonNullList.create();
+        ingredients.add(this.ingredient);
+        return ingredients;
     }
 
     @Override
@@ -75,32 +64,14 @@ public class ByproductRecipe implements Recipe<Container> {
         return true;
     }
 
-
-    public static class Serializer implements RecipeSerializer<ByproductRecipe> {
-
-        @Override
-        @NotNull
-        public ByproductRecipe fromJson(@NotNull ResourceLocation id, @NotNull JsonObject json) {
-            Ingredient ingredient = Ingredient.fromJson(GsonHelper.getAsJsonObject(json, "ingredient"));
-            ItemStack result = ItemStackHelper.fromJson(GsonHelper.getAsJsonObject(json, "result"), true);
-
-            return new ByproductRecipe(id, ingredient, result);
-        }
-
-        @Override
-        @NotNull
-        public ByproductRecipe fromNetwork(@NotNull ResourceLocation id, @NotNull FriendlyByteBuf buffer) {
-            Ingredient ingredient = Ingredient.fromNetwork(buffer);
-            ItemStack result = buffer.readItem();
-
-            return new ByproductRecipe(id, ingredient, result);
-        }
-
-        @Override
-        public void toNetwork(@NotNull FriendlyByteBuf buffer, ByproductRecipe recipe) {
-            recipe.ingredient.toNetwork(buffer);
-            buffer.writeItem(recipe.result);
-        }
-
+    @Override
+    public RecipeType<?> getType() {
+        return EnchantedRecipeTypes.BYPRODUCT.get();
     }
+
+    @Override
+    public RecipeSerializer<?> getSerializer() {
+        return EnchantedRecipeTypes.BYPRODUCT_SERIALIZER.get();
+    }
+
 }

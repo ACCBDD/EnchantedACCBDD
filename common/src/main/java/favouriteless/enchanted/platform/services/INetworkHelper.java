@@ -1,6 +1,5 @@
 package favouriteless.enchanted.platform.services;
 
-import favouriteless.enchanted.common.network.EnchantedPacket;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;

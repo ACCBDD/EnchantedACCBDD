@@ -1,7 +1,8 @@
 package favouriteless.enchanted.common.poppet;
 
+import io.netty.buffer.ByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 
 public class PoppetUseResult {
 
@@ -49,6 +50,8 @@ public class PoppetUseResult {
         SUCCESS,
         SUCCESS_BREAK,
         FAIL,
-        PASS
+        PASS;
+
+        public static final StreamCodec<ByteBuf, ResultType> STREAM_CODEC = StreamCodec.of((buf, val) -> buf.writeByte(val.ordinal()), (buf) -> ResultType.values()[buf.readByte()]);
     }
 }

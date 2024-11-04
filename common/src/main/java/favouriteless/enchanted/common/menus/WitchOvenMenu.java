@@ -8,7 +8,7 @@ import favouriteless.enchanted.common.menus.slots.FuelSlot;
 import favouriteless.enchanted.common.menus.slots.JarInputSlot;
 import favouriteless.enchanted.common.menus.slots.NonJarInputSlot;
 import favouriteless.enchanted.common.menus.slots.OutputSlot;
-import favouriteless.enchanted.util.ItemStackHelper;
+import favouriteless.enchanted.util.ItemUtil;
 import favouriteless.enchanted.util.MenuUtils;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.SimpleContainer;
@@ -75,7 +75,7 @@ public class WitchOvenMenu extends MenuBase<WitchOvenBlockEntity> {
                 if(!moveItemStackTo(slotItem, 0, 1, false))
                     return ItemStack.EMPTY;
             }
-            else if(ItemStackHelper.isFuel(slotItem)) { // Item is fuel
+            else if(ItemUtil.isFuel(slotItem)) { // Item is fuel
                 if(!moveItemStackTo(slotItem, 2, 3, false))
                     return ItemStack.EMPTY;
             }

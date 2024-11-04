@@ -2,7 +2,7 @@ package favouriteless.enchanted.common.curses;
 
 import favouriteless.enchanted.api.curses.Curse;
 import favouriteless.enchanted.api.curses.CurseSavedData;
-import favouriteless.enchanted.common.network.packets.EnchantedSinkingCursePacket;
+import favouriteless.enchanted.common.network.packets.client.SinkingCursePacket;
 import favouriteless.enchanted.platform.CommonServices;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -84,7 +84,7 @@ public class CurseManager {
 
 	public static void playerLoggedOut(ServerPlayer player) { // Remove a player's curses when they log out
 		ACTIVE_CURSES.remove(player.getUUID());
-		CommonServices.NETWORK.sendToPlayer(new EnchantedSinkingCursePacket(0.0D), player); // Remove any sinking curse values
+		CommonServices.NETWORK.sendToPlayer(new SinkingCursePacket(0.0D), player); // Remove any sinking curse values
 	}
 
 }

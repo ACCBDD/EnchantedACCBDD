@@ -3,7 +3,7 @@ package favouriteless.enchanted.common.blocks;
 import favouriteless.enchanted.common.blocks.entity.PoppetShelfBlockEntity;
 import favouriteless.enchanted.common.poppet.PoppetShelfManager;
 import favouriteless.enchanted.platform.CommonServices;
-import favouriteless.enchanted.util.ItemStackHelper;
+import favouriteless.enchanted.util.ItemUtil;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RenderShape;
@@ -64,7 +64,7 @@ public class PoppetShelfBlock extends BaseEntityBlock {
 			if(blockEntity instanceof PoppetShelfBlockEntity) {
 				PoppetShelfBlockEntity shelf = (PoppetShelfBlockEntity) blockEntity;
 				if(!world.isClientSide)
-					ItemStackHelper.dropContentsNoChange(world, blockPos.getX(), blockPos.getY(), blockPos.getZ(), shelf.getInventory());
+					ItemUtil.dropContentsNoChange(world, blockPos.getX(), blockPos.getY(), blockPos.getZ(), shelf.getInventory());
 				PoppetShelfManager.removeShelf(shelf);
 			}
 			super.onRemove(state, world, blockPos, newState, isMoving);

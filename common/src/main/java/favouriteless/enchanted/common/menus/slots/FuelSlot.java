@@ -1,6 +1,6 @@
 package favouriteless.enchanted.common.menus.slots;
 
-import favouriteless.enchanted.util.ItemStackHelper;
+import favouriteless.enchanted.util.ItemUtil;
 import net.minecraft.world.Container;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
@@ -14,7 +14,7 @@ public class FuelSlot extends Slot {
 
 	@Override
 	public boolean mayPlace(ItemStack stack) {
-		return ItemStackHelper.isFuel(stack) || stack.is(Items.BUCKET);
+		return ItemUtil.isFuel(stack) || stack.is(Items.BUCKET);
 	}
 
 	@Override

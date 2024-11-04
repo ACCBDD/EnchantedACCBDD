@@ -122,7 +122,7 @@ public class DistilleryBlockEntity extends ContainerBlockEntityBase implements I
      */
     protected void distill(DistillingRecipe recipe) {
         if(recipe != null) {
-            for(ItemStack recipeItem : recipe.getItemsIn()) { // First, attempt to remove the input items.
+            for(ItemStack recipeItem : recipe.getInputs()) { // First, attempt to remove the input items.
                 for(int i = 0; i < 3; i++) {
                     ItemStack inputItem = inventory.get(i);
                     if(ItemStack.isSameItemSameTags(recipeItem, inputItem)) {
@@ -134,7 +134,7 @@ public class DistilleryBlockEntity extends ContainerBlockEntityBase implements I
                 }
             }
 
-            List<ItemStack> itemsOut = recipe.getItemsOut();
+            List<ItemStack> itemsOut = recipe.getOutputs();
 
             for(ItemStack recipeItem : itemsOut) {
                 for(int i = 3; i < inventory.size(); i++) { // First, stack the result into existing slots.
@@ -168,7 +168,7 @@ public class DistilleryBlockEntity extends ContainerBlockEntityBase implements I
      */
     private boolean canDistill(DistillingRecipe recipe) {
         if(recipe != null) {
-            List<ItemStack> itemsOut = new ArrayList<>(recipe.getItemsOut());
+            List<ItemStack> itemsOut = new ArrayList<>(recipe.getOutputs());
 
             Iterator<ItemStack> iterator = itemsOut.iterator();
             while(iterator.hasNext()) { // First, check if the output for the recipe can fit by stacking with items.

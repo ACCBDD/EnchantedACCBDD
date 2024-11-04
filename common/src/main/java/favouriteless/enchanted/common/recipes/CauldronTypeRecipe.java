@@ -1,32 +1,25 @@
 package favouriteless.enchanted.common.recipes;
 
-import net.minecraft.core.RegistryAccess;
-import net.minecraft.world.Container;
+import favouriteless.enchanted.common.recipes.recipe_inputs.ListInput;
+import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.core.NonNullList;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 
-public abstract class CauldronTypeRecipe implements Recipe<Container> {
+import java.util.List;
 
-    protected final RecipeType<?> type;
-    protected final ResourceLocation id;
+public abstract class CauldronTypeRecipe implements Recipe<ListInput> {
 
-    protected final NonNullList<ItemStack> itemsIn;
-    protected final ItemStack itemOut;
+    protected final List<ItemStack> inputs;
+    protected final ItemStack result;
     protected final int power;
 
-    protected final int[] cookColor;
-    protected final int[] finalColor;
+    protected final int cookColor;
+    protected final int finalColor;
 
-    public CauldronTypeRecipe(RecipeType<?> type, ResourceLocation id, NonNullList<ItemStack> itemsIn, ItemStack itemOut, int power, int[] cookColor, int[] finalColor) {
-        this.type = type;
-        this.id = id;
-
-        this.itemsIn = itemsIn;
-        this.itemOut = itemOut;
+    public CauldronTypeRecipe(List<ItemStack> inputs, ItemStack result, int power, int cookColor, int finalColor) {
+        this.inputs = inputs;
+        this.result = result;
         this.power = power;
 
         this.cookColor = cookColor;
@@ -34,17 +27,16 @@ public abstract class CauldronTypeRecipe implements Recipe<Container> {
     }
 
     /**
-     * Returns true if inventory is a partial match for this recipe
-     * @return isMatch
+     * @return true if inventory is a partial match for this recipe
      */
     @Override
-    public boolean matches(Container inventory, Level level) {
-        if(inventory.isEmpty() || inventory.getContainerSize() > itemsIn.size())
+    public boolean matches(ListInput input, Level level) {
+        if(input.isEmpty() || input.size() > inputs.size())
             return false; // Too many items
 
-        for(int i = 0; i < itemsIn.size() && i < inventory.getContainerSize(); i++) {
-            ItemStack itemIn = itemsIn.get(i);
-            ItemStack inventoryItem = inventory.getItem(i);
+        for(int i = 0; i < inputs.size() && i < input.size(); i++) {
+            ItemStack itemIn = inputs.get(i);
+            ItemStack inventoryItem = input.getItem(i);
 
             if(!ItemStack.matches(itemIn, inventoryItem))
                 return false;
@@ -53,19 +45,15 @@ public abstract class CauldronTypeRecipe implements Recipe<Container> {
     }
 
     /**
-     * Returns true if inventory is a full match to this recipe
-     *
-     * @param inventory
-     *
-     * @return isMatch
+     * @return true if inventory is a full match to this recipe
      */
-    public boolean fullMatch(Container inventory) {
-        if(inventory.getContainerSize() != itemsIn.size()) // Same number of items
+    public boolean fullMatch(ListInput input) {
+        if(input.size() != inputs.size()) // Same number of items
             return false;
 
-        for(int i = 0; i < itemsIn.size(); i++) {
-            ItemStack itemIn = itemsIn.get(i);
-            ItemStack inventoryItem = inventory.getItem(i);
+        for(int i = 0; i < inputs.size(); i++) {
+            ItemStack itemIn = inputs.get(i);
+            ItemStack inventoryItem = input.getItem(i);
             if(!ItemStack.matches(itemIn, inventoryItem))
                 return false;
         }
@@ -73,66 +61,35 @@ public abstract class CauldronTypeRecipe implements Recipe<Container> {
         return true;
     }
 
-    public NonNullList<ItemStack> getItemsIn() {
-        return itemsIn;
+    @Override
+    public ItemStack assemble(ListInput input, Provider registries) {
+        return result.copy();
+    }
+
+    @Override
+    public ItemStack getResultItem(Provider registries) {
+        return result;
     }
 
     public int getPower() {
         return power;
     }
 
-    public int getCookRed() {
-        return cookColor[0];
+    public int getCookColour() {
+        return cookColor;
     }
 
-    public int getCookGreen() {
-        return cookColor[1];
-    }
-
-    public int getCookBlue() {
-        return cookColor[2];
-    }
-
-    public int getFinalRed() {
-        return finalColor[0];
-    }
-
-    public int getFinalGreen() {
-        return finalColor[1];
-    }
-
-    public int getFinalBlue() {
-        return finalColor[2];
+    public int getFinalColour() {
+        return finalColor;
     }
 
     @Override
-    public ItemStack getResultItem(RegistryAccess registryAccess) {
-        return itemOut.copy();
-    }
-
-    @Override
-    public ItemStack assemble(Container inv, RegistryAccess registryAccess) {
-        return itemOut.copy();
-    }
-
-    @Override
-    public boolean canCraftInDimensions(int wdth, int height) {
+    public boolean canCraftInDimensions(int width, int height) {
         return false;
-    }
-
-    @Override
-    public ResourceLocation getId() {
-        return id;
-    }
-
-    @Override
-    public RecipeType<?> getType() {
-        return type;
     }
 
     @Override
     public boolean isSpecial() {
         return true;
     }
-
 }
