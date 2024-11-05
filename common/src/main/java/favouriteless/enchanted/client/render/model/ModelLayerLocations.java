@@ -1,6 +1,6 @@
 package favouriteless.enchanted.client.render.model;
 
-import favouriteless.enchanted.Enchanted;
+import favouriteless.enchanted.common.Enchanted;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 
 public class ModelLayerLocations {

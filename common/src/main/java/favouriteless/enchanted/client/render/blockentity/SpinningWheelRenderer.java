@@ -1,6 +1,6 @@
 package favouriteless.enchanted.client.render.blockentity;
 
-import favouriteless.enchanted.Enchanted;
+import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.client.render.model.ModelLayerLocations;
 import favouriteless.enchanted.common.blocks.SpinningWheelBlock;
 import favouriteless.enchanted.common.blocks.entity.SpinningWheelBlockEntity;

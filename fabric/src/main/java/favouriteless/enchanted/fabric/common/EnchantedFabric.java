@@ -1,7 +1,7 @@
-package favouriteless.enchanted;
+package favouriteless.enchanted.fabric.common;
 
+import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.common.CommonConfig;
-import favouriteless.enchanted.fabric.common.CommonEventsFabric;
 import favouriteless.enchanted.common.altar.AltarUpgrade;
 import favouriteless.enchanted.common.altar.PowerProvider;
 import favouriteless.enchanted.common.entities.FamiliarCat;
@@ -11,12 +11,12 @@ import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
 import favouriteless.enchanted.common.init.registry.EnchantedEntityTypes;
 import favouriteless.enchanted.common.init.registry.EnchantedItems;
 import favouriteless.enchanted.common.rites.RiteRequirements;
-import fuzs.forgeconfigapiport.api.config.v2.ForgeConfigRegistry;
+import fuzs.forgeconfigapiport.fabric.api.neoforge.v4.NeoForgeConfigRegistry;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.registry.DynamicRegistries;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.registry.StrippableBlockRegistry;
-import net.minecraftforge.fml.config.ModConfig.Type;
+import net.neoforged.fml.config.ModConfig.Type;
 
 public class EnchantedFabric implements ModInitializer {
     
@@ -31,7 +31,7 @@ public class EnchantedFabric implements ModInitializer {
         registerStrippables();
         EnchantedBlocks.registerFlammables();
 
-        ForgeConfigRegistry.INSTANCE.register(Enchanted.MOD_ID, Type.COMMON, CommonConfig.SPEC, "enchanted-common.toml");
+        NeoForgeConfigRegistry.INSTANCE.register(Enchanted.MOD_ID, Type.COMMON, CommonConfig.SPEC, "enchanted-common.toml");
     }
 
     private static void registerEntityAttributes() {

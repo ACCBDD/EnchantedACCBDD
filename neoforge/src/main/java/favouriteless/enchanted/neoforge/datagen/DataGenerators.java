@@ -1,6 +1,6 @@
 package favouriteless.enchanted.neoforge.datagen;
 
-import favouriteless.enchanted.Enchanted;
+import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.datagen.providers.*;
 import favouriteless.enchanted.datagen.providers.tag.*;
 import favouriteless.enchanted.neoforge.datagen.providers.*;

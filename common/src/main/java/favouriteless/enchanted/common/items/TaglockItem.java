@@ -1,6 +1,6 @@
 package favouriteless.enchanted.common.items;
 
-import favouriteless.enchanted.Enchanted;
+import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.api.taglock.BedTaglockSavedData;
 import favouriteless.enchanted.api.taglock.IBedTaglock;
 import favouriteless.enchanted.common.blocks.entity.BloodPoppyBlockEntity;

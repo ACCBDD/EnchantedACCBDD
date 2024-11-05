@@ -1,6 +1,6 @@
 package favouriteless.enchanted.common.rites.curse;
 
-import favouriteless.enchanted.Enchanted;
+import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.api.rites.AbstractRite;
 import favouriteless.enchanted.common.CommonConfig;
 import favouriteless.enchanted.common.init.EnchantedTags;
@@ -55,7 +55,7 @@ public class RiteCurseBlight extends AbstractRite {
                 List<LivingEntity> entitiesHandled = new ArrayList<>();
                 for(LivingEntity entity : entities) {
                     if(entity.distanceToSqr(pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D) < blockTicks*blockTicks) { // Sqr distance is much faster to calculate
-                        if(entity instanceof Villager villager && Math.random() < CommonConfig.BLIGHT_ZOMBIE_CHANCE.get())
+                        if(entity instanceof Villager villager && Math.random() < CommonConfig.blightZombieChance.get())
                             villager.convertTo(EntityType.ZOMBIE_VILLAGER, false);
                         else {
                             Holder<MobEffect> effectHolder = BuiltInRegistries.MOB_EFFECT.getOrCreateTag(MobEffects.BLIGHT_EFFECTS).getRandomElement(Enchanted.RANDOMSOURCE).orElse(null);
@@ -74,7 +74,7 @@ public class RiteCurseBlight extends AbstractRite {
                 List<BlockPos> positionsHandled = new ArrayList<>();
                 for(BlockPos _pos : positions) {
                     if(pos.distToCenterSqr(_pos.getX() + 0.5D, _pos.getY() + 0.5D, _pos.getZ() + 0.5D) < blockTicks*blockTicks) {
-                        if(Math.random() < CommonConfig.BLIGHT_DECAY_CHANCE.get()) {
+                        if(Math.random() < CommonConfig.blightDecayChance.get()) {
                             BlockState decayState = level.getBlockState(_pos);
                             if(decayState.is(EnchantedTags.Blocks.BLIGHT_DECAYABLE_BLOCKS)) {
                                 Holder<Block> blockHolder = BuiltInRegistries.BLOCK.getOrCreateTag(EnchantedTags.Blocks.BLIGHT_DECAY_BLOCKS).getRandomElement(Enchanted.RANDOMSOURCE).orElse(null);

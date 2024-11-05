@@ -1,6 +1,6 @@
 package favouriteless.enchanted.neoforge.datagen.providers.loot_tables;
 
-import favouriteless.enchanted.Enchanted;
+import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.common.blocks.crops.*;
 import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
 import favouriteless.enchanted.common.init.registry.EnchantedItems;

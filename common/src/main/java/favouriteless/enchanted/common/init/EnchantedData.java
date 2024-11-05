@@ -1,6 +1,6 @@
 package favouriteless.enchanted.common.init;
 
-import favouriteless.enchanted.Enchanted;
+import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.common.altar.PowerProvider;
 import favouriteless.enchanted.common.altar.AltarUpgrade;
 import favouriteless.enchanted.common.rites.RiteRequirements;

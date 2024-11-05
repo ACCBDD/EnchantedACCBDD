@@ -1,6 +1,6 @@
 package favouriteless.enchanted.api.rites;
 
-import favouriteless.enchanted.Enchanted;
+import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.common.init.registry.RiteTypes;
 import favouriteless.enchanted.common.rites.RiteType;
 import net.minecraft.nbt.CompoundTag;

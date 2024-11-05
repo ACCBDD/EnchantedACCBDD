@@ -1,17 +1,23 @@
 package favouriteless.enchanted.client;
 
-import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
+import net.neoforged.neoforge.common.ModConfigSpec;
+import net.neoforged.neoforge.common.ModConfigSpec.BooleanValue;
+import org.apache.commons.lang3.tuple.Pair;
 
 public class ClientConfig {
-	public static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
-	public static final ForgeConfigSpec SPEC;
+	public static final ClientConfig INSTANCE;
+	public static final ModConfigSpec SPEC;
 
-	public static final ConfigValue<Boolean> USE_ORIGINAL_CAT_TYPE;
+	public final BooleanValue useOriginalCatType;
+
+	private ClientConfig(ModConfigSpec.Builder builder) {
+		useOriginalCatType = builder.comment("Render cat familiars with their original fur colour rather than all black (DEFAULT: false)").define("original_cat_type", false);
+	}
 
 	static {
-		USE_ORIGINAL_CAT_TYPE = BUILDER.comment("Render cat familiars with their original fur colour rather than all black #default false").define("original_cat_type", false);
-		SPEC = BUILDER.build();
+		Pair<ClientConfig, ModConfigSpec> pair = new ModConfigSpec.Builder().configure(ClientConfig::new);
+		INSTANCE = pair.getLeft();
+		SPEC = pair.getRight();
 	}
 
 }

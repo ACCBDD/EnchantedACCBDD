@@ -1,6 +1,6 @@
 package favouriteless.enchanted.common.blocks.entity;
 
-import favouriteless.enchanted.Enchanted;
+import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.api.power.IPowerConsumer;
 import favouriteless.enchanted.api.power.IPowerProvider;
 import favouriteless.enchanted.api.power.PowerHelper;
@@ -237,7 +237,7 @@ public abstract class CauldronBlockEntity<T extends CauldronTypeRecipe> extends 
 			matchRecipes();
 
 			if(potentialRecipes.isEmpty()) {
-				if(CommonConfig.CAULDRON_ITEM_SPOIL.get())
+				if(CommonConfig.cauldronItemSpoil.get())
 					setFailed();
 				else {
 					inventory.remove(itemEntity.getItem());

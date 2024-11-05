@@ -1,6 +1,6 @@
-package favouriteless.enchanted;
+package favouriteless.enchanted.neoforge.common;
 
-import favouriteless.enchanted.client.ClientConfig;
+import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.common.CommonConfig;
 import favouriteless.enchanted.common.altar.AltarUpgrade;
 import favouriteless.enchanted.common.altar.PowerProvider;
@@ -15,19 +15,17 @@ import favouriteless.enchanted.platform.services.ForgeCommonRegistryHelper;
 import favouriteless.enchanted.platform.services.NeoNetworkHelper;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
-import net.neoforged.fml.ModLoadingContext;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.fml.common.EventBusSubscriber.Bus;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig.Type;
 
 @Mod(Enchanted.MOD_ID)
 public class EnchantedNeo {
     
     public EnchantedNeo(IEventBus bus, ModContainer container) {
         ForgeCommonRegistryHelper.TAB_REGISTRY.register(FMLJavaModLoadingContext.get().getModEventBus());
-        ModLoadingContext.get().registerConfig(Type.COMMON, CommonConfig.SPEC, "enchanted-common.toml");
-        ModLoadingContext.get().registerConfig(Type.CLIENT, ClientConfig.SPEC, "enchanted-client.toml");
         Enchanted.init();
+
+        container.registerConfig(Type.COMMON, CommonConfig.SPEC, "enchanted-common.toml");
 
         bus.addListener(NeoNetworkHelper::registerPayloads);
     }

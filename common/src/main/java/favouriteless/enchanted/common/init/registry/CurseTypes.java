@@ -1,6 +1,6 @@
 package favouriteless.enchanted.common.init.registry;
 
-import favouriteless.enchanted.Enchanted;
+import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.api.curses.Curse;
 import favouriteless.enchanted.common.curses.CurseMisfortune;
 import favouriteless.enchanted.common.curses.CurseOverheating;

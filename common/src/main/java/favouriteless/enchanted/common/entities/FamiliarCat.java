@@ -1,6 +1,6 @@
 package favouriteless.enchanted.common.entities;
 
-import favouriteless.enchanted.Enchanted;
+import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.api.familiars.FamiliarHelper;
 import favouriteless.enchanted.api.familiars.FamiliarSavedData;
 import favouriteless.enchanted.api.familiars.IFamiliarEntry;

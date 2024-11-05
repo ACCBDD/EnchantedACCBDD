@@ -32,7 +32,7 @@ public class RiteTotalEclipse extends AbstractRite {
 
     @Override
     protected boolean checkAdditional() {
-        if(System.currentTimeMillis() > LAST_USE_TIME + CommonConfig.TOTAL_ECLIPSE_COOLDOWN.get() * 1000L)
+        if(System.currentTimeMillis() > LAST_USE_TIME + CommonConfig.totalEclipseCooldown.get() * 1000L)
             return true;
 
         Player caster = getLevel().getServer().getPlayerList().getPlayer(getCasterUUID());

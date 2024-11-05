@@ -1,6 +1,6 @@
 package favouriteless.enchanted.common.lootextensions;
 
-import favouriteless.enchanted.Enchanted;
+import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.api.LootExtension;
 import favouriteless.enchanted.common.CommonConfig;
 import net.minecraft.world.item.HoeItem;
@@ -18,7 +18,7 @@ public class GrassLootExtension extends LootExtension {
 
     @Override
     public boolean test(LootContext context) {
-        return !(CommonConfig.HOE_ONLY_SEEDS.get() && !(context.getParam(LootContextParams.TOOL).getItem() instanceof HoeItem));
+        return !(CommonConfig.hoeOnlySeeds.get() && !(context.getParam(LootContextParams.TOOL).getItem() instanceof HoeItem));
     }
 
 }

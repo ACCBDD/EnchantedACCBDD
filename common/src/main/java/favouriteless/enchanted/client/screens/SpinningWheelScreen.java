@@ -1,6 +1,6 @@
 package favouriteless.enchanted.client.screens;
 
-import favouriteless.enchanted.Enchanted;
+import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.common.blocks.entity.SpinningWheelBlockEntity;
 import favouriteless.enchanted.common.menus.SpinningWheelMenu;
 import net.minecraft.client.gui.GuiGraphics;

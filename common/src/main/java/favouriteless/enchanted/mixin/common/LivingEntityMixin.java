@@ -21,7 +21,7 @@ public class LivingEntityMixin {
 
 	@Inject(method="checkTotemDeathProtection", at=@At("HEAD"), cancellable=true)
 	private void checkTotemDeathProtection(DamageSource source, CallbackInfoReturnable<Boolean> cir) {
-		if(CommonConfig.DISABLE_TOTEMS.get())
+		if(CommonConfig.disableTotems.get())
 			cir.setReturnValue(false);
 	}
 

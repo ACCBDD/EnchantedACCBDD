@@ -60,7 +60,7 @@ public class RiteBroiling extends AbstractRite {
                 int totalCount = itemEntity.getItem().getCount();
                 int burnedCount = 0;
                 for(int i = 0; i < totalCount; i++)
-                    if(Math.random() < CommonConfig.BROILING_BURN_CHANCE.get())
+                    if(Math.random() < CommonConfig.broilingBurnChance.get())
                         burnedCount++;
 
                 level.playSound(null, itemEntity, SoundEvents.BLAZE_SHOOT, SoundSource.MASTER, 1.0F, 1.0F);

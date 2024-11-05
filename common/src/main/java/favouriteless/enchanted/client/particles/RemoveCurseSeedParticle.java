@@ -1,6 +1,6 @@
 package favouriteless.enchanted.client.particles;
 
-import favouriteless.enchanted.Enchanted;
+import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.api.rites.AbstractRemoveCurseRite;
 import favouriteless.enchanted.client.particles.types.DelayedActionParticleType.DelayedActionData;
 import favouriteless.enchanted.common.init.registry.EnchantedParticleTypes;

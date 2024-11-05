@@ -1,6 +1,6 @@
 package favouriteless.enchanted.common.network.packets.client;
 
-import favouriteless.enchanted.Enchanted;
+import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.client.client_handlers.misc.EnchantedClientValues;
 import favouriteless.enchanted.common.network.PacketContext;
 import io.netty.buffer.ByteBuf;

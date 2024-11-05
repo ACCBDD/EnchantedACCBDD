@@ -1,6 +1,6 @@
 package favouriteless.enchanted.common.rites.world;
 
-import favouriteless.enchanted.Enchanted;
+import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.api.rites.AbstractRite;
 import favouriteless.enchanted.common.CommonConfig;
 import favouriteless.enchanted.common.init.EnchantedTags;
@@ -31,7 +31,7 @@ import java.util.UUID;
 
 public class RiteForest extends AbstractRite {
 
-    private final int treeCount = CommonConfig.FOREST_TREE_COUNT.get();
+    private final int treeCount = CommonConfig.forestTreeCount.get();
     private int treesPlaced = 0;
     private int tries = 0;
     private final List<BlockPos> usedPositions = new ArrayList<>();
@@ -70,9 +70,9 @@ public class RiteForest extends AbstractRite {
             ServerLevel level = getLevel();
             BlockPos pos = getPos();
             if(level != null) {
-                Vec3 randomPos = new Vec3(Enchanted.RANDOM.nextGaussian(), 0, Enchanted.RANDOM.nextGaussian()).normalize().scale(Math.cbrt(Math.random()) * CommonConfig.FOREST_RADIUS.get());
-                int minHeight = Math.max(level.getMinBuildHeight(), pos.getY() - CommonConfig.FOREST_RADIUS.get() / 2);
-                int maxHeight = Math.min(level.getMaxBuildHeight(), pos.getY() + CommonConfig.FOREST_RADIUS.get() / 2);
+                Vec3 randomPos = new Vec3(Enchanted.RANDOM.nextGaussian(), 0, Enchanted.RANDOM.nextGaussian()).normalize().scale(Math.cbrt(Math.random()) * CommonConfig.forestRadius.get());
+                int minHeight = Math.max(level.getMinBuildHeight(), pos.getY() - CommonConfig.forestRadius.get() / 2);
+                int maxHeight = Math.min(level.getMaxBuildHeight(), pos.getY() + CommonConfig.forestRadius.get() / 2);
 
                 for(int y = minHeight; y < maxHeight; y++) {
                     BlockPos treePos = new BlockPos((int) Math.round(randomPos.x()) + pos.getX(), y, (int) Math.round(randomPos.z()) + pos.getZ());

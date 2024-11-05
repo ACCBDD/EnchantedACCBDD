@@ -1,6 +1,6 @@
 package favouriteless.enchanted.neoforge.common;
 
-import favouriteless.enchanted.Enchanted;
+import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.common.effects.EffectEvents;
 import favouriteless.enchanted.common.poppet.PoppetEvents;
 import favouriteless.enchanted.platform.services.ForgeCommonRegistryHelper;

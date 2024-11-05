@@ -1,4 +1,4 @@
-package favouriteless.enchanted;
+package favouriteless.enchanted.common;
 
 import favouriteless.enchanted.common.init.EnchantedCreativeTab;
 import favouriteless.enchanted.common.init.EnchantedData;

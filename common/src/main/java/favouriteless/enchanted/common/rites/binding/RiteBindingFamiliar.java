@@ -1,6 +1,6 @@
 package favouriteless.enchanted.common.rites.binding;
 
-import favouriteless.enchanted.Enchanted;
+import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.api.familiars.FamiliarSavedData;
 import favouriteless.enchanted.api.familiars.FamiliarType;
 import favouriteless.enchanted.api.rites.AbstractRite;

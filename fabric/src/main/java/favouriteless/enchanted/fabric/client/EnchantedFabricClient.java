@@ -1,9 +1,12 @@
 package favouriteless.enchanted.fabric.client;
 
-import favouriteless.enchanted.Enchanted;
-import fuzs.forgeconfigapiport.api.config.v2.ForgeConfigRegistry;
+import favouriteless.enchanted.common.Enchanted;
+import favouriteless.enchanted.client.ClientConfig;
+import favouriteless.enchanted.client.ClientRegistry;
+import favouriteless.enchanted.client.EnchantedClient;
+import fuzs.forgeconfigapiport.fabric.api.neoforge.v4.NeoForgeConfigRegistry;
 import net.fabricmc.api.ClientModInitializer;
-import net.minecraftforge.fml.config.ModConfig.Type;
+import net.neoforged.fml.config.ModConfig.Type;
 
 public class EnchantedFabricClient implements ClientModInitializer {
 
@@ -16,7 +19,7 @@ public class EnchantedFabricClient implements ClientModInitializer {
         ClientRegistry.registerEntityRenderers();
         ClientEventsFabric.register();
 
-        ForgeConfigRegistry.INSTANCE.register(Enchanted.MOD_ID, Type.CLIENT, ClientConfig.SPEC, "enchanted-client.toml");
+        NeoForgeConfigRegistry.INSTANCE.register(Enchanted.MOD_ID, Type.CLIENT, ClientConfig.SPEC, "enchanted-client.toml");
     }
 
 }

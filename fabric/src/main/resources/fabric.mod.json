@@ -15,7 +15,7 @@
     "environment": "*",
     "entrypoints": {
         "main": [
-            "favouriteless.enchanted.EnchantedFabric"
+            "favouriteless.enchanted.fabric.common.EnchantedFabric"
         ],
         "client": [
           "favouriteless.enchanted.fabric.client.EnchantedFabricClient"

@@ -1,6 +1,6 @@
 package favouriteless.enchanted.common.init.registry;
 
-import favouriteless.enchanted.Enchanted;
+import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.api.rites.AbstractRite;
 import favouriteless.enchanted.api.rites.CreateItemRite;
 import favouriteless.enchanted.common.rites.RiteType;

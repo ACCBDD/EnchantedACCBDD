@@ -1,6 +1,6 @@
 package favouriteless.enchanted.client;
 
-import favouriteless.enchanted.Enchanted;
+import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.client.render.blockentity.CauldronWaterRenderer;
 import favouriteless.enchanted.client.render.blockentity.PoppetShelfRenderer;
 import favouriteless.enchanted.client.render.blockentity.SpinningWheelRenderer;

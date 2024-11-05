@@ -24,7 +24,7 @@ public class FamiliarCatRenderer extends MobRenderer<FamiliarCat, CatModel<Famil
 
 	@Override
 	public ResourceLocation getTextureLocation(FamiliarCat cat) {
-		return ClientConfig.USE_ORIGINAL_CAT_TYPE.get() ? cat.getResourceLocation() : TEXTURE_LOCATION;
+		return ClientConfig.useOriginalCatType.get() ? cat.getResourceLocation() : TEXTURE_LOCATION;
 	}
 
 	@Override

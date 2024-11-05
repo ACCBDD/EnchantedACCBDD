@@ -1,6 +1,6 @@
 package favouriteless.enchanted.client.particles;
 
-import favouriteless.enchanted.Enchanted;
+import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.client.particles.types.CircleMagicParticleType.CircleMagicData;
 import favouriteless.enchanted.common.init.registry.EnchantedParticleTypes;
 import net.minecraft.client.multiplayer.ClientLevel;

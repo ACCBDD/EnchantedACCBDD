@@ -1,6 +1,6 @@
 package favouriteless.enchanted.common.poppet;
 
-import favouriteless.enchanted.Enchanted;
+import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.common.init.registry.EnchantedItems;
 import favouriteless.enchanted.common.items.poppets.DeathPoppetItem;
 import favouriteless.enchanted.common.items.poppets.PoppetItem;

@@ -41,7 +41,7 @@
 # Common
     stateobserver-common = { group = "net.favouriteless.stateobserver", name = "stateobserver-common-1.21.1", version.ref = "stateobserver" }
     geckolib-common = { group = "software.bernie.geckolib", name = "geckolib-common-1.21.1", version.ref = "geckolib" }
-    forgeconfigapi-common = { group = "fuzs.forgeconfigapiport", name = "forgeconfigapiport-common", version.ref = "forgeconfigapi" }
+    forgeconfigapi-common = { group = "fuzs.forgeconfigapiport", name = "forgeconfigapiport-common-neoforgeapi", version.ref = "forgeconfigapi" }
 
 # NeoForge
     stateobserver-neoforge = { group = "net.favouriteless.stateobserver", name = "stateobserver-neoforge-1.21.1", version.ref = "stateobserver" }

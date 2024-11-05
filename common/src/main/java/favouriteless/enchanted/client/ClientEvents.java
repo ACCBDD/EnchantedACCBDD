@@ -31,7 +31,7 @@ public class ClientEvents {
 
 
 	public static void onItemTooltip(ItemStack item, List<Component> toolTips, TooltipFlag flags) {
-		if(item.getItem() == Items.TOTEM_OF_UNDYING && CommonConfig.DISABLE_TOTEMS.get())
+		if(item.getItem() == Items.TOTEM_OF_UNDYING && CommonConfig.disableTotems.get())
 			toolTips.add(Component.literal("Totems are disabled (Enchanted config)").withStyle(ChatFormatting.RED));
 	}
 

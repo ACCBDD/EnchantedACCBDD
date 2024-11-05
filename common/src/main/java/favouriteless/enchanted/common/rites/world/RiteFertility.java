@@ -1,6 +1,6 @@
 package favouriteless.enchanted.common.rites.world;
 
-import favouriteless.enchanted.Enchanted;
+import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.api.rites.AbstractRite;
 import favouriteless.enchanted.common.CommonConfig;
 import favouriteless.enchanted.common.init.EnchantedTags.MobEffects;
@@ -75,7 +75,7 @@ public class RiteFertility extends AbstractRite {
                     if(pos.distToCenterSqr(_pos.getX() + 0.5D, _pos.getY() + 0.5D, _pos.getZ() + 0.5D) < blockTicks*blockTicks) {
                         BlockState state = level.getBlockState(_pos);
                         if(state.getBlock() instanceof BonemealableBlock block)
-                            if(Math.random() < CommonConfig.FERTILITY_BONE_MEAL_CHANCE.get())
+                            if(Math.random() < CommonConfig.fertilityBoneMealChance.get())
                                 block.performBonemeal(level, level.random, _pos, state);
                         positionsHandled.add(_pos);
                     }

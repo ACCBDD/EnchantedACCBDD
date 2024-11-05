@@ -97,7 +97,7 @@ public class RiteSkyWrath extends AbstractRite {
 
     @Override
     protected boolean checkAdditional() {
-        if(System.currentTimeMillis() - LAST_USE_TIME < CommonConfig.SKY_WRATH_COOLDOWN.get() * 1000L) {
+        if(System.currentTimeMillis() - LAST_USE_TIME < CommonConfig.skyWrathCooldown.get() * 1000L) {
             Player caster = getLevel().getServer().getPlayerList().getPlayer(getCasterUUID());
             caster.displayClientMessage(Component.literal("The sky is not ready to release lightning.").withStyle(ChatFormatting.RED), false);
             return false;

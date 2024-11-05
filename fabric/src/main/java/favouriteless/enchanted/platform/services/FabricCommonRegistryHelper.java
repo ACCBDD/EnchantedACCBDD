@@ -1,6 +1,6 @@
 package favouriteless.enchanted.platform.services;
 
-import favouriteless.enchanted.Enchanted;
+import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.fabric.common.items.FabricNonAnimatedArmorItem;
 import favouriteless.enchanted.common.items.NonAnimatedArmorItem;
 import favouriteless.enchanted.platform.JsonDataLoaderWrapper;
