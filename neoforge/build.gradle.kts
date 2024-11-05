@@ -78,11 +78,12 @@ tasks.withType<ProcessResources>().configureEach {
 modrinth {
     token = System.getenv("MODRINTH_TOKEN") ?: "Invalid/No API Token Found"
 
-    projectId = "HsbpdVo9"
-    versionName = "NeoForge ${mcVersion}"
-    versionNumber.set(project.version.toString())
+    projectId.set("HsbpdVo9")
 
-    uploadFile.set(tasks.named<Jar>("jar"))
+    versionName.set("NeoForge $mcVersion")
+    versionNumber.set(project.version.toString())
+    versionType.set(if(project.version.toString().endsWith("beta")) "beta" else "release")
+    uploadFile.set(tasks.jar)
     changelog.set(rootProject.file("changelog.txt").readText(Charsets.UTF_8))
 
     loaders.set(listOf("neoforge"))
@@ -90,6 +91,7 @@ modrinth {
 
     dependencies {
         required.project("stateobserver")
+        required.project("geckolib")
     }
 
     debugMode = true
@@ -101,17 +103,19 @@ tasks.register<TaskPublishCurseForge>("publishToCurseForge") {
     apiToken = System.getenv("CURSEFORGE_TOKEN") ?: "Invalid/No API Token Found"
 
     val mainFile = upload(560363, tasks.jar)
-    mainFile.releaseType = "release"
+    mainFile.releaseType = if(project.version.toString().endsWith("beta")) "beta" else "release"
+    mainFile.changelog = rootProject.file("changelog.txt").readText(Charsets.UTF_8)
+
     mainFile.addModLoader("NeoForge")
     mainFile.addGameVersion(mcVersion)
     mainFile.addJavaVersion("Java 21")
-    mainFile.changelog = rootProject.file("changelog.txt").readText(Charsets.UTF_8)
 
     mainFile.addRequirement(
-        "stateobserver"
+        "stateobserver",
+        "geckolib"
     )
 
-    //debugMode = true
+    debugMode = true
     //https://github.com/Darkhax/CurseForgeGradle#available-properties
 }
 

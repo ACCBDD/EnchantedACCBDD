@@ -86,11 +86,12 @@ tasks.withType<ProcessResources>().configureEach {
 modrinth {
     token = System.getenv("MODRINTH_TOKEN") ?: "Invalid/No API Token Found"
 
-    projectId = "HsbpdVo9"
-    versionName = "Fabric ${minecraftVersion}"
-    versionNumber.set(project.version.toString())
+    projectId.set("HsbpdVo9")
 
-    uploadFile.set(tasks.named<RemapJarTask>("remapJar"))
+    versionName.set("NeoForge $minecraftVersion")
+    versionNumber.set(project.version.toString())
+    versionType.set(if(project.version.toString().endsWith("beta")) "beta" else "release")
+    uploadFile.set(tasks.jar)
     changelog.set(rootProject.file("changelog.txt").readText(Charsets.UTF_8))
 
     loaders.set(listOf("fabric"))
@@ -99,6 +100,7 @@ modrinth {
     dependencies {
         required.project("fabric-api")
         required.project("stateobserver")
+        required.project("forge-config-api-port")
     }
     debugMode = true
     //https://github.com/modrinth/minotaur#available-properties
@@ -108,19 +110,21 @@ tasks.register<TaskPublishCurseForge>("publishToCurseForge") {
     group = "publishing"
     apiToken = System.getenv("CURSEFORGE_TOKEN") ?: "Invalid/No API Token Found"
 
-    val mainFile = upload(560363, tasks.remapJar)
-    mainFile.releaseType = "release"
+    val mainFile = upload(560363, tasks.jar)
+    mainFile.releaseType = if(project.version.toString().endsWith("beta")) "beta" else "release"
+    mainFile.changelog = rootProject.file("changelog.txt").readText(Charsets.UTF_8)
+
     mainFile.addModLoader("Fabric")
     mainFile.addGameVersion(minecraftVersion)
-    mainFile.addJavaVersion("Java 17")
-    mainFile.changelog = rootProject.file("changelog.txt").readText(Charsets.UTF_8)
+    mainFile.addJavaVersion("Java 21")
 
     mainFile.addRequirement(
         "fabric-api",
         "stateobserver",
+        "forge-config-api-port-fabric"
     )
 
-    //debugMode = true
+    debugMode = true
     //https://github.com/Darkhax/CurseForgeGradle#available-properties
 }
 
