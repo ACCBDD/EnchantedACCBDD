@@ -1,5 +1,7 @@
 package net.favouriteless.enchanted.common.poppet;
 
+import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.Tag;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
@@ -71,21 +73,18 @@ public class PoppetShelfInventory extends AbstractList<ItemStack> implements Con
 		inventoryContents.clear();
 	}
 
-	public void save(CompoundTag nbt) {
+	public void save(CompoundTag nbt, HolderLookup.Provider registries) {
 		ListTag list = new ListTag();
-		for(ItemStack itemStack : inventoryContents) {
-			CompoundTag itemTag = new CompoundTag();
-			itemStack.save(itemTag);
-			list.add(itemTag);
+		for(ItemStack stack : inventoryContents) {
+			list.add(stack.save(registries));
 		}
 		nbt.put("items", list);
 	}
 
-	public void load(CompoundTag nbt) {
+	public void load(CompoundTag nbt, HolderLookup.Provider registries) {
 		ListTag list = nbt.getList("items", 10);
 		for(int i = 0; i < list.size(); i++) {
-			CompoundTag tag = (CompoundTag)list.get(i);
-			inventoryContents.set(i, ItemStack.of(tag));
+			inventoryContents.set(i, ItemStack.parse(registries, list.get(i)).orElse(ItemStack.EMPTY));
 		}
 	}
 

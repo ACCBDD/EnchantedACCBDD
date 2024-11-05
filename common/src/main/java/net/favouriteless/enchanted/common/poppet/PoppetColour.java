@@ -1,5 +1,6 @@
 package net.favouriteless.enchanted.common.poppet;
 
+// TODO: Rewrite this as data driven
 public enum PoppetColour {
 	EARTH(112, 80, 54, 59, 43, 30),
 	EQUIPMENT(227, 227, 227, 163, 163, 163),

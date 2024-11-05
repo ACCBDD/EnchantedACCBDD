@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+// TODO: Codec this
 public class FamiliarSavedData extends SavedData {
 
     private static final String NAME = "enchanted_familiars";

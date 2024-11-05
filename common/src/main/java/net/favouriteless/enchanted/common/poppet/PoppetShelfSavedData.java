@@ -2,7 +2,10 @@ package net.favouriteless.enchanted.common.poppet;
 
 import net.favouriteless.enchanted.common.Enchanted;
 import net.favouriteless.enchanted.common.blocks.entity.PoppetShelfBlockEntity;
+import net.favouriteless.enchanted.common.items.component.EDataComponents;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceKey;
@@ -28,19 +31,20 @@ public class PoppetShelfSavedData extends SavedData {
 		this.level = world;
 	}
 
-	public static PoppetShelfSavedData get(Level world) {
-		if (world instanceof ServerLevel) {
-			ServerLevel overworld = world.getServer().getLevel(Level.OVERWORLD);
-
-			DimensionDataStorage storage = overworld.getDataStorage();
-			return storage.computeIfAbsent((nbt) -> PoppetShelfSavedData.load(overworld, nbt),() -> new PoppetShelfSavedData(overworld), NAME);
+	public static PoppetShelfSavedData get(Level level) {
+		if (level instanceof ServerLevel) {
+			ServerLevel overworld = level.getServer().overworld();
+			return overworld.getDataStorage().computeIfAbsent(new Factory<>(
+					() -> new PoppetShelfSavedData(overworld),
+					(nbt, reg) -> PoppetShelfSavedData.load(overworld, nbt, reg),
+					null), NAME);
 		}
 		else {
 			throw new RuntimeException("Game attempted to load server-side poppet shelf data from a client-side world.");
 		}
 	}
 
-	public static PoppetShelfSavedData load(ServerLevel level, CompoundTag nbt) {
+	public static PoppetShelfSavedData load(ServerLevel level, CompoundTag nbt, Provider registries) {
 		PoppetShelfSavedData data = new PoppetShelfSavedData(level);
 
 		for(String identifier : nbt.getAllKeys()) {
@@ -48,7 +52,7 @@ public class PoppetShelfSavedData extends SavedData {
 			BlockPos pos = data.getBlockPosFromShelfIdentifier(identifier);
 			PoppetShelfInventory inventory = new PoppetShelfInventory(world, pos);
 
-			inventory.load((CompoundTag)nbt.get(identifier));
+			inventory.load((CompoundTag)nbt.get(identifier), registries);
 			data.SHELF_STORAGE.put(identifier, inventory);
 			data.setupPoppetUUIDs(identifier, inventory);
 		}
@@ -57,11 +61,11 @@ public class PoppetShelfSavedData extends SavedData {
 	}
 
 	@Override
-	public CompoundTag save(CompoundTag nbt) {
+	public CompoundTag save(CompoundTag nbt, Provider registries) {
 		for(String identifier : SHELF_STORAGE.keySet()) {
 			CompoundTag tag = new CompoundTag();
 			PoppetShelfInventory inventory = SHELF_STORAGE.get(identifier);
-			inventory.save(tag);
+			inventory.save(tag, registries);
 			nbt.put(identifier, tag);
 		}
 		Enchanted.LOG.info("Saved poppet shelves successfully");
@@ -88,18 +92,19 @@ public class PoppetShelfSavedData extends SavedData {
 		}
 	}
 
-	public void setupPoppetUUID(String identifier, ItemStack itemStack) {
-		if(PoppetUtils.isBound(itemStack)) {
-			UUID uuid = itemStack.getTag().getUUID("boundPlayer");
-			PLAYER_POPPETS.putIfAbsent(uuid, new ArrayList<>());
-			PLAYER_POPPETS.get(uuid).add(new PoppetEntry(itemStack, identifier));
+	public void setupPoppetUUID(String identifier, ItemStack stack) {
+		if(PoppetUtils.isBound(stack)) {
+			stack.get(EDataComponents.ENTITY_REF.get()).uuid().ifPresent(uuid -> {
+				PLAYER_POPPETS.putIfAbsent(uuid, new ArrayList<>());
+				PLAYER_POPPETS.get(uuid).add(new PoppetEntry(stack, identifier));
+			});
 		}
 	}
 
-	public void removePoppetUUID(String identifier, ItemStack itemStack) {
-		if(PoppetUtils.isBound(itemStack)) {
-			UUID uuid = itemStack.getTag().getUUID("boundPlayer");
-			PLAYER_POPPETS.get(uuid).removeIf(entry -> entry.matches(itemStack, identifier));
+	public void removePoppetUUID(String identifier, ItemStack stack) {
+		if(PoppetUtils.isBound(stack)) {
+			stack.get(EDataComponents.ENTITY_REF.get()).uuid().ifPresent(uuid ->
+					PLAYER_POPPETS.get(uuid).removeIf(entry -> entry.matches(stack, identifier)));
 		}
 	}
 
@@ -114,7 +119,7 @@ public class PoppetShelfSavedData extends SavedData {
 
 	public ServerLevel getLevelFromShelfIdentifier(String shelfIdentifier) {
 		String levelString = shelfIdentifier.substring(0, shelfIdentifier.indexOf("+"));
-		return level.getServer().getLevel(ResourceKey.create(Registries.DIMENSION, new ResourceLocation(levelString)));
+		return level.getServer().getLevel(ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse(levelString)));
 	}
 
 	public BlockPos getBlockPosFromShelfIdentifier(String shelfIdentifier) {

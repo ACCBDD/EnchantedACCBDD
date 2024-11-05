@@ -2,6 +2,8 @@ package net.favouriteless.enchanted.common.poppet;
 
 import net.favouriteless.enchanted.common.Enchanted;
 import net.favouriteless.enchanted.common.items.EItems;
+import net.favouriteless.enchanted.common.items.component.EDataComponents;
+import net.favouriteless.enchanted.common.items.component.EntityRefData;
 import net.favouriteless.enchanted.common.items.poppets.DeathPoppetItem;
 import net.favouriteless.enchanted.common.items.poppets.PoppetItem;
 import net.favouriteless.enchanted.common.items.poppets.ItemProtectionPoppetItem;
@@ -98,9 +100,7 @@ public class PoppetUtils {
 	 * @return true if item is a bound {@link PoppetItem}
 	 */
 	public static boolean isBound(ItemStack item) {
-		if(item.hasTag())
-			return item.getItem() instanceof PoppetItem && item.getTag().hasUUID("boundPlayer");
-		return false;
+		return item.getItem() instanceof PoppetItem && item.get(EDataComponents.ENTITY_REF.get()).uuid().isPresent();
 	}
 
 	/**
@@ -124,10 +124,10 @@ public class PoppetUtils {
 	 * @return true if item is bound to uuid.
 	 */
 	public static boolean belongsTo(ItemStack item, UUID uuid) {
-		if(item.hasTag() && item.getItem() instanceof PoppetItem) {
-			CompoundTag tag = item.getTag();
-			if(tag.hasUUID("boundPlayer"))
-				return tag.getUUID("boundPlayer").equals(uuid);
+		if(item.getItem() instanceof PoppetItem) {
+			Optional<UUID> optional = item.get(EDataComponents.ENTITY_REF.get()).uuid();
+			if(optional.isPresent())
+				return optional.get().equals(uuid);
 		}
 		return false;
 	}
@@ -140,7 +140,7 @@ public class PoppetUtils {
 	 */
 	public static ServerPlayer getBoundPlayer(ItemStack item, ServerLevel level) {
 		if(isBound(item))
-			return level.getServer().getPlayerList().getPlayer(item.getTag().getUUID("boundPlayer"));
+			return level.getServer().getPlayerList().getPlayer(item.get(EDataComponents.ENTITY_REF.get()).uuid().get());
 		return null;
 	}
 
@@ -153,7 +153,7 @@ public class PoppetUtils {
 	 */
 	public static String getBoundName(ItemStack item) {
 		if(isBound(item))
-			return item.getTag().getString("boundName");
+			return item.get(EDataComponents.ENTITY_REF.get()).name().get();
 		return "None";
 	}
 
@@ -165,10 +165,7 @@ public class PoppetUtils {
 	 */
 	public static void bind(ItemStack item, Player player) {
 		if(item.getItem() instanceof PoppetItem) {
-			CompoundTag tag = item.getOrCreateTag();
-			tag.putUUID("boundPlayer", player.getUUID());
-			tag.putString("boundName", player.getDisplayName().getString());
-			item.setTag(tag);
+			item.set(EDataComponents.ENTITY_REF.get(), EntityRefData.of(player.getUUID(), player.getDisplayName().getString()));
 		}
 	}
 
@@ -179,12 +176,7 @@ public class PoppetUtils {
 	 */
 	public static void unbind(ItemStack item) {
 		if(item.getItem() instanceof PoppetItem) {
-			if(item.hasTag()) {
-				CompoundTag tag = item.getTag();
-				tag.remove("boundPlayer");
-				tag.remove("boundName");
-				item.setTag(tag);
-			}
+			item.set(EDataComponents.ENTITY_REF.get(), EntityRefData.EMPTY);
 		}
 	}
 
