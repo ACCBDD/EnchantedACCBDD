@@ -1,6 +1,5 @@
 package favouriteless.enchanted.common.effects;
 
-import favouriteless.enchanted.common.init.registry.EEffects;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;

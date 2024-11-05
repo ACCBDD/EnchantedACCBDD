@@ -1,8 +1,7 @@
 package favouriteless.enchanted.common.menus;
 
 import favouriteless.enchanted.common.blocks.entity.PoppetShelfBlockEntity;
-import favouriteless.enchanted.common.init.registry.EBlocks;
-import favouriteless.enchanted.common.init.registry.EMenuTypes;
+import favouriteless.enchanted.common.blocks.EBlocks;
 import favouriteless.enchanted.common.items.poppets.PoppetItem;
 import favouriteless.enchanted.util.MenuUtils;
 import net.minecraft.network.FriendlyByteBuf;

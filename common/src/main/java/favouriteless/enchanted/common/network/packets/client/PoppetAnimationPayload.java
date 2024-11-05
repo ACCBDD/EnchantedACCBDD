@@ -3,7 +3,7 @@ package favouriteless.enchanted.common.network.packets.client;
 import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.client.particles.types.TwoToneColouredParticleType.TwoToneColouredData;
 import favouriteless.enchanted.client.render.poppet.PoppetAnimationManager;
-import favouriteless.enchanted.common.init.registry.EParticleTypes;
+import favouriteless.enchanted.common.init.EParticleTypes;
 import favouriteless.enchanted.common.items.poppets.PoppetItem;
 import favouriteless.enchanted.common.network.PacketContext;
 import favouriteless.enchanted.common.poppet.PoppetColour;

@@ -1,8 +1,7 @@
 package favouriteless.enchanted.common.menus;
 
 import favouriteless.enchanted.common.blocks.entity.SpinningWheelBlockEntity;
-import favouriteless.enchanted.common.init.registry.EBlocks;
-import favouriteless.enchanted.common.init.registry.EMenuTypes;
+import favouriteless.enchanted.common.blocks.EBlocks;
 import favouriteless.enchanted.common.menus.slots.NonJarInputSlot;
 import favouriteless.enchanted.common.menus.slots.OutputSlot;
 import favouriteless.enchanted.common.menus.slots.SimpleDataSlot;

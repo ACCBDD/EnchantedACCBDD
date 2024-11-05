@@ -40,4 +40,6 @@ public abstract class AbstractChalkBlock extends Block {
         return blockstate.isFaceSturdy(level, belowPos, Direction.UP);
     }
 
+    public abstract BlockState getRandomState();
+
 }

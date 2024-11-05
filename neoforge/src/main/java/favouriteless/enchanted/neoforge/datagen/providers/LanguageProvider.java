@@ -1,11 +1,9 @@
 package favouriteless.enchanted.neoforge.datagen.providers;
 
 import favouriteless.enchanted.common.Enchanted;
-import favouriteless.enchanted.common.init.registry.EBlocks;
-import favouriteless.enchanted.common.init.registry.EEntityTypes;
+import favouriteless.enchanted.common.blocks.EBlocks;
+import favouriteless.enchanted.common.entities.EEntityTypes;
 import favouriteless.enchanted.common.items.EItems;
-import favouriteless.enchanted.common.init.registry.RiteTypes;
-import favouriteless.enchanted.common.rites.RiteType;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.effect.MobEffect;
@@ -138,21 +136,21 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
     }
 
     protected void autoGenerateRites() {
-        for(RiteType<?> type : RiteTypes.getEntries()) {
-            if(type.getId().getNamespace().equals(Enchanted.MOD_ID)) {
-                String path = type.getId().getPath();
-
-                String[] words = path.split("_");
-                StringBuilder builder = new StringBuilder("Rite of ")
-                        .append(words[0].substring(0, 1).toUpperCase())
-                        .append(words[0].substring(1));
-
-                if(path.contains("charged"))
-                    builder.append(" (Charged)");
-
-                add(Enchanted.translationKey("rite", type.getId().getPath()), builder.toString());
-            }
-        }
+//        for(RiteType<?> type : RiteTypes.getEntries()) {
+//            if(type.getId().getNamespace().equals(Enchanted.MOD_ID)) {
+//                String path = type.getId().getPath();
+//
+//                String[] words = path.split("_");
+//                StringBuilder builder = new StringBuilder("Rite of ")
+//                        .append(words[0].substring(0, 1).toUpperCase())
+//                        .append(words[0].substring(1));
+//
+//                if(path.contains("charged"))
+//                    builder.append(" (Charged)");
+//
+//                add(Enchanted.translationKey("rite", type.getId().getPath()), builder.toString());
+//            }
+//        }
     }
 
     public String getAutoName(String path) {

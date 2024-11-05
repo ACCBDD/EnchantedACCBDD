@@ -1,7 +1,7 @@
 package favouriteless.enchanted.neoforge.datagen.builders.recipe;
 
 import favouriteless.enchanted.common.items.EItems;
-import favouriteless.enchanted.common.init.registry.ERecipeTypes;
+import favouriteless.enchanted.common.recipes.ERecipeTypes;
 import favouriteless.enchanted.util.ItemUtil;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;

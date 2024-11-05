@@ -3,7 +3,6 @@ package favouriteless.enchanted.common.recipes;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import favouriteless.enchanted.common.init.registry.ERecipeTypes;
 import favouriteless.enchanted.util.ExtraCodecs;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;

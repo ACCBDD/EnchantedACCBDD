@@ -2,8 +2,8 @@ package favouriteless.enchanted.common.blocks.crops;
 
 import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.common.entities.Mandrake;
-import favouriteless.enchanted.common.init.registry.EBlocks;
-import favouriteless.enchanted.common.init.registry.EEntityTypes;
+import favouriteless.enchanted.common.blocks.EBlocks;
+import favouriteless.enchanted.common.entities.EEntityTypes;
 import favouriteless.enchanted.common.items.EItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.stats.Stats;

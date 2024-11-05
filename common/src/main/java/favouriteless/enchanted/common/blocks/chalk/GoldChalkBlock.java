@@ -1,7 +1,7 @@
 package favouriteless.enchanted.common.blocks.chalk;
 
 import favouriteless.enchanted.common.blocks.entity.ChalkGoldBlockEntity;
-import favouriteless.enchanted.common.init.registry.EBlockEntityTypes;
+import favouriteless.enchanted.common.blocks.entity.EBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -31,6 +31,11 @@ public class GoldChalkBlock extends AbstractChalkBlock implements EntityBlock {
         this.registerDefaultState(getStateDefinition().any().setValue(GLYPH, 0));
     }
 
+    @Override
+    public BlockState getRandomState() {
+        return defaultBlockState().setValue(GLYPH, random.nextInt(4));
+    }
+
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
@@ -53,7 +58,7 @@ public class GoldChalkBlock extends AbstractChalkBlock implements EntityBlock {
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        return defaultBlockState().setValue(GLYPH, random.nextInt(4));
+        return getRandomState();
     }
 
     @Override

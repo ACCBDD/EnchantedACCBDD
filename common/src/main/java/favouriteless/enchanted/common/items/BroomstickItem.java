@@ -1,18 +1,19 @@
 package favouriteless.enchanted.common.items;
 
 import favouriteless.enchanted.common.entities.Broomstick;
-import favouriteless.enchanted.common.init.registry.EEntityTypes;
+import favouriteless.enchanted.common.entities.EEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.level.Level;
 
 public class BroomstickItem extends Item {
 
-	public BroomstickItem() {
-		super(new Properties());
+	public BroomstickItem(Properties properties) {
+		super(properties);
 	}
 
 	@Override
@@ -22,24 +23,21 @@ public class BroomstickItem extends Item {
 
 	@Override
 	public InteractionResult useOn(UseOnContext context) {
-		if(context.getLevel().isClientSide) {
-			return InteractionResult.SUCCESS;
-		}
-		else {
+		Level level = context.getLevel();
+		Player player = context.getPlayer();
+
+		if(!level.isClientSide) {
 			BlockPos pos = context.getClickedPos().relative(context.getClickedFace());
 
-			Broomstick broom = EEntityTypes.BROOMSTICK.get().create(context.getLevel());
+			Broomstick broom = EEntityTypes.BROOMSTICK.get().create(level);
 			broom.setPos(pos.getX()+0.5D, pos.getY(), pos.getZ()+0.5D);
-			broom.setDeltaMovement(Vec3.ZERO);
-			broom.xo = pos.getX()+0.5D;
-			broom.yo = pos.getY();
-			broom.zo = pos.getZ()+0.5D;
-			broom.setYRot(context.getPlayer().getYRot());;
-			context.getLevel().addFreshEntity(broom);
+			broom.setYRot(player.getYRot());;
+			level.addFreshEntity(broom);
 
-			if(!context.getPlayer().getAbilities().instabuild) // Player not in creative
+			if(!player.getAbilities().instabuild) // Player not in creative
 				context.getItemInHand().shrink(1);
 		}
-		return InteractionResult.PASS;
+		return InteractionResult.sidedSuccess(level.isClientSide);
 	}
+
 }

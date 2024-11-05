@@ -1,7 +1,8 @@
 package favouriteless.enchanted.api.curses;
 
 import favouriteless.enchanted.common.Enchanted;
-import favouriteless.enchanted.common.init.registry.CurseTypes;
+import favouriteless.enchanted.common.curses.CurseTypes;
+import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
@@ -43,7 +44,7 @@ public class CurseSavedData extends SavedData {
 	 */
 	public static CurseSavedData get(Level level) {
 		if(level instanceof ServerLevel)
-			return level.getServer().getLevel(Level.OVERWORLD).getDataStorage().computeIfAbsent(CurseSavedData::load, CurseSavedData::new, NAME);
+			return level.getServer().overworld().getDataStorage().computeIfAbsent(new Factory<>(CurseSavedData::new, CurseSavedData::load, null), NAME);
 		else
 			throw new RuntimeException("Game attempted to load serverside curse data from a clientside world.");
 	}
@@ -54,7 +55,7 @@ public class CurseSavedData extends SavedData {
 		return entries.computeIfAbsent(uuid, (_uuid) -> new ArrayList<>());
 	}
 
-	public static CurseSavedData load(CompoundTag nbt) {
+	public static CurseSavedData load(CompoundTag nbt, Provider registries) {
 		CurseSavedData data = new CurseSavedData();
 
 		for(String key : nbt.getAllKeys()) {
@@ -65,7 +66,7 @@ public class CurseSavedData extends SavedData {
 			ListTag listNBT = playerTag.getList("curses", Tag.TAG_COMPOUND);
 			for(Tag tag : listNBT) {
 				CompoundTag curseTag = (CompoundTag)tag;
-				Curse curse = CurseTypes.getInstance(new ResourceLocation(curseTag.getString("type")));
+				Curse curse = CurseTypes.getInstance(ResourceLocation.parse(curseTag.getString("type")));
 
 				if(curse != null) {
 					curse.load(curseTag);
@@ -80,7 +81,7 @@ public class CurseSavedData extends SavedData {
 	}
 
 	@Override
-	public CompoundTag save(CompoundTag nbt) {
+	public CompoundTag save(CompoundTag nbt, Provider registries) {
 		int i = 0;
 		for(UUID uuid : entries.keySet()) {
 			List<Curse> curses = this.entries.get(uuid);

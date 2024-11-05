@@ -2,9 +2,9 @@ package favouriteless.enchanted.fabric.client;
 
 import favouriteless.enchanted.client.particles.*;
 import favouriteless.enchanted.client.render.blockentity.item.SpinningWheelItemRenderer;
-import favouriteless.enchanted.common.init.registry.EBlocks;
+import favouriteless.enchanted.common.blocks.EBlocks;
 import favouriteless.enchanted.common.items.EItems;
-import favouriteless.enchanted.common.init.registry.EParticleTypes;
+import favouriteless.enchanted.common.init.EParticleTypes;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;

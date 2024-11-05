@@ -1,8 +1,7 @@
 package favouriteless.enchanted.common.blocks;
 
 import favouriteless.enchanted.common.blocks.entity.WitchOvenBlockEntity;
-import favouriteless.enchanted.common.init.registry.EBlockEntityTypes;
-import favouriteless.enchanted.common.init.registry.EBlocks;
+import favouriteless.enchanted.common.blocks.entity.EBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;

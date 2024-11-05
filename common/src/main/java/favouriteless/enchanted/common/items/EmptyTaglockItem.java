@@ -6,9 +6,9 @@ import favouriteless.enchanted.api.taglock.IBedTaglock;
 import favouriteless.enchanted.common.blocks.entity.BloodPoppyBlockEntity;
 import favouriteless.enchanted.common.blocks.crops.BloodPoppyBlock;
 import favouriteless.enchanted.common.init.ETags.EntityTypes;
-import favouriteless.enchanted.common.init.registry.EBlocks;
+import favouriteless.enchanted.common.blocks.EBlocks;
 import favouriteless.enchanted.common.items.component.EDataComponentTypes;
-import favouriteless.enchanted.common.items.component.TaglockData;
+import favouriteless.enchanted.common.items.component.EntityRefData;
 import favouriteless.enchanted.util.ItemUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -81,9 +81,9 @@ public class EmptyTaglockItem extends Item {
                     BedTaglockSavedData data = BedTaglockSavedData.get(level);
                     IBedTaglock bedEntry = data.getEntry(bed);
 
-                    if(bedEntry.getData() != TaglockData.EMPTY) {
+                    if(bedEntry.getData() != EntityRefData.EMPTY) {
                         fillTaglock(context.getPlayer(), context.getItemInHand(), bedEntry.getData());
-                        bedEntry.setData(TaglockData.EMPTY);
+                        bedEntry.setData(EntityRefData.EMPTY);
                         data.setDirty();
                     }
                 }
@@ -105,13 +105,13 @@ public class EmptyTaglockItem extends Item {
     }
 
     protected void fillTaglockEntity(Player player, ItemStack stack, LivingEntity entity) {
-        fillTaglock(player, stack, TaglockData.of(entity.getUUID(), entity.getDisplayName().getString()));
+        fillTaglock(player, stack, EntityRefData.of(entity.getUUID(), entity.getDisplayName().getString()));
     }
 
-    protected void fillTaglock(Player player, ItemStack stack, TaglockData data) {
+    protected void fillTaglock(Player player, ItemStack stack, EntityRefData data) {
         if(player instanceof ServerPlayer serverPlayer) {
             ItemStack item = new ItemStack(EItems.TAGLOCK_FILLED.get(), 1);
-            item.set(EDataComponentTypes.TAGLOCK.get(), data);
+            item.set(EDataComponentTypes.ENTITY_REF.get(), data);
 
             ItemUtil.giveOrDrop(player, item);
 

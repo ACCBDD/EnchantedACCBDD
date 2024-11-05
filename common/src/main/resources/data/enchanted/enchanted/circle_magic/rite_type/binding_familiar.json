@@ -1,0 +1,18 @@
+{
+  "shapes": {
+    "enchanted:myshape": "enchanted:ritual_chalk"
+  },
+  "items": {
+    "enchanted:tear_of_the_goddess": 1,
+    "enchanted:odour_of_purity": 1,
+    "enchanted:whiff_of_magic": 1,
+    "enchanted:demonic_blood": 1,
+    "minecraft:diamond": 1
+  },
+  "entities": {
+    "minecraft:pig": 1
+  },
+  "power": 8000,
+  "tick_power": 50,
+  "behaviour": { "type": "enchanted:binding_familiar" }
+}

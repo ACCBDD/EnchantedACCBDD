@@ -1,7 +1,7 @@
 package favouriteless.enchanted.api.familiars;
 
-import favouriteless.enchanted.api.taglock.BedTaglockSavedData;
-import favouriteless.enchanted.common.init.registry.FamiliarTypes;
+import favouriteless.enchanted.common.familiars.FamiliarTypes;
+import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -48,11 +48,11 @@ public class FamiliarSavedData extends SavedData {
     /**
      * @param level The {@link Level} to grab data from.
      *
-     * @return An instance of {@link BedTaglockSavedData} belonging to level.
+     * @return An instance of {@link FamiliarSavedData} belonging to level.
      */
     public static FamiliarSavedData get(Level level) {
         if(level instanceof ServerLevel serverLevel)
-            return serverLevel.getDataStorage().computeIfAbsent(FamiliarSavedData::load, FamiliarSavedData::new, NAME);
+            return serverLevel.getServer().overworld().getDataStorage().computeIfAbsent(new Factory<>(FamiliarSavedData::new, FamiliarSavedData::load, null), NAME);
         else
             throw new RuntimeException("Game attempted to load serverside familiar data from a clientside world.");
     }
@@ -60,12 +60,12 @@ public class FamiliarSavedData extends SavedData {
 
     // -------------------- IMPLEMENTATION  DETAILS BELOW THIS POINT, NOT NEEDED FOR API USERS --------------------
 
-    private static FamiliarSavedData load(CompoundTag nbt) {
+    private static FamiliarSavedData load(CompoundTag nbt, Provider registries) {
         FamiliarSavedData data = new FamiliarSavedData();
         for(String key : nbt.getAllKeys()) {
             CompoundTag tag = nbt.getCompound(key);
             IFamiliarEntry entry = new FamiliarEntry(
-                    FamiliarTypes.get(new ResourceLocation(tag.getString("type"))),
+                    FamiliarTypes.get(ResourceLocation.parse(tag.getString("type"))),
                     tag.getUUID("uuid"),
                     tag.getCompound("nbt"),
                     tag.getBoolean("isDismissed")
@@ -77,8 +77,7 @@ public class FamiliarSavedData extends SavedData {
     }
 
     @Override
-    @NotNull
-    public CompoundTag save(@NotNull CompoundTag nbt) {
+    public CompoundTag save(@NotNull CompoundTag nbt, Provider provider) {
         for(UUID uuid : entries.keySet()) {
             CompoundTag tag = new CompoundTag();
             IFamiliarEntry entry = entries.get(uuid);

@@ -8,10 +8,10 @@ import favouriteless.enchanted.common.altar.AltarBlockData;
 import favouriteless.enchanted.common.altar.AltarStateObserver;
 import favouriteless.enchanted.common.altar.AltarUpgradeData;
 import favouriteless.enchanted.common.blocks.altar.AltarBlock;
-import favouriteless.enchanted.common.init.registry.EBlockEntityTypes;
 import favouriteless.enchanted.common.menus.AltarMenu;
 import net.favouriteless.stateobserver.api.StateObserverManager;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.MenuProvider;
@@ -29,7 +29,7 @@ import javax.annotation.Nullable;
 
 public class AltarBlockEntity extends BlockEntity implements MenuProvider, IPowerProvider {
 
-    private final double rechargeRate = CommonConfig.altarBaseRecharge.get();
+    private final double rechargeRate = CommonConfig.INSTANCE.altarBaseRecharge.get();
     private final AltarBlockData altarBlockData = new AltarBlockData();
     private final AltarUpgradeData altarUpgradeData = new AltarUpgradeData();
     private double rechargeMultiplier = 1.0D;
@@ -100,7 +100,7 @@ public class AltarBlockEntity extends BlockEntity implements MenuProvider, IPowe
         if(stateObserver == null)
             stateObserver = StateObserverManager.get().getObserver(level, worldPosition, AltarStateObserver.class);
         if(stateObserver == null) {
-            int range = CommonConfig.altarRange.get();
+            int range = CommonConfig.INSTANCE.altarRange.get();
             stateObserver = StateObserverManager.get().addObserver(new AltarStateObserver(level, worldPosition, range + 4, range + 4, range + 4));
         }
         facingX = level.getBlockState(worldPosition).getValue(AltarBlock.FACING_X);
@@ -113,8 +113,7 @@ public class AltarBlockEntity extends BlockEntity implements MenuProvider, IPowe
     }
 
     @Override
-    public void saveAdditional(CompoundTag nbt) {
-        super.saveAdditional(nbt);
+    public void saveAdditional(CompoundTag nbt, Provider provider) {
         nbt.putDouble("currentPower", currentPower);
         nbt.putDouble("maxPower", maxPower);
         nbt.putDouble("powerMultiplier", powerMultiplier);
@@ -124,8 +123,7 @@ public class AltarBlockEntity extends BlockEntity implements MenuProvider, IPowe
     }
 
     @Override
-    public void load(CompoundTag nbt) {
-        super.load(nbt);
+    public void loadAdditional(CompoundTag nbt, Provider provider) {
         setMaxPower(nbt.getDouble("maxPower"));
         setMaxPower(nbt.getDouble("maxPower"));
         currentPower = nbt.getDouble("currentPower");
@@ -136,7 +134,7 @@ public class AltarBlockEntity extends BlockEntity implements MenuProvider, IPowe
             altarUpgradeData.load(nbt.getCompound("upgradeData"));
         }
         else
-            Enchanted.LOG.info(String.format("Failed to load power block data for altar at x:%s y:%s z:%s", getBlockPos().getX(), getBlockPos().getY(), getBlockPos().getZ()));
+            Enchanted.LOG.error("Failed to load power block data for altar at {}", getBlockPos().toShortString());
 
         firstLoad = false;
     }
@@ -173,7 +171,7 @@ public class AltarBlockEntity extends BlockEntity implements MenuProvider, IPowe
      */
     private void recalculateBlocks() {
         if(level != null && !level.isClientSide) {
-            int range = CommonConfig.altarRange.get();
+            int range = CommonConfig.INSTANCE.altarRange.get();
             BlockPos startingPos = facingX ?
                     BlockPos.containing(centerPos.add(-(range+4), -(range+2), -(range+2))) :
                     BlockPos.containing(centerPos.add(-(range+2), -(range+2), -(range+4)));

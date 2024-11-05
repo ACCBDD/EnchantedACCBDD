@@ -1,7 +1,7 @@
 package favouriteless.enchanted.client.particles;
 
 import favouriteless.enchanted.client.particles.types.DoubleParticleType.DoubleParticleData;
-import favouriteless.enchanted.common.init.registry.EParticleTypes;
+import favouriteless.enchanted.common.init.EParticleTypes;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.NoRenderParticle;
 import net.minecraft.client.particle.Particle;

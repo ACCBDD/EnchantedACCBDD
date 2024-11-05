@@ -1,5 +1,6 @@
 package favouriteless.enchanted.common.blocks.chalk;
 
+import favouriteless.enchanted.common.Enchanted;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.util.RandomSource;
@@ -16,7 +17,6 @@ public class ChalkCircleBlock extends AbstractChalkBlock {
 
     // Regular chalk types - white red purple
     public static final IntegerProperty GLYPH = IntegerProperty.create("glyph", 0, 47);
-    public static final Random random = new Random();
     private final SimpleParticleType particleType;
 
     public ChalkCircleBlock(SimpleParticleType particleType) {
@@ -32,7 +32,7 @@ public class ChalkCircleBlock extends AbstractChalkBlock {
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        return defaultBlockState().setValue(GLYPH, random.nextInt(48));
+        return getRandomState();
     }
 
     @Override
@@ -45,6 +45,11 @@ public class ChalkCircleBlock extends AbstractChalkBlock {
                 level.addParticle(particleType, pos.getX() + dx, pos.getY() + 0.1D, pos.getZ() + dz, 0, 0, 0);
             }
         }
+    }
+
+    @Override
+    public BlockState getRandomState() {
+        return defaultBlockState().setValue(GLYPH, Enchanted.RANDOM.nextInt(48));
     }
 
 }

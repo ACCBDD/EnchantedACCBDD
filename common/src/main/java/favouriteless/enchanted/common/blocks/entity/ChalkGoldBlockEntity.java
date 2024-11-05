@@ -1,11 +1,8 @@
 package favouriteless.enchanted.common.blocks.entity;
 
 import favouriteless.enchanted.api.power.IPowerConsumer;
-import favouriteless.enchanted.api.rites.AbstractRite;
 import favouriteless.enchanted.common.altar.SimplePowerPosHolder;
-import favouriteless.enchanted.common.init.registry.EBlockEntityTypes;
-import favouriteless.enchanted.common.init.registry.RiteTypes;
-import favouriteless.enchanted.common.rites.RiteManager;
+import favouriteless.enchanted.common.rites.RiteTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.nbt.CompoundTag;

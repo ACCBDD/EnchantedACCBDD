@@ -44,7 +44,7 @@ public class PlayerMixin {
 
     @Inject(method="attack", at=@At(value="INVOKE", target="Lnet/minecraft/world/entity/player/Player;setItemInHand(Lnet/minecraft/world/InteractionHand;Lnet/minecraft/world/item/ItemStack;)V", shift=Shift.AFTER), locals=LocalCapture.CAPTURE_FAILHARD)
     private void itemBreakAttack(Entity target, CallbackInfo ci, @Local ItemStack itemStack) {
-        ItemStack original; // TODO Somehow replace this weird jank with getting an actual copy of the item before it gets passed into ItemStack#hurt.
+        ItemStack original;
         if(itemStack.isEmpty()) {
             itemStack.setCount(1);
             original = itemStack.copy();

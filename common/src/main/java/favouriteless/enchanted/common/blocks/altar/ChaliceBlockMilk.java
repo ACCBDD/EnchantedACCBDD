@@ -1,6 +1,6 @@
 package favouriteless.enchanted.common.blocks.altar;
 
-import favouriteless.enchanted.common.init.registry.EBlocks;
+import favouriteless.enchanted.common.blocks.EBlocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.core.BlockPos;

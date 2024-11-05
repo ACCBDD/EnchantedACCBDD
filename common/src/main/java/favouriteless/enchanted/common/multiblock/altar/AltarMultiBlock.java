@@ -3,7 +3,7 @@ package favouriteless.enchanted.common.multiblock.altar;
 import favouriteless.enchanted.common.altar.AltarStateObserver;
 import favouriteless.enchanted.common.blocks.entity.AltarBlockEntity;
 import favouriteless.enchanted.common.blocks.altar.AltarBlock;
-import favouriteless.enchanted.common.init.registry.EBlocks;
+import favouriteless.enchanted.common.blocks.EBlocks;
 import favouriteless.enchanted.common.multiblock.IMultiBlockType;
 import net.favouriteless.stateobserver.api.StateObserverManager;
 import net.minecraft.core.BlockPos;

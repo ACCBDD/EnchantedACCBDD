@@ -7,7 +7,7 @@ import favouriteless.enchanted.common.blocks.chalk.ChalkCircleBlock;
 import favouriteless.enchanted.common.blocks.chalk.GoldChalkBlock;
 import favouriteless.enchanted.common.blocks.crops.BloodPoppyBlock;
 import favouriteless.enchanted.common.blocks.crops.CropsBlockAgeFive;
-import favouriteless.enchanted.common.init.registry.EBlocks;
+import favouriteless.enchanted.common.blocks.EBlocks;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Plane;
 import net.minecraft.data.PackOutput;

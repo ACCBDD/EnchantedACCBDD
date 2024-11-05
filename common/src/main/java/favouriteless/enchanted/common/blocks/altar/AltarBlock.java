@@ -1,7 +1,7 @@
 package favouriteless.enchanted.common.blocks.altar;
 
 import favouriteless.enchanted.common.blocks.entity.AltarBlockEntity;
-import favouriteless.enchanted.common.init.registry.EBlockEntityTypes;
+import favouriteless.enchanted.common.blocks.entity.EBlockEntityTypes;
 import favouriteless.enchanted.common.multiblock.MultiBlockTools;
 import favouriteless.enchanted.common.multiblock.altar.AltarMultiBlock;
 import favouriteless.enchanted.common.multiblock.altar.AltarPartIndex;

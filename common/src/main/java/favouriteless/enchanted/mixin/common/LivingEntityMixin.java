@@ -1,7 +1,7 @@
 package favouriteless.enchanted.mixin.common;
 
 import favouriteless.enchanted.common.CommonConfig;
-import favouriteless.enchanted.common.init.LootExtensions;
+import favouriteless.enchanted.common.lootextensions.LootExtensions;
 import favouriteless.enchanted.common.poppet.PoppetEvents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.damagesource.DamageSource;

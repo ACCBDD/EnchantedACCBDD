@@ -2,7 +2,7 @@ package favouriteless.enchanted.neoforge.datagen.providers.tag;
 
 import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.common.init.ETags;
-import favouriteless.enchanted.common.init.registry.EBlocks;
+import favouriteless.enchanted.common.blocks.EBlocks;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;

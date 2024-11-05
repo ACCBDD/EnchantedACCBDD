@@ -1,6 +1,6 @@
 package favouriteless.enchanted.common.items;
 
-import favouriteless.enchanted.common.init.registry.EBlocks;
+import favouriteless.enchanted.common.blocks.EBlocks;
 import net.minecraft.world.item.BlockItem;
 
 /**

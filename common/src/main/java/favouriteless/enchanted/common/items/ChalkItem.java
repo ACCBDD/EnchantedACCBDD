@@ -1,64 +1,61 @@
 package favouriteless.enchanted.common.items;
 
 import favouriteless.enchanted.common.blocks.chalk.AbstractChalkBlock;
-import favouriteless.enchanted.common.init.registry.ESoundEvents;
+import favouriteless.enchanted.common.sounds.ESoundEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class ChalkItem extends BlockItem {
 
     private final AbstractChalkBlock chalkBlock;
 
-    public ChalkItem(Block block, Properties properties) {
+    public ChalkItem(AbstractChalkBlock block, Properties properties) {
         super(block, properties);
-        if(block instanceof AbstractChalkBlock) {
-            chalkBlock = (AbstractChalkBlock) block;
-        } else {
-            throw new IllegalStateException("Chalk item registered with a non-chalk block.");
-        }
+        chalkBlock = block;
     }
 
     @Override
     public InteractionResult useOn(UseOnContext context) {
-        if(context.getClickedFace() == Direction.UP) {
-            Level level = context.getLevel();
-            BlockPos clickedPos = context.getClickedPos();
-            BlockState clickedState = level.getBlockState(clickedPos);
+        if(context.getClickedFace() != Direction.UP)
+            return InteractionResult.PASS;
 
-            if(clickedState.getBlock() instanceof AbstractChalkBlock) {
-                tryPlaceChalk(level, clickedPos, context);
-                return InteractionResult.SUCCESS;
-            }
-            else {
-                BlockPos targetPos = clickedPos.above();
-                BlockState targetState = level.getBlockState(targetPos);
+        Level level = context.getLevel();
+        BlockPos pos = context.getClickedPos();
+        BlockState state = level.getBlockState(pos);
 
-                if(targetState.isAir() || targetState.getBlock() instanceof AbstractChalkBlock) {
-                    if(chalkBlock.canSurvive(chalkBlock.defaultBlockState(), level, targetPos)) {
-                        tryPlaceChalk(level, targetPos, context);
-                        return InteractionResult.SUCCESS;
-                    }
-                }
-            }
+        if(state.getBlock() instanceof AbstractChalkBlock) {
+            tryPlaceChalk(level, pos, context);
+            return InteractionResult.sidedSuccess(level.isClientSide);
         }
-        return InteractionResult.FAIL;
+
+        BlockPos targetPos = pos.above();
+        BlockState targetState = level.getBlockState(targetPos);
+
+        if(targetState.canBeReplaced()) {
+            if(chalkBlock.canSurvive(chalkBlock.defaultBlockState(), level, targetPos))
+                tryPlaceChalk(level, targetPos, context);
+        }
+        return InteractionResult.sidedSuccess(level.isClientSide);
     }
 
     private void tryPlaceChalk(Level level, BlockPos pos, UseOnContext context) {
-        if(!level.isClientSide)
-            level.setBlockAndUpdate(pos, chalkBlock.getStateForPlacement(new BlockPlaceContext(context)));
-        level.playSound(context.getPlayer(), pos, ESoundEvents.CHALK_WRITE.get(), SoundSource.PLAYERS, 1F, 1F);
-        context.getPlayer().getItemInHand(context.getHand()).hurtAndBreak(1, context.getPlayer(), (item) -> {});
+        if(!level.isClientSide) {
+            level.setBlockAndUpdate(pos, chalkBlock.getRandomState());
+        }
+        Player player = context.getPlayer();
+        InteractionHand hand = context.getHand();
+
+        level.playSound(player, pos, ESoundEvents.CHALK_WRITE.get(), SoundSource.PLAYERS, 1F, 1F);
+        player.getItemInHand(hand).hurtAndBreak(1, player, hand == InteractionHand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND);
     }
-
-
 
 }

@@ -1,9 +1,8 @@
 package favouriteless.enchanted.common.menus;
 
 import favouriteless.enchanted.common.blocks.entity.WitchOvenBlockEntity;
-import favouriteless.enchanted.common.init.registry.EBlocks;
+import favouriteless.enchanted.common.blocks.EBlocks;
 import favouriteless.enchanted.common.items.EItems;
-import favouriteless.enchanted.common.init.registry.EMenuTypes;
 import favouriteless.enchanted.common.menus.slots.FuelSlot;
 import favouriteless.enchanted.common.menus.slots.JarInputSlot;
 import favouriteless.enchanted.common.menus.slots.NonJarInputSlot;

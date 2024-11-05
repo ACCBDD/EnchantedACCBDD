@@ -2,7 +2,7 @@ package favouriteless.enchanted.neoforge.datagen.providers.loot_tables;
 
 import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.common.blocks.crops.*;
-import favouriteless.enchanted.common.init.registry.EBlocks;
+import favouriteless.enchanted.common.blocks.EBlocks;
 import favouriteless.enchanted.common.items.EItems;
 import favouriteless.enchanted.platform.services.NeoCommonRegistryHelper;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;

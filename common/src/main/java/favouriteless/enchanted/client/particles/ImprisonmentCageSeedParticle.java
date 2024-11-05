@@ -1,6 +1,6 @@
 package favouriteless.enchanted.client.particles;
 
-import favouriteless.enchanted.common.init.registry.EParticleTypes;
+import favouriteless.enchanted.common.init.EParticleTypes;
 import favouriteless.enchanted.common.rites.entity.RiteImprisonment;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.NoRenderParticle;

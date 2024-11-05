@@ -1,6 +1,6 @@
 package favouriteless.enchanted.common.blocks.altar;
 
-import favouriteless.enchanted.common.init.registry.EBlocks;
+import favouriteless.enchanted.common.blocks.EBlocks;
 import favouriteless.enchanted.common.items.EItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.DustParticleOptions;

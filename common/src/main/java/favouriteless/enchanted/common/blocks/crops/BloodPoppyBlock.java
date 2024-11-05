@@ -1,7 +1,7 @@
 package favouriteless.enchanted.common.blocks.crops;
 
 import favouriteless.enchanted.common.blocks.entity.BloodPoppyBlockEntity;
-import favouriteless.enchanted.common.items.component.TaglockData;
+import favouriteless.enchanted.common.items.component.EntityRefData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -18,7 +18,6 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import org.jetbrains.annotations.Nullable;
 
 public class BloodPoppyBlock extends FlowerBlock implements EntityBlock {
 
@@ -41,7 +40,7 @@ public class BloodPoppyBlock extends FlowerBlock implements EntityBlock {
             return;
 
         if(level.getBlockEntity(pos) instanceof BloodPoppyBlockEntity poppy) {
-            poppy.setTaglockData(TaglockData.of(entity.getUUID(), entity.getDisplayName().getString()));
+            poppy.setTaglockData(EntityRefData.of(entity.getUUID(), entity.getDisplayName().getString()));
             level.setBlockAndUpdate(pos, state.setValue(FILLED, true));
         }
     }

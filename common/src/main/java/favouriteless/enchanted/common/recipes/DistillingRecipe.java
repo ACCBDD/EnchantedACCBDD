@@ -3,7 +3,6 @@ package favouriteless.enchanted.common.recipes;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import favouriteless.enchanted.common.init.registry.ERecipeTypes;
 import favouriteless.enchanted.common.recipes.recipe_inputs.ListInput;
 import favouriteless.enchanted.util.ItemUtil;
 import net.minecraft.core.HolderLookup.Provider;

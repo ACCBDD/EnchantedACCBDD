@@ -1,6 +1,5 @@
 package favouriteless.enchanted.common.blocks.entity;
 
-import favouriteless.enchanted.common.init.registry.EBlockEntityTypes;
 import favouriteless.enchanted.common.menus.PoppetShelfMenu;
 import favouriteless.enchanted.common.poppet.PoppetShelfInventory;
 import favouriteless.enchanted.common.poppet.PoppetShelfManager;

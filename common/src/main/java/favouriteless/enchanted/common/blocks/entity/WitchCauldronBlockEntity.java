@@ -1,10 +1,9 @@
 package favouriteless.enchanted.common.blocks.entity;
 
 import favouriteless.enchanted.client.particles.types.SimpleColouredParticleType.SimpleColouredData;
-import favouriteless.enchanted.common.init.registry.EBlockEntityTypes;
-import favouriteless.enchanted.common.init.registry.EBlocks;
-import favouriteless.enchanted.common.init.registry.EParticleTypes;
-import favouriteless.enchanted.common.init.registry.ERecipeTypes;
+import favouriteless.enchanted.common.blocks.EBlocks;
+import favouriteless.enchanted.common.init.EParticleTypes;
+import favouriteless.enchanted.common.recipes.ERecipeTypes;
 import favouriteless.enchanted.common.recipes.WitchCauldronRecipe;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;

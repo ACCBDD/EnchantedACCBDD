@@ -1,6 +1,5 @@
 package favouriteless.enchanted.common.blocks;
 
-import favouriteless.enchanted.common.init.registry.EBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;

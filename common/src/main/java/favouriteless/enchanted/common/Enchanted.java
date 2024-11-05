@@ -1,11 +1,18 @@
 package favouriteless.enchanted.common;
 
+import favouriteless.enchanted.common.blocks.EBlocks;
+import favouriteless.enchanted.common.blocks.entity.EBlockEntityTypes;
+import favouriteless.enchanted.common.effects.EEffects;
+import favouriteless.enchanted.common.entities.EEntityTypes;
 import favouriteless.enchanted.common.init.ECreativeTab;
 import favouriteless.enchanted.common.init.EData;
-import favouriteless.enchanted.common.init.registry.*;
+import favouriteless.enchanted.common.init.EParticleTypes;
 import favouriteless.enchanted.common.items.EItems;
 import favouriteless.enchanted.common.items.component.EDataComponentTypes;
+import favouriteless.enchanted.common.menus.EMenuTypes;
 import favouriteless.enchanted.common.network.EPackets;
+import favouriteless.enchanted.common.recipes.ERecipeTypes;
+import favouriteless.enchanted.common.sounds.ESoundEvents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import org.slf4j.Logger;

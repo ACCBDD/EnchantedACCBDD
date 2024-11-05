@@ -1,7 +1,7 @@
 package favouriteless.enchanted.neoforge.common.capabilities;
 
 import favouriteless.enchanted.common.Enchanted;
-import favouriteless.enchanted.common.init.registry.EBlockEntityTypes;
+import favouriteless.enchanted.common.blocks.entity.EBlockEntityTypes;
 
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
