@@ -5,14 +5,14 @@
   "refmap": "${mod_id}.refmap.json",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "common.BlockBehaviourMixin",
-    "common.LivingEntityMixin",
-    "common.SaplingBlockAccessor",
-    "common.ZombieVillagerAccessor"
+    "net.favouriteless.enchanted.mixin.common.BlockBehaviourMixin",
+    "net.favouriteless.enchanted.mixin.common.LivingEntityMixin",
+    "net.favouriteless.enchanted.mixin.common.SaplingBlockAccessor",
+    "net.favouriteless.enchanted.mixin.common.ZombieVillagerAccessor"
   ],
   "client": [
-    "client.AbstractSoundInstanceAccessor",
-    "client.LocalPlayerMixin",
+    "net.favouriteless.enchanted.mixin.client.AbstractSoundInstanceAccessor",
+    "net.favouriteless.enchanted.mixin.client.LocalPlayerMixin"
   ],
   "server": [
   ],

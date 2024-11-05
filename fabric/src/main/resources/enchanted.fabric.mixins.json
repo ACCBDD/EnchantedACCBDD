@@ -5,15 +5,15 @@
   "refmap": "enchanted.refmap.json",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "LivingEntityMixin",
-    "PersistentEntitySectionManagerMixin",
-    "PlayerListMixin",
-    "PlayerMixin",
-    "ServerPlayerGameModeMixin"
+    "net.favouriteless.enchanted.fabric.mixin.LivingEntityMixin",
+    "net.favouriteless.enchanted.fabric.mixin.PersistentEntitySectionManagerMixin",
+    "net.favouriteless.enchanted.fabric.mixin.PlayerListMixin",
+    "net.favouriteless.enchanted.fabric.mixin.PlayerMixin",
+    "net.favouriteless.enchanted.fabric.mixin.ServerPlayerGameModeMixin"
   ],
   "client": [
-    "MultiPlayerGameModeMixin",
-    "SoundEngineMixin"
+    "net.favouriteless.enchanted.fabric.mixin.MultiPlayerGameModeMixin",
+    "net.favouriteless.enchanted.fabric.mixin.SoundEngineMixin"
   ],
   "server": [
   ],
