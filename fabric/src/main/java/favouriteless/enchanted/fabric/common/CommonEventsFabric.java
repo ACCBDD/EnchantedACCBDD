@@ -1,5 +1,6 @@
 package favouriteless.enchanted.fabric.common;
 
+import favouriteless.enchanted.common.CommonEvents;
 import favouriteless.enchanted.common.effects.EffectEvents;
 import favouriteless.enchanted.common.poppet.PoppetEvents;
 import net.fabricmc.fabric.api.entity.event.v1.EntitySleepEvents;

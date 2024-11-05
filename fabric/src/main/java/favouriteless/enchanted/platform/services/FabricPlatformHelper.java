@@ -34,11 +34,12 @@ public class FabricPlatformHelper implements IPlatformHelper {
     }
 
     @Override
-    public void openMenuScreen(ServerPlayer player, MenuProvider provider, BlockPos pos) {
-        player.openMenu(new ExtendedScreenHandlerFactory() {
+    public <T> void openMenuScreen(ServerPlayer player, MenuProvider provider, T data) {
+        player.openMenu(new ExtendedScreenHandlerFactory<T>() {
+
             @Override
-            public void writeScreenOpeningData(ServerPlayer player, FriendlyByteBuf buffer) {
-                buffer.writeBlockPos(pos);
+            public T getScreenOpeningData(ServerPlayer player) {
+                return data;
             }
 
             @Override

@@ -1,21 +1,18 @@
 package favouriteless.enchanted.platform.services;
 
-import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraftforge.common.ForgeHooks;
-import net.minecraftforge.fml.ModList;
-import net.minecraftforge.fml.loading.FMLLoader;
-import net.minecraftforge.network.NetworkHooks;
+import net.neoforged.fml.ModList;
+import net.neoforged.fml.loading.FMLLoader;
 import org.jetbrains.annotations.Nullable;
 
-public class ForgePlatformHelper implements IPlatformHelper {
+public class NeoPlatformHelper implements IPlatformHelper {
 
     @Override
     public String getPlatformName() {
-        return "Forge";
+        return "NeoForge";
     }
 
     @Override
@@ -29,13 +26,13 @@ public class ForgePlatformHelper implements IPlatformHelper {
     }
 
     @Override
-    public void openMenuScreen(ServerPlayer player, MenuProvider provider, BlockPos pos) {
-        NetworkHooks.openScreen(player, provider, pos);
+    public <T> void openMenuScreen(ServerPlayer player, MenuProvider provider, T data) {
+        player.openMenu(provider);
     }
 
     @Override
     public int getBurnTime(ItemStack stack, @Nullable RecipeType<?> recipeType) {
-        return ForgeHooks.getBurnTime(stack, recipeType);
+        return stack.getBurnTime(recipeType);
     }
 
     @Override

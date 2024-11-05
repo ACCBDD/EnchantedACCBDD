@@ -1,23 +1,22 @@
 package favouriteless.enchanted.neoforge.client;
 
+import favouriteless.enchanted.client.ClientEvents;
 import favouriteless.enchanted.common.Enchanted;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.RenderGuiEvent;
-import net.minecraftforge.client.event.sound.PlaySoundEvent;
-import net.minecraftforge.event.TickEvent.ClientTickEvent;
-import net.minecraftforge.event.TickEvent.Phase;
-import net.minecraftforge.event.entity.player.ItemTooltipEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.common.EventBusSubscriber.Bus;
+import net.neoforged.neoforge.client.event.ClientTickEvent;
+import net.neoforged.neoforge.client.event.RenderGuiEvent;
+import net.neoforged.neoforge.client.event.sound.PlaySoundEvent;
+import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 
-@EventBusSubscriber(modid=Enchanted.MOD_ID, bus=Bus.FORGE, value=Dist.CLIENT)
+@EventBusSubscriber(modid = Enchanted.MOD_ID, bus= Bus.GAME, value = Dist.CLIENT)
 public class ClientEventsForge {
 
     @SubscribeEvent
-    public static void onClientTick(ClientTickEvent event) {
-        if(event.phase == Phase.END)
-            ClientEvents.clientTickPost();
+    public static void onClientTick(ClientTickEvent.Post event) {
+        ClientEvents.clientTickPost();
     }
 
     @SubscribeEvent
@@ -27,7 +26,7 @@ public class ClientEventsForge {
 
     @SubscribeEvent
     public static void onRenderGuiPost(RenderGuiEvent.Post event) {
-        ClientEvents.onRenderGui(event.getGuiGraphics(), event.getPartialTick(), event.getWindow());
+        ClientEvents.onRenderGui(event.getGuiGraphics(), event.getPartialTick().getGameTimeDeltaTicks());
     }
 
     @SubscribeEvent

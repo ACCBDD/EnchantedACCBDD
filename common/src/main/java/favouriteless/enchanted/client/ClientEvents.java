@@ -21,8 +21,8 @@ import java.util.List;
 
 public class ClientEvents {
 
-	public static void onRenderGui(GuiGraphics graphics, float partialTicks, Window window) {
-		PoppetAnimationManager.render(graphics, partialTicks, window.getGuiScaledWidth(), window.getGuiScaledHeight());
+	public static void onRenderGui(GuiGraphics graphics, float partialTicks) {
+		PoppetAnimationManager.render(graphics, partialTicks, graphics.guiWidth(), graphics.guiHeight());
 	}
 
 	public static void clientTickPost() {
@@ -31,7 +31,7 @@ public class ClientEvents {
 
 
 	public static void onItemTooltip(ItemStack item, List<Component> toolTips, TooltipFlag flags) {
-		if(item.getItem() == Items.TOTEM_OF_UNDYING && CommonConfig.disableTotems.get())
+		if(item.getItem() == Items.TOTEM_OF_UNDYING && CommonConfig.INSTANCE.disableTotems.get())
 			toolTips.add(Component.literal("Totems are disabled (Enchanted config)").withStyle(ChatFormatting.RED));
 	}
 

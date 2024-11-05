@@ -1,8 +1,8 @@
 package favouriteless.enchanted.platform.services;
 
-import favouriteless.enchanted.common.items.NonAnimatedArmorItem;
 import net.minecraft.core.Registry;
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
 import net.minecraft.sounds.SoundEvent;
@@ -15,6 +15,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import org.apache.commons.lang3.function.TriFunction;
 
+import java.util.function.BiFunction;
 import java.util.function.Supplier;
 
 public interface ICommonRegistryHelper {
@@ -28,18 +29,17 @@ public interface ICommonRegistryHelper {
      *
      * @return A {@link Supplier} providing the registered object.
      */
-    <T> Supplier<T> register(Registry<? super T> registry, String name, Supplier<T> entry);
+    <C, T extends C> Supplier<T> register(Registry<C> registry, String name, Supplier<T> entry);
 
     /**
      * Create a {@link MenuType} and register it via {@link ICommonRegistryHelper#register(Registry, String, Supplier)}.
      * This is necessary because Forge and Fabric implement their extra data differently when opening a Menu.
      *
-     * @param create TriFunction used to create the menu, on Fabric this matches ExtendedScreenHandlerType, on Forge it
-     *               matches IForgeMenuType.
-     *
      * @return A {@link Supplier} for a {@link MenuType} implementation, depending on the platform.
      */
-    <T extends AbstractContainerMenu> Supplier<MenuType<T>> registerMenu(String name, TriFunction<Integer, Inventory, FriendlyByteBuf, T> create);
+    public <T extends AbstractContainerMenu, C> Supplier<MenuType<T>> registerMenu(String name,
+                                                                                   TriFunction<Integer, Inventory, C, T> factory,
+                                                                                   StreamCodec<? super RegistryFriendlyByteBuf, C> codec);
 
     /**
      * Register a {@link SimpleJsonResourceReloadListener}, necessary because Fabric requires ReloadListeners to provide
@@ -80,7 +80,8 @@ public interface ICommonRegistryHelper {
      *
      * @return A new {@link CreativeModeTab} with the specified icon and generator.
      */
-    Supplier<CreativeModeTab> registerCreativeTab(String name, Supplier<ItemStack> iconSupplier, DisplayItemsGenerator itemsGenerator);
+    Supplier<CreativeModeTab> registerCreativeTab(String name, Supplier<ItemStack> iconSupplier,
+                                                  DisplayItemsGenerator itemsGenerator);
 
     /**
      * Register a block as flammable (i.e. can catch on fire).
@@ -90,20 +91,5 @@ public interface ICommonRegistryHelper {
      * @param burnOdds
      */
     void setFlammable(Block block, int igniteOdds, int burnOdds);
-
-    /**
-     * Create a new {@link NonAnimatedArmorItem}, register it and return the object. Needed because Geckolib armor
-     * renderers aren't compatible with Multiloader setups on this version.
-     *
-     * @param name The name of this {@link NonAnimatedArmorItem}. This will automatically use Enchanted's namespace.
-     * @param material The {@link ArmorMaterials} for the item.
-     * @param type The {@link ArmorItem.Type} descibing the slot this item uses.
-     * @param assetPath The path of this geckolib assets for this {@link NonAnimatedArmorItem}.
-     * @param properties {@link Item.Properties} for the returned {@link Item}
-     *
-     * @return A {@link Supplier} returning a new instance of {@link NonAnimatedArmorItem}.
-     */
-    Supplier<NonAnimatedArmorItem> registerNonAnimatedArmorItem(String name, ArmorMaterials material, ArmorItem.Type type,
-                                                                String assetPath, Item.Properties properties);
 
 }

@@ -29,3 +29,24 @@ license = "All Rights Reserved"
     versionRange = "${minecraft_version_range}"
     ordering = "NONE"
     side = "BOTH"
+
+[[dependencies.enchanted]]
+    modId = "stateobserver"
+    type="required" #mandatory
+    versionRange = "[${stateobserver_version},)"
+    ordering = "NONE"
+    side = "BOTH"
+
+[[dependencies.enchanted]]
+    modId = "geckolib"
+    type="required" #mandatory
+    versionRange = "[${geckolib_version},)"
+    ordering = "NONE"
+    side = "BOTH"
+
+[[dependencies.enchanted]]
+    modId = "forgeconfigapi"
+    type="required" #mandatory
+    versionRange = "[${forgeconfigapi_version},)"
+    ordering = "NONE"
+    side = "BOTH"

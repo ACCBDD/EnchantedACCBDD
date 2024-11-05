@@ -22,13 +22,17 @@ idea {
 val libs = project.versionCatalogs.find("libs")
 val version = libs.get().findVersion("enchanted").get()
 
-val minecraft_version = libs.get().findVersion("minecraft").get()
-val minecraft_version_range = libs.get().findVersion("minecraft.range").get()
-val neoforge_version = libs.get().findVersion("neoforge").get()
-val neoforge_version_range = libs.get().findVersion("neoforge.range").get()
-val neoforge_loader_range = libs.get().findVersion("neoforge.loader.range").get()
-val fapi_version = libs.get().findVersion("fabric.api").get()
-val fabric_version = libs.get().findVersion("fabric").get()
+val minecraftVersion = libs.get().findVersion("minecraft").get()
+val minecraftVersionRange = libs.get().findVersion("minecraft.range").get()
+val neoVersion = libs.get().findVersion("neoforge").get()
+val neoVersionRange = libs.get().findVersion("neoforge.range").get()
+val neoLoaderRange = libs.get().findVersion("neoforge.loader.range").get()
+val fapiVersion = libs.get().findVersion("fabric.api").get()
+val fabricVersion = libs.get().findVersion("fabric").get()
+
+val stateobserverVersion = libs.get().findVersion("stateobserver").get()
+val geckoVersion = libs.get().findVersion("geckolib").get()
+val fconfapiVersion = libs.get().findVersion("forgeconfigapi").get()
 
 tasks.withType<Jar>().configureEach {
     from(rootProject.file("LICENSE")) {
@@ -43,7 +47,7 @@ tasks.withType<Jar>().configureEach {
             "Implementation-Title"    to "Enchanted",
             "Implementation-Version"  to version,
             "Implementation-Vendor"   to "Favouriteless",
-            "Built-On-Minecraft"      to minecraft_version
+            "Built-On-Minecraft"      to minecraftVersion
         ))
     }
 }
@@ -56,13 +60,16 @@ tasks.withType<JavaCompile>().configureEach {
 tasks.withType<ProcessResources>().configureEach {
     val expandProps = mapOf(
         "version" to version,
-        "minecraft_version" to minecraft_version,
-        "neoforge_version" to neoforge_version,
-        "neoforge_version_range" to neoforge_version_range,
-        "neoforge_loader_range" to neoforge_loader_range,
-        "minecraft_version_range" to minecraft_version_range,
-        "fabric_api_version" to fapi_version,
-        "fabric_loader_version" to fabric_version,
+        "minecraft_version" to minecraftVersion,
+        "neoforge_version" to neoVersion,
+        "neoforge_version_range" to neoVersionRange,
+        "neoforge_loader_range" to neoLoaderRange,
+        "minecraft_version_range" to minecraftVersionRange,
+        "fabric_api_version" to fapiVersion,
+        "fabric_loader_version" to fabricVersion,
+        "stateobserver_version" to stateobserverVersion,
+        "geckolib_version" to geckoVersion,
+        "forgeconfigapi-version" to fconfapiVersion
     )
 
     filesMatching(listOf("pack.mcmeta", "fabric.mod.json", "META-INF/neoforge.mods.toml", "*.mixins.json")) {

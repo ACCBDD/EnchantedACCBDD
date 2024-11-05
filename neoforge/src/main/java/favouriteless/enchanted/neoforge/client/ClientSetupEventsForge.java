@@ -1,27 +1,29 @@
 package favouriteless.enchanted.neoforge.client;
 
+import com.mojang.datafixers.util.Pair;
+import favouriteless.enchanted.client.ClientRegistry;
+import favouriteless.enchanted.client.EnchantedClient;
 import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.client.particles.*;
 import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
 import favouriteless.enchanted.common.init.registry.EnchantedParticleTypes;
-import favouriteless.enchanted.platform.services.ForgeClientRegistryHelper;
+import favouriteless.enchanted.platform.services.NeoClientRegistryHelper;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.EntityRenderersEvent;
-import net.minecraftforge.client.event.RegisterColorHandlersEvent;
-import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
-import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import org.apache.commons.lang3.tuple.Pair;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.common.EventBusSubscriber.Bus;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
+import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
+import net.neoforged.neoforge.client.event.RegisterParticleProvidersEvent;
 
 import java.util.function.Supplier;
 
-@EventBusSubscriber(modid=Enchanted.MOD_ID, bus=Bus.MOD, value=Dist.CLIENT)
+@EventBusSubscriber(modid = Enchanted.MOD_ID, bus = Bus.GAME, value = Dist.CLIENT)
 public class ClientSetupEventsForge {
 
 	@SubscribeEvent
@@ -40,7 +42,7 @@ public class ClientSetupEventsForge {
 
 	@SubscribeEvent
 	public static void onRegisterKeybinds(RegisterKeyMappingsEvent event) {
-		for(KeyMapping mapping : ForgeClientRegistryHelper.KEY_MAPPINGS)
+		for(KeyMapping mapping : NeoClientRegistryHelper.KEY_MAPPINGS)
 			event.register(mapping);
 	}
 
@@ -52,8 +54,8 @@ public class ClientSetupEventsForge {
 	@SubscribeEvent
 	public static void onRegisterLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
 		ClientRegistry.registerLayerDefinitions();
-		for(Pair<ModelLayerLocation, Supplier<LayerDefinition>> pair : ForgeClientRegistryHelper.LAYER_DEFINITIONS)
-			event.registerLayerDefinition(pair.getKey(), pair.getValue());
+		for(Pair<ModelLayerLocation, Supplier<LayerDefinition>> pair : NeoClientRegistryHelper.LAYER_DEFINITIONS)
+			event.registerLayerDefinition(pair.getFirst(), pair.getSecond());
 	}
 
 	@SubscribeEvent
@@ -82,4 +84,5 @@ public class ClientSetupEventsForge {
 		event.registerSpriteSet(EnchantedParticleTypes.BIND_FAMILIAR_SEED.get(), BindFamiliarSeedParticle.Factory::new);
 		event.registerSpriteSet(EnchantedParticleTypes.BIND_FAMILIAR.get(), BindFamiliarParticle.Factory::new);
 	}
+
 }

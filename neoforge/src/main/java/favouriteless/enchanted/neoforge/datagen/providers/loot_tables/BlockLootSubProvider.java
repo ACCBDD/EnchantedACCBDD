@@ -4,7 +4,7 @@ import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.common.blocks.crops.*;
 import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
 import favouriteless.enchanted.common.init.registry.EnchantedItems;
-import favouriteless.enchanted.platform.services.ForgeCommonRegistryHelper;
+import favouriteless.enchanted.platform.services.NeoCommonRegistryHelper;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
@@ -124,7 +124,7 @@ public class BlockLootSubProvider extends net.minecraft.data.loot.BlockLootSubPr
 
     @Override
     protected Iterable<Block> getKnownBlocks() {
-        return ForgeCommonRegistryHelper.getRegistryMap().getDeferred(BuiltInRegistries.BLOCK).getEntries()
+        return NeoCommonRegistryHelper.getRegistryMap().getDeferred(BuiltInRegistries.BLOCK).getEntries()
                 .stream()
                 .flatMap(RegistryObject::stream)
                 ::iterator;

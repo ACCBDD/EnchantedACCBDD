@@ -25,7 +25,7 @@ public interface IPlatformHelper {
      * @param provider The {@link MenuProvider} the screen is being opened for.
      * @param pos The {@link BlockPos} of the provider.
      */
-    void openMenuScreen(ServerPlayer player, MenuProvider provider, BlockPos pos);
+    <T> void openMenuScreen(ServerPlayer player, MenuProvider provider, T data);
 
     /**
      * Grab the burn time for a given {@link ItemStack} and {@link RecipeType}.

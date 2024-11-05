@@ -1,23 +1,24 @@
 package favouriteless.enchanted.neoforge.common;
 
+import favouriteless.enchanted.common.CommonEvents;
 import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.common.effects.EffectEvents;
 import favouriteless.enchanted.common.poppet.PoppetEvents;
-import favouriteless.enchanted.platform.services.ForgeCommonRegistryHelper;
+import favouriteless.enchanted.platform.services.NeoCommonRegistryHelper;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
-import net.minecraftforge.event.AddReloadListenerEvent;
-import net.minecraftforge.event.TickEvent.LevelTickEvent;
-import net.minecraftforge.event.TickEvent.Phase;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import net.minecraftforge.event.entity.player.PlayerDestroyItemEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedOutEvent;
-import net.minecraftforge.event.entity.player.PlayerSleepInBedEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.AddReloadListenerEvent;
+import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
+import net.neoforged.neoforge.event.entity.player.CanPlayerSleepEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerDestroyItemEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent.PlayerLoggedOutEvent;
+import net.neoforged.neoforge.event.tick.LevelTickEvent;
 
-@EventBusSubscriber(modid=Enchanted.MOD_ID, bus=Bus.FORGE)
+import static net.neoforged.fml.common.EventBusSubscriber.Bus.GAME;
+
+@EventBusSubscriber(modid = Enchanted.MOD_ID, bus= GAME)
 public class CommonEventsForge {
 
     @SubscribeEvent
@@ -26,24 +27,23 @@ public class CommonEventsForge {
     }
 
     @SubscribeEvent
-    public static void onLivingHurt(LivingHurtEvent event) {
-        if(EffectEvents.onLivingHurt(event.getEntity(), event.getSource(), event.getAmount())) {
-            event.setCanceled(true);
+    public static void onLivingHurt(LivingDamageEvent.Pre event) {
+        if(EffectEvents.onLivingHurt(event.getEntity(), event.getSource(), event.getOriginalDamage())) {
+            event.setNewDamage(0);
             return;
         }
-        if(PoppetEvents.onLivingEntityHurt(event.getEntity(), event.getAmount(), event.getSource()))
-            event.setCanceled(true);
+        if(PoppetEvents.onLivingEntityHurt(event.getEntity(), event.getOriginalDamage(), event.getSource()))
+            event.setNewDamage(0);
     }
 
     @SubscribeEvent
-    public static void onPlayerSleep(PlayerSleepInBedEvent event) {
+    public static void onPlayerSleep(CanPlayerSleepEvent event) {
         CommonEvents.onPlayerSleeping(event.getEntity(), event.getPos());
     }
 
     @SubscribeEvent
-    public static void onLevelTick(LevelTickEvent event) {
-        if(event.phase == Phase.START)
-            CommonEvents.onLevelTick(event.level);
+    public static void onLevelTick(LevelTickEvent.Pre event) {
+        CommonEvents.onLevelTick(event.getLevel());
     }
 
     @SubscribeEvent
@@ -58,7 +58,7 @@ public class CommonEventsForge {
 
     @SubscribeEvent
     public static void addReloadListenerEvent(AddReloadListenerEvent event) {
-        for (SimpleJsonResourceReloadListener loader : ForgeCommonRegistryHelper.dataLoaders)
+        for (SimpleJsonResourceReloadListener loader : NeoCommonRegistryHelper.dataLoaders)
             event.addListener(loader);
     }
 
