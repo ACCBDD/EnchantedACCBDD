@@ -1,4 +1,4 @@
-package net.favouriteless.enchanted.fabric.mixin;
+package net.favouriteless.enchanted.fabric.mixin.common;
 
 import net.favouriteless.enchanted.common.items.EItems;
 import net.minecraft.world.entity.Entity;

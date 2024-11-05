@@ -23,8 +23,8 @@ public class ThrowableBrew extends ThrowableItemProjectile {
 	}
 
 	@Override
-	protected float getGravity() {
-		return 0.05F;
+	public double getDefaultGravity() {
+		return 0.05D;
 	}
 
 	@Override

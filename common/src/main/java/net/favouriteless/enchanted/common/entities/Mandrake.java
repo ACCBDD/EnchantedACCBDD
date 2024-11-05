@@ -20,13 +20,10 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.GeoAnimatable;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager.ControllerRegistrar;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.animation.RawAnimation;
-import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.animation.AnimatableManager.ControllerRegistrar;
+import software.bernie.geckolib.animation.RawAnimation;
+import software.bernie.geckolib.constant.DefaultAnimations;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.List;
@@ -34,7 +31,6 @@ import java.util.List;
 public class Mandrake extends Monster implements GeoEntity {
 
     private final AnimatableInstanceCache animationCache = GeckoLibUtil.createInstanceCache(this);
-    private static final RawAnimation SPIN_ANIM = RawAnimation.begin().thenPlay("animation.mandrake.walk");
 
     public Mandrake(EntityType<? extends Monster> type, Level world) {
         super(type, world);
@@ -78,16 +74,7 @@ public class Mandrake extends Monster implements GeoEntity {
 
     @Override
     public void registerControllers(ControllerRegistrar registrar) {
-        registrar.add(new AnimationController<>(this, "controller", 5, this::predicate));
-    }
-
-    private <E extends GeoAnimatable> PlayState predicate(AnimationState<E> event) {
-        if (event.isMoving()) {
-            event.getController().setAnimation(SPIN_ANIM);
-            return PlayState.CONTINUE;
-        } else {
-            return PlayState.STOP;
-        }
+        registrar.add(DefaultAnimations.genericWalkController(this));
     }
 
     @Override

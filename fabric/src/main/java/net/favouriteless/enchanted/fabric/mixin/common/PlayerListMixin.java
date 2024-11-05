@@ -1,4 +1,4 @@
-package net.favouriteless.enchanted.fabric.mixin;
+package net.favouriteless.enchanted.fabric.mixin.common;
 
 import net.favouriteless.enchanted.common.CommonEvents;
 import net.minecraft.network.Connection;

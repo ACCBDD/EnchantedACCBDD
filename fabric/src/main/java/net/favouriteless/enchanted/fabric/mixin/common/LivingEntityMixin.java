@@ -1,4 +1,4 @@
-package net.favouriteless.enchanted.fabric.mixin;
+package net.favouriteless.enchanted.fabric.mixin.common;
 
 import net.favouriteless.enchanted.fabric.common.CommonEventsFabric;
 import net.minecraft.world.InteractionHand;

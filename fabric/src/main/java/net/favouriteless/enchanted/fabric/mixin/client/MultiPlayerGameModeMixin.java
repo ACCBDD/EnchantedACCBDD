@@ -1,4 +1,4 @@
-package net.favouriteless.enchanted.fabric.mixin;
+package net.favouriteless.enchanted.fabric.mixin.client;
 
 import net.favouriteless.enchanted.fabric.common.CommonEventsFabric;
 import net.minecraft.client.multiplayer.MultiPlayerGameMode;

@@ -10,6 +10,8 @@ import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.network.syncher.SynchedEntityData.Builder;
+import net.minecraft.server.level.ServerEntity;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -54,10 +56,10 @@ public class Broomstick extends Entity {
     }
 
     @Override
-    protected void defineSynchedData() {
-        entityData.define(DATA_ID_HURT, 0);
-        entityData.define(DATA_ID_HURTDIR, 1);
-        entityData.define(DATA_ID_DAMAGE, 0.0F);
+    protected void defineSynchedData(Builder builder) {
+        builder.define(DATA_ID_HURT, 0);
+        builder.define(DATA_ID_HURTDIR, 1);
+        builder.define(DATA_ID_DAMAGE, 0.0F);
     }
 
     @Override
@@ -126,13 +128,13 @@ public class Broomstick extends Entity {
     }
 
     @Override
-    public void lerpTo(double pX, double pY, double pZ, float pYaw, float pPitch, int pPosRotationIncrements, boolean pTeleport) {
-        lerpX = pX;
-        lerpY = pY;
-        lerpZ = pZ;
-        lerpYRot = pYaw;
-        lerpXRot = pPitch;
-        lerpSteps = 10;
+    public void lerpTo(double x, double y, double z, float yaw, float pitch, int steps) {
+        lerpX = x;
+        lerpY = y;
+        lerpZ = z;
+        lerpYRot = yaw;
+        lerpXRot = pitch;
+        lerpSteps = steps;
     }
 
     public Vec3 getNewDeltaMovement() {
@@ -153,13 +155,13 @@ public class Broomstick extends Entity {
     }
 
     @Override
-    protected float getEyeHeight(Pose pose, EntityDimensions size) {
-        return 0.7F;
+    public double getEyeY() {
+        return 0.7D;
     }
 
     @Override
-    public double getPassengersRidingOffset() {
-        return 0.15D;
+    protected Vec3 getPassengerAttachmentPoint(Entity entity, EntityDimensions dimensions, float partialTick) {
+        return new Vec3(0, 0.15D, 0);
     }
 
     @Override
@@ -168,13 +170,13 @@ public class Broomstick extends Entity {
     }
 
     @Override
-    public InteractionResult interact(Player pPlayer, InteractionHand pHand) {
-        if(pPlayer.isSecondaryUseActive()) {
+    public InteractionResult interact(Player player, InteractionHand hand) {
+        if(player.isSecondaryUseActive()) {
             return InteractionResult.SUCCESS;
         }
         else {
             if(!level().isClientSide) {
-                return pPlayer.startRiding(this) ? InteractionResult.CONSUME : InteractionResult.PASS;
+                return player.startRiding(this) ? InteractionResult.CONSUME : InteractionResult.PASS;
             }
             else {
                 return InteractionResult.SUCCESS;
@@ -203,16 +205,9 @@ public class Broomstick extends Entity {
     }
 
     @Override
-    public Packet<ClientGamePacketListener> getAddEntityPacket() {
-        return new ClientboundAddEntityPacket(this);
-    }
-
-    @Override
     public void positionRider(@NotNull Entity passenger, Entity.MoveFunction moveFunction) {
-        if(hasPassenger(passenger)) {
-            moveFunction.accept(passenger, getX(), getY() + getPassengersRidingOffset(), getZ());
-            clampRotation(passenger);
-        }
+        super.positionRider(passenger, moveFunction);
+        clampRotation(passenger);
     }
 
     public boolean isControlledByLocalInstance() {
@@ -292,51 +287,30 @@ public class Broomstick extends Entity {
         }
     }
 
-    /**
-     * Sets the forward direction of the entity.
-     */
     public void setHurtDir(int pForwardDirection) {
         entityData.set(DATA_ID_HURTDIR, pForwardDirection);
     }
 
-    /**
-     * Gets the forward direction of the entity.
-     */
     public int getHurtDir() {
         return entityData.get(DATA_ID_HURTDIR);
     }
 
-    /**
-     * Sets the time to count down from since the last time entity was hit.
-     */
     public void setHurtTime(int pTimeSinceHit) {
         entityData.set(DATA_ID_HURT, pTimeSinceHit);
     }
 
-    /**
-     * Gets the time since the last hit.
-     */
     public int getHurtTime() {
         return entityData.get(DATA_ID_HURT);
     }
 
-    /**
-     * Sets the damage taken from the last hit.
-     */
     public void setDamage(float pDamageTaken) {
         entityData.set(DATA_ID_DAMAGE, pDamageTaken);
     }
 
-    /**
-     * Gets the damage taken from the last hit.
-     */
     public float getDamage() {
         return entityData.get(DATA_ID_DAMAGE);
     }
 
-    /**
-     * Setups the entity to do the hurt animation. Only used by packets in multiplayer.
-     */
     @Override
     public void animateHurt(float yaw) {
         setHurtDir(-getHurtDir());

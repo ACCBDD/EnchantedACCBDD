@@ -1,7 +1,7 @@
 package net.favouriteless.enchanted.mixin.common;
 
 import net.minecraft.world.level.block.SaplingBlock;
-import net.minecraft.world.level.block.grower.AbstractTreeGrower;
+import net.minecraft.world.level.block.grower.TreeGrower;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
 
@@ -9,6 +9,6 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 public interface SaplingBlockAccessor {
 
     @Accessor("treeGrower")
-    AbstractTreeGrower getTreeGrower();
+    TreeGrower getTreeGrower();
 
 }

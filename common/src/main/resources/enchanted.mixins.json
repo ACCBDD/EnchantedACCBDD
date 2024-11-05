@@ -1,18 +1,18 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "favouriteless.enchanted.mixin",
-  "refmap": "${mod_id}.refmap.json",
-  "compatibilityLevel": "JAVA_17",
+  "package": "net.favouriteless.enchanted.mixin",
+  "refmap": "enchanted.refmap.json",
+  "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "net.favouriteless.enchanted.mixin.common.BlockBehaviourMixin",
-    "net.favouriteless.enchanted.mixin.common.LivingEntityMixin",
-    "net.favouriteless.enchanted.mixin.common.SaplingBlockAccessor",
-    "net.favouriteless.enchanted.mixin.common.ZombieVillagerAccessor"
+    "common.BlockBehaviourMixin",
+    "common.LivingEntityMixin",
+    "common.SaplingBlockAccessor",
+    "common.ZombieVillagerAccessor"
   ],
   "client": [
-    "net.favouriteless.enchanted.mixin.client.AbstractSoundInstanceAccessor",
-    "net.favouriteless.enchanted.mixin.client.LocalPlayerMixin"
+    "client.AbstractSoundInstanceAccessor",
+    "client.LocalPlayerMixin"
   ],
   "server": [
   ],

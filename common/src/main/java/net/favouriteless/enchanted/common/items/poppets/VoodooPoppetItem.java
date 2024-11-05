@@ -12,6 +12,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -38,7 +39,7 @@ public class VoodooPoppetItem extends PoppetItem {
                         ServerPlayer target = PoppetUtils.getBoundPlayer(stack, serverLevel);
                         if(target != null && !target.isCreative() && PoppetUtils.tryVoodooPlayer(target, (ServerPlayer)player, stack)) {
                             target.hurt(EDamageTypes.source(level, EDamageTypes.VOODOO, player), 2.0F);
-                            stack.hurtAndBreak(2, player, p -> p.broadcastBreakEvent(InteractionHand.MAIN_HAND));
+                            stack.hurtAndBreak(2, player, EquipmentSlot.MAINHAND);
                             offHand.shrink(1);
                         }
                     }
@@ -49,7 +50,7 @@ public class VoodooPoppetItem extends PoppetItem {
                 if(target != null && !target.isCreative() && PoppetUtils.tryVoodooPlayer(target, (ServerPlayer)player, stack)) {
                     target.addDeltaMovement(player.getLookAngle().normalize().scale(1.0D));
                     target.hurtMarked = true;
-                    stack.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(InteractionHand.MAIN_HAND));
+                    stack.hurtAndBreak(1, player, EquipmentSlot.MAINHAND);
                 }
             }
         }
@@ -87,7 +88,7 @@ public class VoodooPoppetItem extends PoppetItem {
         voodoo.setItem(stack);
         voodoo.setPickUpDelay(40);
         if(item instanceof ItemEntity itemEntity && itemEntity.getOwner() != null)
-            voodoo.setThrower(itemEntity.getOwner().getUUID());
+            voodoo.setThrower(itemEntity.getOwner());
         return voodoo;
     }
 

@@ -1,19 +1,19 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "favouriteless.enchanted.fabric.mixin",
+  "package": "net.favouriteless.enchanted.fabric.mixin",
   "refmap": "enchanted.refmap.json",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "net.favouriteless.enchanted.fabric.mixin.LivingEntityMixin",
-    "net.favouriteless.enchanted.fabric.mixin.PersistentEntitySectionManagerMixin",
-    "net.favouriteless.enchanted.fabric.mixin.PlayerListMixin",
-    "net.favouriteless.enchanted.fabric.mixin.PlayerMixin",
-    "net.favouriteless.enchanted.fabric.mixin.ServerPlayerGameModeMixin"
+    "common.LivingEntityMixin",
+    "common.PersistentEntitySectionManagerMixin",
+    "common.PlayerListMixin",
+    "common.PlayerMixin",
+    "common.ServerPlayerGameModeMixin"
   ],
   "client": [
-    "net.favouriteless.enchanted.fabric.mixin.MultiPlayerGameModeMixin",
-    "net.favouriteless.enchanted.fabric.mixin.SoundEngineMixin"
+    "client.MultiPlayerGameModeMixin",
+    "client.SoundEngineMixin"
   ],
   "server": [
   ],

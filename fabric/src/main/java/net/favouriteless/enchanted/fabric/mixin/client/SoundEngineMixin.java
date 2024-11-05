@@ -1,4 +1,4 @@
-package net.favouriteless.enchanted.fabric.mixin;
+package net.favouriteless.enchanted.fabric.mixin.client;
 
 import net.favouriteless.enchanted.client.ClientEvents;
 import net.minecraft.client.resources.sounds.SoundInstance;

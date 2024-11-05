@@ -7,10 +7,12 @@ assignees: Favouriteless
 
 ---
 
+**What game version is the bug on?**
+
+**What mod version is the bug on?**
+
 **Describe the bug**
 
-**To Reproduce**
+**To reproduce**
 
-**Expected behavior**
-
-**Screenshots**
+**Screenshots, logs or videos**
