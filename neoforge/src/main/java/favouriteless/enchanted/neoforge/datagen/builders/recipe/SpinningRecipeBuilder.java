@@ -1,6 +1,6 @@
 package favouriteless.enchanted.neoforge.datagen.builders.recipe;
 
-import favouriteless.enchanted.common.init.registry.EnchantedRecipeTypes;
+import favouriteless.enchanted.common.init.registry.ERecipeTypes;
 import favouriteless.enchanted.util.ItemUtil;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -125,7 +125,7 @@ public class SpinningRecipeBuilder extends EnchantedRecipeBuilder {
         @NotNull
         @Override
         public RecipeSerializer<?> getType() {
-            return EnchantedRecipeTypes.SPINNING_SERIALIZER.get();
+            return ERecipeTypes.SPINNING_SERIALIZER.get();
         }
 
     }

@@ -1,7 +1,7 @@
 package favouriteless.enchanted.common.items;
 
 import favouriteless.enchanted.common.Enchanted;
-import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
+import favouriteless.enchanted.common.init.registry.EBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
@@ -24,7 +24,7 @@ public class AnointingPasteItem extends Item {
         BlockPos pos = context.getClickedPos();
         BlockState state = context.getLevel().getBlockState(pos);
         if(state.is(Blocks.CAULDRON)) {
-            context.getLevel().setBlockAndUpdate(pos, EnchantedBlocks.WITCH_CAULDRON.get().defaultBlockState());
+            context.getLevel().setBlockAndUpdate(pos, EBlocks.WITCH_CAULDRON.get().defaultBlockState());
             context.getItemInHand().shrink(1);
 
             context.getLevel().playSound(context.getPlayer(), pos, SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.BLOCKS, 1.0F, 1.0F);

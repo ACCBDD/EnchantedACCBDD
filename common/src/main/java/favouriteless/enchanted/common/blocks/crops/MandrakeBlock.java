@@ -2,9 +2,9 @@ package favouriteless.enchanted.common.blocks.crops;
 
 import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.common.entities.Mandrake;
-import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
-import favouriteless.enchanted.common.init.registry.EnchantedEntityTypes;
-import favouriteless.enchanted.common.init.registry.EnchantedItems;
+import favouriteless.enchanted.common.init.registry.EBlocks;
+import favouriteless.enchanted.common.init.registry.EEntityTypes;
+import favouriteless.enchanted.common.items.EItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.Difficulty;
@@ -25,7 +25,7 @@ public class MandrakeBlock extends CropsBlockAgeFive {
     }
 
     protected ItemLike getBaseSeedId() {
-        return EnchantedItems.MANDRAKE_SEEDS.get();
+        return EItems.MANDRAKE_SEEDS.get();
     }
 
     @Override
@@ -34,7 +34,7 @@ public class MandrakeBlock extends CropsBlockAgeFive {
         player.causeFoodExhaustion(0.005F);
 
         if(!level.isClientSide() && level.getDifficulty() != Difficulty.PEACEFUL) {
-            if (state.is(EnchantedBlocks.MANDRAKE.get()) && state.getValue(AGE_FIVE) == 4) {
+            if (state.is(EBlocks.MANDRAKE.get()) && state.getValue(AGE_FIVE) == 4) {
                 if (level.isDay()) {
                     spawnMandrake(level, pos);
                     return;
@@ -50,7 +50,7 @@ public class MandrakeBlock extends CropsBlockAgeFive {
     }
 
     public static void spawnMandrake(Level level, BlockPos pos) {
-        Mandrake entity = EnchantedEntityTypes.MANDRAKE.get().create(level);
+        Mandrake entity = EEntityTypes.MANDRAKE.get().create(level);
         entity.moveTo(pos.getX() + 0.5D, pos.getY(), pos.getZ() + 0.5D, 0.0F, 0.0F);
         level.addFreshEntity(entity);
     }

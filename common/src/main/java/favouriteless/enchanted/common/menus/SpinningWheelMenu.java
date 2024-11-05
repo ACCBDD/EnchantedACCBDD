@@ -1,8 +1,8 @@
 package favouriteless.enchanted.common.menus;
 
 import favouriteless.enchanted.common.blocks.entity.SpinningWheelBlockEntity;
-import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
-import favouriteless.enchanted.common.init.registry.EnchantedMenuTypes;
+import favouriteless.enchanted.common.init.registry.EBlocks;
+import favouriteless.enchanted.common.init.registry.EMenuTypes;
 import favouriteless.enchanted.common.menus.slots.NonJarInputSlot;
 import favouriteless.enchanted.common.menus.slots.OutputSlot;
 import favouriteless.enchanted.common.menus.slots.SimpleDataSlot;
@@ -19,7 +19,7 @@ public class SpinningWheelMenu extends MenuBase<SpinningWheelBlockEntity> {
 	private final DataSlot data;
 
 	public SpinningWheelMenu(int id, Inventory playerInventory, SpinningWheelBlockEntity be, DataSlot data) {
-		super(EnchantedMenuTypes.SPINNING_WHEEL.get(), id, be, EnchantedBlocks.SPINNING_WHEEL.get());
+		super(EMenuTypes.SPINNING_WHEEL.get(), id, be, EBlocks.SPINNING_WHEEL.get());
 		this.data = data;
 
 		addSlot(new NonJarInputSlot(be, 0, 45, 23)); // Main input

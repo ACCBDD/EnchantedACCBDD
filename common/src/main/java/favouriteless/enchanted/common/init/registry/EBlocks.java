@@ -31,15 +31,15 @@ import net.minecraft.world.level.material.PushReaction;
 import java.util.function.Supplier;
 import java.util.function.ToIntFunction;
 
-public class EnchantedBlocks {
+public class EBlocks {
 
     public static final Supplier<RotatedPillarBlock> STRIPPED_ALDER_LOG = register("stripped_alder_log", () -> log(MapColor.COLOR_ORANGE, MapColor.COLOR_ORANGE));
     public static final Supplier<RotatedPillarBlock> STRIPPED_HAWTHORN_LOG = register("stripped_hawthorn_log", () -> log(MapColor.CLAY, MapColor.CLAY));
     public static final Supplier<RotatedPillarBlock> STRIPPED_ROWAN_LOG = register("stripped_rowan_log", () -> log(MapColor.WOOD, MapColor.WOOD));
-    public static final Supplier<ButtonBlock> ALDER_BUTTON = register("alder_button", EnchantedBlocks::woodenButton);
-    public static final Supplier<FenceBlock> ALDER_FENCE = register("alder_fence", EnchantedBlocks::woodenFence);
-    public static final Supplier<FenceGateBlock> ALDER_FENCE_GATE = register("alder_fence_gate", EnchantedBlocks::woodenGate);
-    public static final Supplier<Block> ALDER_LEAVES = register("alder_leaves", EnchantedBlocks::leaves);
+    public static final Supplier<ButtonBlock> ALDER_BUTTON = register("alder_button", EBlocks::woodenButton);
+    public static final Supplier<FenceBlock> ALDER_FENCE = register("alder_fence", EBlocks::woodenFence);
+    public static final Supplier<FenceGateBlock> ALDER_FENCE_GATE = register("alder_fence_gate", EBlocks::woodenGate);
+    public static final Supplier<Block> ALDER_LEAVES = register("alder_leaves", EBlocks::leaves);
     public static final Supplier<EnchantedLog> ALDER_LOG = register("alder_log", () -> strippableLog(MapColor.COLOR_ORANGE, MapColor.STONE, STRIPPED_ALDER_LOG));
     public static final Supplier<Block> ALDER_PLANKS = register("alder_planks", () -> block(Blocks.OAK_PLANKS));
     public static final Supplier<PressurePlateBlock> ALDER_PRESSURE_PLATE = register("alder_pressure_plate", () -> woodenPressurePlate(MapColor.COLOR_ORANGE));
@@ -59,10 +59,10 @@ public class EnchantedBlocks {
     public static final Supplier<CropsBlockAgeFive> GARLIC = register("garlic", GarlicBlock::new);
     public static final Supplier<Block> GLINT_WEED = register("glint_weed", GlintWeedBlock::new);
     public static final Supplier<Block> GOLDEN_CHALK = register("golden_chalk", GoldChalkBlock::new);
-    public static final Supplier<ButtonBlock> HAWTHORN_BUTTON = register("hawthorn_button", EnchantedBlocks::woodenButton);
-    public static final Supplier<FenceBlock> HAWTHORN_FENCE = register("hawthorn_fence", EnchantedBlocks::woodenFence);
-    public static final Supplier<FenceGateBlock> HAWTHORN_FENCE_GATE = register("hawthorn_fence_gate", EnchantedBlocks::woodenGate);
-    public static final Supplier<Block> HAWTHORN_LEAVES = register("hawthorn_leaves", EnchantedBlocks::leaves);
+    public static final Supplier<ButtonBlock> HAWTHORN_BUTTON = register("hawthorn_button", EBlocks::woodenButton);
+    public static final Supplier<FenceBlock> HAWTHORN_FENCE = register("hawthorn_fence", EBlocks::woodenFence);
+    public static final Supplier<FenceGateBlock> HAWTHORN_FENCE_GATE = register("hawthorn_fence_gate", EBlocks::woodenGate);
+    public static final Supplier<Block> HAWTHORN_LEAVES = register("hawthorn_leaves", EBlocks::leaves);
     public static final Supplier<EnchantedLog> HAWTHORN_LOG = register("hawthorn_log", () -> strippableLog(MapColor.CLAY, MapColor.CLAY, STRIPPED_HAWTHORN_LOG));
     public static final Supplier<Block> HAWTHORN_PLANKS = register("hawthorn_planks", () -> block(Blocks.OAK_PLANKS));
     public static final Supplier<PressurePlateBlock> HAWTHORN_PRESSURE_PLATE = register("hawthorn_pressure_plate", () -> woodenPressurePlate(MapColor.CLAY));
@@ -78,10 +78,10 @@ public class EnchantedBlocks {
     public static final Supplier<Block> PROTECTION_BARRIER = register("protection_barrier", ProtectionBarrierBlock::new);
     public static final Supplier<Block> PROTECTION_BARRIER_TEMPORARY = register("protection_barrier_temporary", TemporaryProtectionBarrierBlock::new);
     public static final Supplier<Block> RITUAL_CHALK = register("ritual_chalk", () -> new ChalkCircleBlock(null));
-    public static final Supplier<ButtonBlock> ROWAN_BUTTON = register("rowan_button", EnchantedBlocks::woodenButton);
-    public static final Supplier<FenceBlock> ROWAN_FENCE = register("rowan_fence", EnchantedBlocks::woodenFence);
-    public static final Supplier<FenceGateBlock> ROWAN_FENCE_GATE = register("rowan_fence_gate", EnchantedBlocks::woodenGate);
-    public static final Supplier<Block> ROWAN_LEAVES = register("rowan_leaves", EnchantedBlocks::leaves);
+    public static final Supplier<ButtonBlock> ROWAN_BUTTON = register("rowan_button", EBlocks::woodenButton);
+    public static final Supplier<FenceBlock> ROWAN_FENCE = register("rowan_fence", EBlocks::woodenFence);
+    public static final Supplier<FenceGateBlock> ROWAN_FENCE_GATE = register("rowan_fence_gate", EBlocks::woodenGate);
+    public static final Supplier<Block> ROWAN_LEAVES = register("rowan_leaves", EBlocks::leaves);
     public static final Supplier<EnchantedLog> ROWAN_LOG = register("rowan_log", () -> strippableLog(MapColor.WOOD, MapColor.PODZOL, STRIPPED_ROWAN_LOG));
     public static final Supplier<Block> ROWAN_PLANKS = register("rowan_planks", () -> block(Blocks.OAK_PLANKS));
     public static final Supplier<PressurePlateBlock> ROWAN_PRESSURE_PLATE = register("rowan_pressure_plate", () -> woodenPressurePlate(MapColor.WOOD));

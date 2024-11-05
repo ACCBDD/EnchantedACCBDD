@@ -1,7 +1,7 @@
 package favouriteless.enchanted.neoforge.datagen.providers.tag;
 
 import favouriteless.enchanted.common.Enchanted;
-import favouriteless.enchanted.common.init.EnchantedTags;
+import favouriteless.enchanted.common.init.ETags;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.BiomeTagsProvider;
@@ -22,7 +22,7 @@ public class BiomeTagProvider extends BiomeTagsProvider {
     }
 
     public void addEnchantedTags(Provider provider) {
-        tag(EnchantedTags.Biomes.OVERHEATING_BIOMES)
+        tag(ETags.Biomes.OVERHEATING_BIOMES)
                 .add(Biomes.BADLANDS, Biomes.BAMBOO_JUNGLE, Biomes.DESERT, Biomes.ERODED_BADLANDS, Biomes.JUNGLE,
                         Biomes.SAVANNA, Biomes.SAVANNA_PLATEAU, Biomes.SPARSE_JUNGLE, Biomes.WINDSWEPT_SAVANNA,
                         Biomes.WOODED_BADLANDS);

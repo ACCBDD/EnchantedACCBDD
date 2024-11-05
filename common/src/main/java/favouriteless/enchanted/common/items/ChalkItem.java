@@ -1,7 +1,7 @@
 package favouriteless.enchanted.common.items;
 
 import favouriteless.enchanted.common.blocks.chalk.AbstractChalkBlock;
-import favouriteless.enchanted.common.init.registry.EnchantedSoundEvents;
+import favouriteless.enchanted.common.init.registry.ESoundEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundSource;
@@ -55,7 +55,7 @@ public class ChalkItem extends BlockItem {
     private void tryPlaceChalk(Level level, BlockPos pos, UseOnContext context) {
         if(!level.isClientSide)
             level.setBlockAndUpdate(pos, chalkBlock.getStateForPlacement(new BlockPlaceContext(context)));
-        level.playSound(context.getPlayer(), pos, EnchantedSoundEvents.CHALK_WRITE.get(), SoundSource.PLAYERS, 1F, 1F);
+        level.playSound(context.getPlayer(), pos, ESoundEvents.CHALK_WRITE.get(), SoundSource.PLAYERS, 1F, 1F);
         context.getPlayer().getItemInHand(context.getHand()).hurtAndBreak(1, context.getPlayer(), (item) -> {});
     }
 

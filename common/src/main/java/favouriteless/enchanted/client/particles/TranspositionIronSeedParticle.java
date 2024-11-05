@@ -1,7 +1,7 @@
 package favouriteless.enchanted.client.particles;
 
 import favouriteless.enchanted.client.particles.types.CircleMagicParticleType.CircleMagicData;
-import favouriteless.enchanted.common.init.registry.EnchantedParticleTypes;
+import favouriteless.enchanted.common.init.registry.EParticleTypes;
 import favouriteless.enchanted.common.rites.world.RiteTranspositionIron;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.NoRenderParticle;
@@ -24,7 +24,7 @@ public class TranspositionIronSeedParticle extends NoRenderParticle {
 			double cx = x + Math.sin(a) * RiteTranspositionIron.CIRCLE_RADIUS;
 			double cz = z + Math.cos(a) * RiteTranspositionIron.CIRCLE_RADIUS;
 
-			level.addParticle(new CircleMagicData(EnchantedParticleTypes.CIRCLE_MAGIC.get(), 170, 111, 58, x, y, z, RiteTranspositionIron.CIRCLE_RADIUS), cx, y, cz, 0.0D, 0.0D, 0.0D);
+			level.addParticle(new CircleMagicData(EParticleTypes.CIRCLE_MAGIC.get(), 170, 111, 58, x, y, z, RiteTranspositionIron.CIRCLE_RADIUS), cx, y, cz, 0.0D, 0.0D, 0.0D);
 		}
 		this.remove();
 	}

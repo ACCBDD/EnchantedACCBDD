@@ -3,6 +3,7 @@ package favouriteless.enchanted.common.init.registry;
 import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.api.rites.AbstractRite;
 import favouriteless.enchanted.api.rites.CreateItemRite;
+import favouriteless.enchanted.common.items.EItems;
 import favouriteless.enchanted.common.rites.RiteType;
 import favouriteless.enchanted.common.rites.binding.*;
 import favouriteless.enchanted.common.rites.curse.*;
@@ -35,7 +36,7 @@ public class RiteTypes {
     public static final RiteType<RiteBindingWaystonePlayer> BINDING_WAYSTONE_PLAYER_CHARGED = register("binding_waystone_player_charged", RiteBindingWaystonePlayer::new);
     public static final RiteType<RiteBroiling> BROILING = register("broiling", RiteBroiling::new);
     public static final RiteType<RiteBroiling> BROILING_CHARGED = register("broiling_charged", RiteBroiling::new);
-    public static final RiteType<CreateItemRite> CHARGING_STONE = register("charging_stone", (type, level, pos, caster) -> new CreateItemRite(type, level, pos, caster, EnchantedItems.ATTUNED_STONE_CHARGED.get().getDefaultInstance()));
+    public static final RiteType<CreateItemRite> CHARGING_STONE = register("charging_stone", (type, level, pos, caster) -> new CreateItemRite(type, level, pos, caster, EItems.ATTUNED_STONE_CHARGED.get().getDefaultInstance()));
     public static final RiteType<RiteCurseBlight> CURSE_OF_BLIGHT = register("curse_blight", RiteCurseBlight::new);
     public static final RiteType<RiteCurseMisfortune> CURSE_OF_MISFORTUNE = register("curse_misfortune", RiteCurseMisfortune::new);
     public static final RiteType<RiteCurseOverheating> CURSE_OF_OVERHEATING = register("curse_overheating", RiteCurseOverheating::new);
@@ -44,7 +45,7 @@ public class RiteTypes {
     public static final RiteType<RiteFertility> FERTILITY_CHARGED = register("fertility_charged", RiteFertility::new);
     public static final RiteType<RiteForest> FOREST = register("forest", RiteForest::new);
     public static final RiteType<RiteImprisonment> IMPRISONMENT = register("imprisonment", RiteImprisonment::new);
-    public static final RiteType<CreateItemRite> INFUSION_BROOM = register("infusion_broom", (type, level, pos, caster) -> new CreateItemRite(type, level, pos, caster, EnchantedItems.ENCHANTED_BROOMSTICK.get().getDefaultInstance()));
+    public static final RiteType<CreateItemRite> INFUSION_BROOM = register("infusion_broom", (type, level, pos, caster) -> new CreateItemRite(type, level, pos, caster, EItems.ENCHANTED_BROOMSTICK.get().getDefaultInstance()));
     public static final RiteType<RiteProtection> PROTECTION = register("protection", (type, level, pos, caster) -> new RiteProtection(type, level, pos, caster, 4));
     public static final RiteType<RiteProtection> PROTECTION_LARGE = register("protection_large", (type, level, pos, caster) -> new RiteProtection(type, level, pos, caster, 6));
     public static final RiteType<RiteProtectionTemporary> PROTECTION_TEMPORARY = register("protection_temporary", RiteProtectionTemporary::new);

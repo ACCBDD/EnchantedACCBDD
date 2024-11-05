@@ -1,7 +1,7 @@
 package favouriteless.enchanted.common.blocks.altar;
 
 import favouriteless.enchanted.common.blocks.entity.AltarBlockEntity;
-import favouriteless.enchanted.common.init.registry.EnchantedBlockEntityTypes;
+import favouriteless.enchanted.common.init.registry.EBlockEntityTypes;
 import favouriteless.enchanted.common.multiblock.MultiBlockTools;
 import favouriteless.enchanted.common.multiblock.altar.AltarMultiBlock;
 import favouriteless.enchanted.common.multiblock.altar.AltarPartIndex;
@@ -94,7 +94,7 @@ public class AltarBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return type == EnchantedBlockEntityTypes.ALTAR.get() ? AltarBlockEntity::tick : null;
+        return type == EBlockEntityTypes.ALTAR.get() ? AltarBlockEntity::tick : null;
     }
 
 

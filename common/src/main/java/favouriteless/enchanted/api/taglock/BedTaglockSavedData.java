@@ -1,13 +1,20 @@
 package favouriteless.enchanted.api.taglock;
 
+import favouriteless.enchanted.common.Enchanted;
+import favouriteless.enchanted.common.items.component.TaglockData;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.NbtOps;
 import net.minecraft.nbt.Tag;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.packs.repository.Pack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BedBlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.saveddata.SavedData;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -28,11 +35,11 @@ public class BedTaglockSavedData extends SavedData {
     }
 
     /**
-     * @param bed The {@link BedBlockEntity} to grab data from.
+     * @param bed The {@link BlockEntity} to grab data from.
      *
-     * @return The {@link IBedTaglock} associated with a specific {@link BedBlockEntity}.
+     * @return The {@link IBedTaglock} associated with a specific {@link BlockEntity}.
      */
-    public IBedTaglock getEntry(BedBlockEntity bed) {
+    public IBedTaglock getEntry(BlockEntity bed) {
         return getEntry(bed.getBlockPos());
     }
 
@@ -43,7 +50,7 @@ public class BedTaglockSavedData extends SavedData {
      */
     public static BedTaglockSavedData get(Level level) {
         if(level instanceof ServerLevel serverLevel)
-            return serverLevel.getDataStorage().computeIfAbsent(BedTaglockSavedData::load, BedTaglockSavedData::new, NAME);
+            return serverLevel.getDataStorage().computeIfAbsent(new Factory<>(BedTaglockSavedData::new, BedTaglockSavedData::load, null), NAME);
         else
             throw new RuntimeException("Game attempted to load serverside taglock (bed) data from a clientside world.");
     }
@@ -54,7 +61,7 @@ public class BedTaglockSavedData extends SavedData {
         return entries.computeIfAbsent(pos, (_pos) -> new BedTaglockImpl());
     }
 
-    private static BedTaglockSavedData load(CompoundTag nbt) {
+    private static BedTaglockSavedData load(CompoundTag nbt, Provider registries) {
         BedTaglockSavedData data = new BedTaglockSavedData();
         ListTag entryList = nbt.getList("entryList", Tag.TAG_COMPOUND);
 
@@ -67,63 +74,51 @@ public class BedTaglockSavedData extends SavedData {
     }
 
     @Override
-    public CompoundTag save(CompoundTag nbt) {
+    public CompoundTag save(CompoundTag tag, Provider registries) {
         ListTag list = new ListTag();
-        for(Entry<BlockPos, IBedTaglock> entry : entries.entrySet()) {
-            IBedTaglock value = entry.getValue();
-            if(value.getUUID() != null) {
-                CompoundTag entryNbt = entry.getValue().serialize();
-                entryNbt.putLong("pos", entry.getKey().asLong());
-            }
-        }
 
-        nbt.put("entryList", list);
-        return nbt;
+        entries.forEach((pos, data) -> {
+            if(data.getData() != TaglockData.EMPTY) {
+                CompoundTag entryTag = data.serialize();
+                entryTag.putLong("pos", pos.asLong());
+            }
+        });
+
+        tag.put("entries", list);
+        return tag;
     }
 
 
 
     private static class BedTaglockImpl implements IBedTaglock {
 
-        private UUID uuid = null;
-        private String name = null;
+        private TaglockData data = TaglockData.EMPTY;
 
         private BedTaglockImpl() {}
 
         @Override
         public CompoundTag serialize() {
-            CompoundTag nbt = new CompoundTag();
-            nbt.putUUID("uuid", uuid);
-            nbt.putString("name", name);
-            return nbt;
+            CompoundTag tag = new CompoundTag();
+            tag.put("taglockData", TaglockData.CODEC.encode(data, NbtOps.INSTANCE, new CompoundTag()).getOrThrow());
+            return tag;
         }
 
         @Override
-        public void deserialize(CompoundTag nbt) {
-            uuid = nbt.getUUID("uuid");
-            name = nbt.getString("name");
+        public void deserialize(CompoundTag tag) {
+            data = TaglockData.CODEC.parse(NbtOps.INSTANCE, tag.get("taglockData"))
+                    .resultOrPartial(e -> Enchanted.LOG.error("Tried to load invalid Taglock data: '{}'", e))
+                    .orElse(TaglockData.EMPTY);
         }
 
         @Override
-        public UUID getUUID() {
-            return uuid;
+        public @NotNull TaglockData getData() {
+            return data;
         }
 
         @Override
-        public void setUUID(UUID uuid) {
-            this.uuid = uuid;
+        public void setData(@NotNull TaglockData data) {
+            this.data = data;
         }
-
-        @Override
-        public String getName() {
-            return name;
-        }
-
-        @Override
-        public void setName(String name) {
-            this.name = name;
-        }
-
     }
 
 }

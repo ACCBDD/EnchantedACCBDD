@@ -1,6 +1,6 @@
 package favouriteless.enchanted.common.altar;
 
-import favouriteless.enchanted.common.init.EnchantedData;
+import favouriteless.enchanted.common.init.EData;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
@@ -107,7 +107,7 @@ public class AltarUpgradeData {
     // When saving, the upgrades map gets flattened.
     public CompoundTag save(Level level) {
         CompoundTag nbt = new CompoundTag();
-        level.registryAccess().registry(EnchantedData.ALTAR_UPGRADE_REGISTRY).ifPresent(registry -> {
+        level.registryAccess().registry(EData.ALTAR_UPGRADE_REGISTRY).ifPresent(registry -> {
             for(Map<AltarUpgrade, Integer> typeMap : upgrades.values()) {
                 for(Entry<AltarUpgrade, Integer> entry : typeMap.entrySet())
                     nbt.putInt(registry.getKey(entry.getKey()).toString(), entry.getValue());
@@ -126,7 +126,7 @@ public class AltarUpgradeData {
     private void tryInitialise(Level level) {
         if(!isInitialised) {
             upgrades.clear();
-            level.registryAccess().registry(EnchantedData.ALTAR_UPGRADE_REGISTRY).ifPresent(registry -> {
+            level.registryAccess().registry(EData.ALTAR_UPGRADE_REGISTRY).ifPresent(registry -> {
 
                 for(Entry<ResourceLocation, Integer> entry : loadData.entrySet()) {
                     if(entry.getValue() == 0) // Do not add upgrades without a count.

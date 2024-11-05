@@ -9,7 +9,7 @@ import net.minecraft.world.effect.MobEffectCategory;
 
 import java.util.function.Supplier;
 
-public class EnchantedEffects {
+public class EEffects {
 
 	public static final Supplier<MobEffect> DROWN_RESISTANCE = register("drown_resistance", () -> new SimpleEffect(MobEffectCategory.BENEFICIAL, 0x2E5299));
 	public static final Supplier<MobEffect> FALL_RESISTANCE = register("fall_resistance", () -> new SimpleEffect(MobEffectCategory.BENEFICIAL, 0x70503A));

@@ -1,9 +1,11 @@
 package favouriteless.enchanted.common;
 
-import favouriteless.enchanted.common.init.EnchantedCreativeTab;
-import favouriteless.enchanted.common.init.EnchantedData;
+import favouriteless.enchanted.common.init.ECreativeTab;
+import favouriteless.enchanted.common.init.EData;
 import favouriteless.enchanted.common.init.registry.*;
-import favouriteless.enchanted.common.network.EnchantedPackets;
+import favouriteless.enchanted.common.items.EItems;
+import favouriteless.enchanted.common.items.component.EDataComponentTypes;
+import favouriteless.enchanted.common.network.EPackets;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import org.slf4j.Logger;
@@ -21,26 +23,27 @@ public class Enchanted {
 
 
     public static void init() {
-        EnchantedPackets.register();
-        Enchanted.loadRegistries();
+        EPackets.register();
+        loadRegistries();
     }
 
     public static void loadRegistries() {
-        EnchantedSoundEvents.load();
-        EnchantedItems.load();
-        EnchantedBlocks.load();
-        EnchantedBlockEntityTypes.load();
-        EnchantedEntityTypes.load();
-        EnchantedEffects.load();
-        EnchantedParticleTypes.load();
-        EnchantedMenuTypes.load();
-        EnchantedRecipeTypes.load();
-        EnchantedData.load();
-        EnchantedCreativeTab.load();
+        ESoundEvents.load();
+        EItems.load();
+        EDataComponentTypes.load();
+        EBlocks.load();
+        EBlockEntityTypes.load();
+        EEntityTypes.load();
+        EEffects.load();
+        EParticleTypes.load();
+        EMenuTypes.load();
+        ERecipeTypes.load();
+        EData.load();
+        ECreativeTab.load();
     }
 
     public static ResourceLocation id(String path) {
-        return new ResourceLocation(MOD_ID, path);
+        return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
     }
 
     public static String translationKey(String prefix, String suffix) {

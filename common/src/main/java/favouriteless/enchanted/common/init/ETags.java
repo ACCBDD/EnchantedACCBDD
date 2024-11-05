@@ -12,7 +12,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 
-public class EnchantedTags {
+public class ETags {
 
     public static class Blocks {
         public static final TagKey<Block> BLIGHT_DECAYABLE_BLOCKS = createBlockTag(Enchanted.id("blight_decayable_blocks"));

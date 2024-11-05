@@ -1,7 +1,7 @@
 package favouriteless.enchanted.common.rites.binding;
 
 import favouriteless.enchanted.api.rites.CreateItemRite;
-import favouriteless.enchanted.common.init.registry.EnchantedItems;
+import favouriteless.enchanted.common.items.EItems;
 import favouriteless.enchanted.common.rites.RiteType;
 import favouriteless.enchanted.util.WaystoneHelper;
 import net.minecraft.core.BlockPos;
@@ -13,7 +13,7 @@ import java.util.UUID;
 public class RiteBindingWaystone extends CreateItemRite {
 
     public RiteBindingWaystone(RiteType<?> type, ServerLevel level, BlockPos pos, UUID caster) {
-        super(type, level, pos, caster, new ItemStack(EnchantedItems.BOUND_WAYSTONE.get()));
+        super(type, level, pos, caster, new ItemStack(EItems.BOUND_WAYSTONE.get()));
     }
 
     @Override

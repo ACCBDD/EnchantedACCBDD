@@ -1,7 +1,7 @@
 package favouriteless.enchanted.common.curses;
 
 import favouriteless.enchanted.api.curses.RandomCurse;
-import favouriteless.enchanted.common.init.EnchantedTags.MobEffects;
+import favouriteless.enchanted.common.init.ETags.MobEffects;
 import favouriteless.enchanted.common.init.registry.CurseTypes;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;

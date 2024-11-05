@@ -1,6 +1,6 @@
 package favouriteless.enchanted.fabric.mixin;
 
-import favouriteless.enchanted.common.init.registry.EnchantedItems;
+import favouriteless.enchanted.common.items.EItems;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.level.entity.EntityAccess;
@@ -16,8 +16,8 @@ public class PersistentEntitySectionManagerMixin<T extends EntityAccess> {
     @Inject(method="addEntity", at=@At("HEAD"), cancellable = true)
     private void addEntity(T e, boolean worldGenSpawned, CallbackInfoReturnable<Boolean> cir) {
         if(e instanceof Entity entity && entity.getClass().equals(ItemEntity.class)) {
-            if(((ItemEntity)entity).getItem().getItem() == EnchantedItems.VOODOO_POPPET.get()) {
-                entity.level().addFreshEntity(EnchantedItems.VOODOO_POPPET.get().createEntity(entity.level(), entity, ((ItemEntity)entity).getItem()));
+            if(((ItemEntity)entity).getItem().getItem() == EItems.VOODOO_POPPET.get()) {
+                entity.level().addFreshEntity(EItems.VOODOO_POPPET.get().createEntity(entity.level(), entity, ((ItemEntity)entity).getItem()));
                 cir.setReturnValue(false);
             }
         }

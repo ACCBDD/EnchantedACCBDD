@@ -1,8 +1,8 @@
 package favouriteless.enchanted.common.rites.binding;
 
 import favouriteless.enchanted.api.rites.AbstractRite;
-import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
-import favouriteless.enchanted.common.init.registry.EnchantedItems;
+import favouriteless.enchanted.common.init.registry.EBlocks;
+import favouriteless.enchanted.common.items.EItems;
 import favouriteless.enchanted.common.rites.CirclePart;
 import favouriteless.enchanted.common.rites.RiteType;
 import net.minecraft.ChatFormatting;
@@ -41,7 +41,7 @@ public class RiteBindingTalisman extends AbstractRite {
             nbt.putByte("small", small);
             nbt.putByte("medium", medium);
             nbt.putByte("large", large);
-            ItemStack talisman = new ItemStack(EnchantedItems.CIRCLE_TALISMAN.get(), 1);
+            ItemStack talisman = new ItemStack(EItems.CIRCLE_TALISMAN.get(), 1);
             talisman.setTag(nbt);
 
             ServerLevel level = getLevel();
@@ -62,7 +62,7 @@ public class RiteBindingTalisman extends AbstractRite {
     @Override
     protected boolean checkAdditional() {
         for(ItemStack item : itemsConsumed) {
-            if(item.getItem() == EnchantedItems.CIRCLE_TALISMAN.get() && item.hasTag()) { // If input talisman is already bound
+            if(item.getItem() == EItems.CIRCLE_TALISMAN.get() && item.hasTag()) { // If input talisman is already bound
                 cancel();
                 ServerPlayer player = tryFindCaster();
                 if(player != null)
@@ -76,9 +76,9 @@ public class RiteBindingTalisman extends AbstractRite {
     private byte testForCircle(CirclePart circle) {
         ServerLevel level = getLevel();
         BlockPos pos = getPos();
-        if(circle.match(level, pos, EnchantedBlocks.RITUAL_CHALK.get())) return 1;
-        if(circle.match(level, pos, EnchantedBlocks.NETHER_CHALK.get())) return 2;
-        if(circle.match(level, pos, EnchantedBlocks.OTHERWHERE_CHALK.get())) return 3;
+        if(circle.match(level, pos, EBlocks.RITUAL_CHALK.get())) return 1;
+        if(circle.match(level, pos, EBlocks.NETHER_CHALK.get())) return 2;
+        if(circle.match(level, pos, EBlocks.OTHERWHERE_CHALK.get())) return 3;
         return 0;
     }
 

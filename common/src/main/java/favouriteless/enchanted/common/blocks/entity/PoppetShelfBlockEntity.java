@@ -1,6 +1,6 @@
 package favouriteless.enchanted.common.blocks.entity;
 
-import favouriteless.enchanted.common.init.registry.EnchantedBlockEntityTypes;
+import favouriteless.enchanted.common.init.registry.EBlockEntityTypes;
 import favouriteless.enchanted.common.menus.PoppetShelfMenu;
 import favouriteless.enchanted.common.poppet.PoppetShelfInventory;
 import favouriteless.enchanted.common.poppet.PoppetShelfManager;
@@ -22,7 +22,7 @@ public class PoppetShelfBlockEntity extends BlockEntity implements MenuProvider 
 	public PoppetShelfInventory inventory = null;
 
 	public PoppetShelfBlockEntity(BlockPos pos, BlockState state) {
-		super(EnchantedBlockEntityTypes.POPPET_SHELF.get(), pos, state);
+		super(EBlockEntityTypes.POPPET_SHELF.get(), pos, state);
 	}
 
 	@Override

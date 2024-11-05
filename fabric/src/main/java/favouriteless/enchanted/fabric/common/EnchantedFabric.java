@@ -6,10 +6,10 @@ import favouriteless.enchanted.common.altar.AltarUpgrade;
 import favouriteless.enchanted.common.altar.PowerProvider;
 import favouriteless.enchanted.common.entities.FamiliarCat;
 import favouriteless.enchanted.common.entities.Mandrake;
-import favouriteless.enchanted.common.init.EnchantedData;
-import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
-import favouriteless.enchanted.common.init.registry.EnchantedEntityTypes;
-import favouriteless.enchanted.common.init.registry.EnchantedItems;
+import favouriteless.enchanted.common.init.EData;
+import favouriteless.enchanted.common.init.registry.EBlocks;
+import favouriteless.enchanted.common.init.registry.EEntityTypes;
+import favouriteless.enchanted.common.items.EItems;
 import favouriteless.enchanted.common.rites.RiteRequirements;
 import fuzs.forgeconfigapiport.fabric.api.neoforge.v4.NeoForgeConfigRegistry;
 import net.fabricmc.api.ModInitializer;
@@ -27,29 +27,29 @@ public class EnchantedFabric implements ModInitializer {
         CommonEventsFabric.register();
         registerDataRegistries();
 
-        EnchantedItems.registerCompostables();
+        EItems.registerCompostables();
         registerStrippables();
-        EnchantedBlocks.registerFlammables();
+        EBlocks.registerFlammables();
 
         NeoForgeConfigRegistry.INSTANCE.register(Enchanted.MOD_ID, Type.COMMON, CommonConfig.SPEC, "enchanted-common.toml");
     }
 
     private static void registerEntityAttributes() {
-        FabricDefaultAttributeRegistry.register(EnchantedEntityTypes.MANDRAKE.get(), Mandrake.createAttributes());
-        FabricDefaultAttributeRegistry.register(EnchantedEntityTypes.FAMILIAR_CAT.get(), FamiliarCat.createCatAttributes());
+        FabricDefaultAttributeRegistry.register(EEntityTypes.MANDRAKE.get(), Mandrake.createAttributes());
+        FabricDefaultAttributeRegistry.register(EEntityTypes.FAMILIAR_CAT.get(), FamiliarCat.createCatAttributes());
     }
 
     private static void registerDataRegistries() {
-        DynamicRegistries.register(EnchantedData.ALTAR_UPGRADE_REGISTRY, AltarUpgrade.CODEC);
-        DynamicRegistries.register(EnchantedData.ALTAR_BLOCK_REGISTRY, PowerProvider.BLOCK_CODEC);
-        DynamicRegistries.register(EnchantedData.ALTAR_TAG_REGISTRY, PowerProvider.TAG_CODEC);
-        DynamicRegistries.registerSynced(EnchantedData.RITE_REQUIREMENTS_REGISTRY, RiteRequirements.CODEC);
+        DynamicRegistries.register(EData.ALTAR_UPGRADE_REGISTRY, AltarUpgrade.CODEC);
+        DynamicRegistries.register(EData.ALTAR_BLOCK_REGISTRY, PowerProvider.BLOCK_CODEC);
+        DynamicRegistries.register(EData.ALTAR_TAG_REGISTRY, PowerProvider.TAG_CODEC);
+        DynamicRegistries.registerSynced(EData.RITE_REQUIREMENTS_REGISTRY, RiteRequirements.CODEC);
     }
 
     private static void registerStrippables() {
-        StrippableBlockRegistry.register(EnchantedBlocks.ALDER_LOG.get(), EnchantedBlocks.STRIPPED_ALDER_LOG.get());
-        StrippableBlockRegistry.register(EnchantedBlocks.HAWTHORN_LOG.get(), EnchantedBlocks.STRIPPED_HAWTHORN_LOG.get());
-        StrippableBlockRegistry.register(EnchantedBlocks.ROWAN_LOG.get(), EnchantedBlocks.STRIPPED_ROWAN_LOG.get());
+        StrippableBlockRegistry.register(EBlocks.ALDER_LOG.get(), EBlocks.STRIPPED_ALDER_LOG.get());
+        StrippableBlockRegistry.register(EBlocks.HAWTHORN_LOG.get(), EBlocks.STRIPPED_HAWTHORN_LOG.get());
+        StrippableBlockRegistry.register(EBlocks.ROWAN_LOG.get(), EBlocks.STRIPPED_ROWAN_LOG.get());
     }
 
 }

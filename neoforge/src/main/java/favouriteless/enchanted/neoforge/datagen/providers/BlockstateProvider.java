@@ -7,7 +7,7 @@ import favouriteless.enchanted.common.blocks.chalk.ChalkCircleBlock;
 import favouriteless.enchanted.common.blocks.chalk.GoldChalkBlock;
 import favouriteless.enchanted.common.blocks.crops.BloodPoppyBlock;
 import favouriteless.enchanted.common.blocks.crops.CropsBlockAgeFive;
-import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
+import favouriteless.enchanted.common.init.registry.EBlocks;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Plane;
 import net.minecraft.data.PackOutput;
@@ -26,69 +26,69 @@ public class BlockstateProvider extends BlockStateProvider {
 
 	@Override
 	protected void registerStatesAndModels() {
-		logWithItem(EnchantedBlocks.ROWAN_LOG.get());
-		logWithItem(EnchantedBlocks.HAWTHORN_LOG.get());
-		logWithItem(EnchantedBlocks.ALDER_LOG.get());
-		logWithItem(EnchantedBlocks.WICKER_BUNDLE.get());
-		logWithItem(EnchantedBlocks.STRIPPED_ALDER_LOG.get());
-		logWithItem(EnchantedBlocks.STRIPPED_ROWAN_LOG.get());
-		logWithItem(EnchantedBlocks.STRIPPED_HAWTHORN_LOG.get());
-		fenceWithItem(EnchantedBlocks.ALDER_FENCE.get(), blockTexture(EnchantedBlocks.ALDER_PLANKS.get()));
-		fenceWithItem(EnchantedBlocks.ROWAN_FENCE.get(), blockTexture(EnchantedBlocks.ROWAN_PLANKS.get()));
-		fenceWithItem(EnchantedBlocks.HAWTHORN_FENCE.get(), blockTexture(EnchantedBlocks.HAWTHORN_PLANKS.get()));
-		fenceGateWithItem(EnchantedBlocks.ALDER_FENCE_GATE.get(), blockTexture(EnchantedBlocks.ALDER_PLANKS.get()));
-		fenceGateWithItem(EnchantedBlocks.ROWAN_FENCE_GATE.get(), blockTexture(EnchantedBlocks.ROWAN_PLANKS.get()));
-		fenceGateWithItem(EnchantedBlocks.HAWTHORN_FENCE_GATE.get(), blockTexture(EnchantedBlocks.HAWTHORN_PLANKS.get()));
-		buttonWithItem(EnchantedBlocks.ALDER_BUTTON.get(), blockTexture(EnchantedBlocks.ALDER_PLANKS.get()));
-		buttonWithItem(EnchantedBlocks.HAWTHORN_BUTTON.get(), blockTexture(EnchantedBlocks.HAWTHORN_PLANKS.get()));
-		buttonWithItem(EnchantedBlocks.ROWAN_BUTTON.get(), blockTexture(EnchantedBlocks.ROWAN_PLANKS.get()));
-		pressurePlateWithItem(EnchantedBlocks.ROWAN_PRESSURE_PLATE.get(), blockTexture(EnchantedBlocks.ROWAN_PLANKS.get()));
-		pressurePlateWithItem(EnchantedBlocks.ALDER_PRESSURE_PLATE.get(), blockTexture(EnchantedBlocks.ALDER_PLANKS.get()));
-		pressurePlateWithItem(EnchantedBlocks.HAWTHORN_PRESSURE_PLATE.get(), blockTexture(EnchantedBlocks.HAWTHORN_PLANKS.get()));
-		simpleWithItem(EnchantedBlocks.ROWAN_PLANKS.get());
-		simpleWithItem(EnchantedBlocks.HAWTHORN_PLANKS.get());
-		simpleWithItem(EnchantedBlocks.ALDER_PLANKS.get());
-		slabWithItem(EnchantedBlocks.ROWAN_SLAB.get(), EnchantedBlocks.ROWAN_PLANKS.get());
-		slabWithItem(EnchantedBlocks.HAWTHORN_SLAB.get(), EnchantedBlocks.HAWTHORN_PLANKS.get());
-		slabWithItem(EnchantedBlocks.ALDER_SLAB.get(), EnchantedBlocks.ALDER_PLANKS.get());
-		stairsWithItem(EnchantedBlocks.ROWAN_STAIRS.get(), EnchantedBlocks.ROWAN_PLANKS.get());
-		stairsWithItem(EnchantedBlocks.HAWTHORN_STAIRS.get(), EnchantedBlocks.HAWTHORN_PLANKS.get());
-		stairsWithItem(EnchantedBlocks.ALDER_STAIRS.get(), EnchantedBlocks.ALDER_PLANKS.get());
-		leafRandomWithItem(EnchantedBlocks.ROWAN_LEAVES.get(), 4);
-		leafRandomWithItem(EnchantedBlocks.HAWTHORN_LEAVES.get(), 4);
-		leafRandomWithItem(EnchantedBlocks.ALDER_LEAVES.get(), 4);
-		crossWithItem(EnchantedBlocks.ROWAN_SAPLING.get());
-		crossWithItem(EnchantedBlocks.HAWTHORN_SAPLING.get());
-		crossWithItem(EnchantedBlocks.ALDER_SAPLING.get());
+		logWithItem(EBlocks.ROWAN_LOG.get());
+		logWithItem(EBlocks.HAWTHORN_LOG.get());
+		logWithItem(EBlocks.ALDER_LOG.get());
+		logWithItem(EBlocks.WICKER_BUNDLE.get());
+		logWithItem(EBlocks.STRIPPED_ALDER_LOG.get());
+		logWithItem(EBlocks.STRIPPED_ROWAN_LOG.get());
+		logWithItem(EBlocks.STRIPPED_HAWTHORN_LOG.get());
+		fenceWithItem(EBlocks.ALDER_FENCE.get(), blockTexture(EBlocks.ALDER_PLANKS.get()));
+		fenceWithItem(EBlocks.ROWAN_FENCE.get(), blockTexture(EBlocks.ROWAN_PLANKS.get()));
+		fenceWithItem(EBlocks.HAWTHORN_FENCE.get(), blockTexture(EBlocks.HAWTHORN_PLANKS.get()));
+		fenceGateWithItem(EBlocks.ALDER_FENCE_GATE.get(), blockTexture(EBlocks.ALDER_PLANKS.get()));
+		fenceGateWithItem(EBlocks.ROWAN_FENCE_GATE.get(), blockTexture(EBlocks.ROWAN_PLANKS.get()));
+		fenceGateWithItem(EBlocks.HAWTHORN_FENCE_GATE.get(), blockTexture(EBlocks.HAWTHORN_PLANKS.get()));
+		buttonWithItem(EBlocks.ALDER_BUTTON.get(), blockTexture(EBlocks.ALDER_PLANKS.get()));
+		buttonWithItem(EBlocks.HAWTHORN_BUTTON.get(), blockTexture(EBlocks.HAWTHORN_PLANKS.get()));
+		buttonWithItem(EBlocks.ROWAN_BUTTON.get(), blockTexture(EBlocks.ROWAN_PLANKS.get()));
+		pressurePlateWithItem(EBlocks.ROWAN_PRESSURE_PLATE.get(), blockTexture(EBlocks.ROWAN_PLANKS.get()));
+		pressurePlateWithItem(EBlocks.ALDER_PRESSURE_PLATE.get(), blockTexture(EBlocks.ALDER_PLANKS.get()));
+		pressurePlateWithItem(EBlocks.HAWTHORN_PRESSURE_PLATE.get(), blockTexture(EBlocks.HAWTHORN_PLANKS.get()));
+		simpleWithItem(EBlocks.ROWAN_PLANKS.get());
+		simpleWithItem(EBlocks.HAWTHORN_PLANKS.get());
+		simpleWithItem(EBlocks.ALDER_PLANKS.get());
+		slabWithItem(EBlocks.ROWAN_SLAB.get(), EBlocks.ROWAN_PLANKS.get());
+		slabWithItem(EBlocks.HAWTHORN_SLAB.get(), EBlocks.HAWTHORN_PLANKS.get());
+		slabWithItem(EBlocks.ALDER_SLAB.get(), EBlocks.ALDER_PLANKS.get());
+		stairsWithItem(EBlocks.ROWAN_STAIRS.get(), EBlocks.ROWAN_PLANKS.get());
+		stairsWithItem(EBlocks.HAWTHORN_STAIRS.get(), EBlocks.HAWTHORN_PLANKS.get());
+		stairsWithItem(EBlocks.ALDER_STAIRS.get(), EBlocks.ALDER_PLANKS.get());
+		leafRandomWithItem(EBlocks.ROWAN_LEAVES.get(), 4);
+		leafRandomWithItem(EBlocks.HAWTHORN_LEAVES.get(), 4);
+		leafRandomWithItem(EBlocks.ALDER_LEAVES.get(), 4);
+		crossWithItem(EBlocks.ROWAN_SAPLING.get());
+		crossWithItem(EBlocks.HAWTHORN_SAPLING.get());
+		crossWithItem(EBlocks.ALDER_SAPLING.get());
 
-		chalkWithItem(EnchantedBlocks.RITUAL_CHALK.get());
-		chalkWithItem(EnchantedBlocks.NETHER_CHALK.get());
-		chalkWithItem(EnchantedBlocks.OTHERWHERE_CHALK.get());
-		goldChalkWithItem(EnchantedBlocks.GOLDEN_CHALK.get());
+		chalkWithItem(EBlocks.RITUAL_CHALK.get());
+		chalkWithItem(EBlocks.NETHER_CHALK.get());
+		chalkWithItem(EBlocks.OTHERWHERE_CHALK.get());
+		goldChalkWithItem(EBlocks.GOLDEN_CHALK.get());
 
-		simpleBlockItem(EnchantedBlocks.ALTAR.get(), models().getExistingFile(modLoc("block/altar")));
-		horizontalLitWithItem(EnchantedBlocks.WITCH_OVEN.get(), "_on", 180);
-		fumeFunnelWithItem(EnchantedBlocks.FUME_FUNNEL.get());
-		fumeFunnelWithItem(EnchantedBlocks.FUME_FUNNEL_FILTERED.get());
-		horizontalLitWithItem(EnchantedBlocks.DISTILLERY.get(), "", 180);
-		complexWithItem(EnchantedBlocks.WITCH_CAULDRON.get());
-		complexWithItem(EnchantedBlocks.CHALICE.get());
-		complexWithItem(EnchantedBlocks.CHALICE_FILLED.get());
-		complexWithItem(EnchantedBlocks.INFINITY_EGG.get(), "block/dragon_egg");
-		complexWithItem(EnchantedBlocks.CANDELABRA.get());
-		kettleWithItem(EnchantedBlocks.KETTLE.get());
-		complexWithItem(EnchantedBlocks.POPPET_SHELF.get());
+		simpleBlockItem(EBlocks.ALTAR.get(), models().getExistingFile(modLoc("block/altar")));
+		horizontalLitWithItem(EBlocks.WITCH_OVEN.get(), "_on", 180);
+		fumeFunnelWithItem(EBlocks.FUME_FUNNEL.get());
+		fumeFunnelWithItem(EBlocks.FUME_FUNNEL_FILTERED.get());
+		horizontalLitWithItem(EBlocks.DISTILLERY.get(), "", 180);
+		complexWithItem(EBlocks.WITCH_CAULDRON.get());
+		complexWithItem(EBlocks.CHALICE.get());
+		complexWithItem(EBlocks.CHALICE_FILLED.get());
+		complexWithItem(EBlocks.INFINITY_EGG.get(), "block/dragon_egg");
+		complexWithItem(EBlocks.CANDELABRA.get());
+		kettleWithItem(EBlocks.KETTLE.get());
+		complexWithItem(EBlocks.POPPET_SHELF.get());
 
-		cropsWithItem(EnchantedBlocks.BELLADONNA.get(), "crop");
-		cropsWithItem(EnchantedBlocks.SNOWBELL.get(), "cross");
-		cropsWithItem(EnchantedBlocks.WATER_ARTICHOKE.get(), "crop");
-		cropsWithItem(EnchantedBlocks.MANDRAKE.get(), "crop");
-		cropsWithItem(EnchantedBlocks.GARLIC.get(), "crop");
-		cropsWithItem(EnchantedBlocks.WOLFSBANE.get(), "cross");
-		crossWithItem(EnchantedBlocks.GLINT_WEED.get());
-		crossWithItem(EnchantedBlocks.EMBER_MOSS.get());
-		getVariantBuilder(EnchantedBlocks.BLOOD_POPPY.get()).forAllStates(state -> {
-			String name = "block/" + ForgeRegistries.BLOCKS.getKey(EnchantedBlocks.BLOOD_POPPY.get()).getPath();
+		cropsWithItem(EBlocks.BELLADONNA.get(), "crop");
+		cropsWithItem(EBlocks.SNOWBELL.get(), "cross");
+		cropsWithItem(EBlocks.WATER_ARTICHOKE.get(), "crop");
+		cropsWithItem(EBlocks.MANDRAKE.get(), "crop");
+		cropsWithItem(EBlocks.GARLIC.get(), "crop");
+		cropsWithItem(EBlocks.WOLFSBANE.get(), "cross");
+		crossWithItem(EBlocks.GLINT_WEED.get());
+		crossWithItem(EBlocks.EMBER_MOSS.get());
+		getVariantBuilder(EBlocks.BLOOD_POPPY.get()).forAllStates(state -> {
+			String name = "block/" + ForgeRegistries.BLOCKS.getKey(EBlocks.BLOOD_POPPY.get()).getPath();
 			if(state.getValue(BloodPoppyBlock.FILLED)) name = name + "_filled";
 			return ConfiguredModel.builder()
 					.modelFile(models().withExistingParent(name, mcLoc("block/cross"))
@@ -96,8 +96,8 @@ public class BlockstateProvider extends BlockStateProvider {
 							.renderType("minecraft:cutout"))
 					.build();
 		});
-		simpleItem(EnchantedBlocks.BLOOD_POPPY.get());
-		simpleItem(EnchantedBlocks.SPANISH_MOSS.get());
+		simpleItem(EBlocks.BLOOD_POPPY.get());
+		simpleItem(EBlocks.SPANISH_MOSS.get());
 
 	}
 

@@ -13,7 +13,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
-public class EnchantedData {
+public class EData {
 
     // These datapack registries need to be registered separately because Forge defers it. See EnchantedForge and EnchantedFabric.
     public static final ResourceKey<Registry<AltarUpgrade>> ALTAR_UPGRADE_REGISTRY = ResourceKey.createRegistryKey(Enchanted.id("altar/upgrades"));

@@ -1,7 +1,7 @@
 package favouriteless.enchanted.common.rites.binding;
 
 import favouriteless.enchanted.api.rites.CreateItemRite;
-import favouriteless.enchanted.common.init.registry.EnchantedItems;
+import favouriteless.enchanted.common.items.EItems;
 import favouriteless.enchanted.common.items.TaglockFilledItem;
 import favouriteless.enchanted.common.rites.RiteType;
 import favouriteless.enchanted.util.WaystoneHelper;
@@ -14,7 +14,7 @@ import java.util.UUID;
 public class RiteBindingWaystonePlayer extends CreateItemRite {
 
     public RiteBindingWaystonePlayer(RiteType<?> type, ServerLevel level, BlockPos pos, UUID caster) {
-        super(type, level, pos, caster, new ItemStack(EnchantedItems.BLOODED_WAYSTONE.get(), 1));
+        super(type, level, pos, caster, new ItemStack(EItems.BLOODED_WAYSTONE.get(), 1));
     }
 
     @Override
@@ -28,7 +28,7 @@ public class RiteBindingWaystonePlayer extends CreateItemRite {
     @Override
     protected boolean checkAdditional() {
         for(ItemStack stack : itemsConsumed) {
-            if(stack.getItem() == EnchantedItems.TAGLOCK_FILLED.get()) {
+            if(stack.getItem() == EItems.TAGLOCK_FILLED.get()) {
                 setTargetUUID(TaglockFilledItem.getUUID(stack));
                 if(getTargetUUID() == null)
                     return false;

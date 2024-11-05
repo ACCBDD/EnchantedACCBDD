@@ -8,7 +8,7 @@ import favouriteless.enchanted.common.altar.AltarBlockData;
 import favouriteless.enchanted.common.altar.AltarStateObserver;
 import favouriteless.enchanted.common.altar.AltarUpgradeData;
 import favouriteless.enchanted.common.blocks.altar.AltarBlock;
-import favouriteless.enchanted.common.init.registry.EnchantedBlockEntityTypes;
+import favouriteless.enchanted.common.init.registry.EBlockEntityTypes;
 import favouriteless.enchanted.common.menus.AltarMenu;
 import net.favouriteless.stateobserver.api.StateObserverManager;
 import net.minecraft.core.BlockPos;
@@ -75,7 +75,7 @@ public class AltarBlockEntity extends BlockEntity implements MenuProvider, IPowe
     private boolean firstTick = true;
 
     public AltarBlockEntity(BlockPos pos, BlockState state) {
-        super(EnchantedBlockEntityTypes.ALTAR.get(), pos, state);
+        super(EBlockEntityTypes.ALTAR.get(), pos, state);
     }
 
     public static <T extends BlockEntity> void tick(Level level, BlockPos pos, BlockState state, T t) {

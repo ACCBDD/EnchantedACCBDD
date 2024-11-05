@@ -3,7 +3,7 @@ package favouriteless.enchanted.common.network.packets.client;
 import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.client.particles.types.TwoToneColouredParticleType.TwoToneColouredData;
 import favouriteless.enchanted.client.render.poppet.PoppetAnimationManager;
-import favouriteless.enchanted.common.init.registry.EnchantedParticleTypes;
+import favouriteless.enchanted.common.init.registry.EParticleTypes;
 import favouriteless.enchanted.common.items.poppets.PoppetItem;
 import favouriteless.enchanted.common.network.PacketContext;
 import favouriteless.enchanted.common.poppet.PoppetColour;
@@ -48,7 +48,7 @@ public class PoppetAnimationPayload implements CustomPacketPayload {
 		if(entity != null) {
 			if(payload.item.getItem() instanceof PoppetItem) {
 				PoppetColour poppetColour = ((PoppetItem)payload.item.getItem()).colour;
-				mc.particleEngine.createTrackingEmitter(entity, new TwoToneColouredData(EnchantedParticleTypes.POPPET.get(),
+				mc.particleEngine.createTrackingEmitter(entity, new TwoToneColouredData(EParticleTypes.POPPET.get(),
 						poppetColour.rPrimary, poppetColour.gPrimary, poppetColour.gSecondary,
 						poppetColour.rSecondary, poppetColour.gSecondary, poppetColour.bSecondary), 40);
 

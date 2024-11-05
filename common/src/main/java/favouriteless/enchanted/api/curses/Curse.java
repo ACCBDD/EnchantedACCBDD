@@ -4,7 +4,7 @@ import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.common.curses.CurseMisfortune;
 import favouriteless.enchanted.common.curses.CurseType;
 import favouriteless.enchanted.common.init.registry.CurseTypes;
-import favouriteless.enchanted.common.init.registry.EnchantedSoundEvents;
+import favouriteless.enchanted.common.init.registry.ESoundEvents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.ClientboundSoundEntityPacket;
@@ -71,7 +71,7 @@ public abstract class Curse {
     private void whisper() {
         if(targetPlayer != null) {
             lastWhisper = ticks;
-            targetPlayer.connection.send(new ClientboundSoundEntityPacket(BuiltInRegistries.SOUND_EVENT.wrapAsHolder(EnchantedSoundEvents.CURSE_WHISPER.get()), SoundSource.AMBIENT, targetPlayer, 0.3F, (float) Math.random() * 0.15F + 0.85F, Enchanted.RANDOM.nextLong()));
+            targetPlayer.connection.send(new ClientboundSoundEntityPacket(BuiltInRegistries.SOUND_EVENT.wrapAsHolder(ESoundEvents.CURSE_WHISPER.get()), SoundSource.AMBIENT, targetPlayer, 0.3F, (float) Math.random() * 0.15F + 0.85F, Enchanted.RANDOM.nextLong()));
         }
     }
 

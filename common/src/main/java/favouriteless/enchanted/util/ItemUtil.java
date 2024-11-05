@@ -7,6 +7,7 @@ import net.minecraft.core.component.DataComponentType;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
@@ -74,6 +75,16 @@ public class ItemUtil {
 		}
 
 		return true;
+	}
+
+	public static void giveOrDrop(Player player, ItemStack item) {
+		if(player.addItem(item))
+			return;
+
+		ItemEntity entity = new ItemEntity(player.level(), player.getX(), player.getY(), player.getZ(), item);
+		entity.setNoPickUpDelay();
+		entity.setThrower(player);
+		player.level().addFreshEntity(player);
 	}
 
 }

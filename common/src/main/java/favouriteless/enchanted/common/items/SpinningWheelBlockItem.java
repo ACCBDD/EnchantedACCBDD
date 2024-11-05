@@ -1,6 +1,6 @@
 package favouriteless.enchanted.common.items;
 
-import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
+import favouriteless.enchanted.common.init.registry.EBlocks;
 import net.minecraft.world.item.BlockItem;
 
 /**
@@ -9,7 +9,7 @@ import net.minecraft.world.item.BlockItem;
 public class SpinningWheelBlockItem extends BlockItem {
 
 	public SpinningWheelBlockItem() {
-		super(EnchantedBlocks.SPINNING_WHEEL.get(), new Properties());
+		super(EBlocks.SPINNING_WHEEL.get(), new Properties());
 	}
 
 }

@@ -1,7 +1,7 @@
 package favouriteless.enchanted.common.blocks;
 
 import favouriteless.enchanted.common.blocks.entity.DistilleryBlockEntity;
-import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
+import favouriteless.enchanted.common.init.registry.EBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -18,13 +18,9 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.stream.Stream;
 
 public class DistilleryBlock extends SimpleContainerBlockBase {
 
@@ -34,7 +30,7 @@ public class DistilleryBlock extends SimpleContainerBlockBase {
     private static final VoxelShape SHAPE = Block.box(2, 0, 2, 14, 14, 14);
 
     public DistilleryBlock() {
-        super(Properties.copy(Blocks.ANVIL).lightLevel(EnchantedBlocks.getLightValueLit(13)).noOcclusion());
+        super(Properties.copy(Blocks.ANVIL).lightLevel(EBlocks.getLightValueLit(13)).noOcclusion());
         this.registerDefaultState(this.defaultBlockState().setValue(FACING, Direction.NORTH).setValue(LIT, false));
     }
 

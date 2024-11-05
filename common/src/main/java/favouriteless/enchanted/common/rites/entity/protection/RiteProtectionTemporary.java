@@ -1,6 +1,6 @@
 package favouriteless.enchanted.common.rites.entity.protection;
 
-import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
+import favouriteless.enchanted.common.init.registry.EBlocks;
 import favouriteless.enchanted.common.rites.RiteType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -12,7 +12,7 @@ public class RiteProtectionTemporary extends RiteProtection {
     public static final int DURATION = 60 * 20; // 60 seconds duration
 
     public RiteProtectionTemporary(RiteType<?> type, ServerLevel level, BlockPos pos, UUID caster) {
-        super(type, level, pos, caster, 4, EnchantedBlocks.PROTECTION_BARRIER_TEMPORARY.get()); // Power, power per tick, radius
+        super(type, level, pos, caster, 4, EBlocks.PROTECTION_BARRIER_TEMPORARY.get()); // Power, power per tick, radius
     }
 
     @Override

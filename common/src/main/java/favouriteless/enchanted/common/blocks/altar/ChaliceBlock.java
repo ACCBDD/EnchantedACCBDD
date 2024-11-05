@@ -1,7 +1,7 @@
 package favouriteless.enchanted.common.blocks.altar;
 
-import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
-import favouriteless.enchanted.common.init.registry.EnchantedItems;
+import favouriteless.enchanted.common.init.registry.EBlocks;
+import favouriteless.enchanted.common.items.EItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.sounds.SoundEvents;
@@ -10,8 +10,6 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -33,12 +31,12 @@ public class ChaliceBlock extends Block {
 
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        if(state.is(EnchantedBlocks.CHALICE.get())) {
+        if(state.is(EBlocks.CHALICE.get())) {
 
-            if(player.getItemInHand(hand).getItem() == EnchantedItems.REDSTONE_SOUP.get()) {
+            if(player.getItemInHand(hand).getItem() == EItems.REDSTONE_SOUP.get()) {
                 if (!level.isClientSide) {
                     level.playSound(null, pos, SoundEvents.FISHING_BOBBER_SPLASH, SoundSource.BLOCKS, 0.4F, 1.0F);
-                    level.setBlockAndUpdate(pos, EnchantedBlocks.CHALICE_FILLED.get().defaultBlockState());
+                    level.setBlockAndUpdate(pos, EBlocks.CHALICE_FILLED.get().defaultBlockState());
                     player.getItemInHand(hand).shrink(1);
                     return InteractionResult.CONSUME;
                 }

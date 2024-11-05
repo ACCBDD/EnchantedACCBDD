@@ -2,8 +2,8 @@ package favouriteless.enchanted.common.rites.world;
 
 import favouriteless.enchanted.api.rites.AbstractRite;
 import favouriteless.enchanted.common.CommonConfig;
-import favouriteless.enchanted.common.init.registry.EnchantedItems;
-import favouriteless.enchanted.common.init.registry.EnchantedParticleTypes;
+import favouriteless.enchanted.common.items.EItems;
+import favouriteless.enchanted.common.init.registry.EParticleTypes;
 import favouriteless.enchanted.common.rites.CirclePart;
 import favouriteless.enchanted.common.rites.RiteType;
 import favouriteless.enchanted.util.WaystoneHelper;
@@ -44,7 +44,7 @@ public class RiteSkyWrath extends AbstractRite {
 
         for(Entity entity : entities) {
             if(entity instanceof ItemEntity itemEntity) {
-                if(itemEntity.getItem().getItem() == EnchantedItems.BOUND_WAYSTONE.get()) {
+                if(itemEntity.getItem().getItem() == EItems.BOUND_WAYSTONE.get()) {
                     if(itemEntity.getItem().hasTag()) {
                         targetPos = WaystoneHelper.getPos(itemEntity.getItem());
                         targetLevel = WaystoneHelper.getLevel(level, itemEntity.getItem());
@@ -56,7 +56,7 @@ public class RiteSkyWrath extends AbstractRite {
                         }
                     }
                 }
-                else if(itemEntity.getItem().getItem() == EnchantedItems.BLOODED_WAYSTONE.get()) {
+                else if(itemEntity.getItem().getItem() == EItems.BLOODED_WAYSTONE.get()) {
                     if(itemEntity.getItem().hasTag()) {
                         setTargetEntity(WaystoneHelper.getEntity(level, itemEntity.getItem()));
                         Entity targetEntity = getTargetEntity();
@@ -74,9 +74,9 @@ public class RiteSkyWrath extends AbstractRite {
         }
 
         if(targetPos != null && targetLevel != null && targetLevel instanceof ServerLevel serverLevel)
-            serverLevel.sendParticles(EnchantedParticleTypes.SKY_WRATH_SEED.get(), targetPos.getX()+0.5D, targetPos.getY()+2.0D, targetPos.getZ()+0.5D, 1, 0.0D, 0.0D, 0.0D, 0.0D);
+            serverLevel.sendParticles(EParticleTypes.SKY_WRATH_SEED.get(), targetPos.getX()+0.5D, targetPos.getY()+2.0D, targetPos.getZ()+0.5D, 1, 0.0D, 0.0D, 0.0D, 0.0D);
         else
-            level.sendParticles(EnchantedParticleTypes.SKY_WRATH_SEED.get(), pos.getX()+0.5D, pos.getY()+2.0D, pos.getZ()+0.5D, 1, 0.0D, 0.0D, 0.0D, 0.0D);
+            level.sendParticles(EParticleTypes.SKY_WRATH_SEED.get(), pos.getX()+0.5D, pos.getY()+2.0D, pos.getZ()+0.5D, 1, 0.0D, 0.0D, 0.0D, 0.0D);
     }
 
     @Override

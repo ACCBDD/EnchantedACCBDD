@@ -1,8 +1,8 @@
 package favouriteless.enchanted.neoforge.datagen.providers.tag;
 
 import favouriteless.enchanted.common.Enchanted;
-import favouriteless.enchanted.common.init.EnchantedTags.EntityTypes;
-import favouriteless.enchanted.common.init.registry.EnchantedEntityTypes;
+import favouriteless.enchanted.common.init.ETags.EntityTypes;
+import favouriteless.enchanted.common.init.registry.EEntityTypes;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
@@ -36,7 +36,7 @@ public class EntityTypeTagProvider extends IntrinsicHolderTagsProvider<EntityTyp
                         EntityType.WITCH, EntityType.WITHER_SKELETON, EntityType.ZOMBIE, EntityType.ZOMBIE_VILLAGER,
                         EntityType.ZOMBIFIED_PIGLIN, EntityType.ZOGLIN, EntityType.WARDEN);
         tag(EntityTypes.TAGLOCK_BLACKLIST)
-                .add(EntityType.ENDER_DRAGON, EntityType.WITHER, EntityType.WARDEN, EnchantedEntityTypes.FAMILIAR_CAT.get());
+                .add(EntityType.ENDER_DRAGON, EntityType.WITHER, EntityType.WARDEN, EEntityTypes.FAMILIAR_CAT.get());
     }
 
 }

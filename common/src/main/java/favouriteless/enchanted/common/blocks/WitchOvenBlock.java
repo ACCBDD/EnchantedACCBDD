@@ -1,8 +1,8 @@
 package favouriteless.enchanted.common.blocks;
 
 import favouriteless.enchanted.common.blocks.entity.WitchOvenBlockEntity;
-import favouriteless.enchanted.common.init.registry.EnchantedBlockEntityTypes;
-import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
+import favouriteless.enchanted.common.init.registry.EBlockEntityTypes;
+import favouriteless.enchanted.common.init.registry.EBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -43,7 +43,7 @@ public class WitchOvenBlock extends SimpleContainerBlockBase {
             Shapes.box(8.0D/16, 0.0D, 5.0D/16, 14.0D/16, 1.0D, 11.0D/16), BooleanOp.OR);
 
     public WitchOvenBlock() {
-        super(Properties.copy(EnchantedBlocks.DISTILLERY.get()));
+        super(Properties.copy(EBlocks.DISTILLERY.get()));
         this.registerDefaultState(this.getStateDefinition().any().setValue(FACING, Direction.NORTH).setValue(LIT, false));
     }
 
@@ -106,6 +106,6 @@ public class WitchOvenBlock extends SimpleContainerBlockBase {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return type == EnchantedBlockEntityTypes.WITCH_OVEN.get() && !level.isClientSide ? WitchOvenBlockEntity::serverTick : null;
+        return type == EBlockEntityTypes.WITCH_OVEN.get() && !level.isClientSide ? WitchOvenBlockEntity::serverTick : null;
     }
 }

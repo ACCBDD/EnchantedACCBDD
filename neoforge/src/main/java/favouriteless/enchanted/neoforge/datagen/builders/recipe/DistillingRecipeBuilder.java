@@ -1,7 +1,7 @@
 package favouriteless.enchanted.neoforge.datagen.builders.recipe;
 
-import favouriteless.enchanted.common.init.registry.EnchantedItems;
-import favouriteless.enchanted.common.init.registry.EnchantedRecipeTypes;
+import favouriteless.enchanted.common.items.EItems;
+import favouriteless.enchanted.common.init.registry.ERecipeTypes;
 import favouriteless.enchanted.util.ItemUtil;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -120,7 +120,7 @@ public class DistillingRecipeBuilder extends EnchantedRecipeBuilder {
     protected String getRecipeName() {
         StringBuilder name = new StringBuilder();
         for(ItemStack item : inputs)
-            if(item.getItem() != EnchantedItems.CLAY_JAR.get())
+            if(item.getItem() != EItems.CLAY_JAR.get())
                 name.append(ForgeRegistries.ITEMS.getKey(item.getItem()).getPath()).append("_");
         name.deleteCharAt(name.length() - 1); // Delete trailing _
 
@@ -162,7 +162,7 @@ public class DistillingRecipeBuilder extends EnchantedRecipeBuilder {
         @NotNull
         @Override
         public RecipeSerializer<?> getType() {
-            return EnchantedRecipeTypes.DISTILLING_SERIALIZER.get();
+            return ERecipeTypes.DISTILLING_SERIALIZER.get();
         }
 
     }

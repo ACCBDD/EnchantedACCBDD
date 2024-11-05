@@ -3,7 +3,7 @@ package favouriteless.enchanted.common.recipes;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import favouriteless.enchanted.common.init.registry.EnchantedRecipeTypes;
+import favouriteless.enchanted.common.init.registry.ERecipeTypes;
 import favouriteless.enchanted.util.ExtraCodecs;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -39,12 +39,12 @@ public class WitchCauldronRecipe extends CauldronTypeRecipe {
 
     @Override
     public RecipeType<?> getType() {
-        return EnchantedRecipeTypes.WITCH_CAULDRON.get();
+        return ERecipeTypes.WITCH_CAULDRON.get();
     }
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return EnchantedRecipeTypes.WITCH_CAULDRON_SERIALIZER.get();
+        return ERecipeTypes.WITCH_CAULDRON_SERIALIZER.get();
     }
 
 }

@@ -1,8 +1,8 @@
 package favouriteless.enchanted.common.menus;
 
 import favouriteless.enchanted.common.blocks.entity.PoppetShelfBlockEntity;
-import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
-import favouriteless.enchanted.common.init.registry.EnchantedMenuTypes;
+import favouriteless.enchanted.common.init.registry.EBlocks;
+import favouriteless.enchanted.common.init.registry.EMenuTypes;
 import favouriteless.enchanted.common.items.poppets.PoppetItem;
 import favouriteless.enchanted.util.MenuUtils;
 import net.minecraft.network.FriendlyByteBuf;
@@ -19,7 +19,7 @@ public class PoppetShelfMenu extends AbstractContainerMenu {
 	private final ContainerLevelAccess containerAccess;
 
 	public PoppetShelfMenu(int id, Inventory playerInventory, PoppetShelfBlockEntity be) {
-		super(EnchantedMenuTypes.POPPET_SHELF.get(), id);
+		super(EMenuTypes.POPPET_SHELF.get(), id);
 
 		for(int i = 0; i < be.getInventory().getContainerSize(); i++)
 			addSlot(new PoppetSlot(be.getInventory(), i, 47 + i*22, 18));
@@ -71,7 +71,7 @@ public class PoppetShelfMenu extends AbstractContainerMenu {
 
 	@Override
 	public boolean stillValid(Player player) {
-		return stillValid(containerAccess, player, EnchantedBlocks.POPPET_SHELF.get());
+		return stillValid(containerAccess, player, EBlocks.POPPET_SHELF.get());
 	}
 
 	public static class PoppetSlot extends Slot {

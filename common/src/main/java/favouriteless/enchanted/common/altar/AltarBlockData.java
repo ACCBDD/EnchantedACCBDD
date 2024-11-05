@@ -1,7 +1,7 @@
 package favouriteless.enchanted.common.altar;
 
-import favouriteless.enchanted.common.init.EnchantedData;
-import favouriteless.enchanted.common.init.EnchantedTags;
+import favouriteless.enchanted.common.init.EData;
+import favouriteless.enchanted.common.init.ETags;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
@@ -31,7 +31,7 @@ public class AltarBlockData {
             return count < blockProvider.limit() ? blockProvider.power() : 0;
         }
 
-        Optional<Registry<PowerProvider<TagKey<Block>>>> registry = level.registryAccess().registry(EnchantedData.ALTAR_TAG_REGISTRY);
+        Optional<Registry<PowerProvider<TagKey<Block>>>> registry = level.registryAccess().registry(EData.ALTAR_TAG_REGISTRY);
         if(registry.isPresent()) { // Block has a power tag associated with it.
             for(PowerProvider<TagKey<Block>> provider : registry.get()) {
                 if(block.builtInRegistryHolder().is(provider.key())) {
@@ -57,7 +57,7 @@ public class AltarBlockData {
             return count > blockProvider.limit() ? 0 : blockProvider.power();
         }
 
-        Optional<Registry<PowerProvider<TagKey<Block>>>> registry = level.registryAccess().registry(EnchantedData.ALTAR_TAG_REGISTRY);
+        Optional<Registry<PowerProvider<TagKey<Block>>>> registry = level.registryAccess().registry(EData.ALTAR_TAG_REGISTRY);
         if(registry.isPresent()) { // Block has a power tag associated with it.
             for(PowerProvider<TagKey<Block>> provider : registry.get()) {
                 if(block.builtInRegistryHolder().is(provider.key())) {
@@ -124,7 +124,7 @@ public class AltarBlockData {
                 blockCounts.put(block, blockNbt.getInt(name));
         }
         for(String name : tagNbt.getAllKeys())
-            tagCounts.put(EnchantedTags.createBlockTag(new ResourceLocation(name)), tagNbt.getInt(name));
+            tagCounts.put(ETags.createBlockTag(new ResourceLocation(name)), tagNbt.getInt(name));
 
         isInitialised = false;
     }

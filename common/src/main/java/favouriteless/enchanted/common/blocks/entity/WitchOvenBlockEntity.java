@@ -3,11 +3,11 @@ package favouriteless.enchanted.common.blocks.entity;
 import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.common.blocks.FumeFunnelBlock;
 import favouriteless.enchanted.common.blocks.WitchOvenBlock;
-import favouriteless.enchanted.common.init.EnchantedTags;
-import favouriteless.enchanted.common.init.registry.EnchantedBlockEntityTypes;
-import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
-import favouriteless.enchanted.common.init.registry.EnchantedItems;
-import favouriteless.enchanted.common.init.registry.EnchantedRecipeTypes;
+import favouriteless.enchanted.common.init.ETags;
+import favouriteless.enchanted.common.init.registry.EBlockEntityTypes;
+import favouriteless.enchanted.common.init.registry.EBlocks;
+import favouriteless.enchanted.common.items.EItems;
+import favouriteless.enchanted.common.init.registry.ERecipeTypes;
 import favouriteless.enchanted.common.menus.WitchOvenMenu;
 import favouriteless.enchanted.common.recipes.ByproductRecipe;
 import favouriteless.enchanted.platform.CommonServices;
@@ -87,9 +87,9 @@ public class WitchOvenBlockEntity extends ContainerBlockEntityBase implements Me
     };
 
     public WitchOvenBlockEntity(BlockPos pos, BlockState state) {
-        super(EnchantedBlockEntityTypes.WITCH_OVEN.get(), pos, state, NonNullList.withSize(5, ItemStack.EMPTY));
+        super(EBlockEntityTypes.WITCH_OVEN.get(), pos, state, NonNullList.withSize(5, ItemStack.EMPTY));
         this.smeltCheck = RecipeManager.createCheck(RecipeType.SMELTING);
-        this.ovenCheck = RecipeManager.createCheck(EnchantedRecipeTypes.BYPRODUCT.get());
+        this.ovenCheck = RecipeManager.createCheck(ERecipeTypes.BYPRODUCT.get());
     }
 
     public static <T extends BlockEntity> void serverTick(Level level, BlockPos blockPos, BlockState blockState, T t) {
@@ -184,7 +184,7 @@ public class WitchOvenBlockEntity extends ContainerBlockEntityBase implements Me
      */
     private boolean canBurn(@Nullable Recipe<?> recipe) {
         ItemStack input = getInput();
-        if(recipe != null && !input.is(EnchantedTags.Items.WITCH_OVEN_BLACKLIST)) {
+        if(recipe != null && !input.is(ETags.Items.WITCH_OVEN_BLACKLIST)) {
             ItemStack result = ((Recipe<Container>)recipe).assemble(this, level.registryAccess());
             if(result.isEmpty())
                 return false; // Don't bother checking recipes with no output.
@@ -260,9 +260,9 @@ public class WitchOvenBlockEntity extends ContainerBlockEntityBase implements Me
         };
 
         for(Block block : potentialFilters) {
-            if(block == EnchantedBlocks.FUME_FUNNEL.get())
+            if(block == EBlocks.FUME_FUNNEL.get())
                 byproductChance += 0.25D;
-            else if(block == EnchantedBlocks.FUME_FUNNEL_FILTERED.get())
+            else if(block == EBlocks.FUME_FUNNEL_FILTERED.get())
                 byproductChance += 0.3D;
         }
         return byproductChance;
@@ -340,7 +340,7 @@ public class WitchOvenBlockEntity extends ContainerBlockEntityBase implements Me
     @Override
     public boolean canPlaceItemThroughFace(int index, @NotNull ItemStack stack, @Nullable Direction face) {
         if(index == 1)
-            return stack.getItem() == EnchantedItems.CLAY_JAR.get();
+            return stack.getItem() == EItems.CLAY_JAR.get();
         return index != 3 && index != 4;
     }
 

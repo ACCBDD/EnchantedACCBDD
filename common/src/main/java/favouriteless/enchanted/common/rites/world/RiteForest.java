@@ -3,8 +3,8 @@ package favouriteless.enchanted.common.rites.world;
 import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.api.rites.AbstractRite;
 import favouriteless.enchanted.common.CommonConfig;
-import favouriteless.enchanted.common.init.EnchantedTags;
-import favouriteless.enchanted.common.init.registry.EnchantedParticleTypes;
+import favouriteless.enchanted.common.init.ETags;
+import favouriteless.enchanted.common.init.registry.EParticleTypes;
 import favouriteless.enchanted.common.rites.CirclePart;
 import favouriteless.enchanted.common.rites.RiteType;
 import favouriteless.enchanted.mixin.common.SaplingBlockAccessor;
@@ -78,7 +78,7 @@ public class RiteForest extends AbstractRite {
                     BlockPos treePos = new BlockPos((int) Math.round(randomPos.x()) + pos.getX(), y, (int) Math.round(randomPos.z()) + pos.getZ());
                     if(notNearUsed(treePos)) {
                         BlockState state = level.getBlockState(treePos);
-                        if(state.isAir() || state.is(EnchantedTags.Blocks.RITE_FOREST_REPLACEABLE)) {
+                        if(state.isAir() || state.is(ETags.Blocks.RITE_FOREST_REPLACEABLE)) {
                             if(saplingBlock.canSurvive(saplingBlock.defaultBlockState(), level, treePos)) {
                                 if(((SaplingBlockAccessor)saplingBlock).getTreeGrower().growTree(level, level.getChunkSource().getGenerator(), treePos, state, Enchanted.RANDOMSOURCE)) {
                                     treesPlaced++;
@@ -90,7 +90,7 @@ public class RiteForest extends AbstractRite {
                         }
                     }
                 }
-                level.sendParticles(EnchantedParticleTypes.FERTILITY_SEED.get(), pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, 1, 0.0D, 0.0D, 0.0D, 0.0D);
+                level.sendParticles(EParticleTypes.FERTILITY_SEED.get(), pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, 1, 0.0D, 0.0D, 0.0D, 0.0D);
                 tries++;
                 if(treesPlaced == treeCount)
                     stopExecuting();

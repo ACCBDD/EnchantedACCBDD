@@ -2,8 +2,8 @@ package favouriteless.enchanted.neoforge.datagen.providers.loot_tables;
 
 import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.common.blocks.crops.*;
-import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
-import favouriteless.enchanted.common.init.registry.EnchantedItems;
+import favouriteless.enchanted.common.init.registry.EBlocks;
+import favouriteless.enchanted.common.items.EItems;
 import favouriteless.enchanted.platform.services.NeoCommonRegistryHelper;
 import net.minecraft.advancements.critereon.StatePropertiesPredicate;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -41,31 +41,31 @@ public class BlockLootSubProvider extends net.minecraft.data.loot.BlockLootSubPr
 
     @Override
     protected void generate() {
-        add(EnchantedBlocks.ALDER_LEAVES.get(), block -> createLeavesDrops(block, EnchantedBlocks.ALDER_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
-        add(EnchantedBlocks.ALDER_SLAB.get(), this::createSlabItemTable);
-        createCropBlockAgeFiveDrops(EnchantedBlocks.BELLADONNA.get(), EnchantedItems.BELLADONNA_FLOWER.get(), EnchantedItems.BELLADONNA_SEEDS.get());
-        add(EnchantedBlocks.EMBER_MOSS.get(), block -> createSilkTouchOrShearsDispatchTable(block, applyExplosionCondition(block, LootItem.lootTableItem(EnchantedItems.EMBER_MOSS.get()))));
-        add(EnchantedBlocks.GARLIC.get(),
-                applyExplosionDecay(EnchantedBlocks.GARLIC.get(),
+        add(EBlocks.ALDER_LEAVES.get(), block -> createLeavesDrops(block, EBlocks.ALDER_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
+        add(EBlocks.ALDER_SLAB.get(), this::createSlabItemTable);
+        createCropBlockAgeFiveDrops(EBlocks.BELLADONNA.get(), EItems.BELLADONNA_FLOWER.get(), EItems.BELLADONNA_SEEDS.get());
+        add(EBlocks.EMBER_MOSS.get(), block -> createSilkTouchOrShearsDispatchTable(block, applyExplosionCondition(block, LootItem.lootTableItem(EItems.EMBER_MOSS.get()))));
+        add(EBlocks.GARLIC.get(),
+                applyExplosionDecay(EBlocks.GARLIC.get(),
                         LootTable.lootTable()
                                 .withPool(LootPool.lootPool()
-                                        .add(LootItem.lootTableItem(EnchantedItems.GARLIC.get())))
+                                        .add(LootItem.lootTableItem(EItems.GARLIC.get())))
                                 .withPool(LootPool.lootPool()
-                                        .add(LootItem.lootTableItem(EnchantedItems.GARLIC.get())
-                                                .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(EnchantedBlocks.GARLIC.get())
+                                        .add(LootItem.lootTableItem(EItems.GARLIC.get())
+                                                .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(EBlocks.GARLIC.get())
                                                         .setProperties(StatePropertiesPredicate.Builder.properties().hasProperty(CropsBlockAgeFive.AGE_FIVE, 4)))
                                                 .apply(ApplyBonusCount.addBonusBinomialDistributionCount(Enchantments.BLOCK_FORTUNE, 0.5714286F, 3))))
                 )
         );
-        add(EnchantedBlocks.HAWTHORN_LEAVES.get(), block -> createLeavesDrops(block, EnchantedBlocks.HAWTHORN_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
-        add(EnchantedBlocks.HAWTHORN_SLAB.get(), this::createSlabItemTable);
-        createCropBlockAgeFiveDrops(EnchantedBlocks.MANDRAKE.get(), EnchantedItems.MANDRAKE_ROOT.get(), EnchantedItems.MANDRAKE_SEEDS.get());
-        add(EnchantedBlocks.ROWAN_LEAVES.get(), block -> createFruitLeavesDrop(block, EnchantedBlocks.ROWAN_SAPLING.get(), EnchantedItems.ROWAN_BERRIES.get(), NORMAL_LEAVES_SAPLING_CHANCES));
-        add(EnchantedBlocks.ROWAN_SLAB.get(), this::createSlabItemTable);
-        createDualCropBlockAgeFiveDrops(EnchantedBlocks.SNOWBELL.get(), EnchantedItems.ICY_NEEDLE.get(), Items.SNOWBALL, EnchantedItems.SNOWBELL_SEEDS.get());
-        add(EnchantedBlocks.SPANISH_MOSS.get(), block -> createSilkTouchOrShearsDispatchTable(block, applyExplosionCondition(block, LootItem.lootTableItem(EnchantedItems.SPANISH_MOSS.get()))));
-        createCropBlockAgeFiveDrops(EnchantedBlocks.WATER_ARTICHOKE.get(), EnchantedItems.WATER_ARTICHOKE.get(), EnchantedItems.WATER_ARTICHOKE_SEEDS.get());
-        createCropBlockAgeFiveDrops(EnchantedBlocks.WOLFSBANE.get(), EnchantedItems.WOLFSBANE_FLOWER.get(), EnchantedItems.WOLFSBANE_SEEDS.get());
+        add(EBlocks.HAWTHORN_LEAVES.get(), block -> createLeavesDrops(block, EBlocks.HAWTHORN_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
+        add(EBlocks.HAWTHORN_SLAB.get(), this::createSlabItemTable);
+        createCropBlockAgeFiveDrops(EBlocks.MANDRAKE.get(), EItems.MANDRAKE_ROOT.get(), EItems.MANDRAKE_SEEDS.get());
+        add(EBlocks.ROWAN_LEAVES.get(), block -> createFruitLeavesDrop(block, EBlocks.ROWAN_SAPLING.get(), EItems.ROWAN_BERRIES.get(), NORMAL_LEAVES_SAPLING_CHANCES));
+        add(EBlocks.ROWAN_SLAB.get(), this::createSlabItemTable);
+        createDualCropBlockAgeFiveDrops(EBlocks.SNOWBELL.get(), EItems.ICY_NEEDLE.get(), Items.SNOWBALL, EItems.SNOWBELL_SEEDS.get());
+        add(EBlocks.SPANISH_MOSS.get(), block -> createSilkTouchOrShearsDispatchTable(block, applyExplosionCondition(block, LootItem.lootTableItem(EItems.SPANISH_MOSS.get()))));
+        createCropBlockAgeFiveDrops(EBlocks.WATER_ARTICHOKE.get(), EItems.WATER_ARTICHOKE.get(), EItems.WATER_ARTICHOKE_SEEDS.get());
+        createCropBlockAgeFiveDrops(EBlocks.WOLFSBANE.get(), EItems.WOLFSBANE_FLOWER.get(), EItems.WOLFSBANE_SEEDS.get());
 
         autoGenerateDefaults(); // Blocks without datagen will automatically dropSelf.
     }

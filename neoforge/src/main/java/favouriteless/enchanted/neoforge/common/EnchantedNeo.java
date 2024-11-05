@@ -6,10 +6,10 @@ import favouriteless.enchanted.common.altar.AltarUpgrade;
 import favouriteless.enchanted.common.altar.PowerProvider;
 import favouriteless.enchanted.common.entities.FamiliarCat;
 import favouriteless.enchanted.common.entities.Mandrake;
-import favouriteless.enchanted.common.init.EnchantedData;
-import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
-import favouriteless.enchanted.common.init.registry.EnchantedEntityTypes;
-import favouriteless.enchanted.common.init.registry.EnchantedItems;
+import favouriteless.enchanted.common.init.EData;
+import favouriteless.enchanted.common.init.registry.EBlocks;
+import favouriteless.enchanted.common.init.registry.EEntityTypes;
+import favouriteless.enchanted.common.items.EItems;
 import favouriteless.enchanted.common.rites.RiteRequirements;
 import favouriteless.enchanted.platform.services.NeoCommonRegistryHelper;
 import favouriteless.enchanted.platform.services.NeoNetworkHelper;
@@ -35,20 +35,20 @@ public class EnchantedNeo {
     }
 
     public static void registerEntityAttributes(EntityAttributeCreationEvent event) {
-        event.put(EnchantedEntityTypes.MANDRAKE.get(), Mandrake.createAttributes());
-        event.put(EnchantedEntityTypes.FAMILIAR_CAT.get(), FamiliarCat.createCatAttributes());
+        event.put(EEntityTypes.MANDRAKE.get(), Mandrake.createAttributes());
+        event.put(EEntityTypes.FAMILIAR_CAT.get(), FamiliarCat.createCatAttributes());
     }
 
     public static void commonSetup(FMLCommonSetupEvent events) {
-        EnchantedItems.registerCompostables();
-        EnchantedBlocks.registerFlammables();
+        EItems.registerCompostables();
+        EBlocks.registerFlammables();
     }
 
     public static void registerDatapackRegistries(DataPackRegistryEvent.NewRegistry event) {
-        event.dataPackRegistry(EnchantedData.ALTAR_UPGRADE_REGISTRY, AltarUpgrade.CODEC);
-        event.dataPackRegistry(EnchantedData.ALTAR_BLOCK_REGISTRY, PowerProvider.BLOCK_CODEC);
-        event.dataPackRegistry(EnchantedData.ALTAR_TAG_REGISTRY, PowerProvider.TAG_CODEC);
-        event.dataPackRegistry(EnchantedData.RITE_REQUIREMENTS_REGISTRY, RiteRequirements.CODEC, RiteRequirements.CODEC);
+        event.dataPackRegistry(EData.ALTAR_UPGRADE_REGISTRY, AltarUpgrade.CODEC);
+        event.dataPackRegistry(EData.ALTAR_BLOCK_REGISTRY, PowerProvider.BLOCK_CODEC);
+        event.dataPackRegistry(EData.ALTAR_TAG_REGISTRY, PowerProvider.TAG_CODEC);
+        event.dataPackRegistry(EData.RITE_REQUIREMENTS_REGISTRY, RiteRequirements.CODEC, RiteRequirements.CODEC);
     }
 
 }

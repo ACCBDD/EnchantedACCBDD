@@ -8,7 +8,7 @@ import favouriteless.enchanted.client.client_handlers.blockentities.CauldronBloc
 import favouriteless.enchanted.client.particles.types.SimpleColouredParticleType.SimpleColouredData;
 import favouriteless.enchanted.common.CommonConfig;
 import favouriteless.enchanted.common.altar.SimplePowerPosHolder;
-import favouriteless.enchanted.common.init.registry.EnchantedParticleTypes;
+import favouriteless.enchanted.common.init.registry.EParticleTypes;
 import favouriteless.enchanted.common.recipes.CauldronTypeRecipe;
 import favouriteless.enchanted.util.PlayerInventoryHelper;
 import net.minecraft.core.BlockPos;
@@ -138,7 +138,7 @@ public abstract class CauldronBlockEntity<T extends CauldronTypeRecipe> extends 
 			double dy = pos.getY() + waterY + 0.02D;
 			double dz = pos.getZ() + 0.5D + (Math.random() - 0.5D) * be.getWaterWidth();
 
-			level.addParticle(new SimpleColouredData(EnchantedParticleTypes.BOILING.get(), be.getRed(time), be.getGreen(time), be.getBlue(time)), dx, dy, dz, 0, 0, 0);
+			level.addParticle(new SimpleColouredData(EParticleTypes.BOILING.get(), be.getRed(time), be.getGreen(time), be.getBlue(time)), dx, dy, dz, 0, 0, 0);
 		}
 
 		if(be.isFailed)
@@ -154,7 +154,7 @@ public abstract class CauldronBlockEntity<T extends CauldronTypeRecipe> extends 
 			double dz = be.worldPosition.getZ() + zOffset;
 			Vec3 velocity = new Vec3(xOffset, 0, zOffset).subtract(0.5D, 0.0D, 0.5D).normalize().scale((1D + Math.random()) * 0.06D);
 
-			level.addParticle(new SimpleColouredData(EnchantedParticleTypes.CAULDRON_BREW.get(), be.getRed(time), be.getGreen(time), be.getBlue(time)), dx, dy, dz, velocity.x, (1.0D + Math.random()) * 0.06D, velocity.z);
+			level.addParticle(new SimpleColouredData(EParticleTypes.CAULDRON_BREW.get(), be.getRed(time), be.getGreen(time), be.getBlue(time)), dx, dy, dz, velocity.x, (1.0D + Math.random()) * 0.06D, velocity.z);
 		}
 	}
 

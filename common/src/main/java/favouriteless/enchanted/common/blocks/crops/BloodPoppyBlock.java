@@ -1,6 +1,7 @@
 package favouriteless.enchanted.common.blocks.crops;
 
 import favouriteless.enchanted.common.blocks.entity.BloodPoppyBlockEntity;
+import favouriteless.enchanted.common.items.component.TaglockData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -22,9 +23,10 @@ import org.jetbrains.annotations.Nullable;
 public class BloodPoppyBlock extends FlowerBlock implements EntityBlock {
 
     public static final BooleanProperty FILLED = BooleanProperty.create("filled");
+    private static final VoxelShape SHAPE = Block.box(5.0D, 0.0D, 5.0D, 11.0D, 10.0D, 11.0D);
 
     public BloodPoppyBlock() {
-        super(MobEffects.WITHER, 1200, Properties.copy(Blocks.POPPY));
+        super(MobEffects.WITHER, 1200, Properties.ofFullCopy(Blocks.POPPY));
         registerDefaultState(defaultBlockState().setValue(FILLED, false));
     }
 
@@ -34,37 +36,33 @@ public class BloodPoppyBlock extends FlowerBlock implements EntityBlock {
     }
 
     @Override
-    public void entityInside(BlockState state, Level world, BlockPos pos, Entity entity) {
-        if(!world.isClientSide && entity instanceof LivingEntity) {
-            if(!state.getValue(FILLED)) {
-                BlockEntity t = world.getBlockEntity(pos);
-                if(t instanceof BloodPoppyBlockEntity be) {
-                    be.setUUID(entity.getUUID());
-                    be.setName(entity.getDisplayName().getString());
-                    world.setBlockAndUpdate(pos, state.setValue(FILLED, true));
-                } else {
-                    throw new IllegalStateException(String.format("Blood poppy at %s, %s, %s has invalid BlockEntity", pos.getX(), pos.getY(), pos.getZ()));
-                }
-            }
+    public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
+        if(level.isClientSide || state.getValue(FILLED) || !(entity instanceof LivingEntity))
+            return;
+
+        if(level.getBlockEntity(pos) instanceof BloodPoppyBlockEntity poppy) {
+            poppy.setTaglockData(TaglockData.of(entity.getUUID(), entity.getDisplayName().getString()));
+            level.setBlockAndUpdate(pos, state.setValue(FILLED, true));
         }
     }
 
     @Override
     public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
-        return Block.box(5.0D, 0.0D, 5.0D, 11.0D, 10.0D, 11.0D);
+        return SHAPE;
     }
 
-    public static void reset(Level world, BlockPos pos) {
-        if(!world.isClientSide) {
-            BloodPoppyBlockEntity blockEntity = (BloodPoppyBlockEntity)world.getBlockEntity(pos);
-            BlockState state = world.getBlockState(pos);
+    public static void reset(Level level, BlockPos pos) {
+        if(level.isClientSide)
+            return;
 
-            world.setBlockAndUpdate(pos, state.setValue(FILLED, false));
-            blockEntity.reset();
+        if(level.getBlockEntity(pos) instanceof BloodPoppyBlockEntity poppy) {
+            BlockState state = level.getBlockState(pos);
+            level.setBlockAndUpdate(pos, state.setValue(FILLED, false));
+
+            poppy.reset();
         }
     }
 
-    @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new BloodPoppyBlockEntity(pos, state);

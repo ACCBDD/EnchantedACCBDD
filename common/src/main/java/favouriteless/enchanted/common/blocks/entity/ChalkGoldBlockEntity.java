@@ -3,7 +3,7 @@ package favouriteless.enchanted.common.blocks.entity;
 import favouriteless.enchanted.api.power.IPowerConsumer;
 import favouriteless.enchanted.api.rites.AbstractRite;
 import favouriteless.enchanted.common.altar.SimplePowerPosHolder;
-import favouriteless.enchanted.common.init.registry.EnchantedBlockEntityTypes;
+import favouriteless.enchanted.common.init.registry.EBlockEntityTypes;
 import favouriteless.enchanted.common.init.registry.RiteTypes;
 import favouriteless.enchanted.common.rites.RiteManager;
 import net.minecraft.core.BlockPos;
@@ -27,7 +27,7 @@ public class ChalkGoldBlockEntity extends BlockEntity implements IPowerConsumer 
     private AbstractRite currentRite = null;
 
     public ChalkGoldBlockEntity(BlockPos pos, BlockState state) {
-        super(EnchantedBlockEntityTypes.CHALK_GOLD.get(), pos, state);
+        super(EBlockEntityTypes.CHALK_GOLD.get(), pos, state);
         this.posHolder = new SimplePowerPosHolder(pos);
     }
 

@@ -7,7 +7,7 @@ import net.minecraft.sounds.SoundEvent;
 
 import java.util.function.Supplier;
 
-public class EnchantedSoundEvents {
+public class ESoundEvents {
 
 	public static Supplier<SoundEvent> BIND_FAMILIAR = register("bind_familiar", () -> SoundEvent.createVariableRangeEvent(Enchanted.id("bind_familiar")));
 	public static Supplier<SoundEvent> BROOM_SWEEP = register("broom_sweep", () -> SoundEvent.createVariableRangeEvent(Enchanted.id("broom_sweep")));

@@ -3,9 +3,9 @@ package favouriteless.enchanted.common.rites.curse;
 import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.api.rites.AbstractRite;
 import favouriteless.enchanted.common.CommonConfig;
-import favouriteless.enchanted.common.init.EnchantedTags;
-import favouriteless.enchanted.common.init.EnchantedTags.MobEffects;
-import favouriteless.enchanted.common.init.registry.EnchantedParticleTypes;
+import favouriteless.enchanted.common.init.ETags;
+import favouriteless.enchanted.common.init.ETags.MobEffects;
+import favouriteless.enchanted.common.init.registry.EParticleTypes;
 import favouriteless.enchanted.common.rites.RiteType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -76,8 +76,8 @@ public class RiteCurseBlight extends AbstractRite {
                     if(pos.distToCenterSqr(_pos.getX() + 0.5D, _pos.getY() + 0.5D, _pos.getZ() + 0.5D) < blockTicks*blockTicks) {
                         if(Math.random() < CommonConfig.blightDecayChance.get()) {
                             BlockState decayState = level.getBlockState(_pos);
-                            if(decayState.is(EnchantedTags.Blocks.BLIGHT_DECAYABLE_BLOCKS)) {
-                                Holder<Block> blockHolder = BuiltInRegistries.BLOCK.getOrCreateTag(EnchantedTags.Blocks.BLIGHT_DECAY_BLOCKS).getRandomElement(Enchanted.RANDOMSOURCE).orElse(null);
+                            if(decayState.is(ETags.Blocks.BLIGHT_DECAYABLE_BLOCKS)) {
+                                Holder<Block> blockHolder = BuiltInRegistries.BLOCK.getOrCreateTag(ETags.Blocks.BLIGHT_DECAY_BLOCKS).getRandomElement(Enchanted.RANDOMSOURCE).orElse(null);
                                 if(blockHolder == null) {
                                     Enchanted.LOG.error("Curse of Blight could not find any valid blocks to decay into! Check the enchanted:blight_decay_blocks tag.");
                                     stopExecuting();
@@ -85,7 +85,7 @@ public class RiteCurseBlight extends AbstractRite {
                                 }
                                 level.setBlockAndUpdate(_pos, blockHolder.value().defaultBlockState());
                             }
-                            else if(decayState.is(EnchantedTags.Blocks.BLIGHT_DECAYABLE_PLANTS))
+                            else if(decayState.is(ETags.Blocks.BLIGHT_DECAYABLE_PLANTS))
                                 level.setBlockAndUpdate(_pos, Blocks.DEAD_BUSH.defaultBlockState());
                         }
                         positionsHandled.add(_pos);
@@ -102,7 +102,7 @@ public class RiteCurseBlight extends AbstractRite {
 
             if(ticks % (TICKS_PER_BLOCK*5) == 0) {
                 level.playSound(null, pos, SoundEvents.ENDER_DRAGON_GROWL, SoundSource.MASTER, 0.1F, 1.0F);
-                level.sendParticles(EnchantedParticleTypes.CURSE_BLIGHT_SEED.get(), pos.getX()+0.5D, pos.getY()+0.5D, pos.getZ()+0.5D, 1, 0, 0, 0, 0);
+                level.sendParticles(EParticleTypes.CURSE_BLIGHT_SEED.get(), pos.getX()+0.5D, pos.getY()+0.5D, pos.getZ()+0.5D, 1, 0, 0, 0, 0);
             }
         }
         else

@@ -1,12 +1,12 @@
 package favouriteless.enchanted.client;
 
-import favouriteless.enchanted.common.init.EnchantedKeybinds;
+import favouriteless.enchanted.common.init.EKeybinds;
 
 public class EnchantedClient {
 
     public static void init() {
         ClientRegistry.register();
-        EnchantedKeybinds.load();
+        EKeybinds.load();
     }
 
 }

@@ -1,7 +1,7 @@
 package favouriteless.enchanted.neoforge.datagen.providers.tag;
 
 import favouriteless.enchanted.common.Enchanted;
-import favouriteless.enchanted.common.init.EnchantedDamageTypes;
+import favouriteless.enchanted.common.init.EDamageTypes;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.DamageTypeTagsProvider;
@@ -23,17 +23,17 @@ public class DamageTypeTagProvider extends DamageTypeTagsProvider {
 
     public void addVanillaTags(Provider provider) {
         tag(DamageTypeTags.BYPASSES_ARMOR)
-                .add(EnchantedDamageTypes.SACRIFICE, EnchantedDamageTypes.SOUND, EnchantedDamageTypes.VOODOO);
+                .add(EDamageTypes.SACRIFICE, EDamageTypes.SOUND, EDamageTypes.VOODOO);
         tag(DamageTypeTags.BYPASSES_EFFECTS)
-                .add(EnchantedDamageTypes.SACRIFICE, EnchantedDamageTypes.SOUND, EnchantedDamageTypes.VOODOO);
+                .add(EDamageTypes.SACRIFICE, EDamageTypes.SOUND, EDamageTypes.VOODOO);
         tag(DamageTypeTags.BYPASSES_COOLDOWN)
-                .add(EnchantedDamageTypes.SACRIFICE);
+                .add(EDamageTypes.SACRIFICE);
         tag(DamageTypeTags.BYPASSES_ENCHANTMENTS)
-                .add(EnchantedDamageTypes.SACRIFICE, EnchantedDamageTypes.SOUND, EnchantedDamageTypes.VOODOO);
+                .add(EDamageTypes.SACRIFICE, EDamageTypes.SOUND, EDamageTypes.VOODOO);
         tag(DamageTypeTags.BYPASSES_INVULNERABILITY)
-                .add(EnchantedDamageTypes.SACRIFICE);
+                .add(EDamageTypes.SACRIFICE);
         tag(DamageTypeTags.BYPASSES_RESISTANCE)
-                .add(EnchantedDamageTypes.SACRIFICE, EnchantedDamageTypes.SOUND, EnchantedDamageTypes.VOODOO);
+                .add(EDamageTypes.SACRIFICE, EDamageTypes.SOUND, EDamageTypes.VOODOO);
     }
 
 }

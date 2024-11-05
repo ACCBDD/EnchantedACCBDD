@@ -1,7 +1,7 @@
 package favouriteless.enchanted.client.client_handlers.entities;
 
 import favouriteless.enchanted.common.entities.Broomstick;
-import favouriteless.enchanted.common.init.EnchantedKeybinds;
+import favouriteless.enchanted.common.init.EKeybinds;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Options;
 import net.minecraft.client.player.LocalPlayer;
@@ -23,11 +23,11 @@ public class BroomstickEntityClientHandler {
 				broom.setDeltaRotY(broom.getDeltaRotY()+1);
 
 			boolean flag = false;
-			if(EnchantedKeybinds.BROOM_AIM_DOWN.isDown()) {
+			if(EKeybinds.BROOM_AIM_DOWN.isDown()) {
 				broom.setDeltaRotX(broom.getDeltaRotX() + 1);
 				flag = true;
 			}
-			if(EnchantedKeybinds.BROOM_AIM_UP.isDown()) {
+			if(EKeybinds.BROOM_AIM_UP.isDown()) {
 				broom.setDeltaRotX(broom.getDeltaRotX() - 1);
 				flag = true;
 			}

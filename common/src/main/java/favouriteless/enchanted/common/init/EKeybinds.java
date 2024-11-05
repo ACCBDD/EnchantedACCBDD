@@ -6,7 +6,7 @@ import favouriteless.enchanted.platform.services.IClientRegistryHelper.KeyConfli
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
 
-public class EnchantedKeybinds {
+public class EKeybinds {
 
 	public static final String CATEGORY_BROOMSTICK = "key.enchanted.categories.broomstick";
 

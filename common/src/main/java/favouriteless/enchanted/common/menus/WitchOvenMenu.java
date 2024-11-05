@@ -1,9 +1,9 @@
 package favouriteless.enchanted.common.menus;
 
 import favouriteless.enchanted.common.blocks.entity.WitchOvenBlockEntity;
-import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
-import favouriteless.enchanted.common.init.registry.EnchantedItems;
-import favouriteless.enchanted.common.init.registry.EnchantedMenuTypes;
+import favouriteless.enchanted.common.init.registry.EBlocks;
+import favouriteless.enchanted.common.items.EItems;
+import favouriteless.enchanted.common.init.registry.EMenuTypes;
 import favouriteless.enchanted.common.menus.slots.FuelSlot;
 import favouriteless.enchanted.common.menus.slots.JarInputSlot;
 import favouriteless.enchanted.common.menus.slots.NonJarInputSlot;
@@ -27,7 +27,7 @@ public class WitchOvenMenu extends MenuBase<WitchOvenBlockEntity> {
     private final ContainerData data;
 
     public WitchOvenMenu(int id, Inventory playerInventory, WitchOvenBlockEntity be, ContainerData data) {
-        super(EnchantedMenuTypes.WITCH_OVEN.get(), id, be, EnchantedBlocks.WITCH_OVEN.get());
+        super(EMenuTypes.WITCH_OVEN.get(), id, be, EBlocks.WITCH_OVEN.get());
         this.data = data;
 
         addSlot(new NonJarInputSlot(be, 0, 53, 17)); // Ingredient input
@@ -79,7 +79,7 @@ public class WitchOvenMenu extends MenuBase<WitchOvenBlockEntity> {
                 if(!moveItemStackTo(slotItem, 2, 3, false))
                     return ItemStack.EMPTY;
             }
-            else if(originalItem.getItem() == EnchantedItems.CLAY_JAR.get()) { // Item is clay jar
+            else if(originalItem.getItem() == EItems.CLAY_JAR.get()) { // Item is clay jar
                 if(!moveItemStackTo(slotItem, 1, 2, false))
                     return ItemStack.EMPTY;
             }

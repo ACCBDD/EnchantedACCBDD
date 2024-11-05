@@ -7,13 +7,12 @@ import favouriteless.enchanted.client.particles.types.DoubleParticleType.DoubleP
 import favouriteless.enchanted.client.particles.types.SimpleColouredParticleType.SimpleColouredData;
 import favouriteless.enchanted.client.particles.types.TwoToneColouredParticleType.TwoToneColouredData;
 import favouriteless.enchanted.platform.CommonServices;
-import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
 
 import java.util.function.Supplier;
 
-public class EnchantedParticleTypes {
+public class EParticleTypes {
 
     public static final Supplier<ParticleType<DelayedActionData>> BIND_FAMILIAR = register("bind_familiar", () -> new DelayedActionParticleType(false));
     public static final Supplier<SimpleParticleType> BIND_FAMILIAR_SEED = register("bind_familiar_seed", () -> new SimpleParticleType(false));

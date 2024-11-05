@@ -3,8 +3,8 @@ package favouriteless.enchanted.common.rites.world;
 import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.api.rites.AbstractRite;
 import favouriteless.enchanted.common.CommonConfig;
-import favouriteless.enchanted.common.init.EnchantedTags.MobEffects;
-import favouriteless.enchanted.common.init.registry.EnchantedParticleTypes;
+import favouriteless.enchanted.common.init.ETags.MobEffects;
+import favouriteless.enchanted.common.init.registry.EParticleTypes;
 import favouriteless.enchanted.common.rites.RiteType;
 import favouriteless.enchanted.mixin.common.ZombieVillagerAccessor;
 import net.minecraft.core.BlockPos;
@@ -91,7 +91,7 @@ public class RiteFertility extends AbstractRite {
 
             if(ticks % (TICKS_PER_BLOCK*5) == 0) {
                 level.playSound(null, pos, SoundEvents.ENDER_DRAGON_GROWL, SoundSource.MASTER, 0.1F, 1.0F);
-                level.sendParticles(EnchantedParticleTypes.FERTILITY_SEED.get(), pos.getX()+0.5D, pos.getY()+2D, pos.getZ()+0.5D, 1, 0, 0, 0, 0);
+                level.sendParticles(EParticleTypes.FERTILITY_SEED.get(), pos.getX()+0.5D, pos.getY()+2D, pos.getZ()+0.5D, 1, 0, 0, 0, 0);
             }
         }
         else

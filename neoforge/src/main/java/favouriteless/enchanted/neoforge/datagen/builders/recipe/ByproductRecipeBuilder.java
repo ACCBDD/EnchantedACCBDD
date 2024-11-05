@@ -1,6 +1,6 @@
 package favouriteless.enchanted.neoforge.datagen.builders.recipe;
 
-import favouriteless.enchanted.common.init.registry.EnchantedRecipeTypes;
+import favouriteless.enchanted.common.init.registry.ERecipeTypes;
 import favouriteless.enchanted.util.ItemUtil;
 import com.google.gson.JsonObject;
 import net.minecraft.data.recipes.FinishedRecipe;
@@ -106,7 +106,7 @@ public class ByproductRecipeBuilder extends EnchantedRecipeBuilder {
         @NotNull
         @Override
         public RecipeSerializer<?> getType() {
-            return EnchantedRecipeTypes.BYPRODUCT_SERIALIZER.get();
+            return ERecipeTypes.BYPRODUCT_SERIALIZER.get();
         }
 
     }

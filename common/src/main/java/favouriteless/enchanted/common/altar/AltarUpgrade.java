@@ -2,7 +2,7 @@ package favouriteless.enchanted.common.altar;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import favouriteless.enchanted.common.init.EnchantedData;
+import favouriteless.enchanted.common.init.EData;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -22,7 +22,7 @@ public record AltarUpgrade(ResourceLocation type, Block block, double recharge, 
     ).apply(instance, (type, block, recharge, power, priority) -> new AltarUpgrade(new ResourceLocation(type), BuiltInRegistries.BLOCK.get(new ResourceLocation(block)), recharge, power, priority)));
 
     public static AltarUpgrade get(Level level, Block block) {
-        Optional<Registry<AltarUpgrade>> optional = level.registryAccess().registry(EnchantedData.ALTAR_UPGRADE_REGISTRY);
+        Optional<Registry<AltarUpgrade>> optional = level.registryAccess().registry(EData.ALTAR_UPGRADE_REGISTRY);
         if(optional.isPresent()) {
             for(AltarUpgrade upgrade : optional.get()) {
                 if(upgrade.block() == block)
@@ -33,7 +33,7 @@ public record AltarUpgrade(ResourceLocation type, Block block, double recharge, 
     }
 
     public static AltarUpgrade get(Level level, ResourceLocation location) {
-        return level.registryAccess().registry(EnchantedData.ALTAR_UPGRADE_REGISTRY)
+        return level.registryAccess().registry(EData.ALTAR_UPGRADE_REGISTRY)
                 .map(altarUpgrades -> altarUpgrades.get(location))
                 .orElse(null);
     }

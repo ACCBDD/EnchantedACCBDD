@@ -1,6 +1,6 @@
 package favouriteless.enchanted.common.blocks;
 
-import favouriteless.enchanted.common.init.EnchantedTags;
+import favouriteless.enchanted.common.init.ETags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -22,7 +22,7 @@ public class ProtectionBarrierBlock extends TemporaryProtectionBarrierBlock {
 		if (context instanceof EntityCollisionContext entityContext) {
 			Entity entity = entityContext.getEntity();
 			if(entity != null) {
-				if(entityContext.getEntity().getType().is(EnchantedTags.EntityTypes.MONSTERS))
+				if(entityContext.getEntity().getType().is(ETags.EntityTypes.MONSTERS))
 					return super.getCollisionShape(state, level, pos, context);
 				else if(entityContext.getEntity() instanceof Player player && player.isCrouching())
 					return Shapes.empty();

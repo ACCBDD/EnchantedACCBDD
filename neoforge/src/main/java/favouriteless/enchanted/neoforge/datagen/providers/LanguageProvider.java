@@ -1,9 +1,9 @@
 package favouriteless.enchanted.neoforge.datagen.providers;
 
 import favouriteless.enchanted.common.Enchanted;
-import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
-import favouriteless.enchanted.common.init.registry.EnchantedEntityTypes;
-import favouriteless.enchanted.common.init.registry.EnchantedItems;
+import favouriteless.enchanted.common.init.registry.EBlocks;
+import favouriteless.enchanted.common.init.registry.EEntityTypes;
+import favouriteless.enchanted.common.items.EItems;
 import favouriteless.enchanted.common.init.registry.RiteTypes;
 import favouriteless.enchanted.common.rites.RiteType;
 import net.minecraft.data.PackOutput;
@@ -37,14 +37,14 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
         add("death.attack.enchanted.sound", "%1$s had their eardrums pierced.");
         add("death.attack.enchanted.voodoo", "%1$s died mysteriously.");
 
-        addBlock(EnchantedBlocks.CHALICE_FILLED, "Chalice (Filled)");
-        addBlock(EnchantedBlocks.FUME_FUNNEL_FILTERED, "Fume Funnel (Filtered)");
-        addBlock(EnchantedBlocks.WITCH_CAULDRON, "Witch's Cauldron");
-        addBlock(EnchantedBlocks.WITCH_OVEN, "Witch's Oven");
+        addBlock(EBlocks.CHALICE_FILLED, "Chalice (Filled)");
+        addBlock(EBlocks.FUME_FUNNEL_FILTERED, "Fume Funnel (Filtered)");
+        addBlock(EBlocks.WITCH_CAULDRON, "Witch's Cauldron");
+        addBlock(EBlocks.WITCH_OVEN, "Witch's Oven");
 
-        addEntityType(EnchantedEntityTypes.FAMILIAR_CAT, "Cat (Familiar)");
+        addEntityType(EEntityTypes.FAMILIAR_CAT, "Cat (Familiar)");
 
-        addJei(EnchantedItems.CHALICE_FILLED, "Right click on a Chalice using redstone soup.");
+        addJei(EItems.CHALICE_FILLED, "Right click on a Chalice using redstone soup.");
         addJei("circle_magic", "Circle Magic");
         addJei("kettle", "Kettle");
         addJei("witch_cauldron", "Witch's Cauldron");
@@ -62,13 +62,13 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
         addKey("broom_up", "Fly Up");
         addKey("broom_down", "Fly Down");
 
-        addContainer(EnchantedBlocks.ALTAR, "Altar");
-        addContainer(EnchantedBlocks.DISTILLERY, "Distillery");
-        addContainer(EnchantedBlocks.KETTLE, "Kettle");
-        addContainer(EnchantedBlocks.WITCH_CAULDRON, "Witch's Cauldron");
-        addContainer(EnchantedBlocks.POPPET_SHELF, "Poppet Shelf");
-        addContainer(EnchantedBlocks.SPINNING_WHEEL, "Spinning Wheel");
-        addContainer(EnchantedBlocks.WITCH_OVEN, "Witch's Oven");
+        addContainer(EBlocks.ALTAR, "Altar");
+        addContainer(EBlocks.DISTILLERY, "Distillery");
+        addContainer(EBlocks.KETTLE, "Kettle");
+        addContainer(EBlocks.WITCH_CAULDRON, "Witch's Cauldron");
+        addContainer(EBlocks.POPPET_SHELF, "Poppet Shelf");
+        addContainer(EBlocks.SPINNING_WHEEL, "Spinning Wheel");
+        addContainer(EBlocks.WITCH_OVEN, "Witch's Oven");
 
         autoGenerateAll(); // All keys which weren't included are attempted to be automatically generated.
     }

@@ -1,6 +1,6 @@
 package favouriteless.enchanted.common.blocks;
 
-import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
+import favouriteless.enchanted.common.init.registry.EBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -35,7 +35,7 @@ public class FumeFunnelBlock extends Block {
     private static final VoxelShape SHAPE_TOP_WEST = Shapes.box(8.0D/16, 0.0D, 5.0D/16, 14.0D/16, 8.0D/16, 11.0D/16);
 
     public FumeFunnelBlock() {
-        super(Properties.copy(EnchantedBlocks.DISTILLERY.get()));
+        super(Properties.copy(EBlocks.DISTILLERY.get()));
         this.registerDefaultState(this.getStateDefinition().any().setValue(FACING, Direction.NORTH).setValue(LIT, false).setValue(TYPE, 0));
     }
 
@@ -76,7 +76,7 @@ public class FumeFunnelBlock extends Block {
         for(Direction dir : Direction.values()) {
             if(dir != Direction.UP) {
                 BlockState ovenState = world.getBlockState(pos.offset(dir.getNormal()));
-                if (ovenState.is(EnchantedBlocks.WITCH_OVEN.get())) {
+                if (ovenState.is(EBlocks.WITCH_OVEN.get())) {
                     if (dir != ovenState.getValue(WitchOvenBlock.FACING) && dir != ovenState.getValue(WitchOvenBlock.FACING).getOpposite()) {
 
                         state = state.setValue(FACING, ovenState.getValue(WitchOvenBlock.FACING));

@@ -13,7 +13,7 @@ import java.util.function.Supplier;
 /*
  * Make sure to register these in ClientRegistry too if they have a Screen.
  */
-public class EnchantedMenuTypes {
+public class EMenuTypes {
     
     public static final Supplier<MenuType<AltarMenu>> ALTAR = register("altar", AltarMenu::new);
     public static final Supplier<MenuType<DistilleryMenu>> DISTILLERY = register("distillery", DistilleryMenu::new);

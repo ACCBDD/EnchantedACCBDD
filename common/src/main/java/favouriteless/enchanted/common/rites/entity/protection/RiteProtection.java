@@ -2,9 +2,9 @@ package favouriteless.enchanted.common.rites.entity.protection;
 
 import favouriteless.enchanted.api.rites.AbstractRite;
 import favouriteless.enchanted.client.particles.types.DoubleParticleType.DoubleParticleData;
-import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
-import favouriteless.enchanted.common.init.registry.EnchantedItems;
-import favouriteless.enchanted.common.init.registry.EnchantedParticleTypes;
+import favouriteless.enchanted.common.init.registry.EBlocks;
+import favouriteless.enchanted.common.items.EItems;
+import favouriteless.enchanted.common.init.registry.EParticleTypes;
 import favouriteless.enchanted.common.rites.CirclePart;
 import favouriteless.enchanted.common.rites.RiteType;
 import favouriteless.enchanted.util.WaystoneHelper;
@@ -41,7 +41,7 @@ public class RiteProtection extends AbstractRite {
     }
 
     public RiteProtection(RiteType<?> type, ServerLevel level, BlockPos pos, UUID caster, int radius) {
-        this(type, level, pos, caster, radius, EnchantedBlocks.PROTECTION_BARRIER.get()); // Power, power per tick, radius
+        this(type, level, pos, caster, radius, EBlocks.PROTECTION_BARRIER.get()); // Power, power per tick, radius
     }
 
     @Override
@@ -49,7 +49,7 @@ public class RiteProtection extends AbstractRite {
         findTargetPos();
         generateSphere(block);
         getOrCreateObserver();
-        targetLevel.sendParticles(new DoubleParticleData(EnchantedParticleTypes.PROTECTION_SEED.get(), radius), targetPos.getX()+0.5D, targetPos.getY()+0.6D, targetPos.getZ()+0.5D, 1, 0.0D, 0.0D, 0.0D, 0.0D);
+        targetLevel.sendParticles(new DoubleParticleData(EParticleTypes.PROTECTION_SEED.get(), radius), targetPos.getX()+0.5D, targetPos.getY()+0.6D, targetPos.getZ()+0.5D, 1, 0.0D, 0.0D, 0.0D, 0.0D);
     }
 
     @Override
@@ -57,7 +57,7 @@ public class RiteProtection extends AbstractRite {
         if(targetLevel.isLoaded(targetPos))
             if(ticks % 20 == 0) {
                 stateObserver.checkChanges();
-                targetLevel.sendParticles(new DoubleParticleData(EnchantedParticleTypes.PROTECTION_SEED.get(), radius), targetPos.getX()+0.5D, targetPos.getY()+0.6D, targetPos.getZ()+0.5D, 1, 0.0D, 0.0D, 0.0D, 0.0D);
+                targetLevel.sendParticles(new DoubleParticleData(EParticleTypes.PROTECTION_SEED.get(), radius), targetPos.getX()+0.5D, targetPos.getY()+0.6D, targetPos.getZ()+0.5D, 1, 0.0D, 0.0D, 0.0D, 0.0D);
             }
     }
 
@@ -78,7 +78,7 @@ public class RiteProtection extends AbstractRite {
                 double sinP = Math.sin(p);
                 spherePos.set((int) Math.round(sinY * cosP * radius) + targetPos.getX(), (int) Math.round(sinP * radius) + targetPos.getY(), (int) Math.round(cosY * cosP * radius) + targetPos.getZ());
 
-                if(targetLevel.getBlockState(spherePos).isAir() || targetLevel.getBlockState(spherePos).is(EnchantedBlocks.PROTECTION_BARRIER.get()) || targetLevel.getBlockState(spherePos).is(EnchantedBlocks.PROTECTION_BARRIER_TEMPORARY.get()))
+                if(targetLevel.getBlockState(spherePos).isAir() || targetLevel.getBlockState(spherePos).is(EBlocks.PROTECTION_BARRIER.get()) || targetLevel.getBlockState(spherePos).is(EBlocks.PROTECTION_BARRIER_TEMPORARY.get()))
                     targetLevel.setBlockAndUpdate(spherePos, block.defaultBlockState());
             }
         }
@@ -91,13 +91,13 @@ public class RiteProtection extends AbstractRite {
         for(Entity entity : items) {
             if(entity instanceof ItemEntity itemEntity) {
                 ItemStack stack = itemEntity.getItem();
-                if(stack.getItem() == EnchantedItems.BOUND_WAYSTONE.get()) {
+                if(stack.getItem() == EItems.BOUND_WAYSTONE.get()) {
                     targetLevel = (ServerLevel) WaystoneHelper.getLevel(level, stack);
                     targetPos = WaystoneHelper.getPos(stack);
                     consumeItemNoRequirement(itemEntity);
                     break;
                 }
-                else if(stack.getItem() == EnchantedItems.BLOODED_WAYSTONE.get()) {
+                else if(stack.getItem() == EItems.BLOODED_WAYSTONE.get()) {
                     setTargetEntity(WaystoneHelper.getEntity(level, stack));
                     targetLevel = (ServerLevel)getTargetEntity().level();
                     targetPos = getTargetEntity().blockPosition();

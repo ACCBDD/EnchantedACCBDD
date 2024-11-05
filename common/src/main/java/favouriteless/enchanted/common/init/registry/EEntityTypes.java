@@ -10,7 +10,7 @@ import net.minecraft.world.entity.MobCategory;
 
 import java.util.function.Supplier;
 
-public class EnchantedEntityTypes {
+public class EEntityTypes {
 
     public static final Supplier<EntityType<Broomstick>> BROOMSTICK = register("broomstick", () -> Builder.of(Broomstick::new, MobCategory.MISC)
             .sized(1.0F, 1.0F).clientTrackingRange(10).build(Enchanted.id("broomstick").toString()));

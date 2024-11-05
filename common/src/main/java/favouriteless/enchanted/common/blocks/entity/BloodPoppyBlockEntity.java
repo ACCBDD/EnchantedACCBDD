@@ -1,55 +1,48 @@
 package favouriteless.enchanted.common.blocks.entity;
 
-import favouriteless.enchanted.common.init.registry.EnchantedBlockEntityTypes;
+import favouriteless.enchanted.common.Enchanted;
+import favouriteless.enchanted.common.init.registry.EBlockEntityTypes;
+import favouriteless.enchanted.common.items.component.TaglockData;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup.Provider;
+import net.minecraft.nbt.NbtOps;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.UUID;
 
 public class BloodPoppyBlockEntity extends BlockEntity {
 
-    private UUID uuid = null;
-    private String name = null;
+    private TaglockData data = TaglockData.EMPTY;
 
     public BloodPoppyBlockEntity(BlockPos pos, BlockState state) {
-        super(EnchantedBlockEntityTypes.BLOOD_POPPY.get(), pos, state);
+        super(EBlockEntityTypes.BLOOD_POPPY.get(), pos, state);
     }
 
-    public UUID getUUID() {
-        return uuid;
+    public void setTaglockData(TaglockData data) {
+        this.data = data;
     }
 
-    public void setUUID(UUID uuid) {
-        this.uuid = uuid;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public TaglockData getTaglockData() {
+        return data;
     }
 
     public void reset() {
-        this.uuid = null;
-        this.name = null;
+        data = TaglockData.EMPTY;
     }
 
     @Override
-    public void saveAdditional(CompoundTag nbt) {
-        super.saveAdditional(nbt);
-        if(uuid != null)
-            nbt.putUUID("uuid", uuid);
+    protected void saveAdditional(CompoundTag tag, @NotNull Provider registries) {
+        tag.put("taglockData", TaglockData.CODEC.encode(data, NbtOps.INSTANCE, new CompoundTag()).getOrThrow());
     }
 
     @Override
-    public void load(CompoundTag nbt) {
-        super.load(nbt);
-        if(nbt.contains("uuid"))
-            this.uuid = nbt.getUUID("uuid");
+    protected void loadAdditional(CompoundTag tag, @NotNull Provider registries) {
+        data = TaglockData.CODEC.parse(NbtOps.INSTANCE, tag.get("taglockData"))
+                .resultOrPartial(e -> Enchanted.LOG.error("Tried to load invalid taglock data: '{}'", e))
+                .orElse(TaglockData.EMPTY);
     }
 
 }

@@ -4,8 +4,8 @@ import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.api.familiars.FamiliarSavedData;
 import favouriteless.enchanted.api.familiars.FamiliarType;
 import favouriteless.enchanted.api.rites.AbstractRite;
-import favouriteless.enchanted.common.init.registry.EnchantedParticleTypes;
-import favouriteless.enchanted.common.init.registry.EnchantedSoundEvents;
+import favouriteless.enchanted.common.init.registry.EParticleTypes;
+import favouriteless.enchanted.common.init.registry.ESoundEvents;
 import favouriteless.enchanted.common.init.registry.FamiliarTypes;
 import favouriteless.enchanted.common.rites.CirclePart;
 import favouriteless.enchanted.common.rites.RiteType;
@@ -50,7 +50,7 @@ public class RiteBindingFamiliar extends AbstractRite {
 			targetEntity.teleportTo(newPos.x, newPos.y, newPos.z);
 			level.sendParticles(ParticleTypes.PORTAL, targetEntity.getX(), targetEntity.getY(),  targetEntity.getZ(), 20 + Enchanted.RANDOM.nextInt(10), offset, offset, offset, 0.0D);
 
-			level.sendParticles(EnchantedParticleTypes.BIND_FAMILIAR_SEED.get(), newPos.x, newPos.y, newPos.z, 1, 0.0D, 0.0D, 0.0D, 0.0D);
+			level.sendParticles(EParticleTypes.BIND_FAMILIAR_SEED.get(), newPos.x, newPos.y, newPos.z, 1, 0.0D, 0.0D, 0.0D, 0.0D);
 		}
 	}
 
@@ -66,7 +66,7 @@ public class RiteBindingFamiliar extends AbstractRite {
 		Entity targetEntity = getTargetEntity();
 		UUID casterUUID = getCasterUUID();
 		if(ticks == START_SOUND)
-			level.playSound(null, pos.getX() + OFFSET.x,  pos.getY() + OFFSET.y,  pos.getZ() + OFFSET.z, EnchantedSoundEvents.BIND_FAMILIAR.get(), SoundSource.MASTER, 1.5F, 1.0F);
+			level.playSound(null, pos.getX() + OFFSET.x,  pos.getY() + OFFSET.y,  pos.getZ() + OFFSET.z, ESoundEvents.BIND_FAMILIAR.get(), SoundSource.MASTER, 1.5F, 1.0F);
 
 		if(ticks < BIND_TICKS) {
 			double dx = (pos.getX() + OFFSET.x + Enchanted.RANDOM.nextDouble() * 0.2D) - 0.1D;

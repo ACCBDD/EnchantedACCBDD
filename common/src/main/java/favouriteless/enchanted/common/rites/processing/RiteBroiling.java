@@ -2,8 +2,8 @@ package favouriteless.enchanted.common.rites.processing;
 
 import favouriteless.enchanted.api.rites.AbstractRite;
 import favouriteless.enchanted.common.CommonConfig;
-import favouriteless.enchanted.common.init.EnchantedTags;
-import favouriteless.enchanted.common.init.registry.EnchantedParticleTypes;
+import favouriteless.enchanted.common.init.ETags;
+import favouriteless.enchanted.common.init.registry.EParticleTypes;
 import favouriteless.enchanted.common.rites.CirclePart;
 import favouriteless.enchanted.common.rites.RiteType;
 import net.minecraft.core.BlockPos;
@@ -42,7 +42,7 @@ public class RiteBroiling extends AbstractRite {
 
             if(level != null) {
                 List<Entity> entitiesInside = CirclePart.SMALL.getEntitiesInside(level, pos, entity -> entity instanceof ItemEntity); // Get all ItemEntity
-                entitiesInside.removeIf(e -> !((ItemEntity)e).getItem().is(EnchantedTags.Items.RAW_FOODS));
+                entitiesInside.removeIf(e -> !((ItemEntity)e).getItem().is(ETags.Items.RAW_FOODS));
                 entitiesInside.sort((a, b) -> a.distanceToSqr(pos.getX() + 0.5D, pos.getY(), pos.getX() + 0.5D) > b.distanceToSqr(pos.getX() + 0.5D, pos.getY(), pos.getX() + 0.5D) ? 1 : 0); // Sort by distance.
 
                 if(entitiesInside.isEmpty()) { // If no food left to cook
@@ -67,7 +67,7 @@ public class RiteBroiling extends AbstractRite {
                 replaceItem(itemEntity, new ItemStack(recipe.getResultItem(level.registryAccess()).getItem(), recipe.getResultItem(level.registryAccess()).getCount() * (totalCount - burnedCount)), new ItemStack(Items.CHARCOAL, burnedCount));
 
                 level.sendParticles(ParticleTypes.SMALL_FLAME, itemEntity.position().x(), itemEntity.position().y(), itemEntity.position().z, 25, 0.2D, 0.2D, 0.2D, 0.0D);
-                level.sendParticles(EnchantedParticleTypes.BROILING_SEED.get(), pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, 1, 0.0D, 0.0D, 0.0D, 0.0D);
+                level.sendParticles(EParticleTypes.BROILING_SEED.get(), pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, 1, 0.0D, 0.0D, 0.0D, 0.0D);
             }
         }
     }

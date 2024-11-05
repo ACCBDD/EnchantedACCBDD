@@ -1,7 +1,7 @@
 package favouriteless.enchanted.common.curses;
 
 import favouriteless.enchanted.api.curses.RandomCurse;
-import favouriteless.enchanted.common.init.EnchantedTags.Biomes;
+import favouriteless.enchanted.common.init.ETags.Biomes;
 import favouriteless.enchanted.common.init.registry.CurseTypes;
 import net.minecraft.world.level.Level;
 

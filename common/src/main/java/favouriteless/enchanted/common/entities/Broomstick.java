@@ -1,7 +1,7 @@
 package favouriteless.enchanted.common.entities;
 
 import favouriteless.enchanted.client.client_handlers.entities.BroomstickEntityClientHandler;
-import favouriteless.enchanted.common.init.registry.EnchantedItems;
+import favouriteless.enchanted.common.items.EItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
@@ -279,7 +279,7 @@ public class Broomstick extends Entity {
             boolean isSurvivalPlayer = source.getEntity() instanceof Player && ((Player) source.getEntity()).getAbilities().instabuild;
             if(isSurvivalPlayer || getDamage() > 40.0F) {
                 if(!isSurvivalPlayer && level().getGameRules().getBoolean(GameRules.RULE_DOENTITYDROPS)) {
-                    spawnAtLocation(EnchantedItems.ENCHANTED_BROOMSTICK.get());
+                    spawnAtLocation(EItems.ENCHANTED_BROOMSTICK.get());
                 }
 
                 discard();

@@ -1,7 +1,7 @@
 package favouriteless.enchanted.common.sounds;
 
 import favouriteless.enchanted.common.blocks.entity.CauldronBlockEntity;
-import favouriteless.enchanted.common.init.registry.EnchantedSoundEvents;
+import favouriteless.enchanted.common.init.registry.ESoundEvents;
 import net.minecraft.client.resources.sounds.AbstractTickableSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
 import net.minecraft.sounds.SoundSource;
@@ -11,7 +11,7 @@ public class CauldronBubblingSoundInstance extends AbstractTickableSoundInstance
 	private final CauldronBlockEntity<?> blockEntity;
 
 	public CauldronBubblingSoundInstance(CauldronBlockEntity<?> blockEntity) {
-		super(EnchantedSoundEvents.CAULDRON_BUBBLING.get(), SoundSource.BLOCKS, SoundInstance.createUnseededRandom());
+		super(ESoundEvents.CAULDRON_BUBBLING.get(), SoundSource.BLOCKS, SoundInstance.createUnseededRandom());
 		this.blockEntity = blockEntity;
 		this.looping = true;
 		this.delay = 0;

@@ -3,8 +3,8 @@ package favouriteless.enchanted.api.rites;
 import favouriteless.enchanted.api.power.IPowerProvider;
 import favouriteless.enchanted.api.power.PowerHelper;
 import favouriteless.enchanted.common.blocks.entity.ChalkGoldBlockEntity;
-import favouriteless.enchanted.common.init.EnchantedData;
-import favouriteless.enchanted.common.init.registry.EnchantedItems;
+import favouriteless.enchanted.common.init.EData;
+import favouriteless.enchanted.common.items.EItems;
 import favouriteless.enchanted.common.init.registry.RiteTypes;
 import favouriteless.enchanted.common.items.TaglockFilledItem;
 import favouriteless.enchanted.common.rites.CirclePart;
@@ -87,7 +87,7 @@ public abstract class AbstractRite {
         }
 
         if(level != null) {
-            Optional<Registry<RiteRequirements>> optional = level.registryAccess().registry(EnchantedData.RITE_REQUIREMENTS_REGISTRY);
+            Optional<Registry<RiteRequirements>> optional = level.registryAccess().registry(EData.RITE_REQUIREMENTS_REGISTRY);
             RiteRequirements requirements = optional.map(riteRequirements -> riteRequirements.get(type.getId())).orElse(null);
             if(requirements == null)
                 throw new IllegalStateException(String.format("Tried to create rite of type %s without any requirements present.", type.getId()));
@@ -405,10 +405,10 @@ public abstract class AbstractRite {
             itemsRequired.put(item, itemsRequired.get(item)-stack.getCount());
             if(itemsRequired.get(item) <= 0) itemsRequired.remove(item); // Remove if all consumed
 
-            if(item != EnchantedItems.ATTUNED_STONE_CHARGED.get())
+            if(item != EItems.ATTUNED_STONE_CHARGED.get())
                 itemsConsumed.add(stack);
             else {
-                ItemEntity itemEntity = new ItemEntity(level, entity.position().x(), entity.position().y(), entity.position().z(), new ItemStack(EnchantedItems.ATTUNED_STONE.get(), stack.getCount()));
+                ItemEntity itemEntity = new ItemEntity(level, entity.position().x(), entity.position().y(), entity.position().z(), new ItemStack(EItems.ATTUNED_STONE.get(), stack.getCount()));
                 level.addFreshEntity(itemEntity);
             }
 
@@ -423,7 +423,7 @@ public abstract class AbstractRite {
             stack.shrink(amountNeeded);
             entity.setItem(stack);
         }
-        if(item == EnchantedItems.TAGLOCK_FILLED.get() && stack.hasTag()) {
+        if(item == EItems.TAGLOCK_FILLED.get() && stack.hasTag()) {
             this.targetUUID = stack.getTag().getUUID("entity");
             targetEntity = tryFindTargetEntity();
         }

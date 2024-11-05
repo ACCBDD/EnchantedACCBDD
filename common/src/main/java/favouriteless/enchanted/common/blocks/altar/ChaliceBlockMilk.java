@@ -1,6 +1,6 @@
 package favouriteless.enchanted.common.blocks.altar;
 
-import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
+import favouriteless.enchanted.common.init.registry.EBlocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.core.BlockPos;
@@ -23,7 +23,7 @@ public class ChaliceBlockMilk extends ChaliceBlock {
         if(!level.isClientSide) {
             player.removeAllEffects();
             level.playSound(null, pos, SoundEvents.GENERIC_DRINK, SoundSource.PLAYERS, 1.0F, 1.0F);
-            level.setBlockAndUpdate(pos, EnchantedBlocks.CHALICE.get().defaultBlockState());
+            level.setBlockAndUpdate(pos, EBlocks.CHALICE.get().defaultBlockState());
         }
         return InteractionResult.SUCCESS;
     }

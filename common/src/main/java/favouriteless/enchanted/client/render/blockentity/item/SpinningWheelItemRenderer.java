@@ -1,7 +1,7 @@
 package favouriteless.enchanted.client.render.blockentity.item;
 
 import favouriteless.enchanted.common.blocks.entity.SpinningWheelBlockEntity;
-import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
+import favouriteless.enchanted.common.init.registry.EBlocks;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
@@ -21,7 +21,7 @@ public class SpinningWheelItemRenderer extends BlockEntityWithoutLevelRenderer {
 	@Override
 	public void renderByItem(ItemStack stack, ItemDisplayContext context, PoseStack poseStack, MultiBufferSource buffer, int light, int overlay) {
 		if(dummyBe == null)
-			dummyBe = new SpinningWheelBlockEntity(BlockPos.ZERO, EnchantedBlocks.SPINNING_WHEEL.get().defaultBlockState());
+			dummyBe = new SpinningWheelBlockEntity(BlockPos.ZERO, EBlocks.SPINNING_WHEEL.get().defaultBlockState());
 
 		poseStack.pushPose();
 		Minecraft.getInstance().getBlockEntityRenderDispatcher().renderItem(dummyBe, poseStack, buffer, light, overlay);

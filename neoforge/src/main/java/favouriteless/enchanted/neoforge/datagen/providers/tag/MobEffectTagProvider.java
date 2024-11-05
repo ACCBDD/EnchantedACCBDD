@@ -1,7 +1,7 @@
 package favouriteless.enchanted.neoforge.datagen.providers.tag;
 
 import favouriteless.enchanted.common.Enchanted;
-import favouriteless.enchanted.common.init.EnchantedTags;
+import favouriteless.enchanted.common.init.ETags;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
@@ -26,13 +26,13 @@ public class MobEffectTagProvider extends IntrinsicHolderTagsProvider<MobEffect>
     }
 
     public void addEnchantedTags(Provider provider) {
-        tag(EnchantedTags.MobEffects.BLIGHT_EFFECTS)
+        tag(ETags.MobEffects.BLIGHT_EFFECTS)
                 .add(MobEffects.BLINDNESS,  MobEffects.CONFUSION, MobEffects.HUNGER, MobEffects.POISON,
                         MobEffects.WEAKNESS, MobEffects.WITHER);
-        tag(EnchantedTags.MobEffects.FERTILITY_CURE_EFFECTS)
+        tag(ETags.MobEffects.FERTILITY_CURE_EFFECTS)
                 .add(MobEffects.BLINDNESS,  MobEffects.CONFUSION, MobEffects.HUNGER, MobEffects.POISON,
                         MobEffects.WEAKNESS, MobEffects.WITHER);
-        tag(EnchantedTags.MobEffects.MISFORTUNE_EFFECTS)
+        tag(ETags.MobEffects.MISFORTUNE_EFFECTS)
                 .add(MobEffects.BLINDNESS,  MobEffects.CONFUSION, MobEffects.DIG_SLOWDOWN, MobEffects.HUNGER,
                         MobEffects.MOVEMENT_SLOWDOWN, MobEffects.UNLUCK ,MobEffects.WEAKNESS);
     }

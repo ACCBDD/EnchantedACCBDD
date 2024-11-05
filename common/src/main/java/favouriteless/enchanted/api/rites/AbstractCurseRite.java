@@ -5,8 +5,8 @@ import favouriteless.enchanted.api.familiars.FamiliarSavedData;
 import favouriteless.enchanted.api.familiars.IFamiliarEntry;
 import favouriteless.enchanted.common.curses.CurseManager;
 import favouriteless.enchanted.common.curses.CurseType;
-import favouriteless.enchanted.common.init.registry.EnchantedParticleTypes;
-import favouriteless.enchanted.common.init.registry.EnchantedSoundEvents;
+import favouriteless.enchanted.common.init.registry.EParticleTypes;
+import favouriteless.enchanted.common.init.registry.ESoundEvents;
 import favouriteless.enchanted.common.init.registry.FamiliarTypes;
 import favouriteless.enchanted.common.rites.RiteType;
 import favouriteless.enchanted.common.rites.curse.RiteCurseMisfortune;
@@ -49,8 +49,8 @@ public abstract class AbstractCurseRite extends AbstractRite {
             }
 
             BlockPos pos = getPos();
-            getLevel().sendParticles(EnchantedParticleTypes.CURSE_SEED.get(), pos.getX()+0.5D, pos.getY(), pos.getZ()+0.5D, 1, 0.0D, 0.0D, 0.0D, 0.0D);
-            getLevel().playSound(null, pos, EnchantedSoundEvents.CURSE_CAST.get(), SoundSource.MASTER, 1.5F, 1.0F);
+            getLevel().sendParticles(EParticleTypes.CURSE_SEED.get(), pos.getX()+0.5D, pos.getY(), pos.getZ()+0.5D, 1, 0.0D, 0.0D, 0.0D, 0.0D);
+            getLevel().playSound(null, pos, ESoundEvents.CURSE_CAST.get(), SoundSource.MASTER, 1.5F, 1.0F);
             CurseManager.createCurse(getLevel(), curseType, getTargetUUID(), getCasterUUID(), casterLevel);
             stopExecuting();
         }

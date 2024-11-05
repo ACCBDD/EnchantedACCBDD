@@ -1,6 +1,6 @@
 package favouriteless.enchanted.common.blocks.crops;
 
-import favouriteless.enchanted.common.init.registry.EnchantedItems;
+import favouriteless.enchanted.common.items.EItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.ItemLike;
@@ -18,7 +18,7 @@ public class ArtichokeBlock extends CropsBlockAgeFive {
     }
 
     protected ItemLike getBaseSeedId() {
-        return EnchantedItems.WATER_ARTICHOKE_SEEDS.get();
+        return EItems.WATER_ARTICHOKE_SEEDS.get();
     }
 
     @Override

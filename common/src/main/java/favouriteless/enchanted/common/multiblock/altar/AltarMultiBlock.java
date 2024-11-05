@@ -3,7 +3,7 @@ package favouriteless.enchanted.common.multiblock.altar;
 import favouriteless.enchanted.common.altar.AltarStateObserver;
 import favouriteless.enchanted.common.blocks.entity.AltarBlockEntity;
 import favouriteless.enchanted.common.blocks.altar.AltarBlock;
-import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
+import favouriteless.enchanted.common.init.registry.EBlocks;
 import favouriteless.enchanted.common.multiblock.IMultiBlockType;
 import net.favouriteless.stateobserver.api.StateObserverManager;
 import net.minecraft.core.BlockPos;
@@ -69,7 +69,7 @@ public class AltarMultiBlock implements IMultiBlockType {
     @Override
     public void unformBlock(Level level, BlockPos pos) {
         BlockState state = level.getBlockState(pos);
-        if(state.is(EnchantedBlocks.ALTAR.get())) {
+        if(state.is(EBlocks.ALTAR.get())) {
             if(state.getValue(AltarBlock.FORMED) == AltarPartIndex.P000) {
                 AltarStateObserver observer = StateObserverManager.get().getObserver(level, pos, AltarStateObserver.class);
                 if(observer != null)
@@ -78,7 +78,7 @@ public class AltarMultiBlock implements IMultiBlockType {
                 if(level.getBlockEntity(pos) instanceof AltarBlockEntity)
                     level.removeBlockEntity(pos);
             }
-            level.setBlockAndUpdate(pos, EnchantedBlocks.ALTAR.get().defaultBlockState());
+            level.setBlockAndUpdate(pos, EBlocks.ALTAR.get().defaultBlockState());
         }
     }
 
@@ -88,7 +88,7 @@ public class AltarMultiBlock implements IMultiBlockType {
     }
 
     public void formBlock(Level world, BlockPos pos, int dx, int dy, int dz, boolean facingX) {
-        world.setBlockAndUpdate(pos, EnchantedBlocks.ALTAR.get().defaultBlockState().setValue(AltarBlock.FORMED, AltarPartIndex.getIndex(dx, dz)).setValue(AltarBlock.FACING_X, facingX));
+        world.setBlockAndUpdate(pos, EBlocks.ALTAR.get().defaultBlockState().setValue(AltarBlock.FORMED, AltarPartIndex.getIndex(dx, dz)).setValue(AltarBlock.FACING_X, facingX));
     }
 
     @Override
@@ -158,11 +158,11 @@ public class AltarMultiBlock implements IMultiBlockType {
     }
 
     private static boolean isUnformedAltar(BlockState state) {
-        return state.is(EnchantedBlocks.ALTAR.get()) && state.getValue(AltarBlock.FORMED) == AltarPartIndex.UNFORMED;
+        return state.is(EBlocks.ALTAR.get()) && state.getValue(AltarBlock.FORMED) == AltarPartIndex.UNFORMED;
     }
 
     private static boolean isFormedAltar(BlockState state) {
-        return (state.is(EnchantedBlocks.ALTAR.get()) && state.getValue(AltarBlock.FORMED) != AltarPartIndex.UNFORMED);
+        return (state.is(EBlocks.ALTAR.get()) && state.getValue(AltarBlock.FORMED) != AltarPartIndex.UNFORMED);
     }
 
     @Override

@@ -2,7 +2,7 @@ package favouriteless.enchanted.common.rites;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
-import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
+import favouriteless.enchanted.common.init.registry.EBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -117,7 +117,7 @@ public enum CirclePart {
 
     public boolean canPlace(Level level, BlockPos centerPos) {
         for(BlockPos pos : circlePoints) {
-            if(!level.getBlockState(centerPos.offset(pos)).isAir() || !EnchantedBlocks.RITUAL_CHALK.get().canSurvive(null, level, centerPos.offset(pos))) { // Not air or chalk can't survive
+            if(!level.getBlockState(centerPos.offset(pos)).isAir() || !EBlocks.RITUAL_CHALK.get().canSurvive(null, level, centerPos.offset(pos))) { // Not air or chalk can't survive
                 return false;
             }
         }

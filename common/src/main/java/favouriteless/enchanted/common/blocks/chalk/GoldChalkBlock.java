@@ -1,7 +1,7 @@
 package favouriteless.enchanted.common.blocks.chalk;
 
 import favouriteless.enchanted.common.blocks.entity.ChalkGoldBlockEntity;
-import favouriteless.enchanted.common.init.registry.EnchantedBlockEntityTypes;
+import favouriteless.enchanted.common.init.registry.EBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -66,7 +66,7 @@ public class GoldChalkBlock extends AbstractChalkBlock implements EntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return type == EnchantedBlockEntityTypes.CHALK_GOLD.get() ? ChalkGoldBlockEntity::tick : null;
+        return type == EBlockEntityTypes.CHALK_GOLD.get() ? ChalkGoldBlockEntity::tick : null;
     }
 
 }

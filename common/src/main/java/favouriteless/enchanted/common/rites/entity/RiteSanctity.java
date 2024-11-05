@@ -2,8 +2,8 @@ package favouriteless.enchanted.common.rites.entity;
 
 import favouriteless.enchanted.api.rites.AbstractRite;
 import favouriteless.enchanted.client.particles.types.CircleMagicParticleType.CircleMagicData;
-import favouriteless.enchanted.common.init.EnchantedTags.EntityTypes;
-import favouriteless.enchanted.common.init.registry.EnchantedParticleTypes;
+import favouriteless.enchanted.common.init.ETags.EntityTypes;
+import favouriteless.enchanted.common.init.registry.EParticleTypes;
 import favouriteless.enchanted.common.rites.CirclePart;
 import favouriteless.enchanted.common.rites.RiteType;
 import net.minecraft.core.BlockPos;
@@ -52,8 +52,8 @@ public class RiteSanctity extends AbstractRite {
             double dy = pos.getY() + 0.1D;
             double dz = pos.getZ() + 0.5D;
 
-            level.sendParticles(new CircleMagicData(EnchantedParticleTypes.CIRCLE_MAGIC.get(), 255, 255, 255, cx, pos.getY(), cz, 3.0D), cx + 3.0D, dy, dz, 1, 0.0D, 0.35D, 0.0D, 0.0D);
-            level.sendParticles(new CircleMagicData(EnchantedParticleTypes.CIRCLE_MAGIC.get(), 255, 255, 255, cx, pos.getY(), cz, 3.0D), cx - 3.0D, dy, dz, 1, 0.0D, 0.35D, 0.0D, 0.0D);
+            level.sendParticles(new CircleMagicData(EParticleTypes.CIRCLE_MAGIC.get(), 255, 255, 255, cx, pos.getY(), cz, 3.0D), cx + 3.0D, dy, dz, 1, 0.0D, 0.35D, 0.0D, 0.0D);
+            level.sendParticles(new CircleMagicData(EParticleTypes.CIRCLE_MAGIC.get(), 255, 255, 255, cx, pos.getY(), cz, 3.0D), cx - 3.0D, dy, dz, 1, 0.0D, 0.35D, 0.0D, 0.0D);
         }
     }
 

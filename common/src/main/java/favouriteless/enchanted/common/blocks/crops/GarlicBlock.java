@@ -1,6 +1,6 @@
 package favouriteless.enchanted.common.blocks.crops;
 
-import favouriteless.enchanted.common.init.registry.EnchantedItems;
+import favouriteless.enchanted.common.items.EItems;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 
@@ -11,7 +11,7 @@ public class GarlicBlock extends CropsBlockAgeFive {
     }
 
     protected ItemLike getBaseSeedId() {
-        return EnchantedItems.GARLIC.get();
+        return EItems.GARLIC.get();
     }
 
 }

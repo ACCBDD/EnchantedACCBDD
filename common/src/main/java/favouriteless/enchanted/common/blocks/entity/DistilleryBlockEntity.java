@@ -4,9 +4,9 @@ import favouriteless.enchanted.api.power.IPowerConsumer;
 import favouriteless.enchanted.api.power.IPowerProvider;
 import favouriteless.enchanted.api.power.PowerHelper;
 import favouriteless.enchanted.common.altar.SimplePowerPosHolder;
-import favouriteless.enchanted.common.init.registry.EnchantedBlockEntityTypes;
-import favouriteless.enchanted.common.init.registry.EnchantedItems;
-import favouriteless.enchanted.common.init.registry.EnchantedRecipeTypes;
+import favouriteless.enchanted.common.init.registry.EBlockEntityTypes;
+import favouriteless.enchanted.common.items.EItems;
+import favouriteless.enchanted.common.init.registry.ERecipeTypes;
 import favouriteless.enchanted.common.menus.DistilleryMenu;
 import favouriteless.enchanted.common.recipes.DistillingRecipe;
 import net.minecraft.core.BlockPos;
@@ -75,9 +75,9 @@ public class DistilleryBlockEntity extends ContainerBlockEntityBase implements I
     };
 
     public DistilleryBlockEntity(BlockPos pos, BlockState state) {
-        super(EnchantedBlockEntityTypes.DISTILLERY.get(), pos, state, NonNullList.withSize(7, ItemStack.EMPTY));
+        super(EBlockEntityTypes.DISTILLERY.get(), pos, state, NonNullList.withSize(7, ItemStack.EMPTY));
         this.posHolder = new SimplePowerPosHolder(pos);
-        this.recipeCheck = RecipeManager.createCheck(EnchantedRecipeTypes.DISTILLING.get());
+        this.recipeCheck = RecipeManager.createCheck(ERecipeTypes.DISTILLING.get());
     }
 
     public static <T extends BlockEntity> void serverTick(Level level, BlockPos blockPos, BlockState blockState, T t) {
@@ -249,7 +249,7 @@ public class DistilleryBlockEntity extends ContainerBlockEntityBase implements I
     @Override
     public boolean canPlaceItemThroughFace(int index, @NotNull ItemStack stack, @Nullable Direction face) {
         if(index < 3)
-            return index != 0 || stack.is(EnchantedItems.CLAY_JAR.get()); // Only let jars into slot 0
+            return index != 0 || stack.is(EItems.CLAY_JAR.get()); // Only let jars into slot 0
         else
             return false;
     }

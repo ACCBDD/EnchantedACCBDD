@@ -1,9 +1,9 @@
 package favouriteless.enchanted.common.items.poppets;
 
 import favouriteless.enchanted.common.entities.VoodooItemEntity;
-import favouriteless.enchanted.common.init.EnchantedDamageTypes;
-import favouriteless.enchanted.common.init.registry.EnchantedEntityTypes;
-import favouriteless.enchanted.common.init.registry.EnchantedItems;
+import favouriteless.enchanted.common.init.EDamageTypes;
+import favouriteless.enchanted.common.init.registry.EEntityTypes;
+import favouriteless.enchanted.common.items.EItems;
 import favouriteless.enchanted.common.poppet.PoppetUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -32,12 +32,12 @@ public class VoodooPoppetItem extends PoppetItem {
         if(PoppetUtils.isBound(stack) && entity instanceof Player player) {
             ItemStack offHand = player.getOffhandItem();
 
-            if(offHand.getItem() == EnchantedItems.BONE_NEEDLE.get()) {
+            if(offHand.getItem() == EItems.BONE_NEEDLE.get()) {
                 if(PoppetUtils.isBound(stack)) {
                     if(level instanceof ServerLevel serverLevel) {
                         ServerPlayer target = PoppetUtils.getBoundPlayer(stack, serverLevel);
                         if(target != null && !target.isCreative() && PoppetUtils.tryVoodooPlayer(target, (ServerPlayer)player, stack)) {
-                            target.hurt(EnchantedDamageTypes.source(level, EnchantedDamageTypes.VOODOO, player), 2.0F);
+                            target.hurt(EDamageTypes.source(level, EDamageTypes.VOODOO, player), 2.0F);
                             stack.hurtAndBreak(2, player, p -> p.broadcastBreakEvent(InteractionHand.MAIN_HAND));
                             offHand.shrink(1);
                         }
@@ -81,7 +81,7 @@ public class VoodooPoppetItem extends PoppetItem {
 
     // This overrides an IForgeItem method.
     public Entity createEntity(Level level, Entity item, ItemStack stack) {
-        VoodooItemEntity voodoo = new VoodooItemEntity(EnchantedEntityTypes.VOODOO_ITEM.get(), level);
+        VoodooItemEntity voodoo = new VoodooItemEntity(EEntityTypes.VOODOO_ITEM.get(), level);
         voodoo.setPos(item.position());
         voodoo.setDeltaMovement(item.getDeltaMovement());
         voodoo.setItem(stack);

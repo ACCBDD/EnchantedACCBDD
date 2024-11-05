@@ -1,7 +1,7 @@
 package favouriteless.enchanted.common.rites.world;
 
 import favouriteless.enchanted.api.rites.AbstractRite;
-import favouriteless.enchanted.common.init.registry.EnchantedParticleTypes;
+import favouriteless.enchanted.common.init.registry.EParticleTypes;
 import favouriteless.enchanted.common.rites.CirclePart;
 import favouriteless.enchanted.common.rites.RiteType;
 import net.minecraft.core.BlockPos;
@@ -55,7 +55,7 @@ public class RiteTranspositionIron extends AbstractRite {
 			}
 
 			if(this.ticks % 20 == 0) {
-				level.sendParticles(EnchantedParticleTypes.TRANSPOSITION_IRON_SEED.get(), pos.getX() + 0.5D, pos.getY() - 0.1D, pos.getZ() + 0.5D, 1, 0.0D, 0.0D, 0.0D, 0.0D);
+				level.sendParticles(EParticleTypes.TRANSPOSITION_IRON_SEED.get(), pos.getX() + 0.5D, pos.getY() - 0.1D, pos.getZ() + 0.5D, 1, 0.0D, 0.0D, 0.0D, 0.0D);
 			}
 
 			if(progress > circlePoints.size() - 1)

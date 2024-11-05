@@ -2,7 +2,7 @@ package favouriteless.enchanted.common.recipes;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import favouriteless.enchanted.common.init.registry.EnchantedRecipeTypes;
+import favouriteless.enchanted.common.init.registry.ERecipeTypes;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -66,12 +66,12 @@ public class ByproductRecipe implements Recipe<SingleRecipeInput> {
 
     @Override
     public RecipeType<?> getType() {
-        return EnchantedRecipeTypes.BYPRODUCT.get();
+        return ERecipeTypes.BYPRODUCT.get();
     }
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return EnchantedRecipeTypes.BYPRODUCT_SERIALIZER.get();
+        return ERecipeTypes.BYPRODUCT_SERIALIZER.get();
     }
 
 }

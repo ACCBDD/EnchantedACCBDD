@@ -1,7 +1,7 @@
 package favouriteless.enchanted.client.particles;
 
 import favouriteless.enchanted.client.particles.types.DoubleParticleType.DoubleParticleData;
-import favouriteless.enchanted.common.init.registry.EnchantedParticleTypes;
+import favouriteless.enchanted.common.init.registry.EParticleTypes;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.NoRenderParticle;
 import net.minecraft.client.particle.Particle;
@@ -35,7 +35,7 @@ public class ProtectionSeedParticle extends NoRenderParticle {
 				double cz = cosY * cosP * radius + z + (Math.random()-0.5D);
 
 				if(Math.random() < 0.5D)
-					level.addParticle(EnchantedParticleTypes.PROTECTION.get(), cx, cy, cz, 0.0D, 0.0D, 0.0D);
+					level.addParticle(EParticleTypes.PROTECTION.get(), cx, cy, cz, 0.0D, 0.0D, 0.0D);
 			}
 		}
 		remove();

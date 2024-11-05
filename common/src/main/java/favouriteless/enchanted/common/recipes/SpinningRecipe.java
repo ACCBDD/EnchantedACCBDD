@@ -3,7 +3,7 @@ package favouriteless.enchanted.common.recipes;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import favouriteless.enchanted.common.init.registry.EnchantedRecipeTypes;
+import favouriteless.enchanted.common.init.registry.ERecipeTypes;
 import favouriteless.enchanted.common.recipes.recipe_inputs.ListInput;
 import favouriteless.enchanted.util.ItemUtil;
 import net.minecraft.core.HolderLookup.Provider;
@@ -85,12 +85,12 @@ public class SpinningRecipe implements Recipe<ListInput> {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return EnchantedRecipeTypes.SPINNING_SERIALIZER.get();
+        return ERecipeTypes.SPINNING_SERIALIZER.get();
     }
 
     @Override
     public RecipeType<?> getType() {
-        return EnchantedRecipeTypes.SPINNING.get();
+        return ERecipeTypes.SPINNING.get();
     }
 
     @Override
