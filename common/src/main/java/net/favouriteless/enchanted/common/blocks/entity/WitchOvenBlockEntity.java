@@ -1,22 +1,22 @@
 package net.favouriteless.enchanted.common.blocks.entity;
 
 import net.favouriteless.enchanted.common.Enchanted;
+import net.favouriteless.enchanted.common.blocks.EBlocks;
 import net.favouriteless.enchanted.common.blocks.FumeFunnelBlock;
 import net.favouriteless.enchanted.common.blocks.WitchOvenBlock;
 import net.favouriteless.enchanted.common.init.ETags;
-import net.favouriteless.enchanted.common.blocks.EBlocks;
 import net.favouriteless.enchanted.common.items.EItems;
-import net.favouriteless.enchanted.common.recipes.ERecipeTypes;
 import net.favouriteless.enchanted.common.menus.WitchOvenMenu;
 import net.favouriteless.enchanted.common.recipes.ByproductRecipe;
+import net.favouriteless.enchanted.common.recipes.ERecipeTypes;
 import net.favouriteless.enchanted.platform.CommonServices;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
-import net.minecraft.world.Container;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -25,10 +25,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeManager;
-import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.item.crafting.SmeltingRecipe;
+import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.AbstractFurnaceBlock;
 import net.minecraft.world.level.block.Block;
@@ -45,8 +42,8 @@ public class WitchOvenBlockEntity extends ContainerBlockEntityBase implements Me
     private static final int[] FACE_SLOTS = new int[] { 2 };
     private static final int[] BOTTOM_SLOTS = new int[] { 3, 4 };
 
-    private final RecipeManager.CachedCheck<Container, SmeltingRecipe> smeltCheck;
-    private final RecipeManager.CachedCheck<Container, ByproductRecipe> ovenCheck;
+    private final RecipeManager.CachedCheck<SingleRecipeInput, SmeltingRecipe> smeltCheck;
+    private final RecipeManager.CachedCheck<SingleRecipeInput, ByproductRecipe> ovenCheck;
 
     private int burnProgress = 0;
     private int burnDuration = 0;
@@ -91,7 +88,7 @@ public class WitchOvenBlockEntity extends ContainerBlockEntityBase implements Me
         this.ovenCheck = RecipeManager.createCheck(ERecipeTypes.BYPRODUCT.get());
     }
 
-    public static <T extends BlockEntity> void serverTick(Level level, BlockPos blockPos, BlockState blockState, T t) {
+    public static <T extends BlockEntity> void serverTick(Level level, BlockPos pos, BlockState state, T t) {
         if(t instanceof WitchOvenBlockEntity be) {
             boolean startedBurning = be.isLit();
             boolean isChanged = false;
@@ -105,34 +102,37 @@ public class WitchOvenBlockEntity extends ContainerBlockEntityBase implements Me
             boolean hasInput = !be.getInput().isEmpty();
 
             if(be.isLit() || hasInput && hasFuel) {
-                Recipe<?> recipe = hasInput ? be.smeltCheck.getRecipeFor(be, level).orElse(null) : null;
+                RecipeHolder<SmeltingRecipe> holder = hasInput ? be.smeltCheck.getRecipeFor(new SingleRecipeInput(be.inventory.get(0)), level).orElse(null) : null;
 
-                if(!be.isLit() && be.canBurn(recipe)) { // Handle starting off a stack of fuel or refreshing burn timer.
-                    be.burnProgress = CommonServices.PLATFORM.getBurnTime(fuelStack, RecipeType.SMELTING);
-                    be.burnDuration = be.burnProgress;
-                    if (be.isLit()) {
-                        isChanged = true;
-                        if(CommonServices.PLATFORM.hasCraftingRemainingItem(fuelStack))
-                            be.inventory.set(2, CommonServices.PLATFORM.getCraftingRemainingItem(fuelStack));
-                        else if(hasFuel) {
-                            fuelStack.shrink(1);
-                            ItemStack remainder = CommonServices.PLATFORM.getCraftingRemainingItem(fuelStack);
-                            if(fuelStack.isEmpty())
-                                be.inventory.set(2, remainder == null ? ItemStack.EMPTY : remainder);
+                if(holder != null) {
+                    if(!be.isLit() && be.canBurn(holder)) { // Handle starting off a stack of fuel or refreshing burn timer.
+                        be.burnProgress = CommonServices.PLATFORM.getBurnTime(fuelStack, RecipeType.SMELTING);
+                        be.burnDuration = be.burnProgress;
+                        if (be.isLit()) {
+                            isChanged = true;
+                            if(CommonServices.PLATFORM.hasCraftingRemainingItem(fuelStack))
+                                be.inventory.set(2, CommonServices.PLATFORM.getCraftingRemainingItem(fuelStack));
+                            else if(hasFuel) {
+                                fuelStack.shrink(1);
+                                ItemStack remainder = CommonServices.PLATFORM.getCraftingRemainingItem(fuelStack);
+                                if(fuelStack.isEmpty())
+                                    be.inventory.set(2, remainder == null ? ItemStack.EMPTY : remainder);
+                            }
                         }
                     }
+
+                    if(be.isLit() && be.canBurn(holder)) {
+                        if(++be.cookProgress == be.cookDuration) {
+                            be.cookProgress = 0;
+                            be.cookDuration = getTotalCookTime(level, be);
+                            be.burn(holder);
+                            isChanged = true;
+                        }
+                    }
+                    else
+                        be.cookProgress = 0;
                 }
 
-                if(be.isLit() && be.canBurn(recipe)) {
-                    if(++be.cookProgress == be.cookDuration) {
-                        be.cookProgress = 0;
-                        be.cookDuration = getTotalCookTime(level, be);
-                        be.burn(recipe);
-                        isChanged = true;
-                    }
-                }
-                else
-                    be.cookProgress = 0;
             }
             else if(!be.isLit() && be.cookProgress > 0)
                 be.cookProgress = Mth.clamp(be.cookProgress - 2, 0, be.cookDuration); // Tick the progress down if fuel ran out.
@@ -153,15 +153,15 @@ public class WitchOvenBlockEntity extends ContainerBlockEntityBase implements Me
      * Attempt to smelt the item in this {@link WitchOvenBlockEntity}'s input slot and roll for a byproduct.
      * @param recipe The smelting recipe to use.
      */
-    private void burn(@Nullable Recipe<?> recipe) {
+    private void burn(@Nullable RecipeHolder<SmeltingRecipe> recipe) {
         if(canBurn(recipe)) {
             ItemStack input = getInput();
             ItemStack fuel = getFuel();
-            ItemStack result = recipe.getResultItem(level.registryAccess());
+            ItemStack result = recipe.value().getResultItem(level.registryAccess());
             ItemStack output = getOutput();
 
             if(Enchanted.RANDOM.nextDouble() <= getByproductChance())
-                tryCreateByproduct(ovenCheck.getRecipeFor(this, level).orElse(null));
+                tryCreateByproduct(ovenCheck.getRecipeFor(new SingleRecipeInput(inventory.get(0)), level).orElse(null));
 
             if(output.isEmpty()) // Output the smelting item
                 inventory.set(3, result.copy());
@@ -181,10 +181,10 @@ public class WitchOvenBlockEntity extends ContainerBlockEntityBase implements Me
      * @param recipe The recipe to check for.
      * @return True if space is found, otherwise false.
      */
-    private boolean canBurn(@Nullable Recipe<?> recipe) {
+    private boolean canBurn(@Nullable RecipeHolder<SmeltingRecipe> recipe) {
         ItemStack input = getInput();
         if(recipe != null && !input.is(ETags.Items.WITCH_OVEN_BLACKLIST)) {
-            ItemStack result = ((Recipe<Container>)recipe).assemble(this, level.registryAccess());
+            ItemStack result = recipe.value().assemble(new SingleRecipeInput(inventory.get(0)), level.registryAccess());
             if(result.isEmpty())
                 return false; // Don't bother checking recipes with no output.
             else {
@@ -192,7 +192,7 @@ public class WitchOvenBlockEntity extends ContainerBlockEntityBase implements Me
                 if(output.isEmpty())
                     return true; // Check the output is valid to place the result into.
                 else {
-                    if(!ItemStack.isSameItemSameTags(output, result))
+                    if(!ItemStack.isSameItemSameComponents(output, result))
                         return false;
                     else
                         return output.getCount() + result.getCount() <= output.getMaxStackSize();
@@ -206,9 +206,9 @@ public class WitchOvenBlockEntity extends ContainerBlockEntityBase implements Me
      * Attempt to create a byproduct from the item currently in the input slot, assuming enough jars are present.
      * @param recipe The {@link Recipe} to create a result from.
      */
-    private void tryCreateByproduct(@Nullable ByproductRecipe recipe) {
+    private void tryCreateByproduct(@Nullable RecipeHolder<ByproductRecipe> recipe) {
         if(recipe != null && !getInput().isEmpty()) {
-            ItemStack result = recipe.assemble(this, level.registryAccess());
+            ItemStack result = recipe.value().assemble(new SingleRecipeInput(inventory.get(0)), level.registryAccess());
             if(!result.isEmpty()) {
                 ItemStack jars = getJarInput();
 
@@ -216,7 +216,7 @@ public class WitchOvenBlockEntity extends ContainerBlockEntityBase implements Me
                     ItemStack output = getJarOutput();
                     if(output.isEmpty())
                         inventory.set(4, result);
-                    else if(ItemStack.isSameItemSameTags(output, result) && output.getCount() + result.getCount() <= output.getMaxStackSize())
+                    else if(ItemStack.isSameItemSameComponents(output, result) && output.getCount() + result.getCount() <= output.getMaxStackSize())
                         output.grow(result.getCount());
 
                     jars.shrink(result.getCount());
@@ -268,7 +268,7 @@ public class WitchOvenBlockEntity extends ContainerBlockEntityBase implements Me
     }
 
     private static int getTotalCookTime(Level level, WitchOvenBlockEntity be) {
-        return be.smeltCheck.getRecipeFor(be, level).map(recipe -> Math.round(recipe.getCookingTime() * 0.8F)).orElse(200);
+        return be.smeltCheck.getRecipeFor(new SingleRecipeInput(be.inventory.get(0)), level).map(recipe -> Math.round(recipe.value().getCookingTime() * 0.8F)).orElse(200);
     }
 
     public ItemStack getInput() {
@@ -303,21 +303,21 @@ public class WitchOvenBlockEntity extends ContainerBlockEntityBase implements Me
     }
 
     @Override
-    public void saveAdditional(@NotNull CompoundTag nbt) {
-        super.saveAdditional(nbt);
-        nbt.putInt("burnTime", burnProgress);
-        nbt.putInt("burnTimeTotal", burnDuration);
-        nbt.putInt("cookTime", cookProgress);
-        nbt.putInt("cookTimeTotal", cookDuration);
+    public void saveAdditional(@NotNull CompoundTag tag, Provider registries) {
+        super.saveAdditional(tag, registries);
+        tag.putInt("burnTime", burnProgress);
+        tag.putInt("burnTimeTotal", burnDuration);
+        tag.putInt("cookTime", cookProgress);
+        tag.putInt("cookTimeTotal", cookDuration);
     }
 
     @Override
-    public void load(@NotNull CompoundTag nbt) {
-        super.load(nbt);
-        burnProgress = nbt.getInt("burnTime");
-        burnDuration = nbt.getInt("burnTimeTotal");
-        cookProgress = nbt.getInt("cookTime");
-        cookDuration = nbt.getInt("cookTimeTotal");
+    public void loadAdditional(@NotNull CompoundTag tag, Provider registries) {
+        super.loadAdditional(tag, registries);
+        burnProgress = tag.getInt("burnTime");
+        burnDuration = tag.getInt("burnTimeTotal");
+        cookProgress = tag.getInt("cookTime");
+        cookDuration = tag.getInt("cookTimeTotal");
     }
 
     private boolean isLit() {
@@ -353,7 +353,7 @@ public class WitchOvenBlockEntity extends ContainerBlockEntityBase implements Me
 
     @Override
     public void setItem(int index, @NotNull ItemStack stack) {
-        boolean matching = !stack.isEmpty() && ItemStack.isSameItemSameTags(stack, getInput());
+        boolean matching = !stack.isEmpty() && ItemStack.isSameItemSameComponents(stack, getInput());
         inventory.set(index, stack);
 
         if(index == 0 && !matching) {

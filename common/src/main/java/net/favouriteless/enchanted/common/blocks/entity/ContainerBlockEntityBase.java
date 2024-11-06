@@ -2,6 +2,7 @@ package net.favouriteless.enchanted.common.blocks.entity;
 
 import net.favouriteless.enchanted.platform.CommonServices;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -69,21 +70,21 @@ public abstract class ContainerBlockEntityBase extends BlockEntity implements Co
     protected abstract Component getDefaultName();
 
     @Override
-    public void load(@NotNull CompoundTag nbt) {
-        super.load(nbt);
-        ContainerHelper.loadAllItems(nbt.getCompound("inventory"), inventory);
+    public void loadAdditional(@NotNull CompoundTag tag, Provider registries) {
+        super.loadAdditional(tag, registries);
+        ContainerHelper.loadAllItems(tag.getCompound("inventory"), inventory, registries);
 
-        if(nbt.contains("CustomName", 8))
-            name = Component.Serializer.fromJson(nbt.getString("CustomName"));
+        if(tag.contains("CustomName", 8))
+            name = Component.Serializer.fromJson(tag.getString("CustomName"), registries);
     }
 
     @Override
-    protected void saveAdditional(@NotNull CompoundTag nbt) {
-        super.saveAdditional(nbt);
-        nbt.put("inventory", ContainerHelper.saveAllItems(new CompoundTag(), inventory));
+    protected void saveAdditional(@NotNull CompoundTag nbt, Provider registries) {
+        super.saveAdditional(nbt, registries);
+        nbt.put("inventory", ContainerHelper.saveAllItems(new CompoundTag(), inventory, registries));
 
         if(name != null)
-            nbt.putString("CustomName", Component.Serializer.toJson(name));
+            nbt.putString("CustomName", Component.Serializer.toJson(name, registries));
     }
 
     @Override

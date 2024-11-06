@@ -1,18 +1,20 @@
 package net.favouriteless.enchanted.common.blocks.entity;
 
-import net.favouriteless.enchanted.client.particles.types.ColourOptions;
-import net.favouriteless.enchanted.common.Enchanted;
 import net.favouriteless.enchanted.api.power.IPowerConsumer;
 import net.favouriteless.enchanted.api.power.IPowerProvider;
 import net.favouriteless.enchanted.api.power.PowerHelper;
 import net.favouriteless.enchanted.client.client_handlers.blockentities.CauldronBlockEntityClientHandler;
+import net.favouriteless.enchanted.client.particles.types.ColourOptions;
 import net.favouriteless.enchanted.common.CommonConfig;
+import net.favouriteless.enchanted.common.Enchanted;
 import net.favouriteless.enchanted.common.altar.SimplePowerPosHolder;
 import net.favouriteless.enchanted.common.init.EParticleTypes;
 import net.favouriteless.enchanted.common.recipes.CauldronTypeRecipe;
+import net.favouriteless.enchanted.common.recipes.recipe_inputs.ListInput;
 import net.favouriteless.enchanted.util.PlayerInventoryHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
@@ -21,6 +23,7 @@ import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.FastColor;
 import net.minecraft.util.Mth;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.WorldlyContainer;
@@ -28,6 +31,7 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.CampfireBlock;
@@ -36,8 +40,8 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -104,7 +108,7 @@ public abstract class CauldronBlockEntity<T extends CauldronTypeRecipe> extends 
 			return;
 		}
 
-		if(be.potentialRecipes.size() != 1 || !be.potentialRecipes.get(0).fullMatch(be)) // Has final recipe
+		if(be.potentialRecipes.size() != 1 || !be.potentialRecipes.get(0).fullMatch(ListInput.of(be.inventory))) // Has final recipe
 			return;
 		
 		if(be.cookProgress < be.cookDuration) {
@@ -138,7 +142,7 @@ public abstract class CauldronBlockEntity<T extends CauldronTypeRecipe> extends 
 			double dy = pos.getY() + waterY + 0.02D;
 			double dz = pos.getZ() + 0.5D + (Math.random() - 0.5D) * be.getWaterWidth();
 
-			level.addParticle(new ColourOptions(EParticleTypes.BOILING.get(), be.getRed(time), be.getGreen(time), be.getBlue(time)), dx, dy, dz, 0, 0, 0);
+			level.addParticle(new ColourOptions(EParticleTypes.BOILING.get(), FastColor.ARGB32.color(be.getRed(time), be.getGreen(time), be.getBlue(time))), dx, dy, dz, 0, 0, 0);
 		}
 
 		if(be.isFailed)
@@ -154,7 +158,7 @@ public abstract class CauldronBlockEntity<T extends CauldronTypeRecipe> extends 
 			double dz = be.worldPosition.getZ() + zOffset;
 			Vec3 velocity = new Vec3(xOffset, 0, zOffset).subtract(0.5D, 0.0D, 0.5D).normalize().scale((1D + Math.random()) * 0.06D);
 
-			level.addParticle(new ColourOptions(EParticleTypes.CAULDRON_BREW.get(), be.getRed(time), be.getGreen(time), be.getBlue(time)), dx, dy, dz, velocity.x, (1.0D + Math.random()) * 0.06D, velocity.z);
+			level.addParticle(new ColourOptions(EParticleTypes.CAULDRON_BREW.get(), FastColor.ARGB32.color(be.getRed(time), be.getGreen(time), be.getBlue(time))), dx, dy, dz, velocity.x, (1.0D + Math.random()) * 0.06D, velocity.z);
 		}
 	}
 
@@ -237,7 +241,7 @@ public abstract class CauldronBlockEntity<T extends CauldronTypeRecipe> extends 
 			matchRecipes();
 
 			if(potentialRecipes.isEmpty()) {
-				if(CommonConfig.cauldronItemSpoil.get())
+				if(CommonConfig.INSTANCE.cauldronItemSpoil.get())
 					setFailed();
 				else {
 					inventory.remove(itemEntity.getItem());
@@ -310,9 +314,10 @@ public abstract class CauldronBlockEntity<T extends CauldronTypeRecipe> extends 
 			targetBlue = 228;
 		}
 		else if(isComplete) {
-			targetRed = potentialRecipes.get(0).getFinalColour();
-			targetGreen = potentialRecipes.get(0).getFinalGreen();
-			targetBlue = potentialRecipes.get(0).getFinalBlue();
+			int colour = potentialRecipes.get(0).getFinalColour();
+			targetRed = FastColor.ARGB32.red(colour);
+			targetGreen = FastColor.ARGB32.green(colour);
+			targetBlue = FastColor.ARGB32.blue(colour);
 		}
 		else if(isFailed) {
 			targetRed = 150;
@@ -320,9 +325,10 @@ public abstract class CauldronBlockEntity<T extends CauldronTypeRecipe> extends 
 			targetBlue = 47;
 		}
 		else if(!potentialRecipes.isEmpty() && cookProgress > 0) {
-			targetRed = potentialRecipes.get(0).getCookColour();
-			targetGreen = potentialRecipes.get(0).getCookGreen();
-			targetBlue = potentialRecipes.get(0).getCookBlue();
+			int colour = potentialRecipes.get(0).getCookColour();
+			targetRed = FastColor.ARGB32.red(colour);
+			targetGreen = FastColor.ARGB32.green(colour);
+			targetBlue = FastColor.ARGB32.blue(colour);
 		}
 		else {
 			targetRed = Enchanted.RANDOM.nextInt(80);
@@ -335,8 +341,11 @@ public abstract class CauldronBlockEntity<T extends CauldronTypeRecipe> extends 
 		return warmingUp == WARMING_MAX;
 	}
 
-	protected void setPotentialRecipes(List<T> potentialRecipes) {
-		this.potentialRecipes = potentialRecipes;
+	protected void setPotentialRecipes(List<RecipeHolder<T>> potentialRecipes) {
+		this.potentialRecipes.clear();
+		for(RecipeHolder<T> holder : potentialRecipes) {
+			this.potentialRecipes.add(holder.value());
+		}
 	}
 
 	public void firstTick() {
@@ -393,47 +402,47 @@ public abstract class CauldronBlockEntity<T extends CauldronTypeRecipe> extends 
 	}
 
 	@Override
-	public void saveAdditional(@NotNull CompoundTag nbt) {
-		super.saveAdditional(nbt);
-		saveBase(nbt);
-		ContainerHelper.saveAllItems(nbt, inventory);
+	public void saveAdditional(@NotNull CompoundTag tag, Provider registries) {
+		super.saveAdditional(tag, registries);
+		saveBase(tag);
+		ContainerHelper.saveAllItems(tag, inventory, registries);
 		if(itemOut != ItemStack.EMPTY) {
 			CompoundTag itemNbt = new CompoundTag();
 			itemNbt.putString("item", BuiltInRegistries.ITEM.getKey(itemOut.getItem()).toString());
 			itemNbt.putInt("count", itemOut.getCount());
-			nbt.put("itemOut", itemNbt);
+			tag.put("itemOut", itemNbt);
 		}
-		nbt.put("posHolder", posHolder.serialize());
+		tag.put("posHolder", posHolder.serialize());
 	}
 
 	@Override
-	public void load(@NotNull CompoundTag nbt) {
-		super.load(nbt);
-		loadBase(nbt);
+	public void loadAdditional(@NotNull CompoundTag tag, Provider registries) {
+		super.loadAdditional(tag, registries);
+		loadBase(tag);
 
-		if(nbt.contains("posHolder"))
-			posHolder.deserialize(nbt.getList("posHolder", 10));
+		if(tag.contains("posHolder"))
+			posHolder.deserialize(tag.getList("posHolder", 10));
 
-		if(nbt.contains("Items")) {
+		if(tag.contains("Items")) {
 			// Have to load nbt weirdly because inventory is not a fixed size
-			ListTag list = nbt.getList("Items", 10);
+			ListTag list = tag.getList("Items", 10);
 			for(int i = 0; i < list.size(); ++i) {
 				CompoundTag compoundnbt = list.getCompound(i);
-				inventory.add(ItemStack.of(compoundnbt));
+				inventory.add(ItemStack.parse(registries, compoundnbt).orElse(ItemStack.EMPTY));
 			}
 
-			if(nbt.contains("itemOut")) {
-				CompoundTag itemNbt = (CompoundTag)nbt.get("itemOut");
-				itemOut = new ItemStack(BuiltInRegistries.ITEM.get(new ResourceLocation(itemNbt.getString("item"))), itemNbt.getInt("count"));
+			if(tag.contains("itemOut")) {
+				CompoundTag itemNbt = (CompoundTag)tag.get("itemOut");
+				itemOut = new ItemStack(BuiltInRegistries.ITEM.get(ResourceLocation.parse(itemNbt.getString("item"))), itemNbt.getInt("count"));
 			}
 		}
-		else if(nbt.contains("hasItems"))
-			hasItems = nbt.getBoolean("hasItems");
+		else if(tag.contains("hasItems"))
+			hasItems = tag.getBoolean("hasItems");
 	}
 
 	@Override
 	@NotNull
-	public CompoundTag getUpdateTag() {
+	public CompoundTag getUpdateTag(Provider registries) {
 		CompoundTag nbt = new CompoundTag();
 		saveBase(nbt);
 		nbt.putBoolean("hasItems", !inventory.isEmpty());
@@ -469,7 +478,7 @@ public abstract class CauldronBlockEntity<T extends CauldronTypeRecipe> extends 
 	}
 
 	@Override
-	public boolean canPlaceItemThroughFace(int i, ItemStack itemStack, @org.jetbrains.annotations.Nullable Direction direction) {
+	public boolean canPlaceItemThroughFace(int i, ItemStack itemStack, @Nullable Direction direction) {
 		return false;
 	}
 

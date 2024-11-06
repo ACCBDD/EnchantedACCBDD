@@ -1,11 +1,14 @@
 package net.favouriteless.enchanted.common.blocks.entity;
 
+import net.favouriteless.enchanted.client.particles.types.ColourOptions;
 import net.favouriteless.enchanted.common.blocks.cauldrons.KettleBlock;
 import net.favouriteless.enchanted.common.init.EParticleTypes;
 import net.favouriteless.enchanted.common.recipes.ERecipeTypes;
 import net.favouriteless.enchanted.common.recipes.KettleRecipe;
+import net.favouriteless.enchanted.common.recipes.recipe_inputs.ListInput;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.util.FastColor;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class KettleBlockEntity extends CauldronBlockEntity<KettleRecipe> {
@@ -36,14 +39,14 @@ public class KettleBlockEntity extends CauldronBlockEntity<KettleRecipe> {
             double dy = worldPosition.getY() + Math.random();
             double dz = worldPosition.getZ() + Math.random();
 
-            level.addParticle(new SimpleColouredData(EParticleTypes.KETTLE_COOK.get(), getRed(time), getGreen(time), getBlue(time)), dx, dy, dz, 0D, 0D, 0D);
+            level.addParticle(new ColourOptions(EParticleTypes.KETTLE_COOK.get(), FastColor.ARGB32.color(getRed(time), getGreen(time), getBlue(time))), dx, dy, dz, 0D, 0D, 0D);
         }
     }
 
     @Override
     protected void matchRecipes() {
-        if (level != null)
-            setPotentialRecipes(level.getRecipeManager().getRecipesFor(ERecipeTypes.KETTLE.get(), this, level));
+        if(level != null)
+            setPotentialRecipes(level.getRecipeManager().getRecipesFor(ERecipeTypes.KETTLE.get(), ListInput.of(inventory), level));
     }
 
     @Override

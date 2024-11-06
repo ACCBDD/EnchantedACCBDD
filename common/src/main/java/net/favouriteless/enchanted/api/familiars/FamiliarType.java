@@ -3,7 +3,6 @@ package net.favouriteless.enchanted.api.familiars;
 import net.favouriteless.enchanted.common.entities.FamiliarCat;
 import net.favouriteless.enchanted.common.familiars.CatFamiliarType;
 import net.favouriteless.enchanted.common.familiars.FamiliarTypes;
-import favouriteless.enchanted.common.rites.binding.RiteBindingFamiliar;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
@@ -59,7 +58,7 @@ public abstract class FamiliarType<T extends TamableAnimal, C extends TamableAni
 	/**
 	 * Creates a familiar {@link TamableAnimal} from the supplied {@link TamableAnimal}. Implementations do not need to
 	 * change the owner, tamed state or name of the returned {@link TamableAnimal} as that is already handled by
-	 * {@link RiteBindingFamiliar}.
+	 * RiteBindingFamiliar
 	 */
 	public abstract C create(T from);
 

@@ -4,16 +4,18 @@ import net.favouriteless.enchanted.api.power.IPowerConsumer;
 import net.favouriteless.enchanted.api.power.IPowerProvider;
 import net.favouriteless.enchanted.api.power.PowerHelper;
 import net.favouriteless.enchanted.common.altar.SimplePowerPosHolder;
-import net.favouriteless.enchanted.common.recipes.ERecipeTypes;
 import net.favouriteless.enchanted.common.menus.SpinningWheelMenu;
+import net.favouriteless.enchanted.common.recipes.ERecipeTypes;
 import net.favouriteless.enchanted.common.recipes.SpinningRecipe;
+import net.favouriteless.enchanted.common.recipes.recipe_inputs.ListInput;
+import net.favouriteless.enchanted.util.ItemUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.world.Container;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -21,6 +23,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.DataSlot;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -34,7 +37,7 @@ public class SpinningWheelBlockEntity extends ContainerBlockEntityBase implement
 	private static final int[] INPUT_SLOTS = new int[] { 0, 1, 2 };
 	private static final int[] BOTTOM_SLOTS = new int[] { 3 };
 
-	private final RecipeManager.CachedCheck<Container, SpinningRecipe> recipeCheck;
+	private final RecipeManager.CachedCheck<ListInput, SpinningRecipe> recipeCheck;
 	private final SimplePowerPosHolder posHolder;
 	private boolean isSpinning = false;
 
@@ -63,20 +66,22 @@ public class SpinningWheelBlockEntity extends ContainerBlockEntityBase implement
 		if(t instanceof SpinningWheelBlockEntity be) {
 			if(!level.isClientSide) {
 				IPowerProvider powerProvider = PowerHelper.tryGetPowerProvider(level, be.posHolder);
-				SpinningRecipe recipe = be.recipeCheck.getRecipeFor(be, level).orElse(null);
+				RecipeHolder<SpinningRecipe> holder = be.recipeCheck.getRecipeFor(ListInput.of(be.inventory.subList(0, 3)), level).orElse(null);
 				boolean wasSpinning = be.spinProgress > 0;
 
-				if(be.canSpin(recipe) && (recipe.getPower() == 0 || powerProvider != null)) {
-					if(powerProvider.tryConsumePower((double)recipe.getPower() / SPIN_DURATION)) {
-						if(++be.spinProgress == SPIN_DURATION) {
-							be.spinProgress = 0;
-							be.spin(recipe);
+				if(holder != null) {
+					SpinningRecipe recipe = holder.value();
+					if(be.canSpin(recipe) && (recipe.getPower() == 0 || powerProvider != null)) {
+						if(powerProvider.tryConsumePower((double)recipe.getPower() / SPIN_DURATION)) {
+							if(++be.spinProgress == SPIN_DURATION) {
+								be.spinProgress = 0;
+								be.spin(recipe);
+							}
 						}
 					}
+					else
+						be.spinProgress = 0;
 				}
-				else
-					be.spinProgress = 0;
-
 				if(wasSpinning != be.spinProgress > 0)
 					be.updateBlock();
 			}
@@ -97,14 +102,14 @@ public class SpinningWheelBlockEntity extends ContainerBlockEntityBase implement
 		for(ItemStack recipeStack : recipe.getInputs()) {
 			for(int i = 0; i < 3; i++) {
 				ItemStack input = inventory.get(i);
-				if(ItemStack.isSameItemSameTags(recipeStack, input)) {
+				if(ItemUtil.isSameItemPartial(input, recipeStack)) {
 					input.shrink(recipeStack.getCount());
 					break;
 				}
 			}
 		}
 
-		ItemStack result = recipe.assemble(this, level.registryAccess());
+		ItemStack result = recipe.assemble(ListInput.of(inventory.subList(0, 3)), level.registryAccess());
 		ItemStack output = inventory.get(3);
 		if(output.isEmpty())
 			inventory.set(3, result);
@@ -123,8 +128,8 @@ public class SpinningWheelBlockEntity extends ContainerBlockEntityBase implement
 			if(output.isEmpty())
 				return true;
 
-			ItemStack result = recipe.assemble(this, level.registryAccess());
-			if(ItemStack.isSameItemSameTags(result, output))
+			ItemStack result = recipe.assemble(ListInput.of(inventory.subList(0, 3)), level.registryAccess());
+			if(ItemStack.isSameItemSameComponents(result, output))
 				return output.getCount() + result.getCount() <= output.getMaxStackSize();
 		}
 		return false;
@@ -143,21 +148,21 @@ public class SpinningWheelBlockEntity extends ContainerBlockEntityBase implement
 	}
 
 	@Override
-	public void saveAdditional(@NotNull CompoundTag nbt) {
-		super.saveAdditional(nbt);
-		nbt.put("posHolder", posHolder.serialize());
-		nbt.putInt("spinProgress", spinProgress);
+	public void saveAdditional(@NotNull CompoundTag tag, Provider registries) {
+		super.saveAdditional(tag, registries);
+		tag.put("posHolder", posHolder.serialize());
+		tag.putInt("spinProgress", spinProgress);
 	}
 
 	@Override
-	public void load(@NotNull CompoundTag nbt) {
-		super.load(nbt);
-		if(nbt.contains("posHolder"))
-			posHolder.deserialize(nbt.getList("posHolder", 10));
-		if(nbt.contains("spinProgress"))
-			spinProgress = nbt.getInt("spinProgress");
-		if(nbt.contains("isSpinning"))
-			isSpinning = nbt.getBoolean("isSpinning");
+	public void loadAdditional(@NotNull CompoundTag tag, Provider registries) {
+		super.loadAdditional(tag, registries);
+		if(tag.contains("posHolder"))
+			posHolder.deserialize(tag.getList("posHolder", 10));
+		if(tag.contains("spinProgress"))
+			spinProgress = tag.getInt("spinProgress");
+		if(tag.contains("isSpinning"))
+			isSpinning = tag.getBoolean("isSpinning");
 	}
 
 	@Nullable
@@ -168,8 +173,8 @@ public class SpinningWheelBlockEntity extends ContainerBlockEntityBase implement
 
 	@Override
 	@NotNull
-	public CompoundTag getUpdateTag() {
-		CompoundTag nbt = super.getUpdateTag();
+	public CompoundTag getUpdateTag(Provider registries) {
+		CompoundTag nbt = super.getUpdateTag(registries);
 		nbt.putBoolean("isSpinning", spinProgress > 0);
 		return nbt;
 	}

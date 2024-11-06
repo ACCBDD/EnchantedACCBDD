@@ -1,7 +1,5 @@
 package net.favouriteless.enchanted.common.blocks;
 
-import net.favouriteless.enchanted.common.blocks.access.EnchantedSaplingBlock;
-import net.favouriteless.enchanted.common.blocks.access.EnchantedStairBlock;
 import net.favouriteless.enchanted.common.blocks.altar.AltarBlock;
 import net.favouriteless.enchanted.common.blocks.altar.CandelabraBlock;
 import net.favouriteless.enchanted.common.blocks.altar.ChaliceBlock;
@@ -9,15 +7,15 @@ import net.favouriteless.enchanted.common.blocks.cauldrons.KettleBlock;
 import net.favouriteless.enchanted.common.blocks.cauldrons.WitchCauldronBlock;
 import net.favouriteless.enchanted.common.blocks.chalk.ChalkCircleBlock;
 import net.favouriteless.enchanted.common.blocks.chalk.GoldChalkBlock;
-import favouriteless.enchanted.common.blocks.crops.*;
 import net.favouriteless.enchanted.common.blocks.crops.*;
-import net.favouriteless.enchanted.common.world.features.EnchantedTreeGrower;
+import net.favouriteless.enchanted.common.init.ETreeGrowers;
 import net.favouriteless.enchanted.platform.CommonServices;
 import net.favouriteless.enchanted.platform.services.ICommonRegistryHelper;
 import net.minecraft.core.Direction.Axis;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.grower.TreeGrower;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.block.state.BlockState;
@@ -43,7 +41,7 @@ public class EBlocks {
     public static final Supplier<EnchantedLog> ALDER_LOG = register("alder_log", () -> strippableLog(MapColor.COLOR_ORANGE, MapColor.STONE, STRIPPED_ALDER_LOG));
     public static final Supplier<Block> ALDER_PLANKS = register("alder_planks", () -> block(Blocks.OAK_PLANKS));
     public static final Supplier<PressurePlateBlock> ALDER_PRESSURE_PLATE = register("alder_pressure_plate", () -> woodenPressurePlate(MapColor.COLOR_ORANGE));
-    public static final Supplier<SaplingBlock> ALDER_SAPLING = register("alder_sapling", () -> sapling("alder_tree"));
+    public static final Supplier<SaplingBlock> ALDER_SAPLING = register("alder_sapling", () -> sapling(ETreeGrowers.ALDER));
     public static final Supplier<SlabBlock> ALDER_SLAB = register("alder_slab", () -> slab(Blocks.OAK_SLAB));
     public static final Supplier<StairBlock> ALDER_STAIRS = register("alder_stairs", () -> stairs(ALDER_PLANKS.get()));
     public static final Supplier<AltarBlock> ALTAR = register("altar", AltarBlock::new);
@@ -66,7 +64,7 @@ public class EBlocks {
     public static final Supplier<EnchantedLog> HAWTHORN_LOG = register("hawthorn_log", () -> strippableLog(MapColor.CLAY, MapColor.CLAY, STRIPPED_HAWTHORN_LOG));
     public static final Supplier<Block> HAWTHORN_PLANKS = register("hawthorn_planks", () -> block(Blocks.OAK_PLANKS));
     public static final Supplier<PressurePlateBlock> HAWTHORN_PRESSURE_PLATE = register("hawthorn_pressure_plate", () -> woodenPressurePlate(MapColor.CLAY));
-    public static final Supplier<SaplingBlock> HAWTHORN_SAPLING = register("hawthorn_sapling", () -> sapling("hawthorn_tree"));
+    public static final Supplier<SaplingBlock> HAWTHORN_SAPLING = register("hawthorn_sapling", () -> sapling(ETreeGrowers.HAWTHORN));
     public static final Supplier<SlabBlock> HAWTHORN_SLAB = register("hawthorn_slab", () -> slab(Blocks.OAK_SLAB));
     public static final Supplier<StairBlock> HAWTHORN_STAIRS = register("hawthorn_stairs", () -> stairs(HAWTHORN_PLANKS.get()));;
     public static final Supplier<InfinityEggBlock> INFINITY_EGG = register("infinity_egg", InfinityEggBlock::new);
@@ -85,7 +83,7 @@ public class EBlocks {
     public static final Supplier<EnchantedLog> ROWAN_LOG = register("rowan_log", () -> strippableLog(MapColor.WOOD, MapColor.PODZOL, STRIPPED_ROWAN_LOG));
     public static final Supplier<Block> ROWAN_PLANKS = register("rowan_planks", () -> block(Blocks.OAK_PLANKS));
     public static final Supplier<PressurePlateBlock> ROWAN_PRESSURE_PLATE = register("rowan_pressure_plate", () -> woodenPressurePlate(MapColor.WOOD));
-    public static final Supplier<SaplingBlock> ROWAN_SAPLING = register("rowan_sapling", () -> sapling("rowan_tree"));
+    public static final Supplier<SaplingBlock> ROWAN_SAPLING = register("rowan_sapling", () -> sapling(ETreeGrowers.ROWAN));
     public static final Supplier<SlabBlock> ROWAN_SLAB = register("rowan_slab", () -> slab(Blocks.OAK_SLAB));
     public static final Supplier<StairBlock> ROWAN_STAIRS = register("rowan_stairs", () -> stairs(ROWAN_PLANKS.get()));
     public static final Supplier<SnowbellBlock> SNOWBELL = register("snowbell", SnowbellBlock::new);
@@ -148,7 +146,7 @@ public class EBlocks {
     }
 
     private static ButtonBlock woodenButton() {
-        return new ButtonBlock(BlockBehaviour.Properties.of().noCollission().strength(0.5F).pushReaction(PushReaction.DESTROY), BlockSetType.OAK, 30, true);
+        return new ButtonBlock(BlockSetType.OAK, 30, Properties.of().noCollission().strength(0.5F).pushReaction(PushReaction.DESTROY));
     }
 
     private static FenceBlock woodenFence() {
@@ -156,14 +154,13 @@ public class EBlocks {
     }
 
     private static FenceGateBlock woodenGate() {
-        return new FenceGateBlock(Properties.ofFullCopy(Blocks.OAK_FENCE_GATE), WoodType.OAK);
+        return new FenceGateBlock(WoodType.OAK, Properties.ofFullCopy(Blocks.OAK_FENCE_GATE));
     }
 
     private static PressurePlateBlock woodenPressurePlate(MapColor mapColor) {
-        return new PressurePlateBlock( Properties.of().mapColor(mapColor).forceSolidOn()
+        return new PressurePlateBlock(BlockSetType.OAK, Properties.of().mapColor(mapColor).forceSolidOn()
                 .instrument(NoteBlockInstrument.BASS).noCollission().strength(0.5F).ignitedByLava()
-                .pushReaction(PushReaction.DESTROY),
-                BlockSetType.OAK);
+                .pushReaction(PushReaction.DESTROY));
     }
 
     private static LeavesBlock leaves() {
@@ -183,15 +180,15 @@ public class EBlocks {
     }
 
     public static StairBlock stairs(Block base) {
-        return new EnchantedStairBlock(base.defaultBlockState(), Properties.ofFullCopy(base));
+        return new StairBlock(base.defaultBlockState(), Properties.ofFullCopy(base));
     }
 
     public static SlabBlock slab(Block base) {
         return new SlabBlock(Properties.ofFullCopy(base));
     }
 
-    public static SaplingBlock sapling(String id) {
-        return new EnchantedSaplingBlock(new EnchantedTreeGrower(id), Properties.ofFullCopy(Blocks.OAK_SAPLING));
+    public static SaplingBlock sapling(TreeGrower treeGrower) {
+        return new SaplingBlock(treeGrower, Properties.ofFullCopy(Blocks.OAK_SAPLING));
     }
 
     public static void load() {} // Method which exists purely to load the class.

@@ -1,11 +1,14 @@
 package net.favouriteless.enchanted.common.blocks.entity;
 
+import net.favouriteless.enchanted.client.particles.types.ColourOptions;
 import net.favouriteless.enchanted.common.blocks.EBlocks;
 import net.favouriteless.enchanted.common.init.EParticleTypes;
 import net.favouriteless.enchanted.common.recipes.ERecipeTypes;
 import net.favouriteless.enchanted.common.recipes.WitchCauldronRecipe;
+import net.favouriteless.enchanted.common.recipes.recipe_inputs.ListInput;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.util.FastColor;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class WitchCauldronBlockEntity extends CauldronBlockEntity<WitchCauldronRecipe> {
@@ -35,13 +38,13 @@ public class WitchCauldronBlockEntity extends CauldronBlockEntity<WitchCauldronR
         double dy = worldPosition.getY() + getWaterY(EBlocks.WITCH_CAULDRON.get().defaultBlockState());
         double dz = worldPosition.getZ() + 0.5D;
 
-        level.addParticle(new SimpleColouredData(EParticleTypes.CAULDRON_COOK.get(), getRed(time), getGreen(time), getBlue(time)), dx, dy, dz, 0.0D, 0.0D, 0.0D);
+        level.addParticle(new ColourOptions(EParticleTypes.CAULDRON_COOK.get(), FastColor.ARGB32.color(getRed(time), getGreen(time), getBlue(time))), dx, dy, dz, 0.0D, 0.0D, 0.0D);
     }
 
     @Override
     protected void matchRecipes() {
         if (level != null)
-            setPotentialRecipes(level.getRecipeManager().getRecipesFor(ERecipeTypes.WITCH_CAULDRON.get(), this, level));
+            setPotentialRecipes(level.getRecipeManager().getRecipesFor(ERecipeTypes.WITCH_CAULDRON.get(), ListInput.of(inventory), level));
     }
 
     @Override
