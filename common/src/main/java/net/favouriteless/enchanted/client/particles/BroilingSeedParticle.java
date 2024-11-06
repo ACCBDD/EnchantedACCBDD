@@ -35,7 +35,8 @@ public class BroilingSeedParticle extends NoRenderParticle {
 
 		@Nullable
 		@Override
-		public Particle createParticle(SimpleParticleType data, ClientLevel world, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+		public Particle createParticle(SimpleParticleType data, ClientLevel world, double x, double y, double z,
+									   double xSpeed, double ySpeed, double zSpeed) {
 			return new BroilingSeedParticle(world, x, y, z);
 		}
 

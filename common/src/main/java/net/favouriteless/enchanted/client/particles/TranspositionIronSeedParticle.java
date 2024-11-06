@@ -8,6 +8,7 @@ import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
 
@@ -28,7 +29,7 @@ public class TranspositionIronSeedParticle extends NoRenderParticle {
 
 //			level.addParticle(new CircleMagicData(EParticleTypes.CIRCLE_MAGIC.get(), 170, 111, 58, x, y, z, RiteTranspositionIron.CIRCLE_RADIUS), cx, y, cz, 0.0D, 0.0D, 0.0D);
 			level.addParticle(new ColouredCircleOptions(EParticleTypes.CIRCLE_MAGIC.get(), 0xAA6f3A,
-							new Vector3f((float)x, (float)y, (float)z), 8), cx, y, cz,
+							new Vec3(x, y, z), 8), cx, y, cz,
 					0.0D, 0.0D, 0.0D);
 		}
 		this.remove();
@@ -41,7 +42,8 @@ public class TranspositionIronSeedParticle extends NoRenderParticle {
 
 		@Nullable
 		@Override
-		public Particle createParticle(SimpleParticleType data, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+		public Particle createParticle(SimpleParticleType data, ClientLevel level, double x, double y, double z,
+									   double xSpeed, double ySpeed, double zSpeed) {
 			return new TranspositionIronSeedParticle(level, x, y, z);
 		}
 	}

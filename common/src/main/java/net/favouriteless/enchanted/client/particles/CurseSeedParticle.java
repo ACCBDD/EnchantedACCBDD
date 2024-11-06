@@ -7,6 +7,7 @@ import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.util.Mth;
 
 public class CurseSeedParticle extends NoRenderParticle {
 
@@ -25,11 +26,11 @@ public class CurseSeedParticle extends NoRenderParticle {
 	@Override
 	public void tick() {
 		if(age++ < lifetime) {
-			double angle = Math.toRadians(age * 20);
+			float angle = age * 20 * Mth.DEG_TO_RAD;
 			for(int i = 0; i < 20; i += 5) {
-				double cx = x + Math.sin(angle+i) * RADIUS;
+				double cx = x + Mth.sin(angle+i) * RADIUS;
 				double cy = y + Math.random() + yOffset;
-				double cz = z + Math.cos(angle+i) * RADIUS;
+				double cz = z + Mth.cos(angle+i) * RADIUS;
 
 				level.addParticle(ParticleTypes.SOUL, cx, cy, cz, 0.0D, 0.0D, 0.0D);
 			}

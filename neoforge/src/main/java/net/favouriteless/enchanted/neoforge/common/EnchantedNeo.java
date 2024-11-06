@@ -47,7 +47,7 @@ public class EnchantedNeo {
         event.dataPackRegistry(EData.ALTAR_UPGRADE_REGISTRY, AltarUpgrade.CODEC);
         event.dataPackRegistry(EData.ALTAR_BLOCK_REGISTRY, PowerProvider.BLOCK_CODEC);
         event.dataPackRegistry(EData.ALTAR_TAG_REGISTRY, PowerProvider.TAG_CODEC);
-        event.dataPackRegistry(EData.RITE_REQUIREMENTS_REGISTRY, RiteRequirements.CODEC, RiteRequirements.CODEC);
+//        event.dataPackRegistry(EData.RITE_REQUIREMENTS_REGISTRY, RiteRequirements.CODEC, RiteRequirements.CODEC);
     }
 
 }

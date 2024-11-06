@@ -49,7 +49,7 @@ public class BindFamiliarSeedParticle extends NoRenderParticle {
 		if(Enchanted.RANDOM.nextFloat() < 0.3F)
 			fallTicks = Enchanted.RANDOM.nextInt(fallTicks);
 
-		level.addParticle(new DelayedPosOptions(EParticleTypes.BIND_FAMILIAR.get(), x, y, z, fallTicks), pos.x, pos.y, pos.z, 0.0D, 0.0D, 0.0D);
+		level.addParticle(new DelayedPosOptions(EParticleTypes.BIND_FAMILIAR.get(), new Vec3(x, y, z), fallTicks), pos.x, pos.y, pos.z, 0.0D, 0.0D, 0.0D);
 	}
 
 	public static class Factory implements ParticleProvider<SimpleParticleType> {

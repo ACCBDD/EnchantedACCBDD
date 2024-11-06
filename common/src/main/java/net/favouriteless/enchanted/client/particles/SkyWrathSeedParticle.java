@@ -1,5 +1,6 @@
 package net.favouriteless.enchanted.client.particles;
 
+import net.favouriteless.enchanted.client.particles.types.DelayedPosOptions;
 import net.favouriteless.enchanted.common.init.EParticleTypes;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.NoRenderParticle;
@@ -7,6 +8,7 @@ import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.world.phys.Vec3;
 
 public class SkyWrathSeedParticle extends NoRenderParticle {
 
@@ -37,7 +39,8 @@ public class SkyWrathSeedParticle extends NoRenderParticle {
 					double cz = z + Math.cos(angle) * 5 + Math.random() * zSpread;
 
 //					level.addParticle(new DelayedActionData(EParticleTypes.SKY_WRATH.get(), x, y, z, RiteSkyWrath.EXPLODE-age), cx, cy, cz, 0, 0, 0);
-					level.addParticle(new DelayedActionData(EParticleTypes.SKY_WRATH.get(), x, y, z, 200-age), cx, cy, cz, 0, 0, 0);
+					level.addParticle(new DelayedPosOptions(EParticleTypes.SKY_WRATH.get(), new Vec3(x, y, z),
+							200-age), cx, cy, cz, 0, 0, 0);
 				}
 			}
 		}
@@ -49,7 +52,8 @@ public class SkyWrathSeedParticle extends NoRenderParticle {
 
 		public Factory(SpriteSet sprites) {}
 
-		public Particle createParticle(SimpleParticleType data, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+		public Particle createParticle(SimpleParticleType data, ClientLevel level, double x, double y, double z,
+									   double xSpeed, double ySpeed, double zSpeed) {
 			return new SkyWrathSeedParticle(level, x, y, z);
 		}
 	}

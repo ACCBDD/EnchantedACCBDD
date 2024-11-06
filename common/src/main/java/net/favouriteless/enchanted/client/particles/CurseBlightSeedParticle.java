@@ -8,6 +8,7 @@ import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.world.phys.Vec3;
 import org.joml.Vector3f;
 
 public class CurseBlightSeedParticle extends NoRenderParticle {
@@ -27,8 +28,7 @@ public class CurseBlightSeedParticle extends NoRenderParticle {
 			double cz = z + Math.cos(angle) * 0.1D;
 
 			level.addParticle(new ColouredCircleOptions(EParticleTypes.CURSE_BLIGHT.get(), 0x1F1E4D,
-							new Vector3f((float)x, (float)y, (float)z), 8), cx, y, cz,
-					0.0D, 0.0D, 0.0D);
+							new Vec3(x, y, z), 8), cx, y, cz, 0.0D, 0.0D, 0.0D);
 		}
 		this.remove();
 	}

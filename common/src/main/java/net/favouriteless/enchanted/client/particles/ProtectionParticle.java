@@ -43,7 +43,8 @@ public class ProtectionParticle extends TextureSheetParticle {
 			this.sprite = sprites;
 		}
 
-		public Particle createParticle(SimpleParticleType type, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+		public Particle createParticle(SimpleParticleType type, ClientLevel level, double x, double y, double z,
+									   double xSpeed, double ySpeed, double zSpeed) {
 			ProtectionParticle particle = new ProtectionParticle(level, x, y, z);
 			particle.pickSprite(this.sprite);
 			return particle;

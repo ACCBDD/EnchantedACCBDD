@@ -42,7 +42,7 @@ public class EnchantedFabric implements ModInitializer {
         DynamicRegistries.register(EData.ALTAR_UPGRADE_REGISTRY, AltarUpgrade.CODEC);
         DynamicRegistries.register(EData.ALTAR_BLOCK_REGISTRY, PowerProvider.BLOCK_CODEC);
         DynamicRegistries.register(EData.ALTAR_TAG_REGISTRY, PowerProvider.TAG_CODEC);
-        DynamicRegistries.registerSynced(EData.RITE_REQUIREMENTS_REGISTRY, RiteRequirements.CODEC);
+//        DynamicRegistries.registerSynced(EData.RITE_REQUIREMENTS_REGISTRY, RiteRequirements.CODEC);
     }
 
     private static void registerStrippables() {

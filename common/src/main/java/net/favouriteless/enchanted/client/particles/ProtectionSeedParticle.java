@@ -1,5 +1,6 @@
 package net.favouriteless.enchanted.client.particles;
 
+import net.favouriteless.enchanted.client.particles.types.DoubleOptions;
 import net.favouriteless.enchanted.common.init.EParticleTypes;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.NoRenderParticle;
@@ -40,11 +41,12 @@ public class ProtectionSeedParticle extends NoRenderParticle {
 		remove();
 	}
 
-	public static class Factory implements ParticleProvider<DoubleParticleData> {
+	public static class Factory implements ParticleProvider<DoubleOptions> {
 
 		public Factory(SpriteSet sprites) {}
 
-		public Particle createParticle(DoubleParticleData data, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+		public Particle createParticle(DoubleOptions data, ClientLevel level, double x, double y, double z,
+									   double xSpeed, double ySpeed, double zSpeed) {
 			return new ProtectionSeedParticle(level, x, y, z, data.getValue());
 		}
 	}

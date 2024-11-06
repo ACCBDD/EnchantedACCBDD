@@ -1,5 +1,6 @@
 package net.favouriteless.enchanted.client.particles;
 
+import net.favouriteless.enchanted.client.particles.types.DelayedPosOptions;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 import net.minecraft.world.phys.Vec3;
@@ -11,16 +12,12 @@ public class BindFamiliarParticle extends TextureSheetParticle {
 
 	private final SpriteSet sprites;
 	private final int fallTicks;
-	private final double centerX;
-	private final double centerY;
-	private final double centerZ;
+	private final Vec3 center;
 
-	protected BindFamiliarParticle(ClientLevel level, double x, double y, double z, double centerX, double centerY, double centerZ, int fallTicks, SpriteSet sprites) {
+	protected BindFamiliarParticle(ClientLevel level, double x, double y, double z, Vec3 center, int fallTicks, SpriteSet sprites) {
 		super(level, x, y, z);
 		this.sprites = sprites;
-		this.centerX = centerX;
-		this.centerY = centerY;
-		this.centerZ = centerZ;
+		this.center = center;
 		this.fallTicks = fallTicks;
 		this.alpha = 0.0F;
 
@@ -42,7 +39,7 @@ public class BindFamiliarParticle extends TextureSheetParticle {
 		this.yo = this.y;
 		this.zo = this.z;
 
-		Vec3 relativePos = new Vec3(x, y, z).subtract(centerX, centerY, centerZ);
+		Vec3 relativePos = new Vec3(x, y, z).subtract(center);
 		if(age++ < fallTicks) {
 			if(alpha < 1.0F) {
 				alpha += 0.05F;
@@ -93,15 +90,15 @@ public class BindFamiliarParticle extends TextureSheetParticle {
 		return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
 	}
 
-	public static class Factory implements ParticleProvider<DelayedActionData> {
+	public static class Factory implements ParticleProvider<DelayedPosOptions> {
 		private final SpriteSet sprite;
 
 		public Factory(SpriteSet sprites) {
 			this.sprite = sprites;
 		}
 
-		public Particle createParticle(DelayedActionData data, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
-			BindFamiliarParticle particle = new BindFamiliarParticle(level, x, y, z, data.getCenterX(), data.getCenterY(), data.getCenterZ(), data.getActionTicks(), sprite);
+		public Particle createParticle(DelayedPosOptions data, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+			BindFamiliarParticle particle = new BindFamiliarParticle(level, x, y, z, data.getCenter(), data.getDelay(), sprite);
 			particle.pickSprite(this.sprite);
 			return particle;
 		}

@@ -61,7 +61,8 @@ public class ImprisonmentCageParticle extends TextureSheetParticle {
 			this.sprite = sprites;
 		}
 
-		public Particle createParticle(SimpleParticleType type, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+		public Particle createParticle(SimpleParticleType type, ClientLevel level, double x, double y, double z,
+									   double xSpeed, double ySpeed, double zSpeed) {
 			ImprisonmentCageParticle particle = new ImprisonmentCageParticle(level, x, y, z);
 			particle.pickSprite(this.sprite);
 			particle.scale(0.5F);

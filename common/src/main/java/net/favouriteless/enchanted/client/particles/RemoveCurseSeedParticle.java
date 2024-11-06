@@ -1,5 +1,6 @@
 package net.favouriteless.enchanted.client.particles;
 
+import net.favouriteless.enchanted.client.particles.types.DelayedPosOptions;
 import net.favouriteless.enchanted.common.Enchanted;
 import net.favouriteless.enchanted.common.init.EParticleTypes;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -52,14 +53,17 @@ public class RemoveCurseSeedParticle extends NoRenderParticle {
 		Vec3 pos = new Vec3(cx, cy, cz).normalize().scale(c * RADIUS).add(x, y, z);
 
 //		level.addParticle(new DelayedActionData(EParticleTypes.REMOVE_CURSE.get(), x, y, z, AbstractRemoveCurseRite.RAISE - age + Enchanted.RANDOM.nextInt(11)), pos.x, pos.y, pos.z, 0.0D, 0.0D, 0.0D);
-		level.addParticle(new DelayedActionData(EParticleTypes.REMOVE_CURSE.get(), x, y, z, 100 - age + Enchanted.RANDOM.nextInt(11)), pos.x, pos.y, pos.z, 0.0D, 0.0D, 0.0D);
+		level.addParticle(new DelayedPosOptions(EParticleTypes.REMOVE_CURSE.get(), new Vec3(x, y, z),
+				100 - age + Enchanted.RANDOM.nextInt(11)), pos.x, pos.y, pos.z, 0.0D, 0.0D,
+				0.0D);
 	}
 
 	public static class Factory implements ParticleProvider<SimpleParticleType> {
 
 		public Factory(SpriteSet sprites) {}
 
-		public Particle createParticle(SimpleParticleType data, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+		public Particle createParticle(SimpleParticleType data, ClientLevel level, double x, double y, double z,
+									   double xSpeed, double ySpeed, double zSpeed) {
 			return new RemoveCurseSeedParticle(level, x, y, z);
 		}
 	}
