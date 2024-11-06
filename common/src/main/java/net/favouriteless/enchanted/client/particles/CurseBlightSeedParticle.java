@@ -1,6 +1,6 @@
 package net.favouriteless.enchanted.client.particles;
 
-import net.favouriteless.enchanted.client.particles.types.CircleMagicParticleType.CircleMagicData;
+import net.favouriteless.enchanted.client.particles.types.ColouredCircleOptions;
 import net.favouriteless.enchanted.common.init.EParticleTypes;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.NoRenderParticle;
@@ -8,6 +8,7 @@ import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.core.particles.SimpleParticleType;
+import org.joml.Vector3f;
 
 public class CurseBlightSeedParticle extends NoRenderParticle {
 
@@ -25,7 +26,9 @@ public class CurseBlightSeedParticle extends NoRenderParticle {
 			double cx = x + Math.sin(angle) * 0.1D;
 			double cz = z + Math.cos(angle) * 0.1D;
 
-			level.addParticle(new CircleMagicData(EParticleTypes.CURSE_BLIGHT.get(), 31, 30, 77, x, y, z, 0.1D), cx, y, cz, 0.0D, 0.0D, 0.0D);
+			level.addParticle(new ColouredCircleOptions(EParticleTypes.CURSE_BLIGHT.get(), 0x1F1E4D,
+							new Vector3f((float)x, (float)y, (float)z), 8), cx, y, cz,
+					0.0D, 0.0D, 0.0D);
 		}
 		this.remove();
 	}

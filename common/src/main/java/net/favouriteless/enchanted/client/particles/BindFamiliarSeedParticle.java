@@ -1,7 +1,7 @@
 package net.favouriteless.enchanted.client.particles;
 
+import net.favouriteless.enchanted.client.particles.types.DelayedPosOptions;
 import net.favouriteless.enchanted.common.Enchanted;
-import net.favouriteless.enchanted.client.particles.types.DelayedActionParticleType.DelayedActionData;
 import net.favouriteless.enchanted.common.init.EParticleTypes;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.NoRenderParticle;
@@ -44,11 +44,12 @@ public class BindFamiliarSeedParticle extends NoRenderParticle {
 		double c = Math.cbrt(Math.random());
 		Vec3 pos = new Vec3(cx, cy, cz).normalize().scale(c * RADIUS).add(x, y, z);
 
-		int fallTicks = RiteBindingFamiliar.BIND_TICKS - age;
+//		int fallTicks = RiteBindingFamiliar.BIND_TICKS - age;
+		int fallTicks = 100;
 		if(Enchanted.RANDOM.nextFloat() < 0.3F)
 			fallTicks = Enchanted.RANDOM.nextInt(fallTicks);
 
-		level.addParticle(new DelayedActionData(EParticleTypes.BIND_FAMILIAR.get(), x, y, z, fallTicks), pos.x, pos.y, pos.z, 0.0D, 0.0D, 0.0D);
+		level.addParticle(new DelayedPosOptions(EParticleTypes.BIND_FAMILIAR.get(), x, y, z, fallTicks), pos.x, pos.y, pos.z, 0.0D, 0.0D, 0.0D);
 	}
 
 	public static class Factory implements ParticleProvider<SimpleParticleType> {

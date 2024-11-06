@@ -21,7 +21,7 @@ public class ClientRegistry {
 
     public static void registerMenuScreens() {
         IClientRegistryHelper registry = ClientServices.CLIENT_REGISTRY;
-        
+
         registry.register(EMenuTypes.WITCH_OVEN.get(), WitchOvenScreen::new);
         registry.register(EMenuTypes.DISTILLERY.get(), DistilleryScreen::new);
         registry.register(EMenuTypes.ALTAR.get(), AltarScreen::new);

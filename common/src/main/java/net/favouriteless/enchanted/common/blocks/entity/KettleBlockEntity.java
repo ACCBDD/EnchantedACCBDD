@@ -1,6 +1,5 @@
 package net.favouriteless.enchanted.common.blocks.entity;
 
-import net.favouriteless.enchanted.client.particles.types.SimpleColouredParticleType.SimpleColouredData;
 import net.favouriteless.enchanted.common.blocks.cauldrons.KettleBlock;
 import net.favouriteless.enchanted.common.init.EParticleTypes;
 import net.favouriteless.enchanted.common.recipes.ERecipeTypes;

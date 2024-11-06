@@ -3,7 +3,7 @@ package net.favouriteless.enchanted.common.recipes;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.favouriteless.enchanted.util.ExtraCodecs;
+import net.favouriteless.enchanted.util.EExtraCodecs;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -19,8 +19,8 @@ public class KettleRecipe extends CauldronTypeRecipe {
             ItemStack.CODEC.listOf().fieldOf("ingredients").forGetter(recipe -> recipe.inputs),
             ItemStack.CODEC.fieldOf("result").forGetter(recipe -> recipe.result),
             Codec.INT.optionalFieldOf("power", 0).forGetter(recipe -> recipe.power),
-            ExtraCodecs.HEX_INT.optionalFieldOf("cook_colour", 0x2D155E).forGetter(recipe -> recipe.cookColor),
-            ExtraCodecs.HEX_INT.optionalFieldOf("final_colour", 0x4A1AAD).forGetter(recipe -> recipe.finalColor)
+            EExtraCodecs.HEX_INT.optionalFieldOf("cook_colour", 0x2D155E).forGetter(recipe -> recipe.cookColor),
+            EExtraCodecs.HEX_INT.optionalFieldOf("final_colour", 0x4A1AAD).forGetter(recipe -> recipe.finalColor)
     ).apply(instance, KettleRecipe::new));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, KettleRecipe> STREAM_CODEC = StreamCodec.composite(

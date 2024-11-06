@@ -1,6 +1,5 @@
 package net.favouriteless.enchanted.client.particles;
 
-import net.favouriteless.enchanted.client.particles.types.CircleMagicParticleType.CircleMagicData;
 import net.minecraft.client.particle.*;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.world.phys.Vec3;
@@ -69,7 +68,7 @@ public class CircleMagicParticle extends TextureSheetParticle {
         return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
     }
 
-    public static class Factory implements ParticleProvider<CircleMagicData> {
+    public static class Factory implements ParticleProvider<CircleMagicParticleOptions> {
 
         private final SpriteSet sprites;
 
@@ -79,7 +78,7 @@ public class CircleMagicParticle extends TextureSheetParticle {
 
         @Nullable
         @Override
-        public Particle createParticle(CircleMagicData data, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+        public Particle createParticle(CircleMagicParticleOptions data, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
             CircleMagicParticle particle = new CircleMagicParticle(level, x, y, z, xSpeed, ySpeed, zSpeed, data.getRed(), data.getGreen(), data.getBlue(), data.getCenterX(), data.getCenterZ(), data.getRadius());
             particle.pickSprite(sprites);
             return particle;

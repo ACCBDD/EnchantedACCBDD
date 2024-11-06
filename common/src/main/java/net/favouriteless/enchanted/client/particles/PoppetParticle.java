@@ -1,6 +1,5 @@
 package net.favouriteless.enchanted.client.particles;
 
-import net.favouriteless.enchanted.client.particles.types.TwoToneColouredParticleType.TwoToneColouredData;
 import net.minecraft.client.particle.*;
 import net.minecraft.client.multiplayer.ClientLevel;
 

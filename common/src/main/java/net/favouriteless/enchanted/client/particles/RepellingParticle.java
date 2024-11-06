@@ -1,6 +1,5 @@
 package net.favouriteless.enchanted.client.particles;
 
-import net.favouriteless.enchanted.client.particles.types.CircleMagicParticleType.CircleMagicData;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 import net.minecraft.world.phys.Vec3;
@@ -63,14 +62,14 @@ public class RepellingParticle extends TextureSheetParticle {
 		return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
 	}
 
-	public static class Factory implements ParticleProvider<CircleMagicData> {
+	public static class Factory implements ParticleProvider<CircleMagicParticleOptions> {
 		private final SpriteSet sprite;
 
 		public Factory(SpriteSet sprites) {
 			this.sprite = sprites;
 		}
 
-		public Particle createParticle(CircleMagicData data, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+		public Particle createParticle(CircleMagicParticleOptions data, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
 			RepellingParticle particle = new RepellingParticle(level, x, y, z, data.getRed(), data.getGreen(), data.getBlue(), data.getCenterX(), data.getCenterY(), data.getCenterZ());
 			particle.pickSprite(this.sprite);
 			return particle;
