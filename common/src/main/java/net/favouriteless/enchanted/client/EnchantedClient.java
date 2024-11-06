@@ -5,7 +5,7 @@ import net.favouriteless.enchanted.common.init.EKeybinds;
 public class EnchantedClient {
 
     public static void init() {
-        ClientRegistry.register();
+        ClientRegistry.registerMenuScreens();
         EKeybinds.load();
     }
 

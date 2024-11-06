@@ -35,7 +35,7 @@ public class WitchOvenScreen extends AbstractContainerScreen<WitchOvenMenu> {
     }
 
     public void render(GuiGraphics gui, int xMouse, int yMouse, float partialTicks) {
-        renderBackground(gui);
+        renderBackground(gui, xMouse, yMouse, partialTicks);
         super.render(gui, xMouse, yMouse, partialTicks);
         renderTooltip(gui, xMouse, yMouse);
     }

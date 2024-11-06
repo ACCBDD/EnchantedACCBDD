@@ -12,7 +12,7 @@ import net.neoforged.neoforge.client.event.sound.PlaySoundEvent;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 
 @EventBusSubscriber(modid = Enchanted.MOD_ID, bus= Bus.GAME, value = Dist.CLIENT)
-public class ClientEventsForge {
+public class ClientEventsNeo {
 
     @SubscribeEvent
     public static void onClientTick(ClientTickEvent.Post event) {

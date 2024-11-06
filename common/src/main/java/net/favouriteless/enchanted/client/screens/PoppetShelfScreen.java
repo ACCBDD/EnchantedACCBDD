@@ -24,7 +24,7 @@ public class PoppetShelfScreen extends AbstractContainerScreen<PoppetShelfMenu> 
 
     @Override
     public void render(GuiGraphics gui, int xMouse, int yMouse, float partialTicks) {
-        this.renderBackground(gui);
+        this.renderBackground(gui, xMouse, yMouse, partialTicks);
         super.render(gui, xMouse, yMouse, partialTicks);
         this.renderTooltip(gui, xMouse, yMouse);
     }

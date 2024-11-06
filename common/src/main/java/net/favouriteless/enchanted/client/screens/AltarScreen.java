@@ -36,7 +36,7 @@ public class AltarScreen extends AbstractContainerScreen<AltarMenu> {
 
     @Override
     public void render(GuiGraphics gui, int xMouse, int yMouse, float partialTicks) {
-        renderBackground(gui);
+        renderBackground(gui, xMouse, yMouse, partialTicks);
         super.render(gui, xMouse, yMouse, partialTicks);
     }
 

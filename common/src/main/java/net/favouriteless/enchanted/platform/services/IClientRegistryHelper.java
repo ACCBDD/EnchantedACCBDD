@@ -1,6 +1,9 @@
 package net.favouriteless.enchanted.platform.services;
 
 import net.minecraft.client.KeyMapping;
+import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.screens.inventory.MenuAccess;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -12,6 +15,8 @@ import net.minecraft.client.renderer.item.ItemPropertyFunction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -61,6 +66,9 @@ public interface IClientRegistryHelper {
      * @param function {@link ItemPropertyFunction} determining if the predicate is true or not.
      */
     void register(Item item, ResourceLocation location, ClampedItemPropertyFunction function);
+
+    <M extends AbstractContainerMenu, U extends Screen & MenuAccess<M>> void register(MenuType<M> type,
+                                                                                      MenuScreens.ScreenConstructor<M, U> factory);
 
     /**
      * Represents Forge's enum of the same name, so this can actually compile. Forge implementation will grab the ordinal

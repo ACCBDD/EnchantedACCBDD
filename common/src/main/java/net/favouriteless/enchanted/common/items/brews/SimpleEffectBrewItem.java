@@ -1,5 +1,6 @@
 package net.favouriteless.enchanted.common.items.brews;
 
+import net.minecraft.core.Holder;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.effect.MobEffect;
@@ -8,11 +9,11 @@ import net.minecraft.world.level.Level;
 
 public class SimpleEffectBrewItem extends ConsumableBrewItem {
 
-	private final MobEffect effect;
+	private final Holder<MobEffect> effect;
 	private final int duration;
 	private final int amplifier;
 
-	public SimpleEffectBrewItem(MobEffect effect, int duration, int amplifier, Properties properties) {
+	public SimpleEffectBrewItem(Holder<MobEffect> effect, int duration, int amplifier, Properties properties) {
 		super(properties);
 		this.effect = effect;
 		this.duration = duration;

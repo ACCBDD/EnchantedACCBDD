@@ -1,21 +1,102 @@
 package net.favouriteless.enchanted.neoforge.client;
 
+import com.mojang.datafixers.util.Pair;
 import net.favouriteless.enchanted.client.ClientConfig;
+import net.favouriteless.enchanted.client.ClientRegistry;
 import net.favouriteless.enchanted.client.EnchantedClient;
+import net.favouriteless.enchanted.client.particles.*;
 import net.favouriteless.enchanted.common.Enchanted;
+import net.favouriteless.enchanted.common.blocks.EBlocks;
+import net.favouriteless.enchanted.common.init.EParticleTypes;
+import net.favouriteless.enchanted.platform.services.NeoClientRegistryHelper;
+import net.minecraft.client.KeyMapping;
+import net.minecraft.client.model.geom.ModelLayerLocation;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.common.EventBusSubscriber.Bus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig.Type;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.event.*;
+
+import java.util.function.Supplier;
 
 @Mod(value = Enchanted.MOD_ID, dist = Dist.CLIENT)
+@EventBusSubscriber(modid = Enchanted.MOD_ID, bus = Bus.GAME, value = Dist.CLIENT)
 public class EnchantedNeoClient {
 
     public EnchantedNeoClient(IEventBus bus, ModContainer container) {
         EnchantedClient.init();
 
         container.registerConfig(Type.CLIENT, ClientConfig.SPEC, "enchanted-client.toml");
+    }
+
+    @SubscribeEvent
+    public static void onClientSetup(final FMLClientSetupEvent event) {
+        EnchantedClient.init();
+
+        event.enqueueWork(ClientRegistry::registerItemModelPredicates);
+    }
+
+    @SubscribeEvent
+    public static void registerMenuScreens(final RegisterMenuScreensEvent event) {
+        NeoClientRegistryHelper.MENU_FACTORY_REGISTERABLES.forEach(r -> r.register(event));
+    }
+
+    @SubscribeEvent
+    public static void registerBlockColors(final RegisterColorHandlersEvent.Block event) {
+        event.register((a, b, c, d) -> 0xF0F0F0, EBlocks.RITUAL_CHALK.get());
+        event.register((a, b, c, d) -> 0x801818, EBlocks.NETHER_CHALK.get());
+        event.register((a, b, c, d) -> 0x4F2F78, EBlocks.OTHERWHERE_CHALK.get());
+    }
+
+    @SubscribeEvent
+    public static void onRegisterKeybinds(final RegisterKeyMappingsEvent event) {
+        for(KeyMapping mapping : NeoClientRegistryHelper.KEY_MAPPINGS)
+            event.register(mapping);
+    }
+
+    @SubscribeEvent
+    public static void onRegisterEntityRenderers(final EntityRenderersEvent.RegisterRenderers event) {
+        ClientRegistry.registerEntityRenderers();
+    }
+
+    @SubscribeEvent
+    public static void onRegisterLayerDefinitions(final EntityRenderersEvent.RegisterLayerDefinitions event) {
+        ClientRegistry.registerLayerDefinitions();
+        for(Pair<ModelLayerLocation, Supplier<LayerDefinition>> pair : NeoClientRegistryHelper.LAYER_DEFINITIONS)
+            event.registerLayerDefinition(pair.getFirst(), pair.getSecond());
+    }
+
+    @SubscribeEvent
+    public static void onRegisterParticleProviders(final RegisterParticleProvidersEvent event) {
+        event.registerSpriteSet(EParticleTypes.BOILING.get(), BoilingParticle.Factory::new);
+        event.registerSpriteSet(EParticleTypes.CAULDRON_BREW.get(), CauldronBrewParticle.Factory::new);
+        event.registerSpriteSet(EParticleTypes.CAULDRON_COOK.get(), CauldronCookParticle.Factory::new);
+        event.registerSpriteSet(EParticleTypes.KETTLE_COOK.get(), KettleCookParticle.Factory::new);
+        event.registerSpriteSet(EParticleTypes.CIRCLE_MAGIC.get(), CircleMagicParticle.Factory::new);
+        event.registerSpriteSet(EParticleTypes.POPPET.get(), PoppetParticle.Factory::new);
+        event.registerSpriteSet(EParticleTypes.IMPRISONMENT_CAGE.get(), ImprisonmentCageParticle.Factory::new);
+        event.registerSpriteSet(EParticleTypes.IMPRISONMENT_CAGE_SEED.get(), ImprisonmentCageSeedParticle.Factory::new);
+        event.registerSpriteSet(EParticleTypes.TRANSPOSITION_IRON_SEED.get(), TranspositionIronSeedParticle.Factory::new);
+        event.registerSpriteSet(EParticleTypes.BROILING_SEED.get(), BroilingSeedParticle.Factory::new);
+        event.registerSpriteSet(EParticleTypes.SKY_WRATH_SEED.get(), SkyWrathSeedParticle.Factory::new);
+        event.registerSpriteSet(EParticleTypes.SKY_WRATH.get(), SkyWrathParticle.Factory::new);
+        event.registerSpriteSet(EParticleTypes.CURSE_SEED.get(), CurseSeedParticle.Factory::new);
+        event.registerSpriteSet(EParticleTypes.CURSE_BLIGHT_SEED.get(), CurseBlightSeedParticle.Factory::new);
+        event.registerSpriteSet(EParticleTypes.CURSE_BLIGHT.get(), RepellingParticle.Factory::new);
+        event.registerSpriteSet(EParticleTypes.REMOVE_CURSE_SEED.get(), RemoveCurseSeedParticle.Factory::new);
+        event.registerSpriteSet(EParticleTypes.REMOVE_CURSE.get(), RemoveCurseParticle.Factory::new);
+        event.registerSpriteSet(EParticleTypes.FERTILITY_SEED.get(), FertilitySeedParticle.Factory::new);
+        event.registerSpriteSet(EParticleTypes.FERTILITY.get(), RepellingParticle.Factory::new);
+        event.registerSpriteSet(EParticleTypes.PROTECTION_SEED.get(), ProtectionSeedParticle.Factory::new);
+        event.registerSpriteSet(EParticleTypes.PROTECTION.get(), ProtectionParticle.Factory::new);
+        event.registerSpriteSet(EParticleTypes.BIND_FAMILIAR_SEED.get(), BindFamiliarSeedParticle.Factory::new);
+        event.registerSpriteSet(EParticleTypes.BIND_FAMILIAR.get(), BindFamiliarParticle.Factory::new);
     }
 
 }

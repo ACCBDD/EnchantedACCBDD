@@ -3,7 +3,6 @@ package net.favouriteless.enchanted.client.particles;
 import net.favouriteless.enchanted.common.Enchanted;
 import net.favouriteless.enchanted.client.particles.types.DelayedActionParticleType.DelayedActionData;
 import net.favouriteless.enchanted.common.init.EParticleTypes;
-import favouriteless.enchanted.common.rites.binding.RiteBindingFamiliar;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.NoRenderParticle;
 import net.minecraft.client.particle.Particle;

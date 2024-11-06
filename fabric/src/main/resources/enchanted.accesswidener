@@ -1,11 +1,1 @@
 accessWidener v1 named
-accessible class net/minecraft/world/level/block/entity/BlockEntityType$BlockEntitySupplier
-accessible method net/minecraft/client/gui/screens/MenuScreens register (Lnet/minecraft/world/inventory/MenuType;Lnet/minecraft/client/gui/screens/MenuScreens$ScreenConstructor;)V
-accessible class net/minecraft/client/gui/screens/MenuScreens$ScreenConstructor
-accessible method net/minecraft/client/particle/ParticleEngine register (Lnet/minecraft/core/particles/ParticleType;Lnet/minecraft/client/particle/ParticleEngine$SpriteParticleRegistration;)V
-accessible class net/minecraft/client/particle/ParticleEngine$SpriteParticleRegistration
-accessible method net/minecraft/client/renderer/item/ItemProperties register (Lnet/minecraft/world/item/Item;Lnet/minecraft/resources/ResourceLocation;Lnet/minecraft/client/renderer/item/ClampedItemPropertyFunction;)V
-accessible method net/minecraft/world/level/block/FireBlock setFlammable (Lnet/minecraft/world/level/block/Block;II)V
-accessible method net/minecraft/world/level/block/ButtonBlock <init> (Lnet/minecraft/world/level/block/state/BlockBehaviour$Properties;Lnet/minecraft/world/level/block/state/properties/BlockSetType;IZ)V
-accessible method net/minecraft/world/level/block/PressurePlateBlock <init> (Lnet/minecraft/world/level/block/PressurePlateBlock$Sensitivity;Lnet/minecraft/world/level/block/state/BlockBehaviour$Properties;Lnet/minecraft/world/level/block/state/properties/BlockSetType;)V
-accessible field net/minecraft/world/entity/item/ItemEntity health I

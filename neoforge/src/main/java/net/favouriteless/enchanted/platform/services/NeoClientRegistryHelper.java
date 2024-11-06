@@ -3,6 +3,9 @@ package net.favouriteless.enchanted.platform.services;
 import com.mojang.blaze3d.platform.InputConstants.Type;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.client.KeyMapping;
+import net.minecraft.client.gui.screens.MenuScreens.ScreenConstructor;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.screens.inventory.MenuAccess;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
@@ -14,9 +17,12 @@ import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +32,7 @@ public class NeoClientRegistryHelper implements IClientRegistryHelper {
 
 	public static final List<KeyMapping> KEY_MAPPINGS = new ArrayList<>();
 	public static final List<Pair<ModelLayerLocation, Supplier<LayerDefinition>>> LAYER_DEFINITIONS = new ArrayList<>();
+	public static final List<MenuFactoryRegisterable<?, ?>> MENU_FACTORY_REGISTERABLES = new ArrayList<>();
 
 	@Override
 	public <T extends Entity> void register(EntityType<? extends T> type, EntityRendererProvider<T> constructor) {
@@ -52,6 +59,21 @@ public class NeoClientRegistryHelper implements IClientRegistryHelper {
 	@Override
 	public void register(Item item, ResourceLocation location, ClampedItemPropertyFunction function) {
 		ItemProperties.register(item, location, function);
+	}
+
+	@Override
+	public <M extends AbstractContainerMenu, U extends Screen & MenuAccess<M>> void register(MenuType<M> type, ScreenConstructor<M, U> factory) {
+		MENU_FACTORY_REGISTERABLES.add(new MenuFactoryRegisterable<>(type, factory));
+	}
+
+
+
+	public record MenuFactoryRegisterable<M extends AbstractContainerMenu, U extends Screen & MenuAccess<M>>(MenuType<M> type, ScreenConstructor<M, U> factory) {
+
+		public void register(RegisterMenuScreensEvent event) {
+			event.register(type, factory);
+		}
+
 	}
 
 }

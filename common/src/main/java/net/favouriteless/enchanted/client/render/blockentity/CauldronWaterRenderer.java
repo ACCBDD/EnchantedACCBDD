@@ -16,7 +16,7 @@ import org.joml.Matrix4f;
 
 public class CauldronWaterRenderer<T extends CauldronBlockEntity<?>> implements BlockEntityRenderer<T> {
 
-    public static final ResourceLocation WATER_TEXTURE = new ResourceLocation("block/water_still");
+    public static final ResourceLocation WATER_TEXTURE = ResourceLocation.withDefaultNamespace("block/water_still");
 
     private final float apothem;
 
@@ -54,7 +54,7 @@ public class CauldronWaterRenderer<T extends CauldronBlockEntity<?>> implements 
     }
 
     private void vertex(VertexConsumer consumer, Matrix4f poseMatrix, float x, float y, float z, int red, int green, int blue, int alpha, float u, float v, int packedLight) {
-        consumer.vertex(poseMatrix, x, y, z).color(red, green, blue, alpha).uv(u, v).uv2(packedLight).normal(0, 1, 0).endVertex();
+        consumer.addVertex(poseMatrix, x, y, z).setColor(red, green, blue, alpha).setUv(u, v).setLight(packedLight).setNormal(0, 1, 0);
     }
 
 }

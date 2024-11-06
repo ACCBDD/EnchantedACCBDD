@@ -46,19 +46,19 @@ public class EBlocks {
     public static final Supplier<SaplingBlock> ALDER_SAPLING = register("alder_sapling", () -> sapling("alder_tree"));
     public static final Supplier<SlabBlock> ALDER_SLAB = register("alder_slab", () -> slab(Blocks.OAK_SLAB));
     public static final Supplier<StairBlock> ALDER_STAIRS = register("alder_stairs", () -> stairs(ALDER_PLANKS.get()));
-    public static final Supplier<Block> ALTAR = register("altar", AltarBlock::new);
+    public static final Supplier<AltarBlock> ALTAR = register("altar", AltarBlock::new);
     public static final Supplier<CropsBlockAgeFive> BELLADONNA = register("belladonna", BelladonnaBlock::new);
-    public static final Supplier<Block> BLOOD_POPPY = register("blood_poppy", BloodPoppyBlock::new);
-    public static final Supplier<Block> CANDELABRA = register("candelabra", CandelabraBlock::new);
-    public static final Supplier<Block> CHALICE = register("chalice", () -> new ChaliceBlock(false));
-    public static final Supplier<Block> CHALICE_FILLED = register("chalice_filled", () -> new ChaliceBlock(true));
-    public static final Supplier<Block> DISTILLERY = register("distillery", DistilleryBlock::new);
-    public static final Supplier<Block> EMBER_MOSS = register("ember_moss", EmberMossBlock::new);
-    public static final Supplier<Block> FUME_FUNNEL = register("fume_funnel", FumeFunnelBlock::new);
-    public static final Supplier<Block> FUME_FUNNEL_FILTERED = register("fume_funnel_filtered", FumeFunnelBlock::new);
-    public static final Supplier<CropsBlockAgeFive> GARLIC = register("garlic", GarlicBlock::new);
-    public static final Supplier<Block> GLINT_WEED = register("glint_weed", GlintWeedBlock::new);
-    public static final Supplier<Block> GOLDEN_CHALK = register("golden_chalk", GoldChalkBlock::new);
+    public static final Supplier<BloodPoppyBlock> BLOOD_POPPY = register("blood_poppy", BloodPoppyBlock::new);
+    public static final Supplier<CandelabraBlock> CANDELABRA = register("candelabra", CandelabraBlock::new);
+    public static final Supplier<ChaliceBlock> CHALICE = register("chalice", () -> new ChaliceBlock(false));
+    public static final Supplier<ChaliceBlock> CHALICE_FILLED = register("chalice_filled", () -> new ChaliceBlock(true));
+    public static final Supplier<DistilleryBlock> DISTILLERY = register("distillery", DistilleryBlock::new);
+    public static final Supplier<EmberMossBlock> EMBER_MOSS = register("ember_moss", EmberMossBlock::new);
+    public static final Supplier<FumeFunnelBlock> FUME_FUNNEL = register("fume_funnel", FumeFunnelBlock::new);
+    public static final Supplier<FumeFunnelBlock> FUME_FUNNEL_FILTERED = register("fume_funnel_filtered", FumeFunnelBlock::new);
+    public static final Supplier<GarlicBlock> GARLIC = register("garlic", GarlicBlock::new);
+    public static final Supplier<GlintWeedBlock> GLINT_WEED = register("glint_weed", GlintWeedBlock::new);
+    public static final Supplier<GoldChalkBlock> GOLDEN_CHALK = register("golden_chalk", GoldChalkBlock::new);
     public static final Supplier<ButtonBlock> HAWTHORN_BUTTON = register("hawthorn_button", EBlocks::woodenButton);
     public static final Supplier<FenceBlock> HAWTHORN_FENCE = register("hawthorn_fence", EBlocks::woodenFence);
     public static final Supplier<FenceGateBlock> HAWTHORN_FENCE_GATE = register("hawthorn_fence_gate", EBlocks::woodenGate);
@@ -69,15 +69,15 @@ public class EBlocks {
     public static final Supplier<SaplingBlock> HAWTHORN_SAPLING = register("hawthorn_sapling", () -> sapling("hawthorn_tree"));
     public static final Supplier<SlabBlock> HAWTHORN_SLAB = register("hawthorn_slab", () -> slab(Blocks.OAK_SLAB));
     public static final Supplier<StairBlock> HAWTHORN_STAIRS = register("hawthorn_stairs", () -> stairs(HAWTHORN_PLANKS.get()));;
-    public static final Supplier<Block> INFINITY_EGG = register("infinity_egg", InfinityEggBlock::new);
-    public static final Supplier<Block> KETTLE = register("kettle", KettleBlock::new);
-    public static final Supplier<CropsBlockAgeFive> MANDRAKE = register("mandrake", MandrakeBlock::new);
-    public static final Supplier<Block> NETHER_CHALK = register("nether_chalk", () -> new ChalkCircleBlock(ParticleTypes.FLAME));
-    public static final Supplier<Block> OTHERWHERE_CHALK = register("otherwhere_chalk", () -> new ChalkCircleBlock(ParticleTypes.DRAGON_BREATH));
-    public static final Supplier<Block> POPPET_SHELF = register("poppet_shelf", PoppetShelfBlock::new);
-    public static final Supplier<Block> PROTECTION_BARRIER = register("protection_barrier", ProtectionBarrierBlock::new);
-    public static final Supplier<Block> PROTECTION_BARRIER_TEMPORARY = register("protection_barrier_temporary", TemporaryProtectionBarrierBlock::new);
-    public static final Supplier<Block> RITUAL_CHALK = register("ritual_chalk", () -> new ChalkCircleBlock(null));
+    public static final Supplier<InfinityEggBlock> INFINITY_EGG = register("infinity_egg", InfinityEggBlock::new);
+    public static final Supplier<KettleBlock> KETTLE = register("kettle", KettleBlock::new);
+    public static final Supplier<MandrakeBlock> MANDRAKE = register("mandrake", MandrakeBlock::new);
+    public static final Supplier<ChalkCircleBlock> NETHER_CHALK = register("nether_chalk", () -> new ChalkCircleBlock(ParticleTypes.FLAME));
+    public static final Supplier<ChalkCircleBlock> OTHERWHERE_CHALK = register("otherwhere_chalk", () -> new ChalkCircleBlock(ParticleTypes.DRAGON_BREATH));
+    public static final Supplier<PoppetShelfBlock> POPPET_SHELF = register("poppet_shelf", PoppetShelfBlock::new);
+    public static final Supplier<ProtectionBarrierBlock> PROTECTION_BARRIER = register("protection_barrier", ProtectionBarrierBlock::new);
+    public static final Supplier<TemporaryProtectionBarrierBlock> PROTECTION_BARRIER_TEMPORARY = register("protection_barrier_temporary", TemporaryProtectionBarrierBlock::new);
+    public static final Supplier<ChalkCircleBlock> RITUAL_CHALK = register("ritual_chalk", () -> new ChalkCircleBlock(null));
     public static final Supplier<ButtonBlock> ROWAN_BUTTON = register("rowan_button", EBlocks::woodenButton);
     public static final Supplier<FenceBlock> ROWAN_FENCE = register("rowan_fence", EBlocks::woodenFence);
     public static final Supplier<FenceGateBlock> ROWAN_FENCE_GATE = register("rowan_fence_gate", EBlocks::woodenGate);
@@ -88,14 +88,14 @@ public class EBlocks {
     public static final Supplier<SaplingBlock> ROWAN_SAPLING = register("rowan_sapling", () -> sapling("rowan_tree"));
     public static final Supplier<SlabBlock> ROWAN_SLAB = register("rowan_slab", () -> slab(Blocks.OAK_SLAB));
     public static final Supplier<StairBlock> ROWAN_STAIRS = register("rowan_stairs", () -> stairs(ROWAN_PLANKS.get()));
-    public static final Supplier<CropsBlockAgeFive> SNOWBELL = register("snowbell", SnowbellBlock::new);
-    public static final Supplier<Block> SPANISH_MOSS = register("spanish_moss", SpanishMossBlock::new);
-    public static final Supplier<Block> SPINNING_WHEEL = register("spinning_wheel", SpinningWheelBlock::new);
-    public static final Supplier<CropsBlockAgeFive> WATER_ARTICHOKE = register("water_artichoke", ArtichokeBlock::new);
-    public static final Supplier<RotatedPillarBlock> WICKER_BUNDLE = register("wicker_bundle", () -> new HayBlock(Properties.ofFullCopy(Blocks.HAY_BLOCK)));
-    public static final Supplier<Block> WITCH_CAULDRON = register("witch_cauldron", WitchCauldronBlock::new);
-    public static final Supplier<Block> WITCH_OVEN = register("witch_oven", WitchOvenBlock::new);
-    public static final Supplier<CropsBlockAgeFive> WOLFSBANE = register("wolfsbane", WolfsbaneBlock::new);
+    public static final Supplier<SnowbellBlock> SNOWBELL = register("snowbell", SnowbellBlock::new);
+    public static final Supplier<SpanishMossBlock> SPANISH_MOSS = register("spanish_moss", SpanishMossBlock::new);
+    public static final Supplier<SpinningWheelBlock> SPINNING_WHEEL = register("spinning_wheel", SpinningWheelBlock::new);
+    public static final Supplier<ArtichokeBlock> WATER_ARTICHOKE = register("water_artichoke", ArtichokeBlock::new);
+    public static final Supplier<HayBlock> WICKER_BUNDLE = register("wicker_bundle", () -> new HayBlock(Properties.ofFullCopy(Blocks.HAY_BLOCK)));
+    public static final Supplier<WitchCauldronBlock> WITCH_CAULDRON = register("witch_cauldron", WitchCauldronBlock::new);
+    public static final Supplier<WitchOvenBlock> WITCH_OVEN = register("witch_oven", WitchOvenBlock::new);
+    public static final Supplier<WolfsbaneBlock> WOLFSBANE = register("wolfsbane", WolfsbaneBlock::new);
 
     //public static final Supplier<Block> DEMON_HEART = register("demon_heart", DemonHeart::new);
 
@@ -138,12 +138,12 @@ public class EBlocks {
     }
 
     private static RotatedPillarBlock log(MapColor topColor, MapColor barkColor) {
-        return new RotatedPillarBlock(Properties.copy(Blocks.OAK_LOG)
+        return new RotatedPillarBlock(Properties.ofFullCopy(Blocks.OAK_LOG)
                 .mapColor(state -> state.getValue(RotatedPillarBlock.AXIS) == Axis.Y ? topColor : barkColor));
     }
 
     private static EnchantedLog strippableLog(MapColor topColor, MapColor barkColor, Supplier<RotatedPillarBlock> stripped) {
-        return new EnchantedLog(Properties.copy(Blocks.OAK_LOG)
+        return new EnchantedLog(Properties.ofFullCopy(Blocks.OAK_LOG)
                 .mapColor(state -> state.getValue(RotatedPillarBlock.AXIS) == Axis.Y ? topColor : barkColor), stripped);
     }
 
@@ -152,21 +152,22 @@ public class EBlocks {
     }
 
     private static FenceBlock woodenFence() {
-        return new FenceBlock(Properties.copy(Blocks.OAK_FENCE));
+        return new FenceBlock(Properties.ofFullCopy(Blocks.OAK_FENCE));
     }
 
     private static FenceGateBlock woodenGate() {
-        return new FenceGateBlock(Properties.copy(Blocks.OAK_FENCE_GATE), WoodType.OAK);
+        return new FenceGateBlock(Properties.ofFullCopy(Blocks.OAK_FENCE_GATE), WoodType.OAK);
     }
 
     private static PressurePlateBlock woodenPressurePlate(MapColor mapColor) {
-        return new PressurePlateBlock(Sensitivity.EVERYTHING,
-                Properties.of().mapColor(mapColor).forceSolidOn().instrument(NoteBlockInstrument.BASS).noCollission().strength(0.5F).ignitedByLava().pushReaction(PushReaction.DESTROY),
+        return new PressurePlateBlock( Properties.of().mapColor(mapColor).forceSolidOn()
+                .instrument(NoteBlockInstrument.BASS).noCollission().strength(0.5F).ignitedByLava()
+                .pushReaction(PushReaction.DESTROY),
                 BlockSetType.OAK);
     }
 
     private static LeavesBlock leaves() {
-        return new LeavesBlock(Properties.copy(Blocks.OAK_LEAVES));
+        return new LeavesBlock(Properties.ofFullCopy(Blocks.OAK_LEAVES));
     }
 
     private static Block block(Properties properties) {
@@ -174,7 +175,7 @@ public class EBlocks {
     }
 
     private static Block block(BlockBehaviour block) {
-        return new Block(Properties.copy(block));
+        return new Block(Properties.ofFullCopy(block));
     }
 
     private static Block block(Supplier<BlockBehaviour> block) {
@@ -182,15 +183,15 @@ public class EBlocks {
     }
 
     public static StairBlock stairs(Block base) {
-        return new EnchantedStairBlock(base.defaultBlockState(), Properties.copy(base));
+        return new EnchantedStairBlock(base.defaultBlockState(), Properties.ofFullCopy(base));
     }
 
     public static SlabBlock slab(Block base) {
-        return new SlabBlock(Properties.copy(base));
+        return new SlabBlock(Properties.ofFullCopy(base));
     }
 
     public static SaplingBlock sapling(String id) {
-        return new EnchantedSaplingBlock(new EnchantedTreeGrower(id), Properties.copy(Blocks.OAK_SAPLING));
+        return new EnchantedSaplingBlock(new EnchantedTreeGrower(id), Properties.ofFullCopy(Blocks.OAK_SAPLING));
     }
 
     public static void load() {} // Method which exists purely to load the class.

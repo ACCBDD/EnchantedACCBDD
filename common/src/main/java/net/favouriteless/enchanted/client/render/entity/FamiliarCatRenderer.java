@@ -16,7 +16,7 @@ import net.minecraft.world.phys.AABB;
 
 public class FamiliarCatRenderer extends MobRenderer<FamiliarCat, CatModel<FamiliarCat>> {
 
-	public static final ResourceLocation TEXTURE_LOCATION = new ResourceLocation("textures/entity/cat/all_black.png");
+	public static final ResourceLocation TEXTURE_LOCATION = ResourceLocation.withDefaultNamespace("textures/entity/cat/all_black.png");
 
 	public FamiliarCatRenderer(EntityRendererProvider.Context context) {
 		super(context, new CatModel<>(context.bakeLayer(ModelLayers.CAT)), 0.4F);
@@ -24,7 +24,7 @@ public class FamiliarCatRenderer extends MobRenderer<FamiliarCat, CatModel<Famil
 
 	@Override
 	public ResourceLocation getTextureLocation(FamiliarCat cat) {
-		return ClientConfig.useOriginalCatType.get() ? cat.getResourceLocation() : TEXTURE_LOCATION;
+		return ClientConfig.INSTANCE.useOriginalCatType.get() ? cat.getTextureId() : TEXTURE_LOCATION;
 	}
 
 	@Override
@@ -33,8 +33,9 @@ public class FamiliarCatRenderer extends MobRenderer<FamiliarCat, CatModel<Famil
 		poseStack.scale(0.8F, 0.8F, 0.8F);
 	}
 
-	protected void setupRotations(FamiliarCat cat, PoseStack poseStack, float age, float yaw, float partialTicks) {
-		super.setupRotations(cat, poseStack, age, yaw, partialTicks);
+	@Override
+	protected void setupRotations(FamiliarCat cat, PoseStack poseStack, float age, float yaw, float partialTicks, float scale) {
+		super.setupRotations(cat, poseStack, age, yaw, partialTicks, scale);
 		float f = cat.getLieDownAmount(partialTicks);
 		if (f > 0.0F) {
 			poseStack.translate(0.4F * f, 0.15F * f, 0.1F * f);

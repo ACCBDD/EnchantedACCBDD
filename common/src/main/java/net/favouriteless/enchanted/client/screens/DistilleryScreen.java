@@ -38,7 +38,7 @@ public class DistilleryScreen extends AbstractContainerScreen<DistilleryMenu> {
 
     @Override
     public void render(@NotNull GuiGraphics gui, int xMouse, int yMouse, float partialTicks) {
-        renderBackground(gui);
+        renderBackground(gui, xMouse, yMouse, partialTicks);
         super.render(gui, xMouse, yMouse, partialTicks);
         this.renderTooltip(gui, xMouse, yMouse);
     }
