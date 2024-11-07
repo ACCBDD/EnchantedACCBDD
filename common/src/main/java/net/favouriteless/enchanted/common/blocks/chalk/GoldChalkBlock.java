@@ -44,7 +44,7 @@ public class GoldChalkBlock extends AbstractChalkBlock implements EntityBlock {
     @Override
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
         if(state != newState) {
-//            if(level.getBlockEntity(pos) instanceof ChalkGoldBlockEntity be)
+//            if(level.getBlockEntity(key) instanceof ChalkGoldBlockEntity be)
 //                be.clearRite();
         }
         super.onRemove(state, level, pos, newState, isMoving);

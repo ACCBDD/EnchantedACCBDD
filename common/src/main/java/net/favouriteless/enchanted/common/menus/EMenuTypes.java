@@ -22,7 +22,7 @@ public class EMenuTypes {
     public static final Supplier<MenuType<SpinningWheelMenu>> SPINNING_WHEEL = register("spinning_wheel", SpinningWheelMenu::new, PosMenuData.STREAM_CODEC);
     public static final Supplier<MenuType<WitchOvenMenu>> WITCH_OVEN = register("witch_oven", WitchOvenMenu::new, PosMenuData.STREAM_CODEC);
 
-            
+
 
     private static <T extends AbstractContainerMenu, C> Supplier<MenuType<T>> register(String name,
                                                                                            TriFunction<Integer, Inventory, C, T> factory,

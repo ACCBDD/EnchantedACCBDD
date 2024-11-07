@@ -44,12 +44,12 @@ public interface IMultiBlockType {
     boolean isValidFormedMultiBlock(Level level, BlockPos pos);
 
     /**
-     * Returns true if the block in pos + dxdyxz is valid as formed for that position
+     * Returns true if the block in key + dxdyxz is valid as formed for that position
      */
     boolean isValidFormedBlock(Level level, BlockPos pos, int dx, int dy, int dz);
 
     /**
-     * Returns true if the block in pos + dxdyxz is valid as unformed for that position
+     * Returns true if the block in key + dxdyxz is valid as unformed for that position
      */
     boolean isValidUnformedBlock(Level level, BlockPos pos, int dx, int dy, int dz);
 

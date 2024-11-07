@@ -64,7 +64,7 @@ public class BedTaglockSavedData extends SavedData {
 
         for(Tag e : entryList) {
             CompoundTag entryNbt = (CompoundTag)e; // This cast should be safe.
-            data.getEntry(BlockPos.of(entryNbt.getLong("pos"))).deserialize(entryNbt);
+            data.getEntry(BlockPos.of(entryNbt.getLong("key"))).deserialize(entryNbt);
         }
 
         return data;
@@ -77,7 +77,7 @@ public class BedTaglockSavedData extends SavedData {
         entries.forEach((pos, data) -> {
             if(data.getData() != EntityRefData.EMPTY) {
                 CompoundTag entryTag = data.serialize();
-                entryTag.putLong("pos", pos.asLong());
+                entryTag.putLong("key", pos.asLong());
             }
         });
 
