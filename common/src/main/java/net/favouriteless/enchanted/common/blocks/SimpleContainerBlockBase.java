@@ -29,7 +29,7 @@ public abstract class SimpleContainerBlockBase extends BaseEntityBlock {
 		if(!level.isClientSide) {
 			BlockEntity blockEntity = level.getBlockEntity(pos);
 			if(blockEntity instanceof MenuProvider mp) {
-				CommonServices.PLATFORM.openMenuScreen((ServerPlayer)player, mp, pos);
+				CommonServices.PLATFORM.openMenu((ServerPlayer)player, mp, pos, BlockPos.STREAM_CODEC);
 				return InteractionResult.SUCCESS;
 			}
 		}

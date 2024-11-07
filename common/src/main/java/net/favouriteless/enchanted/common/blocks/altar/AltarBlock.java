@@ -70,7 +70,7 @@ public class AltarBlock extends BaseEntityBlock {
                 if (cornerState.getValue(FORMED) == AltarPartIndex.P000) {
                     BlockEntity blockEntity = level.getBlockEntity(cornerPos);
                     if(blockEntity instanceof AltarBlockEntity be)
-                        CommonServices.PLATFORM.openMenuScreen((ServerPlayer)player, be, be.getBlockPos());
+                        CommonServices.PLATFORM.openMenu((ServerPlayer)player, be, be.getBlockPos(), BlockPos.STREAM_CODEC);
                 }
                 return InteractionResult.CONSUME;
             }

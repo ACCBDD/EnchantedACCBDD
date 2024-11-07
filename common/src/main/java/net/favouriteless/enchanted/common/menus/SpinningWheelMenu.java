@@ -5,6 +5,7 @@ import net.favouriteless.enchanted.common.blocks.entity.SpinningWheelBlockEntity
 import net.favouriteless.enchanted.common.menus.slots.NonJarInputSlot;
 import net.favouriteless.enchanted.common.menus.slots.OutputSlot;
 import net.favouriteless.enchanted.util.MenuUtils;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerData;
@@ -30,8 +31,8 @@ public class SpinningWheelMenu extends MenuBase<SpinningWheelBlockEntity> {
 		addDataSlots(data);
 	}
 
-	public SpinningWheelMenu(int id, Inventory playerInventory, PosMenuData data) {
-		this(id, playerInventory, MenuUtils.getBlockEntity(playerInventory, data.pos(), SpinningWheelBlockEntity.class), new SimpleContainerData(2));
+	public SpinningWheelMenu(int id, Inventory playerInventory, BlockPos pos) {
+		this(id, playerInventory, MenuUtils.getBlockEntity(playerInventory, pos, SpinningWheelBlockEntity.class), new SimpleContainerData(2));
 	}
 
 	public int getSpinProgress() {

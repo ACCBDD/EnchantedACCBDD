@@ -4,7 +4,9 @@ import net.fabricmc.fabric.api.registry.FuelRegistry;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.fabricmc.loader.api.FabricLoader;
 import net.favouriteless.enchanted.platform.services.IPlatformHelper;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
@@ -33,7 +35,7 @@ public class FabricPlatformHelper implements IPlatformHelper {
     }
 
     @Override
-    public <T> void openMenuScreen(ServerPlayer player, MenuProvider provider, T data) {
+    public <T> void openMenu(ServerPlayer player, MenuProvider provider, T data, StreamCodec<? super RegistryFriendlyByteBuf, T> codec) {
         player.openMenu(new ExtendedScreenHandlerFactory<T>() {
 
             @Override
@@ -46,12 +48,16 @@ public class FabricPlatformHelper implements IPlatformHelper {
                 return provider.getDisplayName();
             }
 
-            @Nullable
             @Override
             public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
                 return provider.createMenu(id, inventory, player);
             }
         });
+    }
+
+    @Override
+    public void openMenu(ServerPlayer player, MenuProvider provider) {
+        player.openMenu(provider);
     }
 
     @Override

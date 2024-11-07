@@ -6,6 +6,7 @@ import net.favouriteless.enchanted.common.items.EItems;
 import net.favouriteless.enchanted.common.menus.slots.JarInputSlot;
 import net.favouriteless.enchanted.common.menus.slots.OutputSlot;
 import net.favouriteless.enchanted.util.MenuUtils;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerData;
@@ -35,8 +36,8 @@ public class DistilleryMenu extends MenuBase<DistilleryBlockEntity> {
         addDataSlots(data);
     }
 
-    public DistilleryMenu(int id, Inventory playerInventory, PosMenuData data) {
-        this(id, playerInventory, MenuUtils.getBlockEntity(playerInventory, data.pos(), DistilleryBlockEntity.class), new SimpleContainerData(2));
+    public DistilleryMenu(int id, Inventory playerInventory, BlockPos pos) {
+        this(id, playerInventory, MenuUtils.getBlockEntity(playerInventory, pos, DistilleryBlockEntity.class), new SimpleContainerData(2));
     }
 
     public int getCookProgress() {

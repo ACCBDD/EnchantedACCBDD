@@ -3,6 +3,7 @@ package net.favouriteless.enchanted.common.menus;
 import net.favouriteless.enchanted.common.blocks.EBlocks;
 import net.favouriteless.enchanted.common.blocks.entity.AltarBlockEntity;
 import net.favouriteless.enchanted.util.MenuUtils;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -25,8 +26,8 @@ public class AltarMenu extends AbstractContainerMenu {
         addDataSlots(this.data);
     }
 
-    public AltarMenu(int id, Inventory playerInventory, PosMenuData data) {
-        this(id, MenuUtils.getBlockEntity(playerInventory, data.pos(), AltarBlockEntity.class), new SimpleContainerData(3));
+    public AltarMenu(int id, Inventory playerInventory, BlockPos pos) {
+        this(id, MenuUtils.getBlockEntity(playerInventory, pos, AltarBlockEntity.class), new SimpleContainerData(3));
     }
 
     public int getCurrentPower() {

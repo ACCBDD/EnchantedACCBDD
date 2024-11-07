@@ -1,9 +1,11 @@
 package net.favouriteless.enchanted.platform.services;
 
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.MenuProvider;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -18,14 +20,25 @@ public interface IPlatformHelper {
     boolean isDevelopmentEnvironment();
 
     /**
-     * Open a {@link Screen} for a {@link BlockEntity}, the {@link BlockPos} of the entity will be written to the buffer
+     * Open a {@link AbstractContainerMenu} for a {@link BlockEntity}, the {@link BlockPos} of the entity will be written to the buffer
      * sent to clients.
      *
      * @param player The {@link ServerPlayer} to open the screen for.
      * @param provider The {@link MenuProvider} the screen is being opened for.
-     * @param pos The {@link BlockPos} of the provider.
+     * @param data The data to be passed to the menu.
+     * @param codec The codec used to encode the data.
      */
-    <T> void openMenuScreen(ServerPlayer player, MenuProvider provider, T data);
+    <T> void openMenu(ServerPlayer player, MenuProvider provider,
+                      T data, StreamCodec<? super RegistryFriendlyByteBuf, T> codec);
+
+    /**
+     * Open a {@link AbstractContainerMenu} for a {@link BlockEntity}, the {@link BlockPos} of the entity will be written to the buffer
+     * sent to clients.
+     *
+     * @param player The {@link ServerPlayer} to open the screen for.
+     * @param provider The {@link MenuProvider} the screen is being opened for.
+     */
+    void openMenu(ServerPlayer player, MenuProvider provider);
 
     /**
      * Grab the burn time for a given {@link ItemStack} and {@link RecipeType}.

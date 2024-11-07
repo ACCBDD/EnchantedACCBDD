@@ -1,6 +1,7 @@
 package net.favouriteless.enchanted.common.menus;
 
 import net.favouriteless.enchanted.platform.CommonServices;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.entity.player.Inventory;
@@ -16,11 +17,11 @@ import java.util.function.Supplier;
  */
 public class EMenuTypes {
     
-    public static final Supplier<MenuType<AltarMenu>> ALTAR = register("altar", AltarMenu::new, PosMenuData.STREAM_CODEC);
-    public static final Supplier<MenuType<DistilleryMenu>> DISTILLERY = register("distillery", DistilleryMenu::new, PosMenuData.STREAM_CODEC);
-    public static final Supplier<MenuType<PoppetShelfMenu>> POPPET_SHELF = register("poppet_shelf", PoppetShelfMenu::new, PosMenuData.STREAM_CODEC);
-    public static final Supplier<MenuType<SpinningWheelMenu>> SPINNING_WHEEL = register("spinning_wheel", SpinningWheelMenu::new, PosMenuData.STREAM_CODEC);
-    public static final Supplier<MenuType<WitchOvenMenu>> WITCH_OVEN = register("witch_oven", WitchOvenMenu::new, PosMenuData.STREAM_CODEC);
+    public static final Supplier<MenuType<AltarMenu>> ALTAR = register("altar", AltarMenu::new, BlockPos.STREAM_CODEC);
+    public static final Supplier<MenuType<DistilleryMenu>> DISTILLERY = register("distillery", DistilleryMenu::new, BlockPos.STREAM_CODEC);
+    public static final Supplier<MenuType<PoppetShelfMenu>> POPPET_SHELF = register("poppet_shelf", PoppetShelfMenu::new, BlockPos.STREAM_CODEC);
+    public static final Supplier<MenuType<SpinningWheelMenu>> SPINNING_WHEEL = register("spinning_wheel", SpinningWheelMenu::new, BlockPos.STREAM_CODEC);
+    public static final Supplier<MenuType<WitchOvenMenu>> WITCH_OVEN = register("witch_oven", WitchOvenMenu::new, BlockPos.STREAM_CODEC);
 
 
 

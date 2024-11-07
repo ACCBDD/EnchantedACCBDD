@@ -58,7 +58,7 @@ public class PoppetShelfBlock extends BaseEntityBlock {
 		if(!level.isClientSide) {
 			BlockEntity blockEntity = level.getBlockEntity(pos);
 			if(blockEntity instanceof PoppetShelfBlockEntity be)
-				CommonServices.PLATFORM.openMenuScreen((ServerPlayer)player, be, pos);
+				CommonServices.PLATFORM.openMenu((ServerPlayer)player, be, pos, BlockPos.STREAM_CODEC);
 		}
 		return InteractionResult.SUCCESS;
 	}

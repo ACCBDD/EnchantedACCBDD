@@ -4,6 +4,7 @@ import net.favouriteless.enchanted.common.blocks.EBlocks;
 import net.favouriteless.enchanted.common.blocks.entity.PoppetShelfBlockEntity;
 import net.favouriteless.enchanted.common.items.poppets.PoppetItem;
 import net.favouriteless.enchanted.util.MenuUtils;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -34,8 +35,8 @@ public class PoppetShelfMenu extends AbstractContainerMenu {
 		this.containerAccess = ContainerLevelAccess.create(be.getLevel(), be.getBlockPos());
 	}
 
-	public PoppetShelfMenu(int id, Inventory playerInventory, PosMenuData data) {
-		this(id, playerInventory, MenuUtils.getBlockEntity(playerInventory, data.pos(), PoppetShelfBlockEntity.class));
+	public PoppetShelfMenu(int id, Inventory playerInventory, BlockPos pos) {
+		this(id, playerInventory, MenuUtils.getBlockEntity(playerInventory, pos, PoppetShelfBlockEntity.class));
 	}
 
 	@Override

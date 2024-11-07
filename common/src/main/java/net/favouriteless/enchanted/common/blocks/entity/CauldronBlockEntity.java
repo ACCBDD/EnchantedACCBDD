@@ -421,7 +421,7 @@ public abstract class CauldronBlockEntity<T extends CauldronTypeRecipe> extends 
 		loadBase(tag);
 
 		if(tag.contains("posHolder"))
-			posHolder.deserialize(tag.getList("posHolder", 10));
+			posHolder.deserialize(tag.getCompound("posHolder"));
 
 		if(tag.contains("Items")) {
 			// Have to load nbt weirdly because inventory is not a fixed size

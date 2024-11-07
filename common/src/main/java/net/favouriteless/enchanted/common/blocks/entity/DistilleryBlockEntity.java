@@ -225,7 +225,7 @@ public class DistilleryBlockEntity extends ContainerBlockEntityBase implements I
     @Override
     public void loadAdditional(@NotNull CompoundTag tag, @NotNull Provider registries) {
         super.loadAdditional(tag, registries);
-        posHolder.deserialize(tag.getList("posHolder", 10));
+        posHolder.deserialize(tag.getCompound("posHolder"));
         isBurning = tag.getBoolean("isBurning");
         cookProgress = tag.getInt("cookTime");
         cookDuration = tag.getInt("cookTimeTotal");

@@ -1,7 +1,13 @@
 package net.favouriteless.enchanted.platform.services;
 
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.MenuProvider;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.neoforged.fml.ModList;
@@ -26,7 +32,12 @@ public class NeoPlatformHelper implements IPlatformHelper {
     }
 
     @Override
-    public <T> void openMenuScreen(ServerPlayer player, MenuProvider provider, T data) {
+    public <T> void openMenu(ServerPlayer player, MenuProvider provider, T data, StreamCodec<? super RegistryFriendlyByteBuf, T> codec) {
+        player.openMenu(provider, buf -> codec.encode(buf, data));
+    }
+
+    @Override
+    public void openMenu(ServerPlayer player, MenuProvider provider) {
         player.openMenu(provider);
     }
 

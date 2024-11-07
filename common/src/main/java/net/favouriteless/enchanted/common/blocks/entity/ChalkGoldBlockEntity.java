@@ -37,7 +37,7 @@ public class ChalkGoldBlockEntity extends BlockEntity implements IPowerConsumer 
 
     @Override
     public void loadAdditional(CompoundTag tag, Provider registries) {
-        posHolder.deserialize(tag.getList("posHolder", 10));
+        posHolder.deserialize(tag.getCompound("posHolder"));
     }
 
     @Override
