@@ -2,10 +2,7 @@ package net.favouriteless.enchanted.neoforge.datagen.providers;
 
 import net.favouriteless.enchanted.common.init.ETags;
 import net.favouriteless.enchanted.common.items.EItems;
-import net.favouriteless.enchanted.neoforge.datagen.builders.recipe.ByproductRecipeBuilder;
-import net.favouriteless.enchanted.neoforge.datagen.builders.recipe.CauldronTypeRecipeBuilder;
-import net.favouriteless.enchanted.neoforge.datagen.builders.recipe.DistillingRecipeBuilder;
-import net.favouriteless.enchanted.neoforge.datagen.builders.recipe.SpinningRecipeBuilder;
+import net.favouriteless.enchanted.neoforge.datagen.builders.recipe.*;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
@@ -18,6 +15,7 @@ import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Blocks;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -41,140 +39,122 @@ public class ERecipeProvider extends RecipeProvider {
 	}
 
 	protected void buildShapedRecipes(RecipeOutput output, Provider registries) {
-		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, EItems.ALTAR.get())
+		EShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, EItems.ALTAR.get())
 				.pattern("bwe")
 				.pattern("srs")
 				.pattern("srs")
 				.define('s', Items.STONE_BRICKS).define('r', EItems.ROWAN_LOG.get())
 				.define('b', EItems.BREATH_OF_THE_GODDESS.get())
 				.define('e', EItems.EXHALE_OF_THE_HORNED_ONE.get())
-				.define('w', Items.POTION)
-				.unlockedBy(getHasName(EItems.ROWAN_LOG.get()), has(EItems.ROWAN_LOG.get())).save(output);
-		ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, EItems.ARTHANA.get())
+				.define('w', Items.POTION).save(output);
+		EShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, EItems.ARTHANA.get())
 				.pattern(" i ")
 				.pattern("nen")
 				.pattern(" s ")
 				.define('i', Items.GOLD_INGOT).define('n', Items.GOLD_NUGGET)
-				.define('e', Items.EMERALD).define('s', Items.STICK)
-				.unlockedBy(getHasName(Items.GOLD_INGOT), has(Items.GOLD_INGOT)).save(output);
-		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, EItems.ATTUNED_STONE.get())
+				.define('e', Items.EMERALD).define('s', Items.STICK).save(output);
+		EShapedRecipeBuilder.shaped(RecipeCategory.MISC, EItems.ATTUNED_STONE.get())
 				.pattern("w")
 				.pattern("d")
 				.pattern("l")
 				.define('w', EItems.WHIFF_OF_MAGIC.get()).define('d', Items.DIAMOND)
-				.define('l', Items.LAVA_BUCKET)
-				.unlockedBy(getHasName(EItems.WHIFF_OF_MAGIC.get()), has(EItems.WHIFF_OF_MAGIC.get())).save(output);
-		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, EItems.BROOM.get())
+				.define('l', Items.LAVA_BUCKET).save(output);
+		EShapedRecipeBuilder.shaped(RecipeCategory.MISC, EItems.BROOM.get())
 				.pattern(" s ")
 				.pattern(" s ")
 				.pattern("hhh")
-				.define('s', Items.STICK).define('h', EItems.HAWTHORN_SAPLING.get())
-				.unlockedBy(getHasName(EItems.HAWTHORN_SAPLING.get()), has(EItems.HAWTHORN_SAPLING.get())).save(output);
-		ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, EItems.CANDELABRA.get())
+				.define('s', Items.STICK).define('h', EItems.HAWTHORN_SAPLING.get()).save(output);
+		EShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, EItems.CANDELABRA.get())
 				.pattern("ccc")
 				.pattern("iai")
 				.pattern(" i ")
 				.define('c', Items.CANDLE).define('i', Items.IRON_INGOT)
-				.define('a', EItems.ATTUNED_STONE.get())
-				.unlockedBy("has_attuned_stone", has(EItems.ATTUNED_STONE.get())).save(output);
-		ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, EItems.CHALICE.get())
+				.define('a', EItems.ATTUNED_STONE.get()).save(output);
+		EShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, EItems.CHALICE.get())
 				.pattern("nan")
 				.pattern("ngn")
 				.pattern(" g ")
 				.define('n', Items.GOLD_NUGGET).define('g', Items.GOLD_INGOT)
-				.define('a', EItems.ATTUNED_STONE.get())
-				.unlockedBy(getHasName(EItems.ATTUNED_STONE.get()), has(EItems.ATTUNED_STONE.get())).save(output);
-		ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, EItems.RITUAL_CHALK.get(), 2)
+				.define('a', EItems.ATTUNED_STONE.get()).save(output);
+		EShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, EItems.RITUAL_CHALK.get())
 				.pattern("ata")
 				.pattern("aga")
 				.pattern("aga")
 				.define('g', EItems.GYPSUM.get())
 				.define('t', EItems.TEAR_OF_THE_GODDESS.get())
-				.define('a', EItems.WOOD_ASH.get())
-				.unlockedBy(getHasName(EItems.TEAR_OF_THE_GODDESS.get()), has(EItems.TEAR_OF_THE_GODDESS.get())).save(output);
-		ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, EItems.CIRCLE_TALISMAN.get())
-				.pattern("ngn").pattern("gag")
+				.define('a', EItems.WOOD_ASH.get()).save(output);
+		EShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, EItems.CIRCLE_TALISMAN.get())
+				.pattern("ngn")
+				.pattern("gag")
 				.pattern("ngn").define('n', Items.GOLD_NUGGET)
-				.define('g', Items.GOLD_INGOT).define('a', EItems.ATTUNED_STONE.get())
-				.unlockedBy(getHasName(EItems.ATTUNED_STONE.get()), has(EItems.ATTUNED_STONE.get())).save(output);
-		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, EItems.SOFT_CLAY_JAR.get(), 4)
+				.define('g', Items.GOLD_INGOT).define('a', EItems.ATTUNED_STONE.get()).save(output);
+		EShapedRecipeBuilder.shaped(RecipeCategory.MISC, EItems.SOFT_CLAY_JAR.get(), 4)
 				.pattern(" c ")
 				.pattern("ccc")
-				.define('c', Items.CLAY_BALL)
-				.unlockedBy(getHasName(Items.CLAY_BALL), has(Items.CLAY_BALL)).save(output);
-		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, EItems.DISTILLERY.get())
+				.define('c', Items.CLAY_BALL).save(output);
+		EShapedRecipeBuilder.shaped(RecipeCategory.MISC, EItems.DISTILLERY.get())
 				.pattern("cic")
 				.pattern("iii")
 				.pattern("gag")
 				.define('i', Items.IRON_INGOT).define('g', Items.GOLD_NUGGET)
 				.define('c', EItems.CLAY_JAR.get())
-				.define('a', EItems.ATTUNED_STONE.get())
-				.unlockedBy(getHasName(EItems.ATTUNED_STONE.get()), has(EItems.ATTUNED_STONE.get())).save(output);
-		ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, EItems.EARMUFFS.get())
+				.define('a', EItems.ATTUNED_STONE.get()).save(output);
+		EShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, EItems.EARMUFFS.get())
 				.pattern(" i ")
 				.pattern("whw")
 				.define('i', Items.IRON_INGOT).define('w', ItemTags.WOOL)
-				.define('h', Items.LEATHER_HELMET)
-				.unlockedBy("has_wool", has(ItemTags.WOOL))
-				.unlockedBy(getHasName(Items.LEATHER_HELMET), has(Items.LEATHER_HELMET)).save(output);
-		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, EItems.FUME_FILTER.get())
+				.define('h', Items.LEATHER_HELMET).save(output);
+		EShapedRecipeBuilder.shaped(RecipeCategory.MISC, EItems.FUME_FILTER.get())
 				.pattern("ggg")
 				.pattern("iai")
 				.pattern("ggg")
 				.define('g', Items.GLASS).define('i', Items.IRON_INGOT)
-				.define('a', EItems.ATTUNED_STONE.get())
-				.unlockedBy(getHasName(EItems.ATTUNED_STONE.get()), has(EItems.ATTUNED_STONE.get())).save(output);
-		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, EItems.FUME_FUNNEL.get())
+				.define('a', EItems.ATTUNED_STONE.get()).save(output);
+		EShapedRecipeBuilder.shaped(RecipeCategory.MISC, EItems.FUME_FUNNEL.get())
 				.pattern("blb")
 				.pattern("bgb")
 				.pattern("ifi")
 				.define('g', Items.GLOWSTONE).define('i', Items.IRON_BLOCK)
 				.define('b', Items.BUCKET).define('l', Items.LAVA_BUCKET)
-				.define('f', Items.IRON_BARS)
-				.unlockedBy(getHasName(Items.GLOWSTONE), has(Items.GLOWSTONE)).save(output);
-		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, EItems.KETTLE.get())
+				.define('f', Items.IRON_BARS).save(output);
+		EShapedRecipeBuilder.shaped(RecipeCategory.MISC, EItems.KETTLE.get())
 				.pattern("wsw")
 				.pattern("sas")
 				.pattern(" c ").define('w', Items.STICK)
-				.define('s', Items.STRING).define('c', Items.CAULDRON
-				).define('a', EItems.ATTUNED_STONE.get())
-				.unlockedBy(getHasName(EItems.ATTUNED_STONE.get()), has(EItems.ATTUNED_STONE.get())).save(output);
-		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, EItems.POPPET.get())
+				.define('s', Items.STRING).define('c', Items.CAULDRON)
+				.define('a', EItems.ATTUNED_STONE.get()).save(output);
+		EShapedRecipeBuilder.shaped(RecipeCategory.MISC, EItems.POPPET.get())
 				.pattern("wmw")
 				.pattern("bms")
 				.pattern("waw")
 				.define('w', ItemTags.WOOL).define('s', Items.STRING)
 				.define('m', EItems.SPANISH_MOSS.get())
 				.define('b', EItems.BONE_NEEDLE.get())
-				.define('a', EItems.ATTUNED_STONE.get())
-				.unlockedBy(getHasName(EItems.ATTUNED_STONE.get()), has(EItems.ATTUNED_STONE.get())).save(output);
-		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, EItems.POPPET_SHELF.get())
+				.define('a', EItems.ATTUNED_STONE.get()).save(output);
+		EShapedRecipeBuilder.shaped(RecipeCategory.MISC, EItems.POPPET_SHELF.get())
 				.pattern("apa")
 				.pattern("pwp")
 				.pattern("apa")
 				.define('w', Items.GREEN_WOOL).define('p', Items.DARK_OAK_PLANKS)
-				.define('a', EItems.ATTUNED_STONE.get())
-				.unlockedBy(getHasName(EItems.ATTUNED_STONE.get()), has(EItems.ATTUNED_STONE.get())).save(output);
-		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, EItems.SPINNING_WHEEL.get())
+				.define('a', EItems.ATTUNED_STONE.get()).save(output);
+		EShapedRecipeBuilder.shaped(RecipeCategory.MISC, EItems.SPINNING_WHEEL.get())
 				.pattern("wrr")
 				.pattern("srr")
 				.pattern("pap")
 				.define('w', ItemTags.WOOL).define('s', Items.STICK)
 				.define('a', EItems.ATTUNED_STONE.get())
 				.define('p', EItems.ALDER_PLANKS.get())
-				.define('r', EItems.ROWAN_STAIRS.get())
-				.unlockedBy(getHasName(EItems.ATTUNED_STONE.get()), has(EItems.ATTUNED_STONE.get())).save(output);
-		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, EItems.WICKER_BUNDLE.get())
+				.define('r', EItems.ROWAN_STAIRS.get()).save(output);
+		EShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, EItems.WICKER_BUNDLE.get())
 				.pattern("sss")
 				.pattern("sss")
 				.pattern("sss")
 				.define('s', ItemTags.SAPLINGS)
 				.unlockedBy("has_sapling", has(ItemTags.SAPLINGS)).save(output);
-		ShapedRecipeBuilder.shaped(RecipeCategory.MISC, EItems.WITCH_OVEN.get())
+		EShapedRecipeBuilder.shaped(RecipeCategory.MISC, EItems.WITCH_OVEN.get())
 				.pattern(" b ").pattern("iii")
 				.pattern("ibi")
-				.define('i', Items.IRON_INGOT).define('b', Items.IRON_BARS)
-				.unlockedBy(getHasName(Items.IRON_INGOT), has(Items.IRON_INGOT)).save(output);
+				.define('i', Items.IRON_INGOT).define('b', Items.IRON_BARS).save(output);
 
 		slab(output, RecipeCategory.BUILDING_BLOCKS, EItems.ROWAN_SLAB.get(), EItems.ROWAN_PLANKS.get());
 		slab(output, RecipeCategory.BUILDING_BLOCKS, EItems.ALDER_SLAB.get(), EItems.ALDER_PLANKS.get());
@@ -188,19 +168,13 @@ public class ERecipeProvider extends RecipeProvider {
 		pressurePlate(output, EItems.HAWTHORN_PRESSURE_PLATE.get(), EItems.HAWTHORN_PLANKS.get());
 		pressurePlate(output, EItems.ROWAN_PRESSURE_PLATE.get(), EItems.ROWAN_PLANKS.get());
 
-		fenceBuilder(EItems.ALDER_FENCE.get(), Ingredient.of(EItems.ALDER_PLANKS.get()))
-				.unlockedBy(getHasName(EItems.ALDER_PLANKS.get()), has(EItems.ALDER_PLANKS.get())).save(output);
-		fenceBuilder(EItems.HAWTHORN_FENCE.get(), Ingredient.of(EItems.HAWTHORN_PLANKS.get()))
-				.unlockedBy(getHasName(EItems.HAWTHORN_PLANKS.get()), has(EItems.HAWTHORN_PLANKS.get())).save(output);
-		fenceBuilder(EItems.ROWAN_FENCE.get(), Ingredient.of(EItems.ROWAN_PLANKS.get()))
-				.unlockedBy(getHasName(EItems.ROWAN_PLANKS.get()), has(EItems.ROWAN_PLANKS.get())).save(output);
+		fence(output, EItems.ALDER_FENCE.get(), Ingredient.of(EItems.ALDER_PLANKS.get()));
+		fence(output, EItems.HAWTHORN_FENCE.get(), Ingredient.of(EItems.HAWTHORN_PLANKS.get()));
+		fence(output, EItems.ROWAN_FENCE.get(), Ingredient.of(EItems.ROWAN_PLANKS.get()));
 
-		fenceGateBuilder(EItems.ALDER_FENCE_GATE.get(), Ingredient.of(EItems.ALDER_PLANKS.get()))
-				.unlockedBy(getHasName(EItems.ALDER_PLANKS.get()), has(EItems.ALDER_PLANKS.get())).save(output);
-		fenceGateBuilder(EItems.HAWTHORN_FENCE_GATE.get(), Ingredient.of(EItems.HAWTHORN_PLANKS.get()))
-				.unlockedBy(getHasName(EItems.HAWTHORN_PLANKS.get()), has(EItems.HAWTHORN_PLANKS.get())).save(output);
-		fenceGateBuilder(EItems.ROWAN_FENCE_GATE.get(), Ingredient.of(EItems.ROWAN_PLANKS.get()))
-				.unlockedBy(getHasName(EItems.ROWAN_PLANKS.get()), has(EItems.ROWAN_PLANKS.get())).save(output);
+		fenceGate(output, EItems.ALDER_FENCE_GATE.get(), Ingredient.of(EItems.ALDER_PLANKS.get()));
+		fenceGate(output, EItems.HAWTHORN_FENCE_GATE.get(), Ingredient.of(EItems.HAWTHORN_PLANKS.get()));
+		fenceGate(output, EItems.ROWAN_FENCE_GATE.get(), Ingredient.of(EItems.ROWAN_PLANKS.get()));
 	}
 
 	protected void buildShapelessRecipes(RecipeOutput output, Provider registries) {
@@ -450,8 +424,24 @@ public class ERecipeProvider extends RecipeProvider {
 		ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, planks, 4).requires(logs).group("planks").unlockedBy(getHasName(logs), has(logs)).save(output);
 	}
 
+	protected static void slab(RecipeOutput recipeOutput, RecipeCategory category, ItemLike slab, ItemLike material) {
+		EShapedRecipeBuilder.shaped(category, slab, 6).define('#', material).pattern("###").save(recipeOutput);
+	}
+
 	protected static void stairs(RecipeOutput output, ItemLike stairs, ItemLike material) {
-		stairBuilder(stairs, Ingredient.of(material)).unlockedBy(getHasName(material), has(material)).save(output);
+		EShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, stairs, 4).define('#', material).pattern("#  ").pattern("## ").pattern("###").save(output);
+	}
+
+	protected static void pressurePlate(RecipeOutput recipeOutput, ItemLike pressurePlate, ItemLike material) {
+		EShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, pressurePlate).define('#', material).pattern("##").save(recipeOutput);
+	}
+
+	protected static void fence(RecipeOutput output, ItemLike fence, Ingredient material) {
+		EShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, fence, fence == Blocks.NETHER_BRICK_FENCE ? 6 : 3).define('W', material).define('#', fence == Blocks.NETHER_BRICK_FENCE ? Items.NETHER_BRICK : Items.STICK).pattern("W#W").pattern("W#W").save(output);
+	}
+
+	protected static void fenceGate(RecipeOutput output, ItemLike fenceGate, Ingredient material) {
+		EShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, fenceGate).define('#', Items.STICK).define('W', material).pattern("#W#").pattern("#W#").save(output);
 	}
 
 }

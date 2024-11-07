@@ -1,0 +1,28 @@
+{
+  "type": "enchanted:witch_cauldron",
+  "cook_colour": "31154a",
+  "final_colour": "490d82",
+  "ingredients": [
+    {
+      "count": 1,
+      "id": "minecraft:nether_wart"
+    },
+    {
+      "count": 1,
+      "id": "enchanted:tear_of_the_goddess"
+    },
+    {
+      "count": 1,
+      "id": "minecraft:ender_pearl"
+    },
+    {
+      "count": 1,
+      "id": "enchanted:ritual_chalk"
+    }
+  ],
+  "power": 2000,
+  "result": {
+    "count": 1,
+    "id": "enchanted:otherwhere_chalk"
+  }
+}

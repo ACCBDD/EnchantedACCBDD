@@ -1,0 +1,10 @@
+{
+  "type": "enchanted:byproduct",
+  "ingredient": {
+    "item": "minecraft:spruce_sapling"
+  },
+  "result": {
+    "count": 1,
+    "id": "enchanted:hint_of_rebirth"
+  }
+}

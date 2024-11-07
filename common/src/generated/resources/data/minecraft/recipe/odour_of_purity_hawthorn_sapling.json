@@ -1,0 +1,10 @@
+{
+  "type": "enchanted:byproduct",
+  "ingredient": {
+    "item": "enchanted:hawthorn_sapling"
+  },
+  "result": {
+    "count": 1,
+    "id": "enchanted:odour_of_purity"
+  }
+}

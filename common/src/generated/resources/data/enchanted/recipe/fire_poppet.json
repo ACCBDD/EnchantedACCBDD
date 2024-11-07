@@ -1,0 +1,27 @@
+{
+  "type": "enchanted:wheel",
+  "ingredients": [
+    {
+      "count": 1,
+      "id": "enchanted:poppet"
+    },
+    {
+      "count": 1,
+      "id": "enchanted:ember_moss"
+    },
+    {
+      "components": {
+        "minecraft:potion_contents": {
+          "potion": "minecraft:long_fire_resistance"
+        }
+      },
+      "count": 1,
+      "id": "minecraft:potion"
+    }
+  ],
+  "power": 500,
+  "result": {
+    "count": 1,
+    "id": "enchanted:fire_poppet"
+  }
+}

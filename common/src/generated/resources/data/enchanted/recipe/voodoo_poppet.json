@@ -1,0 +1,22 @@
+{
+  "type": "enchanted:wheel",
+  "ingredients": [
+    {
+      "count": 1,
+      "id": "enchanted:infused_poppet"
+    },
+    {
+      "count": 1,
+      "id": "enchanted:bone_needle"
+    },
+    {
+      "count": 1,
+      "id": "enchanted:brew_of_the_grotesque"
+    }
+  ],
+  "power": 500,
+  "result": {
+    "count": 1,
+    "id": "enchanted:voodoo_poppet"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "type": "enchanted:distilling",
+  "ingredients": [
+    {
+      "count": 3,
+      "id": "enchanted:clay_jar"
+    },
+    {
+      "count": 1,
+      "id": "enchanted:breath_of_the_goddess"
+    },
+    {
+      "count": 1,
+      "id": "minecraft:lapis_lazuli"
+    }
+  ],
+  "results": [
+    {
+      "count": 1,
+      "id": "enchanted:tear_of_the_goddess"
+    },
+    {
+      "count": 1,
+      "id": "enchanted:whiff_of_magic"
+    },
+    {
+      "count": 1,
+      "id": "minecraft:slime_ball"
+    },
+    {
+      "count": 1,
+      "id": "enchanted:foul_fume"
+    }
+  ]
+}

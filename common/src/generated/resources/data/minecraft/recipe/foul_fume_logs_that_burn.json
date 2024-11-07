@@ -1,0 +1,10 @@
+{
+  "type": "enchanted:byproduct",
+  "ingredient": {
+    "tag": "minecraft:logs_that_burn"
+  },
+  "result": {
+    "count": 1,
+    "id": "enchanted:foul_fume"
+  }
+}

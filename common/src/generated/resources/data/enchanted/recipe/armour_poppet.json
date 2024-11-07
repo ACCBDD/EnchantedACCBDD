@@ -1,0 +1,22 @@
+{
+  "type": "enchanted:wheel",
+  "ingredients": [
+    {
+      "count": 1,
+      "id": "enchanted:poppet"
+    },
+    {
+      "count": 1,
+      "id": "enchanted:hint_of_rebirth"
+    },
+    {
+      "count": 1,
+      "id": "minecraft:diamond_boots"
+    }
+  ],
+  "power": 500,
+  "result": {
+    "count": 1,
+    "id": "enchanted:armour_poppet"
+  }
+}

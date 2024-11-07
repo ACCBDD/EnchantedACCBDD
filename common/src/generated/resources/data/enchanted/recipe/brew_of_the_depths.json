@@ -1,0 +1,35 @@
+{
+  "type": "enchanted:kettle",
+  "cook_colour": "186ea8",
+  "final_colour": "54bad6",
+  "ingredients": [
+    {
+      "count": 1,
+      "id": "minecraft:lily_pad"
+    },
+    {
+      "count": 1,
+      "id": "minecraft:ink_sac"
+    },
+    {
+      "count": 1,
+      "id": "enchanted:mandrake_root"
+    },
+    {
+      "count": 1,
+      "id": "enchanted:tear_of_the_goddess"
+    },
+    {
+      "count": 1,
+      "id": "enchanted:water_artichoke"
+    },
+    {
+      "count": 1,
+      "id": "enchanted:odour_of_purity"
+    }
+  ],
+  "result": {
+    "count": 3,
+    "id": "enchanted:brew_of_the_depths"
+  }
+}

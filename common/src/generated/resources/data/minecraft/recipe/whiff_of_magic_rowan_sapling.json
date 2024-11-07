@@ -1,0 +1,10 @@
+{
+  "type": "enchanted:byproduct",
+  "ingredient": {
+    "item": "enchanted:rowan_sapling"
+  },
+  "result": {
+    "count": 1,
+    "id": "enchanted:whiff_of_magic"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "type": "enchanted:wheel",
+  "ingredients": [
+    {
+      "count": 1,
+      "id": "enchanted:sturdy_poppet"
+    },
+    {
+      "count": 1,
+      "id": "enchanted:water_artichoke"
+    },
+    {
+      "components": {
+        "minecraft:potion_contents": {
+          "potion": "minecraft:long_water_breathing"
+        }
+      },
+      "count": 1,
+      "id": "minecraft:potion"
+    }
+  ],
+  "power": 1000,
+  "result": {
+    "count": 1,
+    "id": "enchanted:sturdy_water_poppet"
+  }
+}

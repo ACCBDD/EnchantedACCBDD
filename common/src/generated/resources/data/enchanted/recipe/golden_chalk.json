@@ -1,0 +1,24 @@
+{
+  "type": "enchanted:witch_cauldron",
+  "cook_colour": "594000",
+  "final_colour": "c29b00",
+  "ingredients": [
+    {
+      "count": 1,
+      "id": "enchanted:mandrake_root"
+    },
+    {
+      "count": 1,
+      "id": "minecraft:gold_nugget"
+    },
+    {
+      "count": 1,
+      "id": "enchanted:ritual_chalk"
+    }
+  ],
+  "power": 3000,
+  "result": {
+    "count": 1,
+    "id": "enchanted:golden_chalk"
+  }
+}

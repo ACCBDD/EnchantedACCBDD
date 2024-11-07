@@ -1,0 +1,27 @@
+{
+  "type": "enchanted:distilling",
+  "ingredients": [
+    {
+      "count": 3,
+      "id": "enchanted:clay_jar"
+    },
+    {
+      "count": 1,
+      "id": "minecraft:diamond"
+    },
+    {
+      "count": 1,
+      "id": "enchanted:oil_of_vitriol"
+    }
+  ],
+  "results": [
+    {
+      "count": 2,
+      "id": "enchanted:diamond_vapour"
+    },
+    {
+      "count": 1,
+      "id": "enchanted:odour_of_purity"
+    }
+  ]
+}

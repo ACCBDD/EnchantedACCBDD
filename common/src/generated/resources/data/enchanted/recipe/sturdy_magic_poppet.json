@@ -1,0 +1,27 @@
+{
+  "type": "enchanted:wheel",
+  "ingredients": [
+    {
+      "count": 1,
+      "id": "enchanted:sturdy_poppet"
+    },
+    {
+      "count": 1,
+      "id": "enchanted:anointing_paste"
+    },
+    {
+      "components": {
+        "minecraft:potion_contents": {
+          "potion": "minecraft:strong_harming"
+        }
+      },
+      "count": 1,
+      "id": "minecraft:potion"
+    }
+  ],
+  "power": 1000,
+  "result": {
+    "count": 1,
+    "id": "enchanted:sturdy_magic_poppet"
+  }
+}

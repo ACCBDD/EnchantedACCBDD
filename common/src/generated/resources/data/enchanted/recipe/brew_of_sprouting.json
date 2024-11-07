@@ -1,0 +1,35 @@
+{
+  "type": "enchanted:kettle",
+  "cook_colour": "5c3c16",
+  "final_colour": "805a2b",
+  "ingredients": [
+    {
+      "count": 1,
+      "id": "enchanted:rowan_sapling"
+    },
+    {
+      "count": 1,
+      "id": "enchanted:tongue_of_dog"
+    },
+    {
+      "count": 1,
+      "id": "enchanted:alder_sapling"
+    },
+    {
+      "count": 1,
+      "id": "enchanted:mandrake_root"
+    },
+    {
+      "count": 1,
+      "id": "enchanted:hawthorn_sapling"
+    },
+    {
+      "count": 1,
+      "id": "minecraft:poppy"
+    }
+  ],
+  "result": {
+    "count": 3,
+    "id": "enchanted:brew_of_sprouting"
+  }
+}

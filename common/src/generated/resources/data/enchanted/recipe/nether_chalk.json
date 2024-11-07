@@ -1,0 +1,24 @@
+{
+  "type": "enchanted:witch_cauldron",
+  "cook_colour": "54011a",
+  "final_colour": "9c012f",
+  "ingredients": [
+    {
+      "count": 1,
+      "id": "minecraft:nether_wart"
+    },
+    {
+      "count": 1,
+      "id": "minecraft:blaze_powder"
+    },
+    {
+      "count": 1,
+      "id": "enchanted:ritual_chalk"
+    }
+  ],
+  "power": 2000,
+  "result": {
+    "count": 1,
+    "id": "enchanted:nether_chalk"
+  }
+}

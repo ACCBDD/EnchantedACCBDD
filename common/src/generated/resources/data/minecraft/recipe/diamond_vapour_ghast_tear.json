@@ -1,0 +1,35 @@
+{
+  "type": "enchanted:distilling",
+  "ingredients": [
+    {
+      "count": 3,
+      "id": "enchanted:clay_jar"
+    },
+    {
+      "count": 1,
+      "id": "enchanted:diamond_vapour"
+    },
+    {
+      "count": 1,
+      "id": "minecraft:ghast_tear"
+    }
+  ],
+  "results": [
+    {
+      "count": 1,
+      "id": "enchanted:odour_of_purity"
+    },
+    {
+      "count": 1,
+      "id": "enchanted:reek_of_misfortune"
+    },
+    {
+      "count": 1,
+      "id": "enchanted:foul_fume"
+    },
+    {
+      "count": 1,
+      "id": "enchanted:refined_evil"
+    }
+  ]
+}

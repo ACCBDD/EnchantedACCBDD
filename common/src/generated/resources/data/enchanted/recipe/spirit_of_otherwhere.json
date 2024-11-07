@@ -1,0 +1,41 @@
+{
+  "type": "enchanted:kettle",
+  "cook_colour": "2f1645",
+  "final_colour": "4e1680",
+  "ingredients": [
+    {
+      "count": 1,
+      "id": "enchanted:redstone_soup"
+    },
+    {
+      "components": {
+        "minecraft:potion_contents": {
+          "potion": "minecraft:long_swiftness"
+        }
+      },
+      "count": 1,
+      "id": "minecraft:potion"
+    },
+    {
+      "count": 1,
+      "id": "enchanted:wool_of_bat"
+    },
+    {
+      "count": 1,
+      "id": "minecraft:ender_eye"
+    },
+    {
+      "count": 1,
+      "id": "minecraft:ender_eye"
+    },
+    {
+      "count": 1,
+      "id": "enchanted:drop_of_luck"
+    }
+  ],
+  "power": 4000,
+  "result": {
+    "count": 2,
+    "id": "enchanted:spirit_of_otherwhere"
+  }
+}

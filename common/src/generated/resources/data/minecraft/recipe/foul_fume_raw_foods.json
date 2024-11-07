@@ -1,0 +1,10 @@
+{
+  "type": "enchanted:byproduct",
+  "ingredient": {
+    "tag": "enchanted:raw_foods"
+  },
+  "result": {
+    "count": 1,
+    "id": "enchanted:foul_fume"
+  }
+}

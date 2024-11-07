@@ -1,0 +1,36 @@
+{
+  "type": "enchanted:kettle",
+  "cook_colour": "362a21",
+  "final_colour": "805f46",
+  "ingredients": [
+    {
+      "count": 1,
+      "id": "enchanted:mutandis_extremis"
+    },
+    {
+      "count": 1,
+      "id": "enchanted:mandrake_root"
+    },
+    {
+      "count": 1,
+      "id": "enchanted:water_artichoke"
+    },
+    {
+      "count": 1,
+      "id": "minecraft:golden_apple"
+    },
+    {
+      "count": 1,
+      "id": "enchanted:tongue_of_dog"
+    },
+    {
+      "count": 1,
+      "id": "minecraft:poisonous_potato"
+    }
+  ],
+  "power": 750,
+  "result": {
+    "count": 3,
+    "id": "enchanted:brew_of_the_grotesque"
+  }
+}

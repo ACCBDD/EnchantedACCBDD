@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "enchanted:water_artichoke_seeds"
+    },
+    {
+      "item": "enchanted:mandrake_seeds"
+    },
+    {
+      "item": "enchanted:belladonna_seeds"
+    },
+    {
+      "item": "enchanted:snowbell_seeds"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "enchanted:anointing_paste"
+  }
+}

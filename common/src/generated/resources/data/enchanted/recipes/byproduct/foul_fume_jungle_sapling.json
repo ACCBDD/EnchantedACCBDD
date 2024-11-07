@@ -1,9 +1,0 @@
-{
-  "type": "enchanted:byproduct",
-  "ingredient": {
-    "item": "minecraft:jungle_sapling"
-  },
-  "result": {
-    "item": "enchanted:foul_fume"
-  }
-}

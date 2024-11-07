@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "d": {
+      "item": "minecraft:diamond"
+    },
+    "l": {
+      "item": "minecraft:lava_bucket"
+    },
+    "w": {
+      "item": "enchanted:whiff_of_magic"
+    }
+  },
+  "pattern": [
+    "w",
+    "d",
+    "l"
+  ],
+  "result": {
+    "count": 1,
+    "id": "enchanted:attuned_stone"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "type": "enchanted:wheel",
+  "ingredients": [
+    {
+      "count": 1,
+      "id": "enchanted:infused_poppet"
+    },
+    {
+      "count": 1,
+      "id": "enchanted:bone_needle"
+    },
+    {
+      "components": {
+        "minecraft:potion_contents": {
+          "potion": "minecraft:strong_healing"
+        }
+      },
+      "count": 1,
+      "id": "minecraft:potion"
+    }
+  ],
+  "power": 1000,
+  "result": {
+    "count": 1,
+    "id": "enchanted:infused_voodoo_protection_poppet"
+  }
+}

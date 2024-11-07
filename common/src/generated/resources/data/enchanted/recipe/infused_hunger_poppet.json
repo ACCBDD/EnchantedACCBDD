@@ -1,0 +1,22 @@
+{
+  "type": "enchanted:wheel",
+  "ingredients": [
+    {
+      "count": 1,
+      "id": "enchanted:infused_poppet"
+    },
+    {
+      "count": 1,
+      "id": "enchanted:rowan_berries"
+    },
+    {
+      "count": 1,
+      "id": "minecraft:rotten_flesh"
+    }
+  ],
+  "power": 1000,
+  "result": {
+    "count": 1,
+    "id": "enchanted:infused_hunger_poppet"
+  }
+}

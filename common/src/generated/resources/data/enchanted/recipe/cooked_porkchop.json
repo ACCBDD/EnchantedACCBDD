@@ -1,0 +1,16 @@
+{
+  "type": "enchanted:witch_cauldron",
+  "cook_colour": "3d4518",
+  "final_colour": "626e13",
+  "ingredients": [
+    {
+      "count": 1,
+      "id": "minecraft:porkchop"
+    }
+  ],
+  "power": 0,
+  "result": {
+    "count": 1,
+    "id": "minecraft:cooked_porkchop"
+  }
+}

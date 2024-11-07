@@ -47,6 +47,19 @@ neoForge {
             programArgument("--nogui")
         }
 
+        val output = project(":common").file("src/generated/resources/").absolutePath
+        val existing = project(":common").file("src/main/resources/").absolutePath
+
+        create("data") {
+            data()
+            gameDirectory = file("runs/data")
+            programArguments.addAll(
+                "--mod", "enchanted", "--all",
+                "--output", output,
+                "--existing", existing
+            )
+        }
+
     }
 }
 
@@ -55,7 +68,6 @@ dependencies {
     implementation( libs.stateobserver.neoforge )
     implementation( libs.geckolib.neoforge ) { isTransitive = false }
 }
-
 
 tasks.withType<JavaCompile>().matching{!it.name.startsWith("neo")}.configureEach {
     source(project(":common").sourceSets.getByName("main").allSource)

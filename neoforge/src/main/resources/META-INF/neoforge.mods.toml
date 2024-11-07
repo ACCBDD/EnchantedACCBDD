@@ -16,6 +16,10 @@ license = "All Rights Reserved"
 [[mixins]]
     config="enchanted.neoforge.mixins.json"
 
+[[mixins]]
+    config="enchanted.mixins.json"
+
+
 [[dependencies.enchanted]]
     modId = "neoforge"
     type="required" #mandatory

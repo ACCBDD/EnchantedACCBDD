@@ -18,10 +18,7 @@ import java.util.concurrent.CompletableFuture;
 public class ELootTableProvider {
 
     public static LootTableProvider create(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
-        return new LootTableProvider(
-                output,
-                BuiltInLootTables.all(),
-                List.of(
+        return new LootTableProvider(output, Set.of(), List.of(
                         new LootTableProvider.SubProviderEntry(EBlockLoot::new, LootContextParamSets.BLOCK)
                 ),
                 registries

@@ -1,0 +1,23 @@
+{
+  "type": "enchanted:distilling",
+  "ingredients": [
+    {
+      "count": 1,
+      "id": "enchanted:clay_jar"
+    },
+    {
+      "count": 1,
+      "id": "enchanted:diamond_vapour"
+    },
+    {
+      "count": 1,
+      "id": "minecraft:blaze_rod"
+    }
+  ],
+  "results": [
+    {
+      "count": 1,
+      "id": "enchanted:demonic_blood"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "b": {
+      "item": "minecraft:iron_bars"
+    },
+    "i": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "pattern": [
+    " b ",
+    "iii",
+    "ibi"
+  ],
+  "result": {
+    "count": 1,
+    "id": "enchanted:witch_oven"
+  }
+}

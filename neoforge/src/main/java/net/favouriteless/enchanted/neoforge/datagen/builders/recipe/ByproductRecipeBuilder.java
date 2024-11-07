@@ -1,6 +1,7 @@
 package net.favouriteless.enchanted.neoforge.datagen.builders.recipe;
 
 import net.favouriteless.enchanted.common.recipes.ByproductRecipe;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -9,26 +10,30 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 
+import java.util.Arrays;
+
 public class ByproductRecipeBuilder extends ERecipeBuilder {
 
     private final ItemStack result;
-    private final Ingredient ingredient;
+    private ItemLike[] items = null;
+    private TagKey<Item> tag = null;
 
-    private ByproductRecipeBuilder(ItemStack result, Ingredient ingredient) {
+    private ByproductRecipeBuilder(ItemStack result, ItemLike[] items, TagKey<Item> tag) {
         this.result = result;
-        this.ingredient = ingredient;
+        this.items = items;
+        this.tag = tag;
     }
 
     public static ByproductRecipeBuilder create(ItemStack result, ItemLike... itemLikes) {
-        return new ByproductRecipeBuilder(result, Ingredient.of(itemLikes));
+        return new ByproductRecipeBuilder(result, itemLikes, null);
     }
 
     public static ByproductRecipeBuilder create(ItemStack result, ItemStack... stacks) {
-        return new ByproductRecipeBuilder(result, Ingredient.of(stacks));
+        return new ByproductRecipeBuilder(result, Arrays.stream(stacks).map(ItemStack::getItem).toArray(ItemLike[]::new), null);
     }
 
     public static ByproductRecipeBuilder create(ItemStack result, TagKey<Item> tag) {
-        return new ByproductRecipeBuilder(result, Ingredient.of(tag));
+        return new ByproductRecipeBuilder(result, null, tag);
     }
 
     @Override
@@ -38,7 +43,19 @@ public class ByproductRecipeBuilder extends ERecipeBuilder {
 
     @Override
     public void save(RecipeOutput output, ResourceLocation id) {
-        output.accept(id, new ByproductRecipe(ingredient, result), null);
+        output.accept(id, new ByproductRecipe(tag == null ? Ingredient.of(items) : Ingredient.of(tag), result), null);
+    }
+
+    @Override
+    public void save(RecipeOutput output) {
+        save(output, getRecipeName());
+    }
+
+    protected String getRecipeName() {
+        String prefix = BuiltInRegistries.ITEM.getKey(result.getItem()).getPath();
+        String suffix = tag != null ? tag.location().getPath() : BuiltInRegistries.ITEM.getKey(items[0].asItem()).getPath();
+
+        return prefix + "_" + suffix;
     }
 
 }

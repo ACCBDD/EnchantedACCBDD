@@ -1,0 +1,22 @@
+{
+  "type": "enchanted:wheel",
+  "ingredients": [
+    {
+      "count": 1,
+      "id": "enchanted:sturdy_poppet"
+    },
+    {
+      "count": 1,
+      "id": "enchanted:hint_of_rebirth"
+    },
+    {
+      "count": 1,
+      "id": "minecraft:diamond_sword"
+    }
+  ],
+  "power": 1000,
+  "result": {
+    "count": 1,
+    "id": "enchanted:sturdy_tool_poppet"
+  }
+}

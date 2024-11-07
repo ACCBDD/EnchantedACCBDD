@@ -1,0 +1,24 @@
+{
+  "type": "enchanted:witch_cauldron",
+  "cook_colour": "1a4723",
+  "final_colour": "3e804e",
+  "ingredients": [
+    {
+      "count": 1,
+      "id": "enchanted:mandrake_root"
+    },
+    {
+      "count": 1,
+      "id": "enchanted:exhale_of_the_horned_one"
+    },
+    {
+      "count": 1,
+      "id": "minecraft:egg"
+    }
+  ],
+  "power": 0,
+  "result": {
+    "count": 6,
+    "id": "enchanted:mutandis"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "type": "enchanted:witch_cauldron",
+  "cook_colour": "4517",
+  "final_colour": "7527",
+  "ingredients": [
+    {
+      "count": 1,
+      "id": "enchanted:mandrake_root"
+    },
+    {
+      "count": 1,
+      "id": "minecraft:nether_wart"
+    },
+    {
+      "count": 1,
+      "id": "enchanted:tear_of_the_goddess"
+    },
+    {
+      "count": 1,
+      "id": "enchanted:refined_evil"
+    },
+    {
+      "count": 1,
+      "id": "enchanted:mutandis_extremis"
+    }
+  ],
+  "power": 7000,
+  "result": {
+    "count": 1,
+    "id": "enchanted:drop_of_luck"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "a": {
+      "item": "enchanted:attuned_stone"
+    },
+    "p": {
+      "item": "enchanted:alder_planks"
+    },
+    "r": {
+      "item": "enchanted:rowan_stairs"
+    },
+    "s": {
+      "item": "minecraft:stick"
+    },
+    "w": {
+      "tag": "minecraft:wool"
+    }
+  },
+  "pattern": [
+    "wrr",
+    "srr",
+    "pap"
+  ],
+  "result": {
+    "count": 1,
+    "id": "enchanted:spinning_wheel"
+  }
+}

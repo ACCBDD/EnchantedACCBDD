@@ -1,0 +1,41 @@
+{
+  "type": "enchanted:kettle",
+  "cook_colour": "706615",
+  "final_colour": "dbc72a",
+  "ingredients": [
+    {
+      "count": 1,
+      "id": "enchanted:redstone_soup"
+    },
+    {
+      "components": {
+        "minecraft:potion_contents": {
+          "potion": "minecraft:long_swiftness"
+        }
+      },
+      "count": 1,
+      "id": "minecraft:potion"
+    },
+    {
+      "count": 1,
+      "id": "minecraft:diamond"
+    },
+    {
+      "count": 1,
+      "id": "minecraft:feather"
+    },
+    {
+      "count": 1,
+      "id": "enchanted:wool_of_bat"
+    },
+    {
+      "count": 1,
+      "id": "enchanted:belladonna_flower"
+    }
+  ],
+  "power": 3000,
+  "result": {
+    "count": 1,
+    "id": "enchanted:flying_ointment"
+  }
+}

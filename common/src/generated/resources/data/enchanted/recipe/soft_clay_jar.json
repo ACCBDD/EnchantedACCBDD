@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "c": {
+      "item": "minecraft:clay_ball"
+    }
+  },
+  "pattern": [
+    " c ",
+    "ccc"
+  ],
+  "result": {
+    "count": 4,
+    "id": "enchanted:soft_clay_jar"
+  }
+}

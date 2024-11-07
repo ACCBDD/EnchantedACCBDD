@@ -1,0 +1,10 @@
+{
+  "type": "enchanted:byproduct",
+  "ingredient": {
+    "item": "enchanted:alder_sapling"
+  },
+  "result": {
+    "count": 1,
+    "id": "enchanted:reek_of_misfortune"
+  }
+}

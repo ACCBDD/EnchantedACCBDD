@@ -1,0 +1,36 @@
+{
+  "type": "enchanted:kettle",
+  "cook_colour": "801e17",
+  "final_colour": "de311d",
+  "ingredients": [
+    {
+      "count": 1,
+      "id": "minecraft:redstone"
+    },
+    {
+      "count": 1,
+      "id": "enchanted:drop_of_luck"
+    },
+    {
+      "count": 1,
+      "id": "enchanted:wool_of_bat"
+    },
+    {
+      "count": 1,
+      "id": "enchanted:tongue_of_dog"
+    },
+    {
+      "count": 1,
+      "id": "enchanted:belladonna_flower"
+    },
+    {
+      "count": 1,
+      "id": "enchanted:mandrake_root"
+    }
+  ],
+  "power": 1000,
+  "result": {
+    "count": 1,
+    "id": "enchanted:redstone_soup"
+  }
+}

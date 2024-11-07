@@ -1,0 +1,35 @@
+{
+  "type": "enchanted:kettle",
+  "cook_colour": "b046a5",
+  "final_colour": "f78feb",
+  "ingredients": [
+    {
+      "count": 1,
+      "id": "minecraft:poppy"
+    },
+    {
+      "count": 1,
+      "id": "minecraft:golden_carrot"
+    },
+    {
+      "count": 1,
+      "id": "minecraft:lily_pad"
+    },
+    {
+      "count": 1,
+      "id": "minecraft:cocoa_beans"
+    },
+    {
+      "count": 1,
+      "id": "enchanted:whiff_of_magic"
+    },
+    {
+      "count": 1,
+      "id": "enchanted:water_artichoke"
+    }
+  ],
+  "result": {
+    "count": 3,
+    "id": "enchanted:brew_of_love"
+  }
+}

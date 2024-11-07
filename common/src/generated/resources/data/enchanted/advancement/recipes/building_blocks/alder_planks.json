@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_alder_log": {
+      "conditions": {
+        "items": [
+          {
+            "items": "enchanted:alder_log"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "enchanted:alder_planks"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_alder_log"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "enchanted:alder_planks"
+    ]
+  }
+}

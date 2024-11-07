@@ -1,0 +1,41 @@
+{
+  "type": "enchanted:kettle",
+  "cook_colour": "320f6e",
+  "final_colour": "541ab8",
+  "ingredients": [
+    {
+      "count": 1,
+      "id": "enchanted:redstone_soup"
+    },
+    {
+      "components": {
+        "minecraft:potion_contents": {
+          "potion": "minecraft:long_night_vision"
+        }
+      },
+      "count": 1,
+      "id": "minecraft:potion"
+    },
+    {
+      "count": 1,
+      "id": "minecraft:ender_eye"
+    },
+    {
+      "count": 1,
+      "id": "minecraft:golden_carrot"
+    },
+    {
+      "count": 1,
+      "id": "minecraft:spider_eye"
+    },
+    {
+      "count": 1,
+      "id": "enchanted:mandrake_root"
+    }
+  ],
+  "power": 2000,
+  "result": {
+    "count": 1,
+    "id": "enchanted:happenstance_oil"
+  }
+}

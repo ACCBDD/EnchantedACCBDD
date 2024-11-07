@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "a": {
+      "item": "enchanted:attuned_stone"
+    },
+    "g": {
+      "item": "minecraft:gold_ingot"
+    },
+    "n": {
+      "item": "minecraft:gold_nugget"
+    }
+  },
+  "pattern": [
+    "ngn",
+    "gag",
+    "ngn"
+  ],
+  "result": {
+    "count": 1,
+    "id": "enchanted:circle_talisman"
+  }
+}

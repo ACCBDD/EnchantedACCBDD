@@ -1,0 +1,31 @@
+{
+  "type": "enchanted:distilling",
+  "ingredients": [
+    {
+      "count": 1,
+      "id": "enchanted:clay_jar"
+    },
+    {
+      "count": 1,
+      "id": "enchanted:foul_fume"
+    },
+    {
+      "count": 1,
+      "id": "enchanted:quicklime"
+    }
+  ],
+  "results": [
+    {
+      "count": 1,
+      "id": "enchanted:gypsum"
+    },
+    {
+      "count": 1,
+      "id": "enchanted:oil_of_vitriol"
+    },
+    {
+      "count": 1,
+      "id": "minecraft:slime_ball"
+    }
+  ]
+}

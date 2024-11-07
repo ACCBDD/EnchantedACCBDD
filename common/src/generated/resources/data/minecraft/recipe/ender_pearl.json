@@ -1,0 +1,23 @@
+{
+  "type": "enchanted:distilling",
+  "ingredients": [
+    {
+      "count": 6,
+      "id": "enchanted:clay_jar"
+    },
+    {
+      "count": 1,
+      "id": "minecraft:ender_pearl"
+    }
+  ],
+  "results": [
+    {
+      "count": 5,
+      "id": "enchanted:ender_dew"
+    },
+    {
+      "count": 1,
+      "id": "enchanted:whiff_of_magic"
+    }
+  ]
+}
