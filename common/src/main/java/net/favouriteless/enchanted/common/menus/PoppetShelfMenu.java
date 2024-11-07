@@ -1,10 +1,9 @@
 package net.favouriteless.enchanted.common.menus;
 
-import net.favouriteless.enchanted.common.blocks.entity.PoppetShelfBlockEntity;
 import net.favouriteless.enchanted.common.blocks.EBlocks;
+import net.favouriteless.enchanted.common.blocks.entity.PoppetShelfBlockEntity;
 import net.favouriteless.enchanted.common.items.poppets.PoppetItem;
 import net.favouriteless.enchanted.util.MenuUtils;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -35,8 +34,8 @@ public class PoppetShelfMenu extends AbstractContainerMenu {
 		this.containerAccess = ContainerLevelAccess.create(be.getLevel(), be.getBlockPos());
 	}
 
-	public PoppetShelfMenu(final int windowId, final Inventory playerInventory, final FriendlyByteBuf data) {
-		this(windowId, playerInventory, MenuUtils.getBlockEntity(playerInventory, data, PoppetShelfBlockEntity.class));
+	public PoppetShelfMenu(int id, Inventory playerInventory, PosMenuData data) {
+		this(id, playerInventory, MenuUtils.getBlockEntity(playerInventory, data.pos(), PoppetShelfBlockEntity.class));
 	}
 
 	@Override

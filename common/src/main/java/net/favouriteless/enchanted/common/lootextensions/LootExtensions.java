@@ -2,6 +2,8 @@ package net.favouriteless.enchanted.common.lootextensions;
 
 import net.favouriteless.enchanted.api.LootExtension;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -46,7 +48,7 @@ public class LootExtensions {
             if(extension.canApply(state.getBlock())) {
                 LootParams params = builder.withParameter(LootContextParams.BLOCK_STATE, state).create(LootContextParamSets.BLOCK);
                 ServerLevel level = params.getLevel();
-                out.addAll(level.getServer().getLootData().getLootTable(extension.getTable()).getRandomItems(params));
+                out.addAll(level.getServer().reloadableRegistries().getLootTable(ResourceKey.create(Registries.LOOT_TABLE, extension.getTable())).getRandomItems(params));
             }
         }
         return out;
@@ -56,7 +58,7 @@ public class LootExtensions {
         for(LootExtension extension : LootExtensions.entityLootExtensions) {
             if(extension.canApply(entity.getType())) {
                 LootParams params = builder.create(LootContextParamSets.ENTITY);
-                params.getLevel().getServer().getLootData().getLootTable(extension.getTable()).getRandomItems(params, entity::spawnAtLocation);
+                params.getLevel().getServer().reloadableRegistries().getLootTable(ResourceKey.create(Registries.LOOT_TABLE, extension.getTable())).getRandomItems(params, entity::spawnAtLocation);
             }
         }
     }

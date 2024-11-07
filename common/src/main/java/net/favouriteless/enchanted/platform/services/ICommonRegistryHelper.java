@@ -15,6 +15,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import org.apache.commons.lang3.function.TriFunction;
 
+import java.util.function.BiFunction;
 import java.util.function.Supplier;
 
 public interface ICommonRegistryHelper {
@@ -36,9 +37,12 @@ public interface ICommonRegistryHelper {
      *
      * @return A {@link Supplier} for a {@link MenuType} implementation, depending on the platform.
      */
-    public <T extends AbstractContainerMenu, C> Supplier<MenuType<T>> registerMenu(String name,
-                                                                                   TriFunction<Integer, Inventory, C, T> factory,
-                                                                                   StreamCodec<? super RegistryFriendlyByteBuf, C> codec);
+    <T extends AbstractContainerMenu, C> Supplier<MenuType<T>> registerMenu(String name,
+                                                                            TriFunction<Integer, Inventory, C, T> factory,
+                                                                            StreamCodec<? super RegistryFriendlyByteBuf, C> codec);
+
+    <T extends AbstractContainerMenu> Supplier<MenuType<T>> registerMenu(String name,
+                                                                            BiFunction<Integer, Inventory, T> factory);
 
     /**
      * Register a {@link SimpleJsonResourceReloadListener}, necessary because Fabric requires ReloadListeners to provide

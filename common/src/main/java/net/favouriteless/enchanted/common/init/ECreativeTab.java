@@ -2,7 +2,6 @@ package net.favouriteless.enchanted.common.init;
 
 import net.favouriteless.enchanted.common.items.EItems;
 import net.favouriteless.enchanted.platform.CommonServices;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTab.DisplayItemsGenerator;
 import net.minecraft.world.item.ItemStack;
@@ -177,14 +176,14 @@ public class ECreativeTab {
 
 
                 out.accept(EItems.CIRCLE_TALISMAN.get());
-                for(int i = 1; i < 4; i++) {
-                    for(String key : new String[] { "small", "medium", "large" }) {
-                        ItemStack stack = new ItemStack(EItems.CIRCLE_TALISMAN.get());
-                        CompoundTag nbt = stack.getOrCreateTag();
-                        nbt.putInt(key, i);
-                        out.accept(stack);
-                    }
-                }
+//                for(int i = 1; i < 4; i++) {
+//                    for(String key : new String[] { "small", "medium", "large" }) {
+//                        ItemStack stack = new ItemStack(EItems.CIRCLE_TALISMAN.get());
+//                        CompoundTag nbt = stack.getOrCreateTag();
+//                        nbt.putInt(key, i);
+//                        out.accept(stack);
+//                    }
+//                }
             });
 
 

@@ -1,7 +1,6 @@
 package net.favouriteless.enchanted.util;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
@@ -12,11 +11,11 @@ public class MenuUtils {
 	 * {@link BlockPos}.
 	 */
 	@SuppressWarnings("unchecked")
-	public static <C extends BlockEntity> C getBlockEntity(final Inventory playerInventory, final FriendlyByteBuf data, Class<C> clazz) {
-		BlockEntity blockEntity = playerInventory.player.level().getBlockEntity(data.readBlockPos());
+	public static <C extends BlockEntity> C getBlockEntity(final Inventory playerInventory, final BlockPos pos, Class<C> clazz) {
+		BlockEntity blockEntity = playerInventory.player.level().getBlockEntity(pos);
 		if(blockEntity != null && blockEntity.getClass() == clazz)
 			return (C)blockEntity; // This unchecked cast is safe as BE.getClass is guaranteed to extend C.
-		throw new IllegalStateException("BlockEntity at " + data.readBlockPos() + " is not correct");
+		throw new IllegalStateException("BlockEntity at " + pos + " is not correct");
 	}
 
 }

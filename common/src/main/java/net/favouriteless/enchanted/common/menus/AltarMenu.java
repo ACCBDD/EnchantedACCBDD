@@ -1,9 +1,8 @@
 package net.favouriteless.enchanted.common.menus;
 
-import net.favouriteless.enchanted.common.blocks.entity.AltarBlockEntity;
 import net.favouriteless.enchanted.common.blocks.EBlocks;
+import net.favouriteless.enchanted.common.blocks.entity.AltarBlockEntity;
 import net.favouriteless.enchanted.util.MenuUtils;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -18,16 +17,16 @@ public class AltarMenu extends AbstractContainerMenu {
     private final ContainerLevelAccess canInteractWithCallable;
     private final ContainerData data;
 
-    public AltarMenu(final int windowId, final AltarBlockEntity blockEntity, ContainerData data) {
-        super(EMenuTypes.ALTAR.get(), windowId);
-        this.blockEntity = blockEntity;
-        this.canInteractWithCallable = ContainerLevelAccess.create(blockEntity.getLevel(), blockEntity.getBlockPos());
+    public AltarMenu(final int id, final AltarBlockEntity be, ContainerData data) {
+        super(EMenuTypes.ALTAR.get(), id);
+        this.blockEntity = be;
+        this.canInteractWithCallable = ContainerLevelAccess.create(be.getLevel(), be.getBlockPos());
         this.data = data;
         addDataSlots(this.data);
     }
 
-    public AltarMenu(final int windowId, final Inventory playerInventory, final FriendlyByteBuf data) {
-        this(windowId, MenuUtils.getBlockEntity(playerInventory, data, AltarBlockEntity.class), new SimpleContainerData(3));
+    public AltarMenu(int id, Inventory playerInventory, PosMenuData data) {
+        this(id, MenuUtils.getBlockEntity(playerInventory, data.pos(), AltarBlockEntity.class), new SimpleContainerData(3));
     }
 
     public int getCurrentPower() {

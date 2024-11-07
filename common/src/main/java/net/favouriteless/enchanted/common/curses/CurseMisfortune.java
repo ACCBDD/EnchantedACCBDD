@@ -28,7 +28,7 @@ public class CurseMisfortune extends RandomCurse {
 				if(Math.random() < 0.25D)
 					effectDuration += 15; // Every additional curse level has a 25% chance to increase duration by 15 seconds
 			}
-			targetPlayer.addEffect(new MobEffectInstance(effect.value(), effectDuration*20, effectLevel));
+			targetPlayer.addEffect(new MobEffectInstance(effect, effectDuration*20, effectLevel));
 		}
 	}
 

@@ -1,15 +1,15 @@
 package net.favouriteless.enchanted.common.menus;
 
-import net.favouriteless.enchanted.common.blocks.entity.SpinningWheelBlockEntity;
 import net.favouriteless.enchanted.common.blocks.EBlocks;
+import net.favouriteless.enchanted.common.blocks.entity.SpinningWheelBlockEntity;
 import net.favouriteless.enchanted.common.menus.slots.NonJarInputSlot;
 import net.favouriteless.enchanted.common.menus.slots.OutputSlot;
 import net.favouriteless.enchanted.common.menus.slots.SimpleDataSlot;
 import net.favouriteless.enchanted.util.MenuUtils;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.*;
+import net.minecraft.world.inventory.DataSlot;
+import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
@@ -30,8 +30,8 @@ public class SpinningWheelMenu extends MenuBase<SpinningWheelBlockEntity> {
 		addDataSlot(data);
 	}
 
-	public SpinningWheelMenu(int id, Inventory playerInventory, FriendlyByteBuf data) {
-		this(id, playerInventory, MenuUtils.getBlockEntity(playerInventory, data, SpinningWheelBlockEntity.class), new SimpleDataSlot());
+	public SpinningWheelMenu(int id, Inventory playerInventory, PosMenuData data) {
+		this(id, playerInventory, MenuUtils.getBlockEntity(playerInventory, data.pos(), SpinningWheelBlockEntity.class), new SimpleDataSlot());
 	}
 
 	public int getSpinProgress() {

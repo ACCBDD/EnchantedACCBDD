@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.BiFunction;
 import java.util.function.Supplier;
 
 public class NeoCommonRegistryHelper implements ICommonRegistryHelper {
@@ -51,6 +52,11 @@ public class NeoCommonRegistryHelper implements ICommonRegistryHelper {
 																				   TriFunction<Integer, Inventory, C, T> factory,
 																				   StreamCodec<? super RegistryFriendlyByteBuf, C> codec) {
 		return register(BuiltInRegistries.MENU, name, () -> new MenuType<>((IContainerFactory<T>)(id, inv, buf) -> factory.apply(id, inv, codec.decode(buf)), FeatureFlags.DEFAULT_FLAGS));
+	}
+
+	@Override
+	public <T extends AbstractContainerMenu> Supplier<MenuType<T>> registerMenu(String name, BiFunction<Integer, Inventory, T> factory) {
+		return register(BuiltInRegistries.MENU, name, () -> new MenuType<>(factory::apply, FeatureFlags.DEFAULT_FLAGS));
 	}
 
 	@Override
