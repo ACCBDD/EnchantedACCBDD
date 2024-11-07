@@ -2,7 +2,7 @@
   "values": [
     "#enchanted:armors",
     {
-      "id": "#forge:armors",
+      "id": "#c:armors",
       "required": false
     }
   ]

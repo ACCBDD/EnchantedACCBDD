@@ -139,7 +139,7 @@ public class WitchOvenBlockEntity extends ContainerBlockEntityBase implements Me
         if(Math.random() <= getByproductChance())
             createByproduct(byproductCheck.getRecipeFor(new SingleRecipeInput(input), level).orElse(null));
 
-        ItemStack result = recipe.value().getResultItem(level.registryAccess());
+        ItemStack result = recipe.value().assemble(new SingleRecipeInput(inventory.get(0)), level.registryAccess());
 
         if(output.isEmpty())
             inventory.set(3, result);
@@ -176,6 +176,7 @@ public class WitchOvenBlockEntity extends ContainerBlockEntityBase implements Me
         else {
             inventory.set(4, result);
         }
+        input.shrink(result.getCount());
     }
 
     /**

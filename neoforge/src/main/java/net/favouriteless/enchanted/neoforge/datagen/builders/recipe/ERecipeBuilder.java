@@ -10,6 +10,12 @@ import org.jetbrains.annotations.Nullable;
 
 public abstract class ERecipeBuilder implements RecipeBuilder {
 
+    private String subfolder;
+
+    protected ERecipeBuilder(String subfolder) {
+        this.subfolder = subfolder;
+    }
+
     @Override
     public RecipeBuilder unlockedBy(String name, Criterion<?> criterion) {
         return null;
@@ -21,11 +27,17 @@ public abstract class ERecipeBuilder implements RecipeBuilder {
     }
 
     @Override
-    public void save(RecipeOutput output) {
+    public final void save(RecipeOutput output) {
         save(output, getDefaultName());
     }
 
-    protected ResourceLocation getDefaultName() {
-        return Enchanted.id(BuiltInRegistries.ITEM.getKey(getResult()).getPath());
+    @Override
+    public final void save(RecipeOutput output, String id) {
+        save(output, Enchanted.id(subfolder + "/" + id));
     }
+
+    protected String getDefaultName() {
+        return BuiltInRegistries.ITEM.getKey(getResult()).getPath();
+    }
+
 }

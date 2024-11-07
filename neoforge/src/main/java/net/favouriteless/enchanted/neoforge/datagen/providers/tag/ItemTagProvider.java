@@ -52,7 +52,7 @@ public class ItemTagProvider extends ItemTagsProvider {
                         Items.NETHERITE_BOOTS, Items.NETHERITE_LEGGINGS, Items.NETHERITE_CHESTPLATE, Items.NETHERITE_HELMET);
         tag(ETags.Items.ARMOR_POPPET_WHITELIST)
                 .addTag(ETags.Items.ARMORS)
-                .addOptionalTag(ResourceLocation.fromNamespaceAndPath("forge", "armors"));
+                .addOptionalTag(ResourceLocation.fromNamespaceAndPath("c", "armors"));
         tag(ETags.Items.RAW_FOODS)
                 .add(Items.BEEF, Items.KELP, Items.POTATO, Items.CHORUS_FRUIT, Items.CHICKEN, Items.COD, Items.MUTTON,
                         Items.PORKCHOP, Items.RABBIT, Items.SALMON);
@@ -64,14 +64,14 @@ public class ItemTagProvider extends ItemTagsProvider {
                 .addTag(ETags.Items.CHALKS);
         tag(ETags.Items.TOOL_POPPET_WHITELIST)
                 .addTags(ItemTags.SWORDS, ItemTags.PICKAXES, ItemTags.SHOVELS, ItemTags.AXES, ItemTags.HOES)
-                .addOptionalTag(ResourceLocation.fromNamespaceAndPath("forge", "tools"))
+                .addOptionalTag(ResourceLocation.fromNamespaceAndPath("c", "tools"))
                 .addOptionalTag(ResourceLocation.fromNamespaceAndPath("c", "hoes"))
                 .addOptionalTag(ResourceLocation.fromNamespaceAndPath("c", "shears"))
                 .addOptionalTag(ResourceLocation.fromNamespaceAndPath("c", "shields"))
                 .addOptionalTag(ResourceLocation.fromNamespaceAndPath("c", "spears"));
         tag(ETags.Items.WITCH_OVEN_BLACKLIST)
-                .addOptionalTag(ResourceLocation.fromNamespaceAndPath("forge", "ores"))
-                .addOptionalTag(ResourceLocation.fromNamespaceAndPath("c", "ores"));
+                .addOptionalTag(ResourceLocation.fromNamespaceAndPath("c", "ores"))
+                .addOptionalTag(ResourceLocation.fromNamespaceAndPath("c", "raw_materials"));
     }
 
     public void addVanillaTags(Provider provider) {

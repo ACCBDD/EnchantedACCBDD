@@ -24,18 +24,19 @@ public class CauldronTypeRecipeBuilder extends ERecipeBuilder {
     private int cookColour = 0x2D155E;
     private int finalColour = 0x4A1AAD;
 
-    private CauldronTypeRecipeBuilder(CauldronTypeRecipeFactory<?> factory, ItemStack result, int power) {
+    private CauldronTypeRecipeBuilder(String subfolder, CauldronTypeRecipeFactory<?> factory, ItemStack result, int power) {
+        super(subfolder);
         this.power = power;
         this.result = result;
         this.factory = factory;
     }
 
     public static CauldronTypeRecipeBuilder cauldron(ItemStack result, int power) {
-        return new CauldronTypeRecipeBuilder(WitchCauldronRecipe::new, result, power);
+        return new CauldronTypeRecipeBuilder("witch_cauldron", WitchCauldronRecipe::new, result, power);
     }
 
     public static CauldronTypeRecipeBuilder kettle(ItemStack result, int power) {
-        return new CauldronTypeRecipeBuilder(KettleRecipe::new, result, power);
+        return new CauldronTypeRecipeBuilder("kettle", KettleRecipe::new, result, power);
     }
 
     public CauldronTypeRecipeBuilder inputs(ItemStack... inputs) {
@@ -70,8 +71,6 @@ public class CauldronTypeRecipeBuilder extends ERecipeBuilder {
     public void save(RecipeOutput output, ResourceLocation id) {
         output.accept(id, factory.create(inputs, result, power, cookColour, finalColour), null);
     }
-
-
 
     @FunctionalInterface
     public interface CauldronTypeRecipeFactory<T extends CauldronTypeRecipe> {

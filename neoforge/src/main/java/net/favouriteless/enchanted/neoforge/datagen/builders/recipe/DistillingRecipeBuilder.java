@@ -22,6 +22,7 @@ public class DistillingRecipeBuilder extends ERecipeBuilder {
     private int power = 750;
 
     private DistillingRecipeBuilder(List<ItemStack> inputs) {
+        super("distilling");
         this.inputs = inputs;
     }
 
@@ -86,11 +87,7 @@ public class DistillingRecipeBuilder extends ERecipeBuilder {
     }
 
     @Override
-    public void save(RecipeOutput output) {
-        save(output, getRecipeName());
-    }
-
-    protected String getRecipeName() {
+    protected String getDefaultName() {
         StringBuilder name = new StringBuilder();
         for(ItemStack item : inputs)
             if(item.getItem() != EItems.CLAY_JAR.get())

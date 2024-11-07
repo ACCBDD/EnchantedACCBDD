@@ -72,7 +72,7 @@ public abstract class ContainerBlockEntityBase extends BlockEntity implements Co
     @Override
     protected void saveAdditional(@NotNull CompoundTag tag, @NotNull Provider registries) {
         super.saveAdditional(tag, registries);
-        tag.put("inventory", ContainerHelper.saveAllItems(tag, inventory, registries));
+        ContainerHelper.saveAllItems(tag, inventory, registries);
 
         if(name != null)
             tag.putString("CustomName", Component.Serializer.toJson(name, registries));

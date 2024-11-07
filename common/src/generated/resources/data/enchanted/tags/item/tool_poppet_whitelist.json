@@ -6,7 +6,7 @@
     "#minecraft:axes",
     "#minecraft:hoes",
     {
-      "id": "#forge:tools",
+      "id": "#c:tools",
       "required": false
     },
     {

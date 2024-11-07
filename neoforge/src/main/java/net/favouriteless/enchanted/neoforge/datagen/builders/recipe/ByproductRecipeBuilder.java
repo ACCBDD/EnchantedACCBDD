@@ -19,6 +19,7 @@ public class ByproductRecipeBuilder extends ERecipeBuilder {
     private TagKey<Item> tag = null;
 
     private ByproductRecipeBuilder(ItemStack result, ItemLike[] items, TagKey<Item> tag) {
+        super("byproduct");
         this.result = result;
         this.items = items;
         this.tag = tag;
@@ -47,11 +48,7 @@ public class ByproductRecipeBuilder extends ERecipeBuilder {
     }
 
     @Override
-    public void save(RecipeOutput output) {
-        save(output, getRecipeName());
-    }
-
-    protected String getRecipeName() {
+    protected String getDefaultName() {
         String prefix = BuiltInRegistries.ITEM.getKey(result.getItem()).getPath();
         String suffix = tag != null ? tag.location().getPath() : BuiltInRegistries.ITEM.getKey(items[0].asItem()).getPath();
 

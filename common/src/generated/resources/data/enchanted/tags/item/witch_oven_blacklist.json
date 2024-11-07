@@ -1,11 +1,11 @@
 {
   "values": [
     {
-      "id": "#forge:ores",
+      "id": "#c:ores",
       "required": false
     },
     {
-      "id": "#c:ores",
+      "id": "#c:raw_materials",
       "required": false
     }
   ]

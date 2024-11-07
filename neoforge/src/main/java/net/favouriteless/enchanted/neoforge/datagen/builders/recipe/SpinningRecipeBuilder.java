@@ -18,6 +18,7 @@ public class SpinningRecipeBuilder extends ERecipeBuilder {
     private int duration = 300;
 
     private SpinningRecipeBuilder(ItemLike result, ItemStack... inputs) {
+        super("spinning");
         this.result = new ItemStack(result.asItem());
         this.inputs = List.of(inputs);
 
