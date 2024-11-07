@@ -1,8 +1,9 @@
 - CHANGE: Updated to 1.21.1
+- CHANGE: Adjusted byproduct chance for the witch oven and fume filters. NOW: 30% base, 20% per funnel, 35% per filtered funnel.
 - CHANGE: Spinning wheel recipes now have a "duration" field.
 - CHANGE: Field names in recipes have been standardised.
-- CHANGE: Rites can now be added (or changed) via a datapack, see discord or docs for more details.
 - CHANGE: Patchouli is no longer a dependency.
 - CHANGE: SmartBrainLib is no longer a dependency.
 
 - NOTE: JEI integration is disabled in this beta, it'll come back for the full release.
+- NOTE: Circle magic temporarily removed.

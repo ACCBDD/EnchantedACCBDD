@@ -52,8 +52,8 @@ public class EBlocks {
     public static final Supplier<ChaliceBlock> CHALICE_FILLED = register("chalice_filled", () -> new ChaliceBlock(true, Properties.of().strength(1.0F, 6.0F).noOcclusion()));
     public static final Supplier<DistilleryBlock> DISTILLERY = register("distillery", () -> new DistilleryBlock(copy(Blocks.ANVIL).lightLevel(EBlocks.getLightValueLit(13)).noOcclusion()));
     public static final Supplier<EmberMossBlock> EMBER_MOSS = register("ember_moss", () -> new EmberMossBlock(copy(Blocks.POPPY).lightLevel((a) -> 6).randomTicks()));
-    public static final Supplier<FumeFunnelBlock> FUME_FUNNEL = register("fume_funnel", () -> new FumeFunnelBlock(copy(Blocks.ANVIL)));
-    public static final Supplier<FumeFunnelBlock> FUME_FUNNEL_FILTERED = register("fume_funnel_filtered", () -> new FumeFunnelBlock(copy(Blocks.ANVIL)));
+    public static final Supplier<FumeFunnelBlock> FUME_FUNNEL = register("fume_funnel", () -> new FumeFunnelBlock(0.2D, copy(Blocks.ANVIL)));
+    public static final Supplier<FumeFunnelBlock> FUME_FUNNEL_FILTERED = register("fume_funnel_filtered", () -> new FumeFunnelBlock(0.35D, copy(Blocks.ANVIL)));
     public static final Supplier<GarlicBlock> GARLIC = register("garlic", () -> new GarlicBlock(copy(Blocks.CARROTS)));
     public static final Supplier<GlintWeedBlock> GLINT_WEED = register("glint_weed", () -> new GlintWeedBlock(copy(Blocks.POPPY).lightLevel((a) -> 14).randomTicks()));
     public static final Supplier<GoldChalkBlock> GOLDEN_CHALK = register("golden_chalk", GoldChalkBlock::new);

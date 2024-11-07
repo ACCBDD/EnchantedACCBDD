@@ -4,20 +4,20 @@ import net.favouriteless.enchanted.common.blocks.EBlocks;
 import net.favouriteless.enchanted.common.blocks.entity.SpinningWheelBlockEntity;
 import net.favouriteless.enchanted.common.menus.slots.NonJarInputSlot;
 import net.favouriteless.enchanted.common.menus.slots.OutputSlot;
-import net.favouriteless.enchanted.common.menus.slots.SimpleDataSlot;
 import net.favouriteless.enchanted.util.MenuUtils;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.DataSlot;
+import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 public class SpinningWheelMenu extends MenuBase<SpinningWheelBlockEntity> {
 
-	private final DataSlot data;
+	private final ContainerData data;
 
-	public SpinningWheelMenu(int id, Inventory playerInventory, SpinningWheelBlockEntity be, DataSlot data) {
+	public SpinningWheelMenu(int id, Inventory playerInventory, SpinningWheelBlockEntity be, ContainerData data) {
 		super(EMenuTypes.SPINNING_WHEEL.get(), id, be, EBlocks.SPINNING_WHEEL.get());
 		this.data = data;
 
@@ -27,15 +27,19 @@ public class SpinningWheelMenu extends MenuBase<SpinningWheelBlockEntity> {
 		addSlot(new OutputSlot(be, 3, 130, 35)); // Spinning wheel output
 
 		addInventorySlots(playerInventory, 8, 84);
-		addDataSlot(data);
+		addDataSlots(data);
 	}
 
 	public SpinningWheelMenu(int id, Inventory playerInventory, PosMenuData data) {
-		this(id, playerInventory, MenuUtils.getBlockEntity(playerInventory, data.pos(), SpinningWheelBlockEntity.class), new SimpleDataSlot());
+		this(id, playerInventory, MenuUtils.getBlockEntity(playerInventory, data.pos(), SpinningWheelBlockEntity.class), new SimpleContainerData(2));
 	}
 
 	public int getSpinProgress() {
-		return data.get();
+		return data.get(0);
+	}
+
+	public int getSpinDuration() {
+		return data.get(1);
 	}
 
 	@Override

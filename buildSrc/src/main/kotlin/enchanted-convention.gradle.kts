@@ -69,7 +69,7 @@ tasks.withType<ProcessResources>().configureEach {
         "fabric_loader_version" to fabricVersion,
         "stateobserver_version" to stateobserverVersion,
         "geckolib_version" to geckoVersion,
-        "forgeconfigapi-version" to fconfapiVersion
+        "forgeconfigapi_version" to fconfapiVersion
     )
 
     filesMatching(listOf("pack.mcmeta", "fabric.mod.json", "META-INF/neoforge.mods.toml", "*.mixins.json")) {

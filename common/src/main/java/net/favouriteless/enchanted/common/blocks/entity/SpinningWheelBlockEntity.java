@@ -21,12 +21,12 @@ import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.DataSlot;
+import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.item.crafting.RecipeManager.CachedCheck;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 
@@ -37,69 +37,56 @@ public class SpinningWheelBlockEntity extends ContainerBlockEntityBase implement
 	private static final int[] INPUT_SLOTS = new int[] { 0, 1, 2 };
 	private static final int[] BOTTOM_SLOTS = new int[] { 3 };
 
-	private final RecipeManager.CachedCheck<ListInput, SpinningRecipe> recipeCheck;
 	private final SimplePowerPosHolder posHolder;
-	private boolean isSpinning = false;
+	private final CachedCheck<ListInput, SpinningRecipe> spinCheck;
 
-	public static final int SPIN_DURATION = 400;
+	private int spinDuration = 300;
 	private int spinProgress = 0;
 
-	public DataSlot data = new DataSlot() {
-		@Override
-		public int get() {
-			return spinProgress;
-		}
-
-		@Override
-		public void set(int value) {
-			spinProgress = value;
-		}
-	};
+	private boolean isSpinning = false; // This is only used clientside. We do this and change spinProgress in client tick to avoid snapping animations.
 
 	public SpinningWheelBlockEntity(BlockPos pos, BlockState state) {
 		super(EBlockEntityTypes.SPINNING_WHEEL.get(), pos, state, NonNullList.withSize(4, ItemStack.EMPTY));
 		this.posHolder = new SimplePowerPosHolder(pos);
-		this.recipeCheck = RecipeManager.createCheck(ERecipeTypes.SPINNING.get());
+		this.spinCheck = RecipeManager.createCheck(ERecipeTypes.SPINNING.get());
 	}
 
-	public static <T extends BlockEntity> void tick(Level level, BlockPos blockPos, BlockState blockState, T t) {
-		if(t instanceof SpinningWheelBlockEntity be) {
-			if(!level.isClientSide) {
-				IPowerProvider powerProvider = PowerHelper.tryGetPowerProvider(level, be.posHolder);
-				RecipeHolder<SpinningRecipe> holder = be.recipeCheck.getRecipeFor(ListInput.of(be.inventory.subList(0, 3)), level).orElse(null);
-				boolean wasSpinning = be.spinProgress > 0;
+	public static void serverTick(Level level, BlockPos pos, BlockState state, SpinningWheelBlockEntity be) {
+		RecipeHolder<SpinningRecipe> recipe = be.spinCheck.getRecipeFor(ListInput.of(be.inventory.subList(0, 3)), level).orElse(null);
+		boolean wasSpinning = be.spinProgress > 0;
 
-				if(holder != null) {
-					SpinningRecipe recipe = holder.value();
-					if(be.canSpin(recipe) && (recipe.getPower() == 0 || powerProvider != null)) {
-						if(powerProvider.tryConsumePower((double)recipe.getPower() / SPIN_DURATION)) {
-							if(++be.spinProgress == SPIN_DURATION) {
-								be.spinProgress = 0;
-								be.spin(recipe);
-							}
-						}
-					}
-					else
-						be.spinProgress = 0;
+		if(recipe != null) {
+			IPowerProvider provider = PowerHelper.tryGetPowerProvider(level, be.posHolder);
+			int power = recipe.value().getPower();
+			// Can fit result and has enough power to spin
+			if(be.canSpin(recipe) && (power == 0 || provider != null && provider.tryConsume((double)recipe.value().getPower() / be.spinDuration))) {
+				if(++be.spinProgress == be.spinDuration) {
+					be.spinProgress = 0;
+					be.spinDuration = be.getTotalSpinTime();
+					be.spin(recipe);
 				}
-				if(wasSpinning != be.spinProgress > 0)
-					be.updateBlock();
 			}
 			else {
-				if(be.isSpinning)
-					be.spinProgress++;
-				else
-					be.spinProgress = 0;
+				be.spinProgress = 0;
 			}
 		}
+		if(wasSpinning != be.isSpinning())
+			be.updateBlock();
+	}
+
+	public static void clientTick(Level level, BlockPos pos, BlockState state, SpinningWheelBlockEntity be) {
+		if(be.isSpinning)
+			be.spinProgress++;
+		else
+			be.spinProgress = 0;
 	}
 
 	/**
 	 * Attempt to spin the items in this {@link SpinningWheelBlockEntity}'s input slots.
 	 * @param recipe The {@link SpinningRecipe} to use.
 	 */
-	protected void spin(SpinningRecipe recipe) {
-		for(ItemStack recipeStack : recipe.getInputs()) {
+	protected void spin(@NotNull RecipeHolder<SpinningRecipe> recipe) {
+		for(ItemStack recipeStack : recipe.value().getInputs()) {
 			for(int i = 0; i < 3; i++) {
 				ItemStack input = inventory.get(i);
 				if(ItemUtil.isSameItemPartial(input, recipeStack)) {
@@ -109,7 +96,7 @@ public class SpinningWheelBlockEntity extends ContainerBlockEntityBase implement
 			}
 		}
 
-		ItemStack result = recipe.assemble(ListInput.of(inventory.subList(0, 3)), level.registryAccess());
+		ItemStack result = recipe.value().assemble(null, null);
 		ItemStack output = inventory.get(3);
 		if(output.isEmpty())
 			inventory.set(3, result);
@@ -119,74 +106,72 @@ public class SpinningWheelBlockEntity extends ContainerBlockEntityBase implement
 
 	/**
 	 * Check if this {@link SpinningWheelBlockEntity} has enough space for the output of a given recipe.
-	 * @param recipe The recipe to check for.
-	 * @return True if space is found, otherwise false.
 	 */
-	protected boolean canSpin(SpinningRecipe recipe) {
-		if(recipe != null) {
-			ItemStack output = inventory.get(3);
-			if(output.isEmpty())
-				return true;
+	private boolean canSpin(@NotNull RecipeHolder<SpinningRecipe> recipe) {
+		ItemStack result = recipe.value().assemble(null, null);
+		if(result.isEmpty())
+			return false;
 
-			ItemStack result = recipe.assemble(ListInput.of(inventory.subList(0, 3)), level.registryAccess());
-			if(ItemStack.isSameItemSameComponents(result, output))
-				return output.getCount() + result.getCount() <= output.getMaxStackSize();
-		}
+		ItemStack output = inventory.get(3);
+
+		if(output.isEmpty())
+			return true;
+		if(ItemStack.isSameItemSameComponents(result, output))
+			return output.getCount() + result.getCount() <= output.getMaxStackSize();
+
 		return false;
 	}
 
 	@Override
-	@NotNull
 	public Component getDefaultName() {
 		return Component.translatable("container.enchanted.spinning_wheel");
 	}
 
-	@Nullable
 	@Override
-	public AbstractContainerMenu createMenu(int id, Inventory playerInventory, Player player) {
-		return new SpinningWheelMenu(id, playerInventory, this, data);
+	public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
+		return new SpinningWheelMenu(id, inventory, this, access);
 	}
 
 	@Override
-	public void saveAdditional(@NotNull CompoundTag tag, Provider registries) {
+	public void saveAdditional(@NotNull CompoundTag tag, @NotNull Provider registries) {
 		super.saveAdditional(tag, registries);
 		tag.put("posHolder", posHolder.serialize());
 		tag.putInt("spinProgress", spinProgress);
+		tag.putInt("spinDuration", spinDuration);
 	}
 
 	@Override
-	public void loadAdditional(@NotNull CompoundTag tag, Provider registries) {
+	public void loadAdditional(@NotNull CompoundTag tag, @NotNull Provider registries) {
 		super.loadAdditional(tag, registries);
 		if(tag.contains("posHolder"))
-			posHolder.deserialize(tag.getList("posHolder", 10));
-		if(tag.contains("spinProgress"))
-			spinProgress = tag.getInt("spinProgress");
-		if(tag.contains("isSpinning"))
-			isSpinning = tag.getBoolean("isSpinning");
+			posHolder.deserialize(tag.getCompound("posHolder"));
+		spinProgress = tag.getInt("spinProgress"); // Don't need to check if exists, client wants this to reset anyway.
+		isSpinning = tag.getBoolean("isSpinning");
 	}
 
-	@Nullable
 	@Override
 	public ClientboundBlockEntityDataPacket getUpdatePacket() {
 		return ClientboundBlockEntityDataPacket.create(this);
 	}
 
 	@Override
-	@NotNull
-	public CompoundTag getUpdateTag(Provider registries) {
+	public @NotNull CompoundTag getUpdateTag(@NotNull Provider registries) {
 		CompoundTag nbt = super.getUpdateTag(registries);
 		nbt.putBoolean("isSpinning", spinProgress > 0);
 		return nbt;
 	}
 
 	@Override
-	@NotNull
-	public IPowerConsumer.IPowerPosHolder getPosHolder() {
+	public @NotNull IPowerPosHolder getPosHolder() {
 		return posHolder;
 	}
 
 	public int getSpinProgress() {
 		return spinProgress;
+	}
+
+	public boolean isSpinning() {
+		return spinProgress > 0;
 	}
 
 	@Override
@@ -204,7 +189,46 @@ public class SpinningWheelBlockEntity extends ContainerBlockEntityBase implement
 
 	@Override
 	public boolean canTakeItemThroughFace(int index, @NotNull ItemStack stack, @Nullable Direction face) {
-		return true;
+		return index == 3;
 	}
+
+	@Override
+	public void setItem(int index, @NotNull ItemStack stack) {
+		inventory.set(index, stack);
+		spinDuration = getTotalSpinTime();
+		spinProgress = 0;
+		setChanged();
+	}
+
+	private int getTotalSpinTime() {
+		return spinCheck.getRecipeFor(ListInput.of(inventory.subList(0, 3)), level)
+				.map(holder -> holder.value().getDuration()).orElse(300);
+	}
+
+	public ContainerData access = new ContainerData() {
+
+		@Override
+		public int get(int index) {
+            return switch(index) {
+                case 0 -> spinProgress;
+                case 1 -> spinDuration;
+                default -> 0;
+            };
+        }
+
+		@Override
+		public void set(int index, int value) {
+			if(index == 0)
+				spinProgress = value;
+			else if(index == 2)
+				spinDuration = value;
+		}
+
+		@Override
+		public int getCount() {
+			return 2;
+		}
+
+	};
 
 }

@@ -153,7 +153,7 @@ public class EItems {
 	public static final Supplier<Item> SOFT_CLAY_JAR = registerItem("soft_clay_jar");
 	public static final Supplier<SimpleEffectBrewItem> SOUL_OF_THE_WORLD = registerBrew("soul_of_the_world", MobEffects.POISON, 1200, 1);
 	public static final Supplier<BlockItem> SPANISH_MOSS = registerBlock("spanish_moss", EBlocks.SPANISH_MOSS);
-	public static final Supplier<Item> SPINNING_WHEEL = register("spinning_wheel", SpinningWheelBlockItem::new);
+	public static final Supplier<Item> SPINNING_WHEEL = register("spinning_wheel", () -> new BlockItem(EBlocks.SPINNING_WHEEL.get(), props()));
 	public static final Supplier<SimpleEffectBrewItem> SPIRIT_OF_OTHERWHERE = registerBrew("spirit_of_otherwhere", MobEffects.POISON, 1200, 1);
 	public static final Supplier<BlockItem> STRIPPED_ALDER_LOG = registerBlock("stripped_alder_log", EBlocks.STRIPPED_ALDER_LOG);
 	public static final Supplier<BlockItem> STRIPPED_HAWTHORN_LOG = registerBlock("stripped_hawthorn_log", EBlocks.STRIPPED_HAWTHORN_LOG);

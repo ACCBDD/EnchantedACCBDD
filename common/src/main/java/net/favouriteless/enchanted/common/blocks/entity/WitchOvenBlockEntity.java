@@ -1,7 +1,5 @@
 package net.favouriteless.enchanted.common.blocks.entity;
 
-import net.favouriteless.enchanted.common.Enchanted;
-import net.favouriteless.enchanted.common.blocks.EBlocks;
 import net.favouriteless.enchanted.common.blocks.FumeFunnelBlock;
 import net.favouriteless.enchanted.common.blocks.WitchOvenBlock;
 import net.favouriteless.enchanted.common.init.ETags;
@@ -26,11 +24,8 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.item.crafting.RecipeManager.CachedCheck;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.AbstractFurnaceBlock;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -42,207 +37,144 @@ public class WitchOvenBlockEntity extends ContainerBlockEntityBase implements Me
     private static final int[] FACE_SLOTS = new int[] { 2 };
     private static final int[] BOTTOM_SLOTS = new int[] { 3, 4 };
 
-    private final RecipeManager.CachedCheck<SingleRecipeInput, SmeltingRecipe> smeltCheck;
-    private final RecipeManager.CachedCheck<SingleRecipeInput, ByproductRecipe> ovenCheck;
+    private final CachedCheck<SingleRecipeInput, SmeltingRecipe> smeltCheck;
+    private final CachedCheck<SingleRecipeInput, ByproductRecipe> byproductCheck;
 
     private int burnProgress = 0;
     private int burnDuration = 0;
     private int cookProgress = 0;
     private int cookDuration = 200;
 
-    private final ContainerData data = new ContainerData() {
-        @Override
-        public int get(int index) {
-            return switch(index) {
-                case 0 -> burnProgress;
-                case 1 -> burnDuration;
-                case 2 -> cookProgress;
-                case 3 -> cookDuration;
-                default -> 0;
-            };
-        }
-
-        @Override
-        public void set(int index, int value) {
-            switch(index) {
-                case 0:
-                    burnProgress = value;
-                case 1:
-                    burnDuration = value;
-                case 2:
-                    cookProgress = value;
-                case 3:
-                    cookDuration = value;
-            }
-        }
-
-        @Override
-        public int getCount() {
-            return 4;
-        }
-    };
 
     public WitchOvenBlockEntity(BlockPos pos, BlockState state) {
         super(EBlockEntityTypes.WITCH_OVEN.get(), pos, state, NonNullList.withSize(5, ItemStack.EMPTY));
         this.smeltCheck = RecipeManager.createCheck(RecipeType.SMELTING);
-        this.ovenCheck = RecipeManager.createCheck(ERecipeTypes.BYPRODUCT.get());
+        this.byproductCheck = RecipeManager.createCheck(ERecipeTypes.BYPRODUCT.get());
     }
 
-    public static <T extends BlockEntity> void serverTick(Level level, BlockPos pos, BlockState state, T t) {
-        if(t instanceof WitchOvenBlockEntity be) {
-            boolean startedBurning = be.isLit();
-            boolean isChanged = false;
+    public static void serverTick(Level level, BlockPos pos, BlockState state, WitchOvenBlockEntity be) {
+        boolean wasLit = be.isLit();
+        boolean isChanged = false;
 
-            if(be.isLit())
-                be.burnProgress--;
+        if(be.isLit())
+            be.burnProgress--;
 
-            ItemStack fuelStack = be.getFuel();
+        ItemStack fuel = be.getFuel();
+        boolean hasInput = !be.getInput().isEmpty();
 
-            boolean hasFuel = !fuelStack.isEmpty();
-            boolean hasInput = !be.getInput().isEmpty();
+        if(be.isLit() || hasInput && !fuel.isEmpty()) {
+            RecipeHolder<SmeltingRecipe> holder = hasInput ? be.smeltCheck.getRecipeFor(new SingleRecipeInput(be.inventory.get(0)), level).orElse(null) : null;
+            if(holder != null) {
+                boolean canBurn = be.canBurn(holder);
 
-            if(be.isLit() || hasInput && hasFuel) {
-                RecipeHolder<SmeltingRecipe> holder = hasInput ? be.smeltCheck.getRecipeFor(new SingleRecipeInput(be.inventory.get(0)), level).orElse(null) : null;
+                if(!be.isLit() && canBurn) {
+                    be.burnProgress = CommonServices.PLATFORM.getBurnTime(fuel, RecipeType.SMELTING);
+                    be.burnDuration = be.burnProgress;
 
-                if(holder != null) {
-                    if(!be.isLit() && be.canBurn(holder)) { // Handle starting off a stack of fuel or refreshing burn timer.
-                        be.burnProgress = CommonServices.PLATFORM.getBurnTime(fuelStack, RecipeType.SMELTING);
-                        be.burnDuration = be.burnProgress;
-                        if (be.isLit()) {
-                            isChanged = true;
-                            if(CommonServices.PLATFORM.hasCraftingRemainingItem(fuelStack))
-                                be.inventory.set(2, CommonServices.PLATFORM.getCraftingRemainingItem(fuelStack));
-                            else if(hasFuel) {
-                                fuelStack.shrink(1);
-                                ItemStack remainder = CommonServices.PLATFORM.getCraftingRemainingItem(fuelStack);
-                                if(fuelStack.isEmpty())
-                                    be.inventory.set(2, remainder == null ? ItemStack.EMPTY : remainder);
-                            }
-                        }
+                    if(be.isLit()) {
+                        isChanged = true;
+
+                        ItemStack remainder = CommonServices.PLATFORM.getCraftingRemainingItem(fuel);
+                        fuel.shrink(1);
+                        if(fuel.isEmpty())
+                            be.inventory.set(2, remainder == null ? ItemStack.EMPTY : remainder);
                     }
+                }
 
-                    if(be.isLit() && be.canBurn(holder)) {
-                        if(++be.cookProgress == be.cookDuration) {
-                            be.cookProgress = 0;
-                            be.cookDuration = getTotalCookTime(level, be);
-                            be.burn(holder);
-                            isChanged = true;
-                        }
-                    }
-                    else
+                if(be.isLit() && canBurn) {
+                    if(++be.cookProgress == be.cookDuration) {
                         be.cookProgress = 0;
+                        be.cookDuration = be.getTotalCookTime();
+                        be.burn(holder);
+                        isChanged = true;
+                    }
                 }
-
-            }
-            else if(!be.isLit() && be.cookProgress > 0)
-                be.cookProgress = Mth.clamp(be.cookProgress - 2, 0, be.cookDuration); // Tick the progress down if fuel ran out.
-
-            if (startedBurning != be.isLit()) { // Update fume funnels and self if the burn state changed
-                isChanged = true;
-                level.setBlock(be.worldPosition, level.getBlockState(be.worldPosition).setValue(WitchOvenBlock.LIT, be.isLit()), 3);
-                be.updateFumeFunnels();
-            }
-
-
-            if(isChanged)
-                be.setChanged();
-        }
-    }
-
-    /**
-     * Attempt to smelt the item in this {@link WitchOvenBlockEntity}'s input slot and roll for a byproduct.
-     * @param recipe The smelting recipe to use.
-     */
-    private void burn(@Nullable RecipeHolder<SmeltingRecipe> recipe) {
-        if(canBurn(recipe)) {
-            ItemStack input = getInput();
-            ItemStack fuel = getFuel();
-            ItemStack result = recipe.value().getResultItem(level.registryAccess());
-            ItemStack output = getOutput();
-
-            if(Enchanted.RANDOM.nextDouble() <= getByproductChance())
-                tryCreateByproduct(ovenCheck.getRecipeFor(new SingleRecipeInput(inventory.get(0)), level).orElse(null));
-
-            if(output.isEmpty()) // Output the smelting item
-                inventory.set(3, result.copy());
-            else
-                output.grow(1);
-
-            if (input.is(Blocks.WET_SPONGE.asItem()) && !fuel.isEmpty() && fuel.is(Items.BUCKET))
-                inventory.set(2, new ItemStack(Items.WATER_BUCKET));
-
-            input.shrink(1);
-        }
-    }
-
-    /**
-     * Check if this {@link WitchOvenBlockEntity} has enough space for the output of a given recipe, and the input is
-     * not blacklisted.
-     * @param recipe The recipe to check for.
-     * @return True if space is found, otherwise false.
-     */
-    private boolean canBurn(@Nullable RecipeHolder<SmeltingRecipe> recipe) {
-        ItemStack input = getInput();
-        if(recipe != null && !input.is(ETags.Items.WITCH_OVEN_BLACKLIST)) {
-            ItemStack result = recipe.value().assemble(new SingleRecipeInput(inventory.get(0)), level.registryAccess());
-            if(result.isEmpty())
-                return false; // Don't bother checking recipes with no output.
-            else {
-                ItemStack output = getOutput();
-                if(output.isEmpty())
-                    return true; // Check the output is valid to place the result into.
                 else {
-                    if(!ItemStack.isSameItemSameComponents(output, result))
-                        return false;
-                    else
-                        return output.getCount() + result.getCount() <= output.getMaxStackSize();
+                    be.cookProgress = 0;
                 }
             }
         }
-        return false;
-    }
-
-    /**
-     * Attempt to create a byproduct from the item currently in the input slot, assuming enough jars are present.
-     * @param recipe The {@link Recipe} to create a result from.
-     */
-    private void tryCreateByproduct(@Nullable RecipeHolder<ByproductRecipe> recipe) {
-        if(recipe != null && !getInput().isEmpty()) {
-            ItemStack result = recipe.value().assemble(new SingleRecipeInput(inventory.get(0)), level.registryAccess());
-            if(!result.isEmpty()) {
-                ItemStack jars = getJarInput();
-
-                if(jars.getCount() >= result.getCount()) {
-                    ItemStack output = getJarOutput();
-                    if(output.isEmpty())
-                        inventory.set(4, result);
-                    else if(ItemStack.isSameItemSameComponents(output, result) && output.getCount() + result.getCount() <= output.getMaxStackSize())
-                        output.grow(result.getCount());
-
-                    jars.shrink(result.getCount());
-                }
-            }
+        else if(!be.isLit() && be.cookProgress > 0) {
+            be.cookProgress = Mth.clamp(be.cookProgress - 2, 0, be.cookDuration); // Tick the progress down if fuel ran out.
         }
+
+        if(wasLit != be.isLit()) { // Update fume funnels and self if the burn state changed
+            level.setBlockAndUpdate(be.worldPosition, level.getBlockState(be.worldPosition).setValue(WitchOvenBlock.LIT, be.isLit()));
+            be.updateFumeFunnels();
+            isChanged = true;
+        }
+
+        if(isChanged)
+            be.setChanged();
     }
-    
+
+    private boolean canBurn(@NotNull RecipeHolder<SmeltingRecipe> recipe) {
+        ItemStack input = getInput();
+
+        if(input.is(ETags.Items.WITCH_OVEN_BLACKLIST))
+            return false;
+
+        ItemStack result = recipe.value().assemble(new SingleRecipeInput(inventory.get(0)), level.registryAccess());
+        if(result.isEmpty())
+            return false; // Don't bother checking recipes with no output.
+
+        ItemStack output = getOutput();
+
+        if(output.isEmpty()) // Check the output is valid to place the result into.
+            return true;
+        if(!ItemStack.isSameItemSameComponents(output, result))
+            return false;
+
+        return output.getCount() + result.getCount() <= output.getMaxStackSize();
+    }
+
     /**
-     * Updates lit property of fume funnels attached to this {@link WitchOvenBlockEntity}.
+     * Create the result for a smelting recipe. Does not check if item can fit.
      */
-    private void updateFumeFunnels() {
-        if(!level.isClientSide) {
-            BlockState state = level.getBlockState(worldPosition);
-            Direction facing = state.getValue(WitchOvenBlock.FACING);
+    private void burn(@NotNull RecipeHolder<SmeltingRecipe> recipe) {
+        ItemStack input = getInput();
+        ItemStack output = getOutput();
+        ItemStack fuel = getFuel();
 
-            BlockPos[] potentialFilters = new BlockPos[]{
-                    new BlockPos(worldPosition.offset(facing.getClockWise().getNormal())),
-                    new BlockPos(worldPosition.offset(facing.getCounterClockWise().getNormal())),
-                    new BlockPos(worldPosition.offset(Direction.UP.getNormal()))
-            };
+        if(Math.random() <= getByproductChance())
+            createByproduct(byproductCheck.getRecipeFor(new SingleRecipeInput(input), level).orElse(null));
 
-            for (BlockPos _pos : potentialFilters) {
-                if (level.getBlockState(_pos).getBlock() instanceof FumeFunnelBlock)
-                    level.setBlock(_pos, level.getBlockState(_pos).setValue(AbstractFurnaceBlock.LIT, isLit()), 3);
-            }
+        ItemStack result = recipe.value().getResultItem(level.registryAccess());
+
+        if(output.isEmpty())
+            inventory.set(3, result);
+        else
+            output.grow(result.getCount());
+
+        if(input.is(Items.WET_SPONGE) && !fuel.isEmpty() && fuel.is(Items.BUCKET))
+            inventory.set(2, new ItemStack(Items.WATER_BUCKET));
+
+        input.shrink(1);
+    }
+
+    /**
+     * Create the result for a byproduct recipe if it can fit and has enough jars.
+     */
+    private void createByproduct(@Nullable RecipeHolder<ByproductRecipe> recipe) {
+        if(recipe == null)
+            return;
+
+        ItemStack result = recipe.value().assemble(null, null); // ByproductRecipe doesn't care about these, but they're SUPPOSED to be NotNull.
+        ItemStack input = getJarInput();
+
+        if(input.getCount() < result.getCount()) // Assume not enough jars.
+            return;
+
+        ItemStack output = getJarOutput();
+
+        if(!output.isEmpty()) {
+            if(!ItemStack.isSameItemSameComponents(result, output) || result.getCount() + output.getCount() > output.getMaxStackSize())
+                return;
+
+            output.grow(result.getCount());
+        }
+        else {
+            inventory.set(4, result);
         }
     }
 
@@ -253,22 +185,34 @@ public class WitchOvenBlockEntity extends ContainerBlockEntityBase implements Me
         double byproductChance = 0.3D;
 
         Direction facing = level.getBlockState(worldPosition).getValue(WitchOvenBlock.FACING);
-        Block[] potentialFilters = new Block[] { // Top filter is just decoration
-                level.getBlockState(worldPosition.offset(facing.getClockWise().getNormal())).getBlock(),
-                level.getBlockState(worldPosition.offset(facing.getCounterClockWise().getNormal())).getBlock()
-        };
 
-        for(Block block : potentialFilters) {
-            if(block == EBlocks.FUME_FUNNEL.get())
-                byproductChance += 0.25D;
-            else if(block == EBlocks.FUME_FUNNEL_FILTERED.get())
-                byproductChance += 0.3D;
-        }
+        BlockState left = level.getBlockState(worldPosition.offset(facing.getCounterClockWise().getNormal()));
+        BlockState right = level.getBlockState(worldPosition.offset(facing.getClockWise().getNormal()));
+
+        if(left.getBlock() instanceof FumeFunnelBlock funnel)
+            byproductChance += funnel.getByproductChance();
+        if(right.getBlock() instanceof FumeFunnelBlock funnel)
+            byproductChance += funnel.getByproductChance();
+
         return byproductChance;
     }
 
-    private static int getTotalCookTime(Level level, WitchOvenBlockEntity be) {
-        return be.smeltCheck.getRecipeFor(new SingleRecipeInput(be.inventory.get(0)), level).map(recipe -> Math.round(recipe.value().getCookingTime() * 0.8F)).orElse(200);
+    /**
+     * Updates lit property of fume funnels attached to this {@link WitchOvenBlockEntity}.
+     */
+    private void updateFumeFunnels() {
+        Direction facing = level.getBlockState(worldPosition).getValue(WitchOvenBlock.FACING);
+
+        BlockPos left = worldPosition.offset(facing.getCounterClockWise().getNormal());
+        BlockPos right = worldPosition.offset(facing.getClockWise().getNormal());
+        BlockPos top = worldPosition.above();
+
+        if(level.getBlockState(left).getBlock() instanceof FumeFunnelBlock)
+            level.setBlockAndUpdate(left, level.getBlockState(left).setValue(WitchOvenBlock.LIT, isLit()));
+        if(level.getBlockState(right).getBlock() instanceof FumeFunnelBlock)
+            level.setBlockAndUpdate(right, level.getBlockState(right).setValue(WitchOvenBlock.LIT, isLit()));
+        if(level.getBlockState(top).getBlock() instanceof FumeFunnelBlock)
+            level.setBlockAndUpdate(top, level.getBlockState(top).setValue(WitchOvenBlock.LIT, isLit()));
     }
 
     public ItemStack getInput() {
@@ -296,14 +240,13 @@ public class WitchOvenBlockEntity extends ContainerBlockEntityBase implements Me
         return Component.translatable("container.enchanted.witch_oven");
     }
 
-    @Nullable
     @Override
     public AbstractContainerMenu createMenu(int id, Inventory playerInventory, Player player) {
-        return new WitchOvenMenu(id, playerInventory, this, data);
+        return new WitchOvenMenu(id, playerInventory, this, access);
     }
 
     @Override
-    public void saveAdditional(@NotNull CompoundTag tag, Provider registries) {
+    public void saveAdditional(@NotNull CompoundTag tag, @NotNull Provider registries) {
         super.saveAdditional(tag, registries);
         tag.putInt("burnTime", burnProgress);
         tag.putInt("burnTimeTotal", burnDuration);
@@ -312,7 +255,7 @@ public class WitchOvenBlockEntity extends ContainerBlockEntityBase implements Me
     }
 
     @Override
-    public void loadAdditional(@NotNull CompoundTag tag, Provider registries) {
+    public void loadAdditional(@NotNull CompoundTag tag, @NotNull Provider registries) {
         super.loadAdditional(tag, registries);
         burnProgress = tag.getInt("burnTime");
         burnDuration = tag.getInt("burnTimeTotal");
@@ -345,10 +288,9 @@ public class WitchOvenBlockEntity extends ContainerBlockEntityBase implements Me
 
     @Override
     public boolean canTakeItemThroughFace(int index, @NotNull ItemStack stack, @Nullable Direction face) {
-        if(face == Direction.DOWN && index == 1)
-            return stack.is(Items.WATER_BUCKET) || stack.is(Items.BUCKET);
-        else
-            return true;
+        if(face == Direction.DOWN)
+            return index == 1 ? stack.is(Items.WATER_BUCKET) || stack.is(Items.BUCKET) : index == 3 || index == 4;
+        return true;
     }
 
     @Override
@@ -357,10 +299,47 @@ public class WitchOvenBlockEntity extends ContainerBlockEntityBase implements Me
         inventory.set(index, stack);
 
         if(index == 0 && !matching) {
-            cookDuration = getTotalCookTime(level, this);
+            cookDuration = getTotalCookTime();
             cookProgress = 0;
             setChanged();
         }
     }
+
+    private int getTotalCookTime() {
+        return smeltCheck.getRecipeFor(new SingleRecipeInput(getInput()), level)
+                .map(holder -> holder.value().getCookingTime()).orElse(200);
+    }
+
+    private final ContainerData access = new ContainerData() {
+        @Override
+        public int get(int index) {
+            return switch(index) {
+                case 0 -> burnProgress;
+                case 1 -> burnDuration;
+                case 2 -> cookProgress;
+                case 3 -> cookDuration;
+                default -> 0;
+            };
+        }
+
+        @Override
+        public void set(int index, int value) {
+            switch(index) {
+                case 0:
+                    burnProgress = value;
+                case 1:
+                    burnDuration = value;
+                case 2:
+                    cookProgress = value;
+                case 3:
+                    cookDuration = value;
+            }
+        }
+
+        @Override
+        public int getCount() {
+            return 4;
+        }
+    };
 
 }

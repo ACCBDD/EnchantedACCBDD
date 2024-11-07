@@ -70,21 +70,21 @@ public abstract class ContainerBlockEntityBase extends BlockEntity implements Co
     protected abstract Component getDefaultName();
 
     @Override
-    public void loadAdditional(@NotNull CompoundTag tag, Provider registries) {
-        super.loadAdditional(tag, registries);
-        ContainerHelper.loadAllItems(tag.getCompound("inventory"), inventory, registries);
+    protected void saveAdditional(@NotNull CompoundTag tag, @NotNull Provider registries) {
+        super.saveAdditional(tag, registries);
+        tag.put("inventory", ContainerHelper.saveAllItems(tag, inventory, registries));
 
-        if(tag.contains("CustomName", 8))
-            name = Component.Serializer.fromJson(tag.getString("CustomName"), registries);
+        if(name != null)
+            tag.putString("CustomName", Component.Serializer.toJson(name, registries));
     }
 
     @Override
-    protected void saveAdditional(@NotNull CompoundTag nbt, Provider registries) {
-        super.saveAdditional(nbt, registries);
-        nbt.put("inventory", ContainerHelper.saveAllItems(new CompoundTag(), inventory, registries));
+    public void loadAdditional(@NotNull CompoundTag tag, @NotNull Provider registries) {
+        super.loadAdditional(tag, registries);
+        ContainerHelper.loadAllItems(tag, inventory, registries);
 
-        if(name != null)
-            nbt.putString("CustomName", Component.Serializer.toJson(name, registries));
+        if(tag.contains("CustomName", 8))
+            name = Component.Serializer.fromJson(tag.getString("CustomName"), registries);
     }
 
     @Override

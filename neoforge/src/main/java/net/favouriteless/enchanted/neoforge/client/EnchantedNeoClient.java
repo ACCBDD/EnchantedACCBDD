@@ -5,13 +5,16 @@ import net.favouriteless.enchanted.client.ClientConfig;
 import net.favouriteless.enchanted.client.ClientRegistry;
 import net.favouriteless.enchanted.client.EnchantedClient;
 import net.favouriteless.enchanted.client.particles.*;
+import net.favouriteless.enchanted.client.render.blockentity.item.SpinningWheelItemRenderer;
 import net.favouriteless.enchanted.common.Enchanted;
 import net.favouriteless.enchanted.common.blocks.EBlocks;
 import net.favouriteless.enchanted.common.init.EParticleTypes;
+import net.favouriteless.enchanted.common.items.EItems;
 import net.favouriteless.enchanted.platform.services.NeoClientRegistryHelper;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -22,6 +25,8 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig.Type;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.*;
+import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
+import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 
 import java.util.function.Supplier;
 
@@ -45,6 +50,7 @@ public class EnchantedNeoClient {
     @SubscribeEvent
     public static void registerMenuScreens(final RegisterMenuScreensEvent event) {
         NeoClientRegistryHelper.MENU_FACTORY_REGISTERABLES.forEach(r -> r.register(event));
+        NeoClientRegistryHelper.MENU_FACTORY_REGISTERABLES.clear();
     }
 
     @SubscribeEvent
@@ -58,6 +64,7 @@ public class EnchantedNeoClient {
     public static void onRegisterKeybinds(final RegisterKeyMappingsEvent event) {
         for(KeyMapping mapping : NeoClientRegistryHelper.KEY_MAPPINGS)
             event.register(mapping);
+        NeoClientRegistryHelper.KEY_MAPPINGS.clear();
     }
 
     @SubscribeEvent
@@ -66,14 +73,15 @@ public class EnchantedNeoClient {
     }
 
     @SubscribeEvent
-    public static void onRegisterLayerDefinitions(final EntityRenderersEvent.RegisterLayerDefinitions event) {
+    public static void registerLayerDefinitions(final EntityRenderersEvent.RegisterLayerDefinitions event) {
         ClientRegistry.registerLayerDefinitions();
         for(Pair<ModelLayerLocation, Supplier<LayerDefinition>> pair : NeoClientRegistryHelper.LAYER_DEFINITIONS)
             event.registerLayerDefinition(pair.getFirst(), pair.getSecond());
+        NeoClientRegistryHelper.LAYER_DEFINITIONS.clear();
     }
 
     @SubscribeEvent
-    public static void onRegisterParticleProviders(final RegisterParticleProvidersEvent event) {
+    public static void registerParticleProviders(final RegisterParticleProvidersEvent event) {
         event.registerSpriteSet(EParticleTypes.BOILING.get(), BoilingParticle.Factory::new);
         event.registerSpriteSet(EParticleTypes.CAULDRON_BREW.get(), CauldronBrewParticle.Factory::new);
         event.registerSpriteSet(EParticleTypes.CAULDRON_COOK.get(), CauldronCookParticle.Factory::new);
@@ -97,6 +105,21 @@ public class EnchantedNeoClient {
         event.registerSpriteSet(EParticleTypes.PROTECTION.get(), ProtectionParticle.Factory::new);
         event.registerSpriteSet(EParticleTypes.BIND_FAMILIAR_SEED.get(), BindFamiliarSeedParticle.Factory::new);
         event.registerSpriteSet(EParticleTypes.BIND_FAMILIAR.get(), BindFamiliarParticle.Factory::new);
+    }
+
+    @SubscribeEvent
+    public static void registerClientExtensions(RegisterClientExtensionsEvent event) {
+        event.registerItem(new IClientItemExtensions() {
+            private SpinningWheelItemRenderer renderer;
+
+            @Override
+            public BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                if(renderer == null)
+                    renderer = new SpinningWheelItemRenderer();
+
+                return renderer;
+            }
+        }, EItems.SPINNING_WHEEL.get());
     }
 
 }

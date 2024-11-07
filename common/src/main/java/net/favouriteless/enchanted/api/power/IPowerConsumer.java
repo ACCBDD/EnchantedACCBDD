@@ -3,7 +3,7 @@ package net.favouriteless.enchanted.api.power;
 import net.favouriteless.enchanted.api.ISerializable;
 import net.favouriteless.enchanted.common.altar.SimplePowerPosHolder;
 import net.minecraft.core.BlockPos;
-import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import org.jetbrains.annotations.NotNull;
@@ -33,7 +33,7 @@ public interface IPowerConsumer {
      * <p>See {@link SimplePowerPosHolder} for the "default" implementation
      * which sorts the provided positions by proximity.</p>
      */
-    interface IPowerPosHolder extends ISerializable<ListTag> {
+    interface IPowerPosHolder extends ISerializable<CompoundTag> {
 
         /**
          * <p><strong>IMPORTANT:</strong> {@link IPowerProvider}s do not need to notify their subscribers when they are removed, you

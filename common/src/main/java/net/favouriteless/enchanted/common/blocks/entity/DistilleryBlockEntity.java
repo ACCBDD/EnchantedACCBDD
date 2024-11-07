@@ -92,7 +92,7 @@ public class DistilleryBlockEntity extends ContainerBlockEntityBase implements I
             if(hasInput && powerProvider != null) {
                 RecipeHolder<DistillingRecipe> recipe = be.recipeCheck.getRecipeFor(ListInput.of(be.inventory.subList(0, 4)), level).orElse(null);
 
-                if(be.canDistill(recipe) && powerProvider.tryConsumePower((double)recipe.value().getPower() / recipe.value().getDuration())) {
+                if(be.canDistill(recipe) && powerProvider.tryConsume((double)recipe.value().getPower() / recipe.value().getDuration())) {
                     isCooking = true;
                     be.isBurning = true;
 
@@ -214,7 +214,7 @@ public class DistilleryBlockEntity extends ContainerBlockEntityBase implements I
     }
 
     @Override
-    public void saveAdditional(@NotNull CompoundTag tag, Provider registries) {
+    public void saveAdditional(@NotNull CompoundTag tag, @NotNull Provider registries) {
         super.saveAdditional(tag, registries);
         tag.put("posHolder", posHolder.serialize());
         tag.putBoolean("isBurning", isBurning);
@@ -223,7 +223,7 @@ public class DistilleryBlockEntity extends ContainerBlockEntityBase implements I
     }
 
     @Override
-    public void loadAdditional(@NotNull CompoundTag tag, Provider registries) {
+    public void loadAdditional(@NotNull CompoundTag tag, @NotNull Provider registries) {
         super.loadAdditional(tag, registries);
         posHolder.deserialize(tag.getList("posHolder", 10));
         isBurning = tag.getBoolean("isBurning");

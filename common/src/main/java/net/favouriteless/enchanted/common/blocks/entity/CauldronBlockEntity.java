@@ -121,7 +121,7 @@ public abstract class CauldronBlockEntity<T extends CauldronTypeRecipe> extends 
 			IPowerProvider powerProvider = PowerHelper.tryGetPowerProvider(level, be.getPosHolder());
 			if(recipe.getPower() <= 0)
 				be.setComplete();
-			else if(powerProvider != null && powerProvider.tryConsumePower(recipe.getPower()))
+			else if(powerProvider != null && powerProvider.tryConsume(recipe.getPower()))
 				be.setComplete();
 			else
 				be.setFailed(); // Fail if not enough power
@@ -402,7 +402,7 @@ public abstract class CauldronBlockEntity<T extends CauldronTypeRecipe> extends 
 	}
 
 	@Override
-	public void saveAdditional(@NotNull CompoundTag tag, Provider registries) {
+	public void saveAdditional(@NotNull CompoundTag tag, @NotNull Provider registries) {
 		super.saveAdditional(tag, registries);
 		saveBase(tag);
 		ContainerHelper.saveAllItems(tag, inventory, registries);
@@ -416,7 +416,7 @@ public abstract class CauldronBlockEntity<T extends CauldronTypeRecipe> extends 
 	}
 
 	@Override
-	public void loadAdditional(@NotNull CompoundTag tag, Provider registries) {
+	public void loadAdditional(@NotNull CompoundTag tag, @NotNull Provider registries) {
 		super.loadAdditional(tag, registries);
 		loadBase(tag);
 

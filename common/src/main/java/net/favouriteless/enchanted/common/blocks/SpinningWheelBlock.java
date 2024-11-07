@@ -1,6 +1,7 @@
 package net.favouriteless.enchanted.common.blocks;
 
 import com.mojang.serialization.MapCodec;
+import net.favouriteless.enchanted.common.blocks.entity.EBlockEntityTypes;
 import net.favouriteless.enchanted.common.blocks.entity.SpinningWheelBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction.Axis;
@@ -62,7 +63,8 @@ public class SpinningWheelBlock extends SimpleContainerBlockBase {
 	@Nullable
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-		return SpinningWheelBlockEntity::tick;
+		return level.isClientSide ? createTickerHelper(type, EBlockEntityTypes.SPINNING_WHEEL.get(), SpinningWheelBlockEntity::clientTick) :
+				createTickerHelper(type, EBlockEntityTypes.SPINNING_WHEEL.get(), SpinningWheelBlockEntity::serverTick);
 	}
 
 }

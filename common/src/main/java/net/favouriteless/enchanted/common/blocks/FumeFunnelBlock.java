@@ -33,9 +33,16 @@ public class FumeFunnelBlock extends Block {
     private static final VoxelShape SHAPE_TOP_EAST = Shapes.box(2.0D/16, 0.0D, 5.0D/16, 8.0D/16, 8.0D/16, 11.0D/16);
     private static final VoxelShape SHAPE_TOP_WEST = Shapes.box(8.0D/16, 0.0D, 5.0D/16, 14.0D/16, 8.0D/16, 11.0D/16);
 
-    public FumeFunnelBlock(Properties properties) {
+    private final double byproductChance;
+
+    public FumeFunnelBlock(double byproductChance, Properties properties) {
         super(properties);
         this.registerDefaultState(this.getStateDefinition().any().setValue(FACING, Direction.NORTH).setValue(LIT, false).setValue(TYPE, 0));
+        this.byproductChance = byproductChance;
+    }
+
+    public double getByproductChance() {
+        return byproductChance;
     }
 
     @Override
@@ -60,15 +67,14 @@ public class FumeFunnelBlock extends Block {
     }
 
     @Override
-    public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor worldIn, BlockPos currentPos, BlockPos facingPos) {
-        return getWitchOvenState(stateIn, (Level) worldIn, currentPos);
+    public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
+        return getWitchOvenState(stateIn, level, currentPos);
     }
 
     /**
      * Checks for adjacent witch oven and returns appropriate state
-     * @return
      */
-    public BlockState getWitchOvenState(BlockState state, Level world, BlockPos pos) {
+    public BlockState getWitchOvenState(BlockState state, LevelAccessor world, BlockPos pos) {
         int type = 3;
         boolean lit = false;
 
@@ -81,15 +87,12 @@ public class FumeFunnelBlock extends Block {
                         state = state.setValue(FACING, ovenState.getValue(WitchOvenBlock.FACING));
                         lit = ovenState.getValue(WitchOvenBlock.LIT);
 
-                        if (dir == Direction.DOWN) {
+                        if (dir == Direction.DOWN)
                             type = 1;
-                        }
-                        else if(dir == state.getValue(FACING).getClockWise()) {
+                        else if(dir == state.getValue(FACING).getClockWise())
                             type = 2;
-                        }
-                        else if(dir == state.getValue(FACING).getCounterClockWise()) {
+                        else if(dir == state.getValue(FACING).getCounterClockWise())
                             type = 0;
-                        }
                     }
                     break;
                 }
@@ -104,41 +107,24 @@ public class FumeFunnelBlock extends Block {
     }
 
     @Override
-    public BlockState rotate(BlockState state, Rotation rot) {
-        return state;
-    }
-
-    @Override
-    public BlockState mirror(BlockState state, Mirror mirrorIn) {
-        return state;
-    }
-
-    @Override
-    public RenderShape getRenderShape(BlockState iBlockState) {
-        return RenderShape.MODEL;
-    }
-
-    @Override
-    public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
         if (state.getValue(LIT)) {
             if (state.getValue(TYPE) != 1) {
                 if (random.nextInt(8) == 0) {
-                    double d0 = (double) pos.getX() + 0.5D;
-                    double d1 = (double) pos.getY();
-                    double d2 = (double) pos.getZ() + 0.5D;
-                    if (random.nextDouble() < 0.1D) {
-                        world.playLocalSound(d0, d1, d2, SoundEvents.FURNACE_FIRE_CRACKLE, SoundSource.BLOCKS, 1.0F, 1.0F, false);
-                    }
+                    double d0 = pos.getX() + 0.5D;
+                    double d1 = pos.getY();
+                    double d2 = pos.getZ() + 0.5D;
+                    if (random.nextDouble() < 0.1D)
+                        level.playLocalSound(d0, d1, d2, SoundEvents.FURNACE_FIRE_CRACKLE, SoundSource.BLOCKS, 1.0F, 1.0F, false);
 
                     Direction direction = state.getValue(FACING);
-                    Direction.Axis direction$axis = direction.getAxis();
-                    double d3 = 0.52D;
+                    Direction.Axis axis = direction.getAxis();
                     double d4 = random.nextDouble() * 0.6D - 0.3D;
-                    double d5 = direction$axis == Direction.Axis.X ? (double) direction.getStepX() * 0.49D : d4;
+                    double d5 = axis == Direction.Axis.X ? (double) direction.getStepX() * 0.49D : d4;
                     double d6 = random.nextDouble() * 6.0D / 16.0D;
-                    double d7 = direction$axis == Direction.Axis.Z ? (double) direction.getStepZ() * 0.49D : d4;
-                    world.addParticle(ParticleTypes.SMOKE, d0 + d5, d1 + d6, d2 + d7, 0.0D, 0.0D, 0.0D);
-                    world.addParticle(ParticleTypes.FLAME, d0 + d5, d1 + d6, d2 + d7, 0.0D, 0.0D, 0.0D);
+                    double d7 = axis == Direction.Axis.Z ? (double) direction.getStepZ() * 0.49D : d4;
+                    level.addParticle(ParticleTypes.SMOKE, d0 + d5, d1 + d6, d2 + d7, 0.0D, 0.0D, 0.0D);
+                    level.addParticle(ParticleTypes.FLAME, d0 + d5, d1 + d6, d2 + d7, 0.0D, 0.0D, 0.0D);
                 }
             }
         }

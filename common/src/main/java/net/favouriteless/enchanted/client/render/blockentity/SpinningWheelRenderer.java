@@ -56,28 +56,29 @@ public class SpinningWheelRenderer implements BlockEntityRenderer<SpinningWheelB
 	}
 
 	@Override
-	public void render(SpinningWheelBlockEntity blockEntity, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay) {
+	public void render(SpinningWheelBlockEntity wheel, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
 		poseStack.pushPose();
-		float rotationYDegrees = blockEntity.getLevel() != null ? blockEntity.getBlockState().getValue(SpinningWheelBlock.FACING).getOpposite().toYRot() : 0;
+		float rotationYDegrees = wheel.getLevel() != null ? wheel.getBlockState().getValue(SpinningWheelBlock.FACING).getOpposite().toYRot() : 0;
 
 		poseStack.translate(0.5F, 1.5F, 0.5F);
 		poseStack.mulPose(Axis.YN.rotationDegrees(rotationYDegrees));
 		poseStack.mulPose(Axis.ZP.rotationDegrees(180));
 
-		float spinProgress = blockEntity.getSpinProgress() >= 1 ? blockEntity.getSpinProgress() + partialTicks - 1 : 0;
+		float spinProgress = wheel.isSpinning() ? wheel.getSpinProgress() + partialTicks : 0;
 		float turnFactor = 25;
 		float rotationDegreesWheel = spinProgress % turnFactor * 360 / turnFactor;
 		float rotationDegreesArm = rotationDegreesWheel * 2;
 
-		VertexConsumer vertexBuilder = buffer.getBuffer((RenderType.entityTranslucentCull(TEXTURE)));
-		body.render(poseStack, vertexBuilder, packedLight, packedOverlay);
+		VertexConsumer buffer = bufferSource.getBuffer((RenderType.entityTranslucentCull(TEXTURE)));
+		body.render(poseStack, buffer, packedLight, packedOverlay);
 
-		wheel.zRot = (float)(Math.PI + Math.toRadians(rotationDegreesWheel));
-		wheel.render(poseStack, vertexBuilder, packedLight, packedOverlay);
+		this.wheel.zRot = (float)(Math.PI + Math.toRadians(rotationDegreesWheel));
+		this.wheel.render(poseStack, buffer, packedLight, packedOverlay);
 
 		frontArm.yRot = (float)(Math.PI + Math.toRadians(rotationDegreesArm));
-		frontArm.render(poseStack, vertexBuilder, packedLight, packedOverlay);
+		frontArm.render(poseStack, buffer, packedLight, packedOverlay);
 
 		poseStack.popPose();
 	}
+
 }

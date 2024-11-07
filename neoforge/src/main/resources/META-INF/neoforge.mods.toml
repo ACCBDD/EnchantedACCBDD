@@ -43,10 +43,3 @@ license = "All Rights Reserved"
     versionRange = "[${geckolib_version},)"
     ordering = "NONE"
     side = "BOTH"
-
-[[dependencies.enchanted]]
-    modId = "forgeconfigapi"
-    type="required" #mandatory
-    versionRange = "[${forgeconfigapi_version},)"
-    ordering = "NONE"
-    side = "BOTH"

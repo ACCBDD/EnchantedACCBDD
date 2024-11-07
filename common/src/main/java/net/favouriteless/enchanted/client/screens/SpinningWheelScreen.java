@@ -1,7 +1,6 @@
 package net.favouriteless.enchanted.client.screens;
 
 import net.favouriteless.enchanted.common.Enchanted;
-import net.favouriteless.enchanted.common.blocks.entity.SpinningWheelBlockEntity;
 import net.favouriteless.enchanted.common.menus.SpinningWheelMenu;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -50,7 +49,7 @@ public class SpinningWheelScreen extends AbstractContainerScreen<SpinningWheelMe
         int edgeSpacingY = (height - imageHeight) / 2;
         gui.blit(TEXTURE, edgeSpacingX, edgeSpacingY, 0, 0, imageWidth, imageHeight);
 
-        double progression = (double)menu.getSpinProgress() / SpinningWheelBlockEntity.SPIN_DURATION;
+        double progression = (double)menu.getSpinProgress() / menu.getSpinProgress();
 
         int barSize = (int)Math.round(BAR_HEIGHT * Math.min(progression * 10.0D, 1.0D));
         if(menu.getSlot(1).hasItem())

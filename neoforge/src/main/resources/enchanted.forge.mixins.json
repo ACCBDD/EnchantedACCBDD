@@ -5,8 +5,7 @@
   "refmap": "enchanted.refmap.json",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "common.EnchantedLogMixin",
-    "common.SpinningWheelBlockItemMixin"
+    "common.EnchantedLogMixin"
   ],
   "client": [
   ],

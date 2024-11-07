@@ -34,16 +34,12 @@ public class WitchOvenBlock extends SimpleContainerBlockBase {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
 
-    private static final VoxelShape SHAPE_NORTH = Shapes.join(Shapes.box(1.0D/16, 0.0D, 1.0D/16, 15.0D/16, 12.0D/16, 15.0D/16),
-            Shapes.box(5.0D/16, 0.0D, 8.0D/16, 11.0D/16, 1.0D, 14.0D/16), BooleanOp.OR);
-    private static final VoxelShape SHAPE_SOUTH = Shapes.join(Shapes.box(1.0D/16, 0.0D, 1.0D/16, 15.0D/16, 12.0D/16, 15.0D/16),
-            Shapes.box(5.0D/16, 0.0D, 2.0D/16, 11.0D/16, 1.0D, 8.0D/16), BooleanOp.OR);
-    private static final VoxelShape SHAPE_EAST = Shapes.join(Shapes.box(1.0D/16, 0.0D, 1.0D/16, 15.0D/16, 12.0D/16, 15.0D/16),
-            Shapes.box(2.0D/16, 0.0D, 5.0D/16, 8.0D/16, 1.0D, 11.0D/16), BooleanOp.OR);
-    private static final VoxelShape SHAPE_WEST = Shapes.join(Shapes.box(1.0D/16, 0.0D, 1.0D/16, 15.0D/16, 12.0D/16, 15.0D/16),
-            Shapes.box(8.0D/16, 0.0D, 5.0D/16, 14.0D/16, 1.0D, 11.0D/16), BooleanOp.OR);
+    private static final VoxelShape SHAPE_NORTH = Shapes.join(Shapes.box(1.0D/16, 0.0D, 1.0D/16, 15.0D/16, 12.0D/16, 15.0D/16), Shapes.box(5.0D/16, 0.0D, 8.0D/16, 11.0D/16, 1.0D, 14.0D/16), BooleanOp.OR);
+    private static final VoxelShape SHAPE_SOUTH = Shapes.join(Shapes.box(1.0D/16, 0.0D, 1.0D/16, 15.0D/16, 12.0D/16, 15.0D/16), Shapes.box(5.0D/16, 0.0D, 2.0D/16, 11.0D/16, 1.0D, 8.0D/16), BooleanOp.OR);
+    private static final VoxelShape SHAPE_EAST = Shapes.join(Shapes.box(1.0D/16, 0.0D, 1.0D/16, 15.0D/16, 12.0D/16, 15.0D/16), Shapes.box(2.0D/16, 0.0D, 5.0D/16, 8.0D/16, 1.0D, 11.0D/16), BooleanOp.OR);
+    private static final VoxelShape SHAPE_WEST = Shapes.join(Shapes.box(1.0D/16, 0.0D, 1.0D/16, 15.0D/16, 12.0D/16, 15.0D/16), Shapes.box(8.0D/16, 0.0D, 5.0D/16, 14.0D/16, 1.0D, 11.0D/16), BooleanOp.OR);
 
-    public final MapCodec<WitchOvenBlock> codec = simpleCodec(WitchOvenBlock::new);
+    private final MapCodec<WitchOvenBlock> codec = simpleCodec(WitchOvenBlock::new);
 
     public WitchOvenBlock(Properties properties) {
         super(properties);
@@ -114,6 +110,6 @@ public class WitchOvenBlock extends SimpleContainerBlockBase {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return type == EBlockEntityTypes.WITCH_OVEN.get() && !level.isClientSide ? WitchOvenBlockEntity::serverTick : null;
+        return level.isClientSide ? null : createTickerHelper(type, EBlockEntityTypes.WITCH_OVEN.get(), WitchOvenBlockEntity::serverTick);
     }
 }

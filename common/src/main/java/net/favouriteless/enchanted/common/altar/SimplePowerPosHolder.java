@@ -3,8 +3,7 @@ package net.favouriteless.enchanted.common.altar;
 import net.favouriteless.enchanted.api.power.IPowerConsumer.IPowerPosHolder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.Tag;
+import net.minecraft.nbt.NbtOps;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -16,7 +15,7 @@ import java.util.List;
  */
 public class SimplePowerPosHolder implements IPowerPosHolder {
 
-	private final List<BlockPos> altars = new ArrayList<>();
+	private List<BlockPos> altars = new ArrayList<>();
 	private final BlockPos pos;
 
 	public SimplePowerPosHolder(BlockPos pos) {
@@ -40,40 +39,32 @@ public class SimplePowerPosHolder implements IPowerPosHolder {
 			altars.add(altarPos);
 		}
 		else {
-			if(!altars.contains(pos)) {
-				for(int i = 0; i < altars.size(); i++) {
-					if(pos.distSqr(altarPos) < pos.distSqr(altars.get(i))) {
-						altars.add(i, altarPos);
-						return;
-					}
-					else if(i == altars.size() - 1) {
-						altars.add(altarPos);
-						return;
-					}
+			if(altars.contains(altarPos))
+				return;
+
+			for(int i = 0; i < altars.size(); i++) { // Crude sorting algorithm. Inserts new pos in correct place.
+				if(pos.distSqr(altarPos) < pos.distSqr(altars.get(i))) {
+					altars.add(i, altarPos);
+					return;
+				}
+				else if(i == altars.size() - 1) {
+					altars.add(altarPos);
+					return;
 				}
 			}
 		}
 	}
 
 	@Override
-	public ListTag serialize() {
-		ListTag nbt = new ListTag();
-		for(BlockPos pos : altars) {
-			CompoundTag posTag = new CompoundTag();
-			posTag.putInt("x", pos.getX());
-			posTag.putInt("y", pos.getY());
-			posTag.putInt("z", pos.getZ());
-			nbt.add(posTag);
-		}
-		return nbt;
+	public CompoundTag serialize() {
+		CompoundTag tag = new CompoundTag();
+		tag.put("altars", BlockPos.CODEC.listOf().encodeStart(NbtOps.INSTANCE, altars).getOrThrow());
+		return tag;
 	}
 
 	@Override
-	public void deserialize(ListTag nbt) {
-		for(Tag tag : nbt) {
-			CompoundTag posTag = (CompoundTag)tag;
-			altars.add(new BlockPos(posTag.getInt("x"), posTag.getInt("y"), posTag.getInt("z")));
-		}
+	public void deserialize(CompoundTag tag) {
+		altars = BlockPos.CODEC.listOf().parse(NbtOps.INSTANCE, tag.get("altars")).getOrThrow();
 	}
 
 }

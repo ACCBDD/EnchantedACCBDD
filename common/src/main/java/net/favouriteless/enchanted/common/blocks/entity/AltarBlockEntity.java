@@ -321,7 +321,7 @@ public class AltarBlockEntity extends BlockEntity implements MenuProvider, IPowe
     }
 
     @Override
-    public boolean tryConsumePower(double amount) {
+    public boolean tryConsume(double amount) {
         if(this.currentPower > amount) {
             currentPower -= amount;
             return true;
