@@ -31,12 +31,11 @@ import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsE
 import java.util.function.Supplier;
 
 @Mod(value = Enchanted.MOD_ID, dist = Dist.CLIENT)
-@EventBusSubscriber(modid = Enchanted.MOD_ID, bus = Bus.GAME, value = Dist.CLIENT)
+@EventBusSubscriber(modid = Enchanted.MOD_ID, bus = Bus.MOD, value = Dist.CLIENT)
 public class EnchantedNeoClient {
 
     public EnchantedNeoClient(IEventBus bus, ModContainer container) {
         EnchantedClient.init();
-
         container.registerConfig(Type.CLIENT, ClientConfig.SPEC, "enchanted-client.toml");
     }
 
@@ -49,6 +48,7 @@ public class EnchantedNeoClient {
 
     @SubscribeEvent
     public static void registerMenuScreens(final RegisterMenuScreensEvent event) {
+        ClientRegistry.registerMenuScreens();
         NeoClientRegistryHelper.MENU_FACTORY_REGISTERABLES.forEach(r -> r.register(event));
         NeoClientRegistryHelper.MENU_FACTORY_REGISTERABLES.clear();
     }
@@ -61,14 +61,14 @@ public class EnchantedNeoClient {
     }
 
     @SubscribeEvent
-    public static void onRegisterKeybinds(final RegisterKeyMappingsEvent event) {
+    public static void registerKeybinds(final RegisterKeyMappingsEvent event) {
         for(KeyMapping mapping : NeoClientRegistryHelper.KEY_MAPPINGS)
             event.register(mapping);
         NeoClientRegistryHelper.KEY_MAPPINGS.clear();
     }
 
     @SubscribeEvent
-    public static void onRegisterEntityRenderers(final EntityRenderersEvent.RegisterRenderers event) {
+    public static void registerEntityRenderers(final EntityRenderersEvent.RegisterRenderers event) {
         ClientRegistry.registerEntityRenderers();
     }
 

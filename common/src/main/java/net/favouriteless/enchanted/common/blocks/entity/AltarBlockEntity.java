@@ -78,22 +78,18 @@ public class AltarBlockEntity extends BlockEntity implements MenuProvider, IPowe
         super(EBlockEntityTypes.ALTAR.get(), pos, state);
     }
 
-    public static <T extends BlockEntity> void tick(Level level, BlockPos pos, BlockState state, T t) {
-        if(t instanceof AltarBlockEntity be) {
-            if(level != null && !level.isClientSide) {
-                if(be.firstTick) // Can't use onLoad here because it's forge exclusive.
-                    be.firstTick();
+    public static void serverTick(Level level, BlockPos pos, BlockState state, AltarBlockEntity be) {
+        if(be.firstTick) // Can't use onLoad here because it's forge exclusive.
+            be.firstTick();
 
-                if(be.ticksAlive % 20 == 0) {
-                    be.stateObserver.checkChanges();
-                }
-                if(be.currentPower <= be.maxPower)
-                    be.currentPower += be.rechargeRate * be.rechargeMultiplier;
-                if(be.currentPower > be.maxPower)
-                    be.currentPower = be.maxPower;
-                be.ticksAlive++;
-            }
+        if(be.ticksAlive % 20 == 0) {
+            be.stateObserver.checkChanges();
         }
+        if(be.currentPower <= be.maxPower)
+            be.currentPower += be.rechargeRate * be.rechargeMultiplier;
+        if(be.currentPower > be.maxPower)
+            be.currentPower = be.maxPower;
+        be.ticksAlive++;
     }
 
     public void firstTick() {

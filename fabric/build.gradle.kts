@@ -100,6 +100,7 @@ modrinth {
     dependencies {
         required.project("fabric-api")
         required.project("stateobserver")
+        required.project("geckolib")
         required.project("forge-config-api-port")
     }
     debugMode = true
@@ -121,6 +122,7 @@ tasks.register<TaskPublishCurseForge>("publishToCurseForge") {
     mainFile.addRequirement(
         "fabric-api",
         "stateobserver",
+        "geckolib",
         "forge-config-api-port-fabric"
     )
 

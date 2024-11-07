@@ -54,7 +54,7 @@ public class EItems {
 	public static final Supplier<Item> BLOODED_WAYSTONE = register("blooded_waystone", () -> new BloodedWaystoneItem(props().component(EDataComponents.ENTITY_REF.get(), EntityRefData.EMPTY)));
 	public static final Supplier<BlockItem> BLOOD_POPPY = registerBlock("blood_poppy", EBlocks.BLOOD_POPPY);
 	public static final Supplier<Item> BONE_NEEDLE = registerItem("bone_needle");
-	public static final Supplier<Item> BOUND_WAYSTONE = registerItem("bound_waystone", props().component(EDataComponents.OPTIONAL_BLOCK_POS.get(), OptionalBlockPosData.EMPTY).component(EDataComponents.OPTIONAL_LEVEL_KEY.get(), OptionalLevelKeyData.EMPTY));
+	public static final Supplier<Item> BOUND_WAYSTONE = register("bound_waystone", () -> new Item(props().component(EDataComponents.OPTIONAL_BLOCK_POS.get(), OptionalBlockPosData.EMPTY).component(EDataComponents.OPTIONAL_LEVEL_KEY.get(), OptionalLevelKeyData.EMPTY)));
 	public static final Supplier<Item> BREATH_OF_THE_GODDESS = registerItem("breath_of_the_goddess");
 	public static final Supplier<Item> BREW_OF_LOVE = register("brew_of_love", LoveBrewItem::new);
 	public static final Supplier<Item> BREW_OF_SPROUTING = registerItem("brew_of_sprouting");

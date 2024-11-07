@@ -36,8 +36,8 @@ public class Enchanted {
 
     public static void loadRegistries() {
         ESoundEvents.load();
-        EItems.load();
         EDataComponents.load();
+        EItems.load();
         EBlocks.load();
         EBlockEntityTypes.load();
         EEntityTypes.load();

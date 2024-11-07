@@ -16,6 +16,7 @@ public class EnchantedFabricClient implements ClientModInitializer {
         FabricClientRegistry.registerAll();
         ClientRegistry.registerItemModelPredicates();
         ClientRegistry.registerLayerDefinitions();
+        ClientRegistry.registerMenuScreens();
         ClientRegistry.registerEntityRenderers();
         ClientEventsFabric.register();
 

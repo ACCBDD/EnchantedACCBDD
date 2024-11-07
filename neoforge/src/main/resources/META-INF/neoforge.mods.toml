@@ -14,7 +14,7 @@ license = "All Rights Reserved"
     description = '''Witchcraft and Occultism based on real history and folklore.'''
 
 [[mixins]]
-    config="modopedia.neoforge.mixins.json"
+    config="enchanted.neoforge.mixins.json"
 
 [[dependencies.enchanted]]
     modId = "neoforge"

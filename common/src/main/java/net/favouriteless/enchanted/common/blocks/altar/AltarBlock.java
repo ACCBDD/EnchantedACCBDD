@@ -99,7 +99,7 @@ public class AltarBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return type == EBlockEntityTypes.ALTAR.get() ? AltarBlockEntity::tick : null;
+        return level.isClientSide ? null : createTickerHelper(type, EBlockEntityTypes.ALTAR.get(), AltarBlockEntity::serverTick);
     }
 
 

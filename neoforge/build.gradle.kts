@@ -52,9 +52,8 @@ neoForge {
 
 dependencies {
     compileOnly( project(":common") )
-    implementation( libs.neoforge )
     implementation( libs.stateobserver.neoforge )
-    implementation( libs.geckolib.neoforge )
+    implementation( libs.geckolib.neoforge ) { isTransitive = false }
 }
 
 

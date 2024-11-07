@@ -24,10 +24,10 @@ public class AltarStateObserver extends StateObserver {
     protected void handleChanges() {
         if(!getLevel().isClientSide) {
             BlockEntity be = getLevel().getBlockEntity(getPos());
-            if (be instanceof AltarBlockEntity altar) { // Only apply this StateObserver to altars.
+            if(be instanceof AltarBlockEntity altar) { // Only apply this StateObserver to altars.
 
-                for (StateChange change : getChangeSet().getChanges()) { // For all changes
-                    if (altar.posWithinRange(change.pos(), CommonConfig.INSTANCE.altarRange.get())) { // Change is relevant
+                for(StateChange change : getChangeSet().getChanges()) { // For all changes
+                    if(altar.posWithinRange(change.pos(), CommonConfig.INSTANCE.altarRange.get())) { // Change is relevant
                         if(!change.oldState().is(change.newState().getBlock())) { // Block actually changed
                             if(getLevel().getBlockEntity(change.pos()) instanceof IPowerConsumer consumer)
                                 consumer.getPosHolder().add(getPos()); // Subscribe power consumer to this Altar if present.
