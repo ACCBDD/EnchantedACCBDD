@@ -1,25 +1,24 @@
 package net.favouriteless.enchanted.common.blocks;
 
+import com.mojang.serialization.MapCodec;
 import net.favouriteless.enchanted.common.blocks.entity.PoppetShelfBlockEntity;
 import net.favouriteless.enchanted.common.poppet.PoppetShelfManager;
 import net.favouriteless.enchanted.platform.CommonServices;
 import net.favouriteless.enchanted.util.ItemUtil;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.RenderShape;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.BaseEntityBlock;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BaseEntityBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
 
 import javax.annotation.Nullable;
 
@@ -27,14 +26,21 @@ public class PoppetShelfBlock extends BaseEntityBlock {
 
 	public static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 8.0D, 16.0D);
 
-	public PoppetShelfBlock() {
-		super(Properties.copy(Blocks.ENCHANTING_TABLE).noOcclusion());
+	private final MapCodec<PoppetShelfBlock> codec = simpleCodec(PoppetShelfBlock::new);
+
+	public PoppetShelfBlock(Properties properties) {
+		super(properties);
 	}
 
 	@Nullable
 	@Override
 	public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
 		return new PoppetShelfBlockEntity(pos, state);
+	}
+
+	@Override
+	protected MapCodec<? extends BaseEntityBlock> codec() {
+		return codec;
 	}
 
 	@Override
@@ -48,9 +54,9 @@ public class PoppetShelfBlock extends BaseEntityBlock {
 	}
 
 	@Override
-	public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand hand, BlockHitResult rayTraceResult) {
-		if(!worldIn.isClientSide) {
-			BlockEntity blockEntity = worldIn.getBlockEntity(pos);
+	public InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
+		if(!level.isClientSide) {
+			BlockEntity blockEntity = level.getBlockEntity(pos);
 			if(blockEntity instanceof PoppetShelfBlockEntity be)
 				CommonServices.PLATFORM.openMenuScreen((ServerPlayer)player, be, pos);
 		}

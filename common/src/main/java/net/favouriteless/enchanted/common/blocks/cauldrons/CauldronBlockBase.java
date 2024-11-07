@@ -6,7 +6,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -29,42 +29,40 @@ public abstract class CauldronBlockBase extends Block implements EntityBlock {
 	}
 
 	@Override
-	public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-		BlockEntity te = world.getBlockEntity(pos);
-		ItemStack stack = player.getItemInHand(hand);
+	protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+		BlockEntity te = level.getBlockEntity(pos);
 		if(te instanceof CauldronBlockEntity<?> cauldron) {
 			if(cauldron.isComplete) {
 				cauldron.takeContents(player);
-				return InteractionResult.SUCCESS;
+				return ItemInteractionResult.SUCCESS;
 			}
 			else if(stack.getItem() == Items.BUCKET && cauldron.isFailed) {
 				cauldron.takeContents(player);
-				world.playSound(null, pos, SoundEvents.BUCKET_FILL, SoundSource.BLOCKS, 1.0F, 1.0F);
-				return InteractionResult.SUCCESS;
+				level.playSound(null, pos, SoundEvents.BUCKET_FILL, SoundSource.BLOCKS, 1.0F, 1.0F);
+				return ItemInteractionResult.SUCCESS;
 			}
 			else if(stack.getItem() == Items.BUCKET && cauldron.getWater() >= 1000) {
-				if (!world.isClientSide) {
+				if (!level.isClientSide) {
 					if (cauldron.removeWater(1000)) {
-						world.playSound(null, pos, SoundEvents.BUCKET_FILL, SoundSource.BLOCKS, 1.0F, 1.0F);
+						level.playSound(null, pos, SoundEvents.BUCKET_FILL, SoundSource.BLOCKS, 1.0F, 1.0F);
 						stack.shrink(1);
 						PlayerInventoryHelper.tryGiveItem(player, new ItemStack(Items.WATER_BUCKET));
 					}
 				}
-				return InteractionResult.SUCCESS;
+				return ItemInteractionResult.SUCCESS;
 			}
 			else if (stack.getItem() == Items.WATER_BUCKET) {
-				if (!world.isClientSide) {
+				if (!level.isClientSide) {
 					if (cauldron.addWater(1000)) {
-						world.playSound(null, pos, SoundEvents.BUCKET_EMPTY, SoundSource.BLOCKS, 1.0F, 1.0F);
+						level.playSound(null, pos, SoundEvents.BUCKET_EMPTY, SoundSource.BLOCKS, 1.0F, 1.0F);
 						if (!player.isCreative()) player.setItemInHand(hand, Items.BUCKET.getDefaultInstance());
 					}
 				}
-				return InteractionResult.SUCCESS;
+				return ItemInteractionResult.SUCCESS;
 			}
 		}
-		return InteractionResult.FAIL;
+		return ItemInteractionResult.FAIL;
 	}
-
 	@Override
 	public void entityInside(BlockState state, Level world, BlockPos pos, Entity entity) {
 		if(!world.isClientSide && entity instanceof ItemEntity) {

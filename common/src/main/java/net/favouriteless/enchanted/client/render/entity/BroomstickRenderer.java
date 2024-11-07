@@ -40,7 +40,7 @@ public class BroomstickRenderer extends EntityRenderer<Broomstick> {
 			poseStack.mulPose(Axis.XP.rotationDegrees(Mth.sin(f) * f * f1 / 10.0F * (float)broomstick.getHurtDir()));
 
 		VertexConsumer ivertexbuilder = buffer.getBuffer(this.model.renderType(this.getTextureLocation(broomstick)));
-		this.model.renderToBuffer(poseStack, ivertexbuilder, packedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+		this.model.renderToBuffer(poseStack, ivertexbuilder, packedLight, OverlayTexture.NO_OVERLAY, 0xFFFFFFFF);
 		poseStack.popPose();
 
 		super.render(broomstick, yaw, partialTicks, poseStack, buffer, packedLight);

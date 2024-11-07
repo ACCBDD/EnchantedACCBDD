@@ -18,7 +18,7 @@ public class EData {
     public static final ResourceKey<Registry<AltarUpgrade>> ALTAR_UPGRADE_REGISTRY = ResourceKey.createRegistryKey(Enchanted.id("altar/upgrade"));
     public static final ResourceKey<Registry<PowerProvider<Block>>> ALTAR_BLOCK_REGISTRY = ResourceKey.createRegistryKey(Enchanted.id("altar/block"));
     public static final ResourceKey<Registry<PowerProvider<TagKey<Block>>>> ALTAR_TAG_REGISTRY = ResourceKey.createRegistryKey(Enchanted.id("altar/tag"));
-    public static final ResourceKey<Registry<RiteRequirements>> RITE_REQUIREMENTS_REGISTRY = ResourceKey.createRegistryKey(Enchanted.id("rite_requirement"));
+//    public static final ResourceKey<Registry<RiteRequirements>> RITE_REQUIREMENTS_REGISTRY = ResourceKey.createRegistryKey(Enchanted.id("rite_requirement"));
 
     private static Block createBlockKey(ResourceLocation key) {
         Block block = BuiltInRegistries.BLOCK.get(key);

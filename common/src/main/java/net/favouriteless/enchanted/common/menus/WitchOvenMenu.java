@@ -1,7 +1,7 @@
 package net.favouriteless.enchanted.common.menus;
 
-import net.favouriteless.enchanted.common.blocks.entity.WitchOvenBlockEntity;
 import net.favouriteless.enchanted.common.blocks.EBlocks;
+import net.favouriteless.enchanted.common.blocks.entity.WitchOvenBlockEntity;
 import net.favouriteless.enchanted.common.items.EItems;
 import net.favouriteless.enchanted.common.menus.slots.FuelSlot;
 import net.favouriteless.enchanted.common.menus.slots.JarInputSlot;
@@ -10,7 +10,6 @@ import net.favouriteless.enchanted.common.menus.slots.OutputSlot;
 import net.favouriteless.enchanted.util.ItemUtil;
 import net.favouriteless.enchanted.util.MenuUtils;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerData;
@@ -18,6 +17,7 @@ import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
@@ -106,7 +106,7 @@ public class WitchOvenMenu extends MenuBase<WitchOvenBlockEntity> {
 
     protected boolean hasRecipe(ItemStack item) {
         Level level = getBlockEntity().getLevel();
-        return level.getRecipeManager().getRecipeFor(RecipeType.SMELTING, new SimpleContainer(item), level).isPresent();
+        return level.getRecipeManager().getRecipeFor(RecipeType.SMELTING, new SingleRecipeInput(item), level).isPresent();
     }
 
 }

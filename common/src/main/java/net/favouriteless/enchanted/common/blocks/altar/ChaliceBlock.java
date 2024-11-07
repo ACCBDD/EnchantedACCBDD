@@ -8,8 +8,9 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -24,13 +25,13 @@ public class ChaliceBlock extends Block {
 
     private final boolean isFilled;
 
-    public ChaliceBlock(boolean filled) {
-        super(Properties.of().strength(1.0F, 6.0F).noOcclusion());
+    public ChaliceBlock(boolean filled, Properties properties) {
+        super(properties);
         this.isFilled = filled;
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         if(state.is(EBlocks.CHALICE.get())) {
 
             if(player.getItemInHand(hand).getItem() == EItems.REDSTONE_SOUP.get()) {
@@ -38,13 +39,14 @@ public class ChaliceBlock extends Block {
                     level.playSound(null, pos, SoundEvents.FISHING_BOBBER_SPLASH, SoundSource.BLOCKS, 0.4F, 1.0F);
                     level.setBlockAndUpdate(pos, EBlocks.CHALICE_FILLED.get().defaultBlockState());
                     player.getItemInHand(hand).shrink(1);
-                    return InteractionResult.CONSUME;
+                    return ItemInteractionResult.CONSUME;
                 }
-                return InteractionResult.SUCCESS;
+                return ItemInteractionResult.SUCCESS;
             }
         }
-        return InteractionResult.FAIL;
+        return ItemInteractionResult.FAIL;
     }
+
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {

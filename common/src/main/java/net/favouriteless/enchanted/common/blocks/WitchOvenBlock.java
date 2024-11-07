@@ -1,7 +1,8 @@
 package net.favouriteless.enchanted.common.blocks;
 
-import net.favouriteless.enchanted.common.blocks.entity.WitchOvenBlockEntity;
+import com.mojang.serialization.MapCodec;
 import net.favouriteless.enchanted.common.blocks.entity.EBlockEntityTypes;
+import net.favouriteless.enchanted.common.blocks.entity.WitchOvenBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -11,6 +12,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -41,9 +43,16 @@ public class WitchOvenBlock extends SimpleContainerBlockBase {
     private static final VoxelShape SHAPE_WEST = Shapes.join(Shapes.box(1.0D/16, 0.0D, 1.0D/16, 15.0D/16, 12.0D/16, 15.0D/16),
             Shapes.box(8.0D/16, 0.0D, 5.0D/16, 14.0D/16, 1.0D, 11.0D/16), BooleanOp.OR);
 
-    public WitchOvenBlock() {
-        super(Properties.copy(EBlocks.DISTILLERY.get()));
+    public final MapCodec<WitchOvenBlock> codec = simpleCodec(WitchOvenBlock::new);
+
+    public WitchOvenBlock(Properties properties) {
+        super(properties);
         this.registerDefaultState(this.getStateDefinition().any().setValue(FACING, Direction.NORTH).setValue(LIT, false));
+    }
+
+    @Override
+    protected MapCodec<? extends BaseEntityBlock> codec() {
+        return codec;
     }
 
     @Nullable
@@ -53,7 +62,7 @@ public class WitchOvenBlock extends SimpleContainerBlockBase {
     }
 
     @Override
-    public RenderShape getRenderShape(BlockState iBlockState) {
+    public RenderShape getRenderShape(BlockState state) {
         return RenderShape.MODEL;
     }
 

@@ -33,8 +33,8 @@ public class FumeFunnelBlock extends Block {
     private static final VoxelShape SHAPE_TOP_EAST = Shapes.box(2.0D/16, 0.0D, 5.0D/16, 8.0D/16, 8.0D/16, 11.0D/16);
     private static final VoxelShape SHAPE_TOP_WEST = Shapes.box(8.0D/16, 0.0D, 5.0D/16, 14.0D/16, 8.0D/16, 11.0D/16);
 
-    public FumeFunnelBlock() {
-        super(Properties.copy(EBlocks.DISTILLERY.get()));
+    public FumeFunnelBlock(Properties properties) {
+        super(properties);
         this.registerDefaultState(this.getStateDefinition().any().setValue(FACING, Direction.NORTH).setValue(LIT, false).setValue(TYPE, 0));
     }
 

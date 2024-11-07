@@ -1,9 +1,9 @@
 package net.favouriteless.enchanted.common.blocks.crops;
 
 import net.favouriteless.enchanted.common.Enchanted;
-import net.favouriteless.enchanted.common.entities.Mandrake;
 import net.favouriteless.enchanted.common.blocks.EBlocks;
 import net.favouriteless.enchanted.common.entities.EEntityTypes;
+import net.favouriteless.enchanted.common.entities.Mandrake;
 import net.favouriteless.enchanted.common.items.EItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.stats.Stats;
@@ -12,7 +12,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -20,8 +19,8 @@ import javax.annotation.Nullable;
 
 public class MandrakeBlock extends CropsBlockAgeFive {
 
-    public MandrakeBlock() {
-        super(Properties.copy(Blocks.WHEAT));
+    public MandrakeBlock(Properties properties) {
+        super(properties);
     }
 
     protected ItemLike getBaseSeedId() {

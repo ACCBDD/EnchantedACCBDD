@@ -19,7 +19,7 @@ public record AltarUpgrade(ResourceLocation type, Block block, double recharge, 
             Codec.DOUBLE.fieldOf("recharge").forGetter(data -> data.recharge),
             Codec.DOUBLE.fieldOf("power").forGetter(data -> data.power),
             Codec.INT.fieldOf("priority").forGetter(data -> data.priority)
-    ).apply(instance, (type, block, recharge, power, priority) -> new AltarUpgrade(new ResourceLocation(type), BuiltInRegistries.BLOCK.get(new ResourceLocation(block)), recharge, power, priority)));
+    ).apply(instance, (type, block, recharge, power, priority) -> new AltarUpgrade(ResourceLocation.parse(type), BuiltInRegistries.BLOCK.get(ResourceLocation.parse(block)), recharge, power, priority)));
 
     public static AltarUpgrade get(Level level, Block block) {
         Optional<Registry<AltarUpgrade>> optional = level.registryAccess().registry(EData.ALTAR_UPGRADE_REGISTRY);

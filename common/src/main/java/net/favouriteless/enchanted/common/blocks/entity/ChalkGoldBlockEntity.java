@@ -5,12 +5,10 @@ import net.favouriteless.enchanted.common.altar.SimplePowerPosHolder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
 
 public class ChalkGoldBlockEntity extends BlockEntity implements IPowerConsumer {
@@ -22,7 +20,7 @@ public class ChalkGoldBlockEntity extends BlockEntity implements IPowerConsumer 
         this.posHolder = new SimplePowerPosHolder(pos);
     }
 
-    public void execute(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+    public void execute(BlockState state, Level level, BlockPos pos, Player player) {
 
     }
 

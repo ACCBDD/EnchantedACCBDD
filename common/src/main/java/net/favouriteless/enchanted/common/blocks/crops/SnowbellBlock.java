@@ -2,12 +2,11 @@ package net.favouriteless.enchanted.common.blocks.crops;
 
 import net.favouriteless.enchanted.common.items.EItems;
 import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.level.block.Blocks;
 
 public class SnowbellBlock extends CropsBlockAgeFive {
 
-    public SnowbellBlock() {
-        super(Properties.copy(Blocks.WHEAT));
+    public SnowbellBlock(Properties properties) {
+        super(properties);
     }
 
     protected ItemLike getBaseSeedId() {

@@ -1,5 +1,6 @@
 package net.favouriteless.enchanted.common.blocks.altar;
 
+import com.mojang.serialization.MapCodec;
 import net.favouriteless.enchanted.common.blocks.entity.AltarBlockEntity;
 import net.favouriteless.enchanted.common.blocks.entity.EBlockEntityTypes;
 import net.favouriteless.enchanted.common.multiblock.MultiBlockTools;
@@ -8,7 +9,6 @@ import net.favouriteless.enchanted.common.multiblock.altar.AltarPartIndex;
 import net.favouriteless.enchanted.platform.CommonServices;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -16,7 +16,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -25,7 +24,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 
@@ -34,8 +32,10 @@ public class AltarBlock extends BaseEntityBlock {
     public static final EnumProperty<AltarPartIndex> FORMED = EnumProperty.create("formed", AltarPartIndex.class);
     public static final BooleanProperty FACING_X = BooleanProperty.create("facing_x");
 
-    public AltarBlock() {
-        super(Properties.copy(Blocks.STONE).pushReaction(PushReaction.BLOCK).requiresCorrectToolForDrops());
+    public final MapCodec<AltarBlock> codec = simpleCodec(AltarBlock::new);
+
+    public AltarBlock(Properties properties) {
+        super(properties);
         this.registerDefaultState(defaultBlockState().setValue(FORMED, AltarPartIndex.UNFORMED).setValue(FACING_X, true));
     }
 
@@ -61,7 +61,7 @@ public class AltarBlock extends BaseEntityBlock {
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
         if(state.getValue(FORMED) != AltarPartIndex.UNFORMED) {
             if (!level.isClientSide) {
                 BlockPos cornerPos = AltarMultiBlock.INSTANCE.getBottomLowerLeft(level, pos, state);
@@ -85,6 +85,11 @@ public class AltarBlock extends BaseEntityBlock {
         return state.getValue(FORMED) == AltarPartIndex.P000 ? new AltarBlockEntity(pos, state) : null;
     }
 
+
+    @Override
+    protected MapCodec<? extends BaseEntityBlock> codec() {
+        return codec;
+    }
 
     @Override
     public RenderShape getRenderShape(BlockState state) {

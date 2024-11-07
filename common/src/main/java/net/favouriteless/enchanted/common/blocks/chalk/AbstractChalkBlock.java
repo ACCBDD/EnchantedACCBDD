@@ -16,13 +16,15 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 public abstract class AbstractChalkBlock extends Block {
 
+    protected static VoxelShape SHAPE = Shapes.create(new AABB(0.0, 0.0, 0.0, 1.0, 0.0625, 1.0));
+
     public AbstractChalkBlock() {
         super(Properties.of().pushReaction(PushReaction.DESTROY).noOcclusion().noCollission().strength(0.5f, 0f).noLootTable());
     }
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        return Shapes.create(new AABB(0.0, 0.0, 0.0, 1.0, 0.0625, 1.0));
+        return SHAPE;
     }
 
     @Override

@@ -2,12 +2,11 @@ package net.favouriteless.enchanted.common.blocks.crops;
 
 import net.favouriteless.enchanted.common.items.EItems;
 import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.level.block.Blocks;
 
 public class WolfsbaneBlock extends CropsBlockAgeFive {
 
-    public WolfsbaneBlock() {
-        super(Properties.copy(Blocks.WHEAT));
+    public WolfsbaneBlock(Properties properties) {
+        super(properties);
     }
 
     protected ItemLike getBaseSeedId() {

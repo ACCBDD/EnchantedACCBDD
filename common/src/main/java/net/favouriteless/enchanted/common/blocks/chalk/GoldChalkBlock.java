@@ -3,7 +3,6 @@ package net.favouriteless.enchanted.common.blocks.chalk;
 import net.favouriteless.enchanted.common.blocks.entity.ChalkGoldBlockEntity;
 import net.favouriteless.enchanted.common.blocks.entity.EBlockEntityTypes;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -45,8 +44,8 @@ public class GoldChalkBlock extends AbstractChalkBlock implements EntityBlock {
     @Override
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
         if(state != newState) {
-            if(level.getBlockEntity(pos) instanceof ChalkGoldBlockEntity be)
-                be.clearRite();
+//            if(level.getBlockEntity(pos) instanceof ChalkGoldBlockEntity be)
+//                be.clearRite();
         }
         super.onRemove(state, level, pos, newState, isMoving);
     }
@@ -62,9 +61,9 @@ public class GoldChalkBlock extends AbstractChalkBlock implements EntityBlock {
     }
 
     @Override
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
         if(level.getBlockEntity(pos) instanceof ChalkGoldBlockEntity be)
-            be.execute(state, level, pos, player, hand, hit);
+            be.execute(state, level, pos, player);
         return InteractionResult.SUCCESS;
     }
 

@@ -19,13 +19,13 @@ public record PowerProvider<T>(T key, int power, int limit) {
             Codec.STRING.fieldOf("block").forGetter(data -> BuiltInRegistries.BLOCK.getKey(data.key).toString()),
             Codec.INT.fieldOf("power").forGetter(data -> data.power),
             Codec.INT.fieldOf("limit").forGetter(data -> data.limit)
-    ).apply(instance, (block, power, limit) -> new PowerProvider<>(BuiltInRegistries.BLOCK.get(new ResourceLocation(block)), power, limit)));
+    ).apply(instance, (block, power, limit) -> new PowerProvider<>(BuiltInRegistries.BLOCK.get(ResourceLocation.parse(block)), power, limit)));
 
     public static final Codec<PowerProvider<TagKey<Block>>> TAG_CODEC = RecordCodecBuilder.create(instance -> instance.group(
             Codec.STRING.fieldOf("tag").forGetter(data -> data.key.location().toString()),
             Codec.INT.fieldOf("power").forGetter(data -> data.power),
             Codec.INT.fieldOf("limit").forGetter(data -> data.limit)
-    ).apply(instance, (tag, power, limit) -> new PowerProvider<>(TagKey.create(Registries.BLOCK, new ResourceLocation(tag)), power, limit)));
+    ).apply(instance, (tag, power, limit) -> new PowerProvider<>(TagKey.create(Registries.BLOCK, ResourceLocation.parse(tag)), power, limit)));
 
     public boolean is(T key) {
         return this.key == key;

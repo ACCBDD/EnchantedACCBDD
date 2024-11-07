@@ -119,7 +119,7 @@ public class AltarUpgradeData {
 
     public void load(CompoundTag nbt) {
         for(String key : nbt.getAllKeys())
-            loadData.put(new ResourceLocation(key), nbt.getInt(key));
+            loadData.put(ResourceLocation.parse(key), nbt.getInt(key));
         isInitialised = false;
     }
 

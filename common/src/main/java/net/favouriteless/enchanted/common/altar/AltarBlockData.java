@@ -119,12 +119,12 @@ public class AltarBlockData {
         CompoundTag tagNbt = nbt.getCompound("tagsCounts");
 
         for(String name : blockNbt.getAllKeys()) {
-            Block block = BuiltInRegistries.BLOCK.get(new ResourceLocation(name));
+            Block block = BuiltInRegistries.BLOCK.get(ResourceLocation.parse(name));
             if(block != Blocks.AIR) // If AIR we'll assume the block doesn't exist.
                 blockCounts.put(block, blockNbt.getInt(name));
         }
         for(String name : tagNbt.getAllKeys())
-            tagCounts.put(ETags.createBlockTag(new ResourceLocation(name)), tagNbt.getInt(name));
+            tagCounts.put(ETags.createBlockTag(ResourceLocation.parse(name)), tagNbt.getInt(name));
 
         isInitialised = false;
     }
