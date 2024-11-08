@@ -43,9 +43,9 @@ public class EItems {
 	public static final Supplier<BlockItem> ALDER_STAIRS = registerBlock("alder_stairs", EBlocks.ALDER_STAIRS);
 	public static final Supplier<BlockItem> ALTAR = registerBlock("altar", EBlocks.ALTAR);
 	public static final Supplier<Item> ANOINTING_PASTE = register("anointing_paste", () -> new AnointingPasteItem(props()));
-	public static final Supplier<Item> ARMOUR_POPPET = register("armour_poppet", () -> new ItemProtectionPoppetItem(0.3F, 1, 0.9F, PoppetColour.EQUIPMENT));
-	public static final Supplier<Item> ARMOUR_POPPET_INFUSED = register("infused_armour_poppet", () -> new ItemProtectionPoppetItem(0.0F, 1, 0.0F, PoppetColour.EQUIPMENT));
-	public static final Supplier<Item> ARMOUR_POPPET_STURDY = register("sturdy_armour_poppet", () -> new ItemProtectionPoppetItem(0.0F, 2, 0.9F, PoppetColour.EQUIPMENT));
+	public static final Supplier<Item> ARMOUR_POPPET = register("armour_poppet", () -> new ItemProtectionPoppetItem(0.3F, 0.9F, PoppetColour.EQUIPMENT, poppetProps(1)));
+	public static final Supplier<Item> ARMOUR_POPPET_INFUSED = register("infused_armour_poppet", () -> new ItemProtectionPoppetItem(0.0F, 0.0F, PoppetColour.EQUIPMENT, poppetProps(1)));
+	public static final Supplier<Item> ARMOUR_POPPET_STURDY = register("sturdy_armour_poppet", () -> new ItemProtectionPoppetItem(0.0F, 0.9F, PoppetColour.EQUIPMENT, poppetProps(2)));
 	public static final Supplier<SwordItem> ARTHANA = registerSword("arthana", Tiers.GOLD, 3, -2.4F);
 	public static final Supplier<Item> ATTUNED_STONE = registerItem("attuned_stone");
 	public static final Supplier<Item> ATTUNED_STONE_CHARGED = register("attuned_stone_charged",  () -> new SimpleFoiledItem(new Properties()));
@@ -74,17 +74,17 @@ public class EItems {
 	public static final Supplier<BlockItem> DISTILLERY = registerBlock("distillery", EBlocks.DISTILLERY);
 	public static final Supplier<Item> DROP_OF_LUCK = registerItem("drop_of_luck");
 	public static final Supplier<EarmuffsItem> EARMUFFS = register("earmuffs", () -> new EarmuffsItem(ArmorMaterials.LEATHER, Type.HELMET, new Properties().stacksTo(1).rarity(Rarity.RARE)));
-	public static final Supplier<Item> EARTH_POPPET = register("earth_poppet", () -> new DeathPoppetItem(0.3F, 1, PoppetColour.EARTH, source -> source.is(DamageTypeTags.IS_FALL) || source.is(DamageTypes.FLY_INTO_WALL)));
-	public static final Supplier<Item> EARTH_POPPET_INFUSED = register("infused_earth_poppet", () -> new DeathPoppetEffectItem(0.0F, 1, PoppetColour.EARTH, () -> new MobEffectInstance(new Holder.Direct<>(EEffects.FALL_RESISTANCE.get()), 200), source -> source.is(DamageTypeTags.IS_FALL) || source.is(DamageTypes.FLY_INTO_WALL)));
-	public static final Supplier<Item> EARTH_POPPET_STURDY = register("sturdy_earth_poppet", () -> new DeathPoppetItem(0.0F, 2, PoppetColour.EARTH, source -> source.is(DamageTypeTags.IS_FALL) || source.is(DamageTypes.FLY_INTO_WALL)));
+	public static final Supplier<Item> EARTH_POPPET = register("earth_poppet", () -> new DeathPoppetItem(0.3F, PoppetColour.EARTH, source -> source.is(DamageTypeTags.IS_FALL) || source.is(DamageTypes.FLY_INTO_WALL), poppetProps(1)));
+	public static final Supplier<Item> EARTH_POPPET_INFUSED = register("infused_earth_poppet", () -> new DeathPoppetEffectItem(0.0F, PoppetColour.EARTH, () -> new MobEffectInstance(new Holder.Direct<>(EEffects.FALL_RESISTANCE.get()), 200), source -> source.is(DamageTypeTags.IS_FALL) || source.is(DamageTypes.FLY_INTO_WALL), poppetProps(1)));
+	public static final Supplier<Item> EARTH_POPPET_STURDY = register("sturdy_earth_poppet", () -> new DeathPoppetItem(0.0F, PoppetColour.EARTH, source -> source.is(DamageTypeTags.IS_FALL) || source.is(DamageTypes.FLY_INTO_WALL), poppetProps(2)));
 	public static final Supplier<BlockItem> EMBER_MOSS = registerBlock("ember_moss", EBlocks.EMBER_MOSS);
 	public static final Supplier<Item> ENCHANTED_BROOMSTICK = register("enchanted_broomstick", () -> new BroomstickItem(props().stacksTo(1).rarity(Rarity.EPIC)));
 	public static final Supplier<Item> ENDER_DEW = registerItem("ender_dew");
 	public static final Supplier<Item> ENT_TWIG = registerItem("ent_twig");
 	public static final Supplier<Item> EXHALE_OF_THE_HORNED_ONE = registerItem("exhale_of_the_horned_one");
-	public static final Supplier<Item> FIRE_POPPET = register("fire_poppet", () -> new FirePoppetItem(0.3F, 1, PoppetColour.FIRE, source -> source.is(DamageTypeTags.IS_FIRE)));
-	public static final Supplier<Item> FIRE_POPPET_INFUSED = register("infused_fire_poppet", () -> new FirePoppetEffectItem(0.0F, 1, PoppetColour.FIRE, () -> new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 200), source -> source.is(DamageTypeTags.IS_FIRE)));
-	public static final Supplier<Item> FIRE_POPPET_STURDY =  register("sturdy_fire_poppet", () -> new FirePoppetItem(0.0F, 2, PoppetColour.FIRE, source -> source.is(DamageTypeTags.IS_FIRE)));
+	public static final Supplier<Item> FIRE_POPPET = register("fire_poppet", () -> new FirePoppetItem(0.3F, PoppetColour.FIRE, source -> source.is(DamageTypeTags.IS_FIRE), poppetProps(1)));
+	public static final Supplier<Item> FIRE_POPPET_INFUSED = register("infused_fire_poppet", () -> new FirePoppetEffectItem(0.0F, PoppetColour.FIRE, () -> new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 200), source -> source.is(DamageTypeTags.IS_FIRE), poppetProps(1)));
+	public static final Supplier<Item> FIRE_POPPET_STURDY =  register("sturdy_fire_poppet", () -> new FirePoppetItem(0.0F, PoppetColour.FIRE, source -> source.is(DamageTypeTags.IS_FIRE), poppetProps(2)));
 	public static final Supplier<SimpleEffectBrewItem> FLYING_OINTMENT = registerBrew("flying_ointment", MobEffects.LEVITATION, 400, 0);
 	public static final Supplier<Item> FOCUSED_WILL = registerItem("focused_will");
 	public static final Supplier<Item> FOUL_FUME = registerItem("foul_fume");
@@ -108,16 +108,16 @@ public class EItems {
 	public static final Supplier<BlockItem> HAWTHORN_SLAB = registerBlock("hawthorn_slab", EBlocks.HAWTHORN_SLAB);
 	public static final Supplier<BlockItem> HAWTHORN_STAIRS = registerBlock("hawthorn_stairs", EBlocks.HAWTHORN_STAIRS);
 	public static final Supplier<Item> HINT_OF_REBIRTH = registerItem("hint_of_rebirth");
-	public static final Supplier<Item> HUNGER_POPPET = register("hunger_poppet", () -> new DeathPoppetItem(0.3F, 1, PoppetColour.HUNGER, source -> source.is(DamageTypes.STARVE)));
-	public static final Supplier<Item> HUNGER_POPPET_INFUSED = register("infused_hunger_poppet", () -> new DeathPoppetEffectItem( 0.0F, 1, PoppetColour.HUNGER, () -> new MobEffectInstance(MobEffects.SATURATION, 100), source -> source.is(DamageTypes.STARVE)));
-	public static final Supplier<Item> HUNGER_POPPET_STURDY = register("sturdy_hunger_poppet", () -> new DeathPoppetItem(0.0F, 2, PoppetColour.HUNGER, source -> source.is(DamageTypes.STARVE)));
+	public static final Supplier<Item> HUNGER_POPPET = register("hunger_poppet", () -> new DeathPoppetItem(0.3F, PoppetColour.HUNGER, source -> source.is(DamageTypes.STARVE), poppetProps(1)));
+	public static final Supplier<Item> HUNGER_POPPET_INFUSED = register("infused_hunger_poppet", () -> new DeathPoppetEffectItem( 0.0F, PoppetColour.HUNGER, () -> new MobEffectInstance(MobEffects.SATURATION, 100), source -> source.is(DamageTypes.STARVE), poppetProps(1)));
+	public static final Supplier<Item> HUNGER_POPPET_STURDY = register("sturdy_hunger_poppet", () -> new DeathPoppetItem(0.0F, PoppetColour.HUNGER, source -> source.is(DamageTypes.STARVE), poppetProps(2)));
 	public static final Supplier<Item> ICY_NEEDLE = registerItem("icy_needle");
 	public static final Supplier<SimpleEffectBrewItem> INFERNAL_ANIMUS = registerBrew("infernal_animus", MobEffects.WITHER, 1200, 2);
 	public static final Supplier<BlockItem> INFINITY_EGG = registerBlock("infinity_egg", EBlocks.INFINITY_EGG);
 	public static final Supplier<BlockItem> KETTLE = registerBlock("kettle", EBlocks.KETTLE);
-	public static final Supplier<DeathPoppetItem> MAGIC_POPPET = register("magic_poppet", () -> new DeathPoppetItem(0.3F, 1, PoppetColour.MAGIC, EEffects::isMagic));
-	public static final Supplier<DeathPoppetEffectItem> MAGIC_POPPET_INFUSED = register("infused_magic_poppet", () -> new DeathPoppetEffectItem( 0.0F, 1, PoppetColour.MAGIC, () -> new MobEffectInstance(new Holder.Direct<>(EEffects.MAGIC_RESISTANCE.get()), 200), EEffects::isMagic));
-	public static final Supplier<DeathPoppetItem> MAGIC_POPPET_STURDY = register("sturdy_magic_poppet", () -> new DeathPoppetItem( 0.0F, 2, PoppetColour.MAGIC, EEffects::isMagic));
+	public static final Supplier<DeathPoppetItem> MAGIC_POPPET = register("magic_poppet", () -> new DeathPoppetItem(0.3F, PoppetColour.MAGIC, EEffects::isMagic, poppetProps(1)));
+	public static final Supplier<DeathPoppetEffectItem> MAGIC_POPPET_INFUSED = register("infused_magic_poppet", () -> new DeathPoppetEffectItem( 0.0F, PoppetColour.MAGIC, () -> new MobEffectInstance(new Holder.Direct<>(EEffects.MAGIC_RESISTANCE.get()), 200), EEffects::isMagic, poppetProps(1)));
+	public static final Supplier<DeathPoppetItem> MAGIC_POPPET_STURDY = register("sturdy_magic_poppet", () -> new DeathPoppetItem( 0.0F, PoppetColour.MAGIC, EEffects::isMagic, poppetProps(2)));
 	public static final Supplier<Item> MANDRAKE_ROOT = registerItem("mandrake_root");
 	public static final Supplier<ItemNameBlockItem> MANDRAKE_SEEDS = registerBlockNamed("mandrake_seeds", EBlocks.MANDRAKE);
 	public static final Supplier<Item> MELLIFLUOUS_HUNGER = registerItem("mellifluous_hunger");
@@ -162,21 +162,21 @@ public class EItems {
 	public static final Supplier<Item> TAGLOCK_FILLED =  register("taglock", () -> new TaglockFilledItem(props().component(EDataComponents.ENTITY_REF.get(), EntityRefData.EMPTY).rarity(Rarity.EPIC)));
 	public static final Supplier<Item> TEAR_OF_THE_GODDESS = registerItem("tear_of_the_goddess");
 	public static final Supplier<Item> TONGUE_OF_DOG = registerItem("tongue_of_dog");
-	public static final Supplier<Item> TOOL_POPPET = register("tool_poppet", () -> new ItemProtectionPoppetItem(0.3F, 1, 0.9F, PoppetColour.EQUIPMENT));
-	public static final Supplier<Item> TOOL_POPPET_INFUSED = register("infused_tool_poppet", () -> new ItemProtectionPoppetItem(0.0F, 1, 0.0F, PoppetColour.EQUIPMENT));
-	public static final Supplier<Item> TOOL_POPPET_STURDY = register("sturdy_tool_poppet", () -> new ItemProtectionPoppetItem(0.0F, 2, 0.9F, PoppetColour.EQUIPMENT));
-	public static final Supplier<Item> VOID_POPPET = register("void_poppet", () -> new VoidPoppetItem(0.3F, 1, PoppetColour.VOID, source -> source.is(DamageTypes.FELL_OUT_OF_WORLD)));
-	public static final Supplier<Item> VOID_POPPET_INFUSED = register("infused_void_poppet", () -> new VoidPoppetEffectItem( 0.0F, 1, PoppetColour.VOID, () -> new MobEffectInstance(new Holder.Direct<>(EEffects.FALL_RESISTANCE.get()), 150), source -> source.is(DamageTypes.FELL_OUT_OF_WORLD)));
-	public static final Supplier<Item> VOID_POPPET_STURDY = register("sturdy_void_poppet", () -> new VoidPoppetItem( 0.0F, 2, PoppetColour.VOID, source -> source.is(DamageTypes.FELL_OUT_OF_WORLD)));
-	public static final Supplier<VoodooPoppetItem> VOODOO_POPPET = register("voodoo_poppet", VoodooPoppetItem::new);
-	public static final Supplier<Item> VOODOO_PROTECTION_POPPET = register("voodoo_protection_poppet", () -> new PoppetItem(0.3F, 1, PoppetColour.VOODOO_PROTECTION));
-	public static final Supplier<Item> VOODOO_PROTECTION_POPPET_INFUSED = register("infused_voodoo_protection_poppet", () -> new PoppetItem(0.0F, 1, PoppetColour.VOODOO_PROTECTION));
-	public static final Supplier<Item> VOODOO_PROTECTION_POPPET_STURDY = register("sturdy_voodoo_protection_poppet", () -> new PoppetItem(0.0F, 2, PoppetColour.VOODOO_PROTECTION));
+	public static final Supplier<Item> TOOL_POPPET = register("tool_poppet", () -> new ItemProtectionPoppetItem(0.3F, 0.9F, PoppetColour.EQUIPMENT, poppetProps(1)));
+	public static final Supplier<Item> TOOL_POPPET_INFUSED = register("infused_tool_poppet", () -> new ItemProtectionPoppetItem(0.0F, 0.0F, PoppetColour.EQUIPMENT, poppetProps(1)));
+	public static final Supplier<Item> TOOL_POPPET_STURDY = register("sturdy_tool_poppet", () -> new ItemProtectionPoppetItem(0.0F, 0.9F, PoppetColour.EQUIPMENT, poppetProps(2)));
+	public static final Supplier<Item> VOID_POPPET = register("void_poppet", () -> new VoidPoppetItem(0.3F, PoppetColour.VOID, source -> source.is(DamageTypes.FELL_OUT_OF_WORLD), poppetProps(1)));
+	public static final Supplier<Item> VOID_POPPET_INFUSED = register("infused_void_poppet", () -> new VoidPoppetEffectItem( 0.0F, PoppetColour.VOID, () -> new MobEffectInstance(new Holder.Direct<>(EEffects.FALL_RESISTANCE.get()), 150), source -> source.is(DamageTypes.FELL_OUT_OF_WORLD), poppetProps(1)));
+	public static final Supplier<Item> VOID_POPPET_STURDY = register("sturdy_void_poppet", () -> new VoidPoppetItem( 0.0F, PoppetColour.VOID, source -> source.is(DamageTypes.FELL_OUT_OF_WORLD), poppetProps(2)));
+	public static final Supplier<VoodooPoppetItem> VOODOO_POPPET = register("voodoo_poppet", () -> new VoodooPoppetItem(props().stacksTo(1)));
+	public static final Supplier<Item> VOODOO_PROTECTION_POPPET = register("voodoo_protection_poppet", () -> new PoppetItem(0.3F, PoppetColour.VOODOO_PROTECTION, poppetProps(1)));
+	public static final Supplier<Item> VOODOO_PROTECTION_POPPET_INFUSED = register("infused_voodoo_protection_poppet", () -> new PoppetItem(0.0F, PoppetColour.VOODOO_PROTECTION, poppetProps(1)));
+	public static final Supplier<Item> VOODOO_PROTECTION_POPPET_STURDY = register("sturdy_voodoo_protection_poppet", () -> new PoppetItem(0.0F, PoppetColour.VOODOO_PROTECTION, poppetProps(2)));
 	public static final Supplier<Item> WATER_ARTICHOKE = registerFood("water_artichoke", 3, MobEffects.HUNGER, 100, 0, 1.0F);
 	public static final Supplier<ArtichokeSeedsItem> WATER_ARTICHOKE_SEEDS = register("water_artichoke_seeds", () -> new ArtichokeSeedsItem(props()));
-	public static final Supplier<DeathPoppetEffectItem> WATER_POPPET = register("water_poppet", () -> new DeathPoppetEffectItem(0.3F, 1, PoppetColour.WATER, () -> new MobEffectInstance(new Holder.Direct<>(EEffects.DROWN_RESISTANCE.get()), 100), source -> source.is(DamageTypeTags.IS_DROWNING)));
-	public static final Supplier<DeathPoppetEffectItem> WATER_POPPET_INFUSED = register("infused_water_poppet", () -> new DeathPoppetEffectItem( 0.0F, 1, PoppetColour.WATER, () -> new MobEffectInstance(MobEffects.WATER_BREATHING, 200), source -> source.is(DamageTypeTags.IS_DROWNING)));
-	public static final Supplier<DeathPoppetEffectItem> WATER_POPPET_STURDY = register("sturdy_water_poppet", () -> new DeathPoppetEffectItem( 0.0F, 2, PoppetColour.WATER, () -> new MobEffectInstance(new Holder.Direct<>(EEffects.DROWN_RESISTANCE.get()), 100), source -> source.is(DamageTypeTags.IS_DROWNING)));
+	public static final Supplier<DeathPoppetEffectItem> WATER_POPPET = register("water_poppet", () -> new DeathPoppetEffectItem(0.3F, PoppetColour.WATER, () -> new MobEffectInstance(new Holder.Direct<>(EEffects.DROWN_RESISTANCE.get()), 100), source -> source.is(DamageTypeTags.IS_DROWNING), poppetProps(1)));
+	public static final Supplier<DeathPoppetEffectItem> WATER_POPPET_INFUSED = register("infused_water_poppet", () -> new DeathPoppetEffectItem( 0.0F, PoppetColour.WATER, () -> new MobEffectInstance(MobEffects.WATER_BREATHING, 200), source -> source.is(DamageTypeTags.IS_DROWNING), poppetProps(1)));
+	public static final Supplier<DeathPoppetEffectItem> WATER_POPPET_STURDY = register("sturdy_water_poppet", () -> new DeathPoppetEffectItem( 0.0F, PoppetColour.WATER, () -> new MobEffectInstance(new Holder.Direct<>(EEffects.DROWN_RESISTANCE.get()), 100), source -> source.is(DamageTypeTags.IS_DROWNING), poppetProps(2)));
 	public static final Supplier<Item> WAYSTONE = registerItem("waystone");
 	public static final Supplier<Item> WHIFF_OF_MAGIC = registerItem("whiff_of_magic");
 	public static final Supplier<BlockItem> WICKER_BUNDLE = registerBlock("wicker_bundle", EBlocks.WICKER_BUNDLE);
@@ -267,6 +267,10 @@ public class EItems {
 
 	public static Properties props() {
 		return new Properties();
+	}
+
+	public static Properties poppetProps(int durability) {
+		return props().durability(durability).stacksTo(1).component(EDataComponents.ENTITY_REF.get(), EntityRefData.EMPTY);
 	}
 
 	public static void load() {} // Method which exists purely to load the class.

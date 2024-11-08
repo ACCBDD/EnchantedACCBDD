@@ -27,23 +27,23 @@ import java.util.UUID;
 public class PoppetItem extends Item {
 
 	private final float failRate;
-	public final PoppetColour colour;
+    public final PoppetColour colour;
 
-	public PoppetItem(float failRate, int durability, PoppetColour colour) {
-		super(new Properties().durability(durability));
+	public PoppetItem(float failRate, PoppetColour colour, Properties properties) {
+		super(properties);
 		this.failRate = failRate;
-		this.colour = colour;
+        this.colour = colour;
 	}
 
 	public float getFailRate() {
 		return this.failRate;
 	}
 
-	public void appendHoverText(ItemStack stack, Level level, List<Component> toolTip, TooltipFlag flag) {
+	@Override
+	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> toolTip, TooltipFlag flag) {
 		toolTip.add(Component.literal((int)(failRate * 100) + "% Chance to fail").withStyle(ChatFormatting.RED));
-		if(PoppetUtils.isBound(stack)) {
+		if(PoppetUtils.isBound(stack))
 			toolTip.add(Component.literal(PoppetUtils.getBoundName(stack)).withStyle(ChatFormatting.GRAY));
-		}
 	}
 
 	@Override

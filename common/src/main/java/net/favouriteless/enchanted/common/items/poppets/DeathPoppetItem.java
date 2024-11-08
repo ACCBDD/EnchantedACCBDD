@@ -12,8 +12,8 @@ public class DeathPoppetItem extends PoppetItem {
 
 	protected final Predicate<DamageSource> sourcePredicate;
 
-	public DeathPoppetItem(float failRate, int durability, PoppetColour colour, Predicate<DamageSource> sourcePredicate) {
-		super(failRate, durability, colour);
+	public DeathPoppetItem(float failRate, PoppetColour colour, Predicate<DamageSource> sourcePredicate, Properties properties) {
+		super(failRate, colour, properties);
 		this.sourcePredicate = sourcePredicate;
 	}
 

@@ -60,13 +60,11 @@ public class Broomstick extends Entity {
 
     @Override
     public void tick() {
-        if (getHurtTime() > 0) {
+        if(getHurtTime() > 0)
             setHurtTime(getHurtTime() - 1);
-        }
 
-        if (getDamage() > 0.0F) {
+        if(getDamage() > 0.0F)
             setDamage(getDamage() - 1.0F);
-        }
 
         super.tick();
 
@@ -157,7 +155,7 @@ public class Broomstick extends Entity {
 
     @Override
     protected Vec3 getPassengerAttachmentPoint(Entity entity, EntityDimensions dimensions, float partialTick) {
-        return new Vec3(0, 0.15D, 0);
+        return new Vec3(0, getEyeY(), 0);
     }
 
     @Override

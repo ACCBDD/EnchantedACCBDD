@@ -100,7 +100,7 @@ public class PoppetUtils {
 	 * @return true if item is a bound {@link PoppetItem}
 	 */
 	public static boolean isBound(ItemStack item) {
-		return item.getItem() instanceof PoppetItem && item.get(EDataComponents.ENTITY_REF.get()).uuid().isPresent();
+		return item.has(EDataComponents.ENTITY_REF.get()) && item.get(EDataComponents.ENTITY_REF.get()).uuid().isPresent();
 	}
 
 	/**

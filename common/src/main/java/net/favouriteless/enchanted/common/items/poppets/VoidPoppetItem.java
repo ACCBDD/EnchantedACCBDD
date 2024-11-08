@@ -9,8 +9,8 @@ import java.util.function.Predicate;
 
 public class VoidPoppetItem extends DeathPoppetItem {
 
-	public VoidPoppetItem(float failRate, int durability, PoppetColour colour, Predicate<DamageSource> sourcePredicate) {
-		super(failRate, durability, colour, sourcePredicate);
+	public VoidPoppetItem(float failRate, PoppetColour colour, Predicate<DamageSource> sourcePredicate, Properties properties) {
+		super(failRate, colour, sourcePredicate, properties);
 	}
 
 	@Override

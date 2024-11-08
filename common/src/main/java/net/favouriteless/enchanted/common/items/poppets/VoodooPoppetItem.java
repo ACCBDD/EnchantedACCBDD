@@ -24,8 +24,8 @@ import java.util.List;
 
 public class VoodooPoppetItem extends PoppetItem {
 
-    public VoodooPoppetItem() {
-        super(0.0F, 40, null);
+    public VoodooPoppetItem(Properties properties) {
+        super(0.0F, null, properties);
     }
 
     @Override
@@ -70,9 +70,9 @@ public class VoodooPoppetItem extends PoppetItem {
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, Level level, List<Component> toolTip, TooltipFlag flag) {
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
         if(PoppetUtils.isBound(stack))
-            toolTip.add(Component.literal(PoppetUtils.getBoundName(stack)).withStyle(ChatFormatting.RED));
+            tooltip.add(Component.literal(PoppetUtils.getBoundName(stack)).withStyle(ChatFormatting.RED));
     }
 
     // This overrides an IForgeItem method.

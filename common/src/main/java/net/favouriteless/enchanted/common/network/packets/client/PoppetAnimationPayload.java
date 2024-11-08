@@ -40,7 +40,7 @@ public class PoppetAnimationPayload implements CustomPacketPayload {
 
 	@Override
 	public Type<? extends CustomPacketPayload> type() {
-		return null;
+		return TYPE;
 	}
 
 	public static void handle(PoppetAnimationPayload payload, PacketContext context) {

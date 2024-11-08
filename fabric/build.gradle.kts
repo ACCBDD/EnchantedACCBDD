@@ -88,7 +88,7 @@ modrinth {
 
     projectId.set("HsbpdVo9")
 
-    versionName.set("NeoForge $minecraftVersion")
+    versionName.set("Fabric $minecraftVersion")
     versionNumber.set(project.version.toString())
     versionType.set(if(project.version.toString().endsWith("beta")) "beta" else "release")
     uploadFile.set(tasks.jar)

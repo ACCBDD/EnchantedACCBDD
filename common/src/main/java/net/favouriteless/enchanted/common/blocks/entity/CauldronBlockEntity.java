@@ -56,7 +56,7 @@ public abstract class CauldronBlockEntity<T extends CauldronTypeRecipe> extends 
 	private static final int BLENDING_MILLISECONDS = 500;
 	private final int cookDuration;
 
-	private List<T> potentialRecipes = new ArrayList<>();
+	private final List<T> potentialRecipes = new ArrayList<>();
 
 	protected ItemStack itemOut = ItemStack.EMPTY;
 	protected int cookProgress = 0;
@@ -93,13 +93,17 @@ public abstract class CauldronBlockEntity<T extends CauldronTypeRecipe> extends 
 
 		BlockState stateBelow = level.getBlockState(be.worldPosition.below());
 		if(!providesHeat(stateBelow) || be.fluidAmount != be.fluidCapacity) { // If cauldron not heated or full, fail/return.
-			if(be.hasItems)
+			boolean update = be.cookProgress > 0 || be.warmingUp > 0;
+			be.cookProgress = 0;
+			be.warmingUp = 0;
+			if(!be.inventory.isEmpty()) {
 				be.setFailed();
-			if(be.warmingUp > 0) {
-				be.warmingUp = 0;
-				be.updateBlock();
-				return;
+				be.recalculateTargetColour();
+				update = true;
 			}
+			if(update)
+				be.updateBlock();
+			return;
 		}
 
 		if(be.warmingUp < WARMING_MAX) { // Handle heating up
