@@ -10,8 +10,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 
-import javax.annotation.Nullable;
-
 public class AltarMultiBlock implements IMultiBlockType {
 
     public static AltarMultiBlock INSTANCE = new AltarMultiBlock();
@@ -54,7 +52,6 @@ public class AltarMultiBlock implements IMultiBlockType {
         }
     }
 
-    @Nullable
     @Override
     public BlockPos getBottomLowerLeft(Level level, BlockPos pos, BlockState state) {
         if(isFormedAltar(state)) {

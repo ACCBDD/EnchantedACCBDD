@@ -16,7 +16,7 @@ public class EExtraCodecs {
         } catch(NumberFormatException e) {
             return DataResult.error(() -> "Not a valid hex number: " + s + " " + e.getMessage());
         }
-    }, Integer::toHexString);
+    }, i -> Integer.toHexString(i).toUpperCase());
 
     public static final Codec<Vec3> VEC3 = RecordCodecBuilder.create(instance -> instance.group(
             Codec.DOUBLE.fieldOf("x").forGetter(v -> v.x),

@@ -25,11 +25,11 @@ public class CauldronWaterRenderer<T extends CauldronBlockEntity<?>> implements 
     }
 
     @Override
-    public void render(T be, float partialTicks, PoseStack poseStack, MultiBufferSource renderBuffer, int packedLight, int packedOverlay) {
+    public void render(T be, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
         BlockState state = be.getLevel().getBlockState(be.getBlockPos());
         if(state.getBlock() instanceof CauldronBlockBase) {
             if(be.getWater() > 0) {
-                VertexConsumer consumer = renderBuffer.getBuffer(RenderType.translucent());
+                VertexConsumer buffer = bufferSource.getBuffer(RenderType.translucent());
                 TextureAtlasSprite sprite = Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(WATER_TEXTURE);
 
                 long time = System.currentTimeMillis() - be.startTime;
@@ -43,10 +43,10 @@ public class CauldronWaterRenderer<T extends CauldronBlockEntity<?>> implements 
                 Matrix4f p = poseStack.last().pose();
 
 
-                vertex(consumer, p, apothem, 0, -apothem, r, g, b, a, sprite.getU((0.5F + apothem)*16), sprite.getV((0.5F - apothem)*16), packedLight);
-                vertex(consumer, p, -apothem, 0, -apothem, r, g, b, a, sprite.getU((0.5F - apothem)*16), sprite.getV((0.5F - apothem)*16), packedLight);
-                vertex(consumer, p, -apothem, 0, apothem, r, g, b, a, sprite.getU((0.5F - apothem)*16), sprite.getV((0.5F + apothem)*16), packedLight);
-                vertex(consumer, p, apothem, 0, apothem, r, g, b, a, sprite.getU((0.5F + apothem)*16), sprite.getV((0.5F + apothem)*16), packedLight);
+                vertex(buffer, p, apothem, 0, -apothem, r, g, b, a, sprite.getU((0.5F + apothem)), sprite.getV((0.5F - apothem)), packedLight);
+                vertex(buffer, p, -apothem, 0, -apothem, r, g, b, a, sprite.getU((0.5F - apothem)), sprite.getV((0.5F - apothem)), packedLight);
+                vertex(buffer, p, -apothem, 0, apothem, r, g, b, a, sprite.getU((0.5F - apothem)), sprite.getV((0.5F + apothem)), packedLight);
+                vertex(buffer, p, apothem, 0, apothem, r, g, b, a, sprite.getU((0.5F + apothem)), sprite.getV((0.5F + apothem)), packedLight);
 
                 poseStack.popPose();
             }

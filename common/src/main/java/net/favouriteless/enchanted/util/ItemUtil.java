@@ -4,12 +4,16 @@ import net.favouriteless.enchanted.common.Enchanted;
 import net.favouriteless.enchanted.platform.CommonServices;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.component.DataComponentType;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+
+import java.util.List;
+import java.util.Objects;
 
 /**
  * Util class for functions related to {@link ItemStack}.
@@ -57,7 +61,7 @@ public class ItemUtil {
 			return false;
 
 		DataComponentMap aMap = a.getComponents();
-		DataComponentMap bMap = b.getComponents();
+		DataComponentMap bMap = b.getComponents().filter(type -> !DataComponents.COMMON_ITEM_COMPONENTS.has(type));
 		for(DataComponentType<?> type : bMap.keySet()) {
 			if(!aMap.has(type))
 				return false;
@@ -70,7 +74,7 @@ public class ItemUtil {
 				return false;
 			}
 
-			if(!aComp.equals(bComp))
+			if(!Objects.equals(aComp, bComp))
 				return false;
 		}
 

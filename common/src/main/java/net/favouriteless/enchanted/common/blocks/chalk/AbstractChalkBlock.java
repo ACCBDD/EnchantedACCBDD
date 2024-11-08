@@ -13,7 +13,6 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-
 public abstract class AbstractChalkBlock extends Block {
 
     protected static VoxelShape SHAPE = Shapes.create(new AABB(0.0, 0.0, 0.0, 1.0, 0.0625, 1.0));

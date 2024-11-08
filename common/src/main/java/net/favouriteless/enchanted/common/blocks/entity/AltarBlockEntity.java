@@ -25,8 +25,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
-import javax.annotation.Nullable;
-
 public class AltarBlockEntity extends BlockEntity implements MenuProvider, IPowerProvider {
 
     private final double rechargeRate = CommonConfig.INSTANCE.altarBaseRecharge.get();
@@ -310,9 +308,8 @@ public class AltarBlockEntity extends BlockEntity implements MenuProvider, IPowe
         return Component.translatable("container.enchanted.altar");
     }
 
-    @Nullable
     @Override
-    public AbstractContainerMenu createMenu(int id, Inventory playerInventory, Player player) {
+    public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
         return new AltarMenu(id, this, fields);
     }
 

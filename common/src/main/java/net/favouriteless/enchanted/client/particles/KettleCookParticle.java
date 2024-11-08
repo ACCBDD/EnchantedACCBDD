@@ -5,8 +5,6 @@ import net.favouriteless.enchanted.common.Enchanted;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 
-import javax.annotation.Nullable;
-
 public class KettleCookParticle extends TextureSheetParticle {
 
     protected KettleCookParticle(ClientLevel world, double x, double y, double z, double xSpeed, double ySpeed,
@@ -55,7 +53,6 @@ public class KettleCookParticle extends TextureSheetParticle {
             this.sprites = pSprites;
         }
 
-        @Nullable
         @Override
         public Particle createParticle(ColourOptions data, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
             KettleCookParticle particle = new KettleCookParticle(level, x, y, z, xSpeed, ySpeed, zSpeed, data.getRed(), data.getGreen(), data.getBlue());

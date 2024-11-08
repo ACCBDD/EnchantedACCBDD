@@ -1,7 +1,7 @@
 package net.favouriteless.enchanted.fabric.mixin.common;
 
-import net.favouriteless.enchanted.fabric.common.CommonEventsFabric;
 import com.llamalad7.mixinextras.sugar.Local;
+import net.favouriteless.enchanted.fabric.common.CommonEventsFabric;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
@@ -16,33 +16,27 @@ import org.spongepowered.asm.mixin.injection.At.Shift;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 @Mixin(Player.class)
 public class PlayerMixin {
 
     @Shadow @Final private Abilities abilities;
 
-    @Inject(method="method_20266", at=@At("HEAD"), locals=LocalCapture.CAPTURE_FAILHARD)
-    private static void itemBreakHurtCurrentlyUsedShieldLambda(InteractionHand hand, Player player, CallbackInfo ci) {
-        CommonEventsFabric.playerDestroyItemEvent(player, player.getUseItem(), hand);
-    }
-
-    @Inject(method="interactOn", at=@At(value="RETURN", ordinal=1), locals=LocalCapture.CAPTURE_FAILHARD)
+    @Inject(method = "interactOn", at = @At(value = "RETURN", ordinal = 1))
     private void itemBreakInteractOn(Entity entityToInteractOn, InteractionHand hand, CallbackInfoReturnable<InteractionResult> cir,
-                                     ItemStack itemStack, ItemStack itemStack2) {
+                                     @Local(ordinal = 0) ItemStack itemStack, @Local(ordinal = 1) ItemStack itemStack2) {
         if(!abilities.instabuild && itemStack.isEmpty())
             CommonEventsFabric.playerDestroyItemEvent((Player)(Object)this, itemStack2, hand);
     }
 
-    @Inject(method="interactOn", at=@At(value="INVOKE", target="Lnet/minecraft/world/entity/player/Player;setItemInHand(Lnet/minecraft/world/InteractionHand;Lnet/minecraft/world/item/ItemStack;)V"), locals=LocalCapture.CAPTURE_FAILHARD)
+    @Inject(method = "interactOn", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;setItemInHand(Lnet/minecraft/world/InteractionHand;Lnet/minecraft/world/item/ItemStack;)V"))
     private void itemBreakInteractOn1(Entity entityToInteractOn, InteractionHand hand, CallbackInfoReturnable<InteractionResult> cir,
-                                     ItemStack itemStack, ItemStack itemStack2) {
+                                      @Local(ordinal = 0) ItemStack itemStack, @Local(ordinal = 1) ItemStack itemStack2) {
         if(!abilities.instabuild && itemStack.isEmpty())
             CommonEventsFabric.playerDestroyItemEvent((Player)(Object)this, itemStack2, hand);
     }
 
-    @Inject(method="attack", at=@At(value="INVOKE", target="Lnet/minecraft/world/entity/player/Player;setItemInHand(Lnet/minecraft/world/InteractionHand;Lnet/minecraft/world/item/ItemStack;)V", shift=Shift.AFTER), locals=LocalCapture.CAPTURE_FAILHARD)
+    @Inject(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/player/Player;setItemInHand(Lnet/minecraft/world/InteractionHand;Lnet/minecraft/world/item/ItemStack;)V", shift = Shift.AFTER))
     private void itemBreakAttack(Entity target, CallbackInfo ci, @Local ItemStack itemStack) {
         ItemStack original;
         if(itemStack.isEmpty()) {

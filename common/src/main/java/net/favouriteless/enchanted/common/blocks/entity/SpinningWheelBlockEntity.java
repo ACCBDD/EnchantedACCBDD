@@ -29,8 +29,7 @@ import net.minecraft.world.item.crafting.RecipeManager.CachedCheck;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
-
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 public class SpinningWheelBlockEntity extends ContainerBlockEntityBase implements IPowerConsumer, MenuProvider, WorldlyContainer {
 
@@ -55,21 +54,20 @@ public class SpinningWheelBlockEntity extends ContainerBlockEntityBase implement
 		RecipeHolder<SpinningRecipe> recipe = be.spinCheck.getRecipeFor(ListInput.of(be.inventory.subList(0, 3)), level).orElse(null);
 		boolean wasSpinning = be.spinProgress > 0;
 
-		if(recipe != null) {
-			IPowerProvider provider = PowerHelper.tryGetPowerProvider(level, be.posHolder);
-			int power = recipe.value().getPower();
-			// Can fit result and has enough power to spin
-			if(be.canSpin(recipe) && (power == 0 || provider != null && provider.tryConsume((double)recipe.value().getPower() / be.spinDuration))) {
-				if(++be.spinProgress == be.spinDuration) {
-					be.spinProgress = 0;
-					be.spinDuration = be.getTotalSpinTime();
-					be.spin(recipe);
-				}
-			}
-			else {
+		IPowerProvider provider = PowerHelper.tryGetPowerProvider(level, be.posHolder);
+		// Can fit result and has enough power to spin
+		if(recipe != null && be.canSpin(recipe) && (recipe.value().getPower() == 0 ||
+				provider != null && provider.tryConsume((double)recipe.value().getPower() / be.spinDuration))) {
+			if(++be.spinProgress == be.spinDuration) {
 				be.spinProgress = 0;
+				be.spinDuration = recipe.value().getDuration();
+				be.spin(recipe);
 			}
 		}
+		else {
+			be.spinProgress = 0;
+		}
+
 		if(wasSpinning != be.isSpinning())
 			be.updateBlock();
 	}
@@ -194,10 +192,15 @@ public class SpinningWheelBlockEntity extends ContainerBlockEntityBase implement
 
 	@Override
 	public void setItem(int index, @NotNull ItemStack stack) {
+		boolean changed = stack.isEmpty() || !ItemStack.isSameItemSameComponents(inventory.get(index), stack);
 		inventory.set(index, stack);
-		spinDuration = getTotalSpinTime();
-		spinProgress = 0;
-		setChanged();
+
+		if(index != 4 && changed) {
+			spinDuration = getTotalSpinTime();
+			spinProgress = 0;
+			updateBlock();
+			setChanged();
+		}
 	}
 
 	private int getTotalSpinTime() {

@@ -49,7 +49,7 @@ public class SpinningWheelScreen extends AbstractContainerScreen<SpinningWheelMe
         int edgeSpacingY = (height - imageHeight) / 2;
         gui.blit(TEXTURE, edgeSpacingX, edgeSpacingY, 0, 0, imageWidth, imageHeight);
 
-        double progression = (double)menu.getSpinProgress() / menu.getSpinProgress();
+        double progression = (double)menu.getSpinProgress() / menu.getSpinDuration();
 
         int barSize = (int)Math.round(BAR_HEIGHT * Math.min(progression * 10.0D, 1.0D));
         if(menu.getSlot(1).hasItem())

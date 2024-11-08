@@ -33,7 +33,7 @@
         "java": ">=21",
         "stateobserver": ">=${stateobserver_version}",
         "geckolib": ">=${geckolib_version}",
-        "forgeconfigapi": ">=${forgeconfigapi_version}"
+        "forgeconfigapiport": ">=${forgeconfigapi_version}"
     },
     "accessWidener" : "enchanted.accesswidener"
 }

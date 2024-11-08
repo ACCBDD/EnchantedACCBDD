@@ -2,6 +2,7 @@ package net.favouriteless.enchanted.common.blocks;
 
 import com.mojang.serialization.MapCodec;
 import net.favouriteless.enchanted.common.blocks.entity.DistilleryBlockEntity;
+import net.favouriteless.enchanted.common.blocks.entity.EBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -73,7 +74,7 @@ public class DistilleryBlock extends SimpleContainerBlockBase {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return !level.isClientSide ? DistilleryBlockEntity::serverTick : null;
+        return level.isClientSide ? null : createTickerHelper(type, EBlockEntityTypes.DISTILLERY.get(), DistilleryBlockEntity::serverTick);
     }
 
 }

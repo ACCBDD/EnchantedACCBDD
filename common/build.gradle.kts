@@ -60,8 +60,7 @@ tasks.create("postDiscord") {
             embed.color = 0x9C58B8
 
             message.addEmbed(embed)
-
-//            webhook.sendMessage(message)
+            webhook.sendMessage(message)
         } catch (e: IOException) {
             project.logger.error("Failed to push CF Discord webhook.")
         }

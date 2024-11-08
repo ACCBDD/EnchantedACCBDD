@@ -4,8 +4,6 @@ import net.favouriteless.enchanted.client.particles.types.TwoColourOptions;
 import net.minecraft.client.particle.*;
 import net.minecraft.client.multiplayer.ClientLevel;
 
-import javax.annotation.Nullable;
-
 public class PoppetParticle extends SimpleAnimatedParticle {
 
     protected PoppetParticle(ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed,
@@ -38,7 +36,6 @@ public class PoppetParticle extends SimpleAnimatedParticle {
             this.sprites = sprites;
         }
 
-        @Nullable
         @Override
         public Particle createParticle(TwoColourOptions data, ClientLevel level, double x, double y, double z,
                                        double xSpeed, double ySpeed, double zSpeed) {

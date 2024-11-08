@@ -23,7 +23,7 @@ public class ListInput implements RecipeInput {
 
     @Override
     public ItemStack getItem(int index) {
-        return index < 0 || index >= items.size() ? null : items.get(0);
+        return index < 0 || index >= items.size() ? null : items.get(index);
     }
 
     @Override

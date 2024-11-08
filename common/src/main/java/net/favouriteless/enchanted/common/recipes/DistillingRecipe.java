@@ -23,15 +23,15 @@ public class DistillingRecipe implements Recipe<ListInput> {
     public static final MapCodec<DistillingRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             ItemStack.CODEC.sizeLimitedListOf(3).fieldOf("ingredients").forGetter(recipe -> recipe.inputs),
             ItemStack.CODEC.sizeLimitedListOf(4).fieldOf("results").forGetter(recipe -> recipe.outputs),
-            Codec.INT.optionalFieldOf("power", 750).forGetter(recipe -> recipe.power),
-            Codec.INT.optionalFieldOf("duration", 300).forGetter(recipe -> recipe.duration)
+            Codec.INT.optionalFieldOf("duration", 300).forGetter(recipe -> recipe.duration),
+            Codec.INT.optionalFieldOf("power", 750).forGetter(recipe -> recipe.power)
     ).apply(instance, DistillingRecipe::new));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, DistillingRecipe> STREAM_CODEC = StreamCodec.composite(
             ItemStack.LIST_STREAM_CODEC, recipe -> recipe.inputs,
             ItemStack.LIST_STREAM_CODEC, recipe -> recipe.outputs,
-            ByteBufCodecs.INT, recipe -> recipe.power,
             ByteBufCodecs.INT, recipe -> recipe.duration,
+            ByteBufCodecs.INT, recipe -> recipe.power,
             DistillingRecipe::new
     );
 

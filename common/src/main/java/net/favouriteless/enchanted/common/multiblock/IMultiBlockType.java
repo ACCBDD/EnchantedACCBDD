@@ -1,10 +1,9 @@
 package net.favouriteless.enchanted.common.multiblock;
 
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
-
-import javax.annotation.Nullable;
+import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
 
 public interface IMultiBlockType {
 
@@ -15,8 +14,7 @@ public interface IMultiBlockType {
      * actually a valid part of the multiblock!
      * @return anchor position or null in case this is not a valid (formed) multiblock
      */
-    @Nullable
-    BlockPos getBottomLowerLeft(Level level, BlockPos pos, BlockState state);
+    @Nullable BlockPos getBottomLowerLeft(Level level, BlockPos pos, BlockState state);
 
     /**
      * Return a given block in the world to its unformed state.

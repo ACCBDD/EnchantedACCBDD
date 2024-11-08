@@ -6,8 +6,6 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 import net.minecraft.world.phys.Vec3;
 
-import javax.annotation.Nullable;
-
 public class CauldronCookParticle extends TextureSheetParticle {
 
     public static final double ANGLE = 8.0D;

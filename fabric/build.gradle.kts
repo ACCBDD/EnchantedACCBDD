@@ -103,7 +103,7 @@ modrinth {
         required.project("geckolib")
         required.project("forge-config-api-port")
     }
-    debugMode = true
+    //debugMode = true
     //https://github.com/modrinth/minotaur#available-properties
 }
 
@@ -126,7 +126,7 @@ tasks.register<TaskPublishCurseForge>("publishToCurseForge") {
         "forge-config-api-port-fabric"
     )
 
-    debugMode = true
+    //debugMode = true
     //https://github.com/Darkhax/CurseForgeGradle#available-properties
 }
 

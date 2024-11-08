@@ -5,8 +5,6 @@ import net.favouriteless.enchanted.common.Enchanted;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 
-import javax.annotation.Nullable;
-
 public class BoilingParticle extends TextureSheetParticle {
 
     private final SpriteSet sprites;

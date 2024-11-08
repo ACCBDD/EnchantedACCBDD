@@ -72,7 +72,7 @@ public class SpinningRecipe implements Recipe<ListInput> {
             if(!neededCopy.isEmpty()) // If not empty then there was not enough of this item
                 return false;
         }
-        return false;
+        return true;
     }
 
     @Override

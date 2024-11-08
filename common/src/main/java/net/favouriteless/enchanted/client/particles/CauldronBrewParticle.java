@@ -5,8 +5,6 @@ import net.favouriteless.enchanted.common.Enchanted;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 
-import javax.annotation.Nullable;
-
 public class CauldronBrewParticle extends TextureSheetParticle {
 
     protected CauldronBrewParticle(ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, float red, float green, float blue) {

@@ -8,8 +8,6 @@ import net.minecraft.world.level.block.VineBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 
-import javax.annotation.Nullable;
-
 public class SpanishMossBlock extends VineBlock {
 
     public SpanishMossBlock(Properties properties) {
@@ -17,7 +15,6 @@ public class SpanishMossBlock extends VineBlock {
         this.registerDefaultState(this.defaultBlockState().setValue(SOUTH, true));
     }
 
-    @Nullable
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         BlockState clickedState = context.getLevel().getBlockState(context.getClickedPos());

@@ -9,8 +9,6 @@ import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.world.phys.Vec3;
-import org.jetbrains.annotations.Nullable;
-import org.joml.Vector3f;
 
 public class TranspositionIronSeedParticle extends NoRenderParticle {
 
@@ -40,7 +38,6 @@ public class TranspositionIronSeedParticle extends NoRenderParticle {
 		public Factory(SpriteSet pSprites) {
 		}
 
-		@Nullable
 		@Override
 		public Particle createParticle(SimpleParticleType data, ClientLevel level, double x, double y, double z,
 									   double xSpeed, double ySpeed, double zSpeed) {

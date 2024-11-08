@@ -15,8 +15,6 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
-import javax.annotation.Nullable;
-
 public class PoppetShelfBlockEntity extends BlockEntity implements MenuProvider {
 
 	public PoppetShelfInventory inventory = null;
@@ -30,7 +28,6 @@ public class PoppetShelfBlockEntity extends BlockEntity implements MenuProvider 
 		return Component.translatable("container.enchanted.poppet_shelf");
 	}
 
-	@Nullable
 	@Override
 	public AbstractContainerMenu createMenu(int id, Inventory playerInventory, Player playerEntity) {
 		return new PoppetShelfMenu(id, playerInventory, this);
@@ -43,7 +40,6 @@ public class PoppetShelfBlockEntity extends BlockEntity implements MenuProvider 
 		}
 	}
 
-	@Nullable
 	@Override
 	public ClientboundBlockEntityDataPacket getUpdatePacket() {
 		return ClientboundBlockEntityDataPacket.create(this);

@@ -105,7 +105,7 @@ modrinth {
         required.project("geckolib")
     }
 
-    debugMode = true
+    //debugMode = true
     //https://github.com/modrinth/minotaur#available-properties
 }
 
@@ -126,7 +126,7 @@ tasks.register<TaskPublishCurseForge>("publishToCurseForge") {
         "geckolib"
     )
 
-    debugMode = true
+    //debugMode = true
     //https://github.com/Darkhax/CurseForgeGradle#available-properties
 }
 
