@@ -64,7 +64,8 @@ public class SimplePowerPosHolder implements IPowerPosHolder {
 
 	@Override
 	public void deserialize(CompoundTag tag) {
-		altars = BlockPos.CODEC.listOf().parse(NbtOps.INSTANCE, tag.get("altars")).getOrThrow();
+		altars.clear();
+		altars.addAll(BlockPos.CODEC.listOf().parse(NbtOps.INSTANCE, tag.get("altars")).getOrThrow());
 	}
 
 }
