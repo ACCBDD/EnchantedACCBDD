@@ -47,6 +47,7 @@ dependencies {
 
 loom {
     accessWidenerPath = file("src/main/resources/enchanted.accesswidener")
+
     runs {
         named("client") {
             configName = "Fabric Client"
@@ -64,6 +65,10 @@ loom {
             ideConfigGenerated(true)
             runDir("runs/" + name)
         }
+    }
+
+    mixin {
+        defaultRefmapName.convention("enchanted.refmap.json")
     }
 }
 

@@ -1,9 +1,9 @@
 [versions]
 # Enchanted
-    enchanted = "4.0.1-beta"
+    enchanted = "4.0.2-beta"
 
 # Common
-    stateobserver = "1.5.2"
+    stateobserver = "1.5.3"
     geckolib = "4.7"
     forgeconfigapi = "21.1.1"
 
@@ -30,7 +30,7 @@
 
 # Plugins
     plugin-mod-dev-gradle = "2.0.31-beta"
-    plugin-loom = "1.7-SNAPSHOT"
+    plugin-loom = "1.8-SNAPSHOT"
     plugin-minotaur = "2.8.7"
     plugin-curseforge-gradle = "1.1.25"
     plugin-idea-ext = "1.1.8"
