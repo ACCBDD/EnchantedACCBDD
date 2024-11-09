@@ -1,17 +1,15 @@
 package net.favouriteless.enchanted.neoforge.common;
 
-import net.favouriteless.enchanted.common.Enchanted;
 import net.favouriteless.enchanted.common.CommonConfig;
-import net.favouriteless.enchanted.common.altar.AltarUpgrade;
-import net.favouriteless.enchanted.common.altar.PowerProvider;
+import net.favouriteless.enchanted.common.Enchanted;
+import net.favouriteless.enchanted.common.blocks.EBlocks;
 import net.favouriteless.enchanted.common.blocks.entity.EBlockEntityTypes;
+import net.favouriteless.enchanted.common.entities.EEntityTypes;
 import net.favouriteless.enchanted.common.entities.FamiliarCat;
 import net.favouriteless.enchanted.common.entities.Mandrake;
-import net.favouriteless.enchanted.common.init.EData;
-import net.favouriteless.enchanted.common.blocks.EBlocks;
-import net.favouriteless.enchanted.common.entities.EEntityTypes;
 import net.favouriteless.enchanted.common.items.EItems;
 import net.favouriteless.enchanted.platform.services.NeoCommonRegistryHelper;
+import net.favouriteless.enchanted.platform.services.NeoCommonRegistryHelper.DataRegistryRegisterable;
 import net.favouriteless.enchanted.platform.services.NeoNetworkHelper;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -55,10 +53,9 @@ public class EnchantedNeo {
 
     @SubscribeEvent
     public static void registerDatapackRegistries(DataPackRegistryEvent.NewRegistry event) {
-        event.dataPackRegistry(EData.ALTAR_UPGRADE_REGISTRY, AltarUpgrade.CODEC);
-        event.dataPackRegistry(EData.ALTAR_BLOCK_REGISTRY, PowerProvider.BLOCK_CODEC);
-        event.dataPackRegistry(EData.ALTAR_TAG_REGISTRY, PowerProvider.TAG_CODEC);
-//        event.dataPackRegistry(EData.RITE_REQUIREMENTS_REGISTRY, RiteRequirements.CODEC, RiteRequirements.CODEC);
+        for(DataRegistryRegisterable<?> registerable : NeoCommonRegistryHelper.dataRegistryRegisterables) {
+            registerable.register(event);
+        }
     }
 
     @SubscribeEvent

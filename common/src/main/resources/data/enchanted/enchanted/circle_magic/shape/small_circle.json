@@ -1,11 +1,9 @@
-{
-  "blocks": [
-    "  XXX  ",
-    " XOOOX ",
-    "XOOOOOX",
-    "XOOOOOX",
-    "XOOOOOX",
-    " XOOOX ",
-    "  XXX  "
-  ]
-}
+[
+  "  XXX  ",
+  " X   X ",
+  "X     X",
+  "X     X",
+  "X     X",
+  " X   X ",
+  "  XXX  "
+]

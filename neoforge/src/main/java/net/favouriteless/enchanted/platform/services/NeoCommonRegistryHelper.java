@@ -1,5 +1,6 @@
 package net.favouriteless.enchanted.platform.services;
 
+import com.mojang.serialization.Codec;
 import net.favouriteless.enchanted.common.Enchanted;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -7,6 +8,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
 import net.minecraft.sounds.SoundEvent;
@@ -24,6 +26,7 @@ import net.minecraft.world.level.block.SoundType;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.util.DeferredSoundType;
 import net.neoforged.neoforge.network.IContainerFactory;
+import net.neoforged.neoforge.registries.DataPackRegistryEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.apache.commons.lang3.function.TriFunction;
@@ -41,6 +44,7 @@ public class NeoCommonRegistryHelper implements ICommonRegistryHelper {
 	private static final RegistryMap registryMap = new RegistryMap();
 
 	public static final List<SimpleJsonResourceReloadListener> dataLoaders = new ArrayList<>();
+	public static final List<DataRegistryRegisterable<?>> dataRegistryRegisterables = new ArrayList<>();
 
 
 	public <C, T extends C> Supplier<T> register(Registry<C> registry, String name, Supplier<T> entry) {
@@ -65,7 +69,7 @@ public class NeoCommonRegistryHelper implements ICommonRegistryHelper {
 	}
 
 	@Override
-	public SoundType getSoundType(float volume, float pitch, Supplier<SoundEvent> breakSound, Supplier<SoundEvent> stepSound, Supplier<SoundEvent> placeSound, Supplier<SoundEvent> hitSound, Supplier<SoundEvent> fallSound) {
+	public SoundType createSoundType(float volume, float pitch, Supplier<SoundEvent> breakSound, Supplier<SoundEvent> stepSound, Supplier<SoundEvent> placeSound, Supplier<SoundEvent> hitSound, Supplier<SoundEvent> fallSound) {
 		return new DeferredSoundType(volume, pitch, breakSound, stepSound, placeSound, hitSound, fallSound);
 	}
 
@@ -76,6 +80,12 @@ public class NeoCommonRegistryHelper implements ICommonRegistryHelper {
 				.icon(iconSupplier)
 				.displayItems(itemGenerator)
 				.build());
+	}
+
+	@Override
+	public <T> ResourceKey<Registry<T>> registerDataRegistry(ResourceKey<Registry<T>> key, Codec<T> codec) {
+		dataRegistryRegisterables.add(new DataRegistryRegisterable<>(key, codec));
+		return key;
 	}
 
 	@Override
@@ -107,6 +117,14 @@ public class NeoCommonRegistryHelper implements ICommonRegistryHelper {
 
 		public void register(IEventBus bus) {
 			registries.values().forEach(reg -> reg.register(bus));
+		}
+
+	}
+
+	public record DataRegistryRegisterable<T>(ResourceKey<Registry<T>> key, Codec<T> codec) {
+
+		public void register(DataPackRegistryEvent.NewRegistry event) {
+			event.dataPackRegistry(key, codec);
 		}
 
 	}

@@ -1,7 +1,7 @@
 package net.favouriteless.enchanted.common.blocks.chalk;
 
-import net.favouriteless.enchanted.common.blocks.entity.ChalkGoldBlockEntity;
 import net.favouriteless.enchanted.common.blocks.entity.EBlockEntityTypes;
+import net.favouriteless.enchanted.common.blocks.entity.GoldChalkBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -38,7 +38,7 @@ public class GoldChalkBlock extends AbstractChalkBlock implements EntityBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new ChalkGoldBlockEntity(pos, state);
+        return new GoldChalkBlockEntity(pos, state);
     }
 
     @Override
@@ -62,15 +62,22 @@ public class GoldChalkBlock extends AbstractChalkBlock implements EntityBlock {
 
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
-        if(level.getBlockEntity(pos) instanceof ChalkGoldBlockEntity be)
-            be.execute(state, level, pos, player);
+        if(level.getBlockEntity(pos) instanceof GoldChalkBlockEntity be)
+            be.use(level, pos, player);
         return InteractionResult.SUCCESS;
     }
 
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return type == EBlockEntityTypes.CHALK_GOLD.get() ? ChalkGoldBlockEntity::tick : null;
+        return !level.isClientSide ? createTickerHelper(type, EBlockEntityTypes.GOLD_CHALK.get(), GoldChalkBlockEntity::serverTick) : null;
+    }
+
+    @Nullable
+    @SuppressWarnings("unchecked")
+    protected static <E extends BlockEntity, A extends BlockEntity> BlockEntityTicker<A> createTickerHelper(
+            BlockEntityType<A> serverType, BlockEntityType<E> clientType, BlockEntityTicker<? super E> ticker) {
+        return clientType == serverType ? (BlockEntityTicker<A>)ticker : null;
     }
 
 }

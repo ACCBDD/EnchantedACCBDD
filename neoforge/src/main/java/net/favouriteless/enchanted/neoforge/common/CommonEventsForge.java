@@ -58,7 +58,7 @@ public class CommonEventsForge {
 
     @SubscribeEvent
     public static void addReloadListenerEvent(AddReloadListenerEvent event) {
-        for (SimpleJsonResourceReloadListener loader : NeoCommonRegistryHelper.dataLoaders)
+        for(SimpleJsonResourceReloadListener loader : NeoCommonRegistryHelper.dataLoaders)
             event.addListener(loader);
     }
 

@@ -17,8 +17,6 @@ public class CommonConfig {
     public final BooleanValue cauldronItemSpoil;
     public final BooleanValue kettleItemSpoil;
 
-    public final IntValue totalEclipseCooldown;
-    public final IntValue skyWrathCooldown;
     public final DoubleValue broilingBurnChance;
     public final BooleanValue disableMisfortune;
     public final BooleanValue disableOverheating;
@@ -49,8 +47,6 @@ public class CommonConfig {
         builder.pop();
 
         builder.push("Rite Options");
-        totalEclipseCooldown = builder.comment("Global cooldown for the rite of eclipse in seconds (DEFAULT: 0)").defineInRange("total_eclipse_cooldown", 0, 0, Integer.MAX_VALUE);
-        skyWrathCooldown = builder.comment("Global cooldown for the rite of sky's wrath in seconds (DEFAULT: 0)").defineInRange("sky_wrath_cooldown", 0, 0, Integer.MAX_VALUE);
         broilingBurnChance = builder.comment("Chance for food to be burned by the rite of broiling (RANGE: 0-1, DEFAULT: 0.3)").defineInRange("broiling_burn_chance", 0.3D, 0, 1);
         disableMisfortune = builder.comment("Disable the curse of misfortune (DEFAULT: false)").define("disable_misfortune", false);
         disableOverheating = builder.comment("Disable the curse of overheating (DEFAULT: false)").define("disable_overheating", false);

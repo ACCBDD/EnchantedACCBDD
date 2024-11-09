@@ -1,5 +1,7 @@
 package net.favouriteless.enchanted.platform.services;
 
+import com.mojang.serialization.Codec;
+import net.fabricmc.fabric.api.event.registry.DynamicRegistries;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
@@ -11,6 +13,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
@@ -54,7 +57,7 @@ public class FabricCommonRegistryHelper implements ICommonRegistryHelper {
 	}
 
 	@Override
-	public SoundType getSoundType(float volume, float pitch, Supplier<SoundEvent> breakSound, Supplier<SoundEvent> stepSound, Supplier<SoundEvent> placeSound, Supplier<SoundEvent> hitSound, Supplier<SoundEvent> fallSound) {
+	public SoundType createSoundType(float volume, float pitch, Supplier<SoundEvent> breakSound, Supplier<SoundEvent> stepSound, Supplier<SoundEvent> placeSound, Supplier<SoundEvent> hitSound, Supplier<SoundEvent> fallSound) {
 		return new SoundType(volume, pitch, breakSound.get(), stepSound.get(), placeSound.get(), hitSound.get(), fallSound.get());
 	}
 
@@ -66,6 +69,12 @@ public class FabricCommonRegistryHelper implements ICommonRegistryHelper {
 						.icon(iconSupplier)
 						.displayItems(itemsGenerator)
 						.build());
+	}
+
+	@Override
+	public <T> ResourceKey<Registry<T>> registerDataRegistry(ResourceKey<Registry<T>> key, Codec<T> codec) {
+		DynamicRegistries.register(key, codec);
+		return key;
 	}
 
 	@Override
