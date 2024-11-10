@@ -1,11 +1,15 @@
 VERY IMPORTANT NOTES. VERY.
 - JEI integration is disabled in this beta, it'll come back for the full release.
-- Circle magic is disabled in this beta, it'll come back for the full release.
 - THIS IS A TESTING BUILD. I DO NOT RECOMMEND USING IT IN A MODPACK.
 
+- CHANGED: Re-added circle magic (a lot of rites are missing), now fully data driven. See .JAR to see how to add custom
+           rites via JSON.
 
-- FIXED: Removing water from a cauldron before it will lock the cauldron.
-- FIXED: The mounting point for broomsticks is too low.
-- FIXED: Right-clicking with a poppet causes a crash.
-- FIXED: Poppet animation packets cause crashing.
-- FIXED: Low framerate on poppet animation.
+- FIXED: Taglocks do not work on beds on Fabric.
+- FIXED: Poppet shelves crash the game.
+- FIXED: Sturdy voodoo protection poppet uses the wrong texture.
+- FIXED: Armour poppets not working.
+- FIXED: Poppets do not trigger when in the offhand.
+- FIXED: Poppets work in inventory without being bound.
+- FIXED: Voodoo poppet only has 2 durability.
+- FIXED: Arthana item drops not dropping.

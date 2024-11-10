@@ -42,7 +42,6 @@ public class ETags {
     public static class Items {
         public static final TagKey<Item> ARMORS = createItemTag(Enchanted.id("armors"));
         public static final TagKey<Item> ARMOR_POPPET_BLACKLIST = createItemTag(Enchanted.id("armor_poppet_blacklist"));
-        public static final TagKey<Item> ARMOR_POPPET_WHITELIST = createItemTag(Enchanted.id("armor_poppet_whitelist"));
         public static final TagKey<Item> CHALICES = createItemTag(Enchanted.id("chalices"));
         public static final TagKey<Item> CHALKS = createItemTag(Enchanted.id("chalks"));
         public static final TagKey<Item> LEAVES = createItemTag(Enchanted.id("leaves"));

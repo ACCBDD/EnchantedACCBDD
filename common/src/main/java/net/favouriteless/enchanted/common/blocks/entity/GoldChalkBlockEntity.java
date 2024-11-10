@@ -92,12 +92,12 @@ public class GoldChalkBlockEntity extends BlockEntity implements IPowerConsumer 
                 int power = be.type.getPower();
 
                 if(power == 0 || (provider != null && provider.tryConsume(power))) {
-                    Rite rite = be.type.create((ServerLevel)level, be.worldPosition, be.caster, be.target);
-                    RiteManager.addRite((ServerLevel)level, rite);
-                    rite.start();
                     be.isExecuting = true;
                     be.isInitialising = false;
                     be.itemsConsumed.clear();
+                    Rite rite = be.type.create((ServerLevel)level, be.worldPosition, be.caster, be.target);
+                    RiteManager.addRite((ServerLevel)level, rite);
+                    rite.start();
                 }
                 else {
                     be.cancel();

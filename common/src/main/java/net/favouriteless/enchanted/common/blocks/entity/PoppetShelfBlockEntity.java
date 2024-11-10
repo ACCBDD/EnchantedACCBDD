@@ -29,8 +29,8 @@ public class PoppetShelfBlockEntity extends BlockEntity implements MenuProvider 
 	}
 
 	@Override
-	public AbstractContainerMenu createMenu(int id, Inventory playerInventory, Player playerEntity) {
-		return new PoppetShelfMenu(id, playerInventory, this);
+	public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
+		return new PoppetShelfMenu(id, inventory, this);
 	}
 
 	public void updateBlock() {
@@ -47,7 +47,7 @@ public class PoppetShelfBlockEntity extends BlockEntity implements MenuProvider 
 
 	@Override
 	public void loadAdditional(CompoundTag tag, Provider registries) {
-		if(tag.contains("items"))
+		if(tag.contains("Items"))
 			getInventory().load(tag, registries);
 	}
 

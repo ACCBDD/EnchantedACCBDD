@@ -28,11 +28,6 @@ public class LivingEntityMixin {
 			cir.setReturnValue(false);
 	}
 
-	@Inject(method="onEquippedItemBroken", at=@At("HEAD"))
-	public void broadcastBreakEvent(Item item, EquipmentSlot slot, CallbackInfo ci) {
-		PoppetEvents.onLivingEntityBreak((LivingEntity)(Object)this, slot);
-	}
-
 	@Inject(method="dropFromLootTable", at=@At("TAIL"), locals=LocalCapture.CAPTURE_FAILSOFT)
 	protected void dropFromLootTable(DamageSource damageSource, boolean hitByPlayer, CallbackInfo ci,
 									 ResourceKey<LootTable> resourcekey, LootTable table, Builder builder,

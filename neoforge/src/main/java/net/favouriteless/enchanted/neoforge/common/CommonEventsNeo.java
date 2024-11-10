@@ -6,9 +6,11 @@ import net.favouriteless.enchanted.common.effects.EffectEvents;
 import net.favouriteless.enchanted.common.poppet.PoppetEvents;
 import net.favouriteless.enchanted.platform.services.NeoCommonRegistryHelper;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
+import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.AddReloadListenerEvent;
+import net.neoforged.neoforge.event.entity.living.ArmorHurtEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.player.CanPlayerSleepEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerDestroyItemEvent;
@@ -19,11 +21,21 @@ import net.neoforged.neoforge.event.tick.LevelTickEvent;
 import static net.neoforged.fml.common.EventBusSubscriber.Bus.GAME;
 
 @EventBusSubscriber(modid = Enchanted.MOD_ID, bus= GAME)
-public class CommonEventsForge {
+public class CommonEventsNeo {
 
     @SubscribeEvent
     public static void onPlayerItemBreak(PlayerDestroyItemEvent event) {
         PoppetEvents.onPlayerItemBreak(event.getEntity(), event.getOriginal(), event.getHand());
+    }
+
+    @SubscribeEvent(priority = EventPriority.LOWEST)
+    public static void onArmourHurt(ArmorHurtEvent event) {
+        event.getArmorMap().forEach((slot, entry) -> {
+            if(PoppetEvents.onArmourHurt(event.getEntity(), slot, entry.armorItemStack, entry.newDamage)) {
+                event.setCanceled(true);
+            }
+        }
+        );
     }
 
     @SubscribeEvent

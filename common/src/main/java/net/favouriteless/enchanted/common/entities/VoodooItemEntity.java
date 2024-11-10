@@ -10,6 +10,7 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.gameevent.GameEvent;
 
 public class VoodooItemEntity extends ItemEntity {
@@ -48,11 +49,21 @@ public class VoodooItemEntity extends ItemEntity {
 
                 if(underWaterTicks > 20 && PoppetUtils.tryVoodooPlayer(target, (ServerPlayer)getOwner(), item) && target.hurt(level.damageSources().drown(), 1.0F))
                     hurt(1);
-
-                if(isInLava() && PoppetUtils.tryVoodooPlayer(target, (ServerPlayer)getOwner(), item) && target.hurt(level.damageSources().lava(), 4.0F)) {
-                    target.setRemainingFireTicks(15*20);
+                else if(isInLava() && PoppetUtils.tryVoodooPlayer(target, (ServerPlayer)getOwner(), item) && target.hurt(level.damageSources().lava(), 4.0F)) {
+                    target.igniteForSeconds(15);
                     hurt(4);
                 }
+                else if(level.getBlockState(blockPosition()).is(Blocks.FIRE) && PoppetUtils.tryVoodooPlayer(target, (ServerPlayer)getOwner(), item) && target.hurt(level.damageSources().inFire(), 1)) {
+                    if(target.getRemainingFireTicks() < 0)
+                        target.igniteForSeconds(8.0F);
+                    target.setRemainingFireTicks(target.getRemainingFireTicks() + 1);
+                }
+                else if(level.getBlockState(blockPosition()).is(Blocks.SOUL_FIRE) && PoppetUtils.tryVoodooPlayer(target, (ServerPlayer)getOwner(), item) && target.hurt(level.damageSources().inFire(), 2)) {
+                    if(target.getRemainingFireTicks() < 0)
+                        target.igniteForSeconds(8.0F);
+                    target.setRemainingFireTicks(target.getRemainingFireTicks() + 1);
+                }
+
             }
         }
     }

@@ -2,24 +2,21 @@ package net.favouriteless.enchanted.neoforge.datagen.providers.tag;
 
 import net.favouriteless.enchanted.common.Enchanted;
 import net.favouriteless.enchanted.common.init.ETags;
-import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.IntrinsicHolderTagsProvider;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffects;
 
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
-public class MobEffectTagProvider extends IntrinsicHolderTagsProvider<MobEffect> {
+public class EMobEffectTagProvider extends IntrinsicHolderTagsProvider<MobEffect> {
 
-    public MobEffectTagProvider(PackOutput output, CompletableFuture<Provider> provider, ExistingFileHelper existingFileHelper) {
+    public EMobEffectTagProvider(PackOutput output, CompletableFuture<Provider> provider, ExistingFileHelper existingFileHelper) {
         super(output, Registries.MOB_EFFECT, provider, mobEffect -> BuiltInRegistries.MOB_EFFECT.getResourceKey(mobEffect).orElse(null), Enchanted.MOD_ID, existingFileHelper);
     }
 

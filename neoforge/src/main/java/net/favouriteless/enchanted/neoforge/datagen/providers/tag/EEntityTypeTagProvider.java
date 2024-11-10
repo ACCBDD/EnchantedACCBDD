@@ -12,10 +12,10 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import java.util.concurrent.CompletableFuture;
 
-public class EntityTypeTagProvider extends IntrinsicHolderTagsProvider<EntityType<?>> {
+public class EEntityTypeTagProvider extends IntrinsicHolderTagsProvider<EntityType<?>> {
 
 
-    public EntityTypeTagProvider(PackOutput output, CompletableFuture<Provider> lookupProvider, ExistingFileHelper existingFileHelper) {
+    public EEntityTypeTagProvider(PackOutput output, CompletableFuture<Provider> lookupProvider, ExistingFileHelper existingFileHelper) {
         super(output, Registries.ENTITY_TYPE, lookupProvider, entityType -> entityType.builtInRegistryHolder().key(), Enchanted.MOD_ID, existingFileHelper);
     }
 

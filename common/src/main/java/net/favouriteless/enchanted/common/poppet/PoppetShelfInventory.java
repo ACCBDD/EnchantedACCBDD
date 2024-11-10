@@ -73,19 +73,12 @@ public class PoppetShelfInventory extends AbstractList<ItemStack> implements Con
 		inventoryContents.clear();
 	}
 
-	public void save(CompoundTag nbt, HolderLookup.Provider registries) {
-		ListTag list = new ListTag();
-		for(ItemStack stack : inventoryContents) {
-			list.add(stack.save(registries));
-		}
-		nbt.put("items", list);
+	public void save(CompoundTag tag, HolderLookup.Provider registries) {
+		ContainerHelper.saveAllItems(tag, inventoryContents, registries);
 	}
 
-	public void load(CompoundTag nbt, HolderLookup.Provider registries) {
-		ListTag list = nbt.getList("items", 10);
-		for(int i = 0; i < list.size(); i++) {
-			inventoryContents.set(i, ItemStack.parse(registries, list.get(i)).orElse(ItemStack.EMPTY));
-		}
+	public void load(CompoundTag tag, HolderLookup.Provider registries) {
+		ContainerHelper.loadAllItems(tag, inventoryContents, registries);
 	}
 
 	public Level getLevel() {

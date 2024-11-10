@@ -19,7 +19,8 @@ public class PoppetEvents {
 	public static boolean onLivingEntityHurt(LivingEntity entity, float amount, DamageSource source) {
 		if(entity instanceof Player player) {
 			if(amount >= player.getHealth()) { // Player would be killed by damage
-				PoppetUseResult result = PoppetUtils.tryUseItems(PoppetUtils.getPoppetQueue(player, item -> item instanceof DeathPoppetItem poppet && poppet.protectsAgainst(source)), player);
+				PoppetUseResult result = PoppetUtils.tryUseItems(PoppetUtils.getPoppetQueue(player,
+						item -> item instanceof DeathPoppetItem poppet && poppet.protectsAgainst(source)), player);
 				if(result.type() != ResultType.PASS)
 					return result.isSuccess();
 
@@ -48,13 +49,12 @@ public class PoppetEvents {
 		}
 	}
 
-	public static void onLivingEntityBreak(LivingEntity entity, EquipmentSlot slot) {
+	public static boolean onArmourHurt(LivingEntity entity, EquipmentSlot slot, ItemStack item, float damage) {
 		if(entity instanceof Player player) {
-			ItemStack item = entity.getItemBySlot(slot).copy();
-			if(item.is(Items.ARMOR_POPPET_WHITELIST) && !item.is(Items.ARMOR_POPPET_BLACKLIST)) {
+ 			if((item.getMaxDamage() - item.getDamageValue()) <= damage && !item.is(Items.ARMOR_POPPET_BLACKLIST)) {
 				PoppetUseResult result = PoppetUtils.tryUseItems(PoppetUtils.getPoppetQueue(player, EItems::isArmourPoppet), player, item);
 				if(result.type() == ResultType.FAIL)
-					return;
+					return false;
 
 				boolean cancelled = result.isSuccess();
 
@@ -62,10 +62,13 @@ public class PoppetEvents {
 					cancelled = PoppetUtils.tryUseEntries(PoppetUtils.getPoppetQueue(PoppetShelfManager.getEntriesFor(player),
 							entry -> EItems.isArmourPoppet(entry.item().getItem())), player, item).isSuccess();
 
-				if(cancelled)
+				if(cancelled) {
 					player.setItemSlot(slot, item);
+					return true;
+				}
 			}
 		}
+		return false;
 	}
 
 }

@@ -24,12 +24,12 @@ public class DataGenerators {
 		PackOutput output = gen.getPackOutput();
 		CompletableFuture<HolderLookup.Provider> provider = event.getLookupProvider();
 
-		BlockTagProvider blockTagProvider = gen.addProvider(true, new BlockTagProvider(output, provider, fileHelper));
-		gen.addProvider(true, new ItemTagProvider(output, provider, fileHelper, blockTagProvider.contentsGetter()));
-		gen.addProvider(true, new EntityTypeTagProvider(output, provider, fileHelper));
-		gen.addProvider(true, new MobEffectTagProvider(output, provider, fileHelper));
-		gen.addProvider(true, new BiomeTagProvider(output, provider, fileHelper));
-		gen.addProvider(true, new DamageTypeTagProvider(output, provider, fileHelper));
+		EBlockTagProvider blockTagProvider = gen.addProvider(true, new EBlockTagProvider(output, provider, fileHelper));
+		gen.addProvider(true, new EItemTagProvider(output, provider, fileHelper, blockTagProvider.contentsGetter()));
+		gen.addProvider(true, new EEntityTypeTagProvider(output, provider, fileHelper));
+		gen.addProvider(true, new EMobEffectTagProvider(output, provider, fileHelper));
+		gen.addProvider(true, new EBiomeTagProvider(output, provider, fileHelper));
+		gen.addProvider(true, new EDamageTypeTagProvider(output, provider, fileHelper));
 		gen.addProvider(true, new ERecipeProvider(output, provider));
 
 		gen.addProvider(true, new BlockstateProvider(output, fileHelper));

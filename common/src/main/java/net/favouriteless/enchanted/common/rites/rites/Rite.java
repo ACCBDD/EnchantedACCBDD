@@ -4,6 +4,7 @@ import net.favouriteless.enchanted.common.blocks.entity.GoldChalkBlockEntity;
 import net.favouriteless.enchanted.common.rites.RiteManager;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup.Provider;
+import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.resources.ResourceLocation;
@@ -139,6 +140,10 @@ public abstract class Rite {
 
     public BlockPos getPos() {
         return pos;
+    }
+
+    protected void spawnRandomParticles(ParticleOptions options) {
+        level.sendParticles(options, pos.getX(), pos.getY(), pos.getZ(), 25, 1.5D, 1.5D, 1.5D, 0.0D);
     }
 
 }

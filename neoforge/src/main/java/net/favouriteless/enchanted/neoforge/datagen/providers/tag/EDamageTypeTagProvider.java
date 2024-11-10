@@ -10,9 +10,9 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import java.util.concurrent.CompletableFuture;
 
-public class DamageTypeTagProvider extends DamageTypeTagsProvider {
+public class EDamageTypeTagProvider extends DamageTypeTagsProvider {
 
-    public DamageTypeTagProvider(PackOutput output, CompletableFuture<Provider> provider, ExistingFileHelper existingFileHelper) {
+    public EDamageTypeTagProvider(PackOutput output, CompletableFuture<Provider> provider, ExistingFileHelper existingFileHelper) {
         super(output, provider, Enchanted.MOD_ID, existingFileHelper);
     }
 

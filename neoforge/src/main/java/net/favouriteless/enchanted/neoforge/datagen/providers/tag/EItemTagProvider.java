@@ -11,13 +11,14 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import java.util.concurrent.CompletableFuture;
 
-public class ItemTagProvider extends ItemTagsProvider {
+public class EItemTagProvider extends ItemTagsProvider {
 
-    public ItemTagProvider(PackOutput output, CompletableFuture<Provider> lookupProvider, ExistingFileHelper existingFileHelper, CompletableFuture<TagLookup<Block>> blockTags) {
+    public EItemTagProvider(PackOutput output, CompletableFuture<Provider> lookupProvider, ExistingFileHelper existingFileHelper, CompletableFuture<TagLookup<Block>> blockTags) {
         super(output, lookupProvider, blockTags, Enchanted.MOD_ID, existingFileHelper);
     }
 
@@ -43,15 +44,13 @@ public class ItemTagProvider extends ItemTagsProvider {
 
         // Other tags
         tag(ETags.Items.ARMORS)
-                .add(EItems.EARMUFFS.get(),
-                        Items.LEATHER_BOOTS, Items.LEATHER_LEGGINGS, Items.LEATHER_CHESTPLATE, Items.LEATHER_HELMET,
-                        Items.GOLDEN_BOOTS, Items.GOLDEN_LEGGINGS, Items.GOLDEN_CHESTPLATE, Items.GOLDEN_HELMET,
-                        Items.CHAINMAIL_BOOTS, Items.CHAINMAIL_LEGGINGS, Items.CHAINMAIL_CHESTPLATE, Items.CHAINMAIL_HELMET,
-                        Items.IRON_BOOTS, Items.IRON_LEGGINGS, Items.IRON_CHESTPLATE, Items.IRON_HELMET,
-                        Items.DIAMOND_BOOTS, Items.DIAMOND_LEGGINGS, Items.DIAMOND_CHESTPLATE, Items.DIAMOND_HELMET,
-                        Items.NETHERITE_BOOTS, Items.NETHERITE_LEGGINGS, Items.NETHERITE_CHESTPLATE, Items.NETHERITE_HELMET);
-        tag(ETags.Items.ARMOR_POPPET_WHITELIST)
-                .addTag(ETags.Items.ARMORS)
+                .add(EItems.EARMUFFS.get(), Items.LEATHER_BOOTS, Items.LEATHER_LEGGINGS, Items.LEATHER_CHESTPLATE,
+                        Items.LEATHER_HELMET, Items.GOLDEN_BOOTS, Items.GOLDEN_LEGGINGS, Items.GOLDEN_CHESTPLATE,
+                        Items.GOLDEN_HELMET, Items.CHAINMAIL_BOOTS, Items.CHAINMAIL_LEGGINGS, Items.CHAINMAIL_CHESTPLATE,
+                        Items.CHAINMAIL_HELMET, Items.IRON_BOOTS, Items.IRON_LEGGINGS, Items.IRON_CHESTPLATE,
+                        Items.IRON_HELMET, Items.DIAMOND_BOOTS, Items.DIAMOND_LEGGINGS, Items.DIAMOND_CHESTPLATE,
+                        Items.DIAMOND_HELMET, Items.NETHERITE_BOOTS, Items.NETHERITE_LEGGINGS, Items.NETHERITE_CHESTPLATE,
+                        Items.NETHERITE_HELMET)
                 .addOptionalTag(ResourceLocation.fromNamespaceAndPath("c", "armors"));
         tag(ETags.Items.RAW_FOODS)
                 .add(Items.BEEF, Items.KELP, Items.POTATO, Items.CHORUS_FRUIT, Items.CHICKEN, Items.COD, Items.MUTTON,
@@ -64,6 +63,7 @@ public class ItemTagProvider extends ItemTagsProvider {
                 .addTag(ETags.Items.CHALKS);
         tag(ETags.Items.TOOL_POPPET_WHITELIST)
                 .addTags(ItemTags.SWORDS, ItemTags.PICKAXES, ItemTags.SHOVELS, ItemTags.AXES, ItemTags.HOES)
+                .addOptionalTag(Tags.Items.TOOLS)
                 .addOptionalTag(ResourceLocation.fromNamespaceAndPath("c", "tools"))
                 .addOptionalTag(ResourceLocation.fromNamespaceAndPath("c", "hoes"))
                 .addOptionalTag(ResourceLocation.fromNamespaceAndPath("c", "shears"))

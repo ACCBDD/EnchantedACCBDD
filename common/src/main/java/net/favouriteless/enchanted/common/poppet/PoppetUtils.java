@@ -76,6 +76,9 @@ public class PoppetUtils {
 			if(stack.getItem() instanceof PoppetItem poppet && validPoppet.test(poppet))
 				poppetQueue.add(stack);
 		}
+		ItemStack stack = player.getInventory().offhand.getFirst();
+		if(stack.getItem() instanceof PoppetItem poppet && validPoppet.test(poppet))
+			poppetQueue.add(stack);
 		return poppetQueue;
 	}
 
@@ -217,9 +220,12 @@ public class PoppetUtils {
 
 	public static PoppetUseResult tryUseItems(@NotNull Queue<ItemStack> queue, @NotNull Player owner, @Nullable ItemStack protectStack) {
 		while(!queue.isEmpty()) {
-			PoppetUseResult result = handleTryUsePoppet(owner, queue.remove(), protectStack, null);
-			if(result.isSuccess() || result.type() == ResultType.FAIL)
-				return result;
+			ItemStack item = queue.remove();
+			if(PoppetUtils.belongsTo(item, owner)) {
+				PoppetUseResult result = handleTryUsePoppet(owner, item, protectStack, null);
+				if(result.isSuccess() || result.type() == ResultType.FAIL)
+					return result;
+			}
 		}
 		return PoppetUseResult.pass();
 	}
@@ -281,7 +287,7 @@ public class PoppetUtils {
 	private static class PoppetComparator implements Comparator<ItemStack> {
 		@Override
 		public int compare(ItemStack o1, ItemStack o2) {
-			if(!(o1.getItem() instanceof PoppetItem) || !(o1.getItem() instanceof PoppetItem))
+			if(!(o1.getItem() instanceof PoppetItem) || !(o2.getItem() instanceof PoppetItem))
 				throw new IllegalStateException("Non-poppet item inside the poppet use queue");
 			return Math.round(Math.signum(((PoppetItem)o1.getItem()).getFailRate() - ((PoppetItem)o2.getItem()).getFailRate()));
 		}

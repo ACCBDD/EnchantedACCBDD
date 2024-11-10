@@ -10,9 +10,9 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import java.util.concurrent.CompletableFuture;
 
-public class BiomeTagProvider extends BiomeTagsProvider {
+public class EBiomeTagProvider extends BiomeTagsProvider {
 
-    public BiomeTagProvider(PackOutput output, CompletableFuture<Provider> provider, ExistingFileHelper existingFileHelper) {
+    public EBiomeTagProvider(PackOutput output, CompletableFuture<Provider> provider, ExistingFileHelper existingFileHelper) {
         super(output, provider, Enchanted.MOD_ID, existingFileHelper);
     }
 

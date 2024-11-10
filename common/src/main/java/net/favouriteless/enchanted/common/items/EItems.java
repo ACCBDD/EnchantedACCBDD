@@ -168,7 +168,7 @@ public class EItems {
 	public static final Supplier<Item> VOID_POPPET = register("void_poppet", () -> new VoidPoppetItem(0.3F, PoppetColour.VOID, source -> source.is(DamageTypes.FELL_OUT_OF_WORLD), poppetProps(1)));
 	public static final Supplier<Item> VOID_POPPET_INFUSED = register("infused_void_poppet", () -> new VoidPoppetEffectItem( 0.0F, PoppetColour.VOID, () -> new MobEffectInstance(new Holder.Direct<>(EEffects.FALL_RESISTANCE.get()), 150), source -> source.is(DamageTypes.FELL_OUT_OF_WORLD), poppetProps(1)));
 	public static final Supplier<Item> VOID_POPPET_STURDY = register("sturdy_void_poppet", () -> new VoidPoppetItem( 0.0F, PoppetColour.VOID, source -> source.is(DamageTypes.FELL_OUT_OF_WORLD), poppetProps(2)));
-	public static final Supplier<VoodooPoppetItem> VOODOO_POPPET = register("voodoo_poppet", () -> new VoodooPoppetItem(props().stacksTo(1)));
+	public static final Supplier<VoodooPoppetItem> VOODOO_POPPET = register("voodoo_poppet", () -> new VoodooPoppetItem(props().stacksTo(1).durability(40).fireResistant()));
 	public static final Supplier<Item> VOODOO_PROTECTION_POPPET = register("voodoo_protection_poppet", () -> new PoppetItem(0.3F, PoppetColour.VOODOO_PROTECTION, poppetProps(1)));
 	public static final Supplier<Item> VOODOO_PROTECTION_POPPET_INFUSED = register("infused_voodoo_protection_poppet", () -> new PoppetItem(0.0F, PoppetColour.VOODOO_PROTECTION, poppetProps(1)));
 	public static final Supplier<Item> VOODOO_PROTECTION_POPPET_STURDY = register("sturdy_voodoo_protection_poppet", () -> new PoppetItem(0.0F, PoppetColour.VOODOO_PROTECTION, poppetProps(2)));
