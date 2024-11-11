@@ -103,7 +103,7 @@ public class PoppetUtils {
 	 * @return true if item is a bound {@link PoppetItem}
 	 */
 	public static boolean isBound(ItemStack item) {
-		return item.has(EDataComponents.ENTITY_REF.get()) && item.get(EDataComponents.ENTITY_REF.get()).uuid().isPresent();
+		return item.has(EDataComponents.ENTITY_REF.get());
 	}
 
 	/**
@@ -128,9 +128,8 @@ public class PoppetUtils {
 	 */
 	public static boolean belongsTo(ItemStack item, UUID uuid) {
 		if(item.getItem() instanceof PoppetItem) {
-			Optional<UUID> optional = item.get(EDataComponents.ENTITY_REF.get()).uuid();
-			if(optional.isPresent())
-				return optional.get().equals(uuid);
+			if(item.has(EDataComponents.ENTITY_REF.get()))
+				return item.get(EDataComponents.ENTITY_REF.get()).uuid().equals(uuid);
 		}
 		return false;
 	}
@@ -143,7 +142,7 @@ public class PoppetUtils {
 	 */
 	public static ServerPlayer getBoundPlayer(ItemStack item, ServerLevel level) {
 		if(isBound(item))
-			return level.getServer().getPlayerList().getPlayer(item.get(EDataComponents.ENTITY_REF.get()).uuid().get());
+			return level.getServer().getPlayerList().getPlayer(item.get(EDataComponents.ENTITY_REF.get()).uuid());
 		return null;
 	}
 
@@ -156,7 +155,7 @@ public class PoppetUtils {
 	 */
 	public static String getBoundName(ItemStack item) {
 		if(isBound(item))
-			return item.get(EDataComponents.ENTITY_REF.get()).name().get();
+			return item.get(EDataComponents.ENTITY_REF.get()).name();
 		return "None";
 	}
 
@@ -178,9 +177,8 @@ public class PoppetUtils {
 	 * @param item The poppet to unbind.
 	 */
 	public static void unbind(ItemStack item) {
-		if(item.getItem() instanceof PoppetItem) {
-			item.set(EDataComponents.ENTITY_REF.get(), EntityRefData.EMPTY);
-		}
+		if(item.getItem() instanceof PoppetItem)
+			item.remove(EDataComponents.ENTITY_REF.get());
 	}
 
 	/**

@@ -1,5 +1,7 @@
 package net.favouriteless.enchanted.common.rites.rites;
 
+import net.favouriteless.enchanted.common.items.component.EDataComponents;
+import net.favouriteless.enchanted.common.items.component.EntityRefData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
@@ -12,11 +14,11 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class CreateItemRite extends Rite {
+public class EntityBoundCreateItemRite extends Rite {
 
     private final List<ItemStack> items;
 
-    public CreateItemRite(BaseRiteParams params, List<ItemStack> items) {
+    public EntityBoundCreateItemRite(BaseRiteParams params, List<ItemStack> items) {
         super(params);
         this.items = items;
     }
@@ -24,7 +26,17 @@ public class CreateItemRite extends Rite {
     @Override
     protected boolean onStart(ServerLevel level, BlockPos pos, @Nullable ServerPlayer caster,
                               @Nullable ServerPlayer target, List<ItemStack> consumedItems) {
+        EntityRefData ref = null;
+
+        for(ItemStack stack : consumedItems) {
+            if(stack.has(EDataComponents.ENTITY_REF.get())) {
+                ref = stack.get(EDataComponents.ENTITY_REF.get());
+                break;
+            }
+        }
+
         for(ItemStack stack : items) {
+            stack.set(EDataComponents.ENTITY_REF.get(), ref);
             ItemEntity itemEntity = new ItemEntity(level, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, stack.copy());
             level.addFreshEntity(itemEntity);
         }

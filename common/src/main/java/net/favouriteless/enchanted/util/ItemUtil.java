@@ -2,9 +2,13 @@ package net.favouriteless.enchanted.util;
 
 import net.favouriteless.enchanted.common.Enchanted;
 import net.favouriteless.enchanted.platform.CommonServices;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.NonNullList;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -61,7 +65,7 @@ public class ItemUtil {
 			return false;
 
 		DataComponentMap aMap = a.getComponents();
-		DataComponentMap bMap = b.getComponents().filter(type -> !DataComponents.COMMON_ITEM_COMPONENTS.has(type));
+		DataComponentMap bMap = b.getComponents();
 		for(DataComponentType<?> type : bMap.keySet()) {
 			if(!aMap.has(type))
 				return false;
@@ -73,6 +77,9 @@ public class ItemUtil {
 					continue;
 				return false;
 			}
+
+			if(bComp.equals(b.getItem().components().get(type)))
+				continue;
 
 			if(!Objects.equals(aComp, bComp))
 				return false;
@@ -89,6 +96,28 @@ public class ItemUtil {
 		entity.setNoPickUpDelay();
 		entity.setThrower(player);
 		player.level().addFreshEntity(player);
+	}
+
+	public static CompoundTag saveAllItems(CompoundTag tag, List<ItemStack> items, HolderLookup.Provider registries) {
+		ListTag list = new ListTag();
+
+        for(ItemStack stack : items) {
+            if(!stack.isEmpty()) {
+                CompoundTag itemTag = new CompoundTag();
+                list.add(stack.save(registries, itemTag));
+            }
+        }
+
+		tag.put("Items", list);
+		return tag;
+	}
+
+	public static void loadAllItems(CompoundTag tag, List<ItemStack> items, HolderLookup.Provider registries) {
+		ListTag list = tag.getList("Items", CompoundTag.TAG_COMPOUND);
+
+		for(int i = 0; i < list.size(); i++) {
+			items.add(ItemStack.parse(registries, list.getCompound(i)).orElse(ItemStack.EMPTY));
+		}
 	}
 
 }

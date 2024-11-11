@@ -6,10 +6,6 @@ import net.favouriteless.enchanted.common.blocks.EBlocks;
 import net.favouriteless.enchanted.common.effects.EEffects;
 import net.favouriteless.enchanted.common.items.brews.SimpleEffectBrewItem;
 import net.favouriteless.enchanted.common.items.brews.throwable.LoveBrewItem;
-import net.favouriteless.enchanted.common.items.component.OptionalBlockPosData;
-import net.favouriteless.enchanted.common.items.component.EDataComponents;
-import net.favouriteless.enchanted.common.items.component.EntityRefData;
-import net.favouriteless.enchanted.common.items.component.OptionalLevelKeyData;
 import net.favouriteless.enchanted.common.items.poppets.*;
 import net.favouriteless.enchanted.common.poppet.PoppetColour;
 import net.favouriteless.enchanted.platform.CommonServices;
@@ -51,10 +47,10 @@ public class EItems {
 	public static final Supplier<Item> ATTUNED_STONE_CHARGED = register("attuned_stone_charged",  () -> new SimpleFoiledItem(new Properties()));
 	public static final Supplier<Item> BELLADONNA_FLOWER = registerItem("belladonna_flower");
 	public static final Supplier<ItemNameBlockItem> BELLADONNA_SEEDS = registerBlockNamed("belladonna_seeds", EBlocks.BELLADONNA);
-	public static final Supplier<Item> BLOODED_WAYSTONE = register("blooded_waystone", () -> new BloodedWaystoneItem(props().component(EDataComponents.ENTITY_REF.get(), EntityRefData.EMPTY)));
+	public static final Supplier<Item> BLOODED_WAYSTONE = register("blooded_waystone", () -> new BloodedWaystoneItem(props()));
 	public static final Supplier<BlockItem> BLOOD_POPPY = registerBlock("blood_poppy", EBlocks.BLOOD_POPPY);
 	public static final Supplier<Item> BONE_NEEDLE = registerItem("bone_needle");
-	public static final Supplier<Item> BOUND_WAYSTONE = register("bound_waystone", () -> new Item(props().component(EDataComponents.OPTIONAL_BLOCK_POS.get(), OptionalBlockPosData.EMPTY).component(EDataComponents.OPTIONAL_LEVEL_KEY.get(), OptionalLevelKeyData.EMPTY)));
+	public static final Supplier<Item> BOUND_WAYSTONE = register("bound_waystone", () -> new BoundWaystoneItem(props()));
 	public static final Supplier<Item> BREATH_OF_THE_GODDESS = registerItem("breath_of_the_goddess");
 	public static final Supplier<Item> BREW_OF_LOVE = register("brew_of_love", LoveBrewItem::new);
 	public static final Supplier<Item> BREW_OF_SPROUTING = registerItem("brew_of_sprouting");
@@ -159,7 +155,7 @@ public class EItems {
 	public static final Supplier<BlockItem> STRIPPED_HAWTHORN_LOG = registerBlock("stripped_hawthorn_log", EBlocks.STRIPPED_HAWTHORN_LOG);
 	public static final Supplier<BlockItem> STRIPPED_ROWAN_LOG = registerBlock("stripped_rowan_log", EBlocks.STRIPPED_ROWAN_LOG);
 	public static final Supplier<Item> TAGLOCK = register("taglock_kit", () -> new EmptyTaglockItem(props()));
-	public static final Supplier<Item> TAGLOCK_FILLED =  register("taglock", () -> new TaglockFilledItem(props().component(EDataComponents.ENTITY_REF.get(), EntityRefData.EMPTY).rarity(Rarity.EPIC)));
+	public static final Supplier<Item> TAGLOCK_FILLED =  register("taglock", () -> new TaglockFilledItem(props().rarity(Rarity.EPIC)));
 	public static final Supplier<Item> TEAR_OF_THE_GODDESS = registerItem("tear_of_the_goddess");
 	public static final Supplier<Item> TONGUE_OF_DOG = registerItem("tongue_of_dog");
 	public static final Supplier<Item> TOOL_POPPET = register("tool_poppet", () -> new ItemProtectionPoppetItem(0.3F, 0.9F, PoppetColour.EQUIPMENT, poppetProps(1)));
@@ -270,7 +266,7 @@ public class EItems {
 	}
 
 	public static Properties poppetProps(int durability) {
-		return props().durability(durability).stacksTo(1).component(EDataComponents.ENTITY_REF.get(), EntityRefData.EMPTY);
+		return props().durability(durability).stacksTo(1);
 	}
 
 	public static void load() {} // Method which exists purely to load the class.

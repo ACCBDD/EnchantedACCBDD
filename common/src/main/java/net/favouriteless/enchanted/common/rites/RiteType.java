@@ -5,6 +5,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.favouriteless.enchanted.api.rites.RiteFactory;
 import net.favouriteless.enchanted.common.init.EData;
 import net.favouriteless.enchanted.common.rites.rites.Rite;
+import net.favouriteless.enchanted.common.rites.rites.Rite.BaseRiteParams;
 import net.favouriteless.enchanted.util.ItemUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -114,8 +115,8 @@ public class RiteType {
         return tickPower;
     }
 
-    public Rite create(ServerLevel level, BlockPos pos, UUID caster, UUID target) {
-        return factory.create(tickPower, level, pos, caster, target);
+    public Rite create(ServerLevel level, BlockPos pos, UUID caster, List<ItemStack> itemsConsumed) {
+        return factory.create(new BaseRiteParams(factory.id(), tickPower, level, pos, caster, itemsConsumed));
     }
 
     public static RiteType getFirstMatching(Level level, BlockPos pos) {

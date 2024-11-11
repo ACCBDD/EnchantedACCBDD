@@ -18,9 +18,9 @@ public class TaglockFilledItem extends Item {
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
-        EntityRefData data = stack.get(EDataComponents.ENTITY_REF.get());
-        data.name().ifPresent(name -> tooltip.add(Component.literal(name).withStyle(ChatFormatting.GRAY)));
         super.appendHoverText(stack, context, tooltip, flag);
+        if(stack.has(EDataComponents.ENTITY_REF.get()))
+            tooltip.add(Component.literal(stack.get(EDataComponents.ENTITY_REF.get()).name()).withStyle(ChatFormatting.GRAY));
     }
 
     @Override
@@ -34,10 +34,7 @@ public class TaglockFilledItem extends Item {
     }
 
     public static UUID getUUID(ItemStack stack) {
-        if(stack.getItem() == EItems.TAGLOCK_FILLED.get()) {
-            return stack.get(EDataComponents.ENTITY_REF.get()).uuid().orElse(null);
-        }
-        return null;
+        return stack.has(EDataComponents.ENTITY_REF.get()) ? stack.get(EDataComponents.ENTITY_REF.get()).uuid() : null;
     }
 
 }

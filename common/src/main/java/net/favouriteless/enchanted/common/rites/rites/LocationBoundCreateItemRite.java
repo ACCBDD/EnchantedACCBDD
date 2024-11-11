@@ -1,5 +1,6 @@
 package net.favouriteless.enchanted.common.rites.rites;
 
+import net.favouriteless.enchanted.common.items.component.EDataComponents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
@@ -12,11 +13,11 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class CreateItemRite extends Rite {
+public class LocationBoundCreateItemRite extends Rite {
 
     private final List<ItemStack> items;
 
-    public CreateItemRite(BaseRiteParams params, List<ItemStack> items) {
+    public LocationBoundCreateItemRite(BaseRiteParams params, List<ItemStack> items) {
         super(params);
         this.items = items;
     }
@@ -25,6 +26,8 @@ public class CreateItemRite extends Rite {
     protected boolean onStart(ServerLevel level, BlockPos pos, @Nullable ServerPlayer caster,
                               @Nullable ServerPlayer target, List<ItemStack> consumedItems) {
         for(ItemStack stack : items) {
+            stack.set(EDataComponents.BLOCK_POS.get(), pos);
+            stack.set(EDataComponents.LEVEL_KEY.get(), level.dimension());
             ItemEntity itemEntity = new ItemEntity(level, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, stack.copy());
             level.addFreshEntity(itemEntity);
         }

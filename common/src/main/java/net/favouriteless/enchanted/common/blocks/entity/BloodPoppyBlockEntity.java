@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class BloodPoppyBlockEntity extends BlockEntity {
 
-    private EntityRefData data = EntityRefData.EMPTY;
+    private EntityRefData data = null;
 
     public BloodPoppyBlockEntity(BlockPos pos, BlockState state) {
         super(EBlockEntityTypes.BLOOD_POPPY.get(), pos, state);
@@ -27,7 +27,7 @@ public class BloodPoppyBlockEntity extends BlockEntity {
     }
 
     public void reset() {
-        data = EntityRefData.EMPTY;
+        data = null;
     }
 
     @Override
@@ -39,7 +39,7 @@ public class BloodPoppyBlockEntity extends BlockEntity {
     protected void loadAdditional(CompoundTag tag, @NotNull Provider registries) {
         data = EntityRefData.CODEC.parse(NbtOps.INSTANCE, tag.get("taglockData"))
                 .resultOrPartial(e -> Enchanted.LOG.error("Tried to load invalid taglock data: '{}'", e))
-                .orElse(EntityRefData.EMPTY);
+                .orElse(null);
     }
 
 }

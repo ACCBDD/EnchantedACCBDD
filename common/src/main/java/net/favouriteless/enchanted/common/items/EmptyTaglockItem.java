@@ -81,9 +81,9 @@ public class EmptyTaglockItem extends Item {
                     BedTaglockSavedData data = BedTaglockSavedData.get(level);
                     IBedTaglock bedEntry = data.getEntry(bed);
 
-                    if(bedEntry.getData() != EntityRefData.EMPTY) {
+                    if(bedEntry.getData() != null) {
                         fillTaglock(context.getPlayer(), context.getItemInHand(), bedEntry.getData());
-                        bedEntry.setData(EntityRefData.EMPTY);
+                        bedEntry.setData(null);
                         data.setDirty();
                     }
                 }

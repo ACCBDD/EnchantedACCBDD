@@ -26,6 +26,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
+import org.apache.logging.log4j.core.jmx.Server;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Vector3f;
 
@@ -36,7 +37,6 @@ import java.util.UUID;
 public class GoldChalkBlockEntity extends BlockEntity implements IPowerConsumer {
 
     private final SimplePowerPosHolder posHolder;
-    private final List<ItemStack> itemsConsumed = new ArrayList<>();
 
     private boolean isExecuting;
 
@@ -45,7 +45,7 @@ public class GoldChalkBlockEntity extends BlockEntity implements IPowerConsumer 
     private List<ItemStack> itemsToConsume;
     private List<EntityType<?>> entitiesToConsume;
     private UUID caster;
-    private UUID target;
+    private List<ItemStack> itemsConsumed = new ArrayList<>();
 
     public GoldChalkBlockEntity(BlockPos pos, BlockState state) {
         super(EBlockEntityTypes.GOLD_CHALK.get(), pos, state);
@@ -56,9 +56,10 @@ public class GoldChalkBlockEntity extends BlockEntity implements IPowerConsumer 
         if(!level.isClientSide) {
             if(isExecuting) {
                 Rite rite = RiteManager.getRiteAt((ServerLevel)level, worldPosition);
-                if(rite != null)
+                if(rite != null) {
                     rite.stop();
-                detatch();
+                    RiteManager.removeRite((ServerLevel)level, rite);
+                }
             }
             else if(!isInitialising) {
                 type = RiteType.getFirstMatching(level, pos);
@@ -67,6 +68,9 @@ public class GoldChalkBlockEntity extends BlockEntity implements IPowerConsumer 
                     entitiesToConsume = type.getEntities();
                     caster = player.getUUID();
                     isInitialising = true;
+                }
+                else {
+                    level.playSound(null, worldPosition, SoundEvents.NOTE_BLOCK_SNARE.value(), SoundSource.MASTER, 1.0f, 1.0f);
                 }
             }
         }
@@ -94,8 +98,8 @@ public class GoldChalkBlockEntity extends BlockEntity implements IPowerConsumer 
                 if(power == 0 || (provider != null && provider.tryConsume(power))) {
                     be.isExecuting = true;
                     be.isInitialising = false;
-                    be.itemsConsumed.clear();
-                    Rite rite = be.type.create((ServerLevel)level, be.worldPosition, be.caster, be.target);
+                    Rite rite = be.type.create((ServerLevel)level, be.worldPosition, be.caster, be.itemsConsumed);
+                    be.itemsConsumed = new ArrayList<>();
                     RiteManager.addRite((ServerLevel)level, rite);
                     rite.start();
                 }
@@ -162,9 +166,6 @@ public class GoldChalkBlockEntity extends BlockEntity implements IPowerConsumer 
             for(ItemStack required : itemsToConsume) {
                 if(!ItemUtil.isSameItemPartial(item, required))
                     continue;
-
-                if(item.has(EDataComponents.ENTITY_REF.get()))
-                    target = item.get(EDataComponents.ENTITY_REF.get()).uuid().orElse(null);
 
                 createConsumeEffect(entity);
                 int toConsume = Math.min(required.getCount(), item.getCount());

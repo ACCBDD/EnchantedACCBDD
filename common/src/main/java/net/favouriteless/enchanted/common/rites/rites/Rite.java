@@ -1,7 +1,9 @@
 package net.favouriteless.enchanted.common.rites.rites;
 
 import net.favouriteless.enchanted.common.blocks.entity.GoldChalkBlockEntity;
+import net.favouriteless.enchanted.common.items.component.EDataComponents;
 import net.favouriteless.enchanted.common.rites.RiteManager;
+import net.favouriteless.enchanted.util.ItemUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.core.particles.ParticleOptions;
@@ -10,8 +12,13 @@ import net.minecraft.nbt.NbtOps;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.UUID;
 
 public abstract class Rite {
@@ -21,16 +28,26 @@ public abstract class Rite {
     private final int tickPower;
 
     private BlockPos pos;
-    private UUID caster;
-    private UUID target;
+    private List<ItemStack> consumedItems;
 
-    protected Rite(ResourceLocation type, int tickPower, ServerLevel level, BlockPos pos, UUID caster, UUID target) {
-        this.type = type;
-        this.level = level;
-        this.pos = pos;
-        this.caster = caster;
-        this.target = target;
-        this.tickPower = tickPower;
+    protected UUID casterUUID;
+    protected UUID targetUUID;
+    protected int ticks = 0;
+
+    protected Rite(BaseRiteParams params) {
+        this.type = params.type;
+        this.level = params.level;
+        this.pos = params.pos;
+        this.casterUUID = params.caster;
+        this.tickPower = params.tickPower;
+        this.consumedItems = params.consumedItems;
+
+        for(ItemStack stack : consumedItems) {
+            if(stack.has(EDataComponents.ENTITY_REF.get())) {
+                targetUUID = stack.get(EDataComponents.ENTITY_REF.get()).uuid();
+                break;
+            }
+        }
     }
 
     /**
@@ -40,8 +57,10 @@ public abstract class Rite {
      * @param pos position of the gold chalk for the rite was cast with.
      * @param caster player who cast the rite. null if they couldn't be found (e.g. logged off).
      * @param target the target of the rite. null if they couldn't be found (e.g. logged off).
+     * @param consumedItems the items used to start the rite.
      */
-    protected boolean onStart(ServerLevel level, BlockPos pos, @Nullable ServerPlayer caster, @Nullable ServerPlayer target) {
+    protected boolean onStart(ServerLevel level, BlockPos pos, @Nullable ServerPlayer caster,
+                              @Nullable ServerPlayer target, List<ItemStack> consumedItems) {
         return false;
     }
 
@@ -52,8 +71,10 @@ public abstract class Rite {
      * @param level level the rite was cast in.
      * @param pos position of the gold chalk for the rite was cast with.
      * @param caster the target of the rite. null if they couldn't be found (e.g. logged off).
+     * @param consumedItems the items used to start the rite.
      */
-    protected boolean onTick(ServerLevel level, BlockPos pos, @Nullable ServerPlayer caster, @Nullable ServerPlayer target) {
+    protected boolean onTick(ServerLevel level, BlockPos pos, @Nullable ServerPlayer caster,
+                             @Nullable ServerPlayer target, List<ItemStack> consumedItems) {
         return false;
     }
 
@@ -63,9 +84,25 @@ public abstract class Rite {
      * @param level level the rite was cast in.
      * @param pos position of the gold chalk for the rite was cast with.
      * @param caster player who cast the rite. null if they couldn't be found (e.g. logged off).
-     * @param caster the target of the rite. null if they couldn't be found (e.g. logged off).
+     * @param target the target of the rite. null if they couldn't be found (e.g. logged off).
+     * @param consumedItems the items used to start the rite.
      */
-    protected void onStop(ServerLevel level, BlockPos pos, @Nullable ServerPlayer caster, @Nullable ServerPlayer target) {
+    protected void onStop(ServerLevel level, BlockPos pos, @Nullable ServerPlayer caster, @Nullable ServerPlayer target,
+                          List<ItemStack> consumedItems) {
+    }
+
+    /**
+     * Refund the items used to start this rite and detatch from chalk, onStop will NOT be called.
+     */
+    protected boolean cancel() {
+        level.playSound(null, pos, SoundEvents.NOTE_BLOCK_SNARE.value(), SoundSource.MASTER, 1.0f, 1.0f);
+        for(ItemStack stack : consumedItems) {
+            ItemEntity entity = new ItemEntity(level, pos.getX()+0.5d, pos.getY()+0.5d, pos.getZ()+0.5d, stack);
+            level.addFreshEntity(entity);
+        }
+        if(level.getBlockEntity(pos) instanceof GoldChalkBlockEntity chalk)
+            chalk.detatch();
+        return false;
     }
 
     protected void saveAdditional(CompoundTag tag, Provider registries) {}
@@ -74,25 +111,29 @@ public abstract class Rite {
 
     // ----------------------------------- NON-API IMPLEMENTATIONS BELOW THIS POINT -----------------------------------
 
-    public void tick() {
+    public boolean tick() {
+        ticks++;
         if(level.isLoaded(pos)) {
             if(tickPower > 0) {
                 if(level.getBlockEntity(pos) instanceof GoldChalkBlockEntity chalk) {
                     if(!chalk.tryConsumePower(tickPower)) {
-                        stop();
-                        return;
+                        return stop();
                     }
                 }
             }
 
-            if(!onTick(level, pos, getCaster(), getTarget()))
-                stop();
+            if(!onTick(level, pos, getCaster(), getTarget(), consumedItems)) {
+                return stop();
+            }
         }
+        return true;
     }
 
     public void start() {
-        if(!onStart(level, pos, getCaster(), getTarget()))
+        if(!onStart(level, pos, getCaster(), getTarget(), consumedItems)) {
             stop();
+            RiteManager.removeRite(level, this);
+        }
     }
 
     public CompoundTag save(Provider registries) {
@@ -101,9 +142,11 @@ public abstract class Rite {
         tag.putInt("x", pos.getX());
         tag.putInt("y", pos.getY());
         tag.putInt("z", pos.getZ());
-        tag.putUUID("caster", caster);
-        if(target != null)
-            tag.putUUID("target", target);
+        tag.putUUID("caster", casterUUID);
+        if(targetUUID != null)
+            tag.putUUID("target", targetUUID);
+        ItemUtil.saveAllItems(tag, consumedItems, registries);
+        tag.putInt("ticks", ticks);
         saveAdditional(tag, registries);
         return tag;
     }
@@ -114,36 +157,40 @@ public abstract class Rite {
                 tag.getInt("y"),
                 tag.getInt("z")
         );
-        caster = tag.getUUID("caster");
+        casterUUID = tag.getUUID("caster");
         if(tag.hasUUID("target"))
-            target = tag.getUUID("target");
+            targetUUID = tag.getUUID("target");
+        ItemUtil.loadAllItems(tag, consumedItems, registries);
+        ticks = tag.getInt("ticks");
         loadAdditional(tag, registries);
     }
 
 
-    public void stop() {
-        onStop(level, pos, getCaster(), getTarget());
+    public boolean stop() {
+        onStop(level, pos, getCaster(), getTarget(), consumedItems);
 
         if(level.getBlockEntity(pos) instanceof GoldChalkBlockEntity chalk)
             chalk.detatch();
-
-        RiteManager.removeRite(level, this);
+        return false;
     }
 
     private @Nullable ServerPlayer getCaster() {
-        return level.getServer().getPlayerList().getPlayer(caster);
+        return level.getServer().getPlayerList().getPlayer(casterUUID);
     }
 
     private @Nullable ServerPlayer getTarget() {
-        return level.getServer().getPlayerList().getPlayer(target);
+        return level.getServer().getPlayerList().getPlayer(targetUUID);
     }
 
     public BlockPos getPos() {
         return pos;
     }
 
-    protected void spawnRandomParticles(ParticleOptions options) {
+    protected void randomParticles(ParticleOptions options) {
         level.sendParticles(options, pos.getX(), pos.getY(), pos.getZ(), 25, 1.5D, 1.5D, 1.5D, 0.0D);
     }
+
+    public record BaseRiteParams(ResourceLocation type, int tickPower, ServerLevel level, BlockPos pos,
+                                 @Nullable UUID caster, List<ItemStack> consumedItems) { }
 
 }

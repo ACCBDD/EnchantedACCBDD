@@ -12,6 +12,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.saveddata.SavedData;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class RiteManager extends SavedData {
@@ -28,7 +29,6 @@ public class RiteManager extends SavedData {
         return level.getDataStorage().computeIfAbsent(new Factory<>(() -> new RiteManager(level), (tag, registries) -> load(level, tag, registries), null), NAME);
     }
 
-
     public static void addRite(ServerLevel level, Rite rite) {
         RiteManager manager = get(level);
         manager.activeRites.add(rite);
@@ -43,7 +43,7 @@ public class RiteManager extends SavedData {
 
     public static void tick(ServerLevel level) {
         RiteManager manager = get(level);
-        manager.activeRites.forEach(Rite::tick);
+        manager.activeRites.removeIf(rite -> !rite.tick());
         manager.setDirty();
     }
 

@@ -52,7 +52,8 @@ public class PoppetItem extends Item {
 			ItemStack taglock = player.getOffhandItem();
 
 			if(taglock.getItem() instanceof TaglockFilledItem) {
-				taglock.get(EDataComponents.ENTITY_REF.get()).uuid().ifPresent(uuid -> {
+				if(taglock.has(EDataComponents.ENTITY_REF.get())) {
+					UUID uuid = taglock.get(EDataComponents.ENTITY_REF.get()).uuid();
 					Player target = level.getPlayerByUUID(uuid);
 
 					if(target != null) {
@@ -60,7 +61,7 @@ public class PoppetItem extends Item {
 						if(!player.isCreative())
 							taglock.shrink(1);
 					}
-				});
+				}
 			}
 		}
 		return itemStack;
@@ -72,10 +73,8 @@ public class PoppetItem extends Item {
 			if(!PoppetUtils.isBound(player.getMainHandItem())) {
 				ItemStack taglock = player.getOffhandItem();
 				if(taglock.getItem() instanceof TaglockFilledItem) {
-					Optional<UUID> optional = taglock.get(EDataComponents.ENTITY_REF.get()).uuid();
-
-					if(optional.isPresent()) {
-						Player target = level.getPlayerByUUID(optional.get());
+					if(taglock.has(EDataComponents.ENTITY_REF.get())) {
+						Player target = level.getPlayerByUUID(taglock.get(EDataComponents.ENTITY_REF.get()).uuid());
 
 						if(target != null) {
 							player.startUsingItem(hand);

@@ -14,6 +14,7 @@ import net.minecraft.world.level.block.entity.BedBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.saveddata.SavedData;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -75,7 +76,7 @@ public class BedTaglockSavedData extends SavedData {
         ListTag list = new ListTag();
 
         entries.forEach((pos, data) -> {
-            if(data.getData() != EntityRefData.EMPTY) {
+            if(data.getData() != null) {
                 CompoundTag entryTag = data.serialize();
                 entryTag.putLong("key", pos.asLong());
             }
@@ -89,7 +90,7 @@ public class BedTaglockSavedData extends SavedData {
 
     private static class BedTaglockImpl implements IBedTaglock {
 
-        private EntityRefData data = EntityRefData.EMPTY;
+        private EntityRefData data = null;
 
         private BedTaglockImpl() {}
 
@@ -104,16 +105,16 @@ public class BedTaglockSavedData extends SavedData {
         public void deserialize(CompoundTag tag) {
             data = EntityRefData.CODEC.parse(NbtOps.INSTANCE, tag.get("taglockData"))
                     .resultOrPartial(e -> Enchanted.LOG.error("Tried to load invalid Taglock data: '{}'", e))
-                    .orElse(EntityRefData.EMPTY);
+                    .orElse(null);
         }
 
         @Override
-        public @NotNull EntityRefData getData() {
+        public @Nullable EntityRefData getData() {
             return data;
         }
 
         @Override
-        public void setData(@NotNull EntityRefData data) {
+        public void setData(@Nullable EntityRefData data) {
             this.data = data;
         }
     }

@@ -11,25 +11,28 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.neoforged.neoforge.common.data.LanguageProvider;
 
 import java.util.HashSet;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.function.Supplier;
 
-public class LanguageProvider extends net.neoforged.neoforge.common.data.LanguageProvider {
+public class ELanguageProvider extends LanguageProvider {
 
     public static final Set<String> lowerCaseWords = Set.of("of", "the", "and");
 
     private final Set<String> usedKeys = new HashSet<>();
 
-    public LanguageProvider(PackOutput output) {
+    public ELanguageProvider(PackOutput output) {
         super(output, Enchanted.MOD_ID, "en_us");
     }
 
     @Override
     protected void addTranslations() {
         add(Enchanted.translationKey("tab", "main"), "Enchanted");
+
+        add("item.enchanted.bound_waystone.not_bound", "Not bound");
 
         add("death.attack.enchanted.sacrifice", "%1$s was sacrificed.");
         add("death.attack.enchanted.sound", "%1$s had their eardrums pierced.");

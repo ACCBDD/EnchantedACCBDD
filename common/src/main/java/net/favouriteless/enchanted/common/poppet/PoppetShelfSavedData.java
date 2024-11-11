@@ -94,17 +94,15 @@ public class PoppetShelfSavedData extends SavedData {
 
 	public void setupPoppetUUID(String identifier, ItemStack stack) {
 		if(PoppetUtils.isBound(stack)) {
-			stack.get(EDataComponents.ENTITY_REF.get()).uuid().ifPresent(uuid -> {
-				PLAYER_POPPETS.putIfAbsent(uuid, new ArrayList<>());
-				PLAYER_POPPETS.get(uuid).add(new PoppetEntry(stack, identifier));
-			});
+			UUID uuid = stack.get(EDataComponents.ENTITY_REF.get()).uuid();
+			PLAYER_POPPETS.putIfAbsent(uuid, new ArrayList<>());
+			PLAYER_POPPETS.get(uuid).add(new PoppetEntry(stack, identifier));
 		}
 	}
 
 	public void removePoppetUUID(String identifier, ItemStack stack) {
 		if(PoppetUtils.isBound(stack)) {
-			stack.get(EDataComponents.ENTITY_REF.get()).uuid().ifPresent(uuid ->
-					PLAYER_POPPETS.get(uuid).removeIf(entry -> entry.matches(stack, identifier)));
+			PLAYER_POPPETS.get(stack.get(EDataComponents.ENTITY_REF.get()).uuid()).removeIf(entry -> entry.matches(stack, identifier));
 		}
 	}
 
