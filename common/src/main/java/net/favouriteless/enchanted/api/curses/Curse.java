@@ -71,7 +71,7 @@ public abstract class Curse {
     private void whisper() {
         if(targetPlayer != null) {
             lastWhisper = ticks;
-            targetPlayer.connection.send(new ClientboundSoundEntityPacket(BuiltInRegistries.SOUND_EVENT.wrapAsHolder(ESoundEvents.CURSE_WHISPER.get()), SoundSource.AMBIENT, targetPlayer, 0.3F, (float) Math.random() * 0.15F + 0.85F, Enchanted.RANDOM.nextLong()));
+            targetPlayer.connection.send(new ClientboundSoundEntityPacket(BuiltInRegistries.SOUND_EVENT.wrapAsHolder(ESoundEvents.CURSE_WHISPER.get()), SoundSource.AMBIENT, targetPlayer, 0.075F, (float)Math.random() * 0.15F + 0.85F, Enchanted.RANDOM.nextLong()));
         }
     }
 

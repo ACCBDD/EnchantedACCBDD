@@ -26,9 +26,9 @@ public abstract class Rite {
     private final ResourceLocation type;
     private final ServerLevel level;
     private final int tickPower;
+    private final List<ItemStack> consumedItems;
 
     private BlockPos pos;
-    private List<ItemStack> consumedItems;
 
     protected UUID casterUUID;
     protected UUID targetUUID;
@@ -61,7 +61,7 @@ public abstract class Rite {
      */
     protected boolean onStart(ServerLevel level, BlockPos pos, @Nullable ServerPlayer caster,
                               @Nullable ServerPlayer target, List<ItemStack> consumedItems) {
-        return false;
+        return true;
     }
 
     /**
@@ -116,15 +116,13 @@ public abstract class Rite {
         if(level.isLoaded(pos)) {
             if(tickPower > 0) {
                 if(level.getBlockEntity(pos) instanceof GoldChalkBlockEntity chalk) {
-                    if(!chalk.tryConsumePower(tickPower)) {
+                    if(!chalk.tryConsumePower(tickPower))
                         return stop();
-                    }
                 }
             }
 
-            if(!onTick(level, pos, getCaster(), getTarget(), consumedItems)) {
+            if(!onTick(level, pos, getCaster(), getTarget(), consumedItems))
                 return stop();
-            }
         }
         return true;
     }

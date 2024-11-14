@@ -54,7 +54,7 @@ public class CommonEventsNeo {
     }
 
     @SubscribeEvent
-    public static void onLevelTick(LevelTickEvent.Pre event) {
+    public static void onLevelTick(LevelTickEvent.Post event) {
         CommonEvents.onLevelTick(event.getLevel());
     }
 

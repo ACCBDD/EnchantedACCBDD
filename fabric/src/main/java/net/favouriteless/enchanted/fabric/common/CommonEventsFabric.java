@@ -22,7 +22,7 @@ public class CommonEventsFabric {
     public static void register() {
         ServerLivingEntityEvents.ALLOW_DAMAGE.register(((entity, source, amount) -> !PoppetEvents.onLivingEntityHurt(entity, amount, source)));
         ServerLivingEntityEvents.ALLOW_DAMAGE.register(((entity, source, amount) -> !EffectEvents.onLivingHurt(entity, source, amount)));
-        ServerTickEvents.START_WORLD_TICK.register(CommonEvents::onLevelTick);
+        ServerTickEvents.END_WORLD_TICK.register(CommonEvents::onLevelTick);
 
         EntitySleepEvents.ALLOW_SETTING_SPAWN.register((player, pos) -> {
             CommonEvents.onPlayerSleeping(player, pos);
