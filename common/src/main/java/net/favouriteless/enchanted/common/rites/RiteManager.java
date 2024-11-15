@@ -12,7 +12,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.saveddata.SavedData;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class RiteManager extends SavedData {
@@ -77,7 +76,7 @@ public class RiteManager extends SavedData {
             ResourceLocation id = ResourceLocation.CODEC.parse(NbtOps.INSTANCE, riteTag.get("type")).getOrThrow();
             RiteType type = level.registryAccess().registryOrThrow(EData.RITE_TYPES_REGISTRY).get(id);
             if(type != null) {
-                Rite rite = type.create(level, null, null, null);
+                Rite rite = type.create(level, null, null, new ArrayList<>());
                 rite.load(riteTag, registries);
                 data.activeRites.add(rite);
             }

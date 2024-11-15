@@ -4,7 +4,6 @@ import net.favouriteless.enchanted.api.power.IPowerConsumer;
 import net.favouriteless.enchanted.api.power.IPowerProvider;
 import net.favouriteless.enchanted.api.power.PowerHelper;
 import net.favouriteless.enchanted.common.altar.SimplePowerPosHolder;
-import net.favouriteless.enchanted.common.items.component.EDataComponents;
 import net.favouriteless.enchanted.common.rites.RiteManager;
 import net.favouriteless.enchanted.common.rites.RiteType;
 import net.favouriteless.enchanted.common.rites.rites.Rite;
@@ -26,7 +25,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
-import org.apache.logging.log4j.core.jmx.Server;
 import org.jetbrains.annotations.NotNull;
 import org.joml.Vector3f;
 
@@ -59,6 +57,9 @@ public class GoldChalkBlockEntity extends BlockEntity implements IPowerConsumer 
                 if(rite != null) {
                     rite.stop();
                     RiteManager.removeRite((ServerLevel)level, rite);
+                }
+                else {
+                    detatch();
                 }
             }
             else if(!isInitialising) {

@@ -1,6 +1,6 @@
 package net.favouriteless.enchanted.common.rites.rites;
 
-import net.favouriteless.enchanted.client.particles.types.ColouredCircleOptions;
+import net.favouriteless.enchanted.client.particles.ImprisonmentCageParticle;
 import net.favouriteless.enchanted.common.init.EParticleTypes;
 import net.favouriteless.enchanted.common.init.ETags.EntityTypes;
 import net.favouriteless.enchanted.util.EntityUtils;
@@ -17,13 +17,15 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class SanctityRite extends Rite {
+public class ImprisonmentRite extends Rite {
 
-    public static final float RADIUS = 3.0f;
-    public static final float RADIUS_SQR = RADIUS * RADIUS;
-    public static final double REPULSE_FACTOR = 3.0d;
+    public static final double ATTRACT_FACTOR = 0.6d;
+    public static final double INNER_RADIUS = 3.0f;
+    public static final double OUTER_RADIUS = 4.0f;
+    private static final double INNER_RADIUS_SQR = INNER_RADIUS * INNER_RADIUS;
+    private static final double OUTER_RADIUS_SQR = OUTER_RADIUS * OUTER_RADIUS;
 
-    public SanctityRite(BaseRiteParams params) {
+    public ImprisonmentRite(BaseRiteParams params) {
         super(params);
     }
 
@@ -40,8 +42,10 @@ public class SanctityRite extends Rite {
         Vec3 center = pos.getBottomCenter();
         List<Entity> entities = level.getEntities(
                 (Entity)null,
-                new AABB(center.subtract(RADIUS+2, 0, RADIUS+2), center.add(RADIUS+2, 6, RADIUS+2)),
-                e -> e.getType().is(EntityTypes.MONSTERS) && new Vec3(e.getX()-center.x, 0, e.getZ()-center.z).lengthSqr() < RADIUS_SQR
+                new AABB(center.subtract(OUTER_RADIUS, 0, OUTER_RADIUS), center.add(OUTER_RADIUS, 4, OUTER_RADIUS)),
+                e -> e.getType().is(EntityTypes.MONSTERS) &&
+                        new Vec3(e.getX()-center.x, 0, e.getZ()-center.z).lengthSqr() > INNER_RADIUS_SQR &&
+                        new Vec3(e.getX()-center.x, 0, e.getZ()-center.z).lengthSqr() < OUTER_RADIUS_SQR
         );
 
         for(Entity entity : entities) {
@@ -51,27 +55,20 @@ public class SanctityRite extends Rite {
             Vec3 vel = toApply.getDeltaMovement();
             vel = new Vec3(vel.x, 0, vel.z);
 
-            double dot = vel.dot(local) / local.dot(local); // 1 if entity moving towards center, -1 if away
+            double dot = vel.dot(local) / local.dot(local); // + if entity moving away from center, - if towards
             if(dot > 0)
-                toApply.addDeltaMovement(local.scale(dot));
+                toApply.addDeltaMovement(local.scale(-dot));
 
-            double d = local.length();
-            toApply.addDeltaMovement(local.scale((1 - (d / RADIUS)) * REPULSE_FACTOR / d));
+            double d = local.lengthSqr();
+            if(d > (INNER_RADIUS - 0.3f) * (INNER_RADIUS - 0.3f))
+                toApply.addDeltaMovement(local.scale(-ATTRACT_FACTOR / d));
         }
 
-        if(this.ticks % 2 == 0) {
-            double cx = pos.getX() + 0.5d;
-            double cz = pos.getZ() + 0.5d;
-            double dy = pos.getY() + 0.1d;
-            double dz = pos.getZ() + 0.5d;
 
-            level.sendParticles(new ColouredCircleOptions(EParticleTypes.CIRCLE_MAGIC.get(), 0xFFFFFFFF,
-                    new Vec3(cx, pos.getY(), cz), RADIUS), cx + RADIUS, dy, dz, 1, 0, 0.35d, 0, 0);
-            level.sendParticles(new ColouredCircleOptions(EParticleTypes.CIRCLE_MAGIC.get(), 0xFFFFFFFF,
-                    new Vec3(cx, pos.getY(), cz), RADIUS), cx - RADIUS, dy, dz, 1, 0, 0.35d, 0, 0);
+        if(ticks % (ImprisonmentCageParticle.LIFETIME+15) == 0) { // 15 ticks for the fade time
+            level.sendParticles(EParticleTypes.IMPRISONMENT_CAGE_SEED.get(), pos.getX()+0.5d,
+                    pos.getY()+0.2d, pos.getZ()+0.5d, 1, 0, 0, 0, 0);
         }
-
         return true;
     }
-
 }

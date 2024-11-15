@@ -1,6 +1,7 @@
 package net.favouriteless.enchanted.client.particles;
 
 import net.favouriteless.enchanted.common.init.EParticleTypes;
+import net.favouriteless.enchanted.common.rites.rites.ImprisonmentRite;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.NoRenderParticle;
 import net.minecraft.client.particle.Particle;
@@ -22,11 +23,9 @@ public class ImprisonmentCageSeedParticle extends NoRenderParticle {
 	public void tick() {
 		for(int a = 0; a < 360; a++) {
 			double angle = Math.toRadians(a);
-//			double cx = x + Math.sin(angle)*(RiteImprisonment.TETHER_RANGE + 0.3D);
-			double cx = x + Math.sin(angle)*(5 + 0.3D);
+			double cx = x + Math.sin(angle)*(ImprisonmentRite.INNER_RADIUS + 0.3D);
 			double cy = y;
-//			double cz = z + Math.cos(angle)*(RiteImprisonment.TETHER_RANGE + 0.3D);
-			double cz = z + Math.cos(angle)*(5 + 0.3D);
+			double cz = z + Math.cos(angle)*(ImprisonmentRite.INNER_RADIUS + 0.3D);
 
 			level.addParticle(EParticleTypes.IMPRISONMENT_CAGE.get(), cx, cy, cz, 0.0D, 0.0D, 0.0D);
 			level.addParticle(EParticleTypes.IMPRISONMENT_CAGE.get(), cx, cy + 4.0D, cz, 0.0D, 0.0D, 0.0D);
