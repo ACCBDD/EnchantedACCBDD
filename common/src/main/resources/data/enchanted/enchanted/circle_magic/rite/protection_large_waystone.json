@@ -1,6 +1,6 @@
 {
   "items": [
-    { "id": "enchanted:waystone", "count": 1 },
+    { "id": "enchanted:bound_waystone", "count": 1 },
     { "id": "minecraft:obsidian", "count": 1 },
     { "id": "minecraft:glowstone_dust", "count": 1 }
   ],
@@ -9,5 +9,5 @@
   },
   "power": 1000,
   "tick_power": 6,
-  "factory": { "type": "enchanted:waystone_protection", "radius": 6 }
+  "factory": { "type": "enchanted:protection_waystone", "radius": 6 }
 }

@@ -1,6 +1,5 @@
-// 1.21.1	2024-11-07T23:30:31.6557447	Tags for minecraft:item mod id enchanted
-472c8d9b5b2662130a73e930c548a07cbee95c70 data/enchanted/tags/item/armors.json
-20caba92127be41bcd5847ca05e0ed25f4f191c4 data/enchanted/tags/item/armor_poppet_whitelist.json
+// 1.21.1	2024-11-15T19:50:57.5510741	Tags for minecraft:item mod id enchanted
+ac41ab0b8b50a71598c8941992e2e888088cc931 data/enchanted/tags/item/armors.json
 e7ff58a601c24e056dc5521f018555f7e596ec4e data/enchanted/tags/item/chalices.json
 cc0b47d4892d7d2ed9f5813df5bc1d69754bd3ef data/enchanted/tags/item/chalks.json
 847203a50ec44d614777e94b9ece91cefd7d94fa data/enchanted/tags/item/leaves.json
@@ -13,7 +12,7 @@ e47cedad84283e8d4746c2aeff8d12fe2618a430 data/enchanted/tags/item/planks.json
 f3f1ba69836a2f3b765ad58fd489fbfe29dc2227 data/enchanted/tags/item/swords.json
 8afe3314b72b43f9c1df12f4603ba4adcac78eeb data/enchanted/tags/item/tools.json
 181fea80d046f4ab0fe3aa89579ae39eb6bc9c87 data/enchanted/tags/item/tool_poppet_blacklist.json
-0600951c837b8d7220d053c7afbf9546d1f84eb5 data/enchanted/tags/item/tool_poppet_whitelist.json
+531f7ff71be1bfb3dd8f43b48429635694d53640 data/enchanted/tags/item/tool_poppet_whitelist.json
 dabc65ca5a83023dd1609d9a0f8602348c139aa2 data/enchanted/tags/item/witch_oven_blacklist.json
 08b6def3e9de617893655d4017801562f26b4bb1 data/enchanted/tags/item/wooden_slabs.json
 990b5a153ba74d4169b814216548205322d8dc22 data/enchanted/tags/item/wooden_stairs.json

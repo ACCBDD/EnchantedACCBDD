@@ -6,6 +6,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.MenuAccess;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -21,6 +22,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public interface IClientRegistryHelper {
@@ -69,6 +71,8 @@ public interface IClientRegistryHelper {
 
     <M extends AbstractContainerMenu, U extends Screen & MenuAccess<M>> void register(MenuType<M> type,
                                                                                       MenuScreens.ScreenConstructor<M, U> factory);
+
+    void registerShader(ShaderInstance instance, Consumer<ShaderInstance> consumer);
 
     /**
      * Represents Forge's enum of the same name, so this can actually compile. Forge implementation will grab the ordinal

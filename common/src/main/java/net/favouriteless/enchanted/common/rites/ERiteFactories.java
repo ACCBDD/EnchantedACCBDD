@@ -2,6 +2,7 @@ package net.favouriteless.enchanted.common.rites;
 
 import com.mojang.serialization.MapCodec;
 import net.favouriteless.enchanted.api.rites.RiteFactory;
+import net.favouriteless.enchanted.common.rites.rites.BloodedTransposeCasterRite;
 import net.favouriteless.enchanted.common.rites.rites.factory.*;
 import net.minecraft.resources.ResourceLocation;
 
@@ -21,6 +22,10 @@ public class ERiteFactories {
         register(ImprisonmentRiteFactory.ID, ImprisonmentRiteFactory.CODEC);
         register(ProtectionRiteFactory.ID, ProtectionRiteFactory.CODEC);
         register(WaystoneProtectionRiteFactory.ID, WaystoneProtectionRiteFactory.CODEC);
+        register(BloodedProtectionRiteFactory.ID, BloodedProtectionRiteFactory.CODEC);
+        register(SummonEntityRiteFactory.ID, SummonEntityRiteFactory.CODEC);
+        register(WaystoneTransposeCasterRiteFactory.ID, WaystoneTransposeCasterRiteFactory.CODEC);
+        register(BloodedTransposeCasterRiteFactory.ID, BloodedTransposeCasterRiteFactory.CODEC);
     }
 
     public static void register(ResourceLocation id, MapCodec<? extends RiteFactory> codec) {

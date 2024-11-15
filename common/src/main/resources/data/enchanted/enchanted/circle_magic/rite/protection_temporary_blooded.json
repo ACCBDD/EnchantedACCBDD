@@ -1,6 +1,6 @@
 {
   "items": [
-    { "id": "enchanted:bound_waystone", "count": 1 },
+    { "id": "enchanted:blooded_waystone", "count": 1 },
     { "id": "minecraft:obsidian", "count": 1 },
     { "id": "enchanted:attuned_stone_charged", "count": 1 }
   ],
@@ -9,5 +9,5 @@
   },
   "power": 1000,
   "tick_power": 6,
-  "factory": { "type": "enchanted:protection_waystone", "radius": 4, "duration": 1200, "blocks_players": true }
+  "factory": { "type": "enchanted:protection_blooded", "radius": 4, "duration": 1200, "blocks_players": true }
 }

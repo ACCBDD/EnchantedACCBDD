@@ -1,7 +1,7 @@
 {
   "type": "enchanted:kettle",
-  "cook_colour": "d5c19",
-  "final_colour": "9991f",
+  "cook_colour": "D5C19",
+  "final_colour": "9991F",
   "ingredients": [
     {
       "count": 1,

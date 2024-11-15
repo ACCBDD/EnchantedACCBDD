@@ -48,7 +48,7 @@ public class ProtectionRite extends Rite {
     @Override
     protected boolean onStart(ServerLevel level, BlockPos pos, @Nullable ServerPlayer caster,
                               @Nullable UUID targetUUID, List<ItemStack> consumedItems) {
-        findTargetLocation(level, pos);
+        findTargetLocation(level, pos, consumedItems);
         if(targetLevel == null || targetPos == null)
             return cancel();
 
@@ -129,7 +129,7 @@ public class ProtectionRite extends Rite {
         }
     }
 
-    protected void findTargetLocation(ServerLevel level, BlockPos pos) {
+    protected void findTargetLocation(ServerLevel level, BlockPos pos, List<ItemStack> consumedItems) {
         targetLevel = level;
         targetPos = pos;
     }

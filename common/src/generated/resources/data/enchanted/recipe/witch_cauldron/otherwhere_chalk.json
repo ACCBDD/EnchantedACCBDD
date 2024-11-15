@@ -1,7 +1,7 @@
 {
   "type": "enchanted:witch_cauldron",
-  "cook_colour": "31154a",
-  "final_colour": "490d82",
+  "cook_colour": "31154A",
+  "final_colour": "490D82",
   "ingredients": [
     {
       "count": 1,

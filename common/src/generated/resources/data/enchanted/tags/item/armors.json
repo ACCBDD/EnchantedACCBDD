@@ -24,6 +24,10 @@
     "minecraft:netherite_boots",
     "minecraft:netherite_leggings",
     "minecraft:netherite_chestplate",
-    "minecraft:netherite_helmet"
+    "minecraft:netherite_helmet",
+    {
+      "id": "#c:armors",
+      "required": false
+    }
   ]
 }

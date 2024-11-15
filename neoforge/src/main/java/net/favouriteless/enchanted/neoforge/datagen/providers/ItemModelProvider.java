@@ -86,6 +86,8 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
 
 		talismanItem(EItems.CIRCLE_TALISMAN.get());
 		simpleItem(EItems.WAYSTONE.get());
+		simpleItem(EItems.BLOODED_WAYSTONE.get());
+		simpleItem(EItems.BOUND_WAYSTONE.get());
 
 		simpleItem(EItems.EARMUFFS.get());
 

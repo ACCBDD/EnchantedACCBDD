@@ -8,6 +8,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.MenuAccess;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -26,6 +27,7 @@ import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class NeoClientRegistryHelper implements IClientRegistryHelper {
@@ -33,6 +35,7 @@ public class NeoClientRegistryHelper implements IClientRegistryHelper {
 	public static final List<KeyMapping> KEY_MAPPINGS = new ArrayList<>();
 	public static final List<Pair<ModelLayerLocation, Supplier<LayerDefinition>>> LAYER_DEFINITIONS = new ArrayList<>();
 	public static final List<MenuFactoryRegisterable<?, ?>> MENU_FACTORY_REGISTERABLES = new ArrayList<>();
+	public static final List<Pair<ShaderInstance, Consumer<ShaderInstance>>> SHADER_INSTANCES = new ArrayList<>();
 
 	@Override
 	public <T extends Entity> void register(EntityType<? extends T> type, EntityRendererProvider<T> constructor) {
@@ -66,6 +69,10 @@ public class NeoClientRegistryHelper implements IClientRegistryHelper {
 		MENU_FACTORY_REGISTERABLES.add(new MenuFactoryRegisterable<>(type, factory));
 	}
 
+	@Override
+	public void registerShader(ShaderInstance instance, Consumer<ShaderInstance> consumer) {
+		SHADER_INSTANCES.add(Pair.of(instance, consumer));
+	}
 
 
 	public record MenuFactoryRegisterable<M extends AbstractContainerMenu, U extends Screen & MenuAccess<M>>(MenuType<M> type, ScreenConstructor<M, U> factory) {

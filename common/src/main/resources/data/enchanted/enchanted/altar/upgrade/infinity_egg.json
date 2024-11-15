@@ -1,7 +1,7 @@
 {
   "type": "enchanted:infinity_egg",
   "block": "enchanted:infinity_egg",
-  "power": 99999.0,
-  "recharge": 99999.0,
+  "power": 999.0,
+  "recharge": 999.0,
   "priority": 0
 }

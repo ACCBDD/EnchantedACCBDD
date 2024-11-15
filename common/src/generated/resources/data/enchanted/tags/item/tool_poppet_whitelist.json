@@ -10,6 +10,10 @@
       "required": false
     },
     {
+      "id": "#c:tools",
+      "required": false
+    },
+    {
       "id": "#c:hoes",
       "required": false
     },

@@ -15,6 +15,7 @@ import net.minecraft.client.KeyMapping;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
+import net.minecraft.client.renderer.ShaderInstance;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -28,6 +29,7 @@ import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 @Mod(value = Enchanted.MOD_ID, dist = Dist.CLIENT)
@@ -108,7 +110,7 @@ public class EnchantedNeoClient {
     }
 
     @SubscribeEvent
-    public static void registerClientExtensions(RegisterClientExtensionsEvent event) {
+    public static void registerClientExtensions(final RegisterClientExtensionsEvent event) {
         event.registerItem(new IClientItemExtensions() {
             private SpinningWheelItemRenderer renderer;
 
@@ -120,6 +122,14 @@ public class EnchantedNeoClient {
                 return renderer;
             }
         }, EItems.SPINNING_WHEEL.get());
+    }
+
+    @SubscribeEvent
+    public static void registerShaders(final RegisterShadersEvent event) {
+        for(Pair<ShaderInstance, Consumer<ShaderInstance>> pair : NeoClientRegistryHelper.SHADER_INSTANCES) {
+            event.registerShader(pair.getFirst(), pair.getSecond());
+        }
+        NeoClientRegistryHelper.SHADER_INSTANCES.clear();
     }
 
 }
