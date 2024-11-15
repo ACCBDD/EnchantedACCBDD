@@ -13,6 +13,7 @@ import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.UUID;
 
 public class EntityBoundCreateItemRite extends Rite {
 
@@ -25,7 +26,7 @@ public class EntityBoundCreateItemRite extends Rite {
 
     @Override
     protected boolean onStart(ServerLevel level, BlockPos pos, @Nullable ServerPlayer caster,
-                              @Nullable ServerPlayer target, List<ItemStack> consumedItems) {
+                              @Nullable UUID targetUUID, List<ItemStack> consumedItems) {
         EntityRefData ref = null;
 
         for(ItemStack stack : consumedItems) {

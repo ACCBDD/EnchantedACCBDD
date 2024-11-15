@@ -9,5 +9,5 @@
   "shapes": {
     "enchanted:small_circle": "enchanted:ritual_chalk"
   },
-  "factory": { "type": "enchanted:location_bound_create_item", "items": [ { "id": "enchanted:bound_waystone", "count": 1 } ] }
+  "factory": { "type": "enchanted:location_bound_create_item", "items": [ { "id": "enchanted:waystone", "count": 1 } ] }
 }

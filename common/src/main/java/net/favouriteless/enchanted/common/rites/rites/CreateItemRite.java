@@ -11,6 +11,7 @@ import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.UUID;
 
 public class CreateItemRite extends Rite {
 
@@ -23,7 +24,7 @@ public class CreateItemRite extends Rite {
 
     @Override
     protected boolean onStart(ServerLevel level, BlockPos pos, @Nullable ServerPlayer caster,
-                              @Nullable ServerPlayer target, List<ItemStack> consumedItems) {
+                              @Nullable UUID targetUUID, List<ItemStack> consumedItems) {
         for(ItemStack stack : items) {
             ItemEntity itemEntity = new ItemEntity(level, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, stack.copy());
             level.addFreshEntity(itemEntity);

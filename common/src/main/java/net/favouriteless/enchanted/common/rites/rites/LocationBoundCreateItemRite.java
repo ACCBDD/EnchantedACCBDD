@@ -12,6 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.UUID;
 
 public class LocationBoundCreateItemRite extends Rite {
 
@@ -24,7 +25,7 @@ public class LocationBoundCreateItemRite extends Rite {
 
     @Override
     protected boolean onStart(ServerLevel level, BlockPos pos, @Nullable ServerPlayer caster,
-                              @Nullable ServerPlayer target, List<ItemStack> consumedItems) {
+                              @Nullable UUID targetUUID, List<ItemStack> consumedItems) {
         for(ItemStack stack : items) {
             stack.set(EDataComponents.BLOCK_POS.get(), pos);
             stack.set(EDataComponents.LEVEL_KEY.get(), level.dimension());

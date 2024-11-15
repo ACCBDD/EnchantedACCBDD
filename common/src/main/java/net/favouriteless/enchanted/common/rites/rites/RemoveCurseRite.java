@@ -4,7 +4,6 @@ import net.favouriteless.enchanted.api.curses.Curse;
 import net.favouriteless.enchanted.api.curses.CurseSavedData;
 import net.favouriteless.enchanted.api.familiars.FamiliarSavedData;
 import net.favouriteless.enchanted.api.familiars.IFamiliarEntry;
-import net.favouriteless.enchanted.common.Enchanted;
 import net.favouriteless.enchanted.common.curses.CurseManager;
 import net.favouriteless.enchanted.common.curses.CurseType;
 import net.favouriteless.enchanted.common.familiars.FamiliarTypes;
@@ -18,6 +17,7 @@ import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.UUID;
 
 public class RemoveCurseRite extends Rite {
 
@@ -33,7 +33,7 @@ public class RemoveCurseRite extends Rite {
 
     @Override
     protected boolean onStart(ServerLevel level, BlockPos pos, @Nullable ServerPlayer caster,
-                              @Nullable ServerPlayer target, List<ItemStack> consumedItems) {
+                              @Nullable UUID targetUUID, List<ItemStack> consumedItems) {
         if(this.targetUUID == null)
             return cancel();
 
@@ -43,14 +43,14 @@ public class RemoveCurseRite extends Rite {
     }
 
     @Override
-    protected boolean onTick(ServerLevel level, BlockPos pos, @Nullable ServerPlayer caster, @Nullable ServerPlayer target, List<ItemStack> consumedItems) {
+    protected boolean onTick(ServerLevel level, BlockPos pos, @Nullable ServerPlayer caster, @Nullable UUID targetUUID, List<ItemStack> consumedItems) {
         if(ticks == START_SOUND) {
             level.playSound(null, pos, ESoundEvents.REMOVE_CURSE.get(), SoundSource.MASTER, 1.0F, 1.0F);
             return true;
         }
 
         if(ticks == RAISE) {
-            List<Curse> curses = CurseSavedData.get(level).entries.get(targetUUID);
+            List<Curse> curses = CurseSavedData.get(level).entries.get(this.targetUUID);
 
             if(curses == null)
                 return false;

@@ -20,6 +20,7 @@ public class ERiteFactories {
         register(SanctityRiteFactory.ID, SanctityRiteFactory.CODEC);
         register(ImprisonmentRiteFactory.ID, ImprisonmentRiteFactory.CODEC);
         register(ProtectionRiteFactory.ID, ProtectionRiteFactory.CODEC);
+        register(WaystoneProtectionRiteFactory.ID, WaystoneProtectionRiteFactory.CODEC);
     }
 
     public static void register(ResourceLocation id, MapCodec<? extends RiteFactory> codec) {

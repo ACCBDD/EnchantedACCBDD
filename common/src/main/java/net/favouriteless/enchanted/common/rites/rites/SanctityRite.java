@@ -16,6 +16,7 @@ import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.UUID;
 
 public class SanctityRite extends Rite {
 
@@ -29,14 +30,14 @@ public class SanctityRite extends Rite {
 
     @Override
     protected boolean onStart(ServerLevel level, BlockPos pos, @Nullable ServerPlayer caster,
-                              @Nullable ServerPlayer target, List<ItemStack> consumedItems) {
+                              @Nullable UUID targetUUID, List<ItemStack> consumedItems) {
         level.playSound(null, pos, SoundEvents.ZOMBIE_VILLAGER_CURE, SoundSource.MASTER, 0.5F, 1.0F);
         return true;
     }
 
     @Override
     protected boolean onTick(ServerLevel level, BlockPos pos, @Nullable ServerPlayer caster,
-                             @Nullable ServerPlayer target, List<ItemStack> consumedItems) {
+                             @Nullable UUID targetUUID, List<ItemStack> consumedItems) {
         Vec3 center = pos.getBottomCenter();
         List<Entity> entities = level.getEntities(
                 (Entity)null,

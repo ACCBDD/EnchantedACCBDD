@@ -15,11 +15,15 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
+import java.lang.ref.WeakReference;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 public abstract class Rite {
@@ -34,6 +38,8 @@ public abstract class Rite {
     protected UUID casterUUID;
     protected UUID targetUUID;
     protected int ticks = 0;
+
+    private Map<UUID, WeakReference<Entity>> entityCache = new HashMap<>();
 
     protected Rite(BaseRiteParams params) {
         this.type = params.type;
@@ -54,14 +60,14 @@ public abstract class Rite {
     /**
      * Called when a rite using this behaviour first starts executing. Rite will stop if this returns false.
      *
-     * @param level level the rite was cast in.
-     * @param pos position of the gold chalk for the rite was cast with.
-     * @param caster player who cast the rite. null if they couldn't be found (e.g. logged off).
-     * @param target the target of the rite. null if they couldn't be found (e.g. logged off).
+     * @param level         level the rite was cast in.
+     * @param pos           position of the gold chalk for the rite was cast with.
+     * @param caster        player who cast the rite. null if they couldn't be found (e.g. logged off).
+     * @param targetUUID    the target of the rite. null if they couldn't be found (e.g. logged off).
      * @param consumedItems the items used to start the rite.
      */
     protected boolean onStart(ServerLevel level, BlockPos pos, @Nullable ServerPlayer caster,
-                              @Nullable ServerPlayer target, List<ItemStack> consumedItems) {
+                              @Nullable UUID targetUUID, List<ItemStack> consumedItems) {
         return true;
     }
 
@@ -69,26 +75,26 @@ public abstract class Rite {
      * Called when a rite using this behaviour ticks. Will not be called if there was not enough power to tick. Rite
      * will stop if this returns false.
      *
-     * @param level level the rite was cast in.
-     * @param pos position of the gold chalk for the rite was cast with.
-     * @param caster the target of the rite. null if they couldn't be found (e.g. logged off).
+     * @param level         level the rite was cast in.
+     * @param pos           position of the gold chalk for the rite was cast with.
+     * @param caster        the target of the rite. null if they couldn't be found (e.g. logged off).
      * @param consumedItems the items used to start the rite.
      */
     protected boolean onTick(ServerLevel level, BlockPos pos, @Nullable ServerPlayer caster,
-                             @Nullable ServerPlayer target, List<ItemStack> consumedItems) {
+                             @Nullable UUID targetUUID, List<ItemStack> consumedItems) {
         return false;
     }
 
     /**
      * Called when a rite using this behaviour stops executing. Will NOT be called if the Rite was cancelled.
      *
-     * @param level level the rite was cast in.
-     * @param pos position of the gold chalk for the rite was cast with.
-     * @param caster player who cast the rite. null if they couldn't be found (e.g. logged off).
-     * @param target the target of the rite. null if they couldn't be found (e.g. logged off).
+     * @param level         level the rite was cast in.
+     * @param pos           position of the gold chalk for the rite was cast with.
+     * @param caster        player who cast the rite. null if they couldn't be found (e.g. logged off).
+     * @param targetUUID    the target of the rite. null if they couldn't be found (e.g. logged off).
      * @param consumedItems the items used to start the rite.
      */
-    protected void onStop(ServerLevel level, BlockPos pos, @Nullable ServerPlayer caster, @Nullable ServerPlayer target,
+    protected void onStop(ServerLevel level, BlockPos pos, @Nullable ServerPlayer caster, @Nullable UUID targetUUID,
                           List<ItemStack> consumedItems) {
     }
 
@@ -125,8 +131,33 @@ public abstract class Rite {
                 0, 0, 0, 0);
     }
 
+    protected @Nullable Entity findEntity(UUID uuid) {
+        Entity out;
+
+        if(entityCache.containsKey(uuid)) { // Cache our entities first since we're usually trying to grab the same one anyway
+            out = entityCache.get(uuid).get();
+            if(out != null)
+                return out;
+            entityCache.remove(uuid);
+        }
+
+        out = level.getServer().getPlayerList().getPlayer(uuid);
+        if(out != null)
+            return cacheAndReturn(uuid, out);
+
+        for(ServerLevel dim : level.getServer().getAllLevels()) {
+            out = dim.getEntity(uuid);
+            if(out != null)
+                return cacheAndReturn(uuid, out);
+        }
+        return null;
+    }
+
     // ----------------------------------- NON-API IMPLEMENTATIONS BELOW THIS POINT -----------------------------------
 
+    /**
+     * Mods should not directly be calling tick.
+     */
     public boolean tick() {
         ticks++;
         if(level.isLoaded(pos)) {
@@ -137,14 +168,14 @@ public abstract class Rite {
                 }
             }
 
-            if(!onTick(level, pos, getCaster(), getTarget(), consumedItems))
+            if(!onTick(level, pos, getCaster(), targetUUID, consumedItems))
                 return stop();
         }
         return true;
     }
 
     public void start() {
-        if(!onStart(level, pos, getCaster(), getTarget(), consumedItems)) {
+        if(!onStart(level, pos, getCaster(), targetUUID, consumedItems)) {
             stop();
             RiteManager.removeRite(level, this);
         }
@@ -181,7 +212,7 @@ public abstract class Rite {
 
 
     public boolean stop() {
-        onStop(level, pos, getCaster(), getTarget(), consumedItems);
+        onStop(level, pos, getCaster(), targetUUID, consumedItems);
 
         if(level.getBlockEntity(pos) instanceof GoldChalkBlockEntity chalk)
             chalk.detatch();
@@ -192,10 +223,6 @@ public abstract class Rite {
         return level.getServer().getPlayerList().getPlayer(casterUUID);
     }
 
-    private @Nullable ServerPlayer getTarget() {
-        return level.getServer().getPlayerList().getPlayer(targetUUID);
-    }
-
     public BlockPos getPos() {
         return pos;
     }
@@ -203,6 +230,12 @@ public abstract class Rite {
     protected void randomParticles(ParticleOptions options) {
         level.sendParticles(options, pos.getX(), pos.getY(), pos.getZ(), 25, 1.5D, 1.5D, 1.5D, 0.0D);
     }
+
+    private Entity cacheAndReturn(UUID uuid, Entity entity) {
+        entityCache.put(uuid, new WeakReference<>(entity));
+        return entity;
+    }
+
 
     public record BaseRiteParams(ResourceLocation type, int tickPower, ServerLevel level, BlockPos pos,
                                  @Nullable UUID caster, List<ItemStack> consumedItems) { }

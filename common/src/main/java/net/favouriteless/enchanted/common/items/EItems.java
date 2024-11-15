@@ -47,10 +47,8 @@ public class EItems {
 	public static final Supplier<Item> ATTUNED_STONE_CHARGED = register("attuned_stone_charged",  () -> new SimpleFoiledItem(new Properties()));
 	public static final Supplier<Item> BELLADONNA_FLOWER = registerItem("belladonna_flower");
 	public static final Supplier<ItemNameBlockItem> BELLADONNA_SEEDS = registerBlockNamed("belladonna_seeds", EBlocks.BELLADONNA);
-	public static final Supplier<Item> BLOODED_WAYSTONE = register("blooded_waystone", () -> new BloodedWaystoneItem(props()));
 	public static final Supplier<BlockItem> BLOOD_POPPY = registerBlock("blood_poppy", EBlocks.BLOOD_POPPY);
 	public static final Supplier<Item> BONE_NEEDLE = registerItem("bone_needle");
-	public static final Supplier<Item> BOUND_WAYSTONE = register("bound_waystone", () -> new BoundWaystoneItem(props()));
 	public static final Supplier<Item> BREATH_OF_THE_GODDESS = registerItem("breath_of_the_goddess");
 	public static final Supplier<Item> BREW_OF_LOVE = register("brew_of_love", LoveBrewItem::new);
 	public static final Supplier<Item> BREW_OF_SPROUTING = registerItem("brew_of_sprouting");
@@ -173,7 +171,7 @@ public class EItems {
 	public static final Supplier<DeathPoppetEffectItem> WATER_POPPET = register("water_poppet", () -> new DeathPoppetEffectItem(0.3F, PoppetColour.WATER, () -> new MobEffectInstance(new Holder.Direct<>(EEffects.DROWN_RESISTANCE.get()), 100), source -> source.is(DamageTypeTags.IS_DROWNING), poppetProps(1)));
 	public static final Supplier<DeathPoppetEffectItem> WATER_POPPET_INFUSED = register("infused_water_poppet", () -> new DeathPoppetEffectItem( 0.0F, PoppetColour.WATER, () -> new MobEffectInstance(MobEffects.WATER_BREATHING, 200), source -> source.is(DamageTypeTags.IS_DROWNING), poppetProps(1)));
 	public static final Supplier<DeathPoppetEffectItem> WATER_POPPET_STURDY = register("sturdy_water_poppet", () -> new DeathPoppetEffectItem( 0.0F, PoppetColour.WATER, () -> new MobEffectInstance(new Holder.Direct<>(EEffects.DROWN_RESISTANCE.get()), 100), source -> source.is(DamageTypeTags.IS_DROWNING), poppetProps(2)));
-	public static final Supplier<Item> WAYSTONE = registerItem("waystone");
+	public static final Supplier<Item> WAYSTONE = register("waystone", () -> new WaystoneItem(props()));
 	public static final Supplier<Item> WHIFF_OF_MAGIC = registerItem("whiff_of_magic");
 	public static final Supplier<BlockItem> WICKER_BUNDLE = registerBlock("wicker_bundle", EBlocks.WICKER_BUNDLE);
 	public static final Supplier<BlockItem> WITCH_CAULDRON = registerBlock("witch_cauldron", EBlocks.WITCH_CAULDRON);

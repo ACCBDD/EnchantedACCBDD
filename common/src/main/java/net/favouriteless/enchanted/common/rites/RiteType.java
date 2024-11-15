@@ -19,15 +19,13 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.AABB;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
-public class RiteType {
+public class RiteType implements Comparable<RiteType> {
 
     public static final Codec<RiteType> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             ItemStack.CODEC.listOf().fieldOf("items").forGetter(r -> r.items),
@@ -129,7 +127,8 @@ public class RiteType {
                 pos.getX()+4, pos.getY()+1, pos.getZ()+4
                 ));
 
-        for(RiteType type : reg) {
+        for(Iterator<RiteType> it = reg.stream().sorted().iterator(); it.hasNext(); ) {
+            RiteType type = it.next();
             if(type.matches(level, pos, entities))
                 return type;
         }
@@ -137,4 +136,23 @@ public class RiteType {
         return null;
     }
 
+    @Override
+    public int compareTo(@NotNull RiteType o) {
+        if(shapes.size() == o.shapes.size() && items.size() == o.items.size() && entities.size() == o.entities.size())
+            return 0;
+
+        if(shapes.size() > o.shapes.size())
+            return -1;
+        else if(shapes.size() < o.shapes.size())
+            return 1;
+
+        if(items.size() > o.items.size())
+            return -1;
+        else if(items.size() < o.items.size())
+            return 1;
+
+        if(entities.size() > o.entities.size())
+            return -1;
+        return 1;
+    }
 }

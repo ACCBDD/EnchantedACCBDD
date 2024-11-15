@@ -1,7 +1,6 @@
 {
   "items": [
-    { "id": "enchanted:bound_waystone", "count": 1 },
-    { "id": "enchanted:waystone", "count": 1 },
+    { "id": "enchanted:waystone", "count": 2 },
     { "id": "enchanted:ender_dew", "count": 1 },
     { "id": "minecraft:redstone", "count": 1 }
   ],
@@ -9,5 +8,5 @@
     "enchanted:small_circle": "enchanted:ritual_chalk"
   },
   "power": 500,
-  "factory": { "type": "enchanted:duplicate_item", "item": "enchanted:bound_waystone", "count": 2 }
+  "factory": { "type": "enchanted:duplicate_item", "item": "enchanted:waystone", "count": 2 }
 }

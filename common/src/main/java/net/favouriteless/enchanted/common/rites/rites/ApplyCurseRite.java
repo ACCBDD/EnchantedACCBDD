@@ -15,6 +15,7 @@ import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.UUID;
 
 public class ApplyCurseRite extends Rite {
 
@@ -27,7 +28,7 @@ public class ApplyCurseRite extends Rite {
 
     @Override
     protected boolean onStart(ServerLevel level, BlockPos pos, @Nullable ServerPlayer caster,
-                              @Nullable ServerPlayer target, List<ItemStack> consumedItems) {
+                              @Nullable UUID targetUUID, List<ItemStack> consumedItems) {
         if(this.targetUUID == null || this.casterUUID == null)
             return cancel();
 
@@ -42,7 +43,7 @@ public class ApplyCurseRite extends Rite {
 
         level.sendParticles(EParticleTypes.CURSE_SEED.get(), pos.getX()+0.5D, pos.getY(), pos.getZ()+0.5D, 1, 0.0D, 0.0D, 0.0D, 0.0D);
         level.playSound(null, pos, ESoundEvents.CURSE_CAST.get(), SoundSource.MASTER, 1.5F, 1.0F);
-        CurseManager.createCurse(level, curse, targetUUID, casterUUID, casterLevel);
+        CurseManager.createCurse(level, curse, this.targetUUID, casterUUID, casterLevel);
         return false;
     }
 }

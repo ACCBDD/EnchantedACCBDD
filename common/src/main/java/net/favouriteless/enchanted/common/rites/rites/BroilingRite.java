@@ -9,17 +9,16 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.item.crafting.RecipeManager.CachedCheck;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.UUID;
 
 public class BroilingRite extends Rite {
 
@@ -35,7 +34,7 @@ public class BroilingRite extends Rite {
 
     @Override
     protected boolean onTick(ServerLevel level, BlockPos pos, @Nullable ServerPlayer caster,
-                             @Nullable ServerPlayer target, List<ItemStack> consumedItems) {
+                             @Nullable UUID targetUUID, List<ItemStack> consumedItems) {
 
         if(ticks % 5 != 0)
             return true;
