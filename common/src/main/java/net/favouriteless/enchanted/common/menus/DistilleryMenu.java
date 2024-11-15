@@ -5,7 +5,7 @@ import net.favouriteless.enchanted.common.blocks.entity.DistilleryBlockEntity;
 import net.favouriteless.enchanted.common.items.EItems;
 import net.favouriteless.enchanted.common.menus.slots.JarInputSlot;
 import net.favouriteless.enchanted.common.menus.slots.OutputSlot;
-import net.favouriteless.enchanted.util.MenuUtils;
+import net.favouriteless.enchanted.common.util.MenuUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;

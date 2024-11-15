@@ -4,7 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.favouriteless.enchanted.common.recipes.recipe_inputs.ListInput;
-import net.favouriteless.enchanted.util.ItemUtil;
+import net.favouriteless.enchanted.common.util.ItemUtil;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;

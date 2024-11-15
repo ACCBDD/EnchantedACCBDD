@@ -1,4 +1,4 @@
-package net.favouriteless.enchanted.util;
+package net.favouriteless.enchanted.common.util;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Inventory;

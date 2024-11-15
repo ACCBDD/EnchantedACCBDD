@@ -1,4 +1,4 @@
-package net.favouriteless.enchanted.common.altar;
+package net.favouriteless.enchanted.common.stateobservers;
 
 import net.favouriteless.enchanted.api.power.IPowerConsumer;
 import net.favouriteless.enchanted.api.power.IPowerProvider;

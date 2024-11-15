@@ -1,4 +1,4 @@
-package net.favouriteless.enchanted.util;
+package net.favouriteless.enchanted.common.util;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;

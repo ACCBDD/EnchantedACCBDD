@@ -4,7 +4,7 @@ import com.mojang.serialization.MapCodec;
 import net.favouriteless.enchanted.common.blocks.entity.PoppetShelfBlockEntity;
 import net.favouriteless.enchanted.common.poppet.PoppetShelfManager;
 import net.favouriteless.enchanted.platform.CommonServices;
-import net.favouriteless.enchanted.util.ItemUtil;
+import net.favouriteless.enchanted.common.util.ItemUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;

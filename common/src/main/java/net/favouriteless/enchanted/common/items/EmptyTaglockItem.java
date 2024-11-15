@@ -9,7 +9,7 @@ import net.favouriteless.enchanted.common.init.ETags.EntityTypes;
 import net.favouriteless.enchanted.common.blocks.EBlocks;
 import net.favouriteless.enchanted.common.items.component.EDataComponents;
 import net.favouriteless.enchanted.common.items.component.EntityRefData;
-import net.favouriteless.enchanted.util.ItemUtil;
+import net.favouriteless.enchanted.common.util.ItemUtil;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;

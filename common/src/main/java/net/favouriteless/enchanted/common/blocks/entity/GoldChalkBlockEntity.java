@@ -4,10 +4,11 @@ import net.favouriteless.enchanted.api.power.IPowerConsumer;
 import net.favouriteless.enchanted.api.power.IPowerProvider;
 import net.favouriteless.enchanted.api.power.PowerHelper;
 import net.favouriteless.enchanted.common.altar.SimplePowerPosHolder;
+import net.favouriteless.enchanted.common.items.EItems;
 import net.favouriteless.enchanted.common.rites.RiteManager;
 import net.favouriteless.enchanted.common.rites.RiteType;
 import net.favouriteless.enchanted.common.rites.rites.Rite;
-import net.favouriteless.enchanted.util.ItemUtil;
+import net.favouriteless.enchanted.common.util.ItemUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.core.particles.DustParticleOptions;
@@ -171,14 +172,20 @@ public class GoldChalkBlockEntity extends BlockEntity implements IPowerConsumer 
                 createConsumeEffect(entity);
                 int toConsume = Math.min(required.getCount(), item.getCount());
 
-                ItemStack copy = item.copy();
-                copy.setCount(toConsume);
-                itemsConsumed.add(copy);
+                if(!entity.getItem().is(EItems.ATTUNED_STONE_CHARGED.get())) {
 
+                    ItemStack copy = item.copy();
+                    copy.setCount(toConsume);
+                    itemsConsumed.add(copy);
+
+                    item.shrink(toConsume);
+                    if(item.isEmpty())
+                        entity.discard();
+                }
+                else {
+                    entity.setItem(new ItemStack(EItems.ATTUNED_STONE.get(), toConsume));
+                }
                 required.shrink(toConsume);
-                item.shrink(toConsume);
-                if(item.isEmpty())
-                    entity.discard();
                 return true;
             }
         }
@@ -208,7 +215,7 @@ public class GoldChalkBlockEntity extends BlockEntity implements IPowerConsumer 
                     SoundSource.MASTER, 1.0f, 1.0f);
 
             ((ServerLevel)level).sendParticles(ParticleTypes.CLOUD, entity.getX(), entity.getY(), entity.getZ(), 1,
-                    0, 0, 0., 0);
+                    0, 0, 0, 0);
         }
     }
 

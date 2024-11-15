@@ -3,7 +3,6 @@ package net.favouriteless.enchanted.common.rites.rites;
 import net.minecraft.commands.CommandSource;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -14,7 +13,6 @@ import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.UUID;
 
 public class CommandRite extends Rite implements CommandSource {
 
@@ -67,12 +65,12 @@ public class CommandRite extends Rite implements CommandSource {
     }
 
     @Override
-    protected void saveAdditional(CompoundTag tag, Provider registries) {
+    protected void saveAdditional(CompoundTag tag, ServerLevel level) {
         tag.putInt("current", current);
     }
 
     @Override
-    protected void loadAdditional(CompoundTag tag, Provider registries) {
+    protected void loadAdditional(CompoundTag tag, ServerLevel level) {
         current = tag.getInt("current");
     }
 

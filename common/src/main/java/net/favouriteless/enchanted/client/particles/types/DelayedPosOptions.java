@@ -3,16 +3,13 @@ package net.favouriteless.enchanted.client.particles.types;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.favouriteless.enchanted.util.EExtraCodecs;
+import net.favouriteless.enchanted.common.util.EExtraCodecs;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.util.ExtraCodecs;
-import net.minecraft.util.FastColor;
 import net.minecraft.world.phys.Vec3;
-import org.joml.Vector3f;
 
 public class DelayedPosOptions implements ParticleOptions {
 

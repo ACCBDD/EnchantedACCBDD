@@ -25,7 +25,7 @@ public class RiteManager extends SavedData {
     }
 
     public static RiteManager get(ServerLevel level) {
-        return level.getDataStorage().computeIfAbsent(new Factory<>(() -> new RiteManager(level), (tag, registries) -> load(level, tag, registries), null), NAME);
+        return level.getDataStorage().computeIfAbsent(new Factory<>(() -> new RiteManager(level), (tag, registries) -> load(level, tag), null), NAME);
     }
 
     public static void addRite(ServerLevel level, Rite rite) {
@@ -60,13 +60,13 @@ public class RiteManager extends SavedData {
         CompoundTag out = new CompoundTag();
         ListTag riteList = new ListTag();
         for(Rite rite : activeRites) {
-            riteList.add(rite.save(registries));
+            riteList.add(rite.save(level));
         }
         out.put("rites", riteList);
         return out;
     }
 
-    public static RiteManager load(ServerLevel level, CompoundTag tag, Provider registries) {
+    public static RiteManager load(ServerLevel level, CompoundTag tag) {
         RiteManager data = new RiteManager(level);
 
         ListTag riteList = tag.getList("rites", CompoundTag.TAG_COMPOUND);
@@ -77,7 +77,7 @@ public class RiteManager extends SavedData {
             RiteType type = level.registryAccess().registryOrThrow(EData.RITE_TYPES_REGISTRY).get(id);
             if(type != null) {
                 Rite rite = type.create(level, null, null, new ArrayList<>());
-                rite.load(riteTag, registries);
+                rite.load(riteTag, level);
                 data.activeRites.add(rite);
             }
         }

@@ -8,7 +8,7 @@ import net.favouriteless.enchanted.common.menus.SpinningWheelMenu;
 import net.favouriteless.enchanted.common.recipes.ERecipeTypes;
 import net.favouriteless.enchanted.common.recipes.SpinningRecipe;
 import net.favouriteless.enchanted.common.recipes.recipe_inputs.ListInput;
-import net.favouriteless.enchanted.util.ItemUtil;
+import net.favouriteless.enchanted.common.util.ItemUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup.Provider;

@@ -11,7 +11,7 @@ import net.favouriteless.enchanted.common.altar.SimplePowerPosHolder;
 import net.favouriteless.enchanted.common.init.EParticleTypes;
 import net.favouriteless.enchanted.common.recipes.CauldronTypeRecipe;
 import net.favouriteless.enchanted.common.recipes.recipe_inputs.ListInput;
-import net.favouriteless.enchanted.util.ItemUtil;
+import net.favouriteless.enchanted.common.util.ItemUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup.Provider;

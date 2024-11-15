@@ -1,12 +1,13 @@
 package net.favouriteless.enchanted.common.rites.rites;
 
 import net.favouriteless.enchanted.common.blocks.entity.GoldChalkBlockEntity;
+import net.favouriteless.enchanted.common.items.EItems;
 import net.favouriteless.enchanted.common.items.component.EDataComponents;
 import net.favouriteless.enchanted.common.rites.RiteManager;
-import net.favouriteless.enchanted.util.ItemUtil;
+import net.favouriteless.enchanted.common.util.ItemUtil;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.resources.ResourceLocation;
@@ -105,9 +106,24 @@ public abstract class Rite {
         return false;
     }
 
-    protected void saveAdditional(CompoundTag tag, Provider registries) {}
+    protected void saveAdditional(CompoundTag tag, ServerLevel level) {}
 
-    protected void loadAdditional(CompoundTag tag, Provider registries) {}
+    protected void loadAdditional(CompoundTag tag, ServerLevel level) {}
+
+    protected void consumeItem(ItemEntity entity) {
+        if(!entity.getItem().is(EItems.ATTUNED_STONE_CHARGED.get())) {
+            consumedItems.add(entity.getItem());
+            entity.discard();
+        }
+        else {
+            entity.setItem(new ItemStack(EItems.ATTUNED_STONE.get(), entity.getItem().getCount()));
+        }
+
+        level.playSound(null, entity.getX(), entity.getY(), entity.getZ(), SoundEvents.CHICKEN_EGG,
+                SoundSource.MASTER, 1.0f, 1.0f);
+        level.sendParticles(ParticleTypes.CLOUD, entity.getX(), entity.getY(), entity.getZ(), 1,
+                0, 0, 0, 0);
+    }
 
     // ----------------------------------- NON-API IMPLEMENTATIONS BELOW THIS POINT -----------------------------------
 
@@ -134,7 +150,7 @@ public abstract class Rite {
         }
     }
 
-    public CompoundTag save(Provider registries) {
+    public CompoundTag save(ServerLevel level) {
         CompoundTag tag = new CompoundTag();
         tag.put("type", ResourceLocation.CODEC.encodeStart(NbtOps.INSTANCE, type).getOrThrow());
         tag.putInt("x", pos.getX());
@@ -143,13 +159,13 @@ public abstract class Rite {
         tag.putUUID("caster", casterUUID);
         if(targetUUID != null)
             tag.putUUID("target", targetUUID);
-        ItemUtil.saveAllItems(tag, consumedItems, registries);
+        ItemUtil.saveAllItems(tag, consumedItems, level.registryAccess());
         tag.putInt("ticks", ticks);
-        saveAdditional(tag, registries);
+        saveAdditional(tag, level);
         return tag;
     }
 
-    public void load(CompoundTag tag, Provider registries) {
+    public void load(CompoundTag tag, ServerLevel level) {
         pos = new BlockPos(
                 tag.getInt("x"),
                 tag.getInt("y"),
@@ -158,9 +174,9 @@ public abstract class Rite {
         casterUUID = tag.getUUID("caster");
         if(tag.hasUUID("target"))
             targetUUID = tag.getUUID("target");
-        ItemUtil.loadAllItems(tag, consumedItems, registries);
+        ItemUtil.loadAllItems(tag, consumedItems, level.registryAccess());
         ticks = tag.getInt("ticks");
-        loadAdditional(tag, registries);
+        loadAdditional(tag, level);
     }
 
 

@@ -3,7 +3,7 @@ package net.favouriteless.enchanted.common.rites.rites;
 import net.favouriteless.enchanted.client.particles.ImprisonmentCageParticle;
 import net.favouriteless.enchanted.common.init.EParticleTypes;
 import net.favouriteless.enchanted.common.init.ETags.EntityTypes;
-import net.favouriteless.enchanted.util.EntityUtils;
+import net.favouriteless.enchanted.common.util.EntityUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;

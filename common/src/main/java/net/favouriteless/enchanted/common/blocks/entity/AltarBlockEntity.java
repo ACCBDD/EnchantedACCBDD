@@ -5,7 +5,7 @@ import net.favouriteless.enchanted.api.power.IPowerConsumer;
 import net.favouriteless.enchanted.api.power.IPowerProvider;
 import net.favouriteless.enchanted.common.CommonConfig;
 import net.favouriteless.enchanted.common.altar.AltarBlockData;
-import net.favouriteless.enchanted.common.altar.AltarStateObserver;
+import net.favouriteless.enchanted.common.stateobservers.AltarStateObserver;
 import net.favouriteless.enchanted.common.altar.AltarUpgradeData;
 import net.favouriteless.enchanted.common.blocks.altar.AltarBlock;
 import net.favouriteless.enchanted.common.menus.AltarMenu;
