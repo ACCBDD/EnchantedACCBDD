@@ -5,9 +5,9 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.favouriteless.enchanted.api.rites.RiteFactory;
 import net.favouriteless.enchanted.common.Enchanted;
 import net.favouriteless.enchanted.common.rites.rites.EntityBoundCreateItemRite;
-import net.favouriteless.enchanted.common.rites.rites.LocationBoundCreateItemRite;
 import net.favouriteless.enchanted.common.rites.rites.Rite;
 import net.favouriteless.enchanted.common.rites.rites.Rite.BaseRiteParams;
+import net.favouriteless.enchanted.common.rites.rites.Rite.RiteParams;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
@@ -22,8 +22,8 @@ public record EntityBoundCreateItemRiteFactory(List<ItemStack> items) implements
     ).apply(instance, EntityBoundCreateItemRiteFactory::new));
 
     @Override
-    public Rite create(BaseRiteParams params) {
-        return new EntityBoundCreateItemRite(params, items);
+    public Rite create(BaseRiteParams baseParams, RiteParams params) {
+        return new EntityBoundCreateItemRite(baseParams, params, items);
     }
 
     @Override

@@ -2,37 +2,26 @@ package net.favouriteless.enchanted.common.rites.rites;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.portal.DimensionTransition;
 import net.minecraft.world.phys.Vec3;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
-import java.util.UUID;
 
 public abstract class TransposeEntityRite extends LocationTargetRite {
 
-    public TransposeEntityRite(BaseRiteParams params) {
-        super(params);
+    public TransposeEntityRite(BaseRiteParams baseParams, RiteParams params) {
+        super(baseParams, params);
     }
 
     @Override
-    protected boolean onStart(ServerLevel level, BlockPos pos, @Nullable ServerPlayer caster,
-                              @Nullable UUID targetUUID, List<ItemStack> consumedItems) {
-        Entity transposee = getTransposee(level, pos, caster, targetUUID, consumedItems);
+    protected boolean onStart(RiteParams params) {
+        Entity transposee = getTransposee(params);
         if(transposee == null)
             return cancel();
 
-        findDestination(level, pos, consumedItems, targetUUID, transposee);
+        super.findTargetLocation(params);
         if(targetLevel == null || targetPos == null)
             return cancel();
 
@@ -40,7 +29,6 @@ public abstract class TransposeEntityRite extends LocationTargetRite {
         portalParticles(targetLevel, targetPos);
 
         transposee.level().playSound(null, transposee.blockPosition(), SoundEvents.ENDERMAN_TELEPORT, SoundSource.MASTER, 1, 1);
-        level.playSound(null, targetPos, SoundEvents.ENDERMAN_TELEPORT, SoundSource.MASTER, 1, 1);
 
         Vec3 destination = targetPos.getCenter().add(0, 0.01d, 0);
         if(targetLevel != transposee.level())
@@ -48,14 +36,12 @@ public abstract class TransposeEntityRite extends LocationTargetRite {
         else
             transposee.teleportTo(destination.x, destination.y, destination.z);
 
+        level.playSound(null, targetPos, SoundEvents.ENDERMAN_TELEPORT, SoundSource.MASTER, 1, 1);
+
         return false;
     }
 
-    protected abstract Entity getTransposee(ServerLevel level, BlockPos pos, @Nullable ServerPlayer caster,
-                                            @Nullable UUID targetUUID, List<ItemStack> consumedItems);
-
-    protected abstract void findDestination(ServerLevel level, BlockPos pos, List<ItemStack> consumedItems,
-                                            @Nullable UUID targetUUID, Entity transposee);
+    protected abstract Entity getTransposee(RiteParams params);
 
     protected void portalParticles(ServerLevel level, BlockPos pos) {
         for(int i = 0; i < 25; i++) {

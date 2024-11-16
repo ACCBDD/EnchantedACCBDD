@@ -3,10 +3,7 @@ package net.favouriteless.enchanted.common.rites.rites;
 import net.favouriteless.enchanted.common.CommonConfig;
 import net.favouriteless.enchanted.common.init.EParticleTypes;
 import net.favouriteless.enchanted.common.init.ETags;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -15,10 +12,8 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.item.crafting.RecipeManager.CachedCheck;
 import net.minecraft.world.phys.AABB;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.UUID;
 
 public class BroilingRite extends Rite {
 
@@ -27,16 +22,14 @@ public class BroilingRite extends Rite {
 
     private final CachedCheck<SingleRecipeInput, SmeltingRecipe> smeltCheck;
 
-    public BroilingRite(BaseRiteParams params) {
-        super(params);
+    public BroilingRite(BaseRiteParams baseParams, RiteParams params) {
+        super(baseParams, params);
         smeltCheck = RecipeManager.createCheck(RecipeType.SMELTING);
     }
 
     @Override
-    protected boolean onTick(ServerLevel level, BlockPos pos, @Nullable ServerPlayer caster,
-                             @Nullable UUID targetUUID, List<ItemStack> consumedItems) {
-
-        if(ticks % 5 != 0)
+    protected boolean onTick(RiteParams params) {
+        if(params.ticks() % 5 != 0)
             return true;
 
         AABB bounds = new AABB(

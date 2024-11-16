@@ -5,16 +5,13 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.favouriteless.enchanted.api.rites.RiteFactory;
 import net.favouriteless.enchanted.common.Enchanted;
-import net.favouriteless.enchanted.common.rites.rites.CreateItemRite;
 import net.favouriteless.enchanted.common.rites.rites.DuplicateItemRite;
 import net.favouriteless.enchanted.common.rites.rites.Rite;
 import net.favouriteless.enchanted.common.rites.rites.Rite.BaseRiteParams;
+import net.favouriteless.enchanted.common.rites.rites.Rite.RiteParams;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-
-import java.util.List;
 
 public record DuplicateItemRiteFactory(Item targetItem, int count) implements RiteFactory {
 
@@ -26,8 +23,8 @@ public record DuplicateItemRiteFactory(Item targetItem, int count) implements Ri
     ).apply(instance, DuplicateItemRiteFactory::new));
 
     @Override
-    public Rite create(BaseRiteParams params) {
-        return new DuplicateItemRite(params, targetItem, count);
+    public Rite create(BaseRiteParams baseParams, RiteParams params) {
+        return new DuplicateItemRite(baseParams, params, targetItem, count);
     }
 
     @Override

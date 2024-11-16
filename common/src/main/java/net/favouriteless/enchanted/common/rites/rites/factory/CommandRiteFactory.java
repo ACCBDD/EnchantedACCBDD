@@ -6,11 +6,10 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.favouriteless.enchanted.api.rites.RiteFactory;
 import net.favouriteless.enchanted.common.Enchanted;
 import net.favouriteless.enchanted.common.rites.rites.CommandRite;
-import net.favouriteless.enchanted.common.rites.rites.CreateItemRite;
 import net.favouriteless.enchanted.common.rites.rites.Rite;
 import net.favouriteless.enchanted.common.rites.rites.Rite.BaseRiteParams;
+import net.favouriteless.enchanted.common.rites.rites.Rite.RiteParams;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
 
@@ -24,8 +23,8 @@ public record CommandRiteFactory(List<List<String>> commands, int delay) impleme
     ).apply(instance, CommandRiteFactory::new));
 
     @Override
-    public Rite create(BaseRiteParams params) {
-        return new CommandRite(params, commands, delay);
+    public Rite create(BaseRiteParams baseParams, RiteParams params) {
+        return new CommandRite(baseParams, params, commands, delay);
     }
 
     @Override

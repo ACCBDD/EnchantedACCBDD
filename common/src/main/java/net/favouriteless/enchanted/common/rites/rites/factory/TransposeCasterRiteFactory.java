@@ -10,20 +10,19 @@ import net.favouriteless.enchanted.common.rites.rites.Rite.BaseRiteParams;
 import net.favouriteless.enchanted.common.rites.rites.Rite.RiteParams;
 import net.minecraft.resources.ResourceLocation;
 
-public record SkyWrathRiteFactory(RiteTargetingType target) implements RiteFactory {
+public record TransposeCasterRiteFactory(RiteTargetingType target) implements RiteFactory {
 
-    public static final ResourceLocation ID = Enchanted.id("sky_wrath");
+    public static final ResourceLocation ID = Enchanted.id("transpose_caster");
 
-    public static final MapCodec<SkyWrathRiteFactory> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+    public static final MapCodec<TransposeCasterRiteFactory> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             RiteTargetingType.CODEC.optionalFieldOf("target", RiteTargetingType.DEFAULT).forGetter(f -> f.target)
-    ).apply(instance, SkyWrathRiteFactory::new));
+    ).apply(instance, TransposeCasterRiteFactory::new));
 
     @Override
     public Rite create(BaseRiteParams baseParams, RiteParams params) {
         return switch(target) {
-            case DEFAULT -> new SkyWrathRite(baseParams, params);
-            case WAYSTONE -> new SkyWrathWaystoneRite(baseParams, params);
-            case ENTITY -> new SkyWrathEntityRite(baseParams, params);
+            case DEFAULT, WAYSTONE -> new TransposeCasterWaystoneRite(baseParams, params);
+            case ENTITY -> new TransposeCasterEntityRite(baseParams, params);
         };
     }
 

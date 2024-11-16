@@ -2,10 +2,12 @@ package net.favouriteless.enchanted.common.rites;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.favouriteless.enchanted.api.Vec2i;
 import net.favouriteless.enchanted.api.rites.RiteFactory;
 import net.favouriteless.enchanted.common.init.EData;
 import net.favouriteless.enchanted.common.rites.rites.Rite;
 import net.favouriteless.enchanted.common.rites.rites.Rite.BaseRiteParams;
+import net.favouriteless.enchanted.common.rites.rites.Rite.RiteParams;
 import net.favouriteless.enchanted.common.util.ItemUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -19,6 +21,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
@@ -43,6 +46,9 @@ public class RiteType implements Comparable<RiteType> {
     private final int tickPower;
     private final RiteFactory factory;
 
+    private final Set<Vec2i> interiorPoints = new HashSet<>();
+    private int radius = 1;
+
     public RiteType(List<ItemStack> items, Map<Holder<CircleMagicShape>, Block> shapes, List<EntityType<?>> entities,
                     int power, int tickPower, RiteFactory factory) {
         this.items = items;
@@ -51,6 +57,12 @@ public class RiteType implements Comparable<RiteType> {
         this.power = power;
         this.tickPower = tickPower;
         this.factory = factory;
+
+        shapes.keySet().stream().map(Holder::value).forEach(shape -> {
+            if(shape.getRadius() > radius)
+                radius = shape.getRadius();
+            interiorPoints.addAll(shape.getInteriorPoints());
+        });
     }
 
 
@@ -109,18 +121,25 @@ public class RiteType implements Comparable<RiteType> {
         return power;
     }
 
-    public int getTickPower() {
-        return tickPower;
+    public AABB getBounds(BlockPos pos) {
+        Vec3 center = pos.getBottomCenter();
+        return new AABB(center.subtract(radius, 0, radius), center.add(radius, 1, radius));
     }
 
-    public Rite create(ServerLevel level, BlockPos pos, UUID caster, List<ItemStack> itemsConsumed) {
-        return factory.create(new BaseRiteParams(factory.id(), tickPower, level, pos, caster, itemsConsumed));
+    public Collection<Vec2i> getInteriorPoints() {
+        return interiorPoints;
+    }
+
+    public Rite create(ServerLevel level, BlockPos pos, UUID caster, List<ItemStack> consumedItems) {
+        return factory.create(new BaseRiteParams(this, level, pos, tickPower), RiteParams.of(caster, consumedItems));
+    }
+
+    public Rite create(ServerLevel level, BlockPos pos) {
+        return factory.create(new BaseRiteParams(this, level, pos, tickPower), RiteParams.empty());
     }
 
     public static RiteType getFirstMatching(Level level, BlockPos pos) {
-        Registry<RiteType> reg = level.registryAccess().registry(EData.RITE_TYPES_REGISTRY).orElse(null);
-        if(reg == null)
-            return null;
+        Registry<RiteType> reg = level.registryAccess().registryOrThrow(EData.RITE_TYPES_REGISTRY);
 
         List<Entity> entities = level.getEntities(null, new AABB(
                 pos.getX()-3, pos.getY(), pos.getZ()-3,
@@ -155,4 +174,5 @@ public class RiteType implements Comparable<RiteType> {
             return -1;
         return 1;
     }
+
 }

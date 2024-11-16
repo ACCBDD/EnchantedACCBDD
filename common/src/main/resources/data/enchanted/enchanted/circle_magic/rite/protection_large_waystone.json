@@ -9,5 +9,5 @@
   },
   "power": 1000,
   "tick_power": 6,
-  "factory": { "type": "enchanted:protection_waystone", "radius": 6 }
+  "factory": { "type": "enchanted:protection", "radius": 6, "target": "waystone" }
 }

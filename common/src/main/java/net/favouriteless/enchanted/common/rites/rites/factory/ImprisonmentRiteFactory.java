@@ -6,6 +6,7 @@ import net.favouriteless.enchanted.common.Enchanted;
 import net.favouriteless.enchanted.common.rites.rites.ImprisonmentRite;
 import net.favouriteless.enchanted.common.rites.rites.Rite;
 import net.favouriteless.enchanted.common.rites.rites.Rite.BaseRiteParams;
+import net.favouriteless.enchanted.common.rites.rites.Rite.RiteParams;
 import net.minecraft.resources.ResourceLocation;
 
 public class ImprisonmentRiteFactory implements RiteFactory {
@@ -15,8 +16,8 @@ public class ImprisonmentRiteFactory implements RiteFactory {
     public static final MapCodec<ImprisonmentRiteFactory> CODEC = MapCodec.unit(ImprisonmentRiteFactory::new);
 
     @Override
-    public Rite create(BaseRiteParams params) {
-        return new ImprisonmentRite(params);
+    public Rite create(BaseRiteParams baseParams, RiteParams params) {
+        return new ImprisonmentRite(baseParams, params);
     }
 
     @Override

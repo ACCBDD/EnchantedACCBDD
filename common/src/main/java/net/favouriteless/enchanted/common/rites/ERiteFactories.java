@@ -20,14 +20,9 @@ public class ERiteFactories {
         register(SanctityRiteFactory.ID, SanctityRiteFactory.CODEC);
         register(ImprisonmentRiteFactory.ID, ImprisonmentRiteFactory.CODEC);
         register(ProtectionRiteFactory.ID, ProtectionRiteFactory.CODEC);
-        register(ProtectionWaystoneRiteFactory.ID, ProtectionWaystoneRiteFactory.CODEC);
-        register(ProtectionBloodedRiteFactory.ID, ProtectionBloodedRiteFactory.CODEC);
         register(SummonEntityRiteFactory.ID, SummonEntityRiteFactory.CODEC);
-        register(TransposeCasterWaystoneRiteFactory.ID, TransposeCasterWaystoneRiteFactory.CODEC);
-        register(TransposeCasterBloodedRiteFactory.ID, TransposeCasterBloodedRiteFactory.CODEC);
+        register(TransposeCasterRiteFactory.ID, TransposeCasterRiteFactory.CODEC);
         register(SkyWrathRiteFactory.ID, SkyWrathRiteFactory.CODEC);
-        register(SkyWrathWaystoneRiteFactory.ID, SkyWrathWaystoneRiteFactory.CODEC);
-        register(SkyWrathBloodedRiteFactory.ID, SkyWrathBloodedRiteFactory.CODEC);
     }
 
     public static void register(ResourceLocation id, MapCodec<? extends RiteFactory> codec) {

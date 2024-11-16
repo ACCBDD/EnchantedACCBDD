@@ -3,7 +3,6 @@ package net.favouriteless.enchanted.common.rites.rites;
 import net.favouriteless.enchanted.common.init.EParticleTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.item.ItemStack;
@@ -18,40 +17,31 @@ public class SkyWrathRite extends LocationTargetRite {
     public static final int EXPLODE = 180;
     public static final double LIGHTNING_RADIUS = 5;
 
-    public SkyWrathRite(BaseRiteParams params) {
-        super(params);
+    public SkyWrathRite(BaseRiteParams baseParams, RiteParams params) {
+        super(baseParams, params);
     }
 
     @Override
-    protected boolean onStart(ServerLevel level, BlockPos pos, @Nullable ServerPlayer caster,
-                              @Nullable UUID targetUUID, List<ItemStack> consumedItems) {
-        findLocation(level, pos, consumedItems, targetUUID);
-        if(targetLevel == null || targetPos == null)
-            return cancel();
-
+    protected boolean onStart(RiteParams params) {
+        super.onStart(params);
         targetLevel.sendParticles(EParticleTypes.SKY_WRATH_SEED.get(),
                 pos.getX()+0.5D, pos.getY()+2, pos.getZ()+0.5D,
                 1, 0, 0, 0, 0);
+
         return true;
     }
 
     @Override
-    protected boolean onTick(ServerLevel level, BlockPos pos, @Nullable ServerPlayer caster,
-                             @Nullable UUID targetUUID, List<ItemStack> consumedItems) {
-        if(ticks == START_RAINING) {
+    protected boolean onTick(RiteParams params) {
+        if(params.ticks() == START_RAINING) {
             level.setWeatherParameters(0, 6000, true, true);
         }
-        else if(ticks > EXPLODE) {
+        else if(params.ticks() > EXPLODE) {
             spawnLightning(targetLevel, targetPos.getX() + 0.5D, targetPos.getY(), targetPos.getZ() + 0.5D);
             return false;
         }
 
         return true;
-    }
-
-    protected void findLocation(ServerLevel level, BlockPos pos, List<ItemStack> consumedItems, @Nullable UUID targetUUID) {
-        targetLevel = level;
-        targetPos = pos;
     }
 
     /**

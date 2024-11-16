@@ -7,14 +7,11 @@ import net.favouriteless.enchanted.common.Enchanted;
 import net.favouriteless.enchanted.common.rites.rites.CreateItemRite;
 import net.favouriteless.enchanted.common.rites.rites.Rite;
 import net.favouriteless.enchanted.common.rites.rites.Rite.BaseRiteParams;
-import net.favouriteless.enchanted.common.rites.rites.TotalEclipseRite;
-import net.minecraft.core.BlockPos;
+import net.favouriteless.enchanted.common.rites.rites.Rite.RiteParams;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
-import java.util.UUID;
 
 public record CreateItemRiteFactory(List<ItemStack> items) implements RiteFactory {
 
@@ -25,8 +22,8 @@ public record CreateItemRiteFactory(List<ItemStack> items) implements RiteFactor
     ).apply(instance, CreateItemRiteFactory::new));
 
     @Override
-    public Rite create(BaseRiteParams params) {
-        return new CreateItemRite(params, items);
+    public Rite create(BaseRiteParams baseParams, RiteParams params) {
+        return new CreateItemRite(baseParams, params, items);
     }
 
     @Override

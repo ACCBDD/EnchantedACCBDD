@@ -5,5 +5,5 @@
   "shapes": {
     "enchanted:small_circle": "enchanted:otherwhere_chalk"
   },
-  "factory": { "type": "enchanted:transpose_caster_blooded" }
+  "factory": { "type": "enchanted:transpose_caster", "target": "entity" }
 }

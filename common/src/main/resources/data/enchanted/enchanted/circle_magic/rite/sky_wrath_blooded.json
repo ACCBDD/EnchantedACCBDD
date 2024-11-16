@@ -8,5 +8,5 @@
     "enchanted:small_circle": "enchanted:ritual_chalk"
   },
   "power": 1000,
-  "factory": { "type": "enchanted:sky_wrath_blooded" }
+  "factory": { "type": "enchanted:sky_wrath", "target": "entity" }
 }

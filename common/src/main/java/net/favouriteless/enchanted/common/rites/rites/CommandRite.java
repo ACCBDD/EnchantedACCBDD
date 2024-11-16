@@ -2,12 +2,10 @@ package net.favouriteless.enchanted.common.rites.rites;
 
 import net.minecraft.commands.CommandSource;
 import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
@@ -22,46 +20,44 @@ public class CommandRite extends Rite implements CommandSource {
 
     private int current = 1;
 
-    public CommandRite(BaseRiteParams params, List<List<String>> commands, int delay) {
-        super(params);
+    public CommandRite(BaseRiteParams baseParams, RiteParams params, List<List<String>> commands, int delay) {
+        super(baseParams, params);
         this.commands = commands;
         this.delay = delay;
     }
 
     @Override
-    protected boolean onStart(ServerLevel level, BlockPos pos, @Nullable ServerPlayer caster,
-                              @Nullable UUID targetUUID, List<ItemStack> consumedItems) {
-        CommandSourceStack sourceStack = new CommandSourceStack(this, Vec3.atCenterOf(getPos()),
+    protected boolean onStart(RiteParams params) {
+        CommandSourceStack sourceStack = new CommandSourceStack(this, Vec3.atCenterOf(pos),
                 new Vec2(0, 0), level, 2, "Command Rite",
                 Component.literal("Command Rite"), level.getServer(), null);
 
         if(delay == 0)
             commands.forEach(list -> list.forEach(command -> level.getServer().getCommands().performPrefixedCommand(sourceStack,
-                    replacedVars(command, caster, targetUUID))));
+                    replacedVars(command, params.caster, params.target))));
         else {
             commands.getFirst().forEach(c -> level.getServer().getCommands().performPrefixedCommand(sourceStack,
-                    replacedVars(c, caster, targetUUID)));
+                    replacedVars(c, params.caster, params.target)));
         }
         return delay > 0 && commands.size() > 1;
     }
 
     @Override
-    protected boolean onTick(ServerLevel level, BlockPos pos, @Nullable ServerPlayer caster,
-                             @Nullable UUID targetUUID, List<ItemStack> consumedItems) {
-        if(++ticks % delay == 0) {
-            CommandSourceStack sourceStack = new CommandSourceStack(this, Vec3.atCenterOf(getPos()),
+    protected boolean onTick(RiteParams params) {
+        if(params.ticks() % delay == 0) {
+            CommandSourceStack sourceStack = new CommandSourceStack(this, Vec3.atCenterOf(pos),
                     new Vec2(0, 0), level, 2, "Command Rite",
                     Component.literal("Command Rite"), level.getServer(), null);
 
             commands.get(current++).forEach(c -> level.getServer().getCommands().performPrefixedCommand(sourceStack,
-                    replacedVars(c, caster, targetUUID)));
+                    replacedVars(c, params.caster, params.caster)));
         }
         return current < commands.size();
     }
 
-    protected String replacedVars(String command, @Nullable ServerPlayer caster, @Nullable UUID target) {
+    protected String replacedVars(String command, @Nullable UUID caster, @Nullable UUID target) {
         return command
-                .replaceAll("@caster", caster != null ? caster.getName().getString() : "@caster")
+                .replaceAll("@caster", caster != null ? caster.toString() : "@caster")
                 .replaceAll("@target", target != null ? target.toString() : "@target");
     }
 

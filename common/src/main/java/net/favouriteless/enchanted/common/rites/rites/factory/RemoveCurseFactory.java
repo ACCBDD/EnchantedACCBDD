@@ -6,10 +6,10 @@ import net.favouriteless.enchanted.api.rites.RiteFactory;
 import net.favouriteless.enchanted.common.Enchanted;
 import net.favouriteless.enchanted.common.curses.CurseType;
 import net.favouriteless.enchanted.common.curses.CurseTypes;
-import net.favouriteless.enchanted.common.rites.rites.ApplyCurseRite;
 import net.favouriteless.enchanted.common.rites.rites.RemoveCurseRite;
 import net.favouriteless.enchanted.common.rites.rites.Rite;
 import net.favouriteless.enchanted.common.rites.rites.Rite.BaseRiteParams;
+import net.favouriteless.enchanted.common.rites.rites.Rite.RiteParams;
 import net.minecraft.resources.ResourceLocation;
 
 public class RemoveCurseFactory implements RiteFactory {
@@ -29,8 +29,8 @@ public class RemoveCurseFactory implements RiteFactory {
     }
 
     @Override
-    public Rite create(BaseRiteParams params) {
-        return new RemoveCurseRite(params, curse);
+    public Rite create(BaseRiteParams baseParams, RiteParams params) {
+        return new RemoveCurseRite(baseParams, params, curse);
     }
 
     @Override

@@ -1,34 +1,26 @@
 package net.favouriteless.enchanted.common.rites.rites;
 
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.List;
-import java.util.UUID;
 
 public class DuplicateItemRite extends Rite {
 
     private final Item targetItem;
     private final int count;
 
-    public DuplicateItemRite(BaseRiteParams params, Item targetItem, int count) {
-        super(params);
+    public DuplicateItemRite(BaseRiteParams baseParams, RiteParams params, Item targetItem, int count) {
+        super(baseParams, params);
         this.targetItem = targetItem;
         this.count = count;
     }
 
     @Override
-    protected boolean onStart(ServerLevel level, BlockPos pos, @Nullable ServerPlayer caster,
-                              @Nullable UUID targetUUID, List<ItemStack> consumedItems) {
-        for(ItemStack stack : consumedItems) {
+    protected boolean onStart(RiteParams params) {
+        for(ItemStack stack : params.consumedItems) {
             if(stack.getItem() == targetItem) {
                 ItemStack copy = stack.copy();
                 copy.setCount(count);
@@ -41,4 +33,5 @@ public class DuplicateItemRite extends Rite {
         randomParticles(ParticleTypes.WITCH);
         return false;
     }
+
 }

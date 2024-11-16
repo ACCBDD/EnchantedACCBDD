@@ -10,6 +10,7 @@ import net.favouriteless.enchanted.common.rites.RiteType;
 import net.favouriteless.enchanted.common.rites.rites.Rite;
 import net.favouriteless.enchanted.common.util.ItemUtil;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
@@ -40,6 +41,7 @@ public class GoldChalkBlockEntity extends BlockEntity implements IPowerConsumer 
     private boolean isExecuting;
 
     private boolean isInitialising = false;
+
     private RiteType type;
     private List<ItemStack> itemsToConsume;
     private List<EntityType<?>> entitiesToConsume;

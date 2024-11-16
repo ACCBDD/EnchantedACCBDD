@@ -9,15 +9,9 @@ import net.favouriteless.enchanted.common.curses.CurseType;
 import net.favouriteless.enchanted.common.familiars.FamiliarTypes;
 import net.favouriteless.enchanted.common.init.EParticleTypes;
 import net.favouriteless.enchanted.common.sounds.ESoundEvents;
-import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.item.ItemStack;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.UUID;
 
 public class RemoveCurseRite extends Rite {
 
@@ -26,15 +20,14 @@ public class RemoveCurseRite extends Rite {
 
     private final CurseType<?> curse;
 
-    public RemoveCurseRite(BaseRiteParams params, CurseType<?> curse) {
-        super(params);
+    public RemoveCurseRite(BaseRiteParams baseParams, RiteParams params, CurseType<?> curse) {
+        super(baseParams, params);
         this.curse = curse;
     }
 
     @Override
-    protected boolean onStart(ServerLevel level, BlockPos pos, @Nullable ServerPlayer caster,
-                              @Nullable UUID targetUUID, List<ItemStack> consumedItems) {
-        if(this.targetUUID == null)
+    protected boolean onStart(RiteParams params) {
+        if(params.target == null)
             return cancel();
 
         level.sendParticles(EParticleTypes.REMOVE_CURSE_SEED.get(), pos.getX() + 0.5d, pos.getY() + 2.5d, pos.getZ() + 0.5d, 1, 0, 0, 0, 0);
@@ -43,14 +36,14 @@ public class RemoveCurseRite extends Rite {
     }
 
     @Override
-    protected boolean onTick(ServerLevel level, BlockPos pos, @Nullable ServerPlayer caster, @Nullable UUID targetUUID, List<ItemStack> consumedItems) {
-        if(ticks == START_SOUND) {
+    protected boolean onTick(RiteParams params) {
+        if(params.ticks() == START_SOUND) {
             level.playSound(null, pos, ESoundEvents.REMOVE_CURSE.get(), SoundSource.MASTER, 1.0F, 1.0F);
             return true;
         }
 
-        if(ticks == RAISE) {
-            List<Curse> curses = CurseSavedData.get(level).entries.get(this.targetUUID);
+        if(params.ticks() == RAISE) {
+            List<Curse> curses = CurseSavedData.get(level).entries.get(params.target);
 
             if(curses == null)
                 return false;
@@ -58,7 +51,7 @@ public class RemoveCurseRite extends Rite {
             int casterLevel = 0;
 
             FamiliarSavedData data = FamiliarSavedData.get(level);
-            IFamiliarEntry familiarEntry = data.getEntry(casterUUID);
+            IFamiliarEntry familiarEntry = data.getEntry(params.caster);
             if(familiarEntry != null && !familiarEntry.isDismissed() && familiarEntry.getType() == FamiliarTypes.CAT)
                 casterLevel++;
 

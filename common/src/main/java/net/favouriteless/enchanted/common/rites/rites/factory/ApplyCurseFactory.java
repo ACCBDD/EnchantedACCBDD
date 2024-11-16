@@ -7,13 +7,10 @@ import net.favouriteless.enchanted.common.Enchanted;
 import net.favouriteless.enchanted.common.curses.CurseType;
 import net.favouriteless.enchanted.common.curses.CurseTypes;
 import net.favouriteless.enchanted.common.rites.rites.ApplyCurseRite;
-import net.favouriteless.enchanted.common.rites.rites.CreateItemRite;
 import net.favouriteless.enchanted.common.rites.rites.Rite;
 import net.favouriteless.enchanted.common.rites.rites.Rite.BaseRiteParams;
+import net.favouriteless.enchanted.common.rites.rites.Rite.RiteParams;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
-
-import java.util.List;
 
 public class ApplyCurseFactory implements RiteFactory {
 
@@ -32,8 +29,8 @@ public class ApplyCurseFactory implements RiteFactory {
     }
 
     @Override
-    public Rite create(BaseRiteParams params) {
-        return new ApplyCurseRite(params, curse);
+    public Rite create(BaseRiteParams baseParams, RiteParams params) {
+        return new ApplyCurseRite(baseParams, params, curse);
     }
 
     @Override

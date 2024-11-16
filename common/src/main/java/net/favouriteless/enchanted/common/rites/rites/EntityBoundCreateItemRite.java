@@ -2,34 +2,28 @@ package net.favouriteless.enchanted.common.rites.rites;
 
 import net.favouriteless.enchanted.common.items.component.EDataComponents;
 import net.favouriteless.enchanted.common.items.component.EntityRefData;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.UUID;
 
 public class EntityBoundCreateItemRite extends Rite {
 
     private final List<ItemStack> items;
 
-    public EntityBoundCreateItemRite(BaseRiteParams params, List<ItemStack> items) {
-        super(params);
+    public EntityBoundCreateItemRite(BaseRiteParams baseParams, RiteParams params, List<ItemStack> items) {
+        super(baseParams, params);
         this.items = items;
     }
 
     @Override
-    protected boolean onStart(ServerLevel level, BlockPos pos, @Nullable ServerPlayer caster,
-                              @Nullable UUID targetUUID, List<ItemStack> consumedItems) {
+    protected boolean onStart(RiteParams params) {
         EntityRefData ref = null;
 
-        for(ItemStack stack : consumedItems) {
+        for(ItemStack stack : params.consumedItems) {
             if(stack.has(EDataComponents.ENTITY_REF.get())) {
                 ref = stack.get(EDataComponents.ENTITY_REF.get());
                 break;
@@ -45,4 +39,5 @@ public class EntityBoundCreateItemRite extends Rite {
         randomParticles(ParticleTypes.WITCH);
         return false;
     }
+
 }

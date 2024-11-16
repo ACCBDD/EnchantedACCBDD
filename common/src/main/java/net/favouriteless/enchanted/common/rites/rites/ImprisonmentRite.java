@@ -4,42 +4,34 @@ import net.favouriteless.enchanted.client.particles.ImprisonmentCageParticle;
 import net.favouriteless.enchanted.common.init.EParticleTypes;
 import net.favouriteless.enchanted.common.init.ETags.EntityTypes;
 import net.favouriteless.enchanted.common.util.EntityUtils;
-import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.UUID;
 
 public class ImprisonmentRite extends Rite {
 
-    public static final double ATTRACT_FACTOR = 0.6d;
-    public static final double INNER_RADIUS = 3.0f;
-    public static final double OUTER_RADIUS = 4.0f;
+    public static final double ATTRACT_FACTOR = 0.6D;
+    public static final double INNER_RADIUS = 3.0F;
+    public static final double OUTER_RADIUS = 4.0F;
     private static final double INNER_RADIUS_SQR = INNER_RADIUS * INNER_RADIUS;
     private static final double OUTER_RADIUS_SQR = OUTER_RADIUS * OUTER_RADIUS;
 
-    public ImprisonmentRite(BaseRiteParams params) {
-        super(params);
+    public ImprisonmentRite(BaseRiteParams baseParams, RiteParams params) {
+        super(baseParams, params);
     }
 
     @Override
-    protected boolean onStart(ServerLevel level, BlockPos pos, @Nullable ServerPlayer caster,
-                              @Nullable UUID targetUUID, List<ItemStack> consumedItems) {
+    protected boolean onStart(RiteParams params) {
         level.playSound(null, pos, SoundEvents.ZOMBIE_VILLAGER_CURE, SoundSource.MASTER, 0.5F, 1.0F);
         return true;
     }
 
     @Override
-    protected boolean onTick(ServerLevel level, BlockPos pos, @Nullable ServerPlayer caster,
-                             @Nullable UUID targetUUID, List<ItemStack> consumedItems) {
+    protected boolean onTick(RiteParams params) {
         Vec3 center = pos.getBottomCenter();
         List<Entity> entities = level.getEntities(
                 (Entity)null,
@@ -61,14 +53,14 @@ public class ImprisonmentRite extends Rite {
                 toApply.addDeltaMovement(local.scale(-dot));
 
             double d = local.lengthSqr();
-            if(d > (INNER_RADIUS - 0.3f) * (INNER_RADIUS - 0.3f))
+            if(d > (INNER_RADIUS - 0.3F) * (INNER_RADIUS - 0.3F))
                 toApply.addDeltaMovement(local.scale(-ATTRACT_FACTOR / d));
         }
 
 
-        if(ticks % (ImprisonmentCageParticle.LIFETIME+15) == 0) { // 15 ticks for the fade time
-            level.sendParticles(EParticleTypes.IMPRISONMENT_CAGE_SEED.get(), pos.getX()+0.5d,
-                    pos.getY()+0.2d, pos.getZ()+0.5d, 1, 0, 0, 0, 0);
+        if(params.ticks() % (ImprisonmentCageParticle.LIFETIME + 15) == 0) { // 15 ticks for the fade time
+            level.sendParticles(EParticleTypes.IMPRISONMENT_CAGE_SEED.get(), pos.getX()+0.5D,
+                    pos.getY()+0.2D, pos.getZ()+0.5D, 1, 0, 0, 0, 0);
         }
         return true;
     }

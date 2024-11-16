@@ -13,19 +13,18 @@ import java.util.UUID;
 
 public class TransposeCasterWaystoneRite extends TransposeEntityRite {
 
-    public TransposeCasterWaystoneRite(BaseRiteParams params) {
-        super(params);
+    public TransposeCasterWaystoneRite(BaseRiteParams baseParams, RiteParams params) {
+        super(baseParams, params);
     }
 
     @Override
-    protected Entity getTransposee(ServerLevel level, BlockPos pos, @Nullable ServerPlayer caster, @Nullable UUID targetUUID, List<ItemStack> consumedItems) {
-        return caster;
+    protected Entity getTransposee(RiteParams params) {
+        return findEntity(params.caster);
     }
 
     @Override
-    protected void findDestination(ServerLevel level, BlockPos pos, List<ItemStack> consumedItems,
-                                   @Nullable UUID targetUUID, Entity transposee) {
-        for(ItemStack item : consumedItems) {
+    protected void findTargetLocation(RiteParams params) {
+        for(ItemStack item : params.consumedItems) {
             if(item.has(EDataComponents.LEVEL_KEY.get()) && item.has(EDataComponents.BLOCK_POS.get())) {
                 targetLevel = level.getServer().getLevel(item.get(EDataComponents.LEVEL_KEY.get()));
                 targetPos = item.get(EDataComponents.BLOCK_POS.get());

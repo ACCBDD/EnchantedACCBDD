@@ -4,19 +4,13 @@ import net.favouriteless.enchanted.client.particles.types.ColouredCircleOptions;
 import net.favouriteless.enchanted.common.init.EParticleTypes;
 import net.favouriteless.enchanted.common.init.ETags.EntityTypes;
 import net.favouriteless.enchanted.common.util.EntityUtils;
-import net.minecraft.core.BlockPos;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.UUID;
 
 public class SanctityRite extends Rite {
 
@@ -24,20 +18,18 @@ public class SanctityRite extends Rite {
     public static final float RADIUS_SQR = RADIUS * RADIUS;
     public static final double REPULSE_FACTOR = 3.0d;
 
-    public SanctityRite(BaseRiteParams params) {
-        super(params);
+    public SanctityRite(BaseRiteParams baseParams, RiteParams params) {
+        super(baseParams, params);
     }
 
     @Override
-    protected boolean onStart(ServerLevel level, BlockPos pos, @Nullable ServerPlayer caster,
-                              @Nullable UUID targetUUID, List<ItemStack> consumedItems) {
+    protected boolean onStart(RiteParams params) {
         level.playSound(null, pos, SoundEvents.ZOMBIE_VILLAGER_CURE, SoundSource.MASTER, 0.5F, 1.0F);
         return true;
     }
 
     @Override
-    protected boolean onTick(ServerLevel level, BlockPos pos, @Nullable ServerPlayer caster,
-                             @Nullable UUID targetUUID, List<ItemStack> consumedItems) {
+    protected boolean onTick(RiteParams params) {
         Vec3 center = pos.getBottomCenter();
         List<Entity> entities = level.getEntities(
                 (Entity)null,
@@ -60,7 +52,7 @@ public class SanctityRite extends Rite {
             toApply.addDeltaMovement(local.scale((1 - (d / RADIUS)) * REPULSE_FACTOR / d));
         }
 
-        if(this.ticks % 2 == 0) {
+        if(params.ticks() % 2 == 0) {
             double cx = pos.getX() + 0.5d;
             double cz = pos.getZ() + 0.5d;
             double dy = pos.getY() + 0.1d;

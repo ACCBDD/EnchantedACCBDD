@@ -9,6 +9,7 @@ import net.minecraft.resources.RegistryFixedCodec;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,8 @@ public class CircleMagicShape {
 
     private final List<String> input;
     private final List<Vec2i> points = new ArrayList<>();
+    private final List<Vec2i> interiorPoints = new ArrayList<>();
+    private final int radius;
 
     public CircleMagicShape(List<String> rows) {
         this.input = rows;
@@ -44,13 +47,18 @@ public class CircleMagicShape {
                 foundPoint = true;
 
             for(int x = 0; x < width; x++) {
-                if(rowString.charAt(x) == 'X')
+                char charAt = rowString.charAt(x);
+                if(charAt == 'X')
                     points.add(new Vec2i(x-radius, y-radius));
+                else if(charAt  == 'O')
+                    interiorPoints.add(new Vec2i(x-radius, y-radius));
             }
         }
 
         if(!foundPoint)
             throw new IllegalArgumentException("A circle magic shape cannot have zero points");
+
+        this.radius = (width - 1) / 2;
     }
 
     public boolean matches(Level level, BlockPos pos, Block block) {
@@ -65,6 +73,14 @@ public class CircleMagicShape {
 
     public List<String> getStrings() {
         return input;
+    }
+
+    public List<Vec2i> getInteriorPoints() {
+        return interiorPoints;
+    }
+
+    public int getRadius() {
+        return radius;
     }
 
 }

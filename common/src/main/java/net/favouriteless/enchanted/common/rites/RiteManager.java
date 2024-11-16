@@ -1,9 +1,12 @@
 package net.favouriteless.enchanted.common.rites;
 
+import net.favouriteless.enchanted.common.Enchanted;
 import net.favouriteless.enchanted.common.init.EData;
 import net.favouriteless.enchanted.common.rites.rites.Rite;
+import net.favouriteless.enchanted.common.rites.rites.Rite.RiteParams;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup.Provider;
+import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.NbtOps;
@@ -59,30 +62,47 @@ public class RiteManager extends SavedData {
     public CompoundTag save(CompoundTag tag, Provider registries) {
         CompoundTag out = new CompoundTag();
         ListTag riteList = new ListTag();
+        Registry<RiteType> registry = level.registryAccess().registryOrThrow(EData.RITE_TYPES_REGISTRY);
+
         for(Rite rite : activeRites) {
-            riteList.add(rite.save(level));
+            ResourceLocation typeId = registry.getKey(rite.getType());
+            if(typeId == null)
+                continue;
+
+            CompoundTag riteTag = rite.save();
+
+            riteTag.put("type", ResourceLocation.CODEC.encodeStart(NbtOps.INSTANCE, typeId).getOrThrow());
+            riteTag.put("pos", BlockPos.CODEC.encodeStart(NbtOps.INSTANCE, rite.getPos()).getOrThrow());
+
+            riteList.add(riteTag);
         }
         out.put("rites", riteList);
         return out;
     }
 
     public static RiteManager load(ServerLevel level, CompoundTag tag) {
-        RiteManager data = new RiteManager(level);
-
+        RiteManager manager = new RiteManager(level);
         ListTag riteList = tag.getList("rites", CompoundTag.TAG_COMPOUND);
-        for(int i = 0; i < riteList.size(); i++) {
-            CompoundTag riteTag = riteList.getCompound(i);
+        Registry<RiteType> registry = level.registryAccess().registryOrThrow(EData.RITE_TYPES_REGISTRY);
 
-            ResourceLocation id = ResourceLocation.CODEC.parse(NbtOps.INSTANCE, riteTag.get("type")).getOrThrow();
-            RiteType type = level.registryAccess().registryOrThrow(EData.RITE_TYPES_REGISTRY).get(id);
-            if(type != null) {
-                Rite rite = type.create(level, null, null, new ArrayList<>());
-                rite.load(riteTag, level);
-                data.activeRites.add(rite);
+        for(int i = 0; i < riteList.size(); i++) {
+            try {
+                CompoundTag riteTag = riteList.getCompound(i);
+
+                RiteType type = registry.get(ResourceLocation.CODEC.parse(NbtOps.INSTANCE, riteTag.get("type")).getOrThrow());
+                BlockPos pos = BlockPos.CODEC.parse(NbtOps.INSTANCE, riteTag.get("pos")).getOrThrow();
+
+                Rite rite = type.create(level, pos);
+                rite.load(riteTag);
+
+                manager.activeRites.add(rite);
+            }
+            catch(Exception e) {
+                Enchanted.LOG.error("Failed to load Rite, skipping: {}", e.getMessage());
             }
         }
 
-        return data;
+        return manager;
     }
 
 }
