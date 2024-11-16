@@ -38,11 +38,14 @@ dependencies {
         officialMojangMappings()
         parchment("org.parchmentmc.data:parchment-${libs.versions.parchment.minecraft.get()}:${libs.versions.parchment.asProvider().get()}@zip")
     })
+
     modImplementation( libs.fabric )
     modImplementation( libs.fabric.api )
     modImplementation( libs.stateobserver.fabric )
     modImplementation( libs.geckolib.fabric )
     modImplementation( libs.forgeconfigapi.fabric )
+
+    modCompileOnly( libs.iris.fabric )
 }
 
 loom {

@@ -1,11 +1,14 @@
 package net.favouriteless.enchanted.common.blocks;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BarrierBlock;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.Vec3;
@@ -44,6 +47,14 @@ public class ProtectionBarrierBlock extends BarrierBlock {
 	@Override
 	protected boolean isPathfindable(BlockState state, PathComputationType pathComputationType) {
 		return false;
+	}
+
+	@Override
+	protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+		if(state.getValue(WATERLOGGED))
+			level.setBlockAndUpdate(pos, Blocks.WATER.defaultBlockState());
+		else
+			level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
 	}
 
 }

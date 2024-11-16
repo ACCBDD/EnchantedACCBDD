@@ -1,5 +1,6 @@
 package net.favouriteless.enchanted.client.particles;
 
+import net.favouriteless.enchanted.client.EParticleRenderTypes;
 import net.favouriteless.enchanted.client.particles.types.ColouredCircleOptions;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
@@ -44,9 +45,8 @@ public class CircleMagicParticle extends TextureSheetParticle {
         zo = z;
         if(age++ >= lifetime) {
             alpha -= 0.01F;
-            if(alpha <= 0) {
+            if(alpha <= 0)
                 remove();
-            }
         }
 
         double angle = Math.toRadians(ANGLE);
@@ -67,7 +67,7 @@ public class CircleMagicParticle extends TextureSheetParticle {
 
     @Override
     public ParticleRenderType getRenderType() {
-        return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
+        return EParticleRenderTypes.translucentParticle();
     }
 
     public static class Factory implements ParticleProvider<ColouredCircleOptions> {

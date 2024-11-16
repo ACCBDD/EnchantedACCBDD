@@ -162,10 +162,8 @@ public abstract class Rite {
         ticks++;
         if(level.isLoaded(pos)) {
             if(tickPower > 0) {
-                if(level.getBlockEntity(pos) instanceof GoldChalkBlockEntity chalk) {
-                    if(!chalk.tryConsumePower(tickPower))
-                        return stop();
-                }
+                if(!(level.getBlockEntity(pos) instanceof GoldChalkBlockEntity chalk) || !chalk.tryConsumePower(tickPower))
+                    return stop();
             }
 
             if(!onTick(level, pos, getCaster(), targetUUID, consumedItems))

@@ -73,8 +73,8 @@ public class EBlocks {
     public static final Supplier<ChalkCircleBlock> NETHER_CHALK = register("nether_chalk", () -> new ChalkCircleBlock(ParticleTypes.FLAME));
     public static final Supplier<ChalkCircleBlock> OTHERWHERE_CHALK = register("otherwhere_chalk", () -> new ChalkCircleBlock(ParticleTypes.DRAGON_BREATH));
     public static final Supplier<PoppetShelfBlock> POPPET_SHELF = register("poppet_shelf", () -> new PoppetShelfBlock(copy(Blocks.ENCHANTING_TABLE).noOcclusion()));
-    public static final Supplier<ProtectionBarrierBlock> PROTECTION_BARRIER = register("protection_barrier", () -> new ProtectionBarrierBlock(false, copy(Blocks.BARRIER)));
-    public static final Supplier<ProtectionBarrierBlock> PROTECTION_BARRIER_BLOCKING = register("protection_barrier_temporary", () -> new ProtectionBarrierBlock(true, copy(Blocks.BARRIER)));
+    public static final Supplier<ProtectionBarrierBlock> PROTECTION_BARRIER = register("protection_barrier", () -> new ProtectionBarrierBlock(false, copy(Blocks.BARRIER).randomTicks()));
+    public static final Supplier<ProtectionBarrierBlock> PROTECTION_BARRIER_BLOCKING = register("protection_barrier_temporary", () -> new ProtectionBarrierBlock(true, copy(Blocks.BARRIER).randomTicks()));
     public static final Supplier<ChalkCircleBlock> RITUAL_CHALK = register("ritual_chalk", () -> new ChalkCircleBlock(null));
     public static final Supplier<ButtonBlock> ROWAN_BUTTON = register("rowan_button", EBlocks::woodenButton);
     public static final Supplier<FenceBlock> ROWAN_FENCE = register("rowan_fence", EBlocks::woodenFence);

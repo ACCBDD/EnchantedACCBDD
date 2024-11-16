@@ -67,6 +67,8 @@ dependencies {
     compileOnly( project(":common") )
     implementation( libs.stateobserver.neoforge )
     implementation( libs.geckolib.neoforge ) { isTransitive = false }
+
+    compileOnly( libs.iris.neoforge )
 }
 
 tasks.withType<JavaCompile>().matching{!it.name.startsWith("neo")}.configureEach {

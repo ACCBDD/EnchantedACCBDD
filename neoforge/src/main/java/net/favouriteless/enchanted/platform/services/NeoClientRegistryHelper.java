@@ -1,6 +1,7 @@
 package net.favouriteless.enchanted.platform.services;
 
 import com.mojang.blaze3d.platform.InputConstants.Type;
+import com.mojang.blaze3d.vertex.VertexFormat;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.gui.screens.MenuScreens.ScreenConstructor;
@@ -35,7 +36,7 @@ public class NeoClientRegistryHelper implements IClientRegistryHelper {
 	public static final List<KeyMapping> KEY_MAPPINGS = new ArrayList<>();
 	public static final List<Pair<ModelLayerLocation, Supplier<LayerDefinition>>> LAYER_DEFINITIONS = new ArrayList<>();
 	public static final List<MenuFactoryRegisterable<?, ?>> MENU_FACTORY_REGISTERABLES = new ArrayList<>();
-	public static final List<Pair<ShaderInstance, Consumer<ShaderInstance>>> SHADER_INSTANCES = new ArrayList<>();
+	public static final List<ShaderInstanceRegisterable> SHADER_INSTANCES = new ArrayList<>();
 
 	@Override
 	public <T extends Entity> void register(EntityType<? extends T> type, EntityRendererProvider<T> constructor) {
@@ -70,10 +71,9 @@ public class NeoClientRegistryHelper implements IClientRegistryHelper {
 	}
 
 	@Override
-	public void registerShader(ShaderInstance instance, Consumer<ShaderInstance> consumer) {
-		SHADER_INSTANCES.add(Pair.of(instance, consumer));
+	public void registerShader(String name, VertexFormat vertexFormat, Consumer<ShaderInstance> consumer) {
+		SHADER_INSTANCES.add(new ShaderInstanceRegisterable(name, vertexFormat, consumer));
 	}
-
 
 	public record MenuFactoryRegisterable<M extends AbstractContainerMenu, U extends Screen & MenuAccess<M>>(MenuType<M> type, ScreenConstructor<M, U> factory) {
 
@@ -82,5 +82,7 @@ public class NeoClientRegistryHelper implements IClientRegistryHelper {
 		}
 
 	}
+
+	public record ShaderInstanceRegisterable(String name, VertexFormat vertexFormat, Consumer<ShaderInstance> loadCallback) {}
 
 }

@@ -1,5 +1,6 @@
 package net.favouriteless.enchanted.client.particles;
 
+import net.favouriteless.enchanted.client.EParticleRenderTypes;
 import net.favouriteless.enchanted.client.particles.types.ColourOptions;
 import net.favouriteless.enchanted.common.Enchanted;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -23,7 +24,7 @@ public class BoilingParticle extends TextureSheetParticle {
 
     @Override
     public void tick() {
-        if (age++ >= lifetime)
+        if(age++ >= lifetime)
             remove();
         else
             setSpriteFromAge(sprites);
@@ -31,7 +32,7 @@ public class BoilingParticle extends TextureSheetParticle {
 
     @Override
     public ParticleRenderType getRenderType() {
-        return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
+        return ParticleRenderType.PARTICLE_SHEET_OPAQUE;
     }
 
     public static class Factory implements ParticleProvider<ColourOptions> {

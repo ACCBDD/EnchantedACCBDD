@@ -1,7 +1,9 @@
 package net.favouriteless.enchanted.fabric.client;
 
+import net.fabricmc.fabric.api.client.rendering.v1.CoreShaderRegistrationCallback;
 import net.favouriteless.enchanted.client.particles.*;
 import net.favouriteless.enchanted.client.render.blockentity.item.SpinningWheelItemRenderer;
+import net.favouriteless.enchanted.common.Enchanted;
 import net.favouriteless.enchanted.common.blocks.EBlocks;
 import net.favouriteless.enchanted.common.items.EItems;
 import net.favouriteless.enchanted.common.init.EParticleTypes;
@@ -9,7 +11,10 @@ import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
+import net.favouriteless.enchanted.platform.services.FabricClientRegistryHelper;
 import net.minecraft.client.renderer.RenderType;
+
+import java.io.IOException;
 
 public class FabricClientRegistry {
 
@@ -18,6 +23,20 @@ public class FabricClientRegistry {
         registerBlockColors();
         registerBlockRenderTypes();
         registerParticleFactories();
+
+        CoreShaderRegistrationCallback.EVENT.register(context -> {
+            FabricClientRegistryHelper.SHADER_INSTANCE_REGISTERABLES.forEach(r -> {
+                try {
+                    context.register(
+                            Enchanted.id(r.name()),
+                            r.vertexFormat(),
+                            r.loadCallback()
+                    );
+                } catch(IOException e) {
+                    Enchanted.LOG.error("Failed to load ShaderInstance: {}", r.name());
+                }
+            });
+        });
     }
 
     private static void registerItemRenderers() {

@@ -1,5 +1,6 @@
 package net.favouriteless.enchanted.client.particles;
 
+import net.favouriteless.enchanted.client.EParticleRenderTypes;
 import net.favouriteless.enchanted.client.particles.types.TwoColourOptions;
 import net.minecraft.client.particle.*;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -25,7 +26,7 @@ public class PoppetParticle extends SimpleAnimatedParticle {
 
     @Override
     public ParticleRenderType getRenderType() {
-        return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
+        return EParticleRenderTypes.translucentParticle();
     }
 
     public static class Factory implements ParticleProvider<TwoColourOptions> {

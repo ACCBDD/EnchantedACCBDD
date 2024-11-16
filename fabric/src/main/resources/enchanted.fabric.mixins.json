@@ -13,6 +13,7 @@
   ],
   "client": [
     "client.MultiPlayerGameModeMixin",
+    "client.ParticleEngineMixin",
     "client.SoundEngineMixin"
   ],
   "server": [

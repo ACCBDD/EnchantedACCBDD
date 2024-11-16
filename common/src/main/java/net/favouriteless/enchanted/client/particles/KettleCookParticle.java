@@ -1,5 +1,6 @@
 package net.favouriteless.enchanted.client.particles;
 
+import net.favouriteless.enchanted.client.EParticleRenderTypes;
 import net.favouriteless.enchanted.client.particles.types.ColourOptions;
 import net.favouriteless.enchanted.common.Enchanted;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -42,7 +43,7 @@ public class KettleCookParticle extends TextureSheetParticle {
 
     @Override
     public ParticleRenderType getRenderType() {
-        return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
+        return EParticleRenderTypes.translucentParticle();
     }
 
     public static class Factory implements ParticleProvider<ColourOptions> {

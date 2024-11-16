@@ -1,5 +1,6 @@
 package net.favouriteless.enchanted.platform.services;
 
+import com.mojang.blaze3d.vertex.VertexFormat;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.gui.screens.Screen;
@@ -72,7 +73,7 @@ public interface IClientRegistryHelper {
     <M extends AbstractContainerMenu, U extends Screen & MenuAccess<M>> void register(MenuType<M> type,
                                                                                       MenuScreens.ScreenConstructor<M, U> factory);
 
-    void registerShader(ShaderInstance instance, Consumer<ShaderInstance> consumer);
+    void registerShader(String name, VertexFormat vertexFormat, Consumer<ShaderInstance> consumer);
 
     /**
      * Represents Forge's enum of the same name, so this can actually compile. Forge implementation will grab the ordinal

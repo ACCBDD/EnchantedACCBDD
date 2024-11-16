@@ -29,14 +29,14 @@ import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 
-import java.util.function.Consumer;
+import java.io.IOException;
 import java.util.function.Supplier;
 
 @Mod(value = Enchanted.MOD_ID, dist = Dist.CLIENT)
 @EventBusSubscriber(modid = Enchanted.MOD_ID, bus = Bus.MOD, value = Dist.CLIENT)
-public class EnchantedNeoClient {
+public class EnchantedClientNeo {
 
-    public EnchantedNeoClient(IEventBus bus, ModContainer container) {
+    public EnchantedClientNeo(IEventBus bus, ModContainer container) {
         EnchantedClient.init();
         container.registerConfig(Type.CLIENT, ClientConfig.SPEC, "enchanted-client.toml");
     }
@@ -126,9 +126,16 @@ public class EnchantedNeoClient {
 
     @SubscribeEvent
     public static void registerShaders(final RegisterShadersEvent event) {
-        for(Pair<ShaderInstance, Consumer<ShaderInstance>> pair : NeoClientRegistryHelper.SHADER_INSTANCES) {
-            event.registerShader(pair.getFirst(), pair.getSecond());
-        }
+        NeoClientRegistryHelper.SHADER_INSTANCES.forEach(r -> {
+            try {
+                event.registerShader(
+                        new ShaderInstance(event.getResourceProvider(), Enchanted.id(r.name()), r.vertexFormat()),
+                        r.loadCallback()
+                );
+            } catch(IOException e) {
+                Enchanted.LOG.error("Failed to load ShaderInstance: {}", r.name());
+            }
+        });
         NeoClientRegistryHelper.SHADER_INSTANCES.clear();
     }
 

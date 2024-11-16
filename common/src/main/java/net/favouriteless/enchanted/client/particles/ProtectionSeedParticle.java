@@ -24,10 +24,11 @@ public class ProtectionSeedParticle extends NoRenderParticle {
 
 	@Override
 	public void tick() {
+
 		float increment = 1.0f / radius; // Total radians / circumference for radians per step
 		for(float y = 0; y <= Mth.PI*2 + increment/2; y += increment) {
 			for(float p = 0; p <= Mth.PI*2 + increment/2; p += increment) {
-				if(Math.random() < 0.5D) {
+				if(Math.random() < 0.025D) {
 					float cosP = Mth.cos(p);
 					double cx = Mth.sin(y) * cosP * radius + x + (Math.random()-0.5d);
 					double cy = Mth.sin(p) * radius + this.y + (Math.random()-0.5d);
@@ -36,7 +37,9 @@ public class ProtectionSeedParticle extends NoRenderParticle {
 				}
 			}
 		}
-		remove();
+
+		if(++age > 20)
+			remove();
 	}
 
 	public static class Factory implements ParticleProvider<DoubleOptions> {

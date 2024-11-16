@@ -32,14 +32,17 @@ public class BloodPoppyBlockEntity extends BlockEntity {
 
     @Override
     protected void saveAdditional(CompoundTag tag, @NotNull Provider registries) {
-        tag.put("taglockData", EntityRefData.CODEC.encode(data, NbtOps.INSTANCE, new CompoundTag()).getOrThrow());
+        if(data != null)
+            tag.put("taglockData", EntityRefData.CODEC.encode(data, NbtOps.INSTANCE, new CompoundTag()).getOrThrow());
     }
 
     @Override
     protected void loadAdditional(CompoundTag tag, @NotNull Provider registries) {
-        data = EntityRefData.CODEC.parse(NbtOps.INSTANCE, tag.get("taglockData"))
-                .resultOrPartial(e -> Enchanted.LOG.error("Tried to load invalid taglock data: '{}'", e))
-                .orElse(null);
+        if(tag.contains("taglockData")) {
+            data = EntityRefData.CODEC.parse(NbtOps.INSTANCE, tag.get("taglockData"))
+                    .resultOrPartial(e -> Enchanted.LOG.error("Tried to load invalid taglock data: '{}'", e))
+                    .orElse(null);
+        }
     }
 
 }

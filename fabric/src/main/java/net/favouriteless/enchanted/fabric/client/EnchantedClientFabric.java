@@ -8,7 +8,7 @@ import fuzs.forgeconfigapiport.fabric.api.neoforge.v4.NeoForgeConfigRegistry;
 import net.fabricmc.api.ClientModInitializer;
 import net.neoforged.fml.config.ModConfig.Type;
 
-public class EnchantedFabricClient implements ClientModInitializer {
+public class EnchantedClientFabric implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {

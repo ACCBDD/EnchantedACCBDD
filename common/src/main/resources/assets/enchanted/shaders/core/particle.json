@@ -1,6 +1,6 @@
 {
-    "vertex": "particle",
-    "fragment": "particle",
+    "vertex": "enchanted:particle",
+    "fragment": "enchanted:particle",
     "samplers": [
         { "name": "Sampler0" },
         { "name": "Sampler2" }
