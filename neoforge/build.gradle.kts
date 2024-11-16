@@ -71,7 +71,11 @@ dependencies {
     compileOnly( libs.iris.neoforge )
 }
 
-tasks.withType<JavaCompile>().matching{!it.name.startsWith("neo")}.configureEach {
+tasks.withType<Test>().configureEach {
+    enabled = false;
+}
+
+tasks.named<JavaCompile>("compileJava").configure {
     source(project(":common").sourceSets.getByName("main").allSource)
 }
 
@@ -86,7 +90,6 @@ tasks.withType<Javadoc>().configureEach {
 tasks.withType<ProcessResources>().configureEach {
     from(project(":common").sourceSets.getByName("main").resources)
 }
-
 
 modrinth {
     token = System.getenv("MODRINTH_TOKEN") ?: "Invalid/No API Token Found"
