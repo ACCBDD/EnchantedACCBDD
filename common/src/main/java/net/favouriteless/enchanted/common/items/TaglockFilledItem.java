@@ -24,6 +24,11 @@ public class TaglockFilledItem extends Item {
     }
 
     @Override
+    public Component getName(ItemStack stack) {
+        return Component.translatable(getDescriptionId(stack)).withStyle(ChatFormatting.RED);
+    }
+
+    @Override
     public int getUseDuration(ItemStack stack, LivingEntity entity) {
         return 32;
     }

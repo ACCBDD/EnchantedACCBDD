@@ -1,6 +1,6 @@
 {
   "items": [
-    { "id": "enchanted:waystone", "count": 2 },
+    { "id": "enchanted:bound_waystone", "count": 2 },
     { "id": "enchanted:ender_dew", "count": 1 },
     { "id": "minecraft:redstone", "count": 1 }
   ],
