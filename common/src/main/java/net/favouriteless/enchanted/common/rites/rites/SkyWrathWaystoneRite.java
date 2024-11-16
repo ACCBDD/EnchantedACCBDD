@@ -3,20 +3,20 @@ package net.favouriteless.enchanted.common.rites.rites;
 import net.favouriteless.enchanted.common.items.component.EDataComponents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.phys.AABB;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.UUID;
 
-public class WaystoneProtectionRite extends ProtectionRite {
+public class SkyWrathWaystoneRite extends SkyWrathRite {
 
-    public WaystoneProtectionRite(BaseRiteParams params, int radius, int duration, boolean blocking) {
-        super(params, radius, duration, blocking);
+    public SkyWrathWaystoneRite(BaseRiteParams params) {
+        super(params);
     }
 
     @Override
-    protected void findTargetLocation(ServerLevel level, BlockPos pos, List<ItemStack> consumedItems) {
+    protected void findLocation(ServerLevel level, BlockPos pos, List<ItemStack> consumedItems, @Nullable UUID targetUUID) {
         for(ItemStack item : consumedItems) {
             if(item.has(EDataComponents.LEVEL_KEY.get()) && item.has(EDataComponents.BLOCK_POS.get())) {
                 targetLevel = level.getServer().getLevel(item.get(EDataComponents.LEVEL_KEY.get()));

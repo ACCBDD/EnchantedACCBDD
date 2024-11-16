@@ -1,6 +1,5 @@
 package net.favouriteless.enchanted.common.rites.rites;
 
-import net.favouriteless.enchanted.common.rites.TransposeEntityRite;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -11,9 +10,9 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.UUID;
 
-public class BloodedTransposeCasterRite extends TransposeEntityRite {
+public class TransposeCasterBloodedRite extends TransposeEntityRite {
 
-    public BloodedTransposeCasterRite(BaseRiteParams params) {
+    public TransposeCasterBloodedRite(BaseRiteParams params) {
         super(params);
     }
 

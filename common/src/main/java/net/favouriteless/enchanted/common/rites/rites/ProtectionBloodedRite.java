@@ -7,9 +7,9 @@ import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
 
-public class BloodedProtectionRite extends ProtectionRite {
+public class ProtectionBloodedRite extends ProtectionRite {
 
-    public BloodedProtectionRite(BaseRiteParams params, int radius, int duration, boolean blocking) {
+    public ProtectionBloodedRite(BaseRiteParams params, int radius, int duration, boolean blocking) {
         super(params, radius, duration, blocking);
     }
 

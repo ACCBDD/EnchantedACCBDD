@@ -1,6 +1,5 @@
-package net.favouriteless.enchanted.common.rites;
+package net.favouriteless.enchanted.common.rites.rites;
 
-import net.favouriteless.enchanted.common.rites.rites.Rite;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
@@ -20,10 +19,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.UUID;
 
-public abstract class TransposeEntityRite extends Rite {
-
-    protected ServerLevel targetLevel = null;
-    protected BlockPos targetPos = null;
+public abstract class TransposeEntityRite extends LocationTargetRite {
 
     public TransposeEntityRite(BaseRiteParams params) {
         super(params);
@@ -60,24 +56,6 @@ public abstract class TransposeEntityRite extends Rite {
 
     protected abstract void findDestination(ServerLevel level, BlockPos pos, List<ItemStack> consumedItems,
                                             @Nullable UUID targetUUID, Entity transposee);
-
-    @Override
-    protected void saveAdditional(CompoundTag tag, ServerLevel level) {
-        tag.putInt("xT", targetPos.getX());
-        tag.putInt("yT", targetPos.getY());
-        tag.putInt("zT", targetPos.getZ());
-        tag.putString("targetLevel", targetLevel.dimension().location().toString());
-    }
-
-    @Override
-    protected void loadAdditional(CompoundTag tag, ServerLevel level) {
-        targetPos = new BlockPos(
-                tag.getInt("xT"),
-                tag.getInt("yT"),
-                tag.getInt("zT")
-        );
-        targetLevel = level.getServer().getLevel(ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse(tag.getString("targetLevel"))));
-    }
 
     protected void portalParticles(ServerLevel level, BlockPos pos) {
         for(int i = 0; i < 25; i++) {

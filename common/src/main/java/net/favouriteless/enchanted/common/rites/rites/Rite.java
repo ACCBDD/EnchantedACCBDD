@@ -39,7 +39,7 @@ public abstract class Rite {
     protected UUID targetUUID;
     protected int ticks = 0;
 
-    private Map<UUID, WeakReference<Entity>> entityCache = new HashMap<>();
+    private final Map<UUID, WeakReference<Entity>> entityCache = new HashMap<>();
 
     protected Rite(BaseRiteParams params) {
         this.type = params.type;

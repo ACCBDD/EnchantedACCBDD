@@ -2,7 +2,6 @@ package net.favouriteless.enchanted.common.rites;
 
 import com.mojang.serialization.MapCodec;
 import net.favouriteless.enchanted.api.rites.RiteFactory;
-import net.favouriteless.enchanted.common.rites.rites.BloodedTransposeCasterRite;
 import net.favouriteless.enchanted.common.rites.rites.factory.*;
 import net.minecraft.resources.ResourceLocation;
 
@@ -21,11 +20,14 @@ public class ERiteFactories {
         register(SanctityRiteFactory.ID, SanctityRiteFactory.CODEC);
         register(ImprisonmentRiteFactory.ID, ImprisonmentRiteFactory.CODEC);
         register(ProtectionRiteFactory.ID, ProtectionRiteFactory.CODEC);
-        register(WaystoneProtectionRiteFactory.ID, WaystoneProtectionRiteFactory.CODEC);
-        register(BloodedProtectionRiteFactory.ID, BloodedProtectionRiteFactory.CODEC);
+        register(ProtectionWaystoneRiteFactory.ID, ProtectionWaystoneRiteFactory.CODEC);
+        register(ProtectionBloodedRiteFactory.ID, ProtectionBloodedRiteFactory.CODEC);
         register(SummonEntityRiteFactory.ID, SummonEntityRiteFactory.CODEC);
-        register(WaystoneTransposeCasterRiteFactory.ID, WaystoneTransposeCasterRiteFactory.CODEC);
-        register(BloodedTransposeCasterRiteFactory.ID, BloodedTransposeCasterRiteFactory.CODEC);
+        register(TransposeCasterWaystoneRiteFactory.ID, TransposeCasterWaystoneRiteFactory.CODEC);
+        register(TransposeCasterBloodedRiteFactory.ID, TransposeCasterBloodedRiteFactory.CODEC);
+        register(SkyWrathRiteFactory.ID, SkyWrathRiteFactory.CODEC);
+        register(SkyWrathWaystoneRiteFactory.ID, SkyWrathWaystoneRiteFactory.CODEC);
+        register(SkyWrathBloodedRiteFactory.ID, SkyWrathBloodedRiteFactory.CODEC);
     }
 
     public static void register(ResourceLocation id, MapCodec<? extends RiteFactory> codec) {

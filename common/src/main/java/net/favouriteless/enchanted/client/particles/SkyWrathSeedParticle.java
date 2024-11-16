@@ -2,6 +2,7 @@ package net.favouriteless.enchanted.client.particles;
 
 import net.favouriteless.enchanted.client.particles.types.DelayedPosOptions;
 import net.favouriteless.enchanted.common.init.EParticleTypes;
+import net.favouriteless.enchanted.common.rites.rites.SkyWrathRite;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.NoRenderParticle;
 import net.minecraft.client.particle.Particle;
@@ -32,15 +33,12 @@ public class SkyWrathSeedParticle extends NoRenderParticle {
 				for(int a = 0; a < 360; a += 20) {
 					double angle = Math.toRadians(a);
 
-//					double cx = x + Math.sin(angle) * RiteSkyWrath.LIGHTNING_RADIUS + Math.random() * xSpread;
-					double cx = x + Math.sin(angle) * 5 + Math.random() * xSpread;
+					double cx = x + Math.sin(angle) * SkyWrathRite.LIGHTNING_RADIUS + Math.random() * xSpread;
 					double cy = y + Math.random() * ySpread;
-//					double cz = z + Math.cos(angle) * RiteSkyWrath.LIGHTNING_RADIUS + Math.random() * zSpread;
-					double cz = z + Math.cos(angle) * 5 + Math.random() * zSpread;
+					double cz = z + Math.cos(angle) * SkyWrathRite.LIGHTNING_RADIUS + Math.random() * zSpread;
 
-//					level.addParticle(new DelayedActionData(EParticleTypes.SKY_WRATH.get(), x, y, z, RiteSkyWrath.EXPLODE-age), cx, cy, cz, 0, 0, 0);
 					level.addParticle(new DelayedPosOptions(EParticleTypes.SKY_WRATH.get(), new Vec3(x, y, z),
-							200-age), cx, cy, cz, 0, 0, 0);
+							SkyWrathRite.EXPLODE-age), cx, cy, cz, 0, 0, 0);
 				}
 			}
 		}
