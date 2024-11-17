@@ -11,6 +11,7 @@ VERY IMPORTANT NOTES. VERY.
 - CHANGED: Rite of Protection barriers now decay over time if the rite isn't active (in case you crash).
 - CHANGED: Adjusted item name colours and rarities.
 - CHANGED: Made the Blood Poppy's texture slightly less conspicious.
+- CHANGED: Rite of Transpose Iron now uses the enchanted:tranpose_iron tag and respects loot tables.
 
 - FIXED: Circle magic rites can run without power if you destroy the gold chalk.
 

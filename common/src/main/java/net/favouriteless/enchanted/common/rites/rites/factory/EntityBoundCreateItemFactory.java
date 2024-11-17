@@ -1,30 +1,29 @@
 package net.favouriteless.enchanted.common.rites.rites.factory;
 
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.favouriteless.enchanted.api.rites.RiteFactory;
 import net.favouriteless.enchanted.common.Enchanted;
-import net.favouriteless.enchanted.common.rites.rites.CommandRite;
+import net.favouriteless.enchanted.common.rites.rites.EntityBoundCreateItemRite;
 import net.favouriteless.enchanted.common.rites.rites.Rite;
 import net.favouriteless.enchanted.common.rites.rites.Rite.BaseRiteParams;
 import net.favouriteless.enchanted.common.rites.rites.Rite.RiteParams;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
 
-public record CommandRiteFactory(List<List<String>> commands, int delay) implements RiteFactory {
+public record EntityBoundCreateItemFactory(List<ItemStack> items) implements RiteFactory {
 
-    public static final ResourceLocation ID = Enchanted.id("command");
+    public static final ResourceLocation ID = Enchanted.id("entity_bound_create_item");
 
-    public static final MapCodec<CommandRiteFactory> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-            Codec.STRING.listOf(1, Integer.MAX_VALUE).listOf(0, Integer.MAX_VALUE).fieldOf("commands").forGetter(f -> f.commands),
-            Codec.INT.optionalFieldOf("delay", 0).forGetter(f -> f.delay)
-    ).apply(instance, CommandRiteFactory::new));
+    public static final MapCodec<EntityBoundCreateItemFactory> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+            ItemStack.CODEC.listOf(1, Integer.MAX_VALUE).fieldOf("items").forGetter(f -> f.items)
+    ).apply(instance, EntityBoundCreateItemFactory::new));
 
     @Override
     public Rite create(BaseRiteParams baseParams, RiteParams params) {
-        return new CommandRite(baseParams, params, commands, delay);
+        return new EntityBoundCreateItemRite(baseParams, params, items);
     }
 
     @Override

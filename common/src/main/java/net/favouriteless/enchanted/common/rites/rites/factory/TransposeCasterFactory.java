@@ -10,13 +10,13 @@ import net.favouriteless.enchanted.common.rites.rites.Rite.BaseRiteParams;
 import net.favouriteless.enchanted.common.rites.rites.Rite.RiteParams;
 import net.minecraft.resources.ResourceLocation;
 
-public record TransposeCasterRiteFactory(RiteTargetingType target) implements RiteFactory {
+public record TransposeCasterFactory(RiteTargetingType target) implements RiteFactory {
 
     public static final ResourceLocation ID = Enchanted.id("transpose_caster");
 
-    public static final MapCodec<TransposeCasterRiteFactory> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+    public static final MapCodec<TransposeCasterFactory> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             RiteTargetingType.CODEC.optionalFieldOf("target", RiteTargetingType.DEFAULT).forGetter(f -> f.target)
-    ).apply(instance, TransposeCasterRiteFactory::new));
+    ).apply(instance, TransposeCasterFactory::new));
 
     @Override
     public Rite create(BaseRiteParams baseParams, RiteParams params) {

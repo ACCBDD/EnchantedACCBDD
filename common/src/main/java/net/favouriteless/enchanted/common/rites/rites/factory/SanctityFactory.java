@@ -9,11 +9,11 @@ import net.favouriteless.enchanted.common.rites.rites.Rite.RiteParams;
 import net.favouriteless.enchanted.common.rites.rites.SanctityRite;
 import net.minecraft.resources.ResourceLocation;
 
-public class SanctityRiteFactory implements RiteFactory {
+public class SanctityFactory implements RiteFactory {
 
     public static final ResourceLocation ID = Enchanted.id("sanctity");
 
-    public static final MapCodec<SanctityRiteFactory> CODEC = MapCodec.unit(SanctityRiteFactory::new);
+    public static final MapCodec<SanctityFactory> CODEC = MapCodec.unit(SanctityFactory::new);
 
     @Override
     public Rite create(BaseRiteParams baseParams, RiteParams params) {

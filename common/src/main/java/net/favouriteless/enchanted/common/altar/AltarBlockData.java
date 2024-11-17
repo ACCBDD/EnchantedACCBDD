@@ -124,7 +124,7 @@ public class AltarBlockData {
                 blockCounts.put(block, blockNbt.getInt(name));
         }
         for(String name : tagNbt.getAllKeys())
-            tagCounts.put(ETags.createBlockTag(ResourceLocation.parse(name)), tagNbt.getInt(name));
+            tagCounts.put(ETags.createBlockTag(name), tagNbt.getInt(name));
 
         isInitialised = false;
     }

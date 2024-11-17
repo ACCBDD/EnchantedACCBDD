@@ -36,7 +36,7 @@ public class EParticleTypes {
     public static final Supplier<ESimpleParticleType> REMOVE_CURSE_SEED = register("remove_curse_seed", () -> new ESimpleParticleType(false));
     public static final Supplier<ParticleType<DelayedPosOptions>> SKY_WRATH = register("sky_wrath", false, DelayedPosOptions::codec, DelayedPosOptions::streamCodec);
     public static final Supplier<ESimpleParticleType> SKY_WRATH_SEED = register("sky_wrath_seed", () -> new ESimpleParticleType(false));
-    public static final Supplier<ESimpleParticleType> TRANSPOSITION_IRON_SEED = register("transposition_iron_seed", () -> new ESimpleParticleType(false));
+    public static final Supplier<ParticleType<DoubleOptions>> TRANSPOSITION_IRON_SEED = register("transposition_iron_seed", false, DoubleOptions::codec, DoubleOptions::streamCodec);
 
     private static <T extends ParticleType<?>> Supplier<T> register(String name, Supplier<T> particleTypeSupplier) {
         return CommonServices.COMMON_REGISTRY.register(BuiltInRegistries.PARTICLE_TYPE, name, particleTypeSupplier);

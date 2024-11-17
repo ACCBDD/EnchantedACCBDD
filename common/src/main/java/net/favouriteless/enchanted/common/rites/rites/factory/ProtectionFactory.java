@@ -14,16 +14,16 @@ import net.favouriteless.enchanted.common.rites.rites.Rite.BaseRiteParams;
 import net.favouriteless.enchanted.common.rites.rites.Rite.RiteParams;
 import net.minecraft.resources.ResourceLocation;
 
-public record ProtectionRiteFactory(RiteTargetingType target, int radius, int duration, boolean blocksPlayers) implements RiteFactory {
+public record ProtectionFactory(RiteTargetingType target, int radius, int duration, boolean blocksPlayers) implements RiteFactory {
 
     public static final ResourceLocation ID = Enchanted.id("protection");
 
-    public static final MapCodec<ProtectionRiteFactory> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+    public static final MapCodec<ProtectionFactory> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             RiteTargetingType.CODEC.optionalFieldOf("target", RiteTargetingType.DEFAULT).forGetter(f -> f.target),
             Codec.INT.fieldOf("radius").forGetter(f -> f.radius),
             Codec.INT.optionalFieldOf("duration", Integer.MAX_VALUE).forGetter(f -> f.duration),
             Codec.BOOL.optionalFieldOf("blocks_players", false).forGetter(f -> f.blocksPlayers)
-    ).apply(instance, ProtectionRiteFactory::new));
+    ).apply(instance, ProtectionFactory::new));
 
     @Override
     public Rite create(BaseRiteParams baseParams, RiteParams params) {

@@ -10,6 +10,7 @@ import net.minecraft.data.tags.IntrinsicHolderTagsProvider;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
 
@@ -85,6 +86,8 @@ public class EBlockTagProvider extends IntrinsicHolderTagsProvider<Block> {
                 .addTag(ETags.Blocks.WOODEN_SLABS);
         tag(ETags.Blocks.STAIRS)
                 .addTag(ETags.Blocks.WOODEN_SLABS);
+        tag(ETags.Blocks.TRANSPOSE_IRON)
+                .addTag(BlockTags.IRON_ORES);
         tag(ETags.Blocks.WOODEN_SLABS)
                 .add(EBlocks.ROWAN_SLAB.get(), EBlocks.ALDER_SLAB.get(),
                         EBlocks.HAWTHORN_SLAB.get());

@@ -13,14 +13,14 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 
-public record DuplicateItemRiteFactory(Item targetItem, int count) implements RiteFactory {
+public record DuplicateItemFactory(Item targetItem, int count) implements RiteFactory {
 
     public static final ResourceLocation ID = Enchanted.id("duplicate_item");
 
-    public static final MapCodec<DuplicateItemRiteFactory> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+    public static final MapCodec<DuplicateItemFactory> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             BuiltInRegistries.ITEM.byNameCodec().fieldOf("item").forGetter(f -> f.targetItem),
             Codec.INT.optionalFieldOf("count", 1).forGetter(f -> f.count)
-    ).apply(instance, DuplicateItemRiteFactory::new));
+    ).apply(instance, DuplicateItemFactory::new));
 
     @Override
     public Rite create(BaseRiteParams baseParams, RiteParams params) {

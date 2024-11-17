@@ -4,26 +4,26 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.favouriteless.enchanted.api.rites.RiteFactory;
 import net.favouriteless.enchanted.common.Enchanted;
-import net.favouriteless.enchanted.common.rites.rites.CreateItemRite;
 import net.favouriteless.enchanted.common.rites.rites.Rite;
 import net.favouriteless.enchanted.common.rites.rites.Rite.BaseRiteParams;
 import net.favouriteless.enchanted.common.rites.rites.Rite.RiteParams;
+import net.favouriteless.enchanted.common.rites.rites.TransposeBlocksRite;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.level.block.Block;
 
-import java.util.List;
+public record TransposeBlocksFactory(TagKey<Block> tag) implements RiteFactory {
 
-public record CreateItemRiteFactory(List<ItemStack> items) implements RiteFactory {
+    public static final ResourceLocation ID = Enchanted.id("transpose_blocks");
 
-    public static final ResourceLocation ID = Enchanted.id("create_item");
-
-    public static final MapCodec<CreateItemRiteFactory> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-            ItemStack.CODEC.listOf(1, Integer.MAX_VALUE).fieldOf("items").forGetter(f -> f.items)
-    ).apply(instance, CreateItemRiteFactory::new));
+    public static final MapCodec<TransposeBlocksFactory> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+            TagKey.codec(Registries.BLOCK).fieldOf("tag").forGetter(p -> p.tag)
+    ).apply(instance, TransposeBlocksFactory::new));
 
     @Override
     public Rite create(BaseRiteParams baseParams, RiteParams params) {
-        return new CreateItemRite(baseParams, params, items);
+        return new TransposeBlocksRite(baseParams, params, tag);
     }
 
     @Override

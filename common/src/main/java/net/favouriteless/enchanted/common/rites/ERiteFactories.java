@@ -8,21 +8,22 @@ import net.minecraft.resources.ResourceLocation;
 public class ERiteFactories {
 
     public static void load() {
-        register(TotalEclipseRiteFactory.ID, TotalEclipseRiteFactory.CODEC);
-        register(CreateItemRiteFactory.ID, CreateItemRiteFactory.CODEC);
-        register(LocationBoundCreateItemRiteFactory.ID, LocationBoundCreateItemRiteFactory.CODEC);
-        register(DuplicateItemRiteFactory.ID, DuplicateItemRiteFactory.CODEC);
-        register(EntityBoundCreateItemRiteFactory.ID, EntityBoundCreateItemRiteFactory.CODEC);
-        register(CommandRiteFactory.ID, CommandRiteFactory.CODEC);
         register(ApplyCurseFactory.ID, ApplyCurseFactory.CODEC);
+        register(BroilingFactory.ID, BroilingFactory.CODEC);
+        register(CommandFactory.ID, CommandFactory.CODEC);
+        register(CreateItemFactory.ID, CreateItemFactory.CODEC);
+        register(DuplicateItemFactory.ID, DuplicateItemFactory.CODEC);
+        register(EntityBoundCreateItemFactory.ID, EntityBoundCreateItemFactory.CODEC);
+        register(ImprisonmentFactory.ID, ImprisonmentFactory.CODEC);
+        register(LocationBoundCreateItemFactory.ID, LocationBoundCreateItemFactory.CODEC);
+        register(ProtectionFactory.ID, ProtectionFactory.CODEC);
         register(RemoveCurseFactory.ID, RemoveCurseFactory.CODEC);
-        register(BroilingRiteFactory.ID, BroilingRiteFactory.CODEC);
-        register(SanctityRiteFactory.ID, SanctityRiteFactory.CODEC);
-        register(ImprisonmentRiteFactory.ID, ImprisonmentRiteFactory.CODEC);
-        register(ProtectionRiteFactory.ID, ProtectionRiteFactory.CODEC);
-        register(SummonEntityRiteFactory.ID, SummonEntityRiteFactory.CODEC);
-        register(TransposeCasterRiteFactory.ID, TransposeCasterRiteFactory.CODEC);
-        register(SkyWrathRiteFactory.ID, SkyWrathRiteFactory.CODEC);
+        register(SanctityFactory.ID, SanctityFactory.CODEC);
+        register(SkyWrathFactory.ID, SkyWrathFactory.CODEC);
+        register(SummonEntityFactory.ID, SummonEntityFactory.CODEC);
+        register(TotalEclipseFactory.ID, TotalEclipseFactory.CODEC);
+        register(TransposeBlocksFactory.ID, TransposeBlocksFactory.CODEC);
+        register(TransposeCasterFactory.ID, TransposeCasterFactory.CODEC);
     }
 
     public static void register(ResourceLocation id, MapCodec<? extends RiteFactory> codec) {

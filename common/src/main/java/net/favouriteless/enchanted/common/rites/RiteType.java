@@ -46,7 +46,7 @@ public class RiteType implements Comparable<RiteType> {
     private final int tickPower;
     private final RiteFactory factory;
 
-    private final Set<Vec2i> interiorPoints = new HashSet<>();
+    private final List<Vec2i> interiorPoints = new ArrayList<>();
     private int radius = 1;
 
     public RiteType(List<ItemStack> items, Map<Holder<CircleMagicShape>, Block> shapes, List<EntityType<?>> entities,
@@ -121,12 +121,16 @@ public class RiteType implements Comparable<RiteType> {
         return power;
     }
 
+    public int getRadius() {
+        return radius;
+    }
+
     public AABB getBounds(BlockPos pos) {
         Vec3 center = pos.getBottomCenter();
         return new AABB(center.subtract(radius, 0, radius), center.add(radius, 1, radius));
     }
 
-    public Collection<Vec2i> getInteriorPoints() {
+    public List<Vec2i> getInteriorPoints() {
         return interiorPoints;
     }
 

@@ -10,13 +10,13 @@ import net.favouriteless.enchanted.common.rites.rites.Rite.BaseRiteParams;
 import net.favouriteless.enchanted.common.rites.rites.Rite.RiteParams;
 import net.minecraft.resources.ResourceLocation;
 
-public record SkyWrathRiteFactory(RiteTargetingType target) implements RiteFactory {
+public record SkyWrathFactory(RiteTargetingType target) implements RiteFactory {
 
     public static final ResourceLocation ID = Enchanted.id("sky_wrath");
 
-    public static final MapCodec<SkyWrathRiteFactory> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+    public static final MapCodec<SkyWrathFactory> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             RiteTargetingType.CODEC.optionalFieldOf("target", RiteTargetingType.DEFAULT).forGetter(f -> f.target)
-    ).apply(instance, SkyWrathRiteFactory::new));
+    ).apply(instance, SkyWrathFactory::new));
 
     @Override
     public Rite create(BaseRiteParams baseParams, RiteParams params) {
