@@ -1,7 +1,7 @@
 package net.favouriteless.enchanted.common.blocks.cauldrons;
 
 import net.favouriteless.enchanted.common.blocks.entity.CauldronBlockEntity;
-import net.favouriteless.enchanted.common.util.ItemUtil;
+import net.favouriteless.enchanted.common.util.ItemUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -46,7 +46,7 @@ public abstract class CauldronBlockBase extends Block implements EntityBlock {
 					if (cauldron.removeWater(1000)) {
 						level.playSound(null, pos, SoundEvents.BUCKET_FILL, SoundSource.BLOCKS, 1.0F, 1.0F);
 						stack.shrink(1);
-						ItemUtil.giveOrDrop(player, new ItemStack(Items.WATER_BUCKET));
+						ItemUtils.giveOrDrop(player, new ItemStack(Items.WATER_BUCKET));
 					}
 				}
 				return ItemInteractionResult.SUCCESS;

@@ -8,7 +8,7 @@ import net.favouriteless.enchanted.common.init.EData;
 import net.favouriteless.enchanted.common.rites.rites.Rite;
 import net.favouriteless.enchanted.common.rites.rites.Rite.BaseRiteParams;
 import net.favouriteless.enchanted.common.rites.rites.Rite.RiteParams;
-import net.favouriteless.enchanted.common.util.ItemUtil;
+import net.favouriteless.enchanted.common.util.ItemUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
@@ -85,7 +85,7 @@ public class RiteType implements Comparable<RiteType> {
                     break;
 
                 for(ItemStack required : items) {
-                    if(ItemUtil.isSameItemPartial(item, required)) {
+                    if(ItemUtils.isSameItemPartial(item, required)) {
                         required.shrink(item.getCount());
                     }
                 }

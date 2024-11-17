@@ -8,9 +8,8 @@ import net.favouriteless.enchanted.common.items.EItems;
 import net.favouriteless.enchanted.common.rites.RiteManager;
 import net.favouriteless.enchanted.common.rites.RiteType;
 import net.favouriteless.enchanted.common.rites.rites.Rite;
-import net.favouriteless.enchanted.common.util.ItemUtil;
+import net.favouriteless.enchanted.common.util.ItemUtils;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
@@ -168,7 +167,7 @@ public class GoldChalkBlockEntity extends BlockEntity implements IPowerConsumer 
             ItemStack item = entity.getItem();
 
             for(ItemStack required : itemsToConsume) {
-                if(!ItemUtil.isSameItemPartial(item, required))
+                if(!ItemUtils.isSameItemPartial(item, required))
                     continue;
 
                 createConsumeEffect(entity);

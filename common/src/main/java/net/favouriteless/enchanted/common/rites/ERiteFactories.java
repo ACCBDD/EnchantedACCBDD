@@ -10,11 +10,14 @@ public class ERiteFactories {
     public static void load() {
         register(ApplyCurseFactory.ID, ApplyCurseFactory.CODEC);
         register(BindFamiliarFactory.ID, BindFamiliarFactory.CODEC);
+        register(BlightFactory.ID, BlightFactory.CODEC);
         register(BroilingFactory.ID, BroilingFactory.CODEC);
         register(CommandFactory.ID, CommandFactory.CODEC);
         register(CreateItemFactory.ID, CreateItemFactory.CODEC);
         register(DuplicateItemFactory.ID, DuplicateItemFactory.CODEC);
         register(EntityBoundCreateItemFactory.ID, EntityBoundCreateItemFactory.CODEC);
+        register(FertilityFactory.ID, FertilityFactory.CODEC);
+        register(ForestFactory.ID, ForestFactory.CODEC);
         register(ImprisonmentFactory.ID, ImprisonmentFactory.CODEC);
         register(LocationBoundCreateItemFactory.ID, LocationBoundCreateItemFactory.CODEC);
         register(ProtectionFactory.ID, ProtectionFactory.CODEC);

@@ -16,13 +16,13 @@ public class EParticleTypes {
 
     public static final Supplier<ParticleType<DelayedPosOptions>> BIND_FAMILIAR = register("bind_familiar", false, DelayedPosOptions::codec, DelayedPosOptions::streamCodec);
     public static final Supplier<ESimpleParticleType> BIND_FAMILIAR_SEED = register("bind_familiar_seed", () -> new ESimpleParticleType(false));
+    public static final Supplier<ParticleType<ColouredCircleOptions>> BLIGHT = register("blight", false, ColouredCircleOptions::codec, ColouredCircleOptions::streamCodec);
+    public static final Supplier<ESimpleParticleType> BLIGHT_SEED = register("blight_seed", () -> new ESimpleParticleType(false));
     public static final Supplier<ParticleType<ColourOptions>> BOILING = register("boiling", false, ColourOptions::codec, ColourOptions::streamCodec);
     public static final Supplier<ESimpleParticleType> BROILING_SEED = register("broiling_seed", () -> new ESimpleParticleType(false));
     public static final Supplier<ParticleType<ColourOptions>> CAULDRON_BREW = register("cauldron_brew", false, ColourOptions::codec, ColourOptions::streamCodec);
     public static final Supplier<ParticleType<ColourOptions>> CAULDRON_COOK = register("cauldron_cook", false, ColourOptions::codec, ColourOptions::streamCodec);
     public static final Supplier<ParticleType<ColouredCircleOptions>> CIRCLE_MAGIC = register("circle_magic", false, ColouredCircleOptions::codec, ColouredCircleOptions::streamCodec);
-    public static final Supplier<ParticleType<ColouredCircleOptions>> CURSE_BLIGHT = register("curse_blight", false, ColouredCircleOptions::codec, ColouredCircleOptions::streamCodec);
-    public static final Supplier<ESimpleParticleType> CURSE_BLIGHT_SEED = register("curse_blight_seed", () -> new ESimpleParticleType(false));
     public static final Supplier<ESimpleParticleType> CURSE_SEED = register("curse_seed", () -> new ESimpleParticleType(false));
     public static final Supplier<ParticleType<ColouredCircleOptions>> FERTILITY = register("fertility", false, ColouredCircleOptions::codec, ColouredCircleOptions::streamCodec);
     public static final Supplier<ESimpleParticleType> FERTILITY_SEED = register("fertility_seed", () -> new ESimpleParticleType(false));

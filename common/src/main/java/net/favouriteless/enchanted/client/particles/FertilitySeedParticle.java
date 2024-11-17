@@ -29,19 +29,22 @@ public class FertilitySeedParticle extends NoRenderParticle {
 			Vec3 pos = new Vec3(cx, cy, cz).normalize().scale(0.1D).add(x, y, z);
 
 			level.addParticle(new ColouredCircleOptions(EParticleTypes.FERTILITY.get(), 0xFFFFFF,
-					new Vec3(x, y, z), 0.1F), pos.x, pos.z, pos.y, 0.0D, 0.0D, 0.0D);
+					new Vec3(x, y, z), 0.1F), pos.x, pos.z, pos.y, 0, 0, 0);
 		}
 		remove();
 	}
 
+
+
 	public static class Factory implements ParticleProvider<SimpleParticleType> {
 
-		public Factory(SpriteSet sprites) {
-		}
+		public Factory(SpriteSet sprites) {}
 
+		@Override
 		public Particle createParticle(SimpleParticleType data, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
 			return new FertilitySeedParticle(level, x, y, z);
 		}
+
 	}
 
 }

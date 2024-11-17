@@ -84,8 +84,8 @@ public class FabricClientRegistry {
         registry.register(EParticleTypes.SKY_WRATH_SEED.get(), SkyWrathSeedParticle.Factory::new);
         registry.register(EParticleTypes.SKY_WRATH.get(), SkyWrathParticle.Factory::new);
         registry.register(EParticleTypes.CURSE_SEED.get(), CurseSeedParticle.Factory::new);
-        registry.register(EParticleTypes.CURSE_BLIGHT_SEED.get(), CurseBlightSeedParticle.Factory::new);
-        registry.register(EParticleTypes.CURSE_BLIGHT.get(), RepellingParticle.Factory::new);
+        registry.register(EParticleTypes.BLIGHT_SEED.get(), BlightSeedParticle.Factory::new);
+        registry.register(EParticleTypes.BLIGHT.get(), RepellingParticle.Factory::new);
         registry.register(EParticleTypes.REMOVE_CURSE_SEED.get(), RemoveCurseSeedParticle.Factory::new);
         registry.register(EParticleTypes.REMOVE_CURSE.get(), RemoveCurseParticle.Factory::new);
         registry.register(EParticleTypes.FERTILITY_SEED.get(), FertilitySeedParticle.Factory::new);

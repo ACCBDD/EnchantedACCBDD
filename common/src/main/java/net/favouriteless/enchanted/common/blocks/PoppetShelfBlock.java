@@ -4,7 +4,7 @@ import com.mojang.serialization.MapCodec;
 import net.favouriteless.enchanted.common.blocks.entity.PoppetShelfBlockEntity;
 import net.favouriteless.enchanted.common.poppet.PoppetShelfManager;
 import net.favouriteless.enchanted.platform.CommonServices;
-import net.favouriteless.enchanted.common.util.ItemUtil;
+import net.favouriteless.enchanted.common.util.ItemUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
@@ -67,7 +67,7 @@ public class PoppetShelfBlock extends BaseEntityBlock {
 			if(blockEntity instanceof PoppetShelfBlockEntity) {
 				PoppetShelfBlockEntity shelf = (PoppetShelfBlockEntity) blockEntity;
 				if(!world.isClientSide)
-					ItemUtil.dropContentsNoChange(world, blockPos.getX(), blockPos.getY(), blockPos.getZ(), shelf.getInventory());
+					ItemUtils.dropContentsNoChange(world, blockPos.getX(), blockPos.getY(), blockPos.getZ(), shelf.getInventory());
 				PoppetShelfManager.removeShelf(shelf);
 			}
 			super.onRemove(state, world, blockPos, newState, isMoving);

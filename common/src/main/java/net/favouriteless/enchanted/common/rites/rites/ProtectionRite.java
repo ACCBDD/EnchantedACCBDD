@@ -4,25 +4,19 @@ import net.favouriteless.enchanted.client.particles.types.DoubleOptions;
 import net.favouriteless.enchanted.common.blocks.EBlocks;
 import net.favouriteless.enchanted.common.init.EParticleTypes;
 import net.favouriteless.enchanted.common.stateobservers.ProtectionRiteObserver;
+import net.favouriteless.enchanted.common.util.BlockPosUtils;
 import net.favouriteless.stateobserver.api.StateObserverManager;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.BlockPos.MutableBlockPos;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.Mth;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.BarrierBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
 
-import java.util.List;
 import java.util.function.Function;
 
 public class ProtectionRite extends LocationTargetRite {
@@ -90,22 +84,11 @@ public class ProtectionRite extends LocationTargetRite {
     }
 
     protected void generateSphere(ServerLevel level, BlockPos pos, Function<BlockState, BlockState> stateGetter) {
-        MutableBlockPos spherePos = new MutableBlockPos(0, 0, 0);
-        float increment = 1.0f / radius; // Total radians / circumference for radians per step
-        for(float y = 0; y <= Mth.PI*2 + increment/2; y += increment) {
-            for(float p = 0; p <= Mth.PI*2 + increment/2; p += increment) {
-                float cosP = Mth.cos(p);
-                spherePos.set(
-                        Math.round(Mth.sin(y) * cosP * radius) + pos.getX(),
-                        Math.round(Mth.sin(p) * radius) + pos.getY(),
-                        Math.round(Mth.cos(y) * cosP * radius) + pos.getZ()
-                );
-
-                BlockState state = stateGetter.apply(level.getBlockState(spherePos));
-                if(state != null)
-                    level.setBlockAndUpdate(spherePos, state);
-            }
-        }
+        BlockPosUtils.iterableSphereHollow(pos, radius).forEach(spherePos -> {
+            BlockState state = stateGetter.apply(level.getBlockState(spherePos));
+            if(state != null)
+                level.setBlockAndUpdate(spherePos, state);
+        });
     }
 
     protected void getOrCreateObserver(ServerLevel level, BlockPos pos) {

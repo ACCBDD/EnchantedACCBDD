@@ -4,7 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.favouriteless.enchanted.common.recipes.recipe_inputs.ListInput;
-import net.favouriteless.enchanted.common.util.ItemUtil;
+import net.favouriteless.enchanted.common.util.ItemUtils;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -69,7 +69,7 @@ public class DistillingRecipe implements Recipe<ListInput> {
         for(ItemStack stack : getInputs()) {
             for(int i = 0; i < 3; i++) {
                 ItemStack item = inv.getItem(i);
-                if(ItemUtil.isSameItemPartial(item, stack) && item.getCount() >= stack.getCount()) {
+                if(ItemUtils.isSameItemPartial(item, stack) && item.getCount() >= stack.getCount()) {
                     requiredItems--;
                     break;
                 }

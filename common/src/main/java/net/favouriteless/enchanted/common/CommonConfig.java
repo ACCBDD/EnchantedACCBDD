@@ -25,8 +25,6 @@ public class CommonConfig {
     public final DoubleValue blightDecayChance;
     public final DoubleValue blightZombieChance;
     public final DoubleValue fertilityBoneMealChance;
-    public final IntValue forestTreeCount;
-    public final IntValue forestRadius;
 
     public final BooleanValue hoeOnlySeeds;
     public final BooleanValue disableTotems;
@@ -34,8 +32,8 @@ public class CommonConfig {
 
     private CommonConfig(ModConfigSpec.Builder builder) {
         builder.push("Altar Options");
-        altarRange = builder.comment("Range of altars (DEFAULT: 16)").defineInRange("altar_range", 16, 1, Integer.MAX_VALUE);
-        altarBaseRecharge = builder.comment("Multiplier for altar power recharge rates (DEFAULT: 2.0)").defineInRange("altar_recharge_rate", 2.0D, 0.0D, Double.MAX_VALUE);
+        altarRange = builder.comment("Range of altars").defineInRange("altar_range", 16, 1, Integer.MAX_VALUE);
+        altarBaseRecharge = builder.comment("Multiplier for altar power recharge rates").defineInRange("altar_recharge_rate", 2.0D, 0.0D, Double.MAX_VALUE);
         builder.pop();
 
         builder.push("Cauldron Options");
@@ -47,22 +45,20 @@ public class CommonConfig {
         builder.pop();
 
         builder.push("Rite Options");
-        broilingBurnChance = builder.comment("Chance for food to be burned by the rite of broiling (RANGE: 0-1, DEFAULT: 0.3)").defineInRange("broiling_burn_chance", 0.3D, 0, 1);
+        broilingBurnChance = builder.comment("Chance for food to be burned by the rite of broiling").defineInRange("broiling_burn_chance", 0.3D, 0, 1);
         disableMisfortune = builder.comment("Disable the curse of misfortune (DEFAULT: false)").define("disable_misfortune", false);
         disableOverheating = builder.comment("Disable the curse of overheating (DEFAULT: false)").define("disable_overheating", false);
         disableSinking = builder.comment("Disable the curse of sinking (DEFAULT: false)").define("disable_sinking", false);
         disableBlight = builder.comment("Disable the curse of blight (DEFAULT: false)").define("disable_blight", false);
-        blightDecayChance = builder.comment("Chance for blocks to be decayed by the curse of blight (RANGE: 0-1, DEFAULT: 0.3)").defineInRange("blight_decay_chance", 0.3D, 0, 1);
-        blightZombieChance = builder.comment("Chance for villagers to be zombified by the curse of blight (RANGE: 0-1, DEFAULT: 0.3)").defineInRange("blight_zombie_chance", 0.3D, 0, 1);
-        fertilityBoneMealChance = builder.comment("Chance for blocks to be bone mealed by the rite of fertility (RANGE: 0-1, DEFAULT: 0.8)").defineInRange("fertility_bone_meal_chance", 0.8D, 0, 1);
-        forestTreeCount = builder.comment("Average tree count for the rite of the forest to place (DEFAULT: 25)").defineInRange("forest_tree_amount", 25, 0, Integer.MAX_VALUE);
-        forestRadius = builder.comment("Maximum radius trees can be placed in by the rite of the forest (DEFAULT: 25)").defineInRange("forest_tree_radius", 25, 0, Integer.MAX_VALUE);
+        blightDecayChance = builder.comment("Chance for blocks to be decayed by the curse of blight").defineInRange("blight_decay_chance", 0.3D, 0, 1);
+        blightZombieChance = builder.comment("Chance for villagers to be zombified by the curse of blight").defineInRange("blight_zombie_chance", 0.3D, 0, 1);
+        fertilityBoneMealChance = builder.comment("Chance for blocks to be bone mealed by the rite of fertility").defineInRange("fertility_bone_meal_chance", 0.04D, 0, 1);
         builder.pop();
 
         builder.push("Miscellaneous Options");
         hoeOnlySeeds = builder.comment("Only drop modded seeds when a hoe is used to break grass. (DEFAULT: false)").define("hoe_seeds", false);
         disableTotems = builder.comment("Disable totems of undying (to make poppets more useful) (DEFAULT: false)").define("disable_totems", false);
-        entAxeMultiplier = builder.comment("The damage multiplier for axes against an Ent (DEFAULT: 3.0)").defineInRange("ent_axe_multiplier", 3.0D, 0, Double.MAX_VALUE);
+        entAxeMultiplier = builder.comment("The damage multiplier for axes against an Ent").defineInRange("ent_axe_multiplier", 3.0D, 0, Double.MAX_VALUE);
         builder.pop();
     }
 

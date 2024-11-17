@@ -9,7 +9,7 @@ import net.favouriteless.enchanted.common.menus.DistilleryMenu;
 import net.favouriteless.enchanted.common.recipes.DistillingRecipe;
 import net.favouriteless.enchanted.common.recipes.ERecipeTypes;
 import net.favouriteless.enchanted.common.recipes.recipe_inputs.ListInput;
-import net.favouriteless.enchanted.common.util.ItemUtil;
+import net.favouriteless.enchanted.common.util.ItemUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup.Provider;
@@ -91,7 +91,7 @@ public class DistilleryBlockEntity extends ContainerBlockEntityBase implements I
         for(ItemStack recipeItem : recipe.value().getInputs()) { // First, attempt to remove the input items.
             for(int i = 0; i < 3; i++) {
                 ItemStack inputItem = inventory.get(i);
-                if(ItemUtil.isSameItemPartial(inputItem, recipeItem)) {
+                if(ItemUtils.isSameItemPartial(inputItem, recipeItem)) {
                     if(inputItem.getCount() >= recipeItem.getCount()) {
                         inputItem.shrink(recipeItem.getCount());
                         break;

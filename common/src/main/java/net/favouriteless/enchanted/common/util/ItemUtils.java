@@ -3,10 +3,8 @@ package net.favouriteless.enchanted.common.util;
 import net.favouriteless.enchanted.common.Enchanted;
 import net.favouriteless.enchanted.platform.CommonServices;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.NonNullList;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.component.DataComponentType;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.world.Container;
@@ -22,7 +20,7 @@ import java.util.Objects;
 /**
  * Util class for functions related to {@link ItemStack}.
  */
-public class ItemUtil {
+public class ItemUtils {
 
 	/**
 	 * Drops copies of a {@link Container}'s items on the floor, without modifying the ones stored in the container.

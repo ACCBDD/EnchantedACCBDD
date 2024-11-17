@@ -4,7 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.favouriteless.enchanted.common.recipes.recipe_inputs.ListInput;
-import net.favouriteless.enchanted.common.util.ItemUtil;
+import net.favouriteless.enchanted.common.util.ItemUtils;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -57,16 +57,16 @@ public class SpinningRecipe implements Recipe<ListInput> {
         if(input.size() != 3)
             return false;
 
-        if(!ItemUtil.isSameItemPartial(input.getItem(0), inputs.getFirst()) ||
+        if(!ItemUtils.isSameItemPartial(input.getItem(0), inputs.getFirst()) ||
                 input.getItem(0).getCount() < inputs.getFirst().getCount()) // If "main" input does not match
             return false;
 
         for(int i = 1; i < inputs.size(); i++) {
             ItemStack neededCopy = inputs.get(i).copy();
 
-            if(ItemUtil.isSameItemPartial(input.getItem(1), neededCopy))
+            if(ItemUtils.isSameItemPartial(input.getItem(1), neededCopy))
                 neededCopy.shrink(input.getItem(1).getCount());
-            if(ItemUtil.isSameItemPartial(input.getItem(2), neededCopy))
+            if(ItemUtils.isSameItemPartial(input.getItem(2), neededCopy))
                 neededCopy.shrink(input.getItem(2).getCount());
 
             if(!neededCopy.isEmpty()) // If not empty then there was not enough of this item

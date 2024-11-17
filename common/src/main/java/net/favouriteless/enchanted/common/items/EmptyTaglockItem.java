@@ -9,7 +9,7 @@ import net.favouriteless.enchanted.common.init.ETags.EntityTypes;
 import net.favouriteless.enchanted.common.blocks.EBlocks;
 import net.favouriteless.enchanted.common.items.component.EDataComponents;
 import net.favouriteless.enchanted.common.items.component.EntityRefData;
-import net.favouriteless.enchanted.common.util.ItemUtil;
+import net.favouriteless.enchanted.common.util.ItemUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -113,7 +113,7 @@ public class EmptyTaglockItem extends Item {
             ItemStack item = new ItemStack(EItems.TAGLOCK_FILLED.get(), 1);
             item.set(EDataComponents.ENTITY_REF.get(), data);
 
-            ItemUtil.giveOrDrop(player, item);
+            ItemUtils.giveOrDrop(player, item);
 
             // Send sound packet to player
             serverPlayer.connection.send(new ClientboundSoundPacket(BuiltInRegistries.SOUND_EVENT.wrapAsHolder(SoundEvents.EXPERIENCE_ORB_PICKUP), SoundSource.MASTER, serverPlayer.getX(), serverPlayer.getY(), serverPlayer.getZ(), 1.0F, 1.0F, Enchanted.RANDOM.nextLong()));

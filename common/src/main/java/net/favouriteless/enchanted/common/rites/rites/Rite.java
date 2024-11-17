@@ -155,7 +155,6 @@ public abstract class Rite {
     // ----------------------------------- NON-API IMPLEMENTATIONS BELOW THIS POINT -----------------------------------
 
     public boolean tick() {
-        params.ticks++;
         if(level.isLoaded(pos)) {
             if(tickPower > 0) {
                 if(!(level.getBlockEntity(pos) instanceof GoldChalkBlockEntity chalk) || !chalk.tryConsumePower(tickPower))
@@ -165,6 +164,7 @@ public abstract class Rite {
             if(!onTick(params))
                 return stop();
         }
+        params.ticks++;
         return true;
     }
 
@@ -227,9 +227,9 @@ public abstract class Rite {
                 new RiteParams(caster, target.orElse(null), consumedItems, ticks))
         );
 
-        protected final UUID caster;
-        protected @Nullable UUID target;
-        protected final List<ItemStack> consumedItems; // Mutable
+        public final List<ItemStack> consumedItems; // Mutable
+        public final UUID caster;
+        public @Nullable UUID target;
 
         private int ticks;
 
