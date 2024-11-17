@@ -3,6 +3,7 @@ package net.favouriteless.enchanted.client.particles;
 import net.favouriteless.enchanted.client.particles.types.DelayedPosOptions;
 import net.favouriteless.enchanted.common.Enchanted;
 import net.favouriteless.enchanted.common.init.EParticleTypes;
+import net.favouriteless.enchanted.common.rites.rites.BindFamiliarRite;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.NoRenderParticle;
 import net.minecraft.client.particle.Particle;
@@ -44,8 +45,7 @@ public class BindFamiliarSeedParticle extends NoRenderParticle {
 		double c = Math.cbrt(Math.random());
 		Vec3 pos = new Vec3(cx, cy, cz).normalize().scale(c * RADIUS).add(x, y, z);
 
-//		int fallTicks = RiteBindingFamiliar.BIND_TICKS - age;
-		int fallTicks = 100;
+		int fallTicks = BindFamiliarRite.BIND_TICKS - age;
 		if(Enchanted.RANDOM.nextFloat() < 0.3F)
 			fallTicks = Enchanted.RANDOM.nextInt(fallTicks);
 

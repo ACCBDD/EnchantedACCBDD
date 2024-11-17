@@ -9,6 +9,7 @@ public class ERiteFactories {
 
     public static void load() {
         register(ApplyCurseFactory.ID, ApplyCurseFactory.CODEC);
+        register(BindFamiliarFactory.ID, BindFamiliarFactory.CODEC);
         register(BroilingFactory.ID, BroilingFactory.CODEC);
         register(CommandFactory.ID, CommandFactory.CODEC);
         register(CreateItemFactory.ID, CreateItemFactory.CODEC);
@@ -21,6 +22,7 @@ public class ERiteFactories {
         register(SanctityFactory.ID, SanctityFactory.CODEC);
         register(SkyWrathFactory.ID, SkyWrathFactory.CODEC);
         register(SummonEntityFactory.ID, SummonEntityFactory.CODEC);
+        register(SummonFamiliarFactory.ID, SummonFamiliarFactory.CODEC);
         register(TotalEclipseFactory.ID, TotalEclipseFactory.CODEC);
         register(TransposeBlocksFactory.ID, TransposeBlocksFactory.CODEC);
         register(TransposeCasterFactory.ID, TransposeCasterFactory.CODEC);

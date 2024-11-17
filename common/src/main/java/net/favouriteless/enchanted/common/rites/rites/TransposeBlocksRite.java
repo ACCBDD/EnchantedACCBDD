@@ -18,15 +18,17 @@ import net.minecraft.world.level.gameevent.GameEvent.Context;
 public class TransposeBlocksRite extends Rite {
 
     private final TagKey<Block> tag;
+    private final ItemStack tool;
 
-    public TransposeBlocksRite(BaseRiteParams baseParams, RiteParams params, TagKey<Block> tag) {
+    public TransposeBlocksRite(BaseRiteParams baseParams, RiteParams params, TagKey<Block> tag, ItemStack tool) {
         super(baseParams, params);
         this.tag = tag;
+        this.tool = tool;
     }
 
     @Override
     protected boolean onTick(RiteParams params) {
-        Vec2i offset = getType().getInteriorPoints().get(params.ticks()-1);
+        Vec2i offset = type.getInteriorPoints().get(params.ticks()-1);
 
         for(int i = 0; i < pos.getY() - level.getMinBuildHeight(); i++) {
             BlockPos pos = this.pos.offset(offset.x(), -i, offset.y()); // Steps down 1 block per iteration.
@@ -35,19 +37,19 @@ public class TransposeBlocksRite extends Rite {
             if(state.is(tag)) {
                 level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
                 level.gameEvent(GameEvent.BLOCK_DESTROY, pos, Context.of(null, state));
-                Block.dropResources(state, level, this.pos, null, null, ItemStack.EMPTY);
+                Block.dropResources(state, level, this.pos, null, null, tool);
                 level.playSound(null, this.pos, SoundEvents.COPPER_BREAK, SoundSource.MASTER, 1.0F, 1.0F);
                 randomParticles(ParticleTypes.WITCH);
             }
         }
 
         if(params.ticks() % 20 == 0) {
-            level.sendParticles(new DoubleOptions(EParticleTypes.TRANSPOSITION_IRON_SEED.get(), getType().getRadius()),
+            level.sendParticles(new DoubleOptions(EParticleTypes.TRANSPOSITION_IRON_SEED.get(), type.getRadius()),
                     pos.getX()+0.5D, pos.getY()-0.1D, pos.getZ()+0.5D,
                     1, 0, 0, 0, 0);
         }
 
-        return params.ticks() < getType().getInteriorPoints().size(); // Stop executing when run out of points.
+        return params.ticks() < type.getInteriorPoints().size(); // Stop executing when run out of points.
     }
 
 }

@@ -2,6 +2,10 @@ VERY IMPORTANT NOTES. VERY.
 - JEI integration is disabled in this beta, it'll come back for the full release.
 - THIS IS A TESTING BUILD. I DO NOT RECOMMEND USING IT IN A MODPACK.
 
+- ADDED: Command rites (see docs)
+
+- REMOVED: Rite of Blooded Waystone (Duplicate, Charged). It really wasn't fair to be able to make infinite blooded waystones of somebody.
+
 - CHANGED: Re-added missing circle magic.
 - CHANGED: SIGNIFICANT rewrites to the Rites API.
 - CHANGED: Bound waystones now show their bound location in their tooltip.
@@ -14,5 +18,5 @@ VERY IMPORTANT NOTES. VERY.
 - CHANGED: Rite of Transpose Iron now uses the enchanted:tranpose_iron tag and respects loot tables.
 
 - FIXED: Circle magic rites can run without power if you destroy the gold chalk.
+- FIXED: Dismissing a familiar doesn't save it's NBT data.
 
-- REMOVED: Rite of Blooded Waystone (Duplicate, Charged). It really wasn't fair to be able to make infinite blooded waystones of somebody.

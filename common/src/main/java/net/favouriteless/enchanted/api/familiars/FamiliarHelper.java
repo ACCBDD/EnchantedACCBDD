@@ -1,6 +1,7 @@
 package net.favouriteless.enchanted.api.familiars;
 
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -13,7 +14,11 @@ public class FamiliarHelper {
 	 */
 	public static void dismiss(TamableAnimal entity) {
 		FamiliarSavedData data = FamiliarSavedData.get(entity.level());
-		data.getEntry(entity.getOwnerUUID()).setDismissed(true);
+
+		IFamiliarEntry entry = data.getEntry(entity.getOwnerUUID());
+
+		entry.setDismissed(true);
+		entry.setNbt(entity.saveWithoutId(new CompoundTag()));
 		data.setDirty();
 
 		double width = entity.getBbWidth();

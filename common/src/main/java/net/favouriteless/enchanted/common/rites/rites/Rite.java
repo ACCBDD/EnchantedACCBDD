@@ -74,7 +74,7 @@ public abstract class Rite {
     protected void loadAdditional(CompoundTag tag, ServerLevel level) {}
 
     /**
-     * Refund the items used to start this rite and detatch from chalk, onStop will NOT be called.
+     * Refund the items used to start this rite and detatch from chalk.
      */
     protected boolean cancel() {
         level.playSound(null, pos, SoundEvents.NOTE_BLOCK_SNARE.value(), SoundSource.MASTER, 1.0F, 1.0F);
