@@ -9,5 +9,5 @@
   },
   "power": 1000,
   "tick_power": 6,
-  "factory": { "type": "enchanted:protection", "radius": 4, "duration": 1200, "blocks_players": true, "target": "waystone" }
+  "factory": { "type": "enchanted:protection", "radius": 4, "duration": 1200, "blocks_players": true, "target": "location" }
 }
