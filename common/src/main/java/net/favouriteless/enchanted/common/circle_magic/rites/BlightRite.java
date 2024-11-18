@@ -1,6 +1,5 @@
 package net.favouriteless.enchanted.common.circle_magic.rites;
 
-import net.favouriteless.enchanted.common.CommonConfig;
 import net.favouriteless.enchanted.common.Enchanted;
 import net.favouriteless.enchanted.common.init.EParticleTypes;
 import net.favouriteless.enchanted.common.init.ETags;
@@ -28,13 +27,17 @@ public class BlightRite extends Rite {
 
     protected final int radius;
     protected final int radiusSq;
+    protected final double decayChance;
+    protected final double zombieChance;
 
     protected int step = 1;
 
-    public BlightRite(BaseRiteParams baseParams, RiteParams params, int radius) {
+    public BlightRite(BaseRiteParams baseParams, RiteParams params, int radius, double decayChance, double zombieChance) {
         super(baseParams, params);
         this.radius = radius;
         this.radiusSq = radius * radius;
+        this.decayChance = decayChance;
+        this.zombieChance = zombieChance;
     }
 
     @Override
@@ -52,7 +55,7 @@ public class BlightRite extends Rite {
             return true;
 
         BlockPosUtils.iterableSphereHollow(pos, step).forEach(spherePos -> {
-            if(Math.random() > CommonConfig.INSTANCE.blightDecayChance.get())
+            if(Math.random() > decayChance)
                 return;
 
             BlockState state = level.getBlockState(spherePos);
@@ -90,7 +93,7 @@ public class BlightRite extends Rite {
     }
 
     protected void applyBlightEffects(Entity caster, LivingEntity target) {
-        if(target instanceof Villager villager && Math.random() < CommonConfig.INSTANCE.blightZombieChance.get()) {
+        if(target instanceof Villager villager && Math.random() < zombieChance) {
             villager.convertTo(EntityType.ZOMBIE_VILLAGER, false);
             return;
         }

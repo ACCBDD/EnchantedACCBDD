@@ -1,6 +1,5 @@
 package net.favouriteless.enchanted.common.circle_magic.rites;
 
-import net.favouriteless.enchanted.common.CommonConfig;
 import net.favouriteless.enchanted.common.Enchanted;
 import net.favouriteless.enchanted.common.init.EParticleTypes;
 import net.favouriteless.enchanted.common.init.ETags;
@@ -27,13 +26,15 @@ public class FertilityRite extends Rite {
 
     protected final int radius;
     protected final int radiusSq;
+    protected final double bonemealChance;
 
     protected int step = 1;
 
-    public FertilityRite(BaseRiteParams baseParams, RiteParams params, int radius) {
+    public FertilityRite(BaseRiteParams baseParams, RiteParams params, int radius, double bonemealChance) {
         super(baseParams, params);
         this.radius = radius;
         this.radiusSq = radius * radius;
+        this.bonemealChance = bonemealChance;
     }
 
     @Override
@@ -51,7 +52,7 @@ public class FertilityRite extends Rite {
             return true;
 
         BlockPosUtils.iterableSphereHollow(pos, step).forEach(spherePos -> {
-            if(Math.random() > CommonConfig.INSTANCE.fertilityBoneMealChance.get())
+            if(Math.random() > bonemealChance)
                 return;
 
             BlockState state = level.getBlockState(spherePos);

@@ -11,17 +11,18 @@ import net.favouriteless.enchanted.common.circle_magic.rites.Rite.BaseRiteParams
 import net.favouriteless.enchanted.common.circle_magic.rites.Rite.RiteParams;
 import net.minecraft.resources.ResourceLocation;
 
-public record FertilityFactory(int radius) implements RiteFactory {
+public record FertilityFactory(int radius, double bonemealChance) implements RiteFactory {
 
     public static final ResourceLocation ID = Enchanted.id("fertility");
 
     public static final MapCodec<FertilityFactory> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-            Codec.INT.fieldOf("radius").forGetter(f -> f.radius)
+            Codec.INT.fieldOf("radius").forGetter(f -> f.radius),
+            Codec.DOUBLE.optionalFieldOf("bonemeal_chance", 0.04D).forGetter(f -> f.bonemealChance)
     ).apply(instance, FertilityFactory::new));
 
     @Override
     public Rite create(BaseRiteParams baseParams, RiteParams params) {
-        return new FertilityRite(baseParams, params, radius);
+        return new FertilityRite(baseParams, params, radius, bonemealChance);
     }
 
     @Override

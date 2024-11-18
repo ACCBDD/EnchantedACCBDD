@@ -11,17 +11,19 @@ import net.favouriteless.enchanted.common.circle_magic.rites.Rite.BaseRiteParams
 import net.favouriteless.enchanted.common.circle_magic.rites.Rite.RiteParams;
 import net.minecraft.resources.ResourceLocation;
 
-public record BlightFactory(int radius) implements RiteFactory {
+public record BlightFactory(int radius, double decayChance, double zombieChance) implements RiteFactory {
 
     public static final ResourceLocation ID = Enchanted.id("blight");
 
     public static final MapCodec<BlightFactory> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-            Codec.INT.fieldOf("radius").forGetter(f -> f.radius)
+            Codec.INT.fieldOf("radius").forGetter(f -> f.radius),
+            Codec.DOUBLE.optionalFieldOf("decay_chance", 0.3D).forGetter(f -> f.decayChance),
+            Codec.DOUBLE.optionalFieldOf("zombie_chance", 0.3D).forGetter(f -> f.zombieChance)
     ).apply(instance, BlightFactory::new));
 
     @Override
     public Rite create(BaseRiteParams baseParams, RiteParams params) {
-        return new BlightRite(baseParams, params, radius);
+        return new BlightRite(baseParams, params, radius, decayChance, zombieChance);
     }
 
     @Override

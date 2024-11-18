@@ -198,8 +198,7 @@ public class ECreativeTab {
                 out.accept(EItems.CIRCLE_TALISMAN.get());
                 for(Supplier<? extends Block> block : SHAPE_BLOCKS) {
                     for(ResourceLocation id : SHAPE_IDS) {
-
-                            ItemStack stack = new ItemStack(EItems.CIRCLE_TALISMAN.get());
+                        ItemStack stack = new ItemStack(EItems.CIRCLE_TALISMAN.get());
                         stack.set(EDataComponents.CIRCLE_MAGIC_SHAPE_MAP.get(), new HashMap<>(Map.of(id, block.get())));
                         out.accept(stack);
                     }

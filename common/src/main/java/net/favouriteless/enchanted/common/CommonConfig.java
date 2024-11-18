@@ -17,15 +17,6 @@ public class CommonConfig {
     public final BooleanValue cauldronItemSpoil;
     public final BooleanValue kettleItemSpoil;
 
-    public final DoubleValue broilingBurnChance;
-    public final BooleanValue disableMisfortune;
-    public final BooleanValue disableOverheating;
-    public final BooleanValue disableSinking;
-    public final BooleanValue disableBlight;
-    public final DoubleValue blightDecayChance;
-    public final DoubleValue blightZombieChance;
-    public final DoubleValue fertilityBoneMealChance;
-
     public final BooleanValue hoeOnlySeeds;
     public final BooleanValue disableTotems;
     public final DoubleValue entAxeMultiplier;
@@ -42,17 +33,6 @@ public class CommonConfig {
 
         builder.push("Kettle Options");
         kettleItemSpoil = builder.comment("Allow incorrect items to spoil brew (DEFAULT: true)").define("kettle_item_spoil", true);
-        builder.pop();
-
-        builder.push("Rite Options");
-        broilingBurnChance = builder.comment("Chance for food to be burned by the rite of broiling").defineInRange("broiling_burn_chance", 0.3D, 0, 1);
-        disableMisfortune = builder.comment("Disable the curse of misfortune (DEFAULT: false)").define("disable_misfortune", false);
-        disableOverheating = builder.comment("Disable the curse of overheating (DEFAULT: false)").define("disable_overheating", false);
-        disableSinking = builder.comment("Disable the curse of sinking (DEFAULT: false)").define("disable_sinking", false);
-        disableBlight = builder.comment("Disable the curse of blight (DEFAULT: false)").define("disable_blight", false);
-        blightDecayChance = builder.comment("Chance for blocks to be decayed by the curse of blight").defineInRange("blight_decay_chance", 0.3D, 0, 1);
-        blightZombieChance = builder.comment("Chance for villagers to be zombified by the curse of blight").defineInRange("blight_zombie_chance", 0.3D, 0, 1);
-        fertilityBoneMealChance = builder.comment("Chance for blocks to be bone mealed by the rite of fertility").defineInRange("fertility_bone_meal_chance", 0.04D, 0, 1);
         builder.pop();
 
         builder.push("Miscellaneous Options");

@@ -1,6 +1,5 @@
 package net.favouriteless.enchanted.common.circle_magic.rites;
 
-import net.favouriteless.enchanted.common.CommonConfig;
 import net.favouriteless.enchanted.common.init.EParticleTypes;
 import net.favouriteless.enchanted.common.init.ETags;
 import net.minecraft.core.particles.ParticleTypes;
@@ -21,10 +20,12 @@ public class BroilingRite extends Rite {
     private static final float RADIUS_SQR = CIRCLE_RADIUS * CIRCLE_RADIUS;
 
     private final CachedCheck<SingleRecipeInput, SmeltingRecipe> smeltCheck;
+    private final double burnChance;
 
-    public BroilingRite(BaseRiteParams baseParams, RiteParams params) {
+    public BroilingRite(BaseRiteParams baseParams, RiteParams params, double burnChance) {
         super(baseParams, params);
         smeltCheck = RecipeManager.createCheck(RecipeType.SMELTING);
+        this.burnChance = burnChance;
     }
 
     @Override
@@ -53,7 +54,7 @@ public class BroilingRite extends Rite {
         int total = item.getItem().getCount();
         int burned = 0;
         for(int i = 0; i < total; i++) {
-            if(Math.random() < CommonConfig.INSTANCE.broilingBurnChance.get())
+            if(Math.random() < burnChance)
                 burned++;
         }
 
