@@ -5,7 +5,7 @@ import net.minecraft.util.StringRepresentable;
 
 public enum RiteTargetingType implements StringRepresentable {
     DEFAULT,
-    WAYSTONE,
+    LOCATION,
     ENTITY;
 
     public static final Codec<RiteTargetingType> CODEC = StringRepresentable.fromEnum(RiteTargetingType::values);

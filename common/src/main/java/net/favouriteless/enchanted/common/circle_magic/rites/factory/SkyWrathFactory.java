@@ -25,7 +25,7 @@ public record SkyWrathFactory(RiteTargetingType target) implements RiteFactory {
     public Rite create(BaseRiteParams baseParams, RiteParams params) {
         return switch(target) {
             case DEFAULT -> new SkyWrathRite(baseParams, params);
-            case WAYSTONE -> new SkyWrathWaystoneRite(baseParams, params);
+            case LOCATION -> new SkyWrathWaystoneRite(baseParams, params);
             case ENTITY -> new SkyWrathEntityRite(baseParams, params);
         };
     }

@@ -8,5 +8,5 @@
   "shapes": {
     "enchanted:small_circle": "enchanted:ritual_chalk"
   },
-  "factory": { "type": "enchanted:sky_wrath", "target": "waystone" }
+  "factory": { "type": "enchanted:sky_wrath", "target": "location" }
 }

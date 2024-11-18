@@ -29,7 +29,7 @@ public record ProtectionFactory(RiteTargetingType target, int radius, int durati
     public Rite create(BaseRiteParams baseParams, RiteParams params) {
         return switch(target) {
             case DEFAULT -> new ProtectionRite(baseParams, params, radius, duration, blocksPlayers);
-            case WAYSTONE -> new ProtectionWaystoneRite(baseParams, params, radius, duration, blocksPlayers);
+            case LOCATION -> new ProtectionWaystoneRite(baseParams, params, radius, duration, blocksPlayers);
             case ENTITY -> new ProtectionEntityRite(baseParams, params, radius, duration, blocksPlayers);
         };
     }
