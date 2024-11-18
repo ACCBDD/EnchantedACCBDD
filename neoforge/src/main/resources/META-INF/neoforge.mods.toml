@@ -9,6 +9,7 @@ license = "All Rights Reserved"
     displayName = "Enchanted"
     displayURL= "https://github.com/Favouriteless/Enchanted"
     logoFile = "enchanted.png"
+    logoBlur = false
     credits = "Heavily inspired by Emoniph's Witchery mod"
     authors = "Favouriteless"
     description = '''Witchcraft and Occultism based on real history and folklore.'''

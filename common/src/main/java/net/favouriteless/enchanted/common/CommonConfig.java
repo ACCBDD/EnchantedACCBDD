@@ -2,14 +2,19 @@ package net.favouriteless.enchanted.common;
 
 import net.neoforged.neoforge.common.ModConfigSpec;
 import net.neoforged.neoforge.common.ModConfigSpec.BooleanValue;
+import net.neoforged.neoforge.common.ModConfigSpec.ConfigValue;
 import net.neoforged.neoforge.common.ModConfigSpec.DoubleValue;
 import net.neoforged.neoforge.common.ModConfigSpec.IntValue;
 import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.List;
 
 public class CommonConfig {
 
     public static final CommonConfig INSTANCE;
     public static final ModConfigSpec SPEC;
+
+    public final ConfigValue<List<? extends String>> disabledRites;
 
     public final IntValue altarRange;
     public final DoubleValue altarBaseRecharge;
@@ -21,7 +26,12 @@ public class CommonConfig {
     public final BooleanValue disableTotems;
     public final DoubleValue entAxeMultiplier;
 
+
     private CommonConfig(ModConfigSpec.Builder builder) {
+        builder.push("Circle Magic Options");
+        disabledRites = builder.comment("Disabled rite types").defineListAllowEmpty("disabled_rites", List::of, () -> "", e -> true);
+        builder.pop();
+
         builder.push("Altar Options");
         altarRange = builder.comment("Range of altars").defineInRange("altar_range", 16, 1, Integer.MAX_VALUE);
         altarBaseRecharge = builder.comment("Multiplier for altar power recharge rates").defineInRange("altar_recharge_rate", 2.0D, 0.0D, Double.MAX_VALUE);

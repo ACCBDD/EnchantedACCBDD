@@ -63,7 +63,7 @@ tasks.create("postDiscord") {
                 val embed = Embed()
                 embed.title = "Changelog"
                 embed.description = if (changeString.length < 4096) changeString else "The changelog was too long to embed, you can view it on the " +
-                        "[GitHub Release](https://github.com/Favouriteless/Enchanted/releases), " +
+                        "[GitHub Release](https://github.com/Favouriteless/Enchanted/releases/tag/v$version-release), " +
                         "[CurseForge](https://www.curseforge.com/minecraft/mc-mods/enchanted-witchcraft/files/all) or " +
                         "[Modrinth](https://modrinth.com/mod/enchanted-witchcraft/versions)."
                 embed.color = 0x9C58B8

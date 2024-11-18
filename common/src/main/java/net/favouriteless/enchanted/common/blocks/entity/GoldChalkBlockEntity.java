@@ -3,17 +3,22 @@ package net.favouriteless.enchanted.common.blocks.entity;
 import net.favouriteless.enchanted.api.power.IPowerConsumer;
 import net.favouriteless.enchanted.api.power.IPowerProvider;
 import net.favouriteless.enchanted.api.power.PowerHelper;
+import net.favouriteless.enchanted.common.CommonConfig;
 import net.favouriteless.enchanted.common.altar.SimplePowerPosHolder;
+import net.favouriteless.enchanted.common.init.EData;
 import net.favouriteless.enchanted.common.items.EItems;
 import net.favouriteless.enchanted.common.circle_magic.RiteManager;
 import net.favouriteless.enchanted.common.circle_magic.RiteType;
 import net.favouriteless.enchanted.common.circle_magic.rites.Rite;
 import net.favouriteless.enchanted.common.util.ItemUtils;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -67,6 +72,15 @@ public class GoldChalkBlockEntity extends BlockEntity implements IPowerConsumer 
             else if(!isInitialising) {
                 type = RiteType.getFirstMatching(level, pos);
                 if(type != null) {
+
+                    ResourceLocation key = level.registryAccess().registryOrThrow(EData.RITE_TYPES_REGISTRY).getKey(type);
+                    if(key == null || CommonConfig.INSTANCE.disabledRites.get().contains(key.toString())) {
+                        player.displayClientMessage(Component.literal("This rite has been disabled in the config.").withStyle(ChatFormatting.RED), false);
+                        level.playSound(null, worldPosition, SoundEvents.NOTE_BLOCK_SNARE.value(), SoundSource.MASTER, 1.0f, 1.0f);
+                        type = null;
+                        return;
+                    }
+
                     itemsToConsume = type.getItems();
                     entitiesToConsume = type.getEntities();
                     caster = player.getUUID();
