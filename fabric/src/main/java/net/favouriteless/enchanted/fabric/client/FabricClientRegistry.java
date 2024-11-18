@@ -1,6 +1,7 @@
 package net.favouriteless.enchanted.fabric.client;
 
 import net.fabricmc.fabric.api.client.rendering.v1.CoreShaderRegistrationCallback;
+import net.favouriteless.enchanted.client.ClientRegistry;
 import net.favouriteless.enchanted.client.particles.*;
 import net.favouriteless.enchanted.client.render.blockentity.item.SpinningWheelItemRenderer;
 import net.favouriteless.enchanted.common.Enchanted;
@@ -12,6 +13,8 @@ import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.BuiltinItemRendererRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.favouriteless.enchanted.platform.services.FabricClientRegistryHelper;
+import net.favouriteless.enchanted.platform.services.FabricNetworkHelper;
+import net.favouriteless.enchanted.platform.services.FabricNetworkHelper.ClientPayloadRegisterable;
 import net.minecraft.client.renderer.RenderType;
 
 import java.io.IOException;
@@ -23,6 +26,12 @@ public class FabricClientRegistry {
         registerBlockColors();
         registerBlockRenderTypes();
         registerParticleFactories();
+        ClientRegistry.registerItemModelPredicates();
+        ClientRegistry.registerLayerDefinitions();
+        ClientRegistry.registerMenuScreens();
+        ClientRegistry.registerEntityRenderers();
+
+        FabricNetworkHelper.clientHandlers.forEach(ClientPayloadRegisterable::register);
 
         CoreShaderRegistrationCallback.EVENT.register(context -> {
             FabricClientRegistryHelper.SHADER_INSTANCE_REGISTERABLES.forEach(r -> {

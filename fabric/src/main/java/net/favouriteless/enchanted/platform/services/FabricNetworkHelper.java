@@ -13,16 +13,20 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload.Type;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.BiConsumer;
 
 public class FabricNetworkHelper implements INetworkHelper {
+
+    public static final List<ClientPayloadRegisterable<?>> clientHandlers = new ArrayList<>();
 
     @Override
     public <T extends CustomPacketPayload> void registerClient(Type<T> type,
                                                                StreamCodec<? super RegistryFriendlyByteBuf, T> codec,
                                                                BiConsumer<T, PacketContext> handler) {
         PayloadTypeRegistry.playS2C().register(type, codec);
-        ClientPlayNetworking.registerGlobalReceiver(type, (payload, context) -> handler.accept(payload, new FabricClientPacketContext(context)));
+        clientHandlers.add(new ClientPayloadRegisterable<>(type, handler));
     }
 
     @Override
@@ -54,6 +58,14 @@ public class FabricNetworkHelper implements INetworkHelper {
     @Override
     public void sendToServer(CustomPacketPayload payload) {
         ClientPlayNetworking.send(payload);
+    }
+
+    public record ClientPayloadRegisterable<T extends CustomPacketPayload>(Type<T> type, BiConsumer<T, PacketContext> handler) {
+
+        public void register() {
+            ClientPlayNetworking.registerGlobalReceiver(type, (payload, context) -> handler.accept(payload, new FabricClientPacketContext(context)));
+        }
+
     }
 
 }
