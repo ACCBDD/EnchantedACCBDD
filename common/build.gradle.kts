@@ -47,19 +47,30 @@ publishing {
 sourceSets.main.get().resources.srcDir(project(":common").file("src/generated/resources"))
 
 tasks.create("postDiscord") {
+    group = "publishing"
     doLast {
         try {
-            val webhook = Webhook(System.getenv("ENCHANTED_RELEASE_WEBHOOK"), "Enchanted Gradle Upload")
+            if(System.getenv("ENCHANTED_RELEASE_WEBHOOK_DEV") != null) {
+                val webhook = Webhook(System.getenv("ENCHANTED_RELEASE_WEBHOOK_DEV"), "Enchanted Gradle Upload")
 
-            val message = Message()
-                .setUsername("Elaina")
-                .setAvatarUrl("https://i.imgur.com/I455GSr.jpeg")
-                .setContent("<@&1246846443944149145> Enchanted $version for Minecraft $mcVersion has been published!")
-                .addEmbed(Embed()
-                    .addField("Changelog", rootProject.file("changelog.txt").readText(Charsets.UTF_8), false)
-                    .setColor(0x9C58B8))
+                val message = Message()
+                message.username = "Elaina"
+                message.avatarUrl = "https://i.imgur.com/I455GSr.jpeg"
+                message.content = "<@&1246846443944149145> Enchanted $version for Minecraft $mcVersion has been published!"
 
-            webhook.sendMessage(message)
+                val changeString = rootProject.file("changelog.txt").readText(Charsets.UTF_8).replace("\r", "")
+
+                val embed = Embed()
+                embed.title = "Changelog"
+                embed.description = if (changeString.length < 4096) changeString else "The changelog was too long to embed, you can view it on the " +
+                        "[GitHub Release](https://github.com/Favouriteless/Enchanted/releases), " +
+                        "[CurseForge](https://www.curseforge.com/minecraft/mc-mods/enchanted-witchcraft/files/all) or " +
+                        "[Modrinth](https://modrinth.com/mod/enchanted-witchcraft/versions)."
+                embed.color = 0x9C58B8
+
+                message.addEmbed(embed)
+                webhook.sendMessage(message)
+            }
         } catch (e: IOException) {
             project.logger.error("Failed to push CF Discord webhook: " + e.message)
         }
