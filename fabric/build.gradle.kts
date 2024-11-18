@@ -99,7 +99,7 @@ modrinth {
     versionName.set("Fabric $minecraftVersion")
     versionNumber.set(project.version.toString())
     versionType.set(if(project.version.toString().endsWith("beta")) "beta" else "release")
-    uploadFile.set(tasks.jar)
+    uploadFile.set(tasks.named<RemapJarTask>("remapJar"))
     changelog.set(rootProject.file("changelog.txt").readText(Charsets.UTF_8))
 
     loaders.set(listOf("fabric"))
@@ -119,7 +119,7 @@ tasks.register<TaskPublishCurseForge>("publishToCurseForge") {
     group = "publishing"
     apiToken = System.getenv("CURSEFORGE_TOKEN") ?: "Invalid/No API Token Found"
 
-    val mainFile = upload(560363, tasks.jar)
+    val mainFile = upload(560363, tasks.named<RemapJarTask>("remapJar"))
     mainFile.releaseType = if(project.version.toString().endsWith("beta")) "beta" else "release"
     mainFile.changelog = rootProject.file("changelog.txt").readText(Charsets.UTF_8)
 

@@ -52,18 +52,16 @@ tasks.create("postDiscord") {
             val webhook = Webhook(System.getenv("ENCHANTED_RELEASE_WEBHOOK"), "Enchanted Gradle Upload")
 
             val message = Message()
-            message.username = "Elaina"
-            message.avatarUrl = "https://i.imgur.com/I455GSr.jpeg"
-            message.content = "<@&1246846443944149145> Enchanted $version for Minecraft $mcVersion has been published!"
+                .setUsername("Elaina")
+                .setAvatarUrl("https://i.imgur.com/I455GSr.jpeg")
+                .setContent("<@&1246846443944149145> Enchanted $version for Minecraft $mcVersion has been published!")
+                .addEmbed(Embed()
+                    .addField("Changelog", rootProject.file("changelog.txt").readText(Charsets.UTF_8), false)
+                    .setColor(0x9C58B8))
 
-            val embed = Embed()
-            embed.addField("Changelog", rootProject.file("changelog.txt").readText(Charsets.UTF_8), false)
-            embed.color = 0x9C58B8
-
-            message.addEmbed(embed)
             webhook.sendMessage(message)
         } catch (e: IOException) {
-            project.logger.error("Failed to push CF Discord webhook.")
+            project.logger.error("Failed to push CF Discord webhook: " + e.message)
         }
     }
 }
