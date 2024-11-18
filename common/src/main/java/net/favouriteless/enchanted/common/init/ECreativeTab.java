@@ -1,14 +1,34 @@
 package net.favouriteless.enchanted.common.init;
 
+import net.favouriteless.enchanted.common.Enchanted;
+import net.favouriteless.enchanted.common.blocks.EBlocks;
 import net.favouriteless.enchanted.common.items.EItems;
+import net.favouriteless.enchanted.common.items.component.EDataComponents;
 import net.favouriteless.enchanted.platform.CommonServices;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTab.DisplayItemsGenerator;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Supplier;
 
 public class ECreativeTab {
+
+    public static final ResourceLocation[] SHAPE_IDS = new ResourceLocation[] {
+            Enchanted.id("small_circle"),
+            Enchanted.id("medium_circle"),
+            Enchanted.id("large_circle")
+    };
+
+    public static final List<Supplier<? extends Block>> SHAPE_BLOCKS = List.of(
+            EBlocks.RITUAL_CHALK,
+            EBlocks.NETHER_CHALK,
+            EBlocks.OTHERWHERE_CHALK
+    );
 
     public static final Supplier<CreativeModeTab> TAB = register("main",
             () -> EItems.ENCHANTED_BROOMSTICK.get().getDefaultInstance(),
@@ -176,14 +196,14 @@ public class ECreativeTab {
 
 
                 out.accept(EItems.CIRCLE_TALISMAN.get());
-//                for(int i = 1; i < 4; i++) {
-//                    for(String key : new String[] { "small", "medium", "large" }) {
-//                        ItemStack stack = new ItemStack(EItems.CIRCLE_TALISMAN.get());
-//                        CompoundTag nbt = stack.getOrCreateTag();
-//                        nbt.putInt(key, i);
-//                        out.accept(stack);
-//                    }
-//                }
+                for(Supplier<? extends Block> block : SHAPE_BLOCKS) {
+                    for(ResourceLocation id : SHAPE_IDS) {
+
+                            ItemStack stack = new ItemStack(EItems.CIRCLE_TALISMAN.get());
+                        stack.set(EDataComponents.CIRCLE_MAGIC_SHAPE_MAP.get(), new HashMap<>(Map.of(id, block.get())));
+                        out.accept(stack);
+                    }
+                }
             });
 
 

@@ -12,7 +12,7 @@ import net.favouriteless.enchanted.common.items.component.EDataComponents;
 import net.favouriteless.enchanted.common.menus.EMenuTypes;
 import net.favouriteless.enchanted.common.network.EPackets;
 import net.favouriteless.enchanted.common.recipes.ERecipeTypes;
-import net.favouriteless.enchanted.common.rites.ERiteFactories;
+import net.favouriteless.enchanted.common.circle_magic.ERiteFactories;
 import net.favouriteless.enchanted.common.sounds.ESoundEvents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;

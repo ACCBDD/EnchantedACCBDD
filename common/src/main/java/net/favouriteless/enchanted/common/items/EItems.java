@@ -1,11 +1,12 @@
 package net.favouriteless.enchanted.common.items;
 
-import net.favouriteless.enchanted.common.blocks.chalk.AbstractChalkBlock;
-import net.favouriteless.enchanted.common.init.ETags;
 import net.favouriteless.enchanted.common.blocks.EBlocks;
+import net.favouriteless.enchanted.common.blocks.chalk.AbstractChalkBlock;
 import net.favouriteless.enchanted.common.effects.EEffects;
+import net.favouriteless.enchanted.common.init.ETags;
 import net.favouriteless.enchanted.common.items.brews.SimpleEffectBrewItem;
 import net.favouriteless.enchanted.common.items.brews.throwable.LoveBrewItem;
+import net.favouriteless.enchanted.common.items.component.EDataComponents;
 import net.favouriteless.enchanted.common.items.poppets.*;
 import net.favouriteless.enchanted.common.poppet.PoppetColour;
 import net.favouriteless.enchanted.platform.CommonServices;
@@ -18,12 +19,13 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.*;
 import net.minecraft.world.item.ArmorItem.Type;
+import net.minecraft.world.item.*;
 import net.minecraft.world.item.Item.Properties;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ComposterBlock;
 
+import java.util.HashMap;
 import java.util.function.Supplier;
 
 public class EItems {
@@ -61,7 +63,7 @@ public class EItems {
 	public static final Supplier<BlockItem> CANDELABRA = registerBlock("candelabra", EBlocks.CANDELABRA);
 	public static final Supplier<BlockItem> CHALICE = registerBlock("chalice", EBlocks.CHALICE);
 	public static final Supplier<BlockItem> CHALICE_FILLED = registerBlock("chalice_filled", EBlocks.CHALICE_FILLED, props().rarity(Rarity.UNCOMMON));
-	public static final Supplier<Item> CIRCLE_TALISMAN = register("circle_talisman", () -> new CircleTalismanItem(new Properties().stacksTo(1)));
+	public static final Supplier<Item> CIRCLE_TALISMAN = register("circle_talisman", () -> new CircleTalismanItem(new Properties().stacksTo(1).component(EDataComponents.CIRCLE_MAGIC_SHAPE_MAP.get(), new HashMap<>())));
 	public static final Supplier<Item> CLAY_JAR = registerItem("clay_jar");
 	public static final Supplier<Item> CONDENSED_FEAR = registerItem("condensed_fear");
 	public static final Supplier<Item> CREEPER_HEART = registerItem("creeper_heart");

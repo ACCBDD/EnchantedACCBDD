@@ -1,59 +1,77 @@
 package net.favouriteless.enchanted.common.items;
 
+import net.favouriteless.enchanted.common.blocks.EBlocks;
+import net.favouriteless.enchanted.common.circle_magic.CircleMagicShape;
+import net.favouriteless.enchanted.common.init.EData;
+import net.favouriteless.enchanted.common.items.component.EDataComponents;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Registry;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 
-// TODO: Update this after rewriting circle magic
+import java.util.HashMap;
+import java.util.Map;
+
 public class CircleTalismanItem extends Item {
 
 	public CircleTalismanItem(Properties properties) {
 		super(properties);
 	}
 
-//	@Override
-//	public InteractionResult useOn(UseOnContext context) {
-//		Level world = context.getLevel();
-//		if(!world.isClientSide) {
-//			BlockPos key = context.getClickedPos().above();
-//			ItemStack stack = context.getItemInHand();
-//
-//
-//			if(stack.hasTag()) {
-//				CompoundTag nbt = stack.getTag();
-//				byte small = nbt.contains("small") ? nbt.getByte("small") : 0;
-//				byte medium = nbt.contains("medium") ? nbt.getByte("medium") : 0;
-//				byte large = nbt.contains("large") ? nbt.getByte("large") : 0;
-//
-//				if(small != 0 || medium != 0 || large != 0) {
-//					boolean validPlace = world.getBlockState(key).isAir() && EBlocks.GOLDEN_CHALK.get().canSurvive(null, world, key);
-//					if(validPlace) {
-//						if(small != 0 && !CirclePart.SMALL.canPlace(world, key)) validPlace = false;
-//						if(medium != 0 && !CirclePart.MEDIUM.canPlace(world, key)) validPlace = false;
-//						if(large != 0 && !CirclePart.LARGE.canPlace(world, key)) validPlace = false;
-//
-//						if(validPlace) {
-//							world.setBlockAndUpdate(key, EBlocks.GOLDEN_CHALK.get().getStateForPlacement(new BlockPlaceContext(context)));
-//							if(small != 0)
-//								CirclePart.SMALL.place(world, key, small == 1 ? EBlocks.RITUAL_CHALK.get() : small == 2 ? EBlocks.NETHER_CHALK.get() : EBlocks.OTHERWHERE_CHALK.get(), context);
-//							if(medium != 0)
-//								CirclePart.MEDIUM.place(world, key, medium == 1 ? EBlocks.RITUAL_CHALK.get() : medium == 2 ? EBlocks.NETHER_CHALK.get() : EBlocks.OTHERWHERE_CHALK.get(), context);
-//							if(large != 0)
-//								CirclePart.LARGE.place(world, key, large == 1 ? EBlocks.RITUAL_CHALK.get() : large == 2 ? EBlocks.NETHER_CHALK.get() : EBlocks.OTHERWHERE_CHALK.get(), context);
-//
-//							stack.setTag(new CompoundTag());
-//
-//							return InteractionResult.SUCCESS;
-//						}
-//					}
-//
-//					if(context.getPlayer() != null) {
-//						context.getPlayer().displayClientMessage(Component.literal("All blocks must be valid spots.").withStyle(ChatFormatting.RED), true);
-//						return InteractionResult.PASS;
-//					}
-//				}
-//			}
-//		}
-//
-//		return InteractionResult.FAIL;
-//	}
+	@Override
+	public InteractionResult useOn(UseOnContext context) {
+		Level level = context.getLevel();
+
+		if(!level.isClientSide) {
+			ItemStack stack = context.getItemInHand();
+
+			if(!(stack.getItem() instanceof CircleTalismanItem))
+				return InteractionResult.CONSUME;
+
+			Registry<CircleMagicShape> registry = level.registryAccess().registryOrThrow(EData.CIRCLE_SHAPE_REGISTRY);
+
+			BlockPos clicked = context.getClickedPos();
+			BlockPos pos = level.getBlockState(clicked).canBeReplaced() ? clicked : clicked.above();
+
+			Map<ResourceLocation, Block> shapes = stack.get(EDataComponents.CIRCLE_MAGIC_SHAPE_MAP.get());
+			if(shapes.isEmpty())
+				return InteractionResult.CONSUME;
+
+			boolean valid = level.getBlockState(pos).canBeReplaced() && EBlocks.GOLDEN_CHALK.get().canSurvive(null, level, pos);
+			if(!valid)
+				return sendFail(context.getPlayer());
+
+			Map<CircleMagicShape, Block> toPlace = new HashMap<>();
+			for(ResourceLocation location : shapes.keySet()) {
+				CircleMagicShape shape = registry.get(location);
+				if(shape == null)
+					continue;
+
+				if(!shape.canPlace(level, pos))
+					return sendFail(context.getPlayer());
+				else
+					toPlace.put(shape, shapes.get(location));
+			}
+			toPlace.forEach((shape, block) -> shape.place(level, pos, block, context));
+			level.setBlockAndUpdate(pos, EBlocks.GOLDEN_CHALK.get().getRandomState());
+			stack.set(EDataComponents.CIRCLE_MAGIC_SHAPE_MAP.get(), new HashMap<>());
+		}
+
+		return InteractionResult.sidedSuccess(level.isClientSide);
+	}
+
+	protected InteractionResult sendFail(Player player) {
+		if(player != null)
+			player.displayClientMessage(Component.literal("All blocks must be valid spots.").withStyle(ChatFormatting.RED), true);
+		return InteractionResult.CONSUME;
+	}
 
 }

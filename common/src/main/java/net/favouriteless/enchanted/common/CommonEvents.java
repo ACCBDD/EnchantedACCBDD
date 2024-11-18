@@ -4,7 +4,7 @@ import net.favouriteless.enchanted.api.taglock.BedTaglockSavedData;
 import net.favouriteless.enchanted.api.taglock.IBedTaglock;
 import net.favouriteless.enchanted.common.curses.CurseManager;
 import net.favouriteless.enchanted.common.items.component.EntityRefData;
-import net.favouriteless.enchanted.common.rites.RiteManager;
+import net.favouriteless.enchanted.common.circle_magic.RiteManager;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
