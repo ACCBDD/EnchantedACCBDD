@@ -39,7 +39,7 @@ public class RiteType implements Comparable<RiteType> {
             Codec.INT.optionalFieldOf("power", 0).forGetter(r -> r.power),
             Codec.INT.optionalFieldOf("tick_power", 0).forGetter(r -> r.tickPower),
             RiteWeatherRequirement.CODEC.optionalFieldOf("weather", RiteWeatherRequirement.NONE).forGetter(r -> r.weather),
-            Codec.pair(Codec.INT, Codec.INT).optionalFieldOf("time", Pair.of(0, 24000)).forGetter(r -> r.timeRange),
+            Codec.INT.listOf(2, 2).optionalFieldOf("time", List.of(0, 24000)).forGetter(r -> r.timeRange),
             RiteFactoryRegistry.CODEC.fieldOf("factory").forGetter(r -> r.factory)
     ).apply(instance, RiteType::new));
 
@@ -50,13 +50,13 @@ public class RiteType implements Comparable<RiteType> {
     private final int tickPower;
     private final RiteFactory factory;
     private final RiteWeatherRequirement weather;
-    private final Pair<Integer, Integer> timeRange;
+    private final List<Integer> timeRange;
 
     private final List<Vec2i> interiorPoints = new ArrayList<>();
     private int radius = 1;
 
     public RiteType(List<ItemStack> items, Map<Holder<CircleMagicShape>, Block> shapes, List<EntityType<?>> entities,
-                    int power, int tickPower, RiteWeatherRequirement weather, Pair<Integer, Integer> times, RiteFactory factory) {
+                    int power, int tickPower, RiteWeatherRequirement weather, List<Integer> times, RiteFactory factory) {
         this.items = items;
         this.shapes = shapes;
         this.entities = entities;
@@ -81,7 +81,7 @@ public class RiteType implements Comparable<RiteType> {
         long time = level.getDayTime();
         if(time < timeRange.getFirst())
             return false;
-        if(time > timeRange.getSecond())
+        if(time > timeRange.getLast())
             return false;
 
         for(Entry<Holder<CircleMagicShape>, Block> entry : shapes.entrySet()) {

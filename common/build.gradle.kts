@@ -50,8 +50,8 @@ tasks.create("postDiscord") {
     group = "publishing"
     doLast {
         try {
-            if(System.getenv("ENCHANTED_RELEASE_WEBHOOK_DEV") != null) {
-                val webhook = Webhook(System.getenv("ENCHANTED_RELEASE_WEBHOOK_DEV"), "Enchanted Gradle Upload")
+            if(System.getenv("ENCHANTED_RELEASE_WEBHOOK") != null) {
+                val webhook = Webhook(System.getenv("ENCHANTED_RELEASE_WEBHOOK"), "Enchanted Gradle Upload")
 
                 val message = Message()
                 message.username = "Elaina"
