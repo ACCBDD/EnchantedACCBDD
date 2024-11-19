@@ -1,6 +1,6 @@
 package favouriteless.enchanted.client.particles;
 
-import favouriteless.enchanted.common.rites.processing.RiteBroiling;
+import favouriteless.enchanted.common.circle_magic.rites.processing.RiteBroiling;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.NoRenderParticle;
 import net.minecraft.client.particle.Particle;

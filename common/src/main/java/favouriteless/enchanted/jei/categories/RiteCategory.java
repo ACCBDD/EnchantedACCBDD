@@ -3,7 +3,7 @@ package favouriteless.enchanted.jei.categories;
 import favouriteless.enchanted.Enchanted;
 import favouriteless.enchanted.common.init.registry.EnchantedItems;
 import favouriteless.enchanted.jei.EnchantedJEITextures;
-import favouriteless.enchanted.common.rites.CirclePart;
+import favouriteless.enchanted.common.circle_magic.rites.CirclePart;
 import com.mojang.blaze3d.vertex.PoseStack;
 import favouriteless.enchanted.jei.recipes.JEIRiteRecipe;
 import mezz.jei.api.constants.VanillaTypes;

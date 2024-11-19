@@ -1,7 +1,7 @@
 package favouriteless.enchanted.common.items;
 
 import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
-import favouriteless.enchanted.common.rites.CirclePart;
+import favouriteless.enchanted.common.circle_magic.rites.CirclePart;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;

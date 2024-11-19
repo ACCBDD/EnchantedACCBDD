@@ -10,7 +10,7 @@ import favouriteless.enchanted.common.init.EnchantedData;
 import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
 import favouriteless.enchanted.common.init.registry.EnchantedEntityTypes;
 import favouriteless.enchanted.common.init.registry.EnchantedItems;
-import favouriteless.enchanted.common.rites.RiteRequirements;
+import favouriteless.enchanted.common.circle_magic.rites.RiteRequirements;
 import fuzs.forgeconfigapiport.api.config.v2.ForgeConfigRegistry;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.registry.DynamicRegistries;

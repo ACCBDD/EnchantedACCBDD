@@ -10,7 +10,7 @@ import favouriteless.enchanted.common.init.EnchantedData;
 import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
 import favouriteless.enchanted.common.init.registry.EnchantedEntityTypes;
 import favouriteless.enchanted.common.init.registry.EnchantedItems;
-import favouriteless.enchanted.common.rites.RiteRequirements;
+import favouriteless.enchanted.common.circle_magic.rites.RiteRequirements;
 import favouriteless.enchanted.platform.services.ForgeCommonRegistryHelper;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;

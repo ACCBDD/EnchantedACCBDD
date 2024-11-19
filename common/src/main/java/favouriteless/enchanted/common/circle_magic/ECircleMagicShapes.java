@@ -1,0 +1,15 @@
+package favouriteless.enchanted.common.circle_magic;
+
+import favouriteless.enchanted.Enchanted;
+import favouriteless.enchanted.common.init.EnchantedData;
+import net.minecraft.resources.ResourceKey;
+
+public class ECircleMagicShapes {
+    public static final ResourceKey<CircleMagicShape> SMALL_CIRCLE = key("small_circle");
+    public static final ResourceKey<CircleMagicShape> MEDIUM_CIRCLE = key("medium_circle");
+    public static final ResourceKey<CircleMagicShape> LARGE_CIRCLE = key("large_circle");
+
+    private static ResourceKey<CircleMagicShape> key(String path) {
+        return ResourceKey.create(EnchantedData.CIRCLE_SHAPE_REGISTRY, Enchanted.id(path));
+    }
+}

@@ -1,7 +1,7 @@
 package favouriteless.enchanted.jei;
 
 import favouriteless.enchanted.Enchanted;
-import favouriteless.enchanted.common.rites.CirclePart;
+import favouriteless.enchanted.common.circle_magic.rites.CirclePart;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 

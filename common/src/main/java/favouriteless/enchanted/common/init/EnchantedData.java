@@ -1,9 +1,13 @@
 package favouriteless.enchanted.common.init;
 
+import com.mojang.serialization.Codec;
 import favouriteless.enchanted.Enchanted;
 import favouriteless.enchanted.common.altar.PowerProvider;
 import favouriteless.enchanted.common.altar.AltarUpgrade;
-import favouriteless.enchanted.common.rites.RiteRequirements;
+import favouriteless.enchanted.common.circle_magic.CircleMagicShape;
+import favouriteless.enchanted.common.circle_magic.RiteType;
+import favouriteless.enchanted.common.circle_magic.rites.RiteRequirements;
+import favouriteless.enchanted.platform.CommonServices;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -19,7 +23,12 @@ public class EnchantedData {
     public static final ResourceKey<Registry<AltarUpgrade>> ALTAR_UPGRADE_REGISTRY = ResourceKey.createRegistryKey(Enchanted.id("altar/upgrades"));
     public static final ResourceKey<Registry<PowerProvider<Block>>> ALTAR_BLOCK_REGISTRY = ResourceKey.createRegistryKey(Enchanted.id("altar/blocks"));
     public static final ResourceKey<Registry<PowerProvider<TagKey<Block>>>> ALTAR_TAG_REGISTRY = ResourceKey.createRegistryKey(Enchanted.id("altar/tags"));
-    public static final ResourceKey<Registry<RiteRequirements>> RITE_REQUIREMENTS_REGISTRY = ResourceKey.createRegistryKey(Enchanted.id("rite_requirements"));
+    public static final ResourceKey<Registry<CircleMagicShape>> CIRCLE_SHAPE_REGISTRY = register(ResourceKey.createRegistryKey(Enchanted.id("circle_magic/shape")), CircleMagicShape.CODEC);
+    public static final ResourceKey<Registry<RiteType>> RITE_TYPES_REGISTRY = register(ResourceKey.createRegistryKey(Enchanted.id("circle_magic/rite")), RiteType.CODEC);
+
+    private static <T> ResourceKey<Registry<T>> register(ResourceKey<Registry<T>> key, Codec<T> codec) {
+        return CommonServices.COMMON_REGISTRY.registerDataRegistry(key, codec);
+    }
 
     private static Block createBlockKey(ResourceLocation key) {
         Block block = BuiltInRegistries.BLOCK.get(key);

@@ -3,7 +3,7 @@ package favouriteless.enchanted.common;
 import favouriteless.enchanted.api.taglock.BedTaglockSavedData;
 import favouriteless.enchanted.api.taglock.IBedTaglock;
 import favouriteless.enchanted.common.curses.CurseManager;
-import favouriteless.enchanted.common.rites.RiteManager;
+import favouriteless.enchanted.common.circle_magic.rites.RiteManager;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;

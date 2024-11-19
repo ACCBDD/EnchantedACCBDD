@@ -1,6 +1,5 @@
 package favouriteless.enchanted.jei;
 
-import com.mojang.datafixers.util.Pair;
 import favouriteless.enchanted.Enchanted;
 import favouriteless.enchanted.api.rites.AbstractRite;
 import favouriteless.enchanted.api.rites.CreateItemRite;
@@ -12,9 +11,8 @@ import favouriteless.enchanted.common.init.EnchantedTags.Blocks;
 import favouriteless.enchanted.common.init.registry.*;
 import favouriteless.enchanted.common.menus.SpinningWheelMenu;
 import favouriteless.enchanted.common.menus.WitchOvenMenu;
-import favouriteless.enchanted.common.rites.CirclePart;
-import favouriteless.enchanted.common.rites.RiteRequirements;
-import favouriteless.enchanted.common.rites.RiteType;
+import favouriteless.enchanted.common.circle_magic.rites.CirclePart;
+import favouriteless.enchanted.common.circle_magic.rites.RiteRequirements;
 import favouriteless.enchanted.jei.categories.*;
 import favouriteless.enchanted.jei.container_handlers.DistilleryContainerHandler;
 import favouriteless.enchanted.jei.container_handlers.SpinningWheelContainerHandler;

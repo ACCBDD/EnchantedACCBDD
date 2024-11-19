@@ -1,14 +1,10 @@
 package favouriteless.enchanted.jei;
 
-import com.mojang.datafixers.util.Pair;
 import favouriteless.enchanted.Enchanted;
-import favouriteless.enchanted.api.rites.CreateItemRite;
-import favouriteless.enchanted.common.rites.RiteRequirements;
 import favouriteless.enchanted.jei.recipes.JEIMutandisRecipe;
 import favouriteless.enchanted.common.recipes.*;
 import favouriteless.enchanted.jei.recipes.JEIRiteRecipe;
 import mezz.jei.api.recipe.RecipeType;
-import net.minecraft.world.item.ItemStack;
 
 public class JEIRecipeTypes {
 

@@ -5,7 +5,7 @@ import favouriteless.enchanted.api.rites.AbstractRite;
 import favouriteless.enchanted.common.altar.SimplePowerPosHolder;
 import favouriteless.enchanted.common.init.registry.EnchantedBlockEntityTypes;
 import favouriteless.enchanted.common.init.registry.RiteTypes;
-import favouriteless.enchanted.common.rites.RiteManager;
+import favouriteless.enchanted.common.circle_magic.rites.RiteManager;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.nbt.CompoundTag;

@@ -3,7 +3,7 @@ package favouriteless.enchanted.api.familiars;
 import favouriteless.enchanted.common.entities.FamiliarCat;
 import favouriteless.enchanted.common.familiars.CatFamiliarType;
 import favouriteless.enchanted.common.init.registry.FamiliarTypes;
-import favouriteless.enchanted.common.rites.binding.RiteBindingFamiliar;
+import favouriteless.enchanted.common.circle_magic.rites.binding.RiteBindingFamiliar;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
