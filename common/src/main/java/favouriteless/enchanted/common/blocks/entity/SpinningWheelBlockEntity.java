@@ -20,6 +20,7 @@ import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.DataSlot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeManager;
@@ -39,19 +40,32 @@ public class SpinningWheelBlockEntity extends ContainerBlockEntityBase implement
 	private final SimplePowerPosHolder posHolder;
 	private boolean isSpinning = false;
 
-	public static final int SPIN_DURATION = 400;
+	private int spinDuration = 300;
 	private int spinProgress = 0;
 
-	public DataSlot data = new DataSlot() {
+	public ContainerData data = new ContainerData() {
 		@Override
-		public int get() {
-			return spinProgress;
+		public int get(int index) {
+			return switch(index) {
+				case 0 -> spinProgress;
+				case 1 -> spinDuration;
+				default -> 0;
+			};
 		}
 
 		@Override
-		public void set(int value) {
-			spinProgress = value;
+		public void set(int index, int value) {
+			if(index == 0)
+				spinProgress = value;
+			else if(index == 2)
+				spinDuration = value;
 		}
+
+		@Override
+		public int getCount() {
+			return 2;
+		}
+
 	};
 
 	public SpinningWheelBlockEntity(BlockPos pos, BlockState state) {
@@ -68,9 +82,10 @@ public class SpinningWheelBlockEntity extends ContainerBlockEntityBase implement
 				boolean wasSpinning = be.spinProgress > 0;
 
 				if(be.canSpin(recipe) && (recipe.getPower() == 0 || powerProvider != null)) {
-					if(powerProvider.tryConsumePower((double)recipe.getPower() / SPIN_DURATION)) {
-						if(++be.spinProgress == SPIN_DURATION) {
+					if(powerProvider.tryConsumePower((double)recipe.getPower() / be.spinDuration)) {
+						if(++be.spinProgress == be.spinDuration) {
 							be.spinProgress = 0;
+							be.spinDuration = recipe.getDuration();
 							be.spin(recipe);
 						}
 					}
@@ -148,6 +163,7 @@ public class SpinningWheelBlockEntity extends ContainerBlockEntityBase implement
 		super.saveAdditional(nbt);
 		nbt.put("posHolder", posHolder.serialize());
 		nbt.putInt("spinProgress", spinProgress);
+		nbt.putInt("spinDuration", spinDuration);
 	}
 
 	@Override

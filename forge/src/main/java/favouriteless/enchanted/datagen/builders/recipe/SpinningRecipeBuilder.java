@@ -21,12 +21,20 @@ public class SpinningRecipeBuilder extends EnchantedRecipeBuilder {
     private final ItemStack[] items;
     private final ItemStack result;
     private final int power;
+    private final int duration;
 
-    private SpinningRecipeBuilder(ItemLike result, int power, ItemStack[] items) {
+    private SpinningRecipeBuilder(ItemLike result, int power, ItemStack[] items, int duration) {
         super("spinning");
         this.result = new ItemStack(result.asItem());
         this.items = items;
         this.power = power;
+        this.duration = duration;
+
+        if(items.length > 3)
+            throw new IllegalArgumentException("Tried to create spinning recipe with more than 3 inputs.");
+
+        if(duration < 1)
+            throw new IllegalArgumentException("Tried to create spinning recipe with duration less than 1.");
     }
 
     /**
@@ -34,12 +42,12 @@ public class SpinningRecipeBuilder extends EnchantedRecipeBuilder {
      * @param result The {@link ItemLike} this recipe produces.
      * @return A new {@link SpinningRecipeBuilder} with the specified parameters.
      */
-    public static SpinningRecipeBuilder create(ItemLike result, int power, ItemLike... items) {
+    public static SpinningRecipeBuilder create(ItemLike result, int power, int duration, ItemLike... items)  {
         ItemStack[] itemsOut = new ItemStack[items.length];
         for(int i = 0; i < items.length; i++)
             itemsOut[i] = items[i].asItem().getDefaultInstance();
 
-        return new SpinningRecipeBuilder(result, power, itemsOut);
+        return new SpinningRecipeBuilder(result, power, itemsOut, duration);
     }
 
     /**
@@ -47,8 +55,8 @@ public class SpinningRecipeBuilder extends EnchantedRecipeBuilder {
      * @param result The {@link ItemLike} this recipe produces.
      * @return A new {@link SpinningRecipeBuilder} with the specified parameters.
      */
-    public static SpinningRecipeBuilder create(ItemLike result, int power, ItemStack... items) {
-        return new SpinningRecipeBuilder(result, power, items);
+    public static SpinningRecipeBuilder create(ItemLike result, int power, int duration, ItemStack... items) {
+        return new SpinningRecipeBuilder(result, power, items, duration);
     }
 
     /**
@@ -90,7 +98,7 @@ public class SpinningRecipeBuilder extends EnchantedRecipeBuilder {
 
     @Override
     public void save(@NotNull Consumer<FinishedRecipe> consumer, @NotNull ResourceLocation id) {
-        consumer.accept(new Result(id, items, result, power));
+        consumer.accept(new Result(id, items, result, power, duration));
     }
 
     @Override
@@ -103,12 +111,14 @@ public class SpinningRecipeBuilder extends EnchantedRecipeBuilder {
         private final ItemStack[] items;
         private final ItemStack result;
         private final int power;
+        private final int duration;
 
-        public Result(ResourceLocation id, ItemStack[] items, ItemStack result, int power) {
+        public Result(ResourceLocation id, ItemStack[] items, ItemStack result, int power, int duration) {
             super(id);
             this.items = items;
             this.result = result;
             this.power = power;
+            this.duration = duration;
         }
 
         @Override
@@ -120,6 +130,7 @@ public class SpinningRecipeBuilder extends EnchantedRecipeBuilder {
             json.add("ingredients", ingredientsArray);
             json.add("result", ItemStackHelper.asJson(result, true));
             json.addProperty("power", power);
+            json.addProperty("duration", duration);
         }
 
         @NotNull

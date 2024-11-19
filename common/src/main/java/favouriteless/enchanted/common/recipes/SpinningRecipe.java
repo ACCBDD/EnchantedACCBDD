@@ -24,13 +24,15 @@ public class SpinningRecipe implements Recipe<Container> {
     protected final NonNullList<ItemStack> itemsIn;
     protected final ItemStack result;
     protected final int power;
+    protected final int duration;
 
-    public SpinningRecipe(ResourceLocation id, NonNullList<ItemStack> itemsIn, ItemStack result, int power) {
+    public SpinningRecipe(ResourceLocation id, NonNullList<ItemStack> itemsIn, ItemStack result, int power, int duration) {
         this.type = EnchantedRecipeTypes.SPINNING.get();
         this.id = id;
         this.itemsIn = itemsIn;
         this.result = result;
         this.power = power;
+        this.duration = duration;
     }
 
     @Override
@@ -105,6 +107,10 @@ public class SpinningRecipe implements Recipe<Container> {
         return power;
     }
 
+    public int getDuration() {
+        return duration;
+    }
+
     public static class Serializer implements RecipeSerializer<SpinningRecipe> {
 
         @Override
@@ -112,8 +118,9 @@ public class SpinningRecipe implements Recipe<Container> {
             NonNullList<ItemStack> itemsIn = JsonHelper.readItemStackList(GsonHelper.getAsJsonArray(json, "ingredients"), true);
             ItemStack result = ItemStackHelper.fromJson(GsonHelper.getAsJsonObject(json, "result"), true);
             int power = GsonHelper.getAsInt(json, "power", 0);
+            int duration = GsonHelper.getAsInt(json, "duration", 0);
 
-            return new SpinningRecipe(recipeId, itemsIn, result, power);
+            return new SpinningRecipe(recipeId, itemsIn, result, power, duration);
         }
 
         @Override
@@ -126,8 +133,9 @@ public class SpinningRecipe implements Recipe<Container> {
 
             ItemStack result = buffer.readItem();
             int power = buffer.readInt();
+            int duration = buffer.readInt();
 
-            return new SpinningRecipe(recipeId, itemsIn, result, power);
+            return new SpinningRecipe(recipeId, itemsIn, result, power, duration);
         }
 
         @Override
@@ -136,6 +144,7 @@ public class SpinningRecipe implements Recipe<Container> {
             recipe.itemsIn.forEach(buffer::writeItem);
             buffer.writeItem(recipe.result);
             buffer.writeInt(recipe.getPower());
+            buffer.writeInt(recipe.getDuration());
         }
 
     }

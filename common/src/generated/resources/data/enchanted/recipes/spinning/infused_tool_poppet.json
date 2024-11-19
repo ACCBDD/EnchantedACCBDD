@@ -1,5 +1,6 @@
 {
   "type": "enchanted:wheel",
+  "duration": 300,
   "ingredients": [
     {
       "item": "enchanted:infused_poppet"

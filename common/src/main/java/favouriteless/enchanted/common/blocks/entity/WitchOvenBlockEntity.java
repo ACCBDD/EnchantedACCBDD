@@ -261,9 +261,9 @@ public class WitchOvenBlockEntity extends ContainerBlockEntityBase implements Me
 
         for(Block block : potentialFilters) {
             if(block == EnchantedBlocks.FUME_FUNNEL.get())
-                byproductChance += 0.25D;
+                byproductChance += 0.20D;
             else if(block == EnchantedBlocks.FUME_FUNNEL_FILTERED.get())
-                byproductChance += 0.3D;
+                byproductChance += 0.35D;
         }
         return byproductChance;
     }

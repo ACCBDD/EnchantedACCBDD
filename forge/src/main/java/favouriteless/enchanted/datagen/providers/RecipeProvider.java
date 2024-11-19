@@ -436,19 +436,19 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
 	}
 
 	protected static void spinning(Consumer<FinishedRecipe> consumer, ItemLike result, ItemLike first, Item second, Item third) {
-		SpinningRecipeBuilder.create(result, 500, first, second, third).save(consumer);
+		SpinningRecipeBuilder.create(result, 500, 300, first, second, third).save(consumer);
 	}
 
 	protected static void spinningSet(Consumer<FinishedRecipe> consumer, ItemLike normal, ItemLike infused, ItemLike sturdy, Item second, Item third) {
-		SpinningRecipeBuilder.create(normal, 500, EnchantedItems.POPPET.get(), second, third).save(consumer);
-		SpinningRecipeBuilder.create(infused, 1000, EnchantedItems.POPPET_INFUSED.get(), second, third).save(consumer);
-		SpinningRecipeBuilder.create(sturdy, 1000, EnchantedItems.POPPET_STURDY.get(), second, third).save(consumer);
+		SpinningRecipeBuilder.create(normal, 500, 300, EnchantedItems.POPPET.get(), second, third).save(consumer);
+		SpinningRecipeBuilder.create(infused, 1000, 300, EnchantedItems.POPPET_INFUSED.get(), second, third).save(consumer);
+		SpinningRecipeBuilder.create(sturdy, 1000, 300, EnchantedItems.POPPET_STURDY.get(), second, third).save(consumer);
 	}
 
 	protected static void spinningSet(Consumer<FinishedRecipe> consumer, ItemLike normal, ItemLike infused, ItemLike sturdy, ItemStack second, ItemStack third) {
-		SpinningRecipeBuilder.create(normal, 500, EnchantedItems.POPPET.get().getDefaultInstance(), second, third).save(consumer);
-		SpinningRecipeBuilder.create(infused, 1000, EnchantedItems.POPPET_INFUSED.get().getDefaultInstance(), second, third).save(consumer);
-		SpinningRecipeBuilder.create(sturdy, 1000, EnchantedItems.POPPET_STURDY.get().getDefaultInstance(), second, third).save(consumer);
+		SpinningRecipeBuilder.create(normal, 500, 300, EnchantedItems.POPPET.get().getDefaultInstance(), second, third).save(consumer);
+		SpinningRecipeBuilder.create(infused, 1000, 300, EnchantedItems.POPPET_INFUSED.get().getDefaultInstance(), second, third).save(consumer);
+		SpinningRecipeBuilder.create(sturdy, 1000, 300, EnchantedItems.POPPET_STURDY.get().getDefaultInstance(), second, third).save(consumer);
 	}
 
 	protected static void byproduct(Consumer<FinishedRecipe> consumer, ItemLike result, ItemLike... items) {

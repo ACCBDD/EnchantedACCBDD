@@ -16,9 +16,9 @@ import org.jetbrains.annotations.NotNull;
 
 public class SpinningWheelMenu extends MenuBase<SpinningWheelBlockEntity> {
 
-	private final DataSlot data;
+	private final ContainerData data;
 
-	public SpinningWheelMenu(int id, Inventory playerInventory, SpinningWheelBlockEntity be, DataSlot data) {
+	public SpinningWheelMenu(int id, Inventory playerInventory, SpinningWheelBlockEntity be, ContainerData data) {
 		super(EnchantedMenuTypes.SPINNING_WHEEL.get(), id, be, EnchantedBlocks.SPINNING_WHEEL.get());
 		this.data = data;
 
@@ -28,15 +28,19 @@ public class SpinningWheelMenu extends MenuBase<SpinningWheelBlockEntity> {
 		addSlot(new OutputSlot(be, 3, 130, 35)); // Spinning wheel output
 
 		addInventorySlots(playerInventory, 8, 84);
-		addDataSlot(data);
+		addDataSlots(data);
 	}
 
 	public SpinningWheelMenu(int id, Inventory playerInventory, FriendlyByteBuf data) {
-		this(id, playerInventory, MenuUtils.getBlockEntity(playerInventory, data, SpinningWheelBlockEntity.class), new SimpleDataSlot());
+		this(id, playerInventory, MenuUtils.getBlockEntity(playerInventory, data, SpinningWheelBlockEntity.class), new SimpleContainerData(2));
 	}
 
 	public int getSpinProgress() {
-		return data.get();
+		return data.get(0);
+	}
+
+	public int getSpinDuration() {
+		return data.get(1);
 	}
 
 	@Override
