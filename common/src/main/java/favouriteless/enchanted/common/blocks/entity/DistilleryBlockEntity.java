@@ -91,7 +91,7 @@ public class DistilleryBlockEntity extends ContainerBlockEntityBase implements I
             if(hasInput && powerProvider != null) {
                 DistillingRecipe recipe = be.recipeCheck.getRecipeFor(be, level).orElse(null);
 
-                if(be.canDistill(recipe) && powerProvider.tryConsumePower((double)recipe.getPower() / recipe.getCookTime())) {
+                if(be.canDistill(recipe) && powerProvider.tryConsume((double)recipe.getPower() / recipe.getCookTime())) {
                     isCooking = true;
                     be.isBurning = true;
 
@@ -224,7 +224,7 @@ public class DistilleryBlockEntity extends ContainerBlockEntityBase implements I
     @Override
     public void load(@NotNull CompoundTag nbt) {
         super.load(nbt);
-        posHolder.deserialize(nbt.getList("posHolder", 10));
+        posHolder.deserialize(nbt.getCompound("posHolder"));
         isBurning = nbt.getBoolean("isBurning");
         cookProgress = nbt.getInt("cookTime");
         cookDuration = nbt.getInt("cookTimeTotal");

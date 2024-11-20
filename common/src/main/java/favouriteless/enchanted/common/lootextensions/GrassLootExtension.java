@@ -18,7 +18,7 @@ public class GrassLootExtension extends LootExtension {
 
     @Override
     public boolean test(LootContext context) {
-        return !(CommonConfig.HOE_ONLY_SEEDS.get() && !(context.getParam(LootContextParams.TOOL).getItem() instanceof HoeItem));
+        return !(CommonConfig.INSTANCE.hoeOnlySeeds.get() && !(context.getParam(LootContextParams.TOOL).getItem() instanceof HoeItem));
     }
 
 }

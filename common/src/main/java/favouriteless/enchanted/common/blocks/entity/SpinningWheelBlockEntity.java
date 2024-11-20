@@ -21,7 +21,6 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
-import net.minecraft.world.inventory.DataSlot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
@@ -82,7 +81,7 @@ public class SpinningWheelBlockEntity extends ContainerBlockEntityBase implement
 				boolean wasSpinning = be.spinProgress > 0;
 
 				if(be.canSpin(recipe) && (recipe.getPower() == 0 || powerProvider != null)) {
-					if(powerProvider.tryConsumePower((double)recipe.getPower() / be.spinDuration)) {
+					if(powerProvider.tryConsume((double)recipe.getPower() / be.spinDuration)) {
 						if(++be.spinProgress == be.spinDuration) {
 							be.spinProgress = 0;
 							be.spinDuration = recipe.getDuration();
@@ -170,7 +169,7 @@ public class SpinningWheelBlockEntity extends ContainerBlockEntityBase implement
 	public void load(@NotNull CompoundTag nbt) {
 		super.load(nbt);
 		if(nbt.contains("posHolder"))
-			posHolder.deserialize(nbt.getList("posHolder", 10));
+			posHolder.deserialize(nbt.getCompound("posHolder"));
 		if(nbt.contains("spinProgress"))
 			spinProgress = nbt.getInt("spinProgress");
 		if(nbt.contains("isSpinning"))

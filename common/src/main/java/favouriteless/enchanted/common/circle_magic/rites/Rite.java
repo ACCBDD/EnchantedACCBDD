@@ -1,8 +1,9 @@
-package net.favouriteless.enchanted.common.circle_magic.rites;
+package favouriteless.enchanted.common.circle_magic.rites;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import favouriteless.enchanted.common.blocks.entity.ChalkGoldBlockEntity;
+import favouriteless.enchanted.Enchanted;
+import favouriteless.enchanted.common.blocks.entity.GoldChalkBlockEntity;
 import favouriteless.enchanted.common.circle_magic.RiteManager;
 import favouriteless.enchanted.common.circle_magic.RiteType;
 import favouriteless.enchanted.common.init.registry.EnchantedItems;
@@ -81,7 +82,7 @@ public abstract class Rite {
             ItemEntity entity = new ItemEntity(level, pos.getX()+0.5D, pos.getY()+0.5D, pos.getZ()+0.5D, stack);
             level.addFreshEntity(entity);
         }
-        if(level.getBlockEntity(pos) instanceof ChalkGoldBlockEntity chalk)
+        if(level.getBlockEntity(pos) instanceof GoldChalkBlockEntity chalk)
             chalk.detatch();
         return false;
     }
@@ -136,9 +137,11 @@ public abstract class Rite {
      */
     protected UUID findTargetUUID(ServerLevel level, BlockPos pos, RiteParams params) {
         for(ItemStack stack : params.consumedItems) {
-            if(stack.getTag().contains(EnchantedDataComponents.ENTITY_REF.get())) {
-                return stack.getTag().get(EDataComponents.ENTITY_REF.get()).uuid();
-            }
+            if (stack.hasTag()) {
+                if(stack.getTag().contains("entity")) {
+                    return UUID.fromString(stack.getTag().getString("entity"));
+                }
+                }
         }
         return null;
     }
@@ -156,7 +159,7 @@ public abstract class Rite {
     public boolean tick() {
         if(level.isLoaded(pos)) {
             if(tickPower > 0) {
-                if(!(level.getBlockEntity(pos) instanceof ChalkGoldBlockEntity chalk) || !chalk.tryConsumePower(tickPower))
+                if(!(level.getBlockEntity(pos) instanceof GoldChalkBlockEntity chalk) || !chalk.tryConsumePower(tickPower))
                     return stop();
             }
 
@@ -178,20 +181,20 @@ public abstract class Rite {
     public boolean stop() {
         onStop(params);
 
-        if(level.getBlockEntity(pos) instanceof ChalkGoldBlockEntity chalk)
+        if(level.getBlockEntity(pos) instanceof GoldChalkBlockEntity chalk)
             chalk.detatch();
         return false;
     }
 
     public CompoundTag save() {
         CompoundTag tag = new CompoundTag();
-        tag.put("Params", RiteParams.CODEC.encodeStart(RegistryOps.create(NbtOps.INSTANCE, level.registryAccess()), params).getOrThrow());
+        tag.put("Params", RiteParams.CODEC.encodeStart(RegistryOps.create(NbtOps.INSTANCE, level.registryAccess()), params).getOrThrow(false, Enchanted.LOG::error));
         saveAdditional(tag, level);
         return tag;
     }
 
     public void load(CompoundTag tag) {
-        params = RiteParams.CODEC.parse(RegistryOps.create(NbtOps.INSTANCE, level.registryAccess()), tag.get("Params")).getOrThrow();
+        params = RiteParams.CODEC.parse(RegistryOps.create(NbtOps.INSTANCE, level.registryAccess()), tag.get("Params")).getOrThrow(false, Enchanted.LOG::error);
         loadAdditional(tag, level);
     }
 

@@ -1,4 +1,4 @@
-package net.favouriteless.enchanted.common.util;
+package favouriteless.enchanted.common.util;
 
 import favouriteless.enchanted.Enchanted;
 import favouriteless.enchanted.platform.CommonServices;

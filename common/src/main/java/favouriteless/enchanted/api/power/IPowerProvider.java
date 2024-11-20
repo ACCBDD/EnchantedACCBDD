@@ -23,6 +23,6 @@ public interface IPowerProvider {
      * @param amount The amount of power to be consumed.
      * @return True if the power was consumed, false if the power was not consumed (e.g. there was not enough power)
      */
-    boolean tryConsumePower(double amount);
+    boolean tryConsume(double amount);
 
 }

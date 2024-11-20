@@ -117,7 +117,7 @@ public abstract class CauldronBlockEntity<T extends CauldronTypeRecipe> extends 
 			IPowerProvider powerProvider = PowerHelper.tryGetPowerProvider(level, be.getPosHolder());
 			if(recipe.getPower() <= 0)
 				be.setComplete();
-			else if(powerProvider != null && powerProvider.tryConsumePower(recipe.getPower()))
+			else if(powerProvider != null && powerProvider.tryConsume(recipe.getPower()))
 				be.setComplete();
 			else
 				be.setFailed(); // Fail if not enough power
@@ -237,7 +237,7 @@ public abstract class CauldronBlockEntity<T extends CauldronTypeRecipe> extends 
 			matchRecipes();
 
 			if(potentialRecipes.isEmpty()) {
-				if(CommonConfig.CAULDRON_ITEM_SPOIL.get())
+				if(CommonConfig.INSTANCE.cauldronItemSpoil.get())
 					setFailed();
 				else {
 					inventory.remove(itemEntity.getItem());
@@ -412,7 +412,7 @@ public abstract class CauldronBlockEntity<T extends CauldronTypeRecipe> extends 
 		loadBase(nbt);
 
 		if(nbt.contains("posHolder"))
-			posHolder.deserialize(nbt.getList("posHolder", 10));
+			posHolder.deserialize(nbt.getCompound("posHolder"));
 
 		if(nbt.contains("Items")) {
 			// Have to load nbt weirdly because inventory is not a fixed size

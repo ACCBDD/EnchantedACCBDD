@@ -4,8 +4,6 @@ import favouriteless.enchanted.Enchanted;
 import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
 import favouriteless.enchanted.common.init.registry.EnchantedEntityTypes;
 import favouriteless.enchanted.common.init.registry.EnchantedItems;
-import favouriteless.enchanted.common.init.registry.RiteTypes;
-import favouriteless.enchanted.common.circle_magic.RiteType;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.effect.MobEffect;
@@ -94,7 +92,6 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
         autoGenerateItems();
         autoGenerateEntities();
         autoGenerateMobEffects();
-        autoGenerateRites();
     }
 
     protected void autoGenerateBlocks() {
@@ -133,24 +130,6 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
                 String id = entry.getValue().getDescriptionId();
                 if(!usedKeys.contains(id))
                     add(id, getAutoName(entry.getKey().location().getPath()));
-            }
-        }
-    }
-
-    protected void autoGenerateRites() {
-        for(RiteType<?> type : RiteTypes.getEntries()) {
-            if(type.getId().getNamespace().equals(Enchanted.MOD_ID)) {
-                String path = type.getId().getPath();
-
-                String[] words = path.split("_");
-                StringBuilder builder = new StringBuilder("Rite of ")
-                        .append(words[0].substring(0, 1).toUpperCase())
-                        .append(words[0].substring(1));
-
-                if(path.contains("charged"))
-                    builder.append(" (Charged)");
-
-                add(Enchanted.translationKey("rite", type.getId().getPath()), builder.toString());
             }
         }
     }

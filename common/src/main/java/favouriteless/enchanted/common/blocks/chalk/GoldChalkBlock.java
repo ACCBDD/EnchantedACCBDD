@@ -1,6 +1,6 @@
 package favouriteless.enchanted.common.blocks.chalk;
 
-import favouriteless.enchanted.common.blocks.entity.ChalkGoldBlockEntity;
+import favouriteless.enchanted.common.blocks.entity.GoldChalkBlockEntity;
 import favouriteless.enchanted.common.init.registry.EnchantedBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
@@ -34,13 +34,13 @@ public class GoldChalkBlock extends AbstractChalkBlock implements EntityBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new ChalkGoldBlockEntity(pos, state);
+        return new GoldChalkBlockEntity(pos, state);
     }
 
     @Override
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
         if(state != newState) {
-            if(level.getBlockEntity(pos) instanceof ChalkGoldBlockEntity be)
+            if(level.getBlockEntity(pos) instanceof GoldChalkBlockEntity be)
                 be.clearRite();
         }
         super.onRemove(state, level, pos, newState, isMoving);
@@ -58,7 +58,7 @@ public class GoldChalkBlock extends AbstractChalkBlock implements EntityBlock {
 
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        if(level.getBlockEntity(pos) instanceof ChalkGoldBlockEntity be)
+        if(level.getBlockEntity(pos) instanceof GoldChalkBlockEntity be)
             be.execute(state, level, pos, player, hand, hit);
         return InteractionResult.SUCCESS;
     }
@@ -66,7 +66,7 @@ public class GoldChalkBlock extends AbstractChalkBlock implements EntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return type == EnchantedBlockEntityTypes.CHALK_GOLD.get() ? ChalkGoldBlockEntity::tick : null;
+        return type == EnchantedBlockEntityTypes.GOLD_CHALK.get() ? GoldChalkBlockEntity::tick : null;
     }
 
 }

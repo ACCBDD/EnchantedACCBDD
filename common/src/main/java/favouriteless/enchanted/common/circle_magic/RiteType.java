@@ -5,9 +5,9 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import favouriteless.enchanted.api.Vec2i;
 import favouriteless.enchanted.api.rites.RiteFactory;
 import favouriteless.enchanted.common.init.EnchantedData;
-import net.favouriteless.enchanted.common.circle_magic.rites.Rite;
+import favouriteless.enchanted.common.util.ItemUtils;
+import favouriteless.enchanted.common.circle_magic.rites.Rite;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.server.level.ServerLevel;
@@ -95,7 +95,7 @@ public class RiteType implements Comparable<RiteType> {
 					break;
 
 				for(ItemStack required : items) {
-					if(net.favouriteless.enchanted.common.util.ItemUtils.isSameItemPartial(item, required)) {
+					if(ItemUtils.isSameItemPartial(item, required)) {
 						required.shrink(item.getCount());
 					}
 				}
