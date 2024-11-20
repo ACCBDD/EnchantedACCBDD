@@ -40,8 +40,8 @@ public class GoldChalkBlock extends AbstractChalkBlock implements EntityBlock {
     @Override
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
         if(state != newState) {
-            if(level.getBlockEntity(pos) instanceof GoldChalkBlockEntity be)
-                be.clearRite();
+//            if(level.getBlockEntity(pos) instanceof GoldChalkBlockEntity be)
+//                be.clearRite();
         }
         super.onRemove(state, level, pos, newState, isMoving);
     }
@@ -59,14 +59,21 @@ public class GoldChalkBlock extends AbstractChalkBlock implements EntityBlock {
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         if(level.getBlockEntity(pos) instanceof GoldChalkBlockEntity be)
-            be.execute(state, level, pos, player, hand, hit);
+            be.use(level, pos, player);
         return InteractionResult.SUCCESS;
     }
 
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return type == EnchantedBlockEntityTypes.GOLD_CHALK.get() ? GoldChalkBlockEntity::tick : null;
+        return !level.isClientSide ? createTickerHelper(type, EnchantedBlockEntityTypes.GOLD_CHALK.get(), GoldChalkBlockEntity::serverTick) : null;
+    }
+
+    @Nullable
+    @SuppressWarnings("unchecked")
+    protected static <E extends BlockEntity, A extends BlockEntity> BlockEntityTicker<A> createTickerHelper(
+            BlockEntityType<A> serverType, BlockEntityType<E> clientType, BlockEntityTicker<? super E> ticker) {
+        return clientType == serverType ? (BlockEntityTicker<A>)ticker : null;
     }
 
 }
