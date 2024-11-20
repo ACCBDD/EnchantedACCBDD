@@ -42,6 +42,7 @@ public class EJeiPlugin implements IModPlugin {
         registration.addRecipeCategories(new ByproductCategory(guiHelper));
         registration.addRecipeCategories(new SpinningCategory(guiHelper));
         registration.addRecipeCategories(new DistillingCategory(guiHelper));
+        registration.addRecipeCategories(new RiteCategory(guiHelper));
         registration.addRecipeCategories(new CauldronTypeRecipeCategory<>(guiHelper, EJeiRecipeTypes.CAULDRON, Component.translatable("jei.enchanted.witch_cauldron"), EItems.WITCH_CAULDRON.get()));
         registration.addRecipeCategories(new CauldronTypeRecipeCategory<>(guiHelper, EJeiRecipeTypes.KETTLE, Component.translatable("jei.enchanted.witch_cauldron"), EItems.KETTLE.get()));
         registration.addRecipeCategories(new MutandisCategory(guiHelper, EJeiRecipeTypes.MUTANDIS, EItems.MUTANDIS.get(), Component.translatable("jei.enchanted.mutandis")));
@@ -56,6 +57,7 @@ public class EJeiPlugin implements IModPlugin {
         registration.addRecipes(EJeiRecipeTypes.KETTLE, RecipeUtils.getRecipes(ERecipeTypes.KETTLE.get()));
         registration.addRecipes(EJeiRecipeTypes.DISTILLING, RecipeUtils.getRecipes(ERecipeTypes.DISTILLING.get()));
 
+        JeiRiteRecipe.register(registration);
         JeiMutandisRecipe.register(registration);
         registration.addIngredientInfo(new ItemStack(EItems.CHALICE_FILLED.get()), VanillaTypes.ITEM_STACK, Component.translatable("jei.enchanted.chalice_filled"));
     }
@@ -74,6 +76,7 @@ public class EJeiPlugin implements IModPlugin {
         registration.addRecipeCatalyst(EItems.WITCH_CAULDRON.get().getDefaultInstance(), EJeiRecipeTypes.CAULDRON);
         registration.addRecipeCatalyst(EItems.KETTLE.get().getDefaultInstance(), EJeiRecipeTypes.KETTLE);
         registration.addRecipeCatalyst(EItems.DISTILLERY.get().getDefaultInstance(), EJeiRecipeTypes.DISTILLING);
+        registration.addRecipeCatalyst(EItems.GOLDEN_CHALK.get().getDefaultInstance(), EJeiRecipeTypes.RITE);
         registration.addRecipeCatalyst(EItems.MUTANDIS.get().getDefaultInstance(), EJeiRecipeTypes.MUTANDIS);
         registration.addRecipeCatalyst(EItems.MUTANDIS_EXTREMIS.get().getDefaultInstance(), EJeiRecipeTypes.MUTANDIS_EXTREMIS);
     }

@@ -12,6 +12,9 @@ import net.favouriteless.enchanted.common.circle_magic.rites.Rite.RiteParams;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+
+import java.util.List;
 
 public record DuplicateItemFactory(Item targetItem, int count) implements RiteFactory {
 
@@ -30,6 +33,11 @@ public record DuplicateItemFactory(Item targetItem, int count) implements RiteFa
     @Override
     public ResourceLocation id() {
         return ID;
+    }
+
+    @Override
+    public List<ItemStack> getOutputs() {
+        return List.of(new ItemStack(targetItem, count));
     }
 
 }

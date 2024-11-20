@@ -31,4 +31,9 @@ public record LocationBoundCreateItemFactory(List<ItemStack> items) implements R
         return ID;
     }
 
+    @Override
+    public List<ItemStack> getOutputs() {
+        return items;
+    }
+
 }

@@ -2,6 +2,7 @@ package net.favouriteless.enchanted.platform.services;
 
 import com.mojang.serialization.Codec;
 import net.fabricmc.fabric.api.event.registry.DynamicRegistries;
+import net.fabricmc.fabric.api.event.registry.DynamicRegistries.SyncOption;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.registry.FlammableBlockRegistry;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
@@ -74,6 +75,12 @@ public class FabricCommonRegistryHelper implements ICommonRegistryHelper {
 	@Override
 	public <T> ResourceKey<Registry<T>> registerDataRegistry(ResourceKey<Registry<T>> key, Codec<T> codec) {
 		DynamicRegistries.register(key, codec);
+		return key;
+	}
+
+	@Override
+	public <T> ResourceKey<Registry<T>> registerSyncedDataRegistry(ResourceKey<Registry<T>> key, Codec<T> codec, Codec<T> networkCodec) {
+		DynamicRegistries.registerSynced(key, codec, networkCodec);
 		return key;
 	}
 

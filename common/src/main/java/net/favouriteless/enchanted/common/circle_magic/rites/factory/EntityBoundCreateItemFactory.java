@@ -31,4 +31,9 @@ public record EntityBoundCreateItemFactory(List<ItemStack> items) implements Rit
         return ID;
     }
 
+    @Override
+    public List<ItemStack> getOutputs() {
+        return items;
+    }
+
 }

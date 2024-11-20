@@ -10,6 +10,7 @@ import net.favouriteless.enchanted.common.circle_magic.rites.Rite.BaseRiteParams
 import net.favouriteless.enchanted.common.circle_magic.rites.Rite.RiteParams;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -29,6 +30,11 @@ public record CreateItemFactory(List<ItemStack> items) implements RiteFactory {
     @Override
     public ResourceLocation id() {
         return ID;
+    }
+
+    @Override
+    public List<ItemStack> getOutputs() {
+        return items;
     }
 
 }

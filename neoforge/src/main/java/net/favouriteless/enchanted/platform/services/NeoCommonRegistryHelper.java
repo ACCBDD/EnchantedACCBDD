@@ -84,7 +84,13 @@ public class NeoCommonRegistryHelper implements ICommonRegistryHelper {
 
 	@Override
 	public <T> ResourceKey<Registry<T>> registerDataRegistry(ResourceKey<Registry<T>> key, Codec<T> codec) {
-		dataRegistryRegisterables.add(new DataRegistryRegisterable<>(key, codec));
+		dataRegistryRegisterables.add(new DataRegistryRegisterable<>(key, codec, null));
+		return key;
+	}
+
+	@Override
+	public <T> ResourceKey<Registry<T>> registerSyncedDataRegistry(ResourceKey<Registry<T>> key, Codec<T> codec, Codec<T> networkCodec) {
+		dataRegistryRegisterables.add(new DataRegistryRegisterable<>(key, codec, networkCodec));
 		return key;
 	}
 
@@ -121,10 +127,13 @@ public class NeoCommonRegistryHelper implements ICommonRegistryHelper {
 
 	}
 
-	public record DataRegistryRegisterable<T>(ResourceKey<Registry<T>> key, Codec<T> codec) {
+	public record DataRegistryRegisterable<T>(ResourceKey<Registry<T>> key, Codec<T> codec, Codec<T> networkCodec) {
 
 		public void register(DataPackRegistryEvent.NewRegistry event) {
-			event.dataPackRegistry(key, codec);
+			if(networkCodec == null)
+				event.dataPackRegistry(key, codec);
+			else
+				event.dataPackRegistry(key, codec, networkCodec);
 		}
 
 	}
