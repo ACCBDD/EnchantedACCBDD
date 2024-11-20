@@ -1,4 +1,1 @@
 - THIS IS A TESTING BUILD. I DO NOT RECOMMEND USING IT IN A MODPACK.
-
-- CHANGED: Re-added and reworked JEI integration.
-- CHANGED: Rite JSONs now support weather and time restrictions.
