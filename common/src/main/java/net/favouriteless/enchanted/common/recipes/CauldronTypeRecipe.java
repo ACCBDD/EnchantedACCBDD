@@ -71,6 +71,10 @@ public abstract class CauldronTypeRecipe implements Recipe<ListInput> {
         return result;
     }
 
+    public List<ItemStack> getInputs() {
+        return inputs;
+    }
+
     public int getPower() {
         return power;
     }

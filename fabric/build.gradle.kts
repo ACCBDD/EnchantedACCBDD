@@ -46,6 +46,9 @@ dependencies {
     modImplementation( libs.forgeconfigapi.fabric )
 
     modCompileOnly( libs.iris.fabric )
+    modCompileOnly( libs.jei.fabric.api )
+
+    modRuntimeOnly( libs.jei.fabric )
 }
 
 loom {

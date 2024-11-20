@@ -69,6 +69,9 @@ dependencies {
     implementation( libs.geckolib.neoforge ) { isTransitive = false }
 
     compileOnly( libs.iris.neoforge )
+    compileOnly( libs.jei.neoforge.api )
+
+    runtimeOnly( libs.jei.neoforge )
 }
 
 tasks.withType<Test>().configureEach {

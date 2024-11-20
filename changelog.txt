@@ -1,5 +1,4 @@
-VERY IMPORTANT NOTES. VERY.
-- JEI integration is disabled in this beta, it'll come back for the full release.
 - THIS IS A TESTING BUILD. I DO NOT RECOMMEND USING IT IN A MODPACK.
 
+- CHANGED: Re-added and reworked JEI integration.
 - CHANGED: Rite JSONs now support weather and time restrictions.

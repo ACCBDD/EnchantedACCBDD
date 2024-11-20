@@ -4,6 +4,8 @@ import net.favouriteless.enchanted.common.Enchanted;
 import net.favouriteless.enchanted.platform.CommonServices;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentMap;
+import net.minecraft.core.component.DataComponentPatch;
+import net.minecraft.core.component.DataComponentPredicate;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -15,7 +17,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * Util class for functions related to {@link ItemStack}.
@@ -63,21 +67,13 @@ public class ItemUtils {
 			return false;
 
 		DataComponentMap aMap = a.getComponents();
-		DataComponentMap bMap = b.getComponents();
-		for(DataComponentType<?> type : bMap.keySet()) {
-			if(!aMap.has(type))
+		DataComponentPatch bPatch = b.getComponentsPatch();
+		for(Entry<DataComponentType<?>, Optional<?>> entry : bPatch.entrySet()) {
+			if(!aMap.has(entry.getKey()))
 				return false;
 
-			Object aComp = aMap.get(type);
-			Object bComp = bMap.get(type);
-			if(aComp == null) {
-				if(bComp == null)
-					continue;
-				return false;
-			}
-
-			if(bComp.equals(b.getItem().components().get(type)))
-				continue;
+			Object aComp = aMap.get(entry.getKey());
+			Object bComp = entry.getValue();
 
 			if(!Objects.equals(aComp, bComp))
 				return false;

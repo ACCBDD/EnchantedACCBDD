@@ -33,6 +33,7 @@ dependencies {
     compileOnly( libs.geckolib.common )
     compileOnly( libs.forgeconfigapi.common )
     compileOnly( libs.iris.common )
+    compileOnly( libs.jei.common.api )
 }
 
 publishing {

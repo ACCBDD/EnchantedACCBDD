@@ -18,6 +18,7 @@ subprojects {
                 includeGroup("software.bernie.geckolib")
             }
         }
+        maven("https://maven.blamejared.com/") { name = "Jared's maven" }
     }
 
 }

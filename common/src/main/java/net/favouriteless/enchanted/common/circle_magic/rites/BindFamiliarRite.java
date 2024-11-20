@@ -95,7 +95,7 @@ public class BindFamiliarRite extends Rite {
     protected UUID findTargetUUID(ServerLevel level, BlockPos pos, RiteParams params) {
         List<TamableAnimal> potentials = level.getEntitiesOfClass(TamableAnimal.class, type.getBounds(pos), e -> FamiliarTypes.getByInput(e.getType()) != null);
         for(TamableAnimal animal : potentials) {
-            if(animal.getOwnerUUID().equals(params.caster))
+            if(animal.getOwnerUUID() != null && animal.getOwnerUUID().equals(params.caster))
                 return animal.getUUID();
         }
         return null;

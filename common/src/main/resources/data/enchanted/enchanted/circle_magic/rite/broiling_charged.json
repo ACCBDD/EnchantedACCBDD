@@ -8,6 +8,5 @@
   "shapes": {
     "enchanted:medium_circle": "enchanted:nether_chalk"
   },
-  "power": 1000,
   "factory": { "type": "enchanted:broiling" }
 }

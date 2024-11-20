@@ -58,6 +58,10 @@ public class ByproductRecipe implements Recipe<SingleRecipeInput> {
         return ingredients;
     }
 
+    public Ingredient getInput() {
+        return this.ingredient;
+    }
+
     @Override
     public boolean isSpecial() {
         return true;
