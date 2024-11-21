@@ -57,7 +57,7 @@ public class EnchantedItems {
 	public static final Supplier<BlockItem> CANDELABRA = registerBlock("candelabra", EnchantedBlocks.CANDELABRA);
 	public static final Supplier<BlockItem> CHALICE = registerBlock("chalice", EnchantedBlocks.CHALICE);
 	public static final Supplier<BlockItem> CHALICE_FILLED = registerBlock("chalice_filled", EnchantedBlocks.CHALICE_FILLED);
-	public static final Supplier<Item> CIRCLE_TALISMAN = register("circle_talisman", CircleTalismanItem::new);
+	public static final Supplier<Item> CIRCLE_TALISMAN = register("circle_talisman", () -> new CircleTalismanItem(new Properties().stacksTo(1)));
 	public static final Supplier<Item> CLAY_JAR = registerItem("clay_jar");
 	public static final Supplier<Item> CONDENSED_FEAR = registerItem("condensed_fear");
 	public static final Supplier<Item> CREEPER_HEART = registerItem("creeper_heart");

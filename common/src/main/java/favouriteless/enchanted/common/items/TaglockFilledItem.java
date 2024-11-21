@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.UUID;
 
 public class TaglockFilledItem extends Item {
+    public static final String TARGET_TAG = "entity";
+    public static final String NAME_TAG = "entityName";
 
     public TaglockFilledItem() {
         super(new Properties());
@@ -20,7 +22,7 @@ public class TaglockFilledItem extends Item {
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level pLevel, List<Component> tooltip, TooltipFlag flag) {
         if(stack.hasTag()) {
-            tooltip.add(Component.literal(stack.getTag().getString("entityName")).withStyle(ChatFormatting.GRAY));
+            tooltip.add(Component.literal(stack.getTag().getString(NAME_TAG)).withStyle(ChatFormatting.GRAY));
         }
         super.appendHoverText(stack, pLevel, tooltip, flag);
     }
@@ -32,7 +34,7 @@ public class TaglockFilledItem extends Item {
 
     public static UUID getUUID(ItemStack stack) {
         if(stack.getItem() == EnchantedItems.TAGLOCK_FILLED.get() && stack.hasTag()) {
-            return NbtUtils.loadUUID(stack.getTag().get("entity"));
+            return NbtUtils.loadUUID(stack.getTag().get(TARGET_TAG));
         }
         return null;
     }

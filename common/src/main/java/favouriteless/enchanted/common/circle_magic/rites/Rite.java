@@ -7,12 +7,14 @@ import favouriteless.enchanted.common.blocks.entity.GoldChalkBlockEntity;
 import favouriteless.enchanted.common.circle_magic.RiteManager;
 import favouriteless.enchanted.common.circle_magic.RiteType;
 import favouriteless.enchanted.common.init.registry.EnchantedItems;
+import favouriteless.enchanted.common.items.TaglockFilledItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.UUIDUtil;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
+import net.minecraft.nbt.NbtUtils;
 import net.minecraft.resources.RegistryOps;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -137,11 +139,11 @@ public abstract class Rite {
      */
     protected UUID findTargetUUID(ServerLevel level, BlockPos pos, RiteParams params) {
         for(ItemStack stack : params.consumedItems) {
-            if (stack.hasTag()) {
-                if(stack.getTag().contains("entity")) {
-                    return UUID.fromString(stack.getTag().getString("entity"));
+            if (stack.getItem() instanceof TaglockFilledItem) {
+                if(stack.getOrCreateTag().contains(TaglockFilledItem.TARGET_TAG)) {
+                    return NbtUtils.loadUUID(stack.getTag().get(TaglockFilledItem.TARGET_TAG));
                 }
-                }
+            }
         }
         return null;
     }

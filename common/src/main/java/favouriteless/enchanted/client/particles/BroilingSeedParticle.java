@@ -1,6 +1,6 @@
 package favouriteless.enchanted.client.particles;
 
-import favouriteless.enchanted.common.circle_magic.rites.processing.RiteBroiling;
+import favouriteless.enchanted.common.circle_magic.rites.BroilingRite;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.NoRenderParticle;
 import net.minecraft.client.particle.Particle;
@@ -20,8 +20,8 @@ public class BroilingSeedParticle extends NoRenderParticle {
 	public void tick() {
 		for(int a = 0; a < 360; a+=6) {
 			double angle = Math.toRadians(a);
-			double cx = xo + Math.sin(angle) * RiteBroiling.CIRCLE_RADIUS;
-			double cz = zo + Math.cos(angle) * RiteBroiling.CIRCLE_RADIUS;
+			double cx = xo + Math.sin(angle) * BroilingRite.CIRCLE_RADIUS;
+			double cz = zo + Math.cos(angle) * BroilingRite.CIRCLE_RADIUS;
 
 			level.addParticle(ParticleTypes.FLAME, cx, yo, cz, 0.0D, 0.0D, 0.0D);
 		}

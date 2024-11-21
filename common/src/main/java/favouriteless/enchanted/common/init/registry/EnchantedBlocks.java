@@ -76,8 +76,8 @@ public class EnchantedBlocks {
     public static final Supplier<Block> NETHER_CHALK = register("nether_chalk", () -> new ChalkCircleBlock(ParticleTypes.FLAME));
     public static final Supplier<Block> OTHERWHERE_CHALK = register("otherwhere_chalk", () -> new ChalkCircleBlock(ParticleTypes.DRAGON_BREATH));
     public static final Supplier<Block> POPPET_SHELF = register("poppet_shelf", PoppetShelfBlock::new);
-    public static final Supplier<Block> PROTECTION_BARRIER = register("protection_barrier", ProtectionBarrierBlock::new);
-    public static final Supplier<Block> PROTECTION_BARRIER_TEMPORARY = register("protection_barrier_temporary", TemporaryProtectionBarrierBlock::new);
+    public static final Supplier<ProtectionBarrierBlock> PROTECTION_BARRIER = register("protection_barrier", () -> new ProtectionBarrierBlock(false, copy(Blocks.BARRIER).randomTicks()));
+    public static final Supplier<ProtectionBarrierBlock> PROTECTION_BARRIER_BLOCKING = register("protection_barrier_temporary", () -> new ProtectionBarrierBlock(true, copy(Blocks.BARRIER).randomTicks()));
     public static final Supplier<Block> RITUAL_CHALK = register("ritual_chalk", () -> new ChalkCircleBlock(null));
     public static final Supplier<ButtonBlock> ROWAN_BUTTON = register("rowan_button", EnchantedBlocks::woodenButton);
     public static final Supplier<FenceBlock> ROWAN_FENCE = register("rowan_fence", EnchantedBlocks::woodenFence);
@@ -192,6 +192,10 @@ public class EnchantedBlocks {
 
     public static SaplingBlock sapling(String id) {
         return new EnchantedSaplingBlock(new EnchantedTreeGrower(id), Properties.copy(Blocks.OAK_SAPLING));
+    }
+
+    public static Properties copy(BlockBehaviour block) {
+        return Properties.copy(block);
     }
 
     public static void load() {} // Method which exists purely to load the class.

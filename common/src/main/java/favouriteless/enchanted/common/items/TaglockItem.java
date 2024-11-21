@@ -118,8 +118,8 @@ public class TaglockItem extends Item {
             ItemStack newStack = new ItemStack(EnchantedItems.TAGLOCK_FILLED.get(), 1);
 
             CompoundTag nbt = new CompoundTag();
-            nbt.putUUID("entity", uuid);
-            nbt.putString("entityName", name);
+            nbt.putUUID(TaglockFilledItem.TARGET_TAG, uuid);
+            nbt.putString(TaglockFilledItem.NAME_TAG, name);
             newStack.setTag(nbt);
 
             if (!player.getInventory().add(newStack)) {

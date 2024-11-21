@@ -7,7 +7,6 @@ import favouriteless.enchanted.client.particles.types.DoubleParticleType.DoubleP
 import favouriteless.enchanted.client.particles.types.SimpleColouredParticleType.SimpleColouredData;
 import favouriteless.enchanted.client.particles.types.TwoToneColouredParticleType.TwoToneColouredData;
 import favouriteless.enchanted.platform.CommonServices;
-import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
 
@@ -22,7 +21,7 @@ public class EnchantedParticleTypes {
     public static final Supplier<ParticleType<SimpleColouredData>> CAULDRON_BREW = register("cauldron_brew", () -> new SimpleColouredParticleType(false));
     public static final Supplier<ParticleType<SimpleColouredData>> CAULDRON_COOK = register("cauldron_cook", () -> new SimpleColouredParticleType(false));
     public static final Supplier<ParticleType<CircleMagicData>> CIRCLE_MAGIC = register("circle_magic", () -> new CircleMagicParticleType(false));
-    public static final Supplier<ParticleType<CircleMagicData>> CURSE_BLIGHT = register("curse_blight", () -> new CircleMagicParticleType(false));
+    public static final Supplier<CircleMagicParticleType> CURSE_BLIGHT = register("curse_blight", () -> new CircleMagicParticleType(false));
     public static final Supplier<SimpleParticleType> CURSE_BLIGHT_SEED = register("curse_blight_seed", () -> new SimpleParticleType(false));
     public static final Supplier<SimpleParticleType> CURSE_SEED = register("curse_seed", () -> new SimpleParticleType(false));
     public static final Supplier<ParticleType<CircleMagicData>> FERTILITY = register("fertility", () -> new CircleMagicParticleType(false));

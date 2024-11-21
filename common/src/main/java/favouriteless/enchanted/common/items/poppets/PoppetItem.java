@@ -47,7 +47,7 @@ public class PoppetItem extends Item {
 
 			if(taglockStack.getItem() instanceof TaglockFilledItem) {
 				CompoundTag nbt = taglockStack.getOrCreateTag();
-				Player target = level.getPlayerByUUID(nbt.getUUID("entity"));
+				Player target = level.getPlayerByUUID(nbt.getUUID(TaglockFilledItem.TARGET_TAG));
 
 				if(target != null) {
 					PoppetUtils.bind(itemStack, target);
@@ -66,7 +66,7 @@ public class PoppetItem extends Item {
 				ItemStack taglockStack = player.getOffhandItem();
 				if(taglockStack.getItem() instanceof TaglockFilledItem) {
 					CompoundTag nbt = taglockStack.getOrCreateTag();
-					Player target = level.getPlayerByUUID(nbt.getUUID("entity"));
+					Player target = level.getPlayerByUUID(nbt.getUUID(TaglockFilledItem.TARGET_TAG));
 
 					if(target != null) {
 						player.startUsingItem(hand);

@@ -36,6 +36,10 @@ public class CurseTypes {
         return register(Enchanted.id(id), curseSupplier);
     }
 
+    public static CurseType<?> get(ResourceLocation id) {
+        return CURSE_TYPES.get(id);
+    }
+
     public static Curse getInstance(ResourceLocation id) {
         CurseType<?> type = CURSE_TYPES.get(id);
         return type != null ? type.create() : null;
