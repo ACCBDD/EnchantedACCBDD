@@ -3,6 +3,7 @@ package favouriteless.enchanted.integrations.jei.categories;
 import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.common.init.registry.EItems;
 import favouriteless.enchanted.common.recipes.WitchCauldronRecipe;
+import favouriteless.enchanted.integrations.jei.EJeiRecipeTypes;
 import favouriteless.enchanted.util.RecipeUtils;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
@@ -10,7 +11,7 @@ import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.drawable.IDrawableAnimated;
 import mezz.jei.api.gui.drawable.IDrawableStatic;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
-import mezz.jei.api.helpers.IJeiHelpers;
+import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
@@ -20,20 +21,18 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 
-public class WitchCauldronCategory implements IRecipeCategory<WitchCauldronRecipe> {
+public class CauldronCategory implements IRecipeCategory<WitchCauldronRecipe> {
 
-    private final RecipeType<WitchCauldronRecipe> type;
-    private final IJeiHelpers jeiHelpers;
+    private final IGuiHelper guiHelper;
 
     private final int GUI_WIDTH = 140;
     private final IDrawableAnimated arrow;
 
-    public WitchCauldronCategory(IJeiHelpers jeiHelpers, RecipeType<WitchCauldronRecipe> type) {
-        this.jeiHelpers = jeiHelpers;
-        this.type = type;
+    public CauldronCategory(IGuiHelper guiHelper) {
+        this.guiHelper = guiHelper;
 
-        IDrawableStatic arrow = jeiHelpers.getGuiHelper().createDrawable(Enchanted.id("textures/gui/witch_oven.png"), 176, 14, 24, 17);
-        this.arrow = jeiHelpers.getGuiHelper().createAnimatedDrawable(arrow, 120, IDrawableAnimated.StartDirection.LEFT, false);
+        IDrawableStatic arrow = guiHelper.createDrawable(Enchanted.id("textures/gui/witch_oven.png"), 176, 14, 24, 17);
+        this.arrow = guiHelper.createAnimatedDrawable(arrow, 120, IDrawableAnimated.StartDirection.LEFT, false);
     }
 
     @Override
@@ -59,7 +58,7 @@ public class WitchCauldronCategory implements IRecipeCategory<WitchCauldronRecip
 
     @Override
     public IDrawable getBackground() {
-        return jeiHelpers.getGuiHelper().createDrawable(Enchanted.id("textures/gui/jei/witch_cauldron.png"), 4, 4, GUI_WIDTH, 70);
+        return guiHelper.createDrawable(Enchanted.id("textures/gui/jei/witch_cauldron.png"), 4, 4, GUI_WIDTH, 70);
     }
 
     @Override
@@ -74,12 +73,12 @@ public class WitchCauldronCategory implements IRecipeCategory<WitchCauldronRecip
 
     @Override
     public IDrawable getIcon() {
-        return jeiHelpers.getGuiHelper().createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(EItems.WITCH_CAULDRON.get()));
+        return guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(EItems.WITCH_CAULDRON.get()));
     }
 
     @Override
     public RecipeType<WitchCauldronRecipe> getRecipeType() {
-        return type;
+        return EJeiRecipeTypes.CAULDRON;
     }
 
 }

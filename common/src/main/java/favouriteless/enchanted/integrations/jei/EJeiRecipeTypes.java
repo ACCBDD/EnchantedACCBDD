@@ -1,10 +1,9 @@
 package favouriteless.enchanted.integrations.jei;
 
 import favouriteless.enchanted.common.Enchanted;
-import favouriteless.enchanted.integrations.jei.recipes.JeiMutandisRecipe;
 import favouriteless.enchanted.common.recipes.*;
+import favouriteless.enchanted.integrations.jei.recipes.JeiMutandisRecipe;
 import favouriteless.enchanted.integrations.jei.recipes.JeiRiteRecipe;
-import favouriteless.enchanted.jei.recipes.JEIRiteRecipe;
 import mezz.jei.api.recipe.RecipeType;
 
 public class EJeiRecipeTypes {

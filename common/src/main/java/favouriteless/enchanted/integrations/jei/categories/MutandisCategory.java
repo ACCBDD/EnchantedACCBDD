@@ -6,6 +6,7 @@ import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
+import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.helpers.IJeiHelpers;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
@@ -14,17 +15,18 @@ import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
 public class MutandisCategory implements IRecipeCategory<JeiMutandisRecipe> {
 
-    private final IJeiHelpers jeiHelpers;
+    private final IGuiHelper guiHelper;
     private final RecipeType<JeiMutandisRecipe> type;
-    private final ItemStack icon;
+    private final Item icon;
     private final Component title;
 
-    public MutandisCategory(IJeiHelpers jeiHelpers, RecipeType<JeiMutandisRecipe> type, ItemStack icon, Component title) {
-        this.jeiHelpers = jeiHelpers;
+    public MutandisCategory(IGuiHelper guiHelper, RecipeType<JeiMutandisRecipe> type, Item icon, Component title) {
+        this.guiHelper = guiHelper;
         this.type = type;
         this.icon = icon;
         this.title = title;
@@ -43,7 +45,7 @@ public class MutandisCategory implements IRecipeCategory<JeiMutandisRecipe> {
 
     @Override
     public IDrawable getBackground() {
-        return jeiHelpers.getGuiHelper().createDrawable(Enchanted.id("textures/gui/jei/mutandis.png"), 0, 0, 120, 68);
+        return guiHelper.createDrawable(Enchanted.id("textures/gui/jei/mutandis.png"), 0, 0, 120, 68);
     }
 
     @Override
@@ -65,7 +67,7 @@ public class MutandisCategory implements IRecipeCategory<JeiMutandisRecipe> {
 
     @Override
     public IDrawable getIcon() {
-        return this.jeiHelpers.getGuiHelper().createDrawableIngredient(VanillaTypes.ITEM_STACK, this.icon);
+        return this.guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(icon));
     }
 
     @Override

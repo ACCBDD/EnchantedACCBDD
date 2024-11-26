@@ -9,6 +9,7 @@ import favouriteless.enchanted.common.init.registry.EMenuTypes;
 import favouriteless.enchanted.common.init.registry.ERecipeTypes;
 import favouriteless.enchanted.common.menus.SpinningWheelMenu;
 import favouriteless.enchanted.common.menus.WitchOvenMenu;
+import favouriteless.enchanted.common.util.RecipeUtils;
 import favouriteless.enchanted.integrations.jei.categories.*;
 import favouriteless.enchanted.integrations.jei.container_handlers.DistilleryContainerHandler;
 import favouriteless.enchanted.integrations.jei.container_handlers.SpinningWheelContainerHandler;
@@ -44,8 +45,8 @@ public class EJeiPlugin implements IModPlugin {
         registration.addRecipeCategories(new SpinningCategory(guiHelper));
         registration.addRecipeCategories(new DistillingCategory(guiHelper));
         registration.addRecipeCategories(new RiteCategory(guiHelper));
-        registration.addRecipeCategories(new CauldronTypeRecipeCategory<>(guiHelper, EJeiRecipeTypes.CAULDRON, Component.translatable("jei.enchanted.witch_cauldron"), EItems.WITCH_CAULDRON.get()));
-        registration.addRecipeCategories(new CauldronTypeRecipeCategory<>(guiHelper, EJeiRecipeTypes.KETTLE, Component.translatable("jei.enchanted.witch_cauldron"), EItems.KETTLE.get()));
+        registration.addRecipeCategories(new CauldronCategory(guiHelper));
+        registration.addRecipeCategories(new KettleCategory(guiHelper));
         registration.addRecipeCategories(new MutandisCategory(guiHelper, EJeiRecipeTypes.MUTANDIS, EItems.MUTANDIS.get(), Component.translatable("jei.enchanted.mutandis")));
         registration.addRecipeCategories(new MutandisCategory(guiHelper, EJeiRecipeTypes.MUTANDIS_EXTREMIS, EItems.MUTANDIS_EXTREMIS.get(), Component.translatable("jei.enchanted.mutandis_extremis")));
     }

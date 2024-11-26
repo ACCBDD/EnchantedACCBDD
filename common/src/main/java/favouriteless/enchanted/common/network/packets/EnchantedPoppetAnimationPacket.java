@@ -1,6 +1,6 @@
 package favouriteless.enchanted.common.network.packets;
 
-import favouriteless.enchanted.client.particles.types.TwoToneColouredParticleType.TwoToneColouredData;
+import favouriteless.enchanted.client.particles.types.TwoColourOptions;
 import favouriteless.enchanted.client.render.poppet.PoppetAnimationManager;
 import favouriteless.enchanted.common.init.registry.EParticleTypes;
 import favouriteless.enchanted.common.items.poppets.PoppetItem;
@@ -10,6 +10,7 @@ import favouriteless.enchanted.common.poppet.PoppetUseResult.ResultType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.FastColor;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 
@@ -47,9 +48,11 @@ public class EnchantedPoppetAnimationPacket implements EnchantedPacket {
 		if(entity != null) {
 			if(item.getItem() instanceof PoppetItem) {
 				PoppetColour poppetColour = ((PoppetItem)item.getItem()).colour;
-				mc.particleEngine.createTrackingEmitter(entity, new TwoToneColouredData(EParticleTypes.POPPET.get(),
-						poppetColour.rPrimary, poppetColour.gPrimary, poppetColour.gSecondary,
-						poppetColour.rSecondary, poppetColour.gSecondary, poppetColour.bSecondary), 40);
+				mc.particleEngine.createTrackingEmitter(entity, new TwoColourOptions(
+							EParticleTypes.POPPET.get(),
+							FastColor.ARGB32.color(255, poppetColour.rPrimary, poppetColour.gPrimary, poppetColour.gSecondary),
+							FastColor.ARGB32.color(255, poppetColour.rSecondary, poppetColour.gSecondary, poppetColour.bSecondary)
+						), 40);
 
 				if(entity == mc.player)
 					PoppetAnimationManager.startAnimation(result, item);

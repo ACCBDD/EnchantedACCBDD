@@ -27,7 +27,7 @@ public class WitchOvenContainerHandler implements IGuiContainerHandler<WitchOven
             @Override
             public void onClick(IFocusFactory focusFactory, IRecipesGui recipesGui) {
                 List<RecipeType<?>> list = new ArrayList<>();
-                list.add(EJeiRecipeTypes.RECIPE_TYPE_BYPRODUCT);
+                list.add(EJeiRecipeTypes.BYPRODUCT);
                 recipesGui.showTypes(list);
             }
         });

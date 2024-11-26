@@ -71,7 +71,7 @@ public class ClientSetupEventsForge {
 		event.registerSpriteSet(EParticleTypes.SKY_WRATH_SEED.get(), SkyWrathSeedParticle.Factory::new);
 		event.registerSpriteSet(EParticleTypes.SKY_WRATH.get(), SkyWrathParticle.Factory::new);
 		event.registerSpriteSet(EParticleTypes.CURSE_SEED.get(), CurseSeedParticle.Factory::new);
-		event.registerSpriteSet(EParticleTypes.CURSE_BLIGHT_SEED.get(), BlightSeedParticle.Factory::new);
+		event.registerSpriteSet(EParticleTypes.BLIGHT_SEED.get(), BlightSeedParticle.Factory::new);
 		event.registerSpriteSet(EParticleTypes.BLIGHT.get(), RepellingParticle.Factory::new);
 		event.registerSpriteSet(EParticleTypes.REMOVE_CURSE_SEED.get(), RemoveCurseSeedParticle.Factory::new);
 		event.registerSpriteSet(EParticleTypes.REMOVE_CURSE.get(), RemoveCurseParticle.Factory::new);

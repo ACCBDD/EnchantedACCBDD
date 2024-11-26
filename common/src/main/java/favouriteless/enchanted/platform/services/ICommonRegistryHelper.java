@@ -90,6 +90,11 @@ public interface ICommonRegistryHelper {
     <T> ResourceKey<Registry<T>> registerDataRegistry(ResourceKey<Registry<T>> key, Codec<T> codec);
 
     /**
+     * Register a synced datapack registry.
+     */
+    <T> ResourceKey<Registry<T>> registerSyncedDataRegistry(ResourceKey<Registry<T>> key, Codec<T> codec, Codec<T> networkCodec);
+
+    /**
      * Register a block as flammable (i.e. can catch on fire).
      *
      * @param block The {@link Block} to make flammable.

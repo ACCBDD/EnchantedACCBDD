@@ -1,9 +1,11 @@
 package favouriteless.enchanted.platform.services;
 
 import com.mojang.blaze3d.platform.InputConstants.Type;
+import com.mojang.blaze3d.vertex.VertexFormat;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -20,12 +22,14 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class ForgeClientRegistryHelper implements IClientRegistryHelper {
 
 	public static final List<KeyMapping> KEY_MAPPINGS = new ArrayList<>();
 	public static final List<Pair<ModelLayerLocation, Supplier<LayerDefinition>>> LAYER_DEFINITIONS = new ArrayList<>();
+	public static final List<ShaderInstanceRegisterable> SHADER_INSTANCES = new ArrayList<>();
 
 	@Override
 	public <T extends Entity> void register(EntityType<? extends T> type, EntityRendererProvider<T> constructor) {
@@ -54,4 +58,10 @@ public class ForgeClientRegistryHelper implements IClientRegistryHelper {
 		ItemProperties.register(item, location, function);
 	}
 
+	@Override
+	public void registerShader(String name, VertexFormat vertexFormat, Consumer<ShaderInstance> consumer) {
+		SHADER_INSTANCES.add(new ShaderInstanceRegisterable(name, vertexFormat, consumer));
+	}
+
+	public record ShaderInstanceRegisterable(String name, VertexFormat vertexFormat, Consumer<ShaderInstance> loadCallback) {}
 }

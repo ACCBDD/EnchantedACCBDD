@@ -1,5 +1,6 @@
 package favouriteless.enchanted.platform.services;
 
+import com.mojang.serialization.Codec;
 import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.common.items.ForgeNonAnimatedArmorItem;
 import favouriteless.enchanted.common.items.NonAnimatedArmorItem;
@@ -8,6 +9,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
 import net.minecraft.sounds.SoundEvent;
@@ -27,6 +29,7 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraftforge.common.extensions.IForgeMenuType;
 import net.minecraftforge.common.util.ForgeSoundType;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.DataPackRegistryEvent;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 import org.apache.commons.lang3.function.TriFunction;
@@ -43,6 +46,7 @@ public class ForgeCommonRegistryHelper implements ICommonRegistryHelper {
 	private static final RegistryMap registryMap = new RegistryMap();
 
 	public static final List<SimpleJsonResourceReloadListener> dataLoaders = new ArrayList<>();
+	public static final List<DataRegistryRegisterable<?>> dataRegistryRegisterables = new ArrayList<>();
 
 
 	@Override
@@ -72,6 +76,18 @@ public class ForgeCommonRegistryHelper implements ICommonRegistryHelper {
 				.icon(iconSupplier)
 				.displayItems(itemGenerator)
 				.build());
+	}
+
+	@Override
+	public <T> ResourceKey<Registry<T>> registerDataRegistry(ResourceKey<Registry<T>> key, Codec<T> codec) {
+		dataRegistryRegisterables.add(new DataRegistryRegisterable<>(key, codec, null));
+		return key;
+	}
+
+	@Override
+	public <T> ResourceKey<Registry<T>> registerSyncedDataRegistry(ResourceKey<Registry<T>> key, Codec<T> codec, Codec<T> networkCodec) {
+		dataRegistryRegisterables.add(new DataRegistryRegisterable<>(key, codec, networkCodec));
+		return key;
 	}
 
 	@Override
@@ -108,4 +124,14 @@ public class ForgeCommonRegistryHelper implements ICommonRegistryHelper {
 
 	}
 
+	public record DataRegistryRegisterable<T>(ResourceKey<Registry<T>> key, Codec<T> codec, Codec<T> networkCodec) {
+
+		public void register(DataPackRegistryEvent.NewRegistry event) {
+			if(networkCodec == null)
+				event.dataPackRegistry(key, codec);
+			else
+				event.dataPackRegistry(key, codec, networkCodec);
+		}
+
+	}
 }

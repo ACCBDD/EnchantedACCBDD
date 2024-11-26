@@ -27,7 +27,7 @@ public class DistilleryContainerHandler implements IGuiContainerHandler<Distille
             @Override
             public void onClick(IFocusFactory focusFactory, IRecipesGui recipesGui) {
                 List<RecipeType<?>> list = new ArrayList<>();
-                list.add(EJeiRecipeTypes.RECIPE_TYPE_DISTILLING);
+                list.add(EJeiRecipeTypes.DISTILLING);
                 recipesGui.showTypes(list);
             }
         });

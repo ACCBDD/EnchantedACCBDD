@@ -11,7 +11,6 @@ import favouriteless.enchanted.common.init.EnchantedData;
 import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
 import favouriteless.enchanted.common.init.registry.EnchantedEntityTypes;
 import favouriteless.enchanted.common.init.registry.EItems;
-import favouriteless.enchanted.common.circle_magic.rites.RiteRequirements;
 import fuzs.forgeconfigapiport.api.config.v2.ForgeConfigRegistry;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.registry.DynamicRegistries;
@@ -44,7 +43,6 @@ public class EnchantedFabric implements ModInitializer {
         DynamicRegistries.register(EnchantedData.ALTAR_UPGRADE_REGISTRY, AltarUpgrade.CODEC);
         DynamicRegistries.register(EnchantedData.ALTAR_BLOCK_REGISTRY, PowerProvider.BLOCK_CODEC);
         DynamicRegistries.register(EnchantedData.ALTAR_TAG_REGISTRY, PowerProvider.TAG_CODEC);
-        DynamicRegistries.registerSynced(EnchantedData.RITE_REQUIREMENTS_REGISTRY, RiteRequirements.CODEC);
     }
 
     private static void registerStrippables() {

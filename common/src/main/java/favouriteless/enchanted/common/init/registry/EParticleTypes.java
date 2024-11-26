@@ -43,11 +43,15 @@ public class EParticleTypes {
     }
 
     private static <T extends ParticleOptions> Supplier<ParticleType<T>> register(String pKey, boolean override, ParticleOptions.Deserializer<T> pDeserializer, final Function<ParticleType<T>, MapCodec<T>> pCodecFactory) {
-        return () -> Registry.register(BuiltInRegistries.PARTICLE_TYPE, pKey, new ParticleType<T>(override, pDeserializer) {
-            public Codec<T> codec() {
-                return pCodecFactory.apply(this).codec();
+        return CommonServices.COMMON_REGISTRY.register(
+            BuiltInRegistries.PARTICLE_TYPE,
+            pKey,
+            () -> new ParticleType<>(override, pDeserializer) {
+                public Codec<T> codec() {
+                    return pCodecFactory.apply(this).codec();
+                }
             }
-        });
+        );
     }
 
     public static void load() {} // Method which exists purely to load the class.

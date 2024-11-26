@@ -27,7 +27,7 @@ public class SpinningWheelContainerHandler implements IGuiContainerHandler<Spinn
             @Override
             public void onClick(IFocusFactory focusFactory, IRecipesGui recipesGui) {
                 List<RecipeType<?>> list = new ArrayList<>();
-                list.add(EJeiRecipeTypes.RECIPE_TYPE_SPINNING);
+                list.add(EJeiRecipeTypes.SPINNING);
                 recipesGui.showTypes(list);
             }
         });

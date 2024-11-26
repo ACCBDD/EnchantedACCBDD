@@ -19,9 +19,9 @@ import net.minecraft.world.level.block.Blocks;
 public class EnchantedData {
 
     // These datapack registries need to be registered separately because Forge defers it. See EnchantedForge and EnchantedFabric.
-    public static final ResourceKey<Registry<AltarUpgrade>> ALTAR_UPGRADE_REGISTRY = ResourceKey.createRegistryKey(Enchanted.id("altar/upgrades"));
-    public static final ResourceKey<Registry<PowerProvider<Block>>> ALTAR_BLOCK_REGISTRY = ResourceKey.createRegistryKey(Enchanted.id("altar/blocks"));
-    public static final ResourceKey<Registry<PowerProvider<TagKey<Block>>>> ALTAR_TAG_REGISTRY = ResourceKey.createRegistryKey(Enchanted.id("altar/tags"));
+    public static final ResourceKey<Registry<AltarUpgrade>> ALTAR_UPGRADE_REGISTRY = register(ResourceKey.createRegistryKey(Enchanted.id("altar/upgrades")), AltarUpgrade.CODEC);
+    public static final ResourceKey<Registry<PowerProvider<Block>>> ALTAR_BLOCK_REGISTRY = register(ResourceKey.createRegistryKey(Enchanted.id("altar/blocks")), PowerProvider.BLOCK_CODEC);
+    public static final ResourceKey<Registry<PowerProvider<TagKey<Block>>>> ALTAR_TAG_REGISTRY = register(ResourceKey.createRegistryKey(Enchanted.id("altar/tags")), PowerProvider.TAG_CODEC);
     public static final ResourceKey<Registry<CircleMagicShape>> CIRCLE_SHAPE_REGISTRY = register(ResourceKey.createRegistryKey(Enchanted.id("circle_magic/shape")), CircleMagicShape.CODEC);
     public static final ResourceKey<Registry<RiteType>> RITE_TYPES_REGISTRY = register(ResourceKey.createRegistryKey(Enchanted.id("circle_magic/rite")), RiteType.CODEC);
 
