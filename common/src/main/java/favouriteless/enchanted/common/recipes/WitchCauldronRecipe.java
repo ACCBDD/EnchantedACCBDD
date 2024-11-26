@@ -1,6 +1,6 @@
 package favouriteless.enchanted.common.recipes;
 
-import favouriteless.enchanted.common.init.registry.EnchantedRecipeTypes;
+import favouriteless.enchanted.common.init.registry.ERecipeTypes;
 import favouriteless.enchanted.util.ItemStackHelper;
 import favouriteless.enchanted.util.JsonHelper;
 import com.google.gson.JsonObject;
@@ -16,12 +16,12 @@ import javax.annotation.Nullable;
 public class WitchCauldronRecipe extends CauldronTypeRecipe {
 
     public WitchCauldronRecipe(ResourceLocation id, NonNullList<ItemStack> itemsIn, ItemStack itemOut, int power, int[] cookingColour, int[] finalColour) {
-        super(EnchantedRecipeTypes.WITCH_CAULDRON.get(), id, itemsIn, itemOut, power, cookingColour, finalColour);
+        super(ERecipeTypes.WITCH_CAULDRON.get(), id, itemsIn, itemOut, power, cookingColour, finalColour);
     }
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return EnchantedRecipeTypes.WITCH_CAULDRON_SERIALIZER.get();
+        return ERecipeTypes.WITCH_CAULDRON_SERIALIZER.get();
     }
 
 

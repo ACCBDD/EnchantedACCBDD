@@ -1,6 +1,6 @@
 package favouriteless.enchanted.client.particles;
 
-import favouriteless.enchanted.client.particles.types.DelayedActionParticleType.DelayedActionData;
+import favouriteless.enchanted.client.particles.types.DelayedPosOptions;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 import net.minecraft.world.phys.Vec3;
@@ -94,15 +94,15 @@ public class BindFamiliarParticle extends TextureSheetParticle {
 		return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
 	}
 
-	public static class Factory implements ParticleProvider<DelayedActionData> {
+	public static class Factory implements ParticleProvider<DelayedPosOptions> {
 		private final SpriteSet sprite;
 
 		public Factory(SpriteSet sprites) {
 			this.sprite = sprites;
 		}
 
-		public Particle createParticle(DelayedActionData data, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
-			BindFamiliarParticle particle = new BindFamiliarParticle(level, x, y, z, data.getCenterX(), data.getCenterY(), data.getCenterZ(), data.getActionTicks(), sprite);
+		public Particle createParticle(DelayedPosOptions data, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+			BindFamiliarParticle particle = new BindFamiliarParticle(level, x, y, z, data.getCenter().x, data.getCenter().y, data.getCenter().z, data.getDelay(), sprite);
 			particle.pickSprite(this.sprite);
 			return particle;
 		}

@@ -3,7 +3,7 @@ package favouriteless.enchanted.patchouli.components;
 import com.google.gson.annotations.SerializedName;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import favouriteless.enchanted.Enchanted;
+import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.common.init.EnchantedData;
 import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
 import favouriteless.enchanted.common.circle_magic.rites.CirclePart;
@@ -51,7 +51,7 @@ public class RiteRequirementsComponent implements ICustomComponent {
 	@SerializedName("rite") public IVariable riteName;
 
 	private transient BookTextRenderer powerTextRenderer;
-	private transient RiteRequirements riteRequirements;
+	private transient RiteRequirementsComponent riteRequirements;
 	private transient final List<ItemRing> itemRings = new ArrayList<>();
 	private transient final List<ResourceLocation> circleImages = new ArrayList<>();
 	private transient int x;

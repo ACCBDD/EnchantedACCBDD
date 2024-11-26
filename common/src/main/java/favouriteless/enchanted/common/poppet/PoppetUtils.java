@@ -1,7 +1,7 @@
 package favouriteless.enchanted.common.poppet;
 
-import favouriteless.enchanted.Enchanted;
-import favouriteless.enchanted.common.init.registry.EnchantedItems;
+import favouriteless.enchanted.common.Enchanted;
+import favouriteless.enchanted.common.init.registry.EItems;
 import favouriteless.enchanted.common.items.poppets.DeathPoppetItem;
 import favouriteless.enchanted.common.items.poppets.PoppetItem;
 import favouriteless.enchanted.common.items.poppets.ItemProtectionPoppetItem;
@@ -37,15 +37,15 @@ public class PoppetUtils {
 	 * @return false if the voodoo was blocked.
 	 */
 	public static boolean tryVoodooPlayer(ServerPlayer target, ServerPlayer attacker, ItemStack poppet) {
-		PoppetUseResult result = PoppetUtils.tryUseItems(PoppetUtils.getPoppetQueue(target, EnchantedItems::isVoodooProtectionPoppet), target, null);
+		PoppetUseResult result = PoppetUtils.tryUseItems(PoppetUtils.getPoppetQueue(target, EItems::isVoodooProtectionPoppet), target, null);
 
 		if(!result.isSuccess() && result.type() != ResultType.FAIL)
-			result = PoppetUtils.tryUseEntries(PoppetUtils.getPoppetQueue(PoppetShelfManager.getEntriesFor(target), entry -> EnchantedItems.isVoodooProtectionPoppet(entry.item().getItem())), target, null);
+			result = PoppetUtils.tryUseEntries(PoppetUtils.getPoppetQueue(PoppetShelfManager.getEntriesFor(target), entry -> EItems.isVoodooProtectionPoppet(entry.item().getItem())), target, null);
 
 		if(result.isSuccess()) {
 			if(attacker != null) {
 				ServerLevel level = attacker.serverLevel();
-				if(result.poppet() == EnchantedItems.VOODOO_PROTECTION_POPPET_INFUSED.get()) {
+				if(result.poppet() == EItems.VOODOO_PROTECTION_POPPET_INFUSED.get()) {
 					LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(level);
 					lightningBolt.moveTo(attacker.getX(), attacker.getY(), attacker.getZ());
 					level.addFreshEntity(lightningBolt);

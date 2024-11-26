@@ -24,8 +24,8 @@ public class EntityBoundCreateItemRite extends Rite {
     protected boolean onStart(RiteParams params) {
         UUID ref = null;
 
-        for(ItemStack stack : params.consumedItems) {
-            if(stack.getItem() instanceof TaglockFilledItem) {
+        for (ItemStack stack : params.consumedItems) {
+            if (stack.getItem() instanceof TaglockFilledItem) {
                 if (stack.getOrCreateTag().contains(TaglockFilledItem.TARGET_TAG)) {
                     ref = NbtUtils.loadUUID(stack.getTag().get(TaglockFilledItem.TARGET_TAG));
                     break;
@@ -33,7 +33,7 @@ public class EntityBoundCreateItemRite extends Rite {
             }
         }
 
-        for(ItemStack stack : items) {
+        for (ItemStack stack : items) {
             if (stack.getItem() instanceof TaglockFilledItem) {
                 if (stack.getOrCreateTag().contains(TaglockFilledItem.TARGET_TAG)) {
                     stack.getTag().put(TaglockFilledItem.TARGET_TAG, NbtUtils.createUUID(ref));

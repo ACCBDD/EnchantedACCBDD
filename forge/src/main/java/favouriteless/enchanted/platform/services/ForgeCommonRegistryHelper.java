@@ -1,6 +1,6 @@
 package favouriteless.enchanted.platform.services;
 
-import favouriteless.enchanted.Enchanted;
+import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.common.items.ForgeNonAnimatedArmorItem;
 import favouriteless.enchanted.common.items.NonAnimatedArmorItem;
 import net.minecraft.core.Registry;

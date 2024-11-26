@@ -1,13 +1,13 @@
 package favouriteless.enchanted.common.items;
 
-import favouriteless.enchanted.Enchanted;
+import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.api.taglock.BedTaglockSavedData;
 import favouriteless.enchanted.api.taglock.IBedTaglock;
 import favouriteless.enchanted.common.blocks.entity.BloodPoppyBlockEntity;
 import favouriteless.enchanted.common.blocks.crops.BloodPoppyBlock;
 import favouriteless.enchanted.common.init.EnchantedTags.EntityTypes;
 import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
-import favouriteless.enchanted.common.init.registry.EnchantedItems;
+import favouriteless.enchanted.common.init.registry.EItems;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -115,7 +115,7 @@ public class TaglockItem extends Item {
 
     public void fillTaglock(Player pPlayer, ItemStack stack, UUID uuid, String name) {
         if(pPlayer instanceof ServerPlayer player) {
-            ItemStack newStack = new ItemStack(EnchantedItems.TAGLOCK_FILLED.get(), 1);
+            ItemStack newStack = new ItemStack(EItems.TAGLOCK_FILLED.get(), 1);
 
             CompoundTag nbt = new CompoundTag();
             nbt.putUUID(TaglockFilledItem.TARGET_TAG, uuid);

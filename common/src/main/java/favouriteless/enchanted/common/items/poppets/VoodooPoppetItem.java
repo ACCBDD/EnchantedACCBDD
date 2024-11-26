@@ -3,7 +3,7 @@ package favouriteless.enchanted.common.items.poppets;
 import favouriteless.enchanted.common.entities.VoodooItemEntity;
 import favouriteless.enchanted.common.init.EnchantedDamageTypes;
 import favouriteless.enchanted.common.init.registry.EnchantedEntityTypes;
-import favouriteless.enchanted.common.init.registry.EnchantedItems;
+import favouriteless.enchanted.common.init.registry.EItems;
 import favouriteless.enchanted.common.poppet.PoppetUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -32,7 +32,7 @@ public class VoodooPoppetItem extends PoppetItem {
         if(PoppetUtils.isBound(stack) && entity instanceof Player player) {
             ItemStack offHand = player.getOffhandItem();
 
-            if(offHand.getItem() == EnchantedItems.BONE_NEEDLE.get()) {
+            if(offHand.getItem() == EItems.BONE_NEEDLE.get()) {
                 if(PoppetUtils.isBound(stack)) {
                     if(level instanceof ServerLevel serverLevel) {
                         ServerPlayer target = PoppetUtils.getBoundPlayer(stack, serverLevel);

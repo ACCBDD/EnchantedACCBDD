@@ -1,10 +1,6 @@
 package favouriteless.enchanted.common.circle_magic.rites;
 
 import favouriteless.enchanted.api.Vec2i;
-import favouriteless.enchanted.client.particles.types.DoubleOptions;
-import favouriteless.enchanted.client.particles.types.DoubleParticleType;
-import favouriteless.enchanted.common.init.EParticleTypes;
-import favouriteless.enchanted.common.init.registry.EnchantedParticleTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
@@ -32,11 +28,11 @@ public class TransposeBlocksRite extends Rite {
     protected boolean onTick(RiteParams params) {
         Vec2i offset = type.getInteriorPoints().get(params.ticks());
 
-        for(int i = 0; i < pos.getY() - level.getMinBuildHeight(); i++) {
+        for (int i = 0; i < pos.getY() - level.getMinBuildHeight(); i++) {
             BlockPos pos = this.pos.offset(offset.x(), -i, offset.y()); // Steps down 1 block per iteration.
 
             BlockState state = level.getBlockState(pos);
-            if(state.is(tag)) {
+            if (state.is(tag)) {
                 level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
                 level.gameEvent(GameEvent.BLOCK_DESTROY, pos, Context.of(null, state));
                 Block.dropResources(state, level, this.pos, null, null, tool);
@@ -52,7 +48,7 @@ public class TransposeBlocksRite extends Rite {
 //                    1, 0, 0, 0, 0);
 //        }
 
-        return params.ticks() < type.getInteriorPoints().size()-1; // Stop executing when run out of points.
+        return params.ticks() < type.getInteriorPoints().size() - 1; // Stop executing when run out of points.
     }
 
 }

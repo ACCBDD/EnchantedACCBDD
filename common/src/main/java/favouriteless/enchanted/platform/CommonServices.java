@@ -1,6 +1,6 @@
 package favouriteless.enchanted.platform;
 
-import favouriteless.enchanted.Enchanted;
+import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.platform.services.*;
 
 import java.util.ServiceLoader;

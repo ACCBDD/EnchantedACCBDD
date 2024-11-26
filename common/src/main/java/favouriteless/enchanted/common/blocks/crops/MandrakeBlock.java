@@ -1,10 +1,10 @@
 package favouriteless.enchanted.common.blocks.crops;
 
-import favouriteless.enchanted.Enchanted;
+import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.common.entities.Mandrake;
 import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
 import favouriteless.enchanted.common.init.registry.EnchantedEntityTypes;
-import favouriteless.enchanted.common.init.registry.EnchantedItems;
+import favouriteless.enchanted.common.init.registry.EItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.Difficulty;
@@ -25,7 +25,7 @@ public class MandrakeBlock extends CropsBlockAgeFive {
     }
 
     protected ItemLike getBaseSeedId() {
-        return EnchantedItems.MANDRAKE_SEEDS.get();
+        return EItems.MANDRAKE_SEEDS.get();
     }
 
     @Override

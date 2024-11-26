@@ -1,6 +1,6 @@
 package favouriteless.enchanted.common.poppet;
 
-import favouriteless.enchanted.Enchanted;
+import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.common.blocks.entity.PoppetShelfBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;

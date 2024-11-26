@@ -1,6 +1,6 @@
 package favouriteless.enchanted.util;
 
-import favouriteless.enchanted.Enchanted;
+import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.platform.CommonServices;
 import com.google.gson.JsonObject;
 import net.minecraft.core.registries.BuiltInRegistries;

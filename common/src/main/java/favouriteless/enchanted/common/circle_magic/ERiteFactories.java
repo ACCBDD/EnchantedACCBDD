@@ -1,8 +1,8 @@
-package net.favouriteless.enchanted.common.circle_magic;
+package favouriteless.enchanted.common.circle_magic;
 
 import com.mojang.serialization.MapCodec;
 import favouriteless.enchanted.api.rites.RiteFactory;
-import favouriteless.enchanted.common.circle_magic.RiteFactoryRegistry;
+import favouriteless.enchanted.common.circle_magic.rites.factory.*;
 import net.minecraft.resources.ResourceLocation;
 
 public class ERiteFactories {

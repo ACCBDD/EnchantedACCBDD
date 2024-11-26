@@ -18,7 +18,7 @@ public record EntityBoundCreateItemFactory(List<ItemStack> items) implements Rit
     public static final ResourceLocation ID = Enchanted.id("entity_bound_create_item");
 
     public static final MapCodec<EntityBoundCreateItemFactory> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-            ItemStack.CODEC.listOf(1, Integer.MAX_VALUE).fieldOf("items").forGetter(f -> f.items)
+            ItemStack.CODEC.listOf().fieldOf("items").forGetter(f -> f.items)
     ).apply(instance, EntityBoundCreateItemFactory::new));
 
     @Override

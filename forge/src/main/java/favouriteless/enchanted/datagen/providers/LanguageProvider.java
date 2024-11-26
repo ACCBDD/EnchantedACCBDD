@@ -1,9 +1,9 @@
 package favouriteless.enchanted.datagen.providers;
 
-import favouriteless.enchanted.Enchanted;
+import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
 import favouriteless.enchanted.common.init.registry.EnchantedEntityTypes;
-import favouriteless.enchanted.common.init.registry.EnchantedItems;
+import favouriteless.enchanted.common.init.registry.EItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.effect.MobEffect;
@@ -42,7 +42,7 @@ public class LanguageProvider extends net.minecraftforge.common.data.LanguagePro
 
         addEntityType(EnchantedEntityTypes.FAMILIAR_CAT, "Cat (Familiar)");
 
-        addJei(EnchantedItems.CHALICE_FILLED, "Right click on a Chalice using redstone soup.");
+        addJei(EItems.CHALICE_FILLED, "Right click on a Chalice using redstone soup.");
         addJei("circle_magic", "Circle Magic");
         addJei("kettle", "Kettle");
         addJei("witch_cauldron", "Witch's Cauldron");

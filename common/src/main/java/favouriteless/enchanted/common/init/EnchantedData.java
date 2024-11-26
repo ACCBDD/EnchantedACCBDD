@@ -1,12 +1,11 @@
 package favouriteless.enchanted.common.init;
 
 import com.mojang.serialization.Codec;
-import favouriteless.enchanted.Enchanted;
+import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.common.altar.PowerProvider;
 import favouriteless.enchanted.common.altar.AltarUpgrade;
 import favouriteless.enchanted.common.circle_magic.CircleMagicShape;
 import favouriteless.enchanted.common.circle_magic.RiteType;
-import favouriteless.enchanted.common.circle_magic.rites.RiteRequirements;
 import favouriteless.enchanted.platform.CommonServices;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;

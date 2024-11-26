@@ -1,8 +1,8 @@
 package favouriteless.enchanted.client.particles;
 
-import favouriteless.enchanted.Enchanted;
-import favouriteless.enchanted.client.particles.types.CircleMagicParticleType.CircleMagicData;
-import favouriteless.enchanted.common.init.registry.EnchantedParticleTypes;
+import favouriteless.enchanted.client.particles.types.ColouredCircleOptions;
+import favouriteless.enchanted.common.Enchanted;
+import favouriteless.enchanted.common.init.registry.EParticleTypes;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.NoRenderParticle;
 import net.minecraft.client.particle.Particle;
@@ -28,19 +28,23 @@ public class FertilitySeedParticle extends NoRenderParticle {
 			double cz = Enchanted.RANDOM.nextGaussian();;
 			Vec3 pos = new Vec3(cx, cy, cz).normalize().scale(0.1D).add(x, y, z);
 
-			level.addParticle(new CircleMagicData(EnchantedParticleTypes.FERTILITY.get(), 255, 255, 255, x, y, z, 0.1D), pos.x, pos.z, pos.y, 0.0D, 0.0D, 0.0D);
+			level.addParticle(new ColouredCircleOptions(EParticleTypes.FERTILITY.get(), 0xFFFFFF,
+					new Vec3(x, y, z), 0.1F), pos.x, pos.z, pos.y, 0, 0, 0);
 		}
 		remove();
 	}
 
+
+
 	public static class Factory implements ParticleProvider<SimpleParticleType> {
 
-		public Factory(SpriteSet sprites) {
-		}
+		public Factory(SpriteSet sprites) {}
 
+		@Override
 		public Particle createParticle(SimpleParticleType data, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
 			return new FertilitySeedParticle(level, x, y, z);
 		}
+
 	}
 
 }

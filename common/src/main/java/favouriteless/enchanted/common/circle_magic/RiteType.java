@@ -21,6 +21,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 
+import javax.annotation.Nullable;
 import java.util.*;
 
 public class RiteType implements Comparable<RiteType> {
@@ -138,6 +139,10 @@ public class RiteType implements Comparable<RiteType> {
 	public AABB getBounds(BlockPos pos) {
 		Vec3 center = pos.getCenter().subtract(0, 0.5, 0);
 		return new AABB(center.subtract(radius, 0, radius), center.add(radius, 1, radius));
+	}
+
+	public @Nullable List<ItemStack> getOutputs() {
+		return factory.getOutputs();
 	}
 
 	public List<Vec2i> getInteriorPoints() {

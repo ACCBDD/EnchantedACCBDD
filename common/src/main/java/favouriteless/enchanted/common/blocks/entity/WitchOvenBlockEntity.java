@@ -1,13 +1,13 @@
 package favouriteless.enchanted.common.blocks.entity;
 
-import favouriteless.enchanted.Enchanted;
+import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.common.blocks.FumeFunnelBlock;
 import favouriteless.enchanted.common.blocks.WitchOvenBlock;
 import favouriteless.enchanted.common.init.EnchantedTags;
 import favouriteless.enchanted.common.init.registry.EnchantedBlockEntityTypes;
 import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
-import favouriteless.enchanted.common.init.registry.EnchantedItems;
-import favouriteless.enchanted.common.init.registry.EnchantedRecipeTypes;
+import favouriteless.enchanted.common.init.registry.EItems;
+import favouriteless.enchanted.common.init.registry.ERecipeTypes;
 import favouriteless.enchanted.common.menus.WitchOvenMenu;
 import favouriteless.enchanted.common.recipes.ByproductRecipe;
 import favouriteless.enchanted.platform.CommonServices;
@@ -89,7 +89,7 @@ public class WitchOvenBlockEntity extends ContainerBlockEntityBase implements Me
     public WitchOvenBlockEntity(BlockPos pos, BlockState state) {
         super(EnchantedBlockEntityTypes.WITCH_OVEN.get(), pos, state, NonNullList.withSize(5, ItemStack.EMPTY));
         this.smeltCheck = RecipeManager.createCheck(RecipeType.SMELTING);
-        this.ovenCheck = RecipeManager.createCheck(EnchantedRecipeTypes.BYPRODUCT.get());
+        this.ovenCheck = RecipeManager.createCheck(ERecipeTypes.BYPRODUCT.get());
     }
 
     public static <T extends BlockEntity> void serverTick(Level level, BlockPos blockPos, BlockState blockState, T t) {
@@ -340,7 +340,7 @@ public class WitchOvenBlockEntity extends ContainerBlockEntityBase implements Me
     @Override
     public boolean canPlaceItemThroughFace(int index, @NotNull ItemStack stack, @Nullable Direction face) {
         if(index == 1)
-            return stack.getItem() == EnchantedItems.CLAY_JAR.get();
+            return stack.getItem() == EItems.CLAY_JAR.get();
         return index != 3 && index != 4;
     }
 

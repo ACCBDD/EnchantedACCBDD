@@ -5,7 +5,7 @@ import favouriteless.enchanted.api.power.IPowerProvider;
 import favouriteless.enchanted.api.power.PowerHelper;
 import favouriteless.enchanted.common.altar.SimplePowerPosHolder;
 import favouriteless.enchanted.common.init.registry.EnchantedBlockEntityTypes;
-import favouriteless.enchanted.common.init.registry.EnchantedRecipeTypes;
+import favouriteless.enchanted.common.init.registry.ERecipeTypes;
 import favouriteless.enchanted.common.menus.SpinningWheelMenu;
 import favouriteless.enchanted.common.recipes.SpinningRecipe;
 import net.minecraft.core.BlockPos;
@@ -70,7 +70,7 @@ public class SpinningWheelBlockEntity extends ContainerBlockEntityBase implement
 	public SpinningWheelBlockEntity(BlockPos pos, BlockState state) {
 		super(EnchantedBlockEntityTypes.SPINNING_WHEEL.get(), pos, state, NonNullList.withSize(4, ItemStack.EMPTY));
 		this.posHolder = new SimplePowerPosHolder(pos);
-		this.recipeCheck = RecipeManager.createCheck(EnchantedRecipeTypes.SPINNING.get());
+		this.recipeCheck = RecipeManager.createCheck(ERecipeTypes.SPINNING.get());
 	}
 
 	public static <T extends BlockEntity> void tick(Level level, BlockPos blockPos, BlockState blockState, T t) {

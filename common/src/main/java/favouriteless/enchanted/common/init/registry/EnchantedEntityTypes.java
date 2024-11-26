@@ -1,6 +1,6 @@
 package favouriteless.enchanted.common.init.registry;
 
-import favouriteless.enchanted.Enchanted;
+import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.common.entities.*;
 import favouriteless.enchanted.platform.CommonServices;
 import net.minecraft.core.registries.BuiltInRegistries;

@@ -1,6 +1,6 @@
 package favouriteless.enchanted.common.recipes;
 
-import favouriteless.enchanted.common.init.registry.EnchantedRecipeTypes;
+import favouriteless.enchanted.common.init.registry.ERecipeTypes;
 import favouriteless.enchanted.util.ItemStackHelper;
 import favouriteless.enchanted.util.JsonHelper;
 import com.google.gson.JsonObject;
@@ -14,12 +14,12 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 public class KettleRecipe extends CauldronTypeRecipe {
 
     public KettleRecipe(ResourceLocation id, NonNullList<ItemStack> itemsIn, ItemStack itemOut, int power, int[] cookingColour, int[] finalColour) {
-        super(EnchantedRecipeTypes.KETTLE.get(), id, itemsIn, itemOut, power, cookingColour, finalColour);
+        super(ERecipeTypes.KETTLE.get(), id, itemsIn, itemOut, power, cookingColour, finalColour);
     }
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return EnchantedRecipeTypes.KETTLE_SERIALIZER.get();
+        return ERecipeTypes.KETTLE_SERIALIZER.get();
     }
 
     public static class Serializer implements RecipeSerializer<KettleRecipe> {

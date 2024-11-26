@@ -2,11 +2,11 @@ package favouriteless.enchanted.common.circle_magic.rites;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import favouriteless.enchanted.Enchanted;
+import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.common.blocks.entity.GoldChalkBlockEntity;
 import favouriteless.enchanted.common.circle_magic.RiteManager;
 import favouriteless.enchanted.common.circle_magic.RiteType;
-import favouriteless.enchanted.common.init.registry.EnchantedItems;
+import favouriteless.enchanted.common.init.registry.EItems;
 import favouriteless.enchanted.common.items.TaglockFilledItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.UUIDUtil;
@@ -71,20 +71,22 @@ public abstract class Rite {
     protected void onStop(RiteParams params) {
     }
 
-    protected void saveAdditional(CompoundTag tag, ServerLevel level) {}
+    protected void saveAdditional(CompoundTag tag, ServerLevel level) {
+    }
 
-    protected void loadAdditional(CompoundTag tag, ServerLevel level) {}
+    protected void loadAdditional(CompoundTag tag, ServerLevel level) {
+    }
 
     /**
      * Refund the items used to start this rite and detatch from chalk.
      */
     protected boolean cancel() {
         level.playSound(null, pos, SoundEvents.NOTE_BLOCK_SNARE.value(), SoundSource.MASTER, 1.0F, 1.0F);
-        for(ItemStack stack : params.consumedItems) {
-            ItemEntity entity = new ItemEntity(level, pos.getX()+0.5D, pos.getY()+0.5D, pos.getZ()+0.5D, stack);
+        for (ItemStack stack : params.consumedItems) {
+            ItemEntity entity = new ItemEntity(level, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, stack);
             level.addFreshEntity(entity);
         }
-        if(level.getBlockEntity(pos) instanceof GoldChalkBlockEntity chalk)
+        if (level.getBlockEntity(pos) instanceof GoldChalkBlockEntity chalk)
             chalk.detatch();
         return false;
     }
@@ -94,17 +96,16 @@ public abstract class Rite {
      * Charged attuned stones will just have their charge consumed.
      */
     protected void consumeItem(ItemEntity entity) {
-        if(!entity.getItem().is(EnchantedItems.ATTUNED_STONE_CHARGED.get())) {
+        if (!entity.getItem().is(EItems.ATTUNED_STONE_CHARGED.get())) {
             params.consumedItems.add(entity.getItem());
             entity.discard();
-        }
-        else {
-            entity.setItem(new ItemStack(EnchantedItems.ATTUNED_STONE.get(), entity.getItem().getCount()));
+        } else {
+            entity.setItem(new ItemStack(EItems.ATTUNED_STONE.get(), entity.getItem().getCount()));
         }
 
         entity.level().playSound(null, entity.getX(), entity.getY(), entity.getZ(), SoundEvents.CHICKEN_EGG,
                 SoundSource.MASTER, 1.0f, 1.0f);
-        ((ServerLevel)entity.level()).sendParticles(ParticleTypes.CLOUD, entity.getX(), entity.getY(), entity.getZ(),
+        ((ServerLevel) entity.level()).sendParticles(ParticleTypes.CLOUD, entity.getX(), entity.getY(), entity.getZ(),
                 1, 0, 0, 0, 0);
     }
 
@@ -114,20 +115,20 @@ public abstract class Rite {
     protected @Nullable Entity findEntity(UUID uuid) {
         Entity out;
 
-        if(entityCache.containsKey(uuid)) { // Cache our entities first since we're usually trying to grab the same one anyway
+        if (entityCache.containsKey(uuid)) { // Cache our entities first since we're usually trying to grab the same one anyway
             out = entityCache.get(uuid).get();
-            if(out != null)
+            if (out != null)
                 return out;
             entityCache.remove(uuid);
         }
 
         out = level.getServer().getPlayerList().getPlayer(uuid);
-        if(out != null)
+        if (out != null)
             return cacheAndReturn(uuid, out);
 
-        for(ServerLevel dim : level.getServer().getAllLevels()) {
+        for (ServerLevel dim : level.getServer().getAllLevels()) {
             out = dim.getEntity(uuid);
-            if(out != null)
+            if (out != null)
                 return cacheAndReturn(uuid, out);
         }
         return null;
@@ -138,9 +139,9 @@ public abstract class Rite {
      * {@link Rite#onStart(RiteParams)}. Override this if you want to change it for some reason.
      */
     protected UUID findTargetUUID(ServerLevel level, BlockPos pos, RiteParams params) {
-        for(ItemStack stack : params.consumedItems) {
+        for (ItemStack stack : params.consumedItems) {
             if (stack.getItem() instanceof TaglockFilledItem) {
-                if(stack.getOrCreateTag().contains(TaglockFilledItem.TARGET_TAG)) {
+                if (stack.getOrCreateTag().contains(TaglockFilledItem.TARGET_TAG)) {
                     return NbtUtils.loadUUID(stack.getTag().get(TaglockFilledItem.TARGET_TAG));
                 }
             }
@@ -159,13 +160,13 @@ public abstract class Rite {
     // ----------------------------------- NON-API IMPLEMENTATIONS BELOW THIS POINT -----------------------------------
 
     public boolean tick() {
-        if(level.isLoaded(pos)) {
-            if(tickPower > 0) {
-                if(!(level.getBlockEntity(pos) instanceof GoldChalkBlockEntity chalk) || !chalk.tryConsumePower(tickPower))
+        if (level.isLoaded(pos)) {
+            if (tickPower > 0) {
+                if (!(level.getBlockEntity(pos) instanceof GoldChalkBlockEntity chalk) || !chalk.tryConsumePower(tickPower))
                     return stop();
             }
 
-            if(!onTick(params))
+            if (!onTick(params))
                 return stop();
         }
         params.ticks++;
@@ -174,7 +175,7 @@ public abstract class Rite {
 
     public void start() {
         params.target = findTargetUUID(level, pos, params);
-        if(!onStart(params)) {
+        if (!onStart(params)) {
             stop();
             RiteManager.removeRite(level, this);
         }
@@ -183,7 +184,7 @@ public abstract class Rite {
     public boolean stop() {
         onStop(params);
 
-        if(level.getBlockEntity(pos) instanceof GoldChalkBlockEntity chalk)
+        if (level.getBlockEntity(pos) instanceof GoldChalkBlockEntity chalk)
             chalk.detatch();
         return false;
     }
@@ -218,7 +219,8 @@ public abstract class Rite {
     }
 
 
-    public record BaseRiteParams(RiteType type, ServerLevel level, BlockPos pos, int tickPower) {}
+    public record BaseRiteParams(RiteType type, ServerLevel level, BlockPos pos, int tickPower) {
+    }
 
     public static class RiteParams {
 

@@ -1,6 +1,6 @@
 package favouriteless.enchanted.common.recipes;
 
-import favouriteless.enchanted.common.init.registry.EnchantedRecipeTypes;
+import favouriteless.enchanted.common.init.registry.ERecipeTypes;
 import favouriteless.enchanted.util.JsonHelper;
 import com.google.gson.JsonObject;
 import net.minecraft.core.NonNullList;
@@ -28,7 +28,7 @@ public class DistillingRecipe implements Recipe<Container> {
 
     public DistillingRecipe(ResourceLocation id, NonNullList<ItemStack> itemsIn, NonNullList<ItemStack> itemsOut,
                             int cookTime, int power) {
-        this.type = EnchantedRecipeTypes.DISTILLING.get();
+        this.type = ERecipeTypes.DISTILLING.get();
         this.id = id;
 
         this.itemsIn = itemsIn;
@@ -109,7 +109,7 @@ public class DistillingRecipe implements Recipe<Container> {
     @Override
     @NotNull
     public RecipeSerializer<?> getSerializer() {
-        return EnchantedRecipeTypes.DISTILLING_SERIALIZER.get();
+        return ERecipeTypes.DISTILLING_SERIALIZER.get();
     }
 
     @Override

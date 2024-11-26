@@ -1,7 +1,7 @@
 package favouriteless.enchanted.common.circle_magic.rites;
 
 import favouriteless.enchanted.common.init.EnchantedTags;
-import favouriteless.enchanted.common.init.registry.EnchantedParticleTypes;
+import favouriteless.enchanted.common.init.registry.EParticleTypes;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -34,7 +34,7 @@ public class BroilingRite extends Rite {
 
     @Override
     protected boolean onTick(RiteParams params) {
-        if(params.ticks() % 5 != 0)
+        if (params.ticks() % 5 != 0)
             return true;
 
         AABB bounds = new AABB(
@@ -45,39 +45,39 @@ public class BroilingRite extends Rite {
         List<ItemEntity> toCook = level.getEntitiesOfClass(ItemEntity.class, bounds, e ->
                 e.position().subtract(pos.getCenter()).lengthSqr() < RADIUS_SQR && e.getItem().is(EnchantedTags.Items.RAW_FOODS));
 
-        if(toCook.isEmpty())
+        if (toCook.isEmpty())
             return false;
 
         ItemEntity item = toCook.get(0);
         Container input = new SimpleContainer(item.getItem());
         SmeltingRecipe recipe = smeltCheck.getRecipeFor(input, level).orElse(null);
 
-        if(recipe == null)
+        if (recipe == null)
             return false;
 
         int total = item.getItem().getCount();
         int burned = 0;
-        for(int i = 0; i < total; i++) {
-            if(Math.random() < burnChance)
+        for (int i = 0; i < total; i++) {
+            if (Math.random() < burnChance)
                 burned++;
         }
 
 
-        if(burned < total) {
+        if (burned < total) {
             ItemStack out = recipe.assemble(input, level.registryAccess());
             out.setCount(total - burned);
             level.addFreshEntity(new ItemEntity(level, item.getX(), item.getY(), item.getZ(), out));
         }
-        if(burned > 0) {
+        if (burned > 0) {
             int count = burned / 16; // int division, no remainder
-            if(Math.random() < (burned % 16) / 16f)
+            if (Math.random() < (burned % 16) / 16f)
                 count += 1;
             level.addFreshEntity(new ItemEntity(level, item.getX(), item.getY(), item.getZ(), new ItemStack(Items.CHARCOAL, count)));
         }
 
         level.playSound(null, item.getX(), item.getY(), item.getZ(), SoundEvents.BLAZE_SHOOT, SoundSource.MASTER, 1.0F, 1.0F);
         level.sendParticles(ParticleTypes.SMALL_FLAME, item.getX(), item.getY(), item.getZ(), 25, 0.2d, 0.2d, 0.2d, 0);
-        level.sendParticles(EnchantedParticleTypes.BROILING_SEED.get(), pos.getX() + 0.5d, pos.getY() + 0.5d, pos.getZ() + 0.5d, 1, 0, 0, 0, 0);
+        level.sendParticles(EParticleTypes.BROILING_SEED.get(), pos.getX() + 0.5d, pos.getY() + 0.5d, pos.getZ() + 0.5d, 1, 0, 0, 0, 0);
         item.discard();
 
         return true;

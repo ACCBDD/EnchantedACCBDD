@@ -1,6 +1,6 @@
 package favouriteless.enchanted.datagen.providers;
 
-import favouriteless.enchanted.Enchanted;
+import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.common.blocks.FumeFunnelBlock;
 import favouriteless.enchanted.common.blocks.cauldrons.KettleBlock;
 import favouriteless.enchanted.common.blocks.chalk.ChalkCircleBlock;

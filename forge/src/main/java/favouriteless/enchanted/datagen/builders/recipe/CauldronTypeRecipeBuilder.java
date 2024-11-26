@@ -1,6 +1,6 @@
 package favouriteless.enchanted.datagen.builders.recipe;
 
-import favouriteless.enchanted.common.init.registry.EnchantedRecipeTypes;
+import favouriteless.enchanted.common.init.registry.ERecipeTypes;
 import favouriteless.enchanted.common.recipes.CauldronTypeRecipe;
 import favouriteless.enchanted.util.ItemStackHelper;
 import favouriteless.enchanted.util.JsonHelper;
@@ -45,7 +45,7 @@ public class CauldronTypeRecipeBuilder extends EnchantedRecipeBuilder {
      * @return A new {@link CauldronTypeRecipeBuilder} with the specified parameters.
      */
     public static CauldronTypeRecipeBuilder cauldron(ItemStack result, int power) {
-        return new CauldronTypeRecipeBuilder(EnchantedRecipeTypes.WITCH_CAULDRON.get(), result, power);
+        return new CauldronTypeRecipeBuilder(ERecipeTypes.WITCH_CAULDRON.get(), result, power);
     }
 
     /**
@@ -55,7 +55,7 @@ public class CauldronTypeRecipeBuilder extends EnchantedRecipeBuilder {
      * @return A new {@link CauldronTypeRecipeBuilder} with the specified parameters.
      */
     public static CauldronTypeRecipeBuilder kettle(ItemStack result, int power) {
-        return new CauldronTypeRecipeBuilder(EnchantedRecipeTypes.KETTLE.get(), result, power);
+        return new CauldronTypeRecipeBuilder(ERecipeTypes.KETTLE.get(), result, power);
     }
 
     /**
@@ -164,7 +164,7 @@ public class CauldronTypeRecipeBuilder extends EnchantedRecipeBuilder {
         @NotNull
         @Override
         public RecipeSerializer<?> getType() {
-            return type == EnchantedRecipeTypes.WITCH_CAULDRON.get() ? EnchantedRecipeTypes.WITCH_CAULDRON_SERIALIZER.get() : EnchantedRecipeTypes.KETTLE_SERIALIZER.get();
+            return type == ERecipeTypes.WITCH_CAULDRON.get() ? ERecipeTypes.WITCH_CAULDRON_SERIALIZER.get() : ERecipeTypes.KETTLE_SERIALIZER.get();
         }
 
     }

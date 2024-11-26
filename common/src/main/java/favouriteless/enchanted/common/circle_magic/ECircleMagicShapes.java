@@ -1,6 +1,6 @@
 package favouriteless.enchanted.common.circle_magic;
 
-import favouriteless.enchanted.Enchanted;
+import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.common.init.EnchantedData;
 import net.minecraft.resources.ResourceKey;
 

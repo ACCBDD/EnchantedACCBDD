@@ -1,6 +1,6 @@
 package favouriteless.enchanted.client;
 
-import favouriteless.enchanted.Enchanted;
+import favouriteless.enchanted.common.Enchanted;
 import fuzs.forgeconfigapiport.api.config.v2.ForgeConfigRegistry;
 import net.fabricmc.api.ClientModInitializer;
 import net.minecraftforge.fml.config.ModConfig.Type;

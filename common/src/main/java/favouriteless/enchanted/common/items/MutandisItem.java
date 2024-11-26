@@ -1,6 +1,6 @@
 package favouriteless.enchanted.common.items;
 
-import favouriteless.enchanted.Enchanted;
+import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.common.init.EnchantedTags.Blocks;
 import net.minecraft.core.HolderSet.Named;
 import net.minecraft.core.particles.ParticleTypes;

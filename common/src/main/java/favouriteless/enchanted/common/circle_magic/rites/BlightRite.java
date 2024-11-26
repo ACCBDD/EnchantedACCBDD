@@ -1,8 +1,8 @@
 package favouriteless.enchanted.common.circle_magic.rites;
 
-import favouriteless.enchanted.Enchanted;
+import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.common.init.EnchantedTags;
-import favouriteless.enchanted.common.init.registry.EnchantedParticleTypes;
+import favouriteless.enchanted.common.init.registry.EParticleTypes;
 import favouriteless.enchanted.common.util.BlockPosUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -50,31 +50,30 @@ public class BlightRite extends Rite {
 
     @Override
     protected boolean onTick(RiteParams params) {
-        if(params.ticks() % TICKS_PER_BLOCK != 0)
+        if (params.ticks() % TICKS_PER_BLOCK != 0)
             return true;
 
         BlockPosUtils.iterableSphereHollow(pos, step).forEach(spherePos -> {
-            if(Math.random() > decayChance)
+            if (Math.random() > decayChance)
                 return;
 
             BlockState state = level.getBlockState(spherePos);
-            if(state.isAir())
+            if (state.isAir())
                 return;
 
-            if(state.is(EnchantedTags.Blocks.BLIGHT_DECAYABLE_BLOCKS)) {
+            if (state.is(EnchantedTags.Blocks.BLIGHT_DECAYABLE_BLOCKS)) {
                 Holder<Block> holder = BuiltInRegistries.BLOCK.getOrCreateTag(EnchantedTags.Blocks.BLIGHT_DECAY_BLOCKS).getRandomElement(Enchanted.RANDOMSOURCE).orElse(null);
-                if(holder == null)
+                if (holder == null)
                     return;
                 level.setBlockAndUpdate(spherePos, holder.value().defaultBlockState());
-            }
-            else if(state.is(EnchantedTags.Blocks.BLIGHT_DECAYABLE_PLANTS)) {
+            } else if (state.is(EnchantedTags.Blocks.BLIGHT_DECAYABLE_PLANTS)) {
                 level.setBlockAndUpdate(spherePos, Blocks.DEAD_BUSH.defaultBlockState());
             }
         });
 
-        if(params.ticks() % (TICKS_PER_BLOCK*5) == 0) {
+        if (params.ticks() % (TICKS_PER_BLOCK * 5) == 0) {
             level.playSound(null, pos, SoundEvents.ENDER_DRAGON_GROWL, SoundSource.MASTER, 0.1F, 1.0F);
-            level.sendParticles(EnchantedParticleTypes.CURSE_BLIGHT_SEED.get(), pos.getX()+0.5D, pos.getY()+0.5D, pos.getZ()+0.5D,
+            level.sendParticles(EParticleTypes.BLIGHT_SEED.get(), pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
                     1, 0, 0, 0, 0);
         }
 
@@ -92,16 +91,16 @@ public class BlightRite extends Rite {
     }
 
     protected void applyBlightEffects(Entity caster, LivingEntity target) {
-        if(target instanceof Villager villager && Math.random() < zombieChance) {
+        if (target instanceof Villager villager && Math.random() < zombieChance) {
             villager.convertTo(EntityType.ZOMBIE_VILLAGER, false);
             return;
         }
 
         Holder<MobEffect> effectHolder = BuiltInRegistries.MOB_EFFECT.getOrCreateTag(EnchantedTags.MobEffects.BLIGHT_EFFECTS).getRandomElement(Enchanted.RANDOMSOURCE).orElse(null);
-        if(effectHolder == null)
+        if (effectHolder == null)
             return;
 
-        if(target != caster)
+        if (target != caster)
             target.addEffect(new MobEffectInstance(effectHolder.value(), 100 + Enchanted.RANDOM.nextInt(101), Enchanted.RANDOM.nextInt(3)));
     }
 

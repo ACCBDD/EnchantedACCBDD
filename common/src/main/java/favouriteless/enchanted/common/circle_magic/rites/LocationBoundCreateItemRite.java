@@ -1,6 +1,5 @@
 package favouriteless.enchanted.common.circle_magic.rites;
 
-import favouriteless.enchanted.common.items.component.EDataComponents;
 import favouriteless.enchanted.util.WaystoneHelper;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
@@ -21,7 +20,7 @@ public class LocationBoundCreateItemRite extends Rite {
 
     @Override
     protected boolean onStart(RiteParams params) {
-        for(ItemStack stack : items) {
+        for (ItemStack stack : items) {
             WaystoneHelper.bind(stack, level, pos);
             ItemEntity itemEntity = new ItemEntity(level, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, stack.copy());
             level.addFreshEntity(itemEntity);

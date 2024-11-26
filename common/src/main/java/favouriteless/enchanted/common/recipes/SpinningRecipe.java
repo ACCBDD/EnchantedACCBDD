@@ -1,6 +1,6 @@
 package favouriteless.enchanted.common.recipes;
 
-import favouriteless.enchanted.common.init.registry.EnchantedRecipeTypes;
+import favouriteless.enchanted.common.init.registry.ERecipeTypes;
 import favouriteless.enchanted.util.ItemStackHelper;
 import favouriteless.enchanted.util.JsonHelper;
 import com.google.gson.JsonObject;
@@ -27,7 +27,7 @@ public class SpinningRecipe implements Recipe<Container> {
     protected final int duration;
 
     public SpinningRecipe(ResourceLocation id, NonNullList<ItemStack> itemsIn, ItemStack result, int power, int duration) {
-        this.type = EnchantedRecipeTypes.SPINNING.get();
+        this.type = ERecipeTypes.SPINNING.get();
         this.id = id;
         this.itemsIn = itemsIn;
         this.result = result;
@@ -79,7 +79,7 @@ public class SpinningRecipe implements Recipe<Container> {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return EnchantedRecipeTypes.SPINNING_SERIALIZER.get();
+        return ERecipeTypes.SPINNING_SERIALIZER.get();
     }
 
     @Override

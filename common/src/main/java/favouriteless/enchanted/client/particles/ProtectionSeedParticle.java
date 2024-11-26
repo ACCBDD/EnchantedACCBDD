@@ -1,16 +1,17 @@
 package favouriteless.enchanted.client.particles;
 
-import favouriteless.enchanted.client.particles.types.DoubleParticleType.DoubleParticleData;
-import favouriteless.enchanted.common.init.registry.EnchantedParticleTypes;
+import favouriteless.enchanted.client.particles.types.DoubleOptions;
+import favouriteless.enchanted.common.init.registry.EParticleTypes;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.NoRenderParticle;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.SpriteSet;
+import net.minecraft.util.Mth;
 
 public class ProtectionSeedParticle extends NoRenderParticle {
 
-	private final double radius;
+	private final float radius;
 
 	protected ProtectionSeedParticle(ClientLevel level, double x, double y, double z, double radius) {
 		super(level, x, y, z);
@@ -18,36 +19,39 @@ public class ProtectionSeedParticle extends NoRenderParticle {
 		this.y = y;
 		this.z = z;
 		this.hasPhysics = false;
-		this.radius = radius;
+		this.radius = (float)radius;
 	}
 
 	@Override
 	public void tick() {
-		double increment = 1.0D / radius; // Total radians / circumference for radians per step
-		for(double y = 0; y <= Math.PI*2 + increment/2; y += increment) {
-			for(double p = 0; p <= Math.PI*2 + increment/2; p += increment) {
-				double cosY = Math.cos(y);
-				double sinY = Math.sin(y);
-				double cosP = Math.cos(p);
-				double sinP = Math.sin(p);
-				double cx = sinY * cosP * radius + x + (Math.random()-0.5D);
-				double cy = sinP * radius + y + (Math.random()-0.5D);
-				double cz = cosY * cosP * radius + z + (Math.random()-0.5D);
 
-				if(Math.random() < 0.5D)
-					level.addParticle(EnchantedParticleTypes.PROTECTION.get(), cx, cy, cz, 0.0D, 0.0D, 0.0D);
+		float increment = 1.0f / radius; // Total radians / circumference for radians per step
+		for(float y = 0; y <= Mth.PI*2 + increment/2; y += increment) {
+			for(float p = 0; p <= Mth.PI*2 + increment/2; p += increment) {
+				if(Math.random() < 0.025D) {
+					float cosP = Mth.cos(p);
+					double cx = Mth.sin(y) * cosP * radius + x + (Math.random()-0.5d);
+					double cy = Mth.sin(p) * radius + this.y + (Math.random()-0.5d);
+					double cz = Mth.cos(y) * cosP * radius + z + (Math.random()-0.5d);
+					level.addParticle(EParticleTypes.PROTECTION.get(), cx, cy, cz, 0, 0, 0);
+				}
 			}
 		}
-		remove();
+
+		if(++age > 20)
+			remove();
 	}
 
-	public static class Factory implements ParticleProvider<DoubleParticleData> {
+	public static class Factory implements ParticleProvider<DoubleOptions> {
 
 		public Factory(SpriteSet sprites) {}
 
-		public Particle createParticle(DoubleParticleData data, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+		@Override
+		public Particle createParticle(DoubleOptions data, ClientLevel level, double x, double y, double z,
+									   double xSpeed, double ySpeed, double zSpeed) {
 			return new ProtectionSeedParticle(level, x, y, z, data.getValue());
 		}
+
 	}
 
 }

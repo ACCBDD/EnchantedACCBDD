@@ -1,6 +1,6 @@
 package favouriteless.enchanted.patchouli.processors;
 
-import favouriteless.enchanted.common.init.registry.EnchantedItems;
+import favouriteless.enchanted.common.init.registry.EItems;
 import favouriteless.enchanted.common.recipes.ByproductRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -32,7 +32,7 @@ public class WitchOvenRecipeProcessor implements IComponentProcessor {
 		if(key.startsWith("input"))
 			return IVariable.from(itemIn);
 		else if(key.startsWith("jar"))
-			return IVariable.from(new ItemStack(EnchantedItems.CLAY_JAR.get()));
+			return IVariable.from(new ItemStack(EItems.CLAY_JAR.get()));
 		else if(key.startsWith("result"))
 			return IVariable.from(resultItem);
 		else if(key.startsWith("byproduct"))

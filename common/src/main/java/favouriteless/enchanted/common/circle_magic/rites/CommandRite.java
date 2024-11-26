@@ -31,7 +31,7 @@ public class CommandRite extends Rite implements CommandSource {
                 new Vec2(0, 0), level, 2, "Command Rite",
                 Component.literal("Command Rite"), level.getServer(), null);
 
-        if(delay == 0)
+        if (delay == 0)
             commands.forEach(list -> list.forEach(command -> level.getServer().getCommands().performPrefixedCommand(sourceStack,
                     replacedVars(command, params.caster, params.target))));
         else {
@@ -43,7 +43,7 @@ public class CommandRite extends Rite implements CommandSource {
 
     @Override
     protected boolean onTick(RiteParams params) {
-        if(params.ticks() % delay == 0) {
+        if (params.ticks() % delay == 0) {
             CommandSourceStack sourceStack = new CommandSourceStack(this, Vec3.atCenterOf(pos),
                     new Vec2(0, 0), level, 2, "Command Rite",
                     Component.literal("Command Rite"), level.getServer(), null);

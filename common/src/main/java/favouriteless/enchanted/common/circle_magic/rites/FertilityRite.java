@@ -1,20 +1,14 @@
 package favouriteless.enchanted.common.circle_magic.rites;
 
-import favouriteless.enchanted.Enchanted;
 import favouriteless.enchanted.common.Enchanted;
-import favouriteless.enchanted.common.init.EParticleTypes;
-import favouriteless.enchanted.common.init.ETags;
-import favouriteless.enchanted.common.init.EnchantedTags;
-import favouriteless.enchanted.common.init.registry.EnchantedParticleTypes;
+import favouriteless.enchanted.common.init.registry.EParticleTypes;
 import favouriteless.enchanted.common.util.BlockPosUtils;
 import favouriteless.enchanted.mixin.common.ZombieVillagerAccessor;
-import net.minecraft.core.Holder;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffect;
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.ZombieVillager;
@@ -28,8 +22,8 @@ import java.util.UUID;
 
 public class FertilityRite extends Rite {
 
-    MobEffect[] cured = new MobEffect[]{MobEffects.BLINDNESS,  MobEffects.CONFUSION, MobEffects.HUNGER, MobEffects.POISON,
-    MobEffects.WEAKNESS, MobEffects.WITHER};
+    MobEffect[] cured = new MobEffect[]{MobEffects.BLINDNESS, MobEffects.CONFUSION, MobEffects.HUNGER, MobEffects.POISON,
+            MobEffects.WEAKNESS, MobEffects.WITHER};
 
     public static final int TICKS_PER_BLOCK = 5;
 
@@ -57,24 +51,24 @@ public class FertilityRite extends Rite {
 
     @Override
     protected boolean onTick(RiteParams params) {
-        if(params.ticks() % TICKS_PER_BLOCK != 0)
+        if (params.ticks() % TICKS_PER_BLOCK != 0)
             return true;
 
         BlockPosUtils.iterableSphereHollow(pos, step).forEach(spherePos -> {
-            if(Math.random() > bonemealChance)
+            if (Math.random() > bonemealChance)
                 return;
 
             BlockState state = level.getBlockState(spherePos);
-            if(state.isAir())
+            if (state.isAir())
                 return;
 
-            if(state.getBlock() instanceof BonemealableBlock block)
+            if (state.getBlock() instanceof BonemealableBlock block)
                 block.performBonemeal(level, level.random, spherePos, state);
         });
 
-        if(params.ticks() % (TICKS_PER_BLOCK*5) == 0) {
+        if (params.ticks() % (TICKS_PER_BLOCK * 5) == 0) {
             level.playSound(null, pos, SoundEvents.ENDER_DRAGON_GROWL, SoundSource.MASTER, 0.1F, 1.0F);
-            level.sendParticles(EnchantedParticleTypes.FERTILITY_SEED.get(), pos.getX()+0.5D, pos.getY()+0.5D, pos.getZ()+0.5D,
+            level.sendParticles(EParticleTypes.FERTILITY_SEED.get(), pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
                     1, 0, 0, 0, 0);
         }
 
@@ -92,14 +86,14 @@ public class FertilityRite extends Rite {
     }
 
     protected void applyCureEffects(UUID casterUUID, LivingEntity target) {
-        if(target instanceof ZombieVillager villager) {
-            ((ZombieVillagerAccessor)villager).startConverting(casterUUID, Enchanted.RANDOM.nextInt(2401) + 3600);
+        if (target instanceof ZombieVillager villager) {
+            ((ZombieVillagerAccessor) villager).startConverting(casterUUID, Enchanted.RANDOM.nextInt(2401) + 3600);
             return;
         }
 
         List<MobEffect> toRemove = new ArrayList<>();
-        for(MobEffect effect : target.getActiveEffectsMap().keySet()) {
-            if(Arrays.asList(cured).contains(effect))
+        for (MobEffect effect : target.getActiveEffectsMap().keySet()) {
+            if (Arrays.asList(cured).contains(effect))
                 toRemove.add(effect);
         }
 

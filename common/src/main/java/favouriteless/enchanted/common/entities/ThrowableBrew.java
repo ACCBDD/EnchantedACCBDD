@@ -1,6 +1,6 @@
 package favouriteless.enchanted.common.entities;
 
-import favouriteless.enchanted.common.init.registry.EnchantedItems;
+import favouriteless.enchanted.common.init.registry.EItems;
 import favouriteless.enchanted.common.items.brews.ThrowableBrewItem;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
@@ -19,7 +19,7 @@ public class ThrowableBrew extends ThrowableItemProjectile {
 
 	@Override
 	protected Item getDefaultItem() {
-		return EnchantedItems.BREW_OF_LOVE.get();
+		return EItems.BREW_OF_LOVE.get();
 	}
 
 	@Override

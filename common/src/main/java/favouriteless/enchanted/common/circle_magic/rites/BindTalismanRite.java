@@ -1,11 +1,8 @@
 package favouriteless.enchanted.common.circle_magic.rites;
 
 import favouriteless.enchanted.common.circle_magic.CircleMagicShape;
-import favouriteless.enchanted.common.init.EData;
 import favouriteless.enchanted.common.init.EnchantedData;
-import favouriteless.enchanted.common.init.registry.EnchantedItems;
-import favouriteless.enchanted.common.items.EItems;
-import favouriteless.enchanted.common.items.component.EDataComponents;
+import favouriteless.enchanted.common.init.registry.EItems;
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
@@ -30,13 +27,13 @@ public class BindTalismanRite extends Rite {
         Registry<CircleMagicShape> registry = level.registryAccess().registryOrThrow(EnchantedData.CIRCLE_SHAPE_REGISTRY);
 
         Map<CircleMagicShape, Block> shapes = new HashMap<>();
-        for(CircleMagicShape shape : registry) {
+        for (CircleMagicShape shape : registry) {
             Block block = shape.getBlockAt(level, pos);
-            if(block != null)
+            if (block != null)
                 shapes.put(shape, block);
         }
 
-        if(shapes.isEmpty())
+        if (shapes.isEmpty())
             return cancel();
 
         HashMap<ResourceLocation, Block> component = new HashMap<>();
@@ -44,7 +41,7 @@ public class BindTalismanRite extends Rite {
         shapes.keySet().forEach(shape -> shape.remove(level, pos));
         level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
 
-        ItemStack out = new ItemStack(EnchantedItems.CIRCLE_TALISMAN.get());
+        ItemStack out = new ItemStack(EItems.CIRCLE_TALISMAN.get());
         //todo: set nbt on talisman
         //out.set(EDataComponents.CIRCLE_MAGIC_SHAPE_MAP.get(), component);
 

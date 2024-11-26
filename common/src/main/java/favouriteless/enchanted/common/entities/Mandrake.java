@@ -1,7 +1,7 @@
 package favouriteless.enchanted.common.entities;
 
 import favouriteless.enchanted.common.init.EnchantedDamageTypes;
-import favouriteless.enchanted.common.init.registry.EnchantedItems;
+import favouriteless.enchanted.common.init.registry.EItems;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -126,7 +126,7 @@ public class Mandrake extends Monster implements GeoEntity {
                     if(entity instanceof Player player && player.isCreative())
                         continue;
 
-                    if(entity.getItemBySlot(EquipmentSlot.HEAD).getItem() != EnchantedItems.EARMUFFS.get()) {
+                    if(entity.getItemBySlot(EquipmentSlot.HEAD).getItem() != EItems.EARMUFFS.get()) {
                         entity.hurt(EnchantedDamageTypes.source(level(), EnchantedDamageTypes.SOUND, mob), 1.0F);
                         entity.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 200, 1));
                     }

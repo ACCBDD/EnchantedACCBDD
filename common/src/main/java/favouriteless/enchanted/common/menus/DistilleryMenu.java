@@ -2,8 +2,8 @@ package favouriteless.enchanted.common.menus;
 
 import favouriteless.enchanted.common.blocks.entity.DistilleryBlockEntity;
 import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
-import favouriteless.enchanted.common.init.registry.EnchantedItems;
-import favouriteless.enchanted.common.init.registry.EnchantedMenuTypes;
+import favouriteless.enchanted.common.init.registry.EItems;
+import favouriteless.enchanted.common.init.registry.EMenuTypes;
 import favouriteless.enchanted.common.menus.slots.JarInputSlot;
 import favouriteless.enchanted.common.menus.slots.OutputSlot;
 import favouriteless.enchanted.util.MenuUtils;
@@ -21,7 +21,7 @@ public class DistilleryMenu extends MenuBase<DistilleryBlockEntity> {
     private final ContainerData data;
 
     public DistilleryMenu(int id, Inventory playerInventory, DistilleryBlockEntity be, ContainerData data) {
-        super(EnchantedMenuTypes.DISTILLERY.get(), id, be, EnchantedBlocks.DISTILLERY.get());
+        super(EMenuTypes.DISTILLERY.get(), id, be, EnchantedBlocks.DISTILLERY.get());
         this.data = data;
 
         addSlot(new JarInputSlot(be, 0, 32, 35)); // Jar input
@@ -63,7 +63,7 @@ public class DistilleryMenu extends MenuBase<DistilleryBlockEntity> {
                 if(!this.moveItemStackTo(slotItem, 7, 43, true))
                     return ItemStack.EMPTY;
             }
-            else if(itemstack.getItem() == EnchantedItems.CLAY_JAR.get()) { // Item is clay jar
+            else if(itemstack.getItem() == EItems.CLAY_JAR.get()) { // Item is clay jar
                 if(!moveItemStackTo(slotItem, 0, 1, false))
                     return ItemStack.EMPTY;
             }

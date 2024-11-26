@@ -18,7 +18,7 @@ public record LocationBoundCreateItemFactory(List<ItemStack> items) implements R
     public static final ResourceLocation ID = Enchanted.id("location_bound_create_item");
 
     public static final MapCodec<LocationBoundCreateItemFactory> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-            ItemStack.CODEC.listOf(1, Integer.MAX_VALUE).fieldOf("items").forGetter(f -> f.items)
+            ItemStack.CODEC.listOf().fieldOf("items").forGetter(f -> f.items)
     ).apply(instance, LocationBoundCreateItemFactory::new));
 
     @Override

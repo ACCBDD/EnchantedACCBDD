@@ -1,9 +1,9 @@
 package favouriteless.enchanted.datagen.providers.tag;
 
-import favouriteless.enchanted.Enchanted;
+import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.common.init.EnchantedTags;
 import favouriteless.enchanted.common.init.EnchantedTags.Blocks;
-import favouriteless.enchanted.common.init.registry.EnchantedItems;
+import favouriteless.enchanted.common.init.registry.EItems;
 import net.minecraft.core.HolderLookup.Provider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
@@ -43,7 +43,7 @@ public class ItemTagProvider extends ItemTagsProvider {
 
         // Other tags
         tag(EnchantedTags.Items.ARMORS)
-                .add(EnchantedItems.EARMUFFS.get(),
+                .add(EItems.EARMUFFS.get(),
                         Items.LEATHER_BOOTS, Items.LEATHER_LEGGINGS, Items.LEATHER_CHESTPLATE, Items.LEATHER_HELMET,
                         Items.GOLDEN_BOOTS, Items.GOLDEN_LEGGINGS, Items.GOLDEN_CHESTPLATE, Items.GOLDEN_HELMET,
                         Items.CHAINMAIL_BOOTS, Items.CHAINMAIL_LEGGINGS, Items.CHAINMAIL_CHESTPLATE, Items.CHAINMAIL_HELMET,
@@ -57,7 +57,7 @@ public class ItemTagProvider extends ItemTagsProvider {
                 .add(Items.BEEF, Items.KELP, Items.POTATO, Items.CHORUS_FRUIT, Items.CHICKEN, Items.COD, Items.MUTTON,
                         Items.PORKCHOP, Items.RABBIT, Items.SALMON);
         tag(EnchantedTags.Items.SWORDS)
-                .add(EnchantedItems.ARTHANA.get());
+                .add(EItems.ARTHANA.get());
         tag(EnchantedTags.Items.TOOLS)
                 .addTag(EnchantedTags.Items.SWORDS);
         tag(EnchantedTags.Items.TOOL_POPPET_BLACKLIST)
@@ -88,7 +88,7 @@ public class ItemTagProvider extends ItemTagsProvider {
         tag(ItemTags.STAIRS)
                 .addTag(EnchantedTags.Items.STAIRS);
         tag(ItemTags.SMALL_FLOWERS)
-                .add(EnchantedItems.BLOOD_POPPY.get());
+                .add(EItems.BLOOD_POPPY.get());
         tag(ItemTags.WOODEN_SLABS)
                 .addTag(EnchantedTags.Items.WOODEN_SLABS);
         tag(ItemTags.WOODEN_STAIRS)

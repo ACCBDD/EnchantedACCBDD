@@ -1,6 +1,6 @@
 package favouriteless.enchanted.common.recipes;
 
-import favouriteless.enchanted.common.init.registry.EnchantedRecipeTypes;
+import favouriteless.enchanted.common.init.registry.ERecipeTypes;
 import favouriteless.enchanted.util.ItemStackHelper;
 import com.google.gson.JsonObject;
 import net.minecraft.core.RegistryAccess;
@@ -25,7 +25,7 @@ public class ByproductRecipe implements Recipe<Container> {
     protected final ItemStack result;
 
     public ByproductRecipe(ResourceLocation id, Ingredient ingredient, ItemStack result) {
-        this.type = EnchantedRecipeTypes.BYPRODUCT.get();
+        this.type = ERecipeTypes.BYPRODUCT.get();
         this.id = id;
         this.ingredient = ingredient;
         this.result = result;
@@ -62,7 +62,7 @@ public class ByproductRecipe implements Recipe<Container> {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return EnchantedRecipeTypes.BYPRODUCT_SERIALIZER.get();
+        return ERecipeTypes.BYPRODUCT_SERIALIZER.get();
     }
 
     @Override

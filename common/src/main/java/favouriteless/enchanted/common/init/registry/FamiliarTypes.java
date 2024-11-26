@@ -1,6 +1,6 @@
 package favouriteless.enchanted.common.init.registry;
 
-import favouriteless.enchanted.Enchanted;
+import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.api.familiars.FamiliarType;
 import favouriteless.enchanted.common.familiars.CatFamiliarType;
 import net.minecraft.resources.ResourceLocation;

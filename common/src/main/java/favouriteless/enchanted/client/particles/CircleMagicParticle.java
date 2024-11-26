@@ -1,8 +1,9 @@
 package favouriteless.enchanted.client.particles;
 
-import favouriteless.enchanted.client.particles.types.CircleMagicParticleType.CircleMagicData;
-import net.minecraft.client.particle.*;
+import favouriteless.enchanted.client.EParticleRenderTypes;
+import favouriteless.enchanted.client.particles.types.ColouredCircleOptions;
 import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.particle.*;
 import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
@@ -10,16 +11,17 @@ import javax.annotation.Nullable;
 public class CircleMagicParticle extends TextureSheetParticle {
 
     public static final double ANGLE = 2.0D;
-    private final double radius;
+    private final float radius;
 
     private final double xStart;
     private final double zStart;
 
-    protected CircleMagicParticle(ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, int red, int green, int blue, double xStart, double zStart, double radius) {
+    protected CircleMagicParticle(ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed,
+                                  double zSpeed, float red, float green, float blue, Vec3 center, float radius) {
         super(level, x, y, z, xSpeed, ySpeed, zSpeed);
-        this.rCol = red/255F;
-        this.gCol = green/255F;
-        this.bCol = blue/255F;
+        this.rCol = red;
+        this.gCol = green;
+        this.bCol = blue;
         this.radius = radius;
 
         this.quadSize = 0.06F;
@@ -27,8 +29,8 @@ public class CircleMagicParticle extends TextureSheetParticle {
         this.lifetime = 60;
         this.hasPhysics = false;
 
-        this.xStart = xStart;
-        this.zStart = zStart;
+        this.xStart = center.x;
+        this.zStart = center.z;
 
         // Create initial velocity
         this.xd = 0;
@@ -43,9 +45,8 @@ public class CircleMagicParticle extends TextureSheetParticle {
         zo = z;
         if(age++ >= lifetime) {
             alpha -= 0.01F;
-            if(alpha <= 0) {
+            if(alpha <= 0)
                 remove();
-            }
         }
 
         double angle = Math.toRadians(ANGLE);
@@ -66,10 +67,10 @@ public class CircleMagicParticle extends TextureSheetParticle {
 
     @Override
     public ParticleRenderType getRenderType() {
-        return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
+        return EParticleRenderTypes.translucentParticle();
     }
 
-    public static class Factory implements ParticleProvider<CircleMagicData> {
+    public static class Factory implements ParticleProvider<ColouredCircleOptions> {
 
         private final SpriteSet sprites;
 
@@ -79,8 +80,9 @@ public class CircleMagicParticle extends TextureSheetParticle {
 
         @Nullable
         @Override
-        public Particle createParticle(CircleMagicData data, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
-            CircleMagicParticle particle = new CircleMagicParticle(level, x, y, z, xSpeed, ySpeed, zSpeed, data.getRed(), data.getGreen(), data.getBlue(), data.getCenterX(), data.getCenterZ(), data.getRadius());
+        public Particle createParticle(ColouredCircleOptions data, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+            CircleMagicParticle particle = new CircleMagicParticle(level, x, y, z, xSpeed, ySpeed, zSpeed, data.getRed(),
+                    data.getGreen(), data.getBlue(), data.getCenter(), data.getRadius());
             particle.pickSprite(sprites);
             return particle;
         }

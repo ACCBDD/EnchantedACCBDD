@@ -1,8 +1,10 @@
 package favouriteless.enchanted.platform.services;
 
+import com.mojang.blaze3d.vertex.VertexFormat;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -16,6 +18,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public interface IClientRegistryHelper {
@@ -61,6 +64,8 @@ public interface IClientRegistryHelper {
      * @param function {@link ItemPropertyFunction} determining if the predicate is true or not.
      */
     void register(Item item, ResourceLocation location, ClampedItemPropertyFunction function);
+
+    void registerShader(String particle, VertexFormat particle1, Consumer<ShaderInstance> consumer);
 
     /**
      * Represents Forge's enum of the same name, so this can actually compile. Forge implementation will grab the ordinal

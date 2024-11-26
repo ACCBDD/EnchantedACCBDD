@@ -1,6 +1,6 @@
 package favouriteless.enchanted.common.capabilities;
 
-import favouriteless.enchanted.Enchanted;
+import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.common.init.registry.EnchantedBlockEntityTypes;
 import net.minecraft.core.Direction;
 import net.minecraft.world.WorldlyContainer;

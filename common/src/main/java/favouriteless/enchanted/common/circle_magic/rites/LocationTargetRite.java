@@ -1,6 +1,6 @@
 package favouriteless.enchanted.common.circle_magic.rites;
 
-import favouriteless.enchanted.Enchanted;
+import favouriteless.enchanted.common.Enchanted;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
@@ -31,17 +31,17 @@ public abstract class LocationTargetRite extends Rite {
 
     @Override
     protected void saveAdditional(CompoundTag tag, ServerLevel level) {
-        if(targetPos != null)
+        if (targetPos != null)
             tag.put("targetPos", BlockPos.CODEC.encodeStart(NbtOps.INSTANCE, targetPos).getOrThrow(false, Enchanted.LOG::error));
-        if(targetLevel != null)
+        if (targetLevel != null)
             tag.putString("targetLevel", targetLevel.dimension().location().toString());
     }
 
     @Override
     protected void loadAdditional(CompoundTag tag, ServerLevel level) {
-        if(tag.contains("targetPos"))
+        if (tag.contains("targetPos"))
             targetPos = BlockPos.CODEC.parse(NbtOps.INSTANCE, tag.get("targetPos")).getOrThrow(false, Enchanted.LOG::error);
-        if(tag.contains("targetLevel"))
+        if (tag.contains("targetLevel"))
             targetLevel = level.getServer().getLevel(ResourceKey.create(Registries.DIMENSION, ResourceLocation.tryParse(tag.getString("targetLevel"))));
     }
 

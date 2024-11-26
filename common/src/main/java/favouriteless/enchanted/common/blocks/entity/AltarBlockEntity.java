@@ -1,6 +1,6 @@
 package favouriteless.enchanted.common.blocks.entity;
 
-import favouriteless.enchanted.Enchanted;
+import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.api.power.IPowerConsumer;
 import favouriteless.enchanted.api.power.IPowerProvider;
 import favouriteless.enchanted.common.CommonConfig;

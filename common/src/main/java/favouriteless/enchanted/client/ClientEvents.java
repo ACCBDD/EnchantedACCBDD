@@ -2,7 +2,7 @@ package favouriteless.enchanted.client;
 
 import favouriteless.enchanted.client.render.poppet.PoppetAnimationManager;
 import favouriteless.enchanted.common.CommonConfig;
-import favouriteless.enchanted.common.init.registry.EnchantedItems;
+import favouriteless.enchanted.common.init.registry.EItems;
 import favouriteless.enchanted.mixin.client.AbstractSoundInstanceAccessor;
 import com.mojang.blaze3d.platform.Window;
 import net.minecraft.ChatFormatting;
@@ -40,7 +40,7 @@ public class ClientEvents {
 		Player player = mc.player;
 
 		if(player != null) {
-			if(player.getItemBySlot(EquipmentSlot.HEAD).getItem() == EnchantedItems.EARMUFFS.get()) {
+			if(player.getItemBySlot(EquipmentSlot.HEAD).getItem() == EItems.EARMUFFS.get()) {
 				if(soundInstance instanceof AbstractSoundInstance sound) {
 					AbstractSoundInstanceAccessor accessor = (AbstractSoundInstanceAccessor)sound;
 					accessor.setVolume(accessor.getVolume() * 0.06F);

@@ -1,6 +1,6 @@
 package favouriteless.enchanted.datagen.providers.tag;
 
-import favouriteless.enchanted.Enchanted;
+import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.common.init.EnchantedTags;
 import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
 import net.minecraft.core.HolderLookup.Provider;

@@ -1,12 +1,11 @@
 package favouriteless.enchanted.client.particles;
 
-import favouriteless.enchanted.Enchanted;
-import favouriteless.enchanted.client.particles.types.SimpleColouredParticleType.SimpleColouredData;
+import favouriteless.enchanted.client.EParticleRenderTypes;
+import favouriteless.enchanted.client.particles.types.ColourOptions;
+import favouriteless.enchanted.common.Enchanted;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 import net.minecraft.world.phys.Vec3;
-
-import javax.annotation.Nullable;
 
 public class CauldronCookParticle extends TextureSheetParticle {
 
@@ -19,11 +18,12 @@ public class CauldronCookParticle extends TextureSheetParticle {
 
     private double currentRadius;
 
-    protected CauldronCookParticle(ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed, int red, int green, int blue) {
+    protected CauldronCookParticle(ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed,
+                                   double zSpeed, float red, float green, float blue) {
         super(level, x, y, z, xSpeed, ySpeed, zSpeed);
-        this.rCol = Math.min((red + Enchanted.RANDOM.nextInt(40) - 20)/255F, 1.0F);
-        this.gCol = Math.min((green + Enchanted.RANDOM.nextInt(40) - 20)/255F, 1.0F);
-        this.bCol = Math.min((blue + Enchanted.RANDOM.nextInt(40) - 20)/255F, 1.0F);
+        this.rCol = Math.min(red + (Enchanted.RANDOM.nextInt(40) - 20)/255F, 1.0F);
+        this.gCol = Math.min(green + (Enchanted.RANDOM.nextInt(40) - 20)/255F, 1.0F);
+        this.bCol = Math.min(blue + (Enchanted.RANDOM.nextInt(40) - 20)/255F, 1.0F);
 
         this.scale(random.nextFloat() * 0.6F);
         this.age = 0;
@@ -46,9 +46,8 @@ public class CauldronCookParticle extends TextureSheetParticle {
         zo = z;
         if (age++ >= lifetime) {
             alpha -= 0.1F;
-            if(alpha <= 0) {
+            if(alpha <= 0)
                 remove();
-            }
         }
 
         if(age >= circleStart) {
@@ -80,10 +79,10 @@ public class CauldronCookParticle extends TextureSheetParticle {
 
     @Override
     public ParticleRenderType getRenderType() {
-        return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
+        return EParticleRenderTypes.translucentParticle();
     }
 
-    public static class Factory implements ParticleProvider<SimpleColouredData> {
+    public static class Factory implements ParticleProvider<ColourOptions> {
 
         private final SpriteSet sprites;
 
@@ -91,9 +90,8 @@ public class CauldronCookParticle extends TextureSheetParticle {
             this.sprites = sprites;
         }
 
-        @Nullable
         @Override
-        public Particle createParticle(SimpleColouredData data, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+        public Particle createParticle(ColourOptions data, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
             CauldronCookParticle particle = new CauldronCookParticle(level, x, y, z, xSpeed, ySpeed, zSpeed, data.getRed(), data.getGreen(), data.getBlue());
             particle.pickSprite(sprites);
             return particle;

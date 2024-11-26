@@ -1,6 +1,6 @@
 package favouriteless.enchanted.common.items;
 
-import favouriteless.enchanted.Enchanted;
+import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.common.init.EnchantedTags;
 import favouriteless.enchanted.common.init.registry.EnchantedSoundEvents;
 import net.minecraft.sounds.SoundSource;

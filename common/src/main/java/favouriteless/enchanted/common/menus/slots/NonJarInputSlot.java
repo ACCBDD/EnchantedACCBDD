@@ -1,6 +1,6 @@
 package favouriteless.enchanted.common.menus.slots;
 
-import favouriteless.enchanted.common.init.registry.EnchantedItems;
+import favouriteless.enchanted.common.init.registry.EItems;
 import net.minecraft.world.Container;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
@@ -13,7 +13,7 @@ public class NonJarInputSlot extends Slot {
 
 	@Override
 	public boolean mayPlace(ItemStack stack) {
-		return !(stack.getItem() == EnchantedItems.CLAY_JAR.get());
+		return !(stack.getItem() == EItems.CLAY_JAR.get());
 	}
 
 }

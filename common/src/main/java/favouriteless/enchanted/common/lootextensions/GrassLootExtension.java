@@ -1,6 +1,6 @@
 package favouriteless.enchanted.common.lootextensions;
 
-import favouriteless.enchanted.Enchanted;
+import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.api.LootExtension;
 import favouriteless.enchanted.common.CommonConfig;
 import net.minecraft.world.item.HoeItem;

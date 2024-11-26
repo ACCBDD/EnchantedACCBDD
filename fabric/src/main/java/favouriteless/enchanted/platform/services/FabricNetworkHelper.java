@@ -1,6 +1,6 @@
 package favouriteless.enchanted.platform.services;
 
-import favouriteless.enchanted.Enchanted;
+import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.common.network.EnchantedPacket;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.api.EnvType;

@@ -4,12 +4,12 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import favouriteless.enchanted.api.rites.RiteFactory;
 import favouriteless.enchanted.common.Enchanted;
-import favouriteless.enchanted.common.curses.CurseType;
-import favouriteless.enchanted.common.curses.CurseTypes;
 import favouriteless.enchanted.common.circle_magic.rites.RemoveCurseRite;
 import favouriteless.enchanted.common.circle_magic.rites.Rite;
 import favouriteless.enchanted.common.circle_magic.rites.Rite.BaseRiteParams;
 import favouriteless.enchanted.common.circle_magic.rites.Rite.RiteParams;
+import favouriteless.enchanted.common.curses.CurseType;
+import favouriteless.enchanted.common.init.registry.CurseTypes;
 import net.minecraft.resources.ResourceLocation;
 
 public class RemoveCurseFactory implements RiteFactory {

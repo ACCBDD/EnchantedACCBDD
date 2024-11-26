@@ -1,6 +1,6 @@
 package favouriteless.enchanted.common.init;
 
-import favouriteless.enchanted.Enchanted;
+import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.platform.ClientServices;
 import favouriteless.enchanted.platform.services.IClientRegistryHelper.KeyConflictContext;
 import com.mojang.blaze3d.platform.InputConstants;

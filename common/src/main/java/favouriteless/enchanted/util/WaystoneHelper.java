@@ -1,6 +1,6 @@
 package favouriteless.enchanted.util;
 
-import favouriteless.enchanted.common.init.registry.EnchantedItems;
+import favouriteless.enchanted.common.init.registry.EItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
@@ -18,7 +18,7 @@ import java.util.UUID;
 public class WaystoneHelper {
 
 	public static BlockPos getPos(ItemStack stack) {
-		if(stack.getItem() == EnchantedItems.BOUND_WAYSTONE.get()) {
+		if(stack.getItem() == EItems.BOUND_WAYSTONE.get()) {
 			if(stack.hasTag()) {
 				CompoundTag nbt = stack.getTag();
 				if(nbt.contains("xPos") && nbt.contains("yPos") && nbt.contains("zPos"))
@@ -29,7 +29,7 @@ public class WaystoneHelper {
 	}
 
 	public static Level getLevel(Level level, ItemStack stack) { // Requires a level to grab server from
-		if(stack.getItem() == EnchantedItems.BOUND_WAYSTONE.get()) {
+		if(stack.getItem() == EItems.BOUND_WAYSTONE.get()) {
 			if(stack.hasTag()) {
 				CompoundTag nbt = stack.getTag();
 				if(nbt.contains("dimension"))
@@ -40,7 +40,7 @@ public class WaystoneHelper {
 	}
 
 	public static Entity getEntity(Level level, ItemStack stack) { // Requires a level to grab server from
-		if(stack.getItem() == EnchantedItems.BLOODED_WAYSTONE.get()) {
+		if(stack.getItem() == EItems.BLOODED_WAYSTONE.get()) {
 			if(stack.hasTag()) {
 				CompoundTag nbt = stack.getTag();
 				if(nbt.contains("uuid")) {
@@ -62,7 +62,7 @@ public class WaystoneHelper {
 	}
 
 	public static void bind(ItemStack stack, Level level, BlockPos pos) {
-		if(stack.getItem() == EnchantedItems.BOUND_WAYSTONE.get()) {
+		if(stack.getItem() == EItems.BOUND_WAYSTONE.get()) {
 			CompoundTag nbt = stack.getOrCreateTag();
 			nbt.putString("dimension", level.dimension().location().toString());
 			nbt.putInt("xPos", pos.getX());
@@ -72,7 +72,7 @@ public class WaystoneHelper {
 	}
 
 	public static void bind(ItemStack stack, UUID uuid, @Nullable String name) {
-		if(stack.getItem() == EnchantedItems.BLOODED_WAYSTONE.get()) {
+		if(stack.getItem() == EItems.BLOODED_WAYSTONE.get()) {
 			CompoundTag nbt = stack.getOrCreateTag();
 			nbt.putUUID("uuid", uuid);
 			if(name != null)
@@ -85,19 +85,19 @@ public class WaystoneHelper {
 	}
 
 	public static ItemStack create(Level level, BlockPos pos) {
-		ItemStack stack = new ItemStack(EnchantedItems.BOUND_WAYSTONE.get(), 1);
+		ItemStack stack = new ItemStack(EItems.BOUND_WAYSTONE.get(), 1);
 		bind(stack, level, pos);
 		return stack;
 	}
 
 	public static ItemStack create(Entity entity) {
-		ItemStack stack = new ItemStack(EnchantedItems.BLOODED_WAYSTONE.get(), 1);
+		ItemStack stack = new ItemStack(EItems.BLOODED_WAYSTONE.get(), 1);
 		bind(stack, entity);
 		return stack;
 	}
 
 	public static ItemStack create(UUID uuid, @Nullable String name) {
-		ItemStack stack = new ItemStack(EnchantedItems.BLOODED_WAYSTONE.get(), 1);
+		ItemStack stack = new ItemStack(EItems.BLOODED_WAYSTONE.get(), 1);
 		bind(stack, uuid, name);
 		return stack;
 	}

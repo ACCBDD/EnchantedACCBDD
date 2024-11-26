@@ -1,6 +1,6 @@
 package favouriteless.enchanted.client.render.entity;
 
-import favouriteless.enchanted.Enchanted;
+import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.client.render.model.ModelLayerLocations;
 import favouriteless.enchanted.client.render.model.entity.BroomstickModel;
 import favouriteless.enchanted.common.entities.Broomstick;

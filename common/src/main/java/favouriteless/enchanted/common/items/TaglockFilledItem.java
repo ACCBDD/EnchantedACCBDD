@@ -1,6 +1,6 @@
 package favouriteless.enchanted.common.items;
 
-import favouriteless.enchanted.common.init.registry.EnchantedItems;
+import favouriteless.enchanted.common.init.registry.EItems;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.chat.Component;
@@ -33,7 +33,7 @@ public class TaglockFilledItem extends Item {
     }
 
     public static UUID getUUID(ItemStack stack) {
-        if(stack.getItem() == EnchantedItems.TAGLOCK_FILLED.get() && stack.hasTag()) {
+        if(stack.getItem() == EItems.TAGLOCK_FILLED.get() && stack.hasTag()) {
             return NbtUtils.loadUUID(stack.getTag().get(TARGET_TAG));
         }
         return null;

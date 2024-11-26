@@ -2,7 +2,7 @@ package favouriteless.enchanted.common.circle_magic.rites.factory;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import favouriteless.enchanted.Enchanted;
+import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.api.rites.RiteFactory;
 import favouriteless.enchanted.common.curses.CurseType;
 import favouriteless.enchanted.common.circle_magic.rites.ApplyCurseRite;

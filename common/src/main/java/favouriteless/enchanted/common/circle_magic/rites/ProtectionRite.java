@@ -1,19 +1,16 @@
 package favouriteless.enchanted.common.circle_magic.rites;
 
-import favouriteless.enchanted.client.particles.types.CircleMagicParticleType;
-import favouriteless.enchanted.client.particles.types.DoubleParticleType;
+import favouriteless.enchanted.client.particles.types.DoubleOptions;
 import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
-import favouriteless.enchanted.common.init.registry.EnchantedParticleTypes;
+import favouriteless.enchanted.common.init.registry.EParticleTypes;
 import favouriteless.enchanted.common.stateobservers.ProtectionRiteObserver;
 import favouriteless.enchanted.common.util.BlockPosUtils;
 import net.favouriteless.stateobserver.api.StateObserverManager;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.level.block.BarrierBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -43,9 +40,9 @@ public class ProtectionRite extends LocationTargetRite {
 
         Block block = blocksPlayers ? EnchantedBlocks.PROTECTION_BARRIER_BLOCKING.get() : EnchantedBlocks.PROTECTION_BARRIER.get();
         generateSphere(targetLevel, targetPos, state -> {
-            if(!state.getFluidState().isEmpty())
+            if (!state.getFluidState().isEmpty())
                 return state.getFluidState().getType() == Fluids.WATER ? block.defaultBlockState().setValue(BlockStateProperties.WATERLOGGED, true) : block.defaultBlockState();
-            if(state.isAir())
+            if (state.isAir())
                 return block.defaultBlockState();
             return null;
         });
@@ -60,9 +57,9 @@ public class ProtectionRite extends LocationTargetRite {
         observer.checkChanges();
 
         //todo: fix particles?
-        if(params.ticks() % 20 == 0) {
-            targetLevel.sendParticles(new DoubleParticleType.DoubleParticleData(EnchantedParticleTypes.PROTECTION_SEED.get(), radius),
-                    targetPos.getX()+0.5d, targetPos.getY()+0.6d, targetPos.getZ()+0.5d,
+        if (params.ticks() % 20 == 0) {
+            targetLevel.sendParticles(new DoubleOptions(EParticleTypes.PROTECTION_SEED.get(), radius),
+                    targetPos.getX() + 0.5d, targetPos.getY() + 0.6d, targetPos.getZ() + 0.5d,
                     1, 0, 0, 0, 0);
         }
         return params.ticks() < duration;
@@ -74,7 +71,7 @@ public class ProtectionRite extends LocationTargetRite {
         StateObserverManager.get().removeObserver(observer);
 
         generateSphere(targetLevel, targetPos, state -> {
-            if(state.is(EnchantedBlocks.PROTECTION_BARRIER.get()) || state.is(EnchantedBlocks.PROTECTION_BARRIER_BLOCKING.get()))
+            if (state.is(EnchantedBlocks.PROTECTION_BARRIER.get()) || state.is(EnchantedBlocks.PROTECTION_BARRIER_BLOCKING.get()))
                 return state.getValue(BlockStateProperties.WATERLOGGED) ? Blocks.WATER.defaultBlockState() : Blocks.AIR.defaultBlockState();
             return null;
         });
@@ -90,15 +87,15 @@ public class ProtectionRite extends LocationTargetRite {
     protected void generateSphere(ServerLevel level, BlockPos pos, Function<BlockState, BlockState> stateGetter) {
         BlockPosUtils.iterableSphereHollow(pos, radius).forEach(spherePos -> {
             BlockState state = stateGetter.apply(level.getBlockState(spherePos));
-            if(state != null)
+            if (state != null)
                 level.setBlockAndUpdate(spherePos, state);
         });
     }
 
     protected void getOrCreateObserver(ServerLevel level, BlockPos pos) {
-        if(observer == null)
+        if (observer == null)
             observer = StateObserverManager.get().getObserver(level, pos, ProtectionRiteObserver.class);
-        if(observer == null)
+        if (observer == null)
             observer = StateObserverManager.get().addObserver(new ProtectionRiteObserver(level, pos,
                     radius + 1, radius + 1, radius + 1, blocksPlayers ? EnchantedBlocks.PROTECTION_BARRIER_BLOCKING.get() : EnchantedBlocks.PROTECTION_BARRIER.get(), radius));
     }

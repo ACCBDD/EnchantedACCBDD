@@ -1,9 +1,8 @@
 package favouriteless.enchanted.common.poppet;
 
 import favouriteless.enchanted.common.init.EnchantedTags.Items;
-import favouriteless.enchanted.common.init.registry.EnchantedItems;
+import favouriteless.enchanted.common.init.registry.EItems;
 import favouriteless.enchanted.common.items.poppets.DeathPoppetItem;
-import favouriteless.enchanted.common.poppet.PoppetShelfSavedData.PoppetEntry;
 import favouriteless.enchanted.common.poppet.PoppetUseResult.ResultType;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
@@ -11,8 +10,6 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-
-import java.util.Queue;
 
 public class PoppetEvents {
 
@@ -36,7 +33,7 @@ public class PoppetEvents {
 
 	public static void onPlayerItemBreak(Player player, ItemStack item, InteractionHand hand) {
 		if(item.is(Items.TOOL_POPPET_WHITELIST) && !item.is(Items.TOOL_POPPET_BLACKLIST)) {
-			PoppetUseResult result = PoppetUtils.tryUseItems(PoppetUtils.getPoppetQueue(player, EnchantedItems::isToolPoppet), player, item);
+			PoppetUseResult result = PoppetUtils.tryUseItems(PoppetUtils.getPoppetQueue(player, EItems::isToolPoppet), player, item);
 			if(result.type() == ResultType.FAIL)
 				return;
 
@@ -44,7 +41,7 @@ public class PoppetEvents {
 
 			if(!cancelled)
 				cancelled = PoppetUtils.tryUseEntries(PoppetUtils.getPoppetQueue(PoppetShelfManager.getEntriesFor(player),
-						entry -> EnchantedItems.isToolPoppet(entry.item().getItem())), player, item).isSuccess();
+						entry -> EItems.isToolPoppet(entry.item().getItem())), player, item).isSuccess();
 
 			if(cancelled)
 				player.setItemInHand(hand, item);
@@ -55,7 +52,7 @@ public class PoppetEvents {
 		if(entity instanceof Player player) {
 			ItemStack item = entity.getItemBySlot(slot).copy();
 			if(item.is(Items.ARMOR_POPPET_WHITELIST) && !item.is(Items.ARMOR_POPPET_BLACKLIST)) {
-				PoppetUseResult result = PoppetUtils.tryUseItems(PoppetUtils.getPoppetQueue(player, EnchantedItems::isArmourPoppet), player, item);
+				PoppetUseResult result = PoppetUtils.tryUseItems(PoppetUtils.getPoppetQueue(player, EItems::isArmourPoppet), player, item);
 				if(result.type() == ResultType.FAIL)
 					return;
 
@@ -63,7 +60,7 @@ public class PoppetEvents {
 
 				if(!cancelled)
 					cancelled = PoppetUtils.tryUseEntries(PoppetUtils.getPoppetQueue(PoppetShelfManager.getEntriesFor(player),
-							entry -> EnchantedItems.isArmourPoppet(entry.item().getItem())), player, item).isSuccess();
+							entry -> EItems.isArmourPoppet(entry.item().getItem())), player, item).isSuccess();
 
 				if(cancelled)
 					player.setItemSlot(slot, item);

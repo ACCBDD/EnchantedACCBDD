@@ -19,7 +19,7 @@ public record CreateItemFactory(List<ItemStack> items) implements RiteFactory {
     public static final ResourceLocation ID = Enchanted.id("create_item");
 
     public static final MapCodec<CreateItemFactory> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-            ItemStack.CODEC.listOf(1, Integer.MAX_VALUE).fieldOf("items").forGetter(f -> f.items)
+            ItemStack.CODEC.listOf().fieldOf("items").forGetter(f -> f.items)
     ).apply(instance, CreateItemFactory::new));
 
     @Override

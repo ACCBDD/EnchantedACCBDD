@@ -1,6 +1,6 @@
 package favouriteless.enchanted.common.circle_magic.rites;
 
-import favouriteless.enchanted.common.init.registry.EnchantedParticleTypes;
+import favouriteless.enchanted.common.init.registry.EParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
@@ -18,8 +18,8 @@ public class SkyWrathRite extends LocationTargetRite {
     @Override
     protected boolean onStart(RiteParams params) {
         super.onStart(params);
-        targetLevel.sendParticles(EnchantedParticleTypes.SKY_WRATH_SEED.get(),
-                pos.getX()+0.5D, pos.getY()+2, pos.getZ()+0.5D,
+        targetLevel.sendParticles(EParticleTypes.SKY_WRATH_SEED.get(),
+                pos.getX() + 0.5D, pos.getY() + 2, pos.getZ() + 0.5D,
                 1, 0, 0, 0, 0);
 
         return true;
@@ -27,10 +27,9 @@ public class SkyWrathRite extends LocationTargetRite {
 
     @Override
     protected boolean onTick(RiteParams params) {
-        if(params.ticks() == START_RAINING) {
+        if (params.ticks() == START_RAINING) {
             level.setWeatherParameters(0, 6000, true, true);
-        }
-        else if(params.ticks() > EXPLODE) {
+        } else if (params.ticks() > EXPLODE) {
             spawnLightning(targetLevel, targetPos.getX() + 0.5D, targetPos.getY(), targetPos.getZ() + 0.5D);
             return false;
         }
@@ -42,7 +41,7 @@ public class SkyWrathRite extends LocationTargetRite {
      * Spawn 6 lightning bolts in a circle around xyz.
      */
     protected void spawnLightning(ServerLevel level, double x, double y, double z) {
-        for(int a = 0; a < 360; a += 60) {
+        for (int a = 0; a < 360; a += 60) {
             double angle = Math.toRadians(a);
             double cx = x + Math.sin(angle) * LIGHTNING_RADIUS;
             double cz = z + Math.cos(angle) * LIGHTNING_RADIUS;

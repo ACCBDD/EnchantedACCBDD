@@ -10,11 +10,10 @@ import favouriteless.enchanted.common.circle_magic.RiteType;
 import favouriteless.enchanted.common.init.EnchantedData;
 import favouriteless.enchanted.common.circle_magic.rites.Rite;
 import favouriteless.enchanted.common.init.registry.EnchantedBlockEntityTypes;
-import favouriteless.enchanted.common.init.registry.EnchantedItems;
+import favouriteless.enchanted.common.init.registry.EItems;
 import favouriteless.enchanted.common.util.ItemUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.HolderGetter;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -188,7 +187,7 @@ public class GoldChalkBlockEntity extends BlockEntity implements IPowerConsumer 
                 createConsumeEffect(entity);
                 int toConsume = Math.min(required.getCount(), item.getCount());
 
-                if(!entity.getItem().is(EnchantedItems.ATTUNED_STONE_CHARGED.get())) {
+                if(!entity.getItem().is(EItems.ATTUNED_STONE_CHARGED.get())) {
 
                     ItemStack copy = item.copy();
                     copy.setCount(toConsume);
@@ -199,7 +198,7 @@ public class GoldChalkBlockEntity extends BlockEntity implements IPowerConsumer 
                         entity.discard();
                 }
                 else {
-                    entity.setItem(new ItemStack(EnchantedItems.ATTUNED_STONE.get(), toConsume));
+                    entity.setItem(new ItemStack(EItems.ATTUNED_STONE.get(), toConsume));
                 }
                 required.shrink(toConsume);
                 return true;

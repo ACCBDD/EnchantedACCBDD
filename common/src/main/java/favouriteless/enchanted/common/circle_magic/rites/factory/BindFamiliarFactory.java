@@ -1,8 +1,8 @@
 package favouriteless.enchanted.common.circle_magic.rites.factory;
 
 import com.mojang.serialization.MapCodec;
-import favouriteless.enchanted.api.rites.RiteFactory;
 import favouriteless.enchanted.common.Enchanted;
+import favouriteless.enchanted.api.rites.RiteFactory;
 import favouriteless.enchanted.common.circle_magic.rites.BindFamiliarRite;
 import favouriteless.enchanted.common.circle_magic.rites.Rite;
 import favouriteless.enchanted.common.circle_magic.rites.Rite.BaseRiteParams;

@@ -1,7 +1,7 @@
 package favouriteless.enchanted.common.circle_magic.rites;
 
-import favouriteless.enchanted.Enchanted;
-import favouriteless.enchanted.common.init.registry.EnchantedParticleTypes;
+import favouriteless.enchanted.common.Enchanted;
+import favouriteless.enchanted.common.init.registry.EParticleTypes;
 import favouriteless.enchanted.common.util.BlockPosUtils;
 import favouriteless.enchanted.mixin.common.SaplingBlockAccessor;
 import net.minecraft.core.BlockPos;
@@ -40,7 +40,7 @@ public class ForestRite extends Rite {
     @Override
     protected boolean onStart(RiteParams params) {
         sapling = getSapling();
-        if(sapling == null)
+        if (sapling == null)
             return cancel();
 
         level.playSound(null, pos, SoundEvents.ZOMBIE_VILLAGER_CURE, SoundSource.MASTER, 0.5F, 1.0F);
@@ -49,29 +49,29 @@ public class ForestRite extends Rite {
 
     @Override
     protected boolean onTick(RiteParams params) {
-        if(params.ticks() % 20 != 0)
+        if (params.ticks() % 20 != 0)
             return true;
 
         BlockState state = sapling.defaultBlockState();
         double r = spacing / 1.7D;
         double o = r / 2D;
 
-        BlockPosUtils.iterableCircleHollow(pos, step*spacing, spacing).forEach(circlePos -> {
-            if(Math.random() < 0.3D)
+        BlockPosUtils.iterableCircleHollow(pos, step * spacing, spacing).forEach(circlePos -> {
+            if (Math.random() < 0.3D)
                 return;
-            circlePos.move((int)Math.round(Math.random() * r - o), 0, (int)Math.round(Math.random() * r - o));
+            circlePos.move((int) Math.round(Math.random() * r - o), 0, (int) Math.round(Math.random() * r - o));
             BlockPos tree = level.getHeightmapPos(Types.MOTION_BLOCKING_NO_LEAVES, circlePos);
 
-            if(!level.getBlockState(tree).canBeReplaced() || !state.canSurvive(level, tree))
+            if (!level.getBlockState(tree).canBeReplaced() || !state.canSurvive(level, tree))
                 return;
 
-            if(((SaplingBlockAccessor)sapling).getTreeGrower().growTree(level, level.getChunkSource().getGenerator(), tree, state, level.random)) {
+            if (((SaplingBlockAccessor) sapling).getTreeGrower().growTree(level, level.getChunkSource().getGenerator(), tree, state, level.random)) {
                 level.playSound(null, pos, SoundEvents.FUNGUS_PLACE, SoundSource.MASTER, 3.0F, 1.0F);
                 usedPositions.add(tree);
             }
         });
 
-        level.sendParticles(EnchantedParticleTypes.FERTILITY_SEED.get(), pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
+        level.sendParticles(EParticleTypes.FERTILITY_SEED.get(), pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D,
                 1, 0, 0, 0, 0);
 
         return step++ < maxSteps;
@@ -87,15 +87,15 @@ public class ForestRite extends Rite {
     @Override
     protected void loadAdditional(CompoundTag tag, ServerLevel level) {
         step = tag.getInt("step");
-        sapling = (SaplingBlock)BuiltInRegistries.BLOCK.get(ResourceLocation.tryParse(tag.getString("sapling")));
+        sapling = (SaplingBlock) BuiltInRegistries.BLOCK.get(ResourceLocation.tryParse(tag.getString("sapling")));
         usedPositions.addAll(BlockPos.CODEC.listOf().parse(NbtOps.INSTANCE, tag.get("used")).getOrThrow(false, Enchanted.LOG::error));
     }
 
     protected SaplingBlock getSapling() {
         List<ItemEntity> entities = level.getEntitiesOfClass(ItemEntity.class, type.getBounds(pos));
 
-        for(ItemEntity entity : entities) {
-            if(entity.getItem().getItem() instanceof BlockItem blockItem &&
+        for (ItemEntity entity : entities) {
+            if (entity.getItem().getItem() instanceof BlockItem blockItem &&
                     blockItem.getBlock() instanceof SaplingBlock sapling) {
                 consumeItem(entity);
                 return sapling;

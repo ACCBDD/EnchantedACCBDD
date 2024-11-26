@@ -1,14 +1,15 @@
 package favouriteless.enchanted.client.particles;
 
-import favouriteless.enchanted.client.particles.types.DelayedActionParticleType.DelayedActionData;
-import favouriteless.enchanted.common.init.registry.EnchantedParticleTypes;
-import favouriteless.enchanted.common.circle_magic.rites.world.RiteSkyWrath;
+import favouriteless.enchanted.client.particles.types.DelayedPosOptions;
+import favouriteless.enchanted.common.circle_magic.rites.SkyWrathRite;
+import favouriteless.enchanted.common.init.registry.EParticleTypes;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.NoRenderParticle;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleProvider;
 import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.world.phys.Vec3;
 
 public class SkyWrathSeedParticle extends NoRenderParticle {
 
@@ -32,11 +33,12 @@ public class SkyWrathSeedParticle extends NoRenderParticle {
 				for(int a = 0; a < 360; a += 20) {
 					double angle = Math.toRadians(a);
 
-					double cx = x + Math.sin(angle) * RiteSkyWrath.LIGHTNING_RADIUS + Math.random() * xSpread;
+					double cx = x + Math.sin(angle) * SkyWrathRite.LIGHTNING_RADIUS + Math.random() * xSpread;
 					double cy = y + Math.random() * ySpread;
-					double cz = z + Math.cos(angle) * RiteSkyWrath.LIGHTNING_RADIUS + Math.random() * zSpread;
+					double cz = z + Math.cos(angle) * SkyWrathRite.LIGHTNING_RADIUS + Math.random() * zSpread;
 
-					level.addParticle(new DelayedActionData(EnchantedParticleTypes.SKY_WRATH.get(), x, y, z, RiteSkyWrath.EXPLODE-age), cx, cy, cz, 0, 0, 0);
+					level.addParticle(new DelayedPosOptions(EParticleTypes.SKY_WRATH.get(), new Vec3(x, y, z),
+							SkyWrathRite.EXPLODE-age), cx, cy, cz, 0, 0, 0);
 				}
 			}
 		}
@@ -48,7 +50,8 @@ public class SkyWrathSeedParticle extends NoRenderParticle {
 
 		public Factory(SpriteSet sprites) {}
 
-		public Particle createParticle(SimpleParticleType data, ClientLevel level, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
+		public Particle createParticle(SimpleParticleType data, ClientLevel level, double x, double y, double z,
+									   double xSpeed, double ySpeed, double zSpeed) {
 			return new SkyWrathSeedParticle(level, x, y, z);
 		}
 	}
