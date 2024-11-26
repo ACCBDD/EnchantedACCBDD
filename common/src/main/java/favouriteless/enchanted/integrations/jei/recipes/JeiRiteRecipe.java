@@ -1,7 +1,7 @@
 package favouriteless.enchanted.integrations.jei.recipes;
 
 import favouriteless.enchanted.common.circle_magic.RiteType;
-import favouriteless.enchanted.common.init.EnchantedData;
+import favouriteless.enchanted.common.init.EData;
 import favouriteless.enchanted.integrations.jei.EJeiRecipeTypes;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.client.Minecraft;
@@ -11,7 +11,7 @@ import net.minecraft.resources.ResourceLocation;
 public record JeiRiteRecipe(ResourceLocation id, RiteType rite) {
 
     public static void register(IRecipeRegistration registration) {
-        Registry<RiteType> registry = Minecraft.getInstance().level.registryAccess().registryOrThrow(EnchantedData.RITE_TYPES_REGISTRY);
+        Registry<RiteType> registry = Minecraft.getInstance().level.registryAccess().registryOrThrow(EData.RITE_TYPES_REGISTRY);
 
         registration.addRecipes(EJeiRecipeTypes.RITE,
                 registry.entrySet().stream()
@@ -20,5 +20,4 @@ public record JeiRiteRecipe(ResourceLocation id, RiteType rite) {
                         .toList()
         );
     }
-
 }

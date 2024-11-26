@@ -1,0 +1,15 @@
+{
+  "items": [
+    { "id": "enchanted:taglock", "Count": 1 },
+    { "id": "enchanted:exhale_of_the_horned_one", "Count": 1 },
+    { "id": "enchanted:brew_of_the_grotesque", "Count": 1 },
+    { "id": "minecraft:nether_wart", "Count": 1 },
+    { "id": "minecraft:ink_sac", "Count": 1 }
+  ],
+  "shapes": {
+    "enchanted:medium_circle": "enchanted:nether_chalk"
+  },
+  "weather": "thundering",
+  "power": 2000,
+  "factory": { "type": "enchanted:apply_curse", "curse": "enchanted:sinking" }
+}

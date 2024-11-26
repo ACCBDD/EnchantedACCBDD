@@ -2,7 +2,7 @@ package favouriteless.enchanted.common.altar;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import favouriteless.enchanted.common.init.EnchantedData;
+import favouriteless.enchanted.common.init.EData;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -32,7 +32,7 @@ public record PowerProvider<T>(T key, int power, int limit) {
     }
 
     public static PowerProvider<Block> getBlock(Level level, Block block) {
-        Optional<Registry<PowerProvider<Block>>> optional = level.registryAccess().registry(EnchantedData.ALTAR_BLOCK_REGISTRY);
+        Optional<Registry<PowerProvider<Block>>> optional = level.registryAccess().registry(EData.ALTAR_BLOCK_REGISTRY);
         if(optional.isPresent()) {
             for(PowerProvider<Block> provider : optional.get()) {
                 if(provider.key == block)
@@ -43,7 +43,7 @@ public record PowerProvider<T>(T key, int power, int limit) {
     }
 
     public static PowerProvider<TagKey<Block>> getTag(Level level, TagKey<Block> tag) {
-        Optional<Registry<PowerProvider<TagKey<Block>>>> optional = level.registryAccess().registry(EnchantedData.ALTAR_TAG_REGISTRY);
+        Optional<Registry<PowerProvider<TagKey<Block>>>> optional = level.registryAccess().registry(EData.ALTAR_TAG_REGISTRY);
         if(optional.isPresent()) {
             for(PowerProvider<TagKey<Block>> provider : optional.get()) {
                 if(provider.key == tag)

@@ -7,7 +7,7 @@ import favouriteless.enchanted.common.CommonConfig;
 import favouriteless.enchanted.common.altar.SimplePowerPosHolder;
 import favouriteless.enchanted.common.circle_magic.RiteManager;
 import favouriteless.enchanted.common.circle_magic.RiteType;
-import favouriteless.enchanted.common.init.EnchantedData;
+import favouriteless.enchanted.common.init.EData;
 import favouriteless.enchanted.common.circle_magic.rites.Rite;
 import favouriteless.enchanted.common.init.registry.EnchantedBlockEntityTypes;
 import favouriteless.enchanted.common.init.registry.EItems;
@@ -73,7 +73,7 @@ public class GoldChalkBlockEntity extends BlockEntity implements IPowerConsumer 
                 type = RiteType.getFirstMatching(level, pos);
                 if(type != null) {
 
-                    ResourceLocation key = level.registryAccess().registryOrThrow(EnchantedData.RITE_TYPES_REGISTRY).getKey(type);
+                    ResourceLocation key = level.registryAccess().registryOrThrow(EData.RITE_TYPES_REGISTRY).getKey(type);
                     if(key == null || CommonConfig.INSTANCE.disabledRites.get().contains(key.toString())) {
                         player.displayClientMessage(Component.literal("This rite has been disabled in the config.").withStyle(ChatFormatting.RED), false);
                         level.playSound(null, worldPosition, SoundEvents.NOTE_BLOCK_SNARE.value(), SoundSource.MASTER, 1.0f, 1.0f);

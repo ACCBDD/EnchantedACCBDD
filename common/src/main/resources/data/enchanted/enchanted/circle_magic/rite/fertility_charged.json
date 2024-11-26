@@ -1,0 +1,14 @@
+{
+  "items": [
+    { "id": "enchanted:hint_of_rebirth", "Count": 1 },
+    { "id": "enchanted:diamond_vapour", "Count": 1 },
+    { "id": "enchanted:quicklime", "Count": 1 },
+    { "id": "enchanted:gypsum", "Count": 1 },
+    { "id": "enchanted:mutandis_extremis", "Count": 1 },
+    { "id": "enchanted:attuned_stone_charged", "Count": 1 }
+  ],
+  "shapes": {
+    "enchanted:small_circle": "enchanted:ritual_chalk"
+  },
+  "factory": { "type": "enchanted:fertility", "radius": 25 }
+}

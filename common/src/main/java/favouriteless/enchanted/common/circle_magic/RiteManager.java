@@ -2,7 +2,7 @@ package favouriteless.enchanted.common.circle_magic;
 
 import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.common.circle_magic.rites.Rite;
-import favouriteless.enchanted.common.init.EnchantedData;
+import favouriteless.enchanted.common.init.EData;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.nbt.CompoundTag;
@@ -60,7 +60,7 @@ public class RiteManager extends SavedData {
 	public CompoundTag save(CompoundTag tag) {
 		CompoundTag out = new CompoundTag();
 		ListTag riteList = new ListTag();
-		Registry<RiteType> registry = level.registryAccess().registryOrThrow(EnchantedData.RITE_TYPES_REGISTRY);
+		Registry<RiteType> registry = level.registryAccess().registryOrThrow(EData.RITE_TYPES_REGISTRY);
 
 		for(Rite rite : activeRites) {
 			ResourceLocation typeId = registry.getKey(rite.getType());
@@ -81,7 +81,7 @@ public class RiteManager extends SavedData {
 	public static RiteManager load(ServerLevel level, CompoundTag tag) {
 		RiteManager manager = new RiteManager(level);
 		ListTag riteList = tag.getList("rites", CompoundTag.TAG_COMPOUND);
-		Registry<RiteType> registry = level.registryAccess().registryOrThrow(EnchantedData.RITE_TYPES_REGISTRY);
+		Registry<RiteType> registry = level.registryAccess().registryOrThrow(EData.RITE_TYPES_REGISTRY);
 
 		for(int i = 0; i < riteList.size(); i++) {
 			try {

@@ -45,7 +45,9 @@ public class EnchantedForge {
 
     @SubscribeEvent
     public static void registerDatapackRegistries(DataPackRegistryEvent.NewRegistry event) {
+        Enchanted.LOG.debug("loaded datapack registries! dadfadf");
         for (ForgeCommonRegistryHelper.DataRegistryRegisterable<?> registerable : ForgeCommonRegistryHelper.dataRegistryRegisterables) {
+            Enchanted.LOG.debug("loaded datapack registries! 2dazaxz");
             registerable.register(event);
         }
     }

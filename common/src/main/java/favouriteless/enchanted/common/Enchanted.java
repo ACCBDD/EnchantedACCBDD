@@ -1,7 +1,8 @@
 package favouriteless.enchanted.common;
 
+import favouriteless.enchanted.common.circle_magic.ERiteFactories;
 import favouriteless.enchanted.common.init.EnchantedCreativeTab;
-import favouriteless.enchanted.common.init.EnchantedData;
+import favouriteless.enchanted.common.init.EData;
 import favouriteless.enchanted.common.init.registry.*;
 import favouriteless.enchanted.common.network.EnchantedPackets;
 import net.minecraft.resources.ResourceLocation;
@@ -35,8 +36,9 @@ public class Enchanted {
         EParticleTypes.load();
         EMenuTypes.load();
         ERecipeTypes.load();
-        EnchantedData.load();
+        EData.load();
         EnchantedCreativeTab.load();
+        ERiteFactories.load();
     }
 
     public static ResourceLocation id(String path) {

@@ -1,0 +1,12 @@
+{
+  "items": [
+    { "id": "enchanted:bound_waystone", "Count": 2 },
+    { "id": "enchanted:ender_dew", "Count": 1 },
+    { "id": "enchanted:quicklime", "Count": 1 },
+    { "id": "enchanted:attuned_stone_charged", "Count": 1 }
+  ],
+  "shapes": {
+    "enchanted:small_circle": "enchanted:ritual_chalk"
+  },
+  "factory": { "type": "enchanted:duplicate_item", "item": "enchanted:waystone", "Count": 2 }
+}

@@ -1,13 +1,12 @@
 package favouriteless.enchanted.common.items;
 
 import favouriteless.enchanted.common.circle_magic.CircleMagicShape;
-import favouriteless.enchanted.common.init.EnchantedData;
+import favouriteless.enchanted.common.init.EData;
 import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionResult;
@@ -39,7 +38,7 @@ public class CircleTalismanItem extends Item {
 			if(!(stack.getItem() instanceof CircleTalismanItem))
 				return InteractionResult.CONSUME;
 
-			Registry<CircleMagicShape> registry = level.registryAccess().registryOrThrow(EnchantedData.CIRCLE_SHAPE_REGISTRY);
+			Registry<CircleMagicShape> registry = level.registryAccess().registryOrThrow(EData.CIRCLE_SHAPE_REGISTRY);
 
 			BlockPos clicked = context.getClickedPos();
 			BlockPos pos = level.getBlockState(clicked).canBeReplaced() ? clicked : clicked.above();

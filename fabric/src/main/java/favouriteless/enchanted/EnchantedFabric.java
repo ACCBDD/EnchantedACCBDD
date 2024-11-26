@@ -7,7 +7,7 @@ import favouriteless.enchanted.common.altar.AltarUpgrade;
 import favouriteless.enchanted.common.altar.PowerProvider;
 import favouriteless.enchanted.common.entities.FamiliarCat;
 import favouriteless.enchanted.common.entities.Mandrake;
-import favouriteless.enchanted.common.init.EnchantedData;
+import favouriteless.enchanted.common.init.EData;
 import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
 import favouriteless.enchanted.common.init.registry.EnchantedEntityTypes;
 import favouriteless.enchanted.common.init.registry.EItems;
@@ -40,9 +40,9 @@ public class EnchantedFabric implements ModInitializer {
     }
 
     private static void registerDataRegistries() {
-        DynamicRegistries.register(EnchantedData.ALTAR_UPGRADE_REGISTRY, AltarUpgrade.CODEC);
-        DynamicRegistries.register(EnchantedData.ALTAR_BLOCK_REGISTRY, PowerProvider.BLOCK_CODEC);
-        DynamicRegistries.register(EnchantedData.ALTAR_TAG_REGISTRY, PowerProvider.TAG_CODEC);
+        DynamicRegistries.register(EData.ALTAR_UPGRADE_REGISTRY, AltarUpgrade.CODEC);
+        DynamicRegistries.register(EData.ALTAR_BLOCK_REGISTRY, PowerProvider.BLOCK_CODEC);
+        DynamicRegistries.register(EData.ALTAR_TAG_REGISTRY, PowerProvider.TAG_CODEC);
     }
 
     private static void registerStrippables() {

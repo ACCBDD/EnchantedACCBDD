@@ -58,8 +58,8 @@ public class ItemUtils {
         if(a.getItem() != b.getItem())
             return false;
 
-        CompoundTag aTags = a.getTag();
-        CompoundTag bTags = b.getTag();
+        CompoundTag aTags = a.getOrCreateTag();
+        CompoundTag bTags = b.getOrCreateTag();
         for(String tag : bTags.getAllKeys()) {
             if(!aTags.contains(tag))
                 return false;

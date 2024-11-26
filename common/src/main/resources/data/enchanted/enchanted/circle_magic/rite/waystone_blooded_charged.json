@@ -1,0 +1,14 @@
+{
+  "items": [
+    { "id": "enchanted:waystone", "Count": 1 },
+    { "id": "enchanted:ender_dew", "Count": 1 },
+    { "id": "enchanted:taglock", "Count": 1 },
+    { "id": "enchanted:attuned_stone_charged", "Count": 1 },
+    { "id": "enchanted:icy_needle", "Count": 1 },
+    { "id": "minecraft:slime_ball", "Count": 1 }
+  ],
+  "shapes": {
+    "enchanted:small_circle": "enchanted:ritual_chalk"
+  },
+  "factory": { "type": "enchanted:entity_bound_create_item", "items": [ { "id": "enchanted:blooded_waystone", "Count": 1 } ] }
+}

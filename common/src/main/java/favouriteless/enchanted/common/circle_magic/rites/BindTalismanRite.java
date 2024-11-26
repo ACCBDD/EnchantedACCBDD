@@ -1,7 +1,7 @@
 package favouriteless.enchanted.common.circle_magic.rites;
 
 import favouriteless.enchanted.common.circle_magic.CircleMagicShape;
-import favouriteless.enchanted.common.init.EnchantedData;
+import favouriteless.enchanted.common.init.EData;
 import favouriteless.enchanted.common.init.registry.EItems;
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleTypes;
@@ -24,7 +24,7 @@ public class BindTalismanRite extends Rite {
 
     @Override
     protected boolean onStart(RiteParams params) {
-        Registry<CircleMagicShape> registry = level.registryAccess().registryOrThrow(EnchantedData.CIRCLE_SHAPE_REGISTRY);
+        Registry<CircleMagicShape> registry = level.registryAccess().registryOrThrow(EData.CIRCLE_SHAPE_REGISTRY);
 
         Map<CircleMagicShape, Block> shapes = new HashMap<>();
         for (CircleMagicShape shape : registry) {

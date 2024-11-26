@@ -4,7 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import favouriteless.enchanted.api.Vec2i;
 import favouriteless.enchanted.api.rites.RiteFactory;
-import favouriteless.enchanted.common.init.EnchantedData;
+import favouriteless.enchanted.common.init.EData;
 import favouriteless.enchanted.common.util.ItemUtils;
 import favouriteless.enchanted.common.circle_magic.rites.Rite;
 import net.minecraft.core.BlockPos;
@@ -158,7 +158,7 @@ public class RiteType implements Comparable<RiteType> {
 	}
 
 	public static RiteType getFirstMatching(Level level, BlockPos pos) {
-		Registry<RiteType> reg = level.registryAccess().registryOrThrow(EnchantedData.RITE_TYPES_REGISTRY);
+		Registry<RiteType> reg = level.registryAccess().registryOrThrow(EData.RITE_TYPES_REGISTRY);
 
 		List<Entity> entities = level.getEntities(null, new AABB(
 				pos.getX()-3, pos.getY(), pos.getZ()-3,

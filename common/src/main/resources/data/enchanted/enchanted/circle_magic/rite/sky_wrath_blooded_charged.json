@@ -1,0 +1,12 @@
+{
+  "items": [
+    { "id": "enchanted:attuned_stone_charged", "Count": 1 },
+    { "id": "enchanted:blooded_waystone", "Count": 1 },
+    { "id": "minecraft:iron_sword", "Count": 1 },
+    { "id": "enchanted:quicklime", "Count": 1 }
+  ],
+  "shapes": {
+    "enchanted:small_circle": "enchanted:ritual_chalk"
+  },
+  "factory": { "type": "enchanted:sky_wrath", "target": "entity" }
+}

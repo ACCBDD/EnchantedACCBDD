@@ -1,0 +1,13 @@
+{
+  "items": [
+    { "id": "enchanted:diamond_vapour", "Count": 1 },
+    { "id": "enchanted:attuned_stone_charged", "Count": 1 },
+    { "id": "minecraft:ender_pearl", "Count": 1 },
+    { "id": "minecraft:iron_ingot", "Count": 1 },
+    { "id": "minecraft:blaze_powder", "Count": 1 }
+  ],
+  "shapes": {
+    "enchanted:large_circle": "enchanted:otherwhere_chalk"
+  },
+  "factory": { "type": "enchanted:transpose_blocks", "tag": "minecraft:iron_ores" }
+}

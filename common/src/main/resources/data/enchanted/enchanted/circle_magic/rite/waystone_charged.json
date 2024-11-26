@@ -1,0 +1,13 @@
+{
+  "items": [
+    { "id": "enchanted:waystone", "Count": 1 },
+    { "id": "enchanted:ender_dew", "Count": 1 },
+    { "id": "enchanted:wood_ash", "Count": 1 },
+    { "id": "enchanted:attuned_stone_charged", "Count": 1 },
+    { "id": "minecraft:glowstone_dust", "Count": 1 }
+  ],
+  "shapes": {
+    "enchanted:small_circle": "enchanted:ritual_chalk"
+  },
+  "factory": { "type": "enchanted:location_bound_create_item", "items": [ { "id": "enchanted:bound_waystone", "Count": 1 } ] }
+}
