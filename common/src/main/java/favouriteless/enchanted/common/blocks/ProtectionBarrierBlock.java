@@ -23,11 +23,11 @@ import org.jetbrains.annotations.NotNull;
 
 public class ProtectionBarrierBlock extends BarrierBlock {
 
-	private final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 	private final boolean blocksPlayers;
 
 	public ProtectionBarrierBlock(boolean blocksPlayers, Properties properties) {
 		super(properties);
+		registerDefaultState(this.getStateDefinition().any().setValue(BlockStateProperties.WATERLOGGED, false));
 		this.blocksPlayers = blocksPlayers;
 	}
 
@@ -58,6 +58,6 @@ public class ProtectionBarrierBlock extends BarrierBlock {
 
 	@Override
 	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-		super.createBlockStateDefinition(builder.add(WATERLOGGED));
+		super.createBlockStateDefinition(builder.add(BlockStateProperties.WATERLOGGED));
 	}
 }
