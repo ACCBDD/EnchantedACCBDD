@@ -2,8 +2,12 @@ package favouriteless.enchanted.common.circle_magic;
 
 import com.mojang.serialization.Codec;
 import favouriteless.enchanted.api.Vec2i;
+import favouriteless.enchanted.common.init.EData;
 import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
+import net.minecraft.resources.RegistryFixedCodec;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;

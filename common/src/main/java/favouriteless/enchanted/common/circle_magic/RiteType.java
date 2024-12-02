@@ -7,9 +7,13 @@ import favouriteless.enchanted.api.rites.RiteFactory;
 import favouriteless.enchanted.common.init.EData;
 import favouriteless.enchanted.common.util.ItemUtils;
 import favouriteless.enchanted.common.circle_magic.rites.Rite;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -28,7 +32,7 @@ public class RiteType implements Comparable<RiteType> {
 
 	public static final Codec<RiteType> CODEC = RecordCodecBuilder.create(instance -> instance.group(
 			ItemStack.CODEC.listOf().fieldOf("items").forGetter(r -> r.items),
-			Codec.unboundedMap(CircleMagicShape.CODEC, BuiltInRegistries.BLOCK.byNameCodec()).optionalFieldOf("shapes", Map.of()).forGetter(r -> r.shapes),
+			Codec.unboundedMap(ResourceKey.codec(EData.CIRCLE_SHAPE_REGISTRY), BuiltInRegistries.BLOCK.byNameCodec()).optionalFieldOf("shapes", Map.of()).forGetter(r -> r.shapes),
 			BuiltInRegistries.ENTITY_TYPE.byNameCodec().listOf().optionalFieldOf("entities", List.of()).forGetter(r -> r.entities),
 			Codec.INT.optionalFieldOf("power", 0).forGetter(r -> r.power),
 			Codec.INT.optionalFieldOf("tick_power", 0).forGetter(r -> r.tickPower),
@@ -38,7 +42,7 @@ public class RiteType implements Comparable<RiteType> {
 	).apply(instance, RiteType::new));
 
 	private final List<ItemStack> items;
-	private final Map<CircleMagicShape, Block> shapes;
+	private final Map<ResourceKey<CircleMagicShape>, Block> shapes;
 	private final List<EntityType<?>> entities;
 	private final int power;
 	private final int tickPower;
@@ -49,7 +53,7 @@ public class RiteType implements Comparable<RiteType> {
 	private final List<Vec2i> interiorPoints = new ArrayList<>();
 	private int radius = 1;
 
-	public RiteType(List<ItemStack> items, Map<CircleMagicShape, Block> shapes, List<EntityType<?>> entities,
+	public RiteType(List<ItemStack> items, Map<ResourceKey<CircleMagicShape>, Block> shapes, List<EntityType<?>> entities,
 					int power, int tickPower, RiteWeatherRequirement weather, List<Integer> times, RiteFactory factory) {
 		this.items = items;
 		this.shapes = shapes;
@@ -59,12 +63,6 @@ public class RiteType implements Comparable<RiteType> {
 		this.weather = weather;
 		this.timeRange = times;
 		this.factory = factory;
-
-		shapes.keySet().forEach(shape -> {
-			if(shape.getRadius() > radius)
-				radius = shape.getRadius();
-			interiorPoints.addAll(shape.getInteriorPoints());
-		});
 	}
 
 
@@ -78,8 +76,9 @@ public class RiteType implements Comparable<RiteType> {
 		if(time > timeRange.get(1))
 			return false;
 
-		for(Map.Entry<CircleMagicShape, Block> entry : shapes.entrySet()) {
-			if(!entry.getKey().matches(level, pos, entry.getValue()))
+		for(Map.Entry<ResourceKey<CircleMagicShape>, Block> entry : shapes.entrySet()) {
+			CircleMagicShape shape = Minecraft.getInstance().level.registryAccess().registryOrThrow(EData.CIRCLE_SHAPE_REGISTRY).get(entry.getKey());
+			if(!shape.matches(level, pos, entry.getValue()))
 				return false;
 		}
 
@@ -126,7 +125,7 @@ public class RiteType implements Comparable<RiteType> {
 	/**
 	 * @return This RiteRequirements' shapes map.
 	 */
-	public Map<CircleMagicShape, Block> getShapes() {
+	public Map<ResourceKey<CircleMagicShape>, Block> getShapes() {
 		return shapes;
 	}
 
@@ -148,6 +147,14 @@ public class RiteType implements Comparable<RiteType> {
 	}
 
 	public List<Vec2i> getInteriorPoints() {
+		if (interiorPoints.isEmpty()) {
+			shapes.keySet().forEach(shapeLoc -> {
+				CircleMagicShape shape = Minecraft.getInstance().getConnection().registryAccess().registryOrThrow(EData.CIRCLE_SHAPE_REGISTRY).get(shapeLoc);
+				if (shape.getRadius() > radius)
+					radius = shape.getRadius();
+				interiorPoints.addAll(shape.getInteriorPoints());
+			});
+		}
 		return interiorPoints;
 	}
 

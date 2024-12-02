@@ -2,8 +2,12 @@ package favouriteless.enchanted.integrations.jei.categories;
 
 import favouriteless.enchanted.common.Enchanted;
 import favouriteless.enchanted.common.circle_magic.CircleMagicShape;
+import favouriteless.enchanted.common.init.EData;
+import favouriteless.enchanted.common.init.registry.EItems;
 import favouriteless.enchanted.integrations.jei.EJeiRecipeTypes;
 import favouriteless.enchanted.integrations.jei.recipes.JeiRiteRecipe;
+import mezz.jei.api.constants.ModIds;
+import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.drawable.IDrawableStatic;
@@ -15,6 +19,7 @@ import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
@@ -27,6 +32,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class RiteCategory implements IRecipeCategory<JeiRiteRecipe> {
 
@@ -37,13 +43,13 @@ public class RiteCategory implements IRecipeCategory<JeiRiteRecipe> {
     private final IGuiHelper helper;
     private final IDrawableStatic background;
     private final IDrawableStatic glyph_golden;
+    private final IDrawable icon;
 
     private final List<IDrawableStatic> circles = new ArrayList<>();
 
     public RiteCategory(IGuiHelper helper) {
         this.helper = helper;
-        //todo: what is this?
-        //helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(EItems.RITUAL_CHALK.get())),
+        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(EItems.RITUAL_CHALK.get()));
         background = helper.createDrawable(Enchanted.id("textures/gui/jei/circle_magic.png"), 0, 0, 180, 120);
         glyph_golden = buildTexture(Enchanted.id("textures/gui/jei/gold_glyph.png"), CIRCLE_SIZE, CIRCLE_SIZE);
 
@@ -78,12 +84,12 @@ public class RiteCategory implements IRecipeCategory<JeiRiteRecipe> {
 
     @Override
     public IDrawable getBackground() {
-        return null;
+        return background;
     }
 
     @Override
     public IDrawable getIcon() {
-        return null;
+        return icon;
     }
 
     @Override
@@ -126,13 +132,12 @@ public class RiteCategory implements IRecipeCategory<JeiRiteRecipe> {
             builder.addSlot(RecipeIngredientRole.OUTPUT, startX + (i % 3) * 17, startY + i / 3 * 17).addItemStack(stack);
         }
 
-        for(Map.Entry<CircleMagicShape, Block> entry : recipe.rite().getShapes().entrySet()) {
-            //todo: actually resolve a resourcelocation
-            ResourceKey<CircleMagicShape> shapeKey = null;//entry.getKey().unwrapKey().orElse(null);
+        for(Map.Entry<ResourceKey<CircleMagicShape>, Block> entry : recipe.rite().getShapes().entrySet()) {
+            CircleMagicShape shapeKey = Minecraft.getInstance().level.registryAccess().registryOrThrow(EData.CIRCLE_SHAPE_REGISTRY).get(entry.getKey());
             if(shapeKey == null)
                 return;
 
-            ResourceLocation location = shapeKey.location();
+            ResourceLocation location = entry.getKey().location();
 
             ResourceLocation texture = ResourceLocation.tryBuild(
                     location.getNamespace(),
