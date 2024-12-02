@@ -1,6 +1,8 @@
 package favouriteless.enchanted.common.circle_magic.rites;
 
+import favouriteless.enchanted.client.particles.types.ColouredCircleOptions;
 import favouriteless.enchanted.common.init.EnchantedTags;
+import favouriteless.enchanted.common.init.registry.EParticleTypes;
 import favouriteless.enchanted.common.util.EntityUtils;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -56,11 +58,10 @@ public class SanctityRite extends Rite {
             double dy = pos.getY() + 0.1d;
             double dz = pos.getZ() + 0.5d;
 
-            //todo: particles
-//            level.sendParticles(new ColouredCircleOptions(EnchantedParticleTypes.CIRCLE_MAGIC.get(), 0xFFFFFFFF,
-//                    new Vec3(cx, pos.getY(), cz), RADIUS), cx + RADIUS, dy, dz, 1, 0, 0.35d, 0, 0);
-//            level.sendParticles(new ColouredCircleOptions(EnchantedParticleTypes.CIRCLE_MAGIC.get(), 0xFFFFFFFF,
-//                    new Vec3(cx, pos.getY(), cz), RADIUS), cx - RADIUS, dy, dz, 1, 0, 0.35d, 0, 0);
+            level.sendParticles(new ColouredCircleOptions(EParticleTypes.CIRCLE_MAGIC.get(), 0xFFFFFFFF,
+                    new Vec3(cx, pos.getY(), cz), RADIUS), cx + RADIUS, dy, dz, 1, 0, 0.35d, 0, 0);
+            level.sendParticles(new ColouredCircleOptions(EParticleTypes.CIRCLE_MAGIC.get(), 0xFFFFFFFF,
+                    new Vec3(cx, pos.getY(), cz), RADIUS), cx - RADIUS, dy, dz, 1, 0, 0.35d, 0, 0);
         }
 
         return true;

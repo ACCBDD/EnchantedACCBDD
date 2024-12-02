@@ -1,6 +1,8 @@
 package favouriteless.enchanted.common.circle_magic.rites;
 
 import favouriteless.enchanted.api.Vec2i;
+import favouriteless.enchanted.client.particles.types.DoubleOptions;
+import favouriteless.enchanted.common.init.registry.EParticleTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
@@ -41,12 +43,11 @@ public class TransposeBlocksRite extends Rite {
             }
         }
 
-        //todo: particles
-//        if(params.ticks() % 20 == 0) {
-//            level.sendParticles(new DoubleParticleType.DoubleParticleData(EnchantedParticleTypes.TRANSPOSITION_IRON_SEED.get(), type.getRadius()),
-//                    pos.getX()+0.5D, pos.getY()-0.1D, pos.getZ()+0.5D,
-//                    1, 0, 0, 0, 0);
-//        }
+        if(params.ticks() % 20 == 0) {
+            level.sendParticles(new DoubleOptions(EParticleTypes.TRANSPOSITION_IRON_SEED.get(), type.getRadius()),
+                    pos.getX()+0.5D, pos.getY()-0.1D, pos.getZ()+0.5D,
+                    1, 0, 0, 0, 0);
+        }
 
         return params.ticks() < type.getInteriorPoints().size() - 1; // Stop executing when run out of points.
     }

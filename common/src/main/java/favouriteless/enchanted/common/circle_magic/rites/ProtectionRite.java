@@ -56,7 +56,6 @@ public class ProtectionRite extends LocationTargetRite {
     protected boolean onTick(RiteParams params) {
         observer.checkChanges();
 
-        //todo: fix particles?
         if (params.ticks() % 20 == 0) {
             targetLevel.sendParticles(new DoubleOptions(EParticleTypes.PROTECTION_SEED.get(), radius),
                     targetPos.getX() + 0.5d, targetPos.getY() + 0.6d, targetPos.getZ() + 0.5d,
