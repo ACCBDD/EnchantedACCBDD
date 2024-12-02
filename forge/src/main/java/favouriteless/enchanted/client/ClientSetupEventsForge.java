@@ -8,17 +8,16 @@ import favouriteless.enchanted.platform.services.ForgeClientRegistryHelper;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
+import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.EntityRenderersEvent;
-import net.minecraftforge.client.event.RegisterColorHandlersEvent;
-import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
-import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
+import net.minecraftforge.client.event.*;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import org.apache.commons.lang3.tuple.Pair;
 
+import java.io.IOException;
 import java.util.function.Supplier;
 
 @EventBusSubscriber(modid=Enchanted.MOD_ID, bus=Bus.MOD, value=Dist.CLIENT)
@@ -81,5 +80,21 @@ public class ClientSetupEventsForge {
 		event.registerSpriteSet(EParticleTypes.PROTECTION.get(), ProtectionParticle.Factory::new);
 		event.registerSpriteSet(EParticleTypes.BIND_FAMILIAR_SEED.get(), BindFamiliarSeedParticle.Factory::new);
 		event.registerSpriteSet(EParticleTypes.BIND_FAMILIAR.get(), BindFamiliarParticle.Factory::new);
+	}
+
+	@SubscribeEvent
+	public static void registerShaders(final RegisterShadersEvent event) {
+		ForgeClientRegistryHelper.SHADER_INSTANCES.forEach(r -> {
+			try {
+				event.registerShader(
+						new ShaderInstance(event.getResourceProvider(), Enchanted.id(r.name()), r.vertexFormat()),
+						r.loadCallback()
+				);
+			} catch(IOException e) {
+				Enchanted.LOG.error("Failed to load ShaderInstance: {}", r.name());
+				Enchanted.LOG.error(e.toString());
+			}
+		});
+		ForgeClientRegistryHelper.SHADER_INSTANCES.clear();
 	}
 }

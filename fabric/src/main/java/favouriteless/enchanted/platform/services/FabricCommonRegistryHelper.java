@@ -70,13 +70,7 @@ public class FabricCommonRegistryHelper implements ICommonRegistryHelper {
 
 	@Override
 	public <T> ResourceKey<Registry<T>> registerDataRegistry(ResourceKey<Registry<T>> key, Codec<T> codec) {
-		DynamicRegistries.register(key, codec);
-		return key;
-	}
-
-	@Override
-	public <T> ResourceKey<Registry<T>> registerSyncedDataRegistry(ResourceKey<Registry<T>> key, Codec<T> codec, Codec<T> networkCodec) {
-		DynamicRegistries.registerSynced(key, codec, networkCodec);
+		DynamicRegistries.registerSynced(key, codec, codec);
 		return key;
 	}
 

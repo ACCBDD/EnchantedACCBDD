@@ -4,6 +4,8 @@ import favouriteless.enchanted.client.screens.DistilleryScreen;
 import favouriteless.enchanted.client.screens.SpinningWheelScreen;
 import favouriteless.enchanted.client.screens.WitchOvenScreen;
 import favouriteless.enchanted.common.Enchanted;
+import favouriteless.enchanted.common.circle_magic.RiteType;
+import favouriteless.enchanted.common.init.EData;
 import favouriteless.enchanted.common.init.registry.EItems;
 import favouriteless.enchanted.common.init.registry.EMenuTypes;
 import favouriteless.enchanted.common.init.registry.ERecipeTypes;
@@ -22,6 +24,7 @@ import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.helpers.IJeiHelpers;
 import mezz.jei.api.registration.*;
+import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -59,7 +62,7 @@ public class EJeiPlugin implements IModPlugin {
         registration.addRecipes(EJeiRecipeTypes.KETTLE, RecipeUtils.getRecipes(ERecipeTypes.KETTLE.get()));
         registration.addRecipes(EJeiRecipeTypes.DISTILLING, RecipeUtils.getRecipes(ERecipeTypes.DISTILLING.get()));
 
-        JeiRiteRecipe.register(registration);
+        JeiRiteRecipe.register(registration, Minecraft.getInstance().getConnection().registryAccess().registry(EData.RITE_TYPES_REGISTRY).get());
         JeiMutandisRecipe.register(registration);
         registration.addIngredientInfo(new ItemStack(EItems.CHALICE_FILLED.get()), VanillaTypes.ITEM_STACK, Component.translatable("jei.enchanted.chalice_filled"));
     }

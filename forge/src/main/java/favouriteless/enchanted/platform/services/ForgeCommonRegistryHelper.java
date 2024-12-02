@@ -80,13 +80,7 @@ public class ForgeCommonRegistryHelper implements ICommonRegistryHelper {
 
 	@Override
 	public <T> ResourceKey<Registry<T>> registerDataRegistry(ResourceKey<Registry<T>> key, Codec<T> codec) {
-		dataRegistryRegisterables.add(new DataRegistryRegisterable<>(key, codec, null));
-		return key;
-	}
-
-	@Override
-	public <T> ResourceKey<Registry<T>> registerSyncedDataRegistry(ResourceKey<Registry<T>> key, Codec<T> codec, Codec<T> networkCodec) {
-		dataRegistryRegisterables.add(new DataRegistryRegisterable<>(key, codec, networkCodec));
+		dataRegistryRegisterables.add(new DataRegistryRegisterable<>(key, codec, codec));
 		return key;
 	}
 

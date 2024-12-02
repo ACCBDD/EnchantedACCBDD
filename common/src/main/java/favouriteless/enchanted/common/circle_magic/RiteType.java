@@ -72,7 +72,7 @@ public class RiteType implements Comparable<RiteType> {
 		if(!weather.check(level))
 			return false;
 
-		long time = level.getDayTime();
+		long time = level.getDayTime() % Level.TICKS_PER_DAY;
 		if(time < timeRange.get(0))
 			return false;
 		if(time > timeRange.get(1))
@@ -111,7 +111,9 @@ public class RiteType implements Comparable<RiteType> {
 	 * @return A copy of this RiteRequirements' item list.
 	 */
 	public List<ItemStack> getItems() {
-		return new ArrayList<>(items);
+		List<ItemStack> returned = new ArrayList<>();
+		items.forEach(i -> returned.add(i.copy()));
+		return returned;
 	}
 
 	/**
