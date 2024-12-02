@@ -3,8 +3,11 @@ package favouriteless.enchanted.common.circle_magic.rites;
 import favouriteless.enchanted.common.circle_magic.CircleMagicShape;
 import favouriteless.enchanted.common.init.EData;
 import favouriteless.enchanted.common.init.registry.EItems;
+import favouriteless.enchanted.common.items.CircleTalismanItem;
 import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -42,8 +45,11 @@ public class BindTalismanRite extends Rite {
         level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
 
         ItemStack out = new ItemStack(EItems.CIRCLE_TALISMAN.get());
-        //todo: set nbt on talisman
-        //out.set(EDataComponents.CIRCLE_MAGIC_SHAPE_MAP.get(), component);
+        CompoundTag shapesTag = new CompoundTag();
+        for (Map.Entry<ResourceLocation, Block> entry : component.entrySet()) {
+            shapesTag.putString(entry.getKey().toString(), BuiltInRegistries.BLOCK.getKey(entry.getValue()).toString());
+        }
+        out.getOrCreateTag().put(CircleTalismanItem.SHAPE_TAG, shapesTag);
 
         ItemEntity entity = new ItemEntity(level, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, out);
         level.addFreshEntity(entity);

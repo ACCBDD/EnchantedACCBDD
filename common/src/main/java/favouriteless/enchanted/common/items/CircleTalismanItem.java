@@ -6,7 +6,10 @@ import favouriteless.enchanted.common.init.registry.EnchantedBlocks;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionResult;
@@ -43,10 +46,17 @@ public class CircleTalismanItem extends Item {
 			BlockPos clicked = context.getClickedPos();
 			BlockPos pos = level.getBlockState(clicked).canBeReplaced() ? clicked : clicked.above();
 
-			//todo: somehow turn circles into nbt data
-			Map<ResourceLocation, Block> shapes = new HashMap<>();
-			if(shapes.isEmpty())
+			if(!stack.getOrCreateTag().contains(SHAPE_TAG))
 				return InteractionResult.CONSUME;
+
+			if(stack.getOrCreateTag().getCompound(SHAPE_TAG).isEmpty())
+				return InteractionResult.CONSUME;
+
+			Map<ResourceLocation, Block> shapes = new HashMap<>();
+            CompoundTag shapesTag = stack.getOrCreateTag().getCompound(SHAPE_TAG);
+			for (String key : shapesTag.getAllKeys()) {
+				shapes.put(ResourceLocation.tryParse(key), BuiltInRegistries.BLOCK.get(ResourceLocation.tryParse(shapesTag.getString(key))));
+			}
 
 			boolean valid = level.getBlockState(pos).canBeReplaced() && EnchantedBlocks.GOLDEN_CHALK.get().canSurvive(null, level, pos);
 			if(!valid)
