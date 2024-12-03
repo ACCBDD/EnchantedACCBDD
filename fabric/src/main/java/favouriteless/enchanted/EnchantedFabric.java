@@ -25,7 +25,6 @@ public class EnchantedFabric implements ModInitializer {
         Enchanted.init();
         registerEntityAttributes();
         CommonEventsFabric.register();
-        registerDataRegistries();
 
         EItems.registerCompostables();
         registerStrippables();
