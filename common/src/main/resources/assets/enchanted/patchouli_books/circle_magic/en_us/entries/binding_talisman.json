@@ -10,7 +10,7 @@
     },
     {
       "type": "enchanted:rite_requirements",
-      "rite": "enchanted:binding_talisman"
+      "rite": "enchanted:bind_talisman"
     },
     {
       "type": "enchanted:rite_description",
@@ -19,7 +19,7 @@
     },
     {
       "type": "enchanted:rite_requirements",
-      "rite": "enchanted:binding_talisman_charged"
+      "rite": "enchanted:bind_talisman_charged"
     }
   ],
   "read_by_default": true

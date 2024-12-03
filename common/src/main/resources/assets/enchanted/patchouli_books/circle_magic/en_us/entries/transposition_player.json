@@ -10,7 +10,7 @@
     },
     {
       "type": "enchanted:rite_requirements",
-      "rite": "enchanted:transposition_player"
+      "rite": "enchanted:transpose_caster_waystone"
     },
     {
       "type": "enchanted:rite_description",
@@ -19,7 +19,7 @@
     },
     {
       "type": "enchanted:rite_requirements",
-      "rite": "enchanted:transposition_player_blooded"
+      "rite": "enchanted:transpose_caster_blooded"
     }
   ],
   "read_by_default": true

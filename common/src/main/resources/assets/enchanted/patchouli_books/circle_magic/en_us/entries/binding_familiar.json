@@ -10,7 +10,7 @@
     },
     {
       "type": "enchanted:rite_requirements",
-      "rite": "enchanted:binding_familiar"
+      "rite": "enchanted:bind_familiar"
     }
   ],
   "read_by_default": true

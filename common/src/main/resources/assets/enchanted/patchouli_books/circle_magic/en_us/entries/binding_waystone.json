@@ -10,7 +10,7 @@
     },
     {
       "type": "enchanted:rite_requirements",
-      "rite": "enchanted:binding_waystone"
+      "rite": "enchanted:waystone"
     },
     {
       "type": "enchanted:rite_description",
@@ -19,7 +19,7 @@
     },
     {
       "type": "enchanted:rite_requirements",
-      "rite": "enchanted:binding_waystone_charged"
+      "rite": "enchanted:waystone_charged"
     },
     {
       "type": "enchanted:rite_description",
@@ -28,7 +28,7 @@
     },
     {
       "type": "enchanted:rite_requirements",
-      "rite": "enchanted:binding_waystone_duplicate"
+      "rite": "enchanted:duplicate_waystone"
     },
     {
       "type": "enchanted:rite_description",
@@ -37,7 +37,7 @@
     },
     {
       "type": "enchanted:rite_requirements",
-      "rite": "enchanted:binding_waystone_duplicate_charged"
+      "rite": "enchanted:duplicate_waystone_charged"
     },
     {
       "type": "enchanted:rite_description",
@@ -46,7 +46,7 @@
     },
     {
       "type": "enchanted:rite_requirements",
-      "rite": "enchanted:binding_waystone_player"
+      "rite": "enchanted:waystone_blooded"
     },
     {
       "type": "enchanted:rite_description",
@@ -55,7 +55,7 @@
     },
     {
       "type": "enchanted:rite_requirements",
-      "rite": "enchanted:binding_waystone_player_charged"
+      "rite": "enchanted:waystone_blooded_charged"
     }
   ],
   "read_by_default": true

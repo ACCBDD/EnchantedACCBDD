@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class EntityBoundCreateItemRite extends Rite {
-
+    //todo: fix
     private final List<ItemStack> items;
 
     public EntityBoundCreateItemRite(BaseRiteParams baseParams, RiteParams params, List<ItemStack> items) {
