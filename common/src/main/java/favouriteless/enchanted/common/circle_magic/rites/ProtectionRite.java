@@ -56,7 +56,7 @@ public class ProtectionRite extends LocationTargetRite {
     protected boolean onTick(RiteParams params) {
         observer.checkChanges();
 
-        if (params.ticks() % 20 == 0) {
+        if (params.ticks() % 20 == 0 && targetPos != null) {
             targetLevel.sendParticles(new DoubleOptions(EParticleTypes.PROTECTION_SEED.get(), radius),
                     targetPos.getX() + 0.5d, targetPos.getY() + 0.6d, targetPos.getZ() + 0.5d,
                     1, 0, 0, 0, 0);
@@ -66,6 +66,11 @@ public class ProtectionRite extends LocationTargetRite {
 
     @Override
     protected void onStop(RiteParams params) {
+        if (targetPos == null)
+            targetPos = pos;
+        if (targetLevel == null)
+            targetLevel = level;
+
         targetLevel.playSound(null, targetPos, SoundEvents.ENCHANTMENT_TABLE_USE, SoundSource.MASTER, 1.0f, 0.5f);
         StateObserverManager.get().removeObserver(observer);
 

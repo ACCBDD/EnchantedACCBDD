@@ -1,5 +1,6 @@
 package favouriteless.enchanted.common.circle_magic.rites;
 
+import favouriteless.enchanted.common.Enchanted;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -23,8 +24,8 @@ public class DuplicateItemRite extends Rite {
         for (ItemStack stack : params.consumedItems) {
             if (stack.getItem() == targetItem) {
                 ItemStack copy = stack.copy();
-                copy.setCount(count);
                 ItemEntity itemEntity = new ItemEntity(level, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, copy);
+                itemEntity.getItem().setCount(count);
                 level.addFreshEntity(itemEntity);
                 break;
             }

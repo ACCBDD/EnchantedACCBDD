@@ -47,7 +47,7 @@ public class EItems {
 	public static final Supplier<Item> BLOODED_WAYSTONE = register("blooded_waystone", BloodedWaystoneItem::new);
 	public static final Supplier<BlockItem> BLOOD_POPPY = registerBlock("blood_poppy", EnchantedBlocks.BLOOD_POPPY);
 	public static final Supplier<Item> BONE_NEEDLE = registerItem("bone_needle");
-	public static final Supplier<Item> BOUND_WAYSTONE = registerItem("bound_waystone");
+	public static final Supplier<Item> BOUND_WAYSTONE = register("bound_waystone", BoundWaystoneItem::new);
 	public static final Supplier<Item> BREATH_OF_THE_GODDESS = registerItem("breath_of_the_goddess");
 	public static final Supplier<Item> BREW_OF_LOVE = register("brew_of_love", LoveBrewItem::new);
 	public static final Supplier<Item> BREW_OF_SPROUTING = registerItem("brew_of_sprouting");
@@ -170,7 +170,7 @@ public class EItems {
 	public static final Supplier<DeathPoppetEffectItem> WATER_POPPET = register("water_poppet", () -> new DeathPoppetEffectItem(0.3F, 1, PoppetColour.WATER, () -> new MobEffectInstance(EnchantedEffects.DROWN_RESISTANCE.get(), 100), source -> source.is(DamageTypeTags.IS_DROWNING)));
 	public static final Supplier<DeathPoppetEffectItem> WATER_POPPET_INFUSED = register("infused_water_poppet", () -> new DeathPoppetEffectItem( 0.0F, 1, PoppetColour.WATER, () -> new MobEffectInstance(MobEffects.WATER_BREATHING, 200), source -> source.is(DamageTypeTags.IS_DROWNING)));
 	public static final Supplier<DeathPoppetEffectItem> WATER_POPPET_STURDY = register("sturdy_water_poppet", () -> new DeathPoppetEffectItem( 0.0F, 2, PoppetColour.WATER, () -> new MobEffectInstance(EnchantedEffects.DROWN_RESISTANCE.get(), 100), source -> source.is(DamageTypeTags.IS_DROWNING)));
-	public static final Supplier<Item> WAYSTONE = registerItem("waystone");
+	public static final Supplier<Item> WAYSTONE = register("waystone", WaystoneItem::new);
 	public static final Supplier<Item> WHIFF_OF_MAGIC = registerItem("whiff_of_magic");
 	public static final Supplier<BlockItem> WICKER_BUNDLE = registerBlock("wicker_bundle", EnchantedBlocks.WICKER_BUNDLE);
 	public static final Supplier<BlockItem> WITCH_CAULDRON = registerBlock("witch_cauldron", EnchantedBlocks.WITCH_CAULDRON);

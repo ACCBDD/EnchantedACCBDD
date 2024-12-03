@@ -1,7 +1,11 @@
 package favouriteless.enchanted.common.circle_magic.rites;
 
+import favouriteless.enchanted.util.WaystoneHelper;
+import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 
 public class ProtectionEntityRite extends ProtectionRite {
 
@@ -18,6 +22,16 @@ public class ProtectionEntityRite extends ProtectionRite {
 
             targetLevel = (ServerLevel) target.level();
             targetPos = target.blockPosition();
+        } else {
+            for (ItemStack item : params.consumedItems) {
+                Entity target = WaystoneHelper.getEntity(level, item);
+                if (target == null)
+                    return;
+
+                params.target = target.getUUID();
+                targetLevel = (ServerLevel) target.level();
+                targetPos = target.blockPosition();
+            }
         }
     }
 

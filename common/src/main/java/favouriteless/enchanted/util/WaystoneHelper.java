@@ -16,13 +16,19 @@ import javax.annotation.Nullable;
 import java.util.UUID;
 
 public class WaystoneHelper {
+	public static final String X = "xPos";
+	public static final String Y = "yPos";
+	public static final String Z = "zPos";
+	public static final String DIMENSION = "dimension";
+	public static final String UUID = "uuid";
+	public static final String NAME = "displayName";
 
 	public static BlockPos getPos(ItemStack stack) {
 		if(stack.getItem() == EItems.BOUND_WAYSTONE.get()) {
 			if(stack.hasTag()) {
 				CompoundTag nbt = stack.getTag();
-				if(nbt.contains("xPos") && nbt.contains("yPos") && nbt.contains("zPos"))
-					return new BlockPos(nbt.getInt("xPos"), nbt.getInt("yPos"), nbt.getInt("zPos"));
+				if(nbt.contains(X) && nbt.contains(Y) && nbt.contains(Z))
+					return new BlockPos(nbt.getInt(X), nbt.getInt(Y), nbt.getInt(Z));
 			}
 		}
 		return null;
@@ -32,8 +38,8 @@ public class WaystoneHelper {
 		if(stack.getItem() == EItems.BOUND_WAYSTONE.get()) {
 			if(stack.hasTag()) {
 				CompoundTag nbt = stack.getTag();
-				if(nbt.contains("dimension"))
-					return level.getServer().getLevel(ResourceKey.create(Registries.DIMENSION, new ResourceLocation(nbt.getString("dimension"))));
+				if(nbt.contains(DIMENSION))
+					return level.getServer().getLevel(ResourceKey.create(Registries.DIMENSION, new ResourceLocation(nbt.getString(DIMENSION))));
 			}
 		}
 		return null;
@@ -43,8 +49,8 @@ public class WaystoneHelper {
 		if(stack.getItem() == EItems.BLOODED_WAYSTONE.get()) {
 			if(stack.hasTag()) {
 				CompoundTag nbt = stack.getTag();
-				if(nbt.contains("uuid")) {
-					UUID uuid = nbt.getUUID("uuid");
+				if(nbt.contains(UUID)) {
+					UUID uuid = nbt.getUUID(UUID);
 
 					ServerPlayer player = level.getServer().getPlayerList().getPlayer(uuid);
 					if(player != null)
@@ -64,19 +70,19 @@ public class WaystoneHelper {
 	public static void bind(ItemStack stack, Level level, BlockPos pos) {
 		if(stack.getItem() == EItems.BOUND_WAYSTONE.get()) {
 			CompoundTag nbt = stack.getOrCreateTag();
-			nbt.putString("dimension", level.dimension().location().toString());
-			nbt.putInt("xPos", pos.getX());
-			nbt.putInt("yPos", pos.getY());
-			nbt.putInt("zPos", pos.getZ());
+			nbt.putString(DIMENSION, level.dimension().location().toString());
+			nbt.putInt(X, pos.getX());
+			nbt.putInt(Y, pos.getY());
+			nbt.putInt(Z, pos.getZ());
 		}
 	}
 
 	public static void bind(ItemStack stack, UUID uuid, @Nullable String name) {
 		if(stack.getItem() == EItems.BLOODED_WAYSTONE.get()) {
 			CompoundTag nbt = stack.getOrCreateTag();
-			nbt.putUUID("uuid", uuid);
+			nbt.putUUID(UUID, uuid);
 			if(name != null)
-				nbt.putString("displayName", name);
+				nbt.putString(NAME, name);
 		}
 	}
 

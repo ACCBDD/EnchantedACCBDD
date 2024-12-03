@@ -22,7 +22,7 @@ public record DuplicateItemFactory(Item targetItem, int count) implements RiteFa
 
     public static final MapCodec<DuplicateItemFactory> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             BuiltInRegistries.ITEM.byNameCodec().fieldOf("item").forGetter(f -> f.targetItem),
-            Codec.INT.optionalFieldOf("count", 1).forGetter(f -> f.count)
+            Codec.INT.optionalFieldOf("Count", 1).forGetter(f -> f.count)
     ).apply(instance, DuplicateItemFactory::new));
 
     @Override
