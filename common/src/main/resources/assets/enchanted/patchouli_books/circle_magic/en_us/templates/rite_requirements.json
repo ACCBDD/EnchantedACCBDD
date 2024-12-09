@@ -14,7 +14,7 @@
     },
     {
       "type": "patchouli:custom",
-      "class": "favouriteless.enchanted.patchouli.components.RiteRequirementsComponent",
+      "class": "net.favouriteless.enchanted.patchouli.components.RiteRequirementsComponent",
       "x": 58,
       "y": 75,
       "rite": "#rite",

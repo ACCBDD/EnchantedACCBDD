@@ -15,10 +15,10 @@
     "environment": "*",
     "entrypoints": {
         "main": [
-            "favouriteless.enchanted.EnchantedFabric"
+          "net.favouriteless.enchanted.EnchantedFabric"
         ],
         "client": [
-            "favouriteless.enchanted.client.EnchantedFabricClient"
+          "net.favouriteless.enchanted.client.EnchantedFabricClient"
         ]
     },
     "mixins": [
