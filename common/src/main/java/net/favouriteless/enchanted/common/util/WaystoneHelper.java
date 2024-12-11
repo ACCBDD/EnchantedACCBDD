@@ -1,4 +1,4 @@
-package net.favouriteless.enchanted.util;
+package net.favouriteless.enchanted.common.util;
 
 import net.favouriteless.enchanted.common.init.registry.EItems;
 import net.minecraft.core.BlockPos;

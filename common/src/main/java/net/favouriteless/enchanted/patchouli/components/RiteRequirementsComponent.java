@@ -8,7 +8,7 @@ import net.favouriteless.enchanted.common.circle_magic.CircleMagicShape;
 import net.favouriteless.enchanted.common.circle_magic.RiteType;
 import net.favouriteless.enchanted.common.init.EData;
 import net.favouriteless.enchanted.common.init.registry.EBlocks;
-import net.favouriteless.enchanted.util.Vector2i;
+import net.favouriteless.enchanted.common.util.Vector2i;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;

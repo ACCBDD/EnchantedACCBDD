@@ -1,8 +1,8 @@
 package net.favouriteless.enchanted.common.recipes;
 
 import net.favouriteless.enchanted.common.init.registry.ERecipeTypes;
-import net.favouriteless.enchanted.util.ItemStackHelper;
-import net.favouriteless.enchanted.util.JsonHelper;
+import net.favouriteless.enchanted.common.util.ItemUtils;
+import net.favouriteless.enchanted.common.util.JsonHelper;
 import com.google.gson.JsonObject;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.FriendlyByteBuf;
@@ -32,7 +32,7 @@ public class WitchCauldronRecipe extends CauldronTypeRecipe {
         public WitchCauldronRecipe fromJson(ResourceLocation id, JsonObject json) {
 
             NonNullList<ItemStack> itemsIn = JsonHelper.readItemStackList(GsonHelper.getAsJsonArray(json, "ingredients"), true);
-            ItemStack itemOut = ItemStackHelper.fromJson(GsonHelper.getAsJsonObject(json, "result"), true);
+            ItemStack itemOut = ItemUtils.fromJson(GsonHelper.getAsJsonObject(json, "result"), true);
             int power = GsonHelper.getAsInt(json, "power");
             int[] cookingColour = JsonHelper.readRgb(GsonHelper.getAsJsonArray(json, "cookingColor"));
             int[] finalColour = JsonHelper.readRgb(GsonHelper.getAsJsonArray(json, "finalColor"));

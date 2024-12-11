@@ -6,7 +6,7 @@ import net.favouriteless.enchanted.common.init.registry.EItems;
 import net.favouriteless.enchanted.common.init.registry.EMenuTypes;
 import net.favouriteless.enchanted.common.menus.slots.JarInputSlot;
 import net.favouriteless.enchanted.common.menus.slots.OutputSlot;
-import net.favouriteless.enchanted.util.MenuUtils;
+import net.favouriteless.enchanted.common.util.MenuUtils;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;

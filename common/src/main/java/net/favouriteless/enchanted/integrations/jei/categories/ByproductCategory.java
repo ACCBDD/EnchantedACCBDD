@@ -4,7 +4,7 @@ import net.favouriteless.enchanted.common.Enchanted;
 import net.favouriteless.enchanted.common.init.registry.EItems;
 import net.favouriteless.enchanted.common.recipes.ByproductRecipe;
 import net.favouriteless.enchanted.integrations.jei.EJeiRecipeTypes;
-import net.favouriteless.enchanted.util.RecipeUtils;
+import net.favouriteless.enchanted.common.util.RecipeUtils;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;

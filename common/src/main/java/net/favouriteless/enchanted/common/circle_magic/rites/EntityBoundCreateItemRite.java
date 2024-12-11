@@ -1,7 +1,7 @@
 package net.favouriteless.enchanted.common.circle_magic.rites;
 
 import net.favouriteless.enchanted.common.items.TaglockFilledItem;
-import net.favouriteless.enchanted.util.WaystoneHelper;
+import net.favouriteless.enchanted.common.util.WaystoneHelper;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.sounds.SoundEvents;

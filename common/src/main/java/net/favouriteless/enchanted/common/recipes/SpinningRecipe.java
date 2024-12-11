@@ -1,8 +1,8 @@
 package net.favouriteless.enchanted.common.recipes;
 
 import net.favouriteless.enchanted.common.init.registry.ERecipeTypes;
-import net.favouriteless.enchanted.util.ItemStackHelper;
-import net.favouriteless.enchanted.util.JsonHelper;
+import net.favouriteless.enchanted.common.util.ItemUtils;
+import net.favouriteless.enchanted.common.util.JsonHelper;
 import com.google.gson.JsonObject;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
@@ -44,9 +44,9 @@ public class SpinningRecipe implements Recipe<Container> {
         for(int i = 1; i < itemsIn.size(); i++) {
             ItemStack itemNeeded = itemsIn.get(i).copy();
 
-            if(ItemStack.isSameItemSameTags(itemNeeded, inv.getItem(1)))
+            if(ItemUtils.isSameItemPartial(inv.getItem(1), itemNeeded))
                 itemNeeded.shrink(inv.getItem(1).getCount());
-            if(ItemStack.isSameItemSameTags(itemNeeded, inv.getItem(2)))
+            if(ItemUtils.isSameItemPartial(inv.getItem(2), itemNeeded))
                 itemNeeded.shrink(inv.getItem(2).getCount());
 
             if(!itemNeeded.isEmpty()) // If not empty then there was not enough of this item
@@ -116,7 +116,7 @@ public class SpinningRecipe implements Recipe<Container> {
         @Override
         public SpinningRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
             NonNullList<ItemStack> itemsIn = JsonHelper.readItemStackList(GsonHelper.getAsJsonArray(json, "ingredients"), true);
-            ItemStack result = ItemStackHelper.fromJson(GsonHelper.getAsJsonObject(json, "result"), true);
+            ItemStack result = ItemUtils.fromJson(GsonHelper.getAsJsonObject(json, "result"), true);
             int power = GsonHelper.getAsInt(json, "power", 0);
             int duration = GsonHelper.getAsInt(json, "duration", 0);
 

@@ -1,8 +1,8 @@
 package net.favouriteless.enchanted.common.recipes;
 
 import net.favouriteless.enchanted.common.init.registry.ERecipeTypes;
-import net.favouriteless.enchanted.util.ItemStackHelper;
 import com.google.gson.JsonObject;
+import net.favouriteless.enchanted.common.util.ItemUtils;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -82,7 +82,7 @@ public class ByproductRecipe implements Recipe<Container> {
         @NotNull
         public ByproductRecipe fromJson(@NotNull ResourceLocation id, @NotNull JsonObject json) {
             Ingredient ingredient = Ingredient.fromJson(GsonHelper.getAsJsonObject(json, "ingredient"));
-            ItemStack result = ItemStackHelper.fromJson(GsonHelper.getAsJsonObject(json, "result"), true);
+            ItemStack result = ItemUtils.fromJson(GsonHelper.getAsJsonObject(json, "result"), true);
 
             return new ByproductRecipe(id, ingredient, result);
         }

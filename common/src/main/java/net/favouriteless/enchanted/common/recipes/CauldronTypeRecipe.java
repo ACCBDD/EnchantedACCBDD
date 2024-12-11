@@ -1,5 +1,6 @@
 package net.favouriteless.enchanted.common.recipes;
 
+import net.favouriteless.enchanted.common.util.ItemUtils;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
@@ -46,7 +47,7 @@ public abstract class CauldronTypeRecipe implements Recipe<Container> {
             ItemStack itemIn = itemsIn.get(i);
             ItemStack inventoryItem = inventory.getItem(i);
 
-            if(!ItemStack.matches(itemIn, inventoryItem))
+            if(itemIn.getCount() != inventoryItem.getCount() || !ItemUtils.isSameItemPartial(inventoryItem, itemIn))
                 return false;
         }
         return true;

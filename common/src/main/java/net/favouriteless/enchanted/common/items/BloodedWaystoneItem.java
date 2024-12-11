@@ -1,6 +1,6 @@
 package net.favouriteless.enchanted.common.items;
 
-import net.favouriteless.enchanted.util.WaystoneHelper;
+import net.favouriteless.enchanted.common.util.WaystoneHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;

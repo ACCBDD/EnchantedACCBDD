@@ -10,7 +10,7 @@ import net.favouriteless.enchanted.common.CommonConfig;
 import net.favouriteless.enchanted.common.altar.SimplePowerPosHolder;
 import net.favouriteless.enchanted.common.init.registry.EParticleTypes;
 import net.favouriteless.enchanted.common.recipes.CauldronTypeRecipe;
-import net.favouriteless.enchanted.util.PlayerInventoryHelper;
+import net.favouriteless.enchanted.common.util.PlayerInventoryHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;

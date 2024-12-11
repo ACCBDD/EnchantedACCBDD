@@ -1,9 +1,9 @@
 package net.favouriteless.enchanted.datagen.builders.recipe;
 
 import net.favouriteless.enchanted.common.init.registry.ERecipeTypes;
-import net.favouriteless.enchanted.util.ItemStackHelper;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import net.favouriteless.enchanted.common.util.ItemUtils;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
@@ -125,10 +125,10 @@ public class SpinningRecipeBuilder extends EnchantedRecipeBuilder {
         public void serializeRecipeData(JsonObject json) {
             JsonArray ingredientsArray = new JsonArray();
             for(ItemStack item : items)
-                ingredientsArray.add(ItemStackHelper.asJson(item, true));
+                ingredientsArray.add(ItemUtils.asJson(item, true));
 
             json.add("ingredients", ingredientsArray);
-            json.add("result", ItemStackHelper.asJson(result, true));
+            json.add("result", ItemUtils.asJson(result, true));
             json.addProperty("power", power);
             json.addProperty("duration", duration);
         }

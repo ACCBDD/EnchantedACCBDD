@@ -1,6 +1,6 @@
 package net.favouriteless.enchanted.common.circle_magic.rites;
 
-import net.favouriteless.enchanted.util.WaystoneHelper;
+import net.favouriteless.enchanted.common.util.WaystoneHelper;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;

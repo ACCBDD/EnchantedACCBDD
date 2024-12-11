@@ -2,9 +2,9 @@ package net.favouriteless.enchanted.datagen.builders.recipe;
 
 import net.favouriteless.enchanted.common.init.registry.EItems;
 import net.favouriteless.enchanted.common.init.registry.ERecipeTypes;
-import net.favouriteless.enchanted.util.ItemStackHelper;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import net.favouriteless.enchanted.common.util.ItemUtils;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -146,11 +146,11 @@ public class DistillingRecipeBuilder extends EnchantedRecipeBuilder {
         public void serializeRecipeData(JsonObject json) {
             JsonArray ingredientsArray = new JsonArray();
             for(ItemStack item : inputs)
-                ingredientsArray.add(ItemStackHelper.asJson(item, true));
+                ingredientsArray.add(ItemUtils.asJson(item, true));
 
             JsonArray resultsArray = new JsonArray();
             for(ItemStack item : results)
-                resultsArray.add(ItemStackHelper.asJson(item, true));
+                resultsArray.add(ItemUtils.asJson(item, true));
 
             json.add("ingredients", ingredientsArray);
             json.add("results", resultsArray);

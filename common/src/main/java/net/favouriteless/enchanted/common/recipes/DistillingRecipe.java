@@ -1,7 +1,8 @@
 package net.favouriteless.enchanted.common.recipes;
 
 import net.favouriteless.enchanted.common.init.registry.ERecipeTypes;
-import net.favouriteless.enchanted.util.JsonHelper;
+import net.favouriteless.enchanted.common.util.ItemUtils;
+import net.favouriteless.enchanted.common.util.JsonHelper;
 import com.google.gson.JsonObject;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
@@ -68,7 +69,7 @@ public class DistillingRecipe implements Recipe<Container> {
         for(ItemStack stack : getItemsIn()) {
             for(int i = 0; i < 3; i++) {
                 ItemStack item = inv.getItem(i);
-                if(ItemStack.isSameItemSameTags(stack, item) && item.getCount() >= stack.getCount()) {
+                if(ItemUtils.isSameItemPartial(item, stack) && item.getCount() >= stack.getCount()) {
                     requiredItems--;
                     break;
                 }

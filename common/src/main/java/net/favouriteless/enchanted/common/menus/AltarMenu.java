@@ -3,7 +3,7 @@ package net.favouriteless.enchanted.common.menus;
 import net.favouriteless.enchanted.common.blocks.entity.AltarBlockEntity;
 import net.favouriteless.enchanted.common.init.registry.EBlocks;
 import net.favouriteless.enchanted.common.init.registry.EMenuTypes;
-import net.favouriteless.enchanted.util.MenuUtils;
+import net.favouriteless.enchanted.common.util.MenuUtils;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;

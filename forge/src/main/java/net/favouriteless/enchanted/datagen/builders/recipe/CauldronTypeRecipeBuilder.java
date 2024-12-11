@@ -2,8 +2,8 @@ package net.favouriteless.enchanted.datagen.builders.recipe;
 
 import net.favouriteless.enchanted.common.init.registry.ERecipeTypes;
 import net.favouriteless.enchanted.common.recipes.CauldronTypeRecipe;
-import net.favouriteless.enchanted.util.ItemStackHelper;
-import net.favouriteless.enchanted.util.JsonHelper;
+import net.favouriteless.enchanted.common.util.ItemUtils;
+import net.favouriteless.enchanted.common.util.JsonHelper;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.minecraft.data.recipes.FinishedRecipe;
@@ -152,10 +152,10 @@ public class CauldronTypeRecipeBuilder extends EnchantedRecipeBuilder {
         public void serializeRecipeData(JsonObject json) {
             JsonArray ingredientsArray = new JsonArray();
             for(ItemStack item : inputs)
-                ingredientsArray.add(ItemStackHelper.asJson(item, true));
+                ingredientsArray.add(ItemUtils.asJson(item, true));
 
             json.add("ingredients", ingredientsArray);
-            json.add("result", ItemStackHelper.asJson(result, true));
+            json.add("result", ItemUtils.asJson(result, true));
             json.addProperty("power", power);
             json.add("cookingColor", JsonHelper.rgbAsJson(cookColor));
             json.add("finalColor", JsonHelper.rgbAsJson(finalColor));

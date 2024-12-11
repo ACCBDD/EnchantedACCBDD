@@ -1,4 +1,4 @@
-package net.favouriteless.enchanted.util;
+package net.favouriteless.enchanted.common.util;
 
 public class Vector2i {
 

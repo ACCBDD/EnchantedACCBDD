@@ -1,8 +1,8 @@
 package net.favouriteless.enchanted.datagen.builders.recipe;
 
 import net.favouriteless.enchanted.common.init.registry.ERecipeTypes;
-import net.favouriteless.enchanted.util.ItemStackHelper;
 import com.google.gson.JsonObject;
+import net.favouriteless.enchanted.common.util.ItemUtils;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -100,7 +100,7 @@ public class ByproductRecipeBuilder extends EnchantedRecipeBuilder {
         @Override
         public void serializeRecipeData(JsonObject json) {
             json.add("ingredient", ingredient.toJson());
-            json.add("result", ItemStackHelper.asJson(result, count, null));
+            json.add("result", ItemUtils.asJson(result, count, null));
         }
 
         @NotNull

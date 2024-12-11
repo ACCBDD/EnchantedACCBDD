@@ -1,7 +1,7 @@
 package net.favouriteless.enchanted.common.circle_magic.rites;
 
 import net.favouriteless.enchanted.common.init.registry.EItems;
-import net.favouriteless.enchanted.util.WaystoneHelper;
+import net.favouriteless.enchanted.common.util.WaystoneHelper;
 import net.minecraft.world.item.ItemStack;
 
 public class SkyWrathWaystoneRite extends SkyWrathRite {

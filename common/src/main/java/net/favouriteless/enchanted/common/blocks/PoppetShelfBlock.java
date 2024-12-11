@@ -3,7 +3,6 @@ package net.favouriteless.enchanted.common.blocks;
 import net.favouriteless.enchanted.common.blocks.entity.PoppetShelfBlockEntity;
 import net.favouriteless.enchanted.common.poppet.PoppetShelfManager;
 import net.favouriteless.enchanted.platform.CommonServices;
-import net.favouriteless.enchanted.util.ItemStackHelper;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RenderShape;
