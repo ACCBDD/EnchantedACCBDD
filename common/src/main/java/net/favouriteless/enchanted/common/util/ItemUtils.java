@@ -3,6 +3,7 @@ package net.favouriteless.enchanted.common.util;
 import net.favouriteless.enchanted.common.Enchanted;
 import net.favouriteless.enchanted.platform.CommonServices;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NumericTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.EntityType;
@@ -58,8 +59,8 @@ public class ItemUtils {
         if(a.getItem() != b.getItem())
             return false;
 
-        CompoundTag aTags = a.getOrCreateTag();
-        CompoundTag bTags = b.getOrCreateTag();
+        CompoundTag aTags = a.copy().getOrCreateTag();
+        CompoundTag bTags = b.copy().getOrCreateTag();
         for(String tag : bTags.getAllKeys()) {
             if(!aTags.contains(tag))
                 return false;
@@ -72,12 +73,26 @@ public class ItemUtils {
                 return false;
             }
 
-            if(!Objects.equals(aTag, bTag))
+            if(!Objects.equals(aTag, bTag)) {
+                if(aTag instanceof NumericTag aNumeric && bTag instanceof NumericTag bNumeric) {
+                    //if numeric, check equal
+                    if(aNumeric.getAsFloat() == bNumeric.getAsFloat())
+                        continue;
+                }
+
+                if(aTag instanceof CompoundTag aCompound && bTag instanceof CompoundTag bCompound) {
+                    //if compound, convert snbt to json, then check equal
+                    if(snbtToJson(aCompound.toString()).equals(snbtToJson(bCompound.toString())))
+                        continue;
+                }
                 return false;
+            }
         }
 
         return true;
     }
+
+
 
     public static void giveOrDrop(Player player, ItemStack item) {
         if(player.addItem(item))
@@ -89,4 +104,7 @@ public class ItemUtils {
         player.level().addFreshEntity(player);
     }
 
+    public static String snbtToJson(String snbt) {
+        return snbt.replaceAll("([0-9])[bBsSlLfFdD]([,}])", "$1$2");
+    }
 }
