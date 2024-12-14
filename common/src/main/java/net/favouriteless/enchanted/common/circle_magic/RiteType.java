@@ -75,7 +75,7 @@ public class RiteType implements Comparable<RiteType> {
 			return false;
 
 		for(Map.Entry<ResourceKey<CircleMagicShape>, Block> entry : shapes.entrySet()) {
-			CircleMagicShape shape = Minecraft.getInstance().level.registryAccess().registryOrThrow(EData.CIRCLE_SHAPE_REGISTRY).get(entry.getKey());
+			CircleMagicShape shape = level.registryAccess().registryOrThrow(EData.CIRCLE_SHAPE_REGISTRY).get(entry.getKey());
 			if(!shape.matches(level, pos, entry.getValue()))
 				return false;
 		}

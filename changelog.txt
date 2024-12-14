@@ -1,2 +1,1 @@
-- CHANGED: Enchanted recipes now use partial NBT matching.
-- FIXED: Fixed NBT matching bug on rites.
+- FIXED: Rite Types won't match on dedicated servers.

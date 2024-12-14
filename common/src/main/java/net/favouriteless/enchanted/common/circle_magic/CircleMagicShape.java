@@ -2,8 +2,11 @@ package net.favouriteless.enchanted.common.circle_magic;
 
 import com.mojang.serialization.Codec;
 import net.favouriteless.enchanted.api.Vec2i;
+import net.favouriteless.enchanted.common.init.EData;
 import net.favouriteless.enchanted.common.init.registry.EBlocks;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
+import net.minecraft.resources.RegistryFixedCodec;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
@@ -15,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CircleMagicShape {
+
     public static final Codec<CircleMagicShape> CODEC = Codec.STRING.listOf().xmap(CircleMagicShape::new, CircleMagicShape::getStrings);
 
     private final List<String> input;
