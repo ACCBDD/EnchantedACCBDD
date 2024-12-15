@@ -1,5 +1,9 @@
 {
   "values": [
+    "#enchanted:logs",
+    "#enchanted:wooden_fences",
+    "#enchanted:wooden_stairs",
+    "#enchanted:wooden_slabs",
     "enchanted:spinning_wheel"
   ]
 }
