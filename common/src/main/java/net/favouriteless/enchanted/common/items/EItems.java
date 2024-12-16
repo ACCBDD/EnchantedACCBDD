@@ -26,6 +26,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ComposterBlock;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Supplier;
 
 public class EItems {
@@ -262,6 +263,10 @@ public class EItems {
 		ComposterBlock.COMPOSTABLES.put(WOLFSBANE_SEEDS.get(), 0.3F);
 		ComposterBlock.COMPOSTABLES.put(WOLFSBANE_FLOWER.get(), 0.65F);
 		ComposterBlock.COMPOSTABLES.put(GARLIC.get(), 0.45F);
+	}
+
+	public static void registerFuel(Map<Item, Integer> map) {
+
 	}
 
 	public static Properties props() {

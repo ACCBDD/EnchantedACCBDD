@@ -34,7 +34,9 @@ public class ETags {
         public static final TagKey<Block> SLABS = createBlockTag("slabs");
         public static final TagKey<Block> STAIRS = createBlockTag("stairs");
         public static final TagKey<Block> TRANSPOSE_IRON = createBlockTag("transpose_iron");
+        public static final TagKey<Block> WOODEN_BUTTONS = createBlockTag("wooden_buttons");
         public static final TagKey<Block> WOODEN_FENCES = createBlockTag("wooden_fences");
+        public static final TagKey<Block> WOODEN_PRESSURE_PLATES = createBlockTag("wooden_pressure_plates");
         public static final TagKey<Block> WOODEN_SLABS = createBlockTag("wooden_slabs");
         public static final TagKey<Block> WOODEN_STAIRS = createBlockTag("wooden_stairs");
     }
@@ -45,6 +47,7 @@ public class ETags {
         public static final TagKey<Item> CHALICES = createItemTag("chalices");
         public static final TagKey<Item> CHALKS = createItemTag("chalks");
         public static final TagKey<Item> LEAVES = createItemTag("leaves");
+        public static final TagKey<Item> FENCE_GATES = createItemTag("fence_gates");
         public static final TagKey<Item> LOGS = createItemTag("logs");
         public static final TagKey<Item> PLANKS = createItemTag("planks");
         public static final TagKey<Item> RAW_FOODS = createItemTag("raw_foods");
@@ -56,6 +59,9 @@ public class ETags {
         public static final TagKey<Item> TOOL_POPPET_BLACKLIST = createItemTag("tool_poppet_blacklist");
         public static final TagKey<Item> TOOL_POPPET_WHITELIST = createItemTag("tool_poppet_whitelist");
         public static final TagKey<Item> WITCH_OVEN_BLACKLIST = createItemTag("witch_oven_blacklist");
+        public static final TagKey<Item> WOODEN_BUTTONS = createItemTag("wooden_buttons");
+        public static final TagKey<Item> WOODEN_FENCES = createItemTag("wooden_fences");
+        public static final TagKey<Item> WOODEN_PRESSURE_PLATES = createItemTag("wooden_pressure_plates");
         public static final TagKey<Item> WOODEN_SLABS = createItemTag("wooden_slabs");
         public static final TagKey<Item> WOODEN_STAIRS = createItemTag("wooden_stairs");
     }

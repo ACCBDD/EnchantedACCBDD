@@ -33,12 +33,16 @@ public class EItemTagProvider extends ItemTagsProvider {
         // Copied block tags
         copy(Blocks.CHALICES, ETags.Items.CHALICES);
         copy(Blocks.CHALKS, ETags.Items.CHALKS);
+        copy(Blocks.FENCE_GATES, ETags.Items.FENCE_GATES);
         copy(Blocks.LEAVES, ETags.Items.LEAVES);
         copy(Blocks.LOGS, ETags.Items.LOGS);
         copy(Blocks.PLANKS, ETags.Items.PLANKS);
         copy(Blocks.SAPLINGS, ETags.Items.SAPLINGS);
         copy(Blocks.SLABS, ETags.Items.SLABS);
         copy(Blocks.STAIRS, ETags.Items.STAIRS);
+        copy(Blocks.WOODEN_BUTTONS, ETags.Items.WOODEN_BUTTONS);
+        copy(Blocks.WOODEN_FENCES, ETags.Items.WOODEN_FENCES);
+        copy(Blocks.WOODEN_PRESSURE_PLATES, ETags.Items.WOODEN_PRESSURE_PLATES);
         copy(Blocks.WOODEN_SLABS, ETags.Items.WOODEN_SLABS);
         copy(Blocks.WOODEN_STAIRS, ETags.Items.WOODEN_STAIRS);
 
@@ -75,8 +79,12 @@ public class EItemTagProvider extends ItemTagsProvider {
     }
 
     public void addVanillaTags(Provider provider) {
+        tag(ItemTags.FENCE_GATES)
+                .addTag(ETags.Items.FENCE_GATES);
         tag(ItemTags.LEAVES)
                 .addTag(ETags.Items.LEAVES);
+        tag(ItemTags.LOGS)
+                .addTag(ETags.Items.LOGS);
         tag(ItemTags.LOGS_THAT_BURN)
                 .addTag(ETags.Items.LOGS);
         tag(ItemTags.PLANKS)
@@ -85,10 +93,18 @@ public class EItemTagProvider extends ItemTagsProvider {
                 .addTag(ETags.Items.SAPLINGS);
         tag(ItemTags.SLABS)
                 .addTag(ETags.Items.SLABS);
-        tag(ItemTags.STAIRS)
-                .addTag(ETags.Items.STAIRS);
         tag(ItemTags.SMALL_FLOWERS)
                 .add(EItems.BLOOD_POPPY.get());
+        tag(ItemTags.STAIRS)
+                .addTag(ETags.Items.STAIRS);
+        tag(ItemTags.SWORDS)
+                .add(EItems.ARTHANA.get());
+        tag(ItemTags.WOODEN_BUTTONS)
+                .addTag(ETags.Items.WOODEN_BUTTONS);
+        tag(ItemTags.WOODEN_FENCES)
+                .addTag(ETags.Items.WOODEN_FENCES);
+        tag(ItemTags.WOODEN_PRESSURE_PLATES)
+                .addTag(ETags.Items.WOODEN_PRESSURE_PLATES);
         tag(ItemTags.WOODEN_SLABS)
                 .addTag(ETags.Items.WOODEN_SLABS);
         tag(ItemTags.WOODEN_STAIRS)

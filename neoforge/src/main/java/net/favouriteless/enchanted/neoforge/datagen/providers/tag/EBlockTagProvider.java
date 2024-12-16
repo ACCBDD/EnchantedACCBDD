@@ -53,7 +53,9 @@ public class EBlockTagProvider extends IntrinsicHolderTagsProvider<Block> {
         tag(ETags.Blocks.LEAVES)
                 .add(EBlocks.ALDER_LEAVES.get(), EBlocks.ROWAN_LEAVES.get(), EBlocks.HAWTHORN_LEAVES.get());
         tag(ETags.Blocks.LOGS)
-                .add(EBlocks.ALDER_LOG.get(), EBlocks.ROWAN_LOG.get(), EBlocks.HAWTHORN_LOG.get());
+                .add(EBlocks.ALDER_LOG.get(), EBlocks.ROWAN_LOG.get(), EBlocks.HAWTHORN_LOG.get(),
+                        EBlocks.STRIPPED_ALDER_LOG.get(), EBlocks.STRIPPED_ROWAN_LOG.get(),
+                        EBlocks.STRIPPED_HAWTHORN_LOG.get());
         tag(ETags.Blocks.MUTANDIS_BLACKLIST)
                 .add(Blocks.WITHER_ROSE)
                 .add(EBlocks.BLOOD_POPPY.get());
@@ -77,9 +79,14 @@ public class EBlockTagProvider extends IntrinsicHolderTagsProvider<Block> {
         tag(ETags.Blocks.SLABS)
                 .addTag(ETags.Blocks.WOODEN_SLABS);
         tag(ETags.Blocks.STAIRS)
-                .addTag(ETags.Blocks.WOODEN_SLABS);
+                .addTag(ETags.Blocks.WOODEN_STAIRS);
         tag(ETags.Blocks.TRANSPOSE_IRON)
                 .addTag(BlockTags.IRON_ORES);
+        tag(ETags.Blocks.WOODEN_BUTTONS)
+                .add(EBlocks.ROWAN_BUTTON.get(), EBlocks.ALDER_BUTTON.get(), EBlocks.HAWTHORN_BUTTON.get());
+        tag(ETags.Blocks.WOODEN_PRESSURE_PLATES)
+                .add(EBlocks.ROWAN_PRESSURE_PLATE.get(), EBlocks.ALDER_PRESSURE_PLATE.get(),
+                        EBlocks.HAWTHORN_PRESSURE_PLATE.get());
         tag(ETags.Blocks.WOODEN_SLABS)
                 .add(EBlocks.ROWAN_SLAB.get(), EBlocks.ALDER_SLAB.get(), EBlocks.HAWTHORN_SLAB.get());
         tag(ETags.Blocks.WOODEN_FENCES)
@@ -124,13 +131,14 @@ public class EBlockTagProvider extends IntrinsicHolderTagsProvider<Block> {
                 .addTag(ETags.Blocks.STAIRS);
         tag(BlockTags.SMALL_FLOWERS)
                 .add(EBlocks.BLOOD_POPPY.get());
+        tag(BlockTags.WOODEN_BUTTONS)
+                .addTag(ETags.Blocks.WOODEN_BUTTONS);
         tag(BlockTags.WOODEN_FENCES)
                 .addTag(ETags.Blocks.WOODEN_FENCES);
         tag(BlockTags.WOODEN_SLABS)
                 .addTag(ETags.Blocks.WOODEN_SLABS);
         tag(BlockTags.WOODEN_STAIRS)
                 .addTag(ETags.Blocks.WOODEN_STAIRS);
-
     }
 
 }

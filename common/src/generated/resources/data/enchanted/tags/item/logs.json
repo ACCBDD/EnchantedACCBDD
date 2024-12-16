@@ -2,6 +2,9 @@
   "values": [
     "enchanted:alder_log",
     "enchanted:rowan_log",
-    "enchanted:hawthorn_log"
+    "enchanted:hawthorn_log",
+    "enchanted:stripped_alder_log",
+    "enchanted:stripped_rowan_log",
+    "enchanted:stripped_hawthorn_log"
   ]
 }

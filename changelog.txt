@@ -1,1 +1,4 @@
 - THIS IS A TESTING BUILD. I DO NOT RECOMMEND USING IT IN A MODPACK.
+
+- FIXED: Arthanas can't be enchanted
+- FIXED: Enchanted wooden items do not act as furnace fuel
