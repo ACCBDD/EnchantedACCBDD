@@ -5,11 +5,13 @@ import com.mojang.blaze3d.vertex.BufferBuilder;
 import com.mojang.blaze3d.vertex.DefaultVertexFormat;
 import com.mojang.blaze3d.vertex.Tesselator;
 import com.mojang.blaze3d.vertex.VertexFormat;
+import net.favouriteless.enchanted.platform.CommonServices;
 import net.minecraft.client.particle.ParticleRenderType;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureManager;
 
 public class EParticleRenderTypes {
+
     public static final ParticleRenderType PARTICLE_TRANSLUCENT = new ParticleRenderType() {
         @Override
         public void begin(BufferBuilder bufferBuilder, TextureManager textureManager) {
@@ -34,6 +36,7 @@ public class EParticleRenderTypes {
     };
 
     public static ParticleRenderType translucentParticle() {
-        return PARTICLE_TRANSLUCENT;
+        return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
     }
+
 }

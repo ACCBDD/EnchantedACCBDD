@@ -1,1 +1,1 @@
-- FIXED: Rite Types won't match on dedicated servers.
+- CHANGED: Reverted particle shader to the vanilla one. This is why we can't have nice things, Iris devs.
