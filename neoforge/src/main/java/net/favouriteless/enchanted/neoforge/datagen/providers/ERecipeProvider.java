@@ -212,6 +212,9 @@ public class ERecipeProvider extends RecipeProvider {
 		planksFromLog(output, EItems.ROWAN_PLANKS.get(), EItems.ROWAN_LOG.get());
 		planksFromLog(output, EItems.ALDER_PLANKS.get(), EItems.ALDER_LOG.get());
 		planksFromLog(output, EItems.HAWTHORN_PLANKS.get(), EItems.HAWTHORN_LOG.get());
+		planksFromLog(output, EItems.ROWAN_PLANKS.get(), EItems.STRIPPED_ROWAN_LOG.get());
+		planksFromLog(output, EItems.ALDER_PLANKS.get(), EItems.STRIPPED_ALDER_LOG.get());
+		planksFromLog(output, EItems.HAWTHORN_PLANKS.get(), EItems.STRIPPED_HAWTHORN_LOG.get());
 	}
 
 	protected void buildSmeltingRecipes(RecipeOutput output, Provider registries) {

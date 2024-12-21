@@ -76,6 +76,7 @@ public class FabricClientRegistry {
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(), EBlocks.EMBER_MOSS.get());
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(), EBlocks.SPANISH_MOSS.get());
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(), EBlocks.BLOOD_POPPY.get());
+        BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(), EBlocks.WITCH_CAULDRON.get());
     }
 
     private static void registerParticleFactories() {
